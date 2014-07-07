@@ -797,8 +797,9 @@ static NSWindowController *hudWC;
     CGFloat height = 200;
     NSRect hudFrame = NSRectMake((screenFrame.size.width - width)/2, (screenFrame.size.height - height)/2, width, height);
     [hudWC.window setFrame:hudFrame display:NO];
+    [hudWC.window center];
     [hudWC showWindow:nil];
-    [hudWC.window makeKeyAndOrderFront:nil];
+    [hudWC.window makeKeyAndOrderFront:self];
     [hudWC.window setOrderedIndex:0];
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(second* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
