@@ -67,7 +67,6 @@
 }
 
 
-
 #pragma mark - should
 
 -(BOOL)hasX{

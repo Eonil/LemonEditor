@@ -236,6 +236,10 @@
 
 
 #pragma mark -
+- (NSMutableArray *)allIdentifierChildren{
+    return [self allChildren]; 
+}
+
 
 -(NSMutableArray*)allChildren{
     if (self.children) {

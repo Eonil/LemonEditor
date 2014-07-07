@@ -32,7 +32,7 @@
 -(void)unregisterIUs:(NSArray*)IUs{
     for (IUBox *box in IUs) {
         [confirmed removeObjectForKey:box.htmlID];
-        for (IUBox *child in box.allChildren) {
+        for (IUBox *child in box.allIdentifierChildren) {
             [confirmed removeObjectForKey:child.htmlID];
         }
     }

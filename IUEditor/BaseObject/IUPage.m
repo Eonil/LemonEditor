@@ -47,6 +47,12 @@
     return self;
 }
 
+- (NSMutableArray *)allIdentifierChildren{
+    NSMutableArray *array =  [self allChildren];
+    [array removeObject:_background];
+    [array removeObjectsInArray:[_background allChildren]];
+    return array;
+}
 
 - (BOOL)floatRightChangeable{
     return NO;

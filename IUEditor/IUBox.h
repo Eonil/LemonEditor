@@ -123,7 +123,8 @@ typedef enum _IUOverflowType{
 
 -(NSArray*)children;
 @property (readonly) NSMutableArray *referenceChildren;
--(NSMutableArray*)allChildren;
+- (NSMutableArray*)allChildren;
+- (NSMutableArray *)allIdentifierChildren;
 
 -(BOOL)insertIU:(IUBox *)iu atIndex:(NSInteger)index  error:(NSError**)error;
 -(BOOL)addIU:(IUBox *)iu error:(NSError**)error;
