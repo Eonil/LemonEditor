@@ -299,6 +299,12 @@
     IUBox *currentBox = (IUBox *)_IUController.selection;
     NSString *modifiedName = textField.stringValue;
     
+    if([modifiedName stringByTrim].length == 0){
+        [JDUIUtil hudAlert:@"Name should not be empty" second:1];
+        [textField setStringValue:currentBox.name];
+        return;
+    }
+    
     if([modifiedName isEqualToString:currentBox.name]){
         [textField setStringValue:currentBox.name];
         return;
@@ -309,14 +315,6 @@
         [textField setStringValue:currentBox.name];
         return;
     }
-    
-    
-    if(modifiedName.length == 0){
-        [JDUIUtil hudAlert:@"Name should not be empty" second:1];
-        [textField setStringValue:currentBox.name];
-        return;
-    }
-    
     NSCharacterSet *characterSet = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
     if([modifiedName rangeOfCharacterFromSet:characterSet].location != NSNotFound){
         [JDUIUtil hudAlert:@"Name should be alphabet or digit" second:1];

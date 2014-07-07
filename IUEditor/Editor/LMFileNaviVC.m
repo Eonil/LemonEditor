@@ -274,13 +274,14 @@
     IUSheet *sheet = (IUSheet *)self.selection;
     NSString *modifiedName = textField.stringValue;
     
-    if([modifiedName isEqualToString:sheet.name]){
+    if([modifiedName stringByTrim].length == 0){
+        [JDUIUtil hudAlert:@"Name should not be empty" second:2];
         [textField setStringValue:sheet.name];
         return;
     }
+
     
-    if(modifiedName.length == 0){
-        [JDUIUtil hudAlert:@"Name should not be empty" second:2];
+    if([modifiedName isEqualToString:sheet.name]){
         [textField setStringValue:sheet.name];
         return;
     }
