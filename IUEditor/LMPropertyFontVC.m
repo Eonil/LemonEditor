@@ -282,19 +282,6 @@
                 
 }
 
-- (void)controlTextDidChange:(NSNotification *)obj{
-    NSComboBox *currentComboBox = obj.object;
-    if([currentComboBox isEqualTo:_fontB]){
-        [self updateFontName:[_fontB stringValue]];
-    }
-    else if([currentComboBox isEqualTo:_fontSizeComboBox]){
-        [self updateFontSize:[_fontB integerValue]];
-    }
-    else if([_lineHeightB isEqualTo:_lineHeightB]){
-        [self updateLineHeight:[_lineHeightB stringValue]];
-    }
-}
-
 
 - (void)comboBoxSelectionDidChange:(NSNotification *)notification{
     NSComboBox *currentComboBox = notification.object;
@@ -331,6 +318,26 @@
             [_controller.selection setLineHeightAuto:NO];
         }
     }
+}
+
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
+    if([control isEqualTo:_fontB]){
+        [self updateFontName:[fieldEditor string]];
+    }
+    else if([control isEqualTo:_fontSizeComboBox]){
+        NSInteger fontSize = [[fieldEditor string] integerValue];
+        if(fontSize == 0 ){
+            [self updateFontSize:1];
+            [_fontSizeComboBox setStringValue:@"1"];
+            [JDUIUtil hudAlert:@"Font Size can't be Zero" second:2];
+            return NO;
+        }
+        [self updateFontSize:fontSize];
+    }
+    else if([control isEqualTo:_lineHeightB]){
+        [self updateLineHeight:[fieldEditor string]];
+    }
+    return YES;
 }
 
 
