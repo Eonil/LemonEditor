@@ -141,29 +141,7 @@
         parentIU = [self.controller IUBoxByIdentifier:realID];
     }
     
-    
-    //find parent IU
-    if([parentIU isKindOfClass:[IUPage class]]){
-        parentIU = (IUBox *)((IUPage *)parentIU).pageContent;
-    }
-    
-    int i=0;
-    while([parentIU shouldAddIUByUserInput] == NO){
-        
-        if([parentIU isKindOfClass:[IUBackground class]]){
-            return NO;
-        }
-        
-        //safe code;
-        if(i>10000){
-            [JDUIUtil hudAlert:@"Can't find parent node, you try it, again" second:2];
-            return NO;
-        }
-        
-        parentIU = parentIU.parent;
-    }
-  
-    NSPoint position = [self distanceFromIU:parentIUID toPointFromWebView:point];
+    NSPoint position = [self distanceFromIU:parentIU.htmlID toPointFromWebView:point];
         
     //postion을 먼저 정한 후에 add 함
     [newIU setPosition:position];

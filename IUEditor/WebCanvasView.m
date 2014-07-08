@@ -162,7 +162,7 @@
         LMWC *lmWC = [NSApp mainWindow].windowController;
         IUBox *newIU = lmWC.pastedNewIU;
         if(newIU){
-            NSString *parentIUID = [self IUAtPoint:convertedPoint];
+            NSString *parentIUID = [self parentNewIUAtPoint:convertedPoint];
             if(parentIUID){
                 NSPoint rountPoint = NSPointMake(round(convertedPoint.x), round(convertedPoint.y));
                 if ([self.VC makeNewIUByDragAndDrop:newIU atPoint:rountPoint atIU:parentIUID]){
@@ -771,6 +771,15 @@
     return nil;
 }
 
+- (NSString *)parentNewIUAtPoint:(NSPoint)point{
+    DOMElement *domNode =[self DOMElementAtPoint:point];
+    if(domNode){
+        DOMHTMLElement *htmlElement =[self parentIUNodeAtCurrentNode:domNode];
+        return htmlElement.idName;
+    }
+    
+    return nil;
+}
 
 - (BOOL)isDOMTextAtPoint:(NSPoint)point{
     DOMElement *element = [self DOMElementAtPoint:point];
@@ -779,6 +788,33 @@
     }
     return NO;
 }
+
+
+- (DOMHTMLElement *)parentIUNodeAtCurrentNode:(DOMNode *)node{
+    NSString *iuClass = ((DOMElement *)node).className;
+    if([iuClass containsString:@"IUBox"]){
+        if([((DOMHTMLElement *)node) hasAttribute:@"hasChildren"]){
+            return (DOMHTMLElement *)node;
+        }
+        return [self IUNodeAtCurrentNode:node.parentNode];
+    }
+    else if ([node isKindOfClass:[DOMHTMLIFrameElement class]]){
+        JDTraceLog(@"");
+        return nil;
+    }
+    else if (node.parentNode == nil ){
+        //can't find div node
+        //- it can't be in IU model
+        //- IU model : text always have to be in Div class
+        //reach to html
+        JDTraceLog(@"can't find IU node, reach to HTMLElement");
+        return nil;
+    }
+    else {
+        return [self IUNodeAtCurrentNode:node.parentNode];
+    }
+}
+
 
 
 - (DOMHTMLElement *)IUNodeAtCurrentNode:(DOMNode *)node{

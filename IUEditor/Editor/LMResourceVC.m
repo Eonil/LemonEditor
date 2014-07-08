@@ -68,6 +68,17 @@
     return NO;
 }
 
+
+- (NSImage *)collectionView:(NSCollectionView *)collectionView draggingImageForItemsAtIndexes:(NSIndexSet *)indexes withEvent:(NSEvent *)event offset:(NSPointPointer)dragImageOffset{
+    
+    NSUInteger index = [indexes firstIndex];
+    IUResourceFile *node = [[_resourceArrayController arrangedObjects] objectAtIndex:index];
+    
+    return node.image;
+}
+
+
+
 #pragma mark -
 #pragma mark click BTN
 
@@ -214,13 +225,16 @@
         NSMenuItem *removeMenu = [[NSMenuItem alloc] initWithTitle:@"Remove" action:@selector(removeResourceItem:) keyEquivalent:@""];
         [collectionMenu addItem:removeMenu];
         removeMenu.target = self;
-        NSUInteger index = [[currentCollectionView selectionIndexes] firstIndex];
-        IUResourceFile *resourceFile = [[currentCollectionView itemAtIndex:index] representedObject];
-        removeMenu.representedObject = resourceFile;
         
-        [NSMenu popUpContextMenu:collectionMenu withEvent:theEvent forView:sender];
-
-       
+        if([[currentCollectionView selectionIndexes] count] > 0){
+            NSUInteger index = [[currentCollectionView selectionIndexes] firstIndex];
+            IUResourceFile *resourceFile = [[currentCollectionView itemAtIndex:index] representedObject];
+            removeMenu.representedObject = resourceFile;
+            
+            [NSMenu popUpContextMenu:collectionMenu withEvent:theEvent forView:sender];
+        }
+        
+        
     }
     else{
         NSAssert(0, @"");
