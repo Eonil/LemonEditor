@@ -141,7 +141,7 @@
         parentIU = [self.controller IUBoxByIdentifier:realID];
     }
     
-    NSPoint position = [self distanceFromIU:parentIU.htmlID toPointFromWebView:point];
+    NSPoint position = [self distanceFromIU:parentIUID toPointFromWebView:point];
         
     //postion을 먼저 정한 후에 add 함
     [newIU setPosition:position];
@@ -564,13 +564,13 @@
 }
 
 - (BOOL)isSheetHeightChanged:(NSString *)identifier{
-    if([identifier isEqualToString:[@"." stringByAppendingString:_sheet.htmlID]]
+    if([identifier isEqualToString:[_sheet.htmlID cssClass]]
        && [_sheet isKindOfClass:[IUClass class]]){
         return YES;
     }
     else if([_sheet isKindOfClass:[IUBackground class]]){
         IUHeader *header = ((IUBackground *)_sheet).header;
-        if([identifier isEqualToString:[@"." stringByAppendingString:header.htmlID]]){
+        if([identifier isEqualToString:[header.htmlID cssClass]]){
             return YES;
         }
         
@@ -595,9 +595,7 @@
         }
         else{
             [self setIUStyle:cssText withID:identifier size:width];
-            
         }
-//        [self.webView setNeedsDisplay:YES];
     }
     
     if([self isSheetHeightChanged:identifier]){
@@ -736,9 +734,6 @@
     NSMutableString *innerCSSHTML = [NSMutableString stringWithString:@"\n"];
     NSString *trimmedInnerCSSHTML = [innerCSSText  stringByTrim];
     NSArray *cssRuleList = [trimmedInnerCSSHTML componentsSeparatedByString:@"\n"];
-    
-    //    NSArray *cssRuleList = [trimmedInnerCSSHTML componentsSeparatedByCharactersInSet:
-    //                          [NSCharacterSet characterSetWithCharactersInString:@"."]];
     
     for(NSString *rule in cssRuleList){
         if(rule.length == 0){
@@ -1001,10 +996,8 @@
     NSArray *cssIds = [iu cssIdentifierArray];
     for (NSString *identifier in cssIds){
         [self removeAllCSSWithIdentifier:identifier];
-        [self removeAllCSSWithIdentifier:[identifier stringByAppendingString:@":hover"]];
     }
-    
-    
+
     //remove layer for children
     if ([iu isKindOfClass:[IUImport class]]){
         for(IUBox *child in iu.allChildren){
@@ -1012,9 +1005,6 @@
             [[self gridView] removeLayerWithIUIdentifier:modifiedHTMLID];
             [frameDict.dict removeObjectForKey:modifiedHTMLID];
             
-            //FIXME: IMPORT css id??
-            [self removeAllCSSWithIdentifier:modifiedHTMLID];
-
         }
         
     }

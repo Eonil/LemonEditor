@@ -65,4 +65,13 @@
 }
 
 
+- (NSMutableArray *)allIdentifierChildren{
+    NSMutableArray *array =  [self allChildren];
+    [array removeObject:_prototypeClass];
+    [array removeObjectsInArray:[_prototypeClass allChildren]];
+    return array;
+}
+
+
+
 @end
