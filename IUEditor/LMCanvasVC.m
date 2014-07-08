@@ -169,7 +169,15 @@
     [newIU setPosition:position];
     [parentIU addIU:newIU error:nil];
     [self.controller rearrangeObjects];
-    [self.controller setSelectedObjectsByIdentifiers:@[newIU.htmlID]];
+    
+    if ([parentIUID containsString:@"ImportedBy_"]) {
+        NSString *parentIdentifier = [[parentIUID componentsSeparatedByString:@"_" ] objectAtIndex:1];
+        NSString *finalString = [NSString stringWithFormat:@"ImportedBy_%@_%@", parentIdentifier, newIU.htmlID];
+        [self.controller trySetSelectedObjectsByIdentifiers:@[finalString]];
+    }
+    else {
+        [self.controller setSelectedObjectsByIdentifiers:@[newIU.htmlID]];
+    }
     
     [newIU confirmIdentifier];
     
