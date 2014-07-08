@@ -322,7 +322,7 @@
     if([self.controller.selectedIdentifiers containsObject:IU]){
         return;
     }
-    NSArray *array = [self.controller.selectedIdentifiers arrayByAddingObject:IU];
+    NSArray *array = [self.controller.selectedIdentifiersWithImportIdentifier arrayByAddingObject:IU];
     [self.controller trySetSelectedObjectsByIdentifiers:array];
 }
 
