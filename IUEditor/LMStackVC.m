@@ -250,7 +250,7 @@
             [_IUController rearrangeObjects];
             [_IUController setSelectedObjectsByIdentifiers:@[newIU.htmlID]];
             
-            [newIU confirm];
+            [newIU confirmIdentifier];
 
             return YES;
         }

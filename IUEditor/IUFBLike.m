@@ -71,8 +71,8 @@
         showFaces = @"false";
     }
     
-    [self.delegate IUClassIdentifier:self.cssID CSSUpdated:[self cssForWidth:self.css.editWidth isHover:NO]  forWidth:self.css.editWidth];
-    
+    [self updateCSSForEditViewPort];
+        
     NSString *currentPixel = [[NSString alloc] initWithFormat:@"%.0f", [self.css.assembledTagDictionary[IUCSSTagHeight] floatValue]];
     
     NSString *source;

@@ -36,7 +36,130 @@
 /* Note
  IUText is not programmed.
  */
-#pragma mark initialize
+#pragma mark - initialize
+
+
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super init];
+    if (self) {
+        [aDecoder decodeToObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"delegate", @"textType"]]];
+        
+        _textType = [aDecoder decodeInt32ForKey:@"textType"] ;
+        _css = [aDecoder decodeObjectForKey:@"css"];
+        _css.delegate = self;
+        _event = [aDecoder decodeObjectForKey:@"event"];
+        _m_children=[aDecoder decodeObjectForKey:@"children"];
+        changedCSSWidths = [NSMutableSet set];
+        
+    }
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+    if ([self.htmlID length] == 0) {
+        NSAssert(0, @"");
+    }
+    [aCoder encodeFromObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"identifierManager", @"textController"]]];
+    [aCoder encodeObject:self.css forKey:@"css"];
+    [aCoder encodeObject:self.event forKey:@"event"];
+    [aCoder encodeObject:_m_children forKey:@"children"];
+    
+    
+}
+
+-(id)init{
+    //only called from copyWithZone
+    self = [super init];
+    if (self) {
+        _css = [[IUCSS alloc] init];
+        _css.delegate = self;
+        _event = [[IUEvent alloc] init];
+        _m_children = [NSMutableArray array];
+        
+        changedCSSWidths = [NSMutableSet set];
+    }
+    return self;
+}
+
+- (void)dealloc{
+    if (isConnectedWithEditor) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
+    }
+}
+
+
+
+-(id)initWithProject:(IUProject*)project options:(NSDictionary*)options{
+    self = [super init];
+    _tempProject = project;
+    _css = [[IUCSS alloc] init];
+    _css.delegate = self;
+    _event = [[IUEvent alloc] init];
+    _m_children = [NSMutableArray array];
+    
+    
+    
+    [_css setValue:@(0) forTag:IUCSSTagXUnit forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:@(0) forTag:IUCSSTagYUnit forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:@(0) forTag:IUCSSTagWidthUnit forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:@(0) forTag:IUCSSTagHeightUnit forWidth:IUCSSMaxViewPortWidth];
+    
+#if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
+    _lineHeightAuto = YES;
+#endif
+    
+    
+    if (self.hasWidth) {
+        [_css setValue:@(100) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
+    }
+    if (self.hasHeight) {
+        [_css setValue:@(60) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
+    }
+    
+    //background
+    [_css setValue:[NSColor randomColor] forTag:IUCSSTagBGColor forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:@(IUBGSizeTypeAuto) forTag:IUCSSTagBGSize forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:@(0) forTag:IUCSSTagBGXPosition forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:@(0) forTag:IUCSSTagBGYPosition forWidth:IUCSSMaxViewPortWidth];
+    
+    //border
+    [_css setValue:@(0) forTag:IUCSSTagBorderTopWidth forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:@(0) forTag:IUCSSTagBorderLeftWidth forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:@(0) forTag:IUCSSTagBorderRightWidth forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:@(0) forTag:IUCSSTagBorderBottomWidth forWidth:IUCSSMaxViewPortWidth];
+    
+    [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderTopColor forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderLeftColor forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderRightColor forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderBottomColor forWidth:IUCSSMaxViewPortWidth];
+    
+    //type
+    [_css setValue:@"Auto" forTag:IUCSSTagLineHeight forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forWidth:IUCSSMaxViewPortWidth];
+    
+    
+    changedCSSWidths = [NSMutableSet set];
+    
+    [project.identifierManager setNewIdentifierAndRegisterToTemp:self withKey:nil];
+    self.name = self.htmlID;
+    
+    
+    return self;
+}
+
+
+- (void)connectWithEditor{
+    NSAssert(self.project, @"");
+    isConnectedWithEditor = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:nil];
+    for (IUBox *box in self.children) {
+        [box connectWithEditor];
+    }
+}
+
+
+#pragma mark - copy
 
 - (id)copyWithZone:(NSZone *)zone{
     IUBox *box = [[[self class] allocWithZone: zone] init];
@@ -74,6 +197,41 @@
     return YES;
 }
 
+#pragma mark - setXXX
+
+-(void)setDelegate:(id<IUSourceDelegate>)delegate{
+    _delegate = delegate;
+    for (IUBox *obj in _m_children) {
+        obj.delegate = delegate;
+    }
+}
+
+-(IUSheet*)sheet{
+    if ([self isKindOfClass:[IUSheet class]]) {
+        return (IUSheet*)self;
+    }
+    if (self.parent) {
+        return self.parent.sheet;
+    }
+    return nil;
+}
+
+- (IUProject *)project{
+    if (self.sheet.group.project) {
+        return self.sheet.group.project;
+    }
+    else if (_tempProject) {
+        //not assigned to document
+        return _tempProject;
+    }
+    NSAssert(0, @"project");
+    return nil;
+}
+
+-(NSString*)description{
+    return [[super description] stringByAppendingFormat:@" %@", self.htmlID];
+}
+
 - (void)setTempProject:(IUProject*)project{
     _tempProject = project;
 }
@@ -86,16 +244,6 @@
     _event = event;
 }
 
-
-- (void)connectWithEditor{
-    NSAssert(self.project, @"");
-    isConnectedWithEditor = YES;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:nil];
-    for (IUBox *box in self.children) {
-        [box connectWithEditor];
-    }
-}
 
 - (void)setName:(NSString *)name{
     //loading - not called rename notification
@@ -110,114 +258,37 @@
                       IUNotificationStructureChangedIU: self}];
     }
 }
-
--(id)initWithCoder:(NSCoder *)aDecoder{
-    self = [super init];
-    if (self) {
-        [aDecoder decodeToObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"delegate", @"textType"]]];
-
-        _textType = [aDecoder decodeInt32ForKey:@"textType"] ;
-        _css = [aDecoder decodeObjectForKey:@"css"];
-        _css.delegate = self;
-        _event = [aDecoder decodeObjectForKey:@"event"];
-        _m_children=[aDecoder decodeObjectForKey:@"children"];
-        changedCSSWidths = [NSMutableSet set];
-        
-    }
-    return self;
+-(void)setLink:(id)link{
+    _link = link;
+    //    [self.delegate IU:self.htmlID setLink:link];
 }
 
--(void)encodeWithCoder:(NSCoder *)aCoder{
-    if ([self.htmlID length] == 0) {
-        NSAssert(0, @"");
-    }
-    [aCoder encodeFromObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"identifierManager", @"textController"]]];
-    [aCoder encodeObject:self.css forKey:@"css"];
-    [aCoder encodeObject:self.event forKey:@"event"];
-    [aCoder encodeObject:_m_children forKey:@"children"];
-    
+-(void)setDivLink:(id)divLink{
+    _divLink = divLink;
+}
 
+- (void)setImageName:(NSString *)imageName{
+    NSDictionary *defaultTagDictionary = [_css tagDictionaryForWidth:IUCSSMaxViewPortWidth];
+    if (defaultTagDictionary) {
+        [_css setValue:imageName forTag:IUCSSTagImage forWidth:_css.editWidth];
+    }
+    [_css setValue:imageName forTag:IUCSSTagImage forWidth:IUCSSMaxViewPortWidth];
+}
+
+- (NSString *)imageName{
+    return _css.assembledTagDictionary[IUCSSTagImage];
 }
 
 
--(id)initWithProject:(IUProject*)project options:(NSDictionary*)options{
-    self = [super init];
-    _tempProject = project;
-    _css = [[IUCSS alloc] init];
-    _css.delegate = self;
-    _event = [[IUEvent alloc] init];
-    _m_children = [NSMutableArray array];
-
-    
-    
-    [_css setValue:@(0) forTag:IUCSSTagXUnit forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:@(0) forTag:IUCSSTagYUnit forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:@(0) forTag:IUCSSTagWidthUnit forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:@(0) forTag:IUCSSTagHeightUnit forWidth:IUCSSMaxViewPortWidth];
-    
-#if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
-    _lineHeightAuto = YES;
-#endif
-
-    
-    if (self.hasWidth) {
-        [_css setValue:@(100) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
-    }
-    if (self.hasHeight) {
-        [_css setValue:@(60) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
-    }
-    
-    //background
-    [_css setValue:[NSColor randomColor] forTag:IUCSSTagBGColor forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:@(IUBGSizeTypeAuto) forTag:IUCSSTagBGSize forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:@(0) forTag:IUCSSTagBGXPosition forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:@(0) forTag:IUCSSTagBGYPosition forWidth:IUCSSMaxViewPortWidth];
-    
-    //border
-    [_css setValue:@(0) forTag:IUCSSTagBorderTopWidth forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:@(0) forTag:IUCSSTagBorderLeftWidth forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:@(0) forTag:IUCSSTagBorderRightWidth forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:@(0) forTag:IUCSSTagBorderBottomWidth forWidth:IUCSSMaxViewPortWidth];
-    
-    [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderTopColor forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderLeftColor forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderRightColor forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderBottomColor forWidth:IUCSSMaxViewPortWidth];
-    
-    //type
-    [_css setValue:@"Auto" forTag:IUCSSTagLineHeight forWidth:IUCSSMaxViewPortWidth];
-    [_css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forWidth:IUCSSMaxViewPortWidth];
-
-    
-    changedCSSWidths = [NSMutableSet set];
-
-    [project.identifierManager setNewIdentifierAndRegisterToTemp:self withKey:nil];
-    self.name = self.htmlID;
-    
-    
-    return self;
+//iucontroller & inspectorVC sync가 안맞는듯.
+- (id)valueForUndefinedKey:(NSString *)key{
+    return nil;
 }
 
-
--(id)init{
-    //only called from copyWithZone
-    self = [super init];
-    if (self) {
-        _css = [[IUCSS alloc] init];
-        _css.delegate = self;
-        _event = [[IUEvent alloc] init];
-        _m_children = [NSMutableArray array];
-
-        changedCSSWidths = [NSMutableSet set];
-    }
-    return self;
+- (void)confirmIdentifier{
+    [self.project.identifierManager confirm];
 }
 
-- (void)dealloc{
-    if (isConnectedWithEditor) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
-    }
-}
 
 #pragma mark - mq
 
@@ -232,25 +303,6 @@
         [_css setEditWidth:selectedSize];
     }
     
-}
-
-
-#pragma mark -
-- (NSMutableArray *)allIdentifierChildren{
-    return [self allChildren]; 
-}
-
-
--(NSMutableArray*)allChildren{
-    if (self.children) {
-        NSMutableArray *array = [NSMutableArray array];
-        for (IUBox *iu in self.children) {
-            [array addObject:iu];
-            [array addObjectsFromArray:iu.allChildren];
-        }
-        return array;
-    }
-    return nil;
 }
 
 
@@ -274,15 +326,12 @@
 - (void)updateHTML{
     if (self.delegate) {
         [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.parent.htmlID];
-        
-#if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
-        [self updateAutoHeight];
-#endif
+
     }
 }
 
 
-#pragma mark css
+#pragma mark - css
 
 -(NSDictionary*)CSSAttributesForWidth:(NSInteger)width{
     return [_css tagDictionaryForWidth:(int)width];
@@ -299,35 +348,32 @@
     if(self.delegate){
         NSString *css = [self cssForWidth:width isHover:isHover];
         if (isHover) {
-            [self.delegate IUClassIdentifier:[self.cssID hoverIdentifier] CSSUpdated:css forWidth:width];
+            [self.delegate IUClassIdentifier:[self.htmlID cssHoverClass] CSSUpdated:css forWidth:width];
         }
         else {
-            [self.delegate IUClassIdentifier:self.cssID CSSUpdated:css forWidth:width];
+            [self.delegate IUClassIdentifier:[self.htmlID cssClass]  CSSUpdated:css forWidth:width];
         }
     }
 }
-
+/**
+ @brief use cssIdentifierArray when remove IU, All CSS Identifiers should be in it.
+ 
+ */
 - (NSArray *)cssIdentifierArray{
-    return @[self.cssID];
+    return @[[self.htmlID cssClass], [self.htmlID cssHoverClass]];
 }
-
-
-- (NSString *)cssID{
-    return [NSString stringWithFormat:@".%@", self.htmlID];
-}
-
 
 - (void)updateCSSForMaxViewPort{
     if (self.delegate) {
-        [self.delegate IUClassIdentifier:self.cssID CSSUpdated:[self cssForWidth:IUCSSMaxViewPortWidth isHover:NO] forWidth:IUCSSMaxViewPortWidth];
-        [self.delegate IUClassIdentifier:[self.cssID hoverIdentifier] CSSUpdated:[self cssForWidth:IUCSSMaxViewPortWidth isHover:YES] forWidth:IUCSSMaxViewPortWidth];
+        [self CSSUpdatedForWidth:IUCSSMaxViewPortWidth isHover:YES];
+        [self CSSUpdatedForWidth:IUCSSMaxViewPortWidth isHover:NO];
     }
 }
 
 - (void)updateCSSForEditViewPort{
     if (self.delegate) {
-        [self.delegate IUClassIdentifier:self.cssID CSSUpdated:[self cssForWidth:_css.editWidth isHover:NO] forWidth:_css.editWidth];
-        [self.delegate IUClassIdentifier:[self.cssID hoverIdentifier] CSSUpdated:[self cssForWidth:_css.editWidth isHover:YES] forWidth:_css.editWidth];
+        [self CSSUpdatedForWidth:_css.editWidth isHover:YES];
+        [self CSSUpdatedForWidth:_css.editWidth isHover:NO];
         
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
         [self updateAutoHeight];
@@ -340,13 +386,45 @@
     return YES;
 }
 
-#pragma mark insertIU
+#pragma mark - manage IU
 
+
+#pragma mark children
+
+- (NSMutableArray *)allIdentifierChildren{
+    return [self allChildren];
+}
+
+
+-(NSMutableArray*)allChildren{
+    if (self.children) {
+        NSMutableArray *array = [NSMutableArray array];
+        for (IUBox *iu in self.children) {
+            [array addObject:iu];
+            [array addObjectsFromArray:iu.allChildren];
+        }
+        return array;
+    }
+    return nil;
+}
+
+-(NSArray*)children{
+    return [_m_children copy];
+}
+
+#pragma mark should
 
 -(BOOL)shouldAddIUByUserInput{
     return YES;
 }
+- (BOOL)shouldRemoveIU{
+    return YES;
+}
+- (BOOL)shouldRemoveIUByUserInput{
+    return YES;
+}
 
+#pragma mark add
 -(BOOL)addIU:(IUBox *)iu error:(NSError**)error{
     NSInteger index = [_m_children count];
     return [self insertIU:iu atIndex:index error:error];
@@ -371,24 +449,24 @@
     
     if ([self.sheet isKindOfClass:[IUClass class]]) {
         for (IUBox *import in [(IUClass*)self.sheet references]) {
-            [self.delegate IUHTMLIdentifier:import.htmlID HTML:import.html withParentID:import.parent.htmlID];
-            [self.delegate IUClassIdentifier:iu.cssID CSSUpdated:[iu cssForWidth:IUCSSMaxViewPortWidth isHover:NO] forWidth:IUCSSMaxViewPortWidth];
+            
+            [import updateHTML];
+            [import updateCSSForMaxViewPort];
             
             for (IUBox *child in iu.children) {
-                [self.delegate IUClassIdentifier:child.cssID CSSUpdated:[child cssForWidth:IUCSSMaxViewPortWidth isHover:NO] forWidth:IUCSSMaxViewPortWidth];
+                [child updateCSSForMaxViewPort];
             }
         }
     }
     
-    
-    [self.delegate IUHTMLIdentifier:iu.htmlID HTML:iu.html withParentID:self.htmlID];
-    [self.delegate IUClassIdentifier:iu.cssID CSSUpdated:[iu cssForWidth:IUCSSMaxViewPortWidth isHover:NO] forWidth:IUCSSMaxViewPortWidth];
+
+    [iu updateHTML];
+    [iu updateCSSForMaxViewPort];
     for (IUBox *child in iu.children) {
-        [self.delegate IUClassIdentifier:child.cssID CSSUpdated:[child cssForWidth:IUCSSMaxViewPortWidth isHover:NO] forWidth:IUCSSMaxViewPortWidth];
+        [child updateCSSForMaxViewPort];
     }
 
-    
-    [self.delegate runJSAfterInsertIU:iu];
+    [self updateJS];
     [iu bind:@"identifierManager" toObject:self withKeyPath:@"identifierManager" options:nil];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureAdding, IUNotificationStructureChangedIU: iu}];
@@ -404,12 +482,6 @@
     return YES;
 }
 
-- (BOOL)shouldRemoveIU{
-    return YES;
-}
-- (BOOL)shouldRemoveIUByUserInput{
-    return YES;
-}
 
 -(BOOL)removeIU:(IUBox *)iu{
     if([iu shouldRemoveIU]){
@@ -447,46 +519,48 @@
 }
 
 
--(NSArray*)children{
-    return [_m_children copy];
+
+#pragma mark - Frame
+
+
+#pragma mark has frame
+- (BOOL)hasText{
+    return NO;
 }
 
-#pragma mark -
-
--(void)setDelegate:(id<IUSourceDelegate>)delegate{
-    _delegate = delegate;
-    for (IUBox *obj in _m_children) {
-        obj.delegate = delegate;
-    }
+-(BOOL)hasX{
+    return YES;
+}
+-(BOOL)hasY{
+    return YES;
+}
+-(BOOL)hasWidth{
+    return YES;
+}
+-(BOOL)hasHeight{
+    return YES;
+}
+- (BOOL)centerChangeable{
+    return YES;
 }
 
--(IUSheet*)sheet{
-    if ([self isKindOfClass:[IUSheet class]]) {
-        return (IUSheet*)self;
+- (BOOL)canChangeXByUserInput{
+    if (self.positionType == IUPositionTypeAbsoluteCenter || self.positionType == IUPositionTypeRelativeCenter) {
+        return NO;
     }
-    if (self.parent) {
-        return self.parent.sheet;
-    }
-    return nil;
+    return YES;
+}
+- (BOOL)canChangeYByUserInput{
+    return YES;
+}
+- (BOOL)canChangeWidthByUserInput{
+    return YES;
+}
+- (BOOL)canChangeHeightByUserInput{
+    return YES;
 }
 
-- (IUProject *)project{
-    if (self.sheet.group.project) {
-        return self.sheet.group.project;
-    }
-    else if (_tempProject) {
-        //not assigned to document
-        return _tempProject;
-    }
-    NSAssert(0, @"project");
-    return nil;
-}
-
--(NSString*)description{
-    return [[super description] stringByAppendingFormat:@" %@", self.htmlID];
-}
-
-#pragma mark - position
+#pragma mark setFrame
 
 - (void)setPosition:(NSPoint)position{
     [_css setValue:@(position.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagX]];
@@ -621,100 +695,42 @@
     }
 }
 
+#pragma mark - position
 
-#pragma mark -frame
-- (BOOL)hasText{
-    return NO;
-}
-
--(BOOL)hasX{
-    return YES;
-}
--(BOOL)hasY{
-    return YES;
-}
--(BOOL)hasWidth{
-    return YES;
-}
--(BOOL)hasHeight{
+#pragma mark - shouldXXX
+- (BOOL)canChangePositionType{
     return YES;
 }
 
-
--(void)setLink:(id)link{
-    _link = link;
-//    [self.delegate IU:self.htmlID setLink:link];
-}
-
--(void)setDivLink:(id)divLink{
-    _divLink = divLink;
-}
-
-
-#pragma mark -
-
-
-#pragma mark - image
-- (void)setImageName:(NSString *)imageName{
-    NSDictionary *defaultTagDictionary = [_css tagDictionaryForWidth:IUCSSMaxViewPortWidth];
-    if (defaultTagDictionary) {
-        [_css setValue:imageName forTag:IUCSSTagImage forWidth:_css.editWidth];
-    }
-    [_css setValue:imageName forTag:IUCSSTagImage forWidth:IUCSSMaxViewPortWidth];
-}
-
-- (NSString *)imageName{
-    return _css.assembledTagDictionary[IUCSSTagImage];
-}
-
-
-/*
-- (void)setOverflow:(BOOL)overflow{
-    _overflow = overflow;
-    if (self.delegate) {
-        [self.delegate IUClassIdentifier:self.cssID CSSUpdated:[self cssForWidth:IUCSSMaxViewPortWidth isHover:NO] forWidth:IUCSSMaxViewPortWidth];
-    }
-}
-*/
-
-- (BOOL)centerChangeable{
+- (BOOL)canChangePositionAbsolute{
     return YES;
 }
 
-
-//iucontroller & inspectorVC sync가 안맞는듯.
-- (id)valueForUndefinedKey:(NSString *)key{
-    return nil;
-}
-
-
-#pragma mark -
-#pragma mark user input
-
-- (BOOL)canChangeXByUserInput{
-    if (self.positionType == IUPositionTypeAbsoluteCenter || self.positionType == IUPositionTypeRelativeCenter) {
-        return NO;
-    }
-    return YES;
-}
-- (BOOL)canChangeYByUserInput{
-    return YES;
-}
-- (BOOL)canChangeWidthByUserInput{
-    return YES;
-}
-- (BOOL)canChangeHeightByUserInput{
+- (BOOL)canChangePositionRelative{
     return YES;
 }
 
-
-- (void)confirm{
-    [self.project.identifierManager confirm];
+- (BOOL)canChangePositionFloatLeft{
+    return YES;
 }
 
-- (NSArray *)helpDictionary{
-    return nil;
+- (BOOL)canChangePositionFloatRight{
+    return YES;
 }
+
+- (BOOL)canChangePositionAbsoluteCenter{
+    return YES;
+}
+
+- (BOOL)canChangePositionRelativeCenter{
+    return YES;
+}
+
+- (BOOL)canChangeOverflow{
+    return YES;
+}
+
+#pragma mark - setting position
 
 - (void)setPositionType:(IUPositionType)positionType{
     BOOL isCurrentCenter = NO;
@@ -745,34 +761,6 @@
     }
 }
 
-- (BOOL)canChangePositionType{
-    return YES;
-}
-
-- (BOOL)canChangePositionAbsolute{
-    return YES;
-}
-
-- (BOOL)canChangePositionRelative{
-    return YES;
-}
-
-- (BOOL)canChangePositionFloatLeft{
-    return YES;
-}
-
-- (BOOL)canChangePositionFloatRight{
-    return YES;
-}
-
-- (BOOL)canChangePositionAbsoluteCenter{
-    return YES;
-}
-
-- (BOOL)canChangePositionRelativeCenter{
-    return YES;
-}
-
 - (void)setOverflowType:(IUOverflowType)overflowType{
     _overflowType = overflowType;
     [self updateCSSForEditViewPort];
@@ -780,9 +768,6 @@
 }
 
 
-- (BOOL)canChangeOverflow{
-    return YES;
-}
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 #pragma mark -text

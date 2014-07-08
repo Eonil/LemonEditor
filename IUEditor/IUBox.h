@@ -26,19 +26,16 @@
 -(void)IUClassIdentifier:(NSString *)classIdentifier removeClass:(NSString *)className;
 -(void)updateTextRangeFromID:(NSString *)fromID toID:(NSString *)toID;
 
-//-(NSRect)IUPercentFrame:(NSString*)identifier;
-
 -(void)IURemoved:(NSString*)identifier withParentID:(NSString *)parentID;
 
 - (NSPoint)distanceFromIU:(NSString *)iuName to:(NSString *)parentName;
 - (NSSize)frameSize:(NSString *)identifier;
 - (void)changeIUPageHeight:(CGFloat)pageHeight;
 
-- (void)runJSAfterInsertIU:(IUBox *)iu;
 - (void)runCSSJS;
-/*
- argument에 들어가는 것중에 dict, array는 string으로 보내서
- javascript내부에서 새로 var를 만들어서 사용
+/**
+ @brief call javascript function
+ @param args javascirpt function argument, argument에 들어가는 것중에 dict, array는 string으로 보내서javascript내부에서 새로 var를 만들어서 사용
 */
 - (id)callWebScriptMethod:(NSString *)function withArguments:(NSArray *)args;
 
@@ -74,12 +71,8 @@ typedef enum _IUOverflowType{
     NSMutableArray *_m_children;
 }
 
-@property (readonly) IUCSS *css; //used by subclass
-@property (readonly) IUEvent *event;
-
-
 -(id)initWithProject:(IUProject*)project options:(NSDictionary*)options;
-
+- (void)connectWithEditor;
 
 -(IUSheet *)sheet;
 
@@ -90,14 +83,14 @@ typedef enum _IUOverflowType{
  */
 -(IUProject *)project;
 
-- (void)connectWithEditor;
+#pragma mark - IU Setting
 
-// this is IU setting
-@property (copy) NSString *htmlID;
 @property (copy, nonatomic) NSString *name;
+@property (copy) NSString *htmlID;
+- (void)confirmIdentifier;
+
 @property (nonatomic, weak) id<IUSourceDelegate> delegate;
 @property (weak) IUBox    *parent;
-@property NSArray   *mutables;
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 @property (nonatomic) NSString *text;
@@ -106,25 +99,37 @@ typedef enum _IUOverflowType{
 - (void)updateAutoHeight;
 #endif
 
--(NSString *)cssID;
-// followings are IU build setting;
--(NSDictionary*)CSSAttributesForWidth:(NSInteger)width;
 
-//source
+//Event
+@property (readonly) IUEvent *event;
+@property NSString *pgVisibleConditionVariable;
+@property NSString *pgContentVariable;
+
+
+//CSS
+@property (readonly) IUCSS *css; //used by subclass
+- (NSArray *)cssIdentifierArray;
+- (NSDictionary*)CSSAttributesForWidth:(NSInteger)width;
+- (void)updateCSSForEditViewPort;
+- (void)updateCSSForMaxViewPort;
+
+//HTML
 -(NSString*)html;
 -(NSString*)cssForWidth:(NSInteger)width isHover:(BOOL)isHover;
+- (void)updateHTML;
 
-//user interface status
-@property (readonly) BOOL canChangeXByUserInput;
-@property (readonly) BOOL canChangeYByUserInput;
-@property (readonly) BOOL canChangeWidthByUserInput;
-@property (readonly) BOOL canChangeHeightByUserInput;
+//JS
+- (void)updateJS;
 
 
--(NSArray*)children;
+//children
 @property (readonly) NSMutableArray *referenceChildren;
+- (NSArray*)children;
 - (NSMutableArray*)allChildren;
 - (NSMutableArray *)allIdentifierChildren;
+
+
+-(BOOL)shouldAddIUByUserInput;
 
 -(BOOL)insertIU:(IUBox *)iu atIndex:(NSInteger)index  error:(NSError**)error;
 -(BOOL)addIU:(IUBox *)iu error:(NSError**)error;
@@ -143,8 +148,21 @@ typedef enum _IUOverflowType{
 -(BOOL)removeIU:(IUBox *)iu;
 -(BOOL)shouldRemoveIUByUserInput;
 -(BOOL)changeIUIndex:(IUBox*)iu to:(NSUInteger)index error:(NSError**)error;
-
 -(BOOL)addIUReference:(IUBox *)iu error:(NSError**)error;
+
+
+//Frame
+//user interface status
+@property (readonly) BOOL canChangeXByUserInput;
+@property (readonly) BOOL canChangeYByUserInput;
+@property (readonly) BOOL canChangeWidthByUserInput;
+@property (readonly) BOOL canChangeHeightByUserInput;
+
+- (BOOL)hasX;
+- (BOOL)hasY;
+- (BOOL)hasWidth;
+- (BOOL)hasHeight;
+- (BOOL)hasText;
 
 - (void)setPixelFrame:(NSRect)frame;
 - (void)setPercentFrame:(NSRect)frame;
@@ -152,23 +170,11 @@ typedef enum _IUOverflowType{
 - (void)movePosition:(NSPoint)point withParentSize:(NSSize)parentSize;
 - (void)startDragSession;
 - (void)increaseSize:(NSSize)size withParentSize:(NSSize)parentSize;
-- (void)setImageName:(NSString *)imageName;
-- (NSString *)imageName;
-
-@property (nonatomic) id link, divLink;
-
--(BOOL)hasX;
--(BOOL)hasY;
--(BOOL)hasWidth;
--(BOOL)hasHeight;
-- (BOOL)hasText;
-
--(BOOL)shouldAddIUByUserInput;
 
 
+//Position
 @property (nonatomic) IUPositionType positionType;
 - (BOOL)canChangePositionType;
-
 - (BOOL)canChangePositionAbsolute;
 - (BOOL)canChangePositionRelative;
 - (BOOL)canChangePositionFloatLeft;
@@ -177,33 +183,23 @@ typedef enum _IUOverflowType{
 - (BOOL)canChangePositionRelativeCenter;
 
 
+
+//Property
+
 - (BOOL)canCopy;
 
-//@property (nonatomic) BOOL overflow;
-- (BOOL)canChangeOverflow;
 
+- (BOOL)canChangeOverflow;
 @property (nonatomic) IUOverflowType overflowType;
 
-@property NSString *pgVisibleConditionVariable;
-@property NSString *pgContentVariable;
 
-- (void)updateCSSForEditViewPort;
-- (void)updateCSSForMaxViewPort;
-- (void)updateHTML;
-- (void)updateJS;
+- (void)setImageName:(NSString *)imageName;
+- (NSString *)imageName;
 
+@property (nonatomic) id link, divLink;
 @property float opacityMove;
 @property float xPosMove;
 //0 for default, 1 for H1, 2 for H2
 @property IUTextType textType;
-
-- (void)confirm;
-
-- (NSArray *)helpDictionary;
-
-//css 전체를 지울 때 사용
-- (NSArray *)cssIdentifierArray;
-
-
 
 @end

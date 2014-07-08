@@ -62,6 +62,7 @@
     return NO;
 }
 
+#pragma mark - new Identifier
 
 - (NSString *)newIdentifierWithKey:(NSString *)key{
     int i=0;
@@ -105,5 +106,6 @@
 -(IUBox*)IUWithIdentifier:(NSString*)identifier{
     return [confirmed objectForKey:identifier];
 }
+
 
 @end

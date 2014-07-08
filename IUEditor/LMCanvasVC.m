@@ -132,6 +132,8 @@
 
 
 
+#pragma mark - Drag & drop
+
 - (BOOL)makeNewIUByDragAndDrop:(IUBox *)newIU atPoint:(NSPoint)point atIU:(NSString *)parentIUID{
     IUBox *parentIU = [self.controller IUBoxByIdentifier:parentIUID];
     if ([parentIUID containsString:@"ImportedBy_"]) {
@@ -169,7 +171,7 @@
     [self.controller rearrangeObjects];
     [self.controller setSelectedObjectsByIdentifiers:@[newIU.htmlID]];
     
-    [newIU confirm];
+    [newIU confirmIdentifier];
     
     JDTraceLog( @"[IU:%@] : point(%.1f, %.1f) atIU:%@", newIU.htmlID, point.x, point.y, parentIUID);
     return YES;
@@ -552,17 +554,6 @@
     
 //    JDDebugLog(@"%@:%@", identifier, html);
 
-}
-
-
-- (void)runJSAfterInsertIU:(IUBox *)iu{
-    [[self webView] runJSAfterRefreshCSS];
-#if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
-    if([iu isMemberOfClass:[IUBox class]]){
-        [iu updateAutoHeight];
-    }
-#endif
-    [self.webView setNeedsDisplay:YES];
 }
 
 - (void)runCSSJS{

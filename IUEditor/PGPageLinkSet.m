@@ -65,10 +65,5 @@
     [self updateCSSForMaxViewPort];
 }
 
-- (void)updateCSSForEditViewPort{
-    [self.delegate IUClassIdentifier:self.cssID CSSUpdated:[self cssForWidth:self.css.editWidth isHover:NO] forWidth:self.css.editWidth];
-    [self.delegate IUClassIdentifier:[self.cssID hoverIdentifier] CSSUpdated:[self cssForWidth:self.css.editWidth isHover:YES] forWidth:self.css.editWidth];
-}
-
 
 @end

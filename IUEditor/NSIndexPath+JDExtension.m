@@ -16,6 +16,11 @@
     while (defaultLen != length) {
         returnValue = [returnValue indexPathByRemovingLastIndex];
         defaultLen --;
+        
+        //방어코드
+        if(defaultLen < 0){
+            break;
+        }
     }
     return returnValue;
 }
