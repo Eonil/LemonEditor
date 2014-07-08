@@ -44,7 +44,13 @@
     if (self) {
         [aDecoder decodeToObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"delegate", @"textType"]]];
         
-        _textType = [aDecoder decodeInt32ForKey:@"textType"] ;
+        //VERSION COMPABILITY: texttype decode int issue
+        @try {
+            _textType = [aDecoder decodeInt32ForKey:@"textType"] ;
+        }
+        @catch (NSException *exception) {
+            _textType = IUTextTypeDefault;
+        }
         _css = [aDecoder decodeObjectForKey:@"css"];
         _css.delegate = self;
         _event = [aDecoder decodeObjectForKey:@"event"];
