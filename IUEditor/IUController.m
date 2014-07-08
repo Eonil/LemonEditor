@@ -186,16 +186,13 @@
         NSString *importIdentifier = [IUChain objectAtIndex:1];
         IUImport *import = [self IUBoxByIdentifier:importIdentifier];
         
-        //get sheet
-        IUSheet *sheet = import.prototypeClass;
-        
         //get all selected IUs
         NSMutableArray *objIdentifiers = [NSMutableArray array];
         for (NSString *identifier in identifiers) {
             [objIdentifiers addObject:[[identifier componentsSeparatedByString:@"_"] objectAtIndex:2]];
         }
         
-        NSArray *selectedIUs = [self IUBoxesByIdentifiers:objIdentifiers];
+        NSSet *selectedIUs = [self IUBoxesByIdentifiers:objIdentifiers];
         
         
         //get all index paths of each selected iu
@@ -205,9 +202,9 @@
             [indexPaths addObjectsFromArray:[self indexPathsOfObject:selectedIU]];
         }
         
-        NSIndexPath *sheetPath = [self indexPathOfObject:sheet];
+        NSIndexPath *importPath = [self indexPathOfObject:import];
         NSPredicate *selectIndexPathPredicate = [NSPredicate predicateWithBlock:^BOOL(NSIndexPath *path, NSDictionary *bindings) {
-            if ([path containsIndexPath:sheetPath]) {
+            if ([path containsIndexPath:importPath]) {
                 return YES;
             }
             return NO;
@@ -270,15 +267,15 @@
 }
 
 -(id)IUBoxByIdentifier:(NSString *)identifier{
-    NSArray *findIUs = [self IUBoxesByIdentifiers:[NSArray arrayWithObject:identifier]];
+    NSSet *findIUs = [self IUBoxesByIdentifiers:[NSArray arrayWithObject:identifier]];
     if(findIUs.count == 0){
         JDInfoLog(@"there is no IUID");
         return nil;
     }
-    return findIUs[0];
+    return [findIUs anyObject];
 }
 
--(NSArray *)IUBoxesByIdentifiers:(NSArray *)identifiers{
+-(NSSet *)IUBoxesByIdentifiers:(NSArray *)identifiers{
     IUSheet *document = [self.content firstObject];
     NSArray *allChildren = [[document allChildren] arrayByAddingObject:document];
     
@@ -290,7 +287,7 @@
     }];
 
     NSArray *filteredChildren = [allChildren filteredArrayUsingPredicate:predicate];
-    return filteredChildren;
+    return [NSSet setWithArray:filteredChildren];
 }
 
 
