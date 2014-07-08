@@ -50,6 +50,8 @@
     return self;
 }
 
+#pragma mark - Header Part
+
 -(JDCode *)metadataSource:(IUPage *)page{
 
     JDCode *code = [[JDCode alloc] init];
@@ -58,9 +60,9 @@
         [code addCodeLineWithFormat:@"<title>%@</title>", page.title];
         [code addCodeLineWithFormat:@"<meta name='og:title' content='%@'>", page.title];
     }
-    if(page.description && page.description.length != 0){
-        [code addCodeLineWithFormat:@"<meta name='description' content='%@'>", page.description];
-        [code addCodeLineWithFormat:@"<meta name='og:description' content='%@'>", page.description];
+    if(page.desc && page.desc.length != 0){
+        [code addCodeLineWithFormat:@"<meta name='description' content='%@'>", page.desc];
+        [code addCodeLineWithFormat:@"<meta name='og:description' content='%@'>", page.desc];
     }
     if(page.keywords && page.keywords.length != 0){
         [code addCodeLineWithFormat:@"<meta name='keywords' content='%@'>", page.keywords];
@@ -126,6 +128,32 @@
 }
 
 
+#pragma mark default
+
+-(NSString *)HTMLOneAttributeStringWithTagArray:(NSArray *)tagArray{
+    NSMutableString *code = [NSMutableString string];
+    for (NSString *key in tagArray) {
+        [code appendFormat:@"%@ ", key];
+        
+    }
+    [code trim];
+    return code;
+}
+
+
+-(IUCSSUnit)unitWithBool:(BOOL)value{
+    if(value){
+        return IUCSSUnitPercent;
+    }
+    else{
+        return IUCSSUnitPixel;
+    }
+}
+
+
+
+#pragma mark - output body source
+
 -(NSString*)outputSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray{
     if ([document isKindOfClass:[IUClass class]]) {
         return [self outputHTML:document].string;
@@ -158,7 +186,7 @@
         NSMutableArray *cssSizeArray = [mqSizeArray mutableCopy];
         //remove default size
         [cssSizeArray removeObjectAtIndex:0];
-        JDCode *cssCode = [self cssSource:document cssSizeArray:cssSizeArray];
+        JDCode *cssCode = [self cssSource:document cssSizeArray:cssSizeArray isEdit:NO];
         [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCode:cssCode];
         
         //change html
@@ -176,241 +204,6 @@
     
     
     return sourceCode.string;
-}
-
--(NSString*)editorSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray{
-    NSString *templateFilePath = [[NSBundle mainBundle] pathForResource:@"webTemplate" ofType:@"html"];
-    
-    
-    NSMutableString *sourceString = [NSMutableString stringWithContentsOfFile:templateFilePath encoding:NSUTF8StringEncoding error:nil];
-    
-    JDCode *sourceCode = [[JDCode alloc] initWithCodeString:sourceString];
-    
-    
-    JDCode *webFontCode = [self webfontImportSourceForEdit];
-    [sourceCode replaceCodeString:@"<!--WEBFONT_Insert-->" toCode:webFontCode];
-    
-    //change css
-    NSMutableArray *cssSizeArray = [mqSizeArray mutableCopy];
-    //remove default size
-    [cssSizeArray removeObjectAtIndex:0];
-    JDCode *cssCode = [self cssSource:document cssSizeArray:cssSizeArray];
-    [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCode:cssCode];
-    
-    //change html
-    JDCode *htmlCode = [self editorHTML:document];
-    [sourceCode replaceCodeString:@"<!--HTML_Replacement-->" toCode:htmlCode];
-    
-
-    
-    JDSectionInfoLog( IULogSource, @"source : %@", [@"\n" stringByAppendingString:sourceCode.string]);
-
-    return sourceCode.string;
-}
-
--(JDCode *)cssSource:(IUSheet *)sheet cssSizeArray:(NSArray *)cssSizeArray{
-    JDCode *code = [[JDCode alloc] init];
-//    NSMutableString *css = [NSMutableString string];
-    //default-
-    [code addCodeLine:@"<style id=default>"];
-    [code increaseIndentLevelForEdit];
-
-    NSDictionary *cssDict = [self cssSourceForIU:sheet width:IUCSSMaxViewPortWidth];
-    for (NSString *identifier in cssDict) {
-        [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
-    }
-    NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
-
-    for (IUBox *obj in districtChildren) {
-        NSDictionary *cssDict = [self cssSourceForIU:obj width:IUCSSMaxViewPortWidth];
-        for (NSString *identifier in cssDict) {
-            [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
-        }
-    }
-    [code decreaseIndentLevelForEdit];
-    [code addCodeLine:@"</style>"];
-    
-#pragma mark extract MQ css
-    //mediaQuery css
-    //remove default size
-    for(NSNumber *sizeNumber in cssSizeArray){
-        int size = [sizeNumber intValue];
-        
-        //        <style type="text/css" media="screen and (max-width:400px)" id="style400">
-        [code addCodeLine:@"<style type=\"text/css\" "];
-        [code addCodeWithFormat:@"media ='screen and (max-width:%dpx)' id='style%d'>" , size, size];
-        [code increaseIndentLevelForEdit];
-        
-        NSDictionary *cssDict = [self cssSourceForIU:sheet width:size];
-        for (NSString *identifier in cssDict) {
-            if ([[cssDict[identifier] stringByTrim]length]) {
-                [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
-            }
-        }
-        
-        NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
-        
-        for (IUBox *obj in districtChildren) {
-            NSDictionary *cssDict = [self cssSourceForIU:obj width:size];
-            for (NSString *identifier in cssDict) {
-                if ([[cssDict[identifier] stringByTrim]length]) {
-                    [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
-                }
-            }
-        }
-        [code decreaseIndentLevelForEdit];
-        [code addCodeLine:@"</style>"];
-    }
-    
-    return code;
-}
-
--(JDCode *)cssContentForIUCarouselPager:(IUCarousel *)iu hover:(BOOL)hover{
-    JDCode *code = [[JDCode alloc] init];
-    if(hover){
-        //fall back
-        [code addCodeLineWithFormat:@"background:%@ !important;", [iu.selectColor cssBGString]];
-    }else{
-        [code addCodeLineWithFormat:@"background:%@ !important;", [iu.deselectColor cssBGString]];
-    }
-    return code;
-}
-
-- (NSString *)cssContentForIUCarouselArrow:(IUCarousel *)iu hover:(BOOL)hover location:(IUCarouselArrow)location carouselHeight:(NSInteger)height{
-    
-    
-    NSMutableString *css = [NSMutableString string];
-    NSString *imageName;
-    if(location == IUCarouselArrowLeft){
-        imageName = iu.leftArrowImage;
-    }
-    else if(location == IUCarouselArrowRight){
-        imageName = iu.rightArrowImage;
-    }
-    
-    NSImage *arrowImage;
-    if ([imageName isHTTPURL]) {
-        [css appendFormat:@"background:(%@) ;", imageName];
-        arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
-    }
-    else{
-        IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
-        NSString *imageRelativePath = [file relativePath];
-        [css appendFormat:@"background:%@ ;", [imageRelativePath CSSURLString]];
-        NSString *imageAbsolutePath = [file absolutePath];
-        arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
-    }
-    
-    [css appendFormat:@"height:%.0fpx ; ",arrowImage.size.height];
-    [css appendFormat:@"width:%.0fpx ;", arrowImage.size.width];
-    [css appendFormat:@"top:%.0fpx ;", (height/2-arrowImage.size.height/2)];
-
-    
-    return css;
-}
-
--(NSDictionary *)cssSourceForIUPageLinkSet:(PGPageLinkSet *)iu{
-    NSMutableDictionary *returnDict = [NSMutableDictionary dictionary];
-    
-    switch (iu.pageLinkAlign) {
-        case IUAlignLeft: break;
-        case IUAlignRight:{
-            NSString *identifier = [[iu.htmlID cssClass] stringByAppendingString:@" > div"];
-            [returnDict setObject:identifier forKey:@"float:right;"];
-        }
-        case IUAlignCenter:{
-            NSString *identifier = [[iu.htmlID cssClass] stringByAppendingString:@" > div"];
-            [returnDict setObject:identifier forKey:@"margin:auto;"];
-        }
-        default:  break;
-    }
-    
-    NSMutableString *pgLinkButton = [NSMutableString string];
-    CGFloat height = [iu.css.assembledTagDictionary[IUCSSTagHeight] floatValue];
-    [pgLinkButton appendFormat:@"    display:block; width:%.1fpx; height:%.1fpx; margin-left:%.1fpx; margin-right: %.1fpx; line-height:%.1fpx;", height, height, iu.buttonMargin, iu.buttonMargin, height];
-    [pgLinkButton appendFormat:@"    background-color:%@;", [iu.defaultButtonBGColor cssBGString]];
-
-    [returnDict setObject:pgLinkButton forKey:[iu.htmlID.cssClass stringByAppendingString:@" > div > ul > a > li"]];
-    [returnDict setObject:[iu.selectedButtonBGColor rgbString] forKey:[[iu.htmlID cssClass] stringByAppendingString:@" selected > div > ul > a > li"]];
-
-    return returnDict;
-}
-
-
--(NSDictionary *)cssDictionaryForIUCarousel:(IUCarousel *)iu{
-    
-    NSMutableDictionary *css = [NSMutableDictionary dictionary];
-    if(iu.enableColor){
-        NSString *itemID = [NSString stringWithFormat:@"%@pager-item", iu.htmlID];
-        [css setObject:[[self cssContentForIUCarouselPager:iu hover:NO] string] forKey:[itemID cssClass]];
-        [css setObject:[[self cssContentForIUCarouselPager:iu hover:YES] string] forKey:[itemID cssHoverClass]];
-        [css setObject:[[self cssContentForIUCarouselPager:iu hover:YES] string] forKey:[itemID cssActiveClass]];
-    }
-    
-    
-    NSString *leftArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-prev", iu.htmlID];
-    if([iu.leftArrowImage isEqualToString:@"Default"] == NO){
-        NSInteger currentHeight = [iu.css.assembledTagDictionary[IUCSSTagHeight] integerValue];
-        
-        NSString *string = [self cssContentForIUCarouselArrow:iu hover:NO location:IUCarouselArrowLeft carouselHeight:currentHeight];
-        [css setObject:string forKey:leftArrowID];
-    }
-    else{
-        [css setObject:@"" forKey:leftArrowID];
-    }
-    
-    NSString *rightArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-next", iu.htmlID];
-    if([iu.rightArrowImage isEqualToString:@"Default"] == NO){
-        NSInteger currentHeight = [iu.css.assembledTagDictionary[IUCSSTagHeight] integerValue];
-        NSString *string = [self cssContentForIUCarouselArrow:iu hover:NO location:IUCarouselArrowRight carouselHeight:currentHeight];
-        [css setObject:string forKey:rightArrowID];
-    }
-    else{
-        [css setObject:@"" forKey:rightArrowID];
-    }
-
-    return css;
-}
-
--(NSDictionary*)cssSourceForIU:(IUBox*)iu width:(int)width{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    
-    BOOL isDefaultWidth = (width == IUCSSMaxViewPortWidth) ? YES : NO;
-    NSString *defaultCSSString = [self CSSContentFromAttributes:[iu CSSAttributesForWidth:width] ofClass:iu isHover:NO isDefaultWidth:isDefaultWidth];
-    [dict setObject:defaultCSSString forKey:[NSString stringWithFormat:@".%@", iu.htmlID]];
-    
-    NSString *hoverCSS = [self CSSContentFromAttributes:[iu CSSAttributesForWidth:width] ofClass:iu isHover:YES isDefaultWidth:isDefaultWidth];
-    if ([[hoverCSS stringByTrim] length]) {
-        [dict setObject:hoverCSS forKey:[NSString stringWithFormat:@".%@:hover", iu.htmlID]];
-    }
-    
-#if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
-    
-    if([iu isKindOfClass:[IUText class]]){
-        IUText *textIU = (IUText *)iu;
-        NSDictionary *textCSSDict = textIU.textController.cssDict;
-        for(NSString *textIdentifier in textCSSDict.allKeys){
-            NSString *textCSSStr = [self fontCSSContentFromAttributes:[textIU textCSSAttributesForWidth:width textIdentifier:textIdentifier]];
-            [dict setObject:textCSSStr forKey:[NSString stringWithFormat:@".%@",textIdentifier]];
-        }
-    }
-    
-#endif
-    
-    if([iu isKindOfClass:[IUCarousel class]] && width == IUCSSMaxViewPortWidth){
-        NSDictionary * carouselDict =[self cssDictionaryForIUCarousel:(IUCarousel *)iu];
-        for (id key in carouselDict) {
-            [dict setObject:carouselDict[key] forKey:key];
-        }
-    }
-    
-    if ([iu isKindOfClass:[PGPageLinkSet class]] && width == IUCSSMaxViewPortWidth) {
-        NSDictionary *pagelinkSetDict = [self cssSourceForIUPageLinkSet:(PGPageLinkSet *)iu];
-        for (id key in pagelinkSetDict) {
-            [dict setObject:pagelinkSetDict[key] forKey:key];
-        }
-    }
-    return dict;
 }
 
 
@@ -434,7 +227,7 @@
     if ( self.rule == IUCompileRuleDjango && [iu isKindOfClass:[PGForm class]]) {
         [code addCodeLine:@"{% csrf_token %}"];
     }
-   
+    
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     if (self.rule == IUCompileRuleDjango && iu.pgContentVariable) {
@@ -450,8 +243,8 @@
         htmlText = [htmlText stringByReplacingOccurrencesOfString:@"  " withString:@" &nbsp;"];
         [code addCodeLineWithFormat:@"<p>%@</p>",htmlText];
     }
-
-
+    
+    
 #endif
     if (iu.children.count) {
         for (IUBox *child in iu.children) {
@@ -532,10 +325,10 @@
         
         if(((IUMovie *)iu).videoPath){
             NSMutableString *compatibilitySrc = [NSMutableString stringWithString:@"\
-                <source src=\"$moviename$\" type=\"video/$type$\">\n\
-                    <object data=\"$moviename$\" width=\"100%\" height=\"100%\">\n\
-                    <embed width=\"100%\" height=\"100%\" src=\"$moviename$\">\n\
-                </object>"];
+                                                 <source src=\"$moviename$\" type=\"video/$type$\">\n\
+                                                 <object data=\"$moviename$\" width=\"100%\" height=\"100%\">\n\
+                                                 <embed width=\"100%\" height=\"100%\" src=\"$moviename$\">\n\
+                                                 </object>"];
             
             [compatibilitySrc replaceOccurrencesOfString:@"$moviename$" withString:((IUMovie *)iu).videoPath options:0 range:NSMakeRange(0, compatibilitySrc.length)];
             [compatibilitySrc replaceOccurrencesOfString:@"$type$" withString:((IUMovie *)iu).videoPath.pathExtension options:0 range:NSMakeRange(0, compatibilitySrc.length)];
@@ -545,7 +338,7 @@
         if( ((IUMovie *)iu).altText){
             [code addCodeLine:((IUMovie *)iu).altText];
         }
-
+        
         [code addCodeLine:@"</video>"];
     }
 #pragma mark IUImage
@@ -568,7 +361,7 @@
         
     }
 #pragma mark PGPageLinkSet
-
+    
     else if ([iu isKindOfClass:[PGPageLinkSet class]]){
         [code addCodeLineWithFormat:@"<div %@>\n", [self HTMLAttributes:iu option:nil]];
         [code addCodeLine:@"    <div>"];
@@ -616,7 +409,7 @@
             }
             [code addCodeLine:@"</div>"];
         }
-
+        
     }
 #endif
 #pragma mark IUTextFeild
@@ -639,7 +432,7 @@
         [code addCodeLineWithFormat:@"<input %@ >", [self HTMLAttributes:iu option:nil]];
     }
     
-
+    
 #pragma mark IUBox
     else if ([iu isKindOfClass:[IUBox class]]) {
         JDCode *outputCode = [self outputHTMLAsBox:iu option:nil];
@@ -679,8 +472,101 @@
         [code wrapTextWithStartString:str endString:@"</a>"];
     }
     return code;
-
+    
 }
+
+#pragma mark - editor body source
+
+-(NSString*)editorSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray{
+    NSString *templateFilePath = [[NSBundle mainBundle] pathForResource:@"webTemplate" ofType:@"html"];
+    
+    
+    NSMutableString *sourceString = [NSMutableString stringWithContentsOfFile:templateFilePath encoding:NSUTF8StringEncoding error:nil];
+    
+    JDCode *sourceCode = [[JDCode alloc] initWithCodeString:sourceString];
+    
+    
+    JDCode *webFontCode = [self webfontImportSourceForEdit];
+    [sourceCode replaceCodeString:@"<!--WEBFONT_Insert-->" toCode:webFontCode];
+    
+    //change css
+    NSMutableArray *cssSizeArray = [mqSizeArray mutableCopy];
+    //remove default size
+    [cssSizeArray removeObjectAtIndex:0];
+    JDCode *cssCode = [self cssSource:document cssSizeArray:cssSizeArray isEdit:YES];
+    [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCode:cssCode];
+    
+    //change html
+    JDCode *htmlCode = [self editorHTML:document];
+    [sourceCode replaceCodeString:@"<!--HTML_Replacement-->" toCode:htmlCode];
+    
+
+    
+    JDSectionInfoLog( IULogSource, @"source : %@", [@"\n" stringByAppendingString:sourceCode.string]);
+
+    return sourceCode.string;
+}
+
+#pragma mark - cssSource
+
+-(JDCode *)cssSource:(IUSheet *)sheet cssSizeArray:(NSArray *)cssSizeArray isEdit:(BOOL)isEdit{
+    JDCode *code = [[JDCode alloc] init];
+//    NSMutableString *css = [NSMutableString string];
+    //default-
+    [code addCodeLine:@"<style id=default>"];
+    [code increaseIndentLevelForEdit];
+
+    NSDictionary *cssDict = [self cssSourceForIU:sheet width:IUCSSMaxViewPortWidth isEdit:isEdit];
+    for (NSString *identifier in cssDict) {
+        [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
+    }
+    NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
+
+    for (IUBox *obj in districtChildren) {
+        NSDictionary *cssDict = [self cssSourceForIU:obj width:IUCSSMaxViewPortWidth isEdit:isEdit];
+        for (NSString *identifier in cssDict) {
+            [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
+        }
+    }
+    [code decreaseIndentLevelForEdit];
+    [code addCodeLine:@"</style>"];
+    
+#pragma mark extract MQ css
+    //mediaQuery css
+    //remove default size
+    for(NSNumber *sizeNumber in cssSizeArray){
+        int size = [sizeNumber intValue];
+        
+        //        <style type="text/css" media="screen and (max-width:400px)" id="style400">
+        [code addCodeLine:@"<style type=\"text/css\" "];
+        [code addCodeWithFormat:@"media ='screen and (max-width:%dpx)' id='style%d'>" , size, size];
+        [code increaseIndentLevelForEdit];
+        
+        NSDictionary *cssDict = [self cssSourceForIU:sheet width:size isEdit:isEdit];
+        for (NSString *identifier in cssDict) {
+            if ([[cssDict[identifier] stringByTrim]length]) {
+                [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
+            }
+        }
+        
+        NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
+        
+        for (IUBox *obj in districtChildren) {
+            NSDictionary *cssDict = [self cssSourceForIU:obj width:size isEdit:isEdit];
+            for (NSString *identifier in cssDict) {
+                if ([[cssDict[identifier] stringByTrim]length]) {
+                    [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
+                }
+            }
+        }
+        [code decreaseIndentLevelForEdit];
+        [code addCodeLine:@"</style>"];
+    }
+    
+    return code;
+}
+
+
 
 - (JDCode*)editorHTMLAsBOX:(IUBox *)iu{
     JDCode *code = [[JDCode alloc] init];
@@ -742,7 +628,7 @@
         IUCarousel *carousel = (IUCarousel *)iu;
         [code addCodeLineWithFormat:@"<div %@ initCarousel='%@'>", [self HTMLAttributes:iu option:nil], [carousel carouselAttributes]];
         [code addCodeLineWithFormat:@"<ul class='bxslider' id='bxslider_%@'>", iu.htmlID];
-
+        
         for(IUItem *item in iu.children){
             [code addCode:[self editorHTML:item]];
         }
@@ -759,17 +645,17 @@
         else{
             NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"image_default" ofType:@"png"];
             [code addCodeLineWithFormat:@"<img %@ src='%@' >",  [self HTMLAttributes:iu option:nil], imagePath];
-
+            
         }
     }
 #pragma mark IUMovie
     else if([iu isKindOfClass:[IUMovie class]]){
-
+        
         NSDictionary *dict = [NSDictionary dictionaryWithObject:@[@(1)] forKey:@[@"editor"]];
         [code addCodeLineWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:dict]];
         
         IUMovie *iuMovie = (IUMovie *)iu;
-    
+        
         NSString *thumbnailPath;
         if(iuMovie.videoPath && iuMovie.posterPath){
             thumbnailPath = [NSString stringWithString:iuMovie.posterPath];
@@ -779,11 +665,11 @@
         }
         
         [code addCodeLineWithFormat:@"<div style=\"background-image:url('%@');\
-        background-size:contain;\
-        background-repeat:no-repeat; \
-        background-position:center; \
-        width:100%%; height:100%%; \
-        position:absolute; left:0; top:0\"></div>", thumbnailPath];
+         background-size:contain;\
+         background-repeat:no-repeat; \
+         background-position:center; \
+         width:100%%; height:100%%; \
+         position:absolute; left:0; top:0\"></div>", thumbnailPath];
         
         
         NSString *videoPlayImagePath = [[NSBundle mainBundle] pathForResource:@"video_play" ofType:@"png"];
@@ -794,7 +680,7 @@
          position:absolute;  width:100%%; height:100%%; \"></div>", videoPlayImagePath];
         
         [code addCodeLine:@"</div>"];
-
+        
     }
 #pragma mark IUWebMovie
     else if([iu isKindOfClass:[IUWebMovie class]]){
@@ -819,7 +705,7 @@
          position:absolute;  width:100%%; height:100%%; \"></div>", videoPlayImagePath];
         
         [code addCodeLine:@"</div>"];
-
+        
     }
 #pragma mark IUFBLike
     else if([iu isKindOfClass:[IUFBLike class]]){
@@ -877,12 +763,12 @@
     }
     
 #pragma mark PGTextView
-
+    
     else if ([iu isKindOfClass:[PGTextView class]]){
         NSString *inputValue = [[(PGTextView *)iu inputValue] length] ? [(PGTextView *)iu inputValue] : @"";
         [code addCodeLineWithFormat:@"<textarea %@ >%@</textarea>", [self HTMLAttributes:iu option:nil], inputValue];
     }
-
+    
 #pragma mark IUImport
     else if ([iu isKindOfClass:[IUImport class]]) {
         //add prefix, <ImportedBy_[IUName]_ to all id html (including chilren)
@@ -908,20 +794,163 @@
 }
 
 
--(NSString *)HTMLOneAttributeStringWithTagArray:(NSArray *)tagArray{
-    NSMutableString *code = [NSMutableString string];
-    for (NSString *key in tagArray) {
-        [code appendFormat:@"%@ ", key];
+#pragma mark carousel css
 
+-(JDCode *)cssContentForIUCarouselPager:(IUCarousel *)iu hover:(BOOL)hover{
+    JDCode *code = [[JDCode alloc] init];
+    if(hover){
+        //fall back
+        [code addCodeLineWithFormat:@"background:%@ !important;", [iu.selectColor cssBGString]];
+    }else{
+        [code addCodeLineWithFormat:@"background:%@ !important;", [iu.deselectColor cssBGString]];
     }
-    [code trim];
     return code;
 }
 
+- (NSString *)cssContentForIUCarouselArrow:(IUCarousel *)iu hover:(BOOL)hover location:(IUCarouselArrow)location carouselHeight:(NSInteger)height{
+    
+    
+    NSMutableString *css = [NSMutableString string];
+    NSString *imageName;
+    if(location == IUCarouselArrowLeft){
+        imageName = iu.leftArrowImage;
+    }
+    else if(location == IUCarouselArrowRight){
+        imageName = iu.rightArrowImage;
+    }
+    
+    NSImage *arrowImage;
+    if ([imageName isHTTPURL]) {
+        [css appendFormat:@"background:(%@) ;", imageName];
+        arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
+    }
+    else{
+        IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
+        NSString *imageRelativePath = [file relativePath];
+        [css appendFormat:@"background:%@ ;", [imageRelativePath CSSURLString]];
+        NSString *imageAbsolutePath = [file absolutePath];
+        arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
+    }
+    
+    [css appendFormat:@"height:%.0fpx ; ",arrowImage.size.height];
+    [css appendFormat:@"width:%.0fpx ;", arrowImage.size.width];
+    [css appendFormat:@"top:%.0fpx ;", (height/2-arrowImage.size.height/2)];
 
--(NSString*)CSSContentFromAttributes:(NSDictionary*)cssTagDictionary ofClass:(IUBox*)obj isHover:(BOOL)isHover isDefaultWidth:(BOOL)isDefaultWidth{
+    
+    return css;
+}
+-(NSDictionary *)cssDictionaryForIUCarousel:(IUCarousel *)iu{
+    
+    NSMutableDictionary *css = [NSMutableDictionary dictionary];
+    if(iu.enableColor){
+        NSString *itemID = [NSString stringWithFormat:@"%@pager-item", iu.htmlID];
+        [css setObject:[[self cssContentForIUCarouselPager:iu hover:NO] string] forKey:[itemID cssClass]];
+        [css setObject:[[self cssContentForIUCarouselPager:iu hover:YES] string] forKey:[itemID cssHoverClass]];
+        [css setObject:[[self cssContentForIUCarouselPager:iu hover:YES] string] forKey:[itemID cssActiveClass]];
+    }
+    
+    
+    NSString *leftArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-prev", iu.htmlID];
+    if([iu.leftArrowImage isEqualToString:@"Default"] == NO){
+        NSInteger currentHeight = [iu.css.assembledTagDictionary[IUCSSTagHeight] integerValue];
+        
+        NSString *string = [self cssContentForIUCarouselArrow:iu hover:NO location:IUCarouselArrowLeft carouselHeight:currentHeight];
+        [css setObject:string forKey:leftArrowID];
+    }
+    else{
+        [css setObject:@"" forKey:leftArrowID];
+    }
+    
+    NSString *rightArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-next", iu.htmlID];
+    if([iu.rightArrowImage isEqualToString:@"Default"] == NO){
+        NSInteger currentHeight = [iu.css.assembledTagDictionary[IUCSSTagHeight] integerValue];
+        NSString *string = [self cssContentForIUCarouselArrow:iu hover:NO location:IUCarouselArrowRight carouselHeight:currentHeight];
+        [css setObject:string forKey:rightArrowID];
+    }
+    else{
+        [css setObject:@"" forKey:rightArrowID];
+    }
+    
+    return css;
+}
+
+#pragma mark css iupagelinkset
+
+-(NSDictionary *)cssSourceForIUPageLinkSet:(PGPageLinkSet *)iu{
+    NSMutableDictionary *returnDict = [NSMutableDictionary dictionary];
+    
+    switch (iu.pageLinkAlign) {
+        case IUAlignLeft: break;
+        case IUAlignRight:{
+            NSString *identifier = [[iu.htmlID cssClass] stringByAppendingString:@" > div"];
+            [returnDict setObject:identifier forKey:@"float:right;"];
+        }
+        case IUAlignCenter:{
+            NSString *identifier = [[iu.htmlID cssClass] stringByAppendingString:@" > div"];
+            [returnDict setObject:identifier forKey:@"margin:auto;"];
+        }
+        default:  break;
+    }
+    
+    NSMutableString *pgLinkButton = [NSMutableString string];
+    CGFloat height = [iu.css.assembledTagDictionary[IUCSSTagHeight] floatValue];
+    [pgLinkButton appendFormat:@"    display:block; width:%.1fpx; height:%.1fpx; margin-left:%.1fpx; margin-right: %.1fpx; line-height:%.1fpx;", height, height, iu.buttonMargin, iu.buttonMargin, height];
+    [pgLinkButton appendFormat:@"    background-color:%@;", [iu.defaultButtonBGColor cssBGString]];
+
+    [returnDict setObject:pgLinkButton forKey:[iu.htmlID.cssClass stringByAppendingString:@" > div > ul > a > li"]];
+    [returnDict setObject:[iu.selectedButtonBGColor rgbString] forKey:[[iu.htmlID cssClass] stringByAppendingString:@" selected > div > ul > a > li"]];
+
+    return returnDict;
+}
+
+#pragma mark css default
+
+-(NSDictionary*)cssSourceForIU:(IUBox*)iu width:(int)width isEdit:(BOOL)isEdit{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    
+    BOOL isDefaultWidth = (width == IUCSSMaxViewPortWidth) ? YES : NO;
+    NSString *defaultCSSString = [self CSSContentFromAttributes:[iu CSSAttributesForWidth:width] ofClass:iu isHover:NO isDefaultWidth:isDefaultWidth isEdit:isEdit];
+    [dict setObject:defaultCSSString forKey:[NSString stringWithFormat:@".%@", iu.htmlID]];
+    
+    NSString *hoverCSS = [self CSSContentFromAttributes:[iu CSSAttributesForWidth:width] ofClass:iu isHover:YES isDefaultWidth:isDefaultWidth isEdit:isEdit];
+    if ([[hoverCSS stringByTrim] length]) {
+        [dict setObject:hoverCSS forKey:[NSString stringWithFormat:@".%@:hover", iu.htmlID]];
+    }
+    
+#if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
+    
+    if([iu isKindOfClass:[IUText class]]){
+        IUText *textIU = (IUText *)iu;
+        NSDictionary *textCSSDict = textIU.textController.cssDict;
+        for(NSString *textIdentifier in textCSSDict.allKeys){
+            NSString *textCSSStr = [self fontCSSContentFromAttributes:[textIU textCSSAttributesForWidth:width textIdentifier:textIdentifier]];
+            [dict setObject:textCSSStr forKey:[NSString stringWithFormat:@".%@",textIdentifier]];
+        }
+    }
+    
+#endif
+    
+    if([iu isKindOfClass:[IUCarousel class]] && width == IUCSSMaxViewPortWidth){
+        NSDictionary * carouselDict =[self cssDictionaryForIUCarousel:(IUCarousel *)iu];
+        for (id key in carouselDict) {
+            [dict setObject:carouselDict[key] forKey:key];
+        }
+    }
+    
+    if ([iu isKindOfClass:[PGPageLinkSet class]] && width == IUCSSMaxViewPortWidth) {
+        NSDictionary *pagelinkSetDict = [self cssSourceForIUPageLinkSet:(PGPageLinkSet *)iu];
+        for (id key in pagelinkSetDict) {
+            [dict setObject:pagelinkSetDict[key] forKey:key];
+        }
+    }
+    return dict;
+}
+
+
+
+-(NSString*)CSSContentFromAttributes:(NSDictionary*)cssTagDictionary ofClass:(IUBox*)obj isHover:(BOOL)isHover isDefaultWidth:(BOOL)isDefaultWidth isEdit:(BOOL)isEdit{
     //convert css tag dictionry to css string dictionary
-    NSMutableDictionary *cssStringDict = [[self cssStringDictionaryWithCSSTagDictionary:cssTagDictionary ofClass:obj isHover:isHover] mutableCopy];
+    NSMutableDictionary *cssStringDict = [[self cssStringDictionaryWithCSSTagDictionary:cssTagDictionary ofClass:obj isHover:isHover isEdit:isEdit] mutableCopy];
     
     if(isDefaultWidth == NO){
         [cssStringDict removeObjectForKey:@"position"];
@@ -937,17 +966,8 @@
     return code;
 }
 
--(IUCSSUnit)unitWithBool:(BOOL)value{
-    if(value){
-        return IUCSSUnitPercent;
-    }
-    else{
-        return IUCSSUnitPixel;
-    }
-}
 
-
--(IUCSSStringDictionary*)cssStringDictionaryWithCSSTagDictionary:(NSDictionary*)cssTagDict ofClass:(IUBox*)obj isHover:(BOOL)isHover{
+-(IUCSSStringDictionary*)cssStringDictionaryWithCSSTagDictionary:(NSDictionary*)cssTagDict ofClass:(IUBox*)obj isHover:(BOOL)isHover isEdit:(BOOL)isEdit{
     IUCSSStringDictionary *dict = [IUCSSStringDictionary dictionary];
     id value;
     
@@ -1645,7 +1665,7 @@
 }
 
 
-#pragma mark manage JS source
+#pragma mark - manage JS source
 
 -(NSString *)outputJSArgs:(IUBox *)iu{
     NSMutableString *argStr = [NSMutableString string];
@@ -1680,24 +1700,21 @@
 }
 
 -(NSString*)outputJSInitializeSource:(IUSheet *)document{
-    NSString *jsSource = [[self outputJSSource:document] stringByIndent:8 prependIndent:YES];
-    return jsSource;
+    JDCode *jsSource = [self outputJSSource:document];
+    return [jsSource string];
 }
 
--(NSString *)outputJSSource:(IUBox *)iu{
-    NSMutableString *code = [NSMutableString string];
+-(JDCode *)outputJSSource:(IUBox *)iu{
+    JDCode *code = [[JDCode alloc] init];
    
     if([iu isKindOfClass:[IUCarousel class]]){
-        [code appendString:@"/* IUCarousel initialize */\n"];
-        [code appendFormat:@"$('#bxslider_%@').bxSlider(%@)", iu.htmlID, [self outputJSArgs:iu]];
-        [code appendNewline];
+        [code addCodeLine:@"/* IUCarousel initialize */\n"];
+        [code addCodeLineWithFormat:@"$('#bxslider_%@').bxSlider(%@)", iu.htmlID, [self outputJSArgs:iu]];
     }
     else if ([iu isKindOfClass:[IUBox class]]) {
         if (iu.children.count) {
-            [code appendNewline];
             for (IUBox *child in iu.children) {
-                [code appendString:[self outputJSSource:child]];
-                [code appendNewline];
+                [code addCode:[self outputJSSource:child]];
             }
         }
 

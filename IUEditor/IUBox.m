@@ -340,7 +340,7 @@
 
 -(NSString*)cssForWidth:(NSInteger)width isHover:(BOOL)isHover{
     BOOL isDefaultWidth = (width == IUCSSMaxViewPortWidth) ? YES : NO;
-    return [self.project.compiler CSSContentFromAttributes:[self CSSAttributesForWidth:width] ofClass:self isHover:isHover isDefaultWidth:isDefaultWidth];
+    return [self.project.compiler CSSContentFromAttributes:[self CSSAttributesForWidth:width] ofClass:self isHover:isHover isDefaultWidth:isDefaultWidth isEdit:YES];
 }
 
 //delegate from IUCSS

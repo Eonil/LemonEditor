@@ -29,17 +29,20 @@ typedef enum _IUCompileRule{
 @property IUCompileRule    rule;
 
 //build source
--(NSString*)outputSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray;
--(JDCode *)outputHTML:(IUBox *)iu;
+- (NSString *)outputSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray;
+- (JDCode *)outputHTML:(IUBox *)iu;
 
 //editor source
--(NSString*)editorSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray;
--(JDCode* )editorHTML:(IUBox*)iu;
+- (NSString *)editorSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray;
+- (JDCode * )editorHTML:(IUBox*)iu;
 
--(NSString*)CSSContentFromAttributes:(NSDictionary*)attributeDict ofClass:(IUBox*)obj isHover:(BOOL)isHover isDefaultWidth:(BOOL)isDefaultWidth;
--(NSString *)fontCSSContentFromAttributes:(NSDictionary*)attributeDict;
--(NSDictionary *)cssDictionaryForIUCarousel:(IUCarousel *)iu;
--(JDCode *)cssContentForIUCarouselPager:(IUCarousel *)iu hover:(BOOL)hover;
+//editor string
+-(NSString*)CSSContentFromAttributes:(NSDictionary*)cssTagDictionary ofClass:(IUBox*)obj isHover:(BOOL)isHover isDefaultWidth:(BOOL)isDefaultWidth isEdit:(BOOL)isEdit;
+- (NSString *)fontCSSContentFromAttributes:(NSDictionary*)attributeDict;
+
+//carousel dict & string
+- (NSDictionary *)cssDictionaryForIUCarousel:(IUCarousel *)iu;
+- (JDCode *)cssContentForIUCarouselPager:(IUCarousel *)iu hover:(BOOL)hover;
 - (NSString *)cssContentForIUCarouselArrow:(IUCarousel *)iu hover:(BOOL)hover location:(IUCarouselArrow)location carouselHeight:(NSInteger)height;
 
 #pragma mark manage JS source

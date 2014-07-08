@@ -123,6 +123,16 @@
 
 #pragma mark Inner CSS (Carousel)
 
+- (NSArray *)cssIdentifierArray{
+    NSString *pagerItemID = [NSString stringWithFormat:@"%@pager-item", self.htmlID];
+    NSString *leftArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-prev", self.htmlID];
+    NSString *rightArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-next", self.htmlID];
+
+    NSMutableArray *cssArray = [[super cssIdentifierArray] mutableCopy];
+    [cssArray addObjectsFromArray:@[[pagerItemID cssClass], [pagerItemID cssHoverClass], [pagerItemID cssActiveClass], leftArrowID, rightArrowID]];
+    return cssArray;
+}
+
 - (void)setSelectColor:(NSColor *)selectColor{
     _selectColor = selectColor;
     [self cssForItemColor];
@@ -138,22 +148,20 @@
 }
 
 - (void)cssForItemColor{
-    NSString *itemID = [NSString stringWithFormat:@".%@pager-item", self.htmlID];
-    NSString *hoverItemID = [NSString stringWithFormat:@"%@:hover", itemID];
-    NSString *activeItemID = [NSString stringWithFormat:@"%@.active", itemID];
+    NSString *itemID = [NSString stringWithFormat:@"%@pager-item", self.htmlID];
     
     if (self.delegate) {
         if(self.enableColor){
-            [self.delegate IUClassIdentifier:itemID CSSUpdated:[[self.project.compiler cssContentForIUCarouselPager:self hover:NO] string] forWidth:IUCSSMaxViewPortWidth];
+            [self.delegate IUClassIdentifier:[itemID cssClass] CSSUpdated:[[self.project.compiler cssContentForIUCarouselPager:self hover:NO] string] forWidth:IUCSSMaxViewPortWidth];
             
-            [self.delegate IUClassIdentifier:hoverItemID CSSUpdated:[[self.project.compiler cssContentForIUCarouselPager:self hover:YES] string] forWidth:IUCSSMaxViewPortWidth];
+            [self.delegate IUClassIdentifier:[itemID cssHoverClass] CSSUpdated:[[self.project.compiler cssContentForIUCarouselPager:self hover:YES] string] forWidth:IUCSSMaxViewPortWidth];
             
-            [self.delegate IUClassIdentifier:activeItemID CSSUpdated:[[self.project.compiler cssContentForIUCarouselPager:self hover:YES] string] forWidth:IUCSSMaxViewPortWidth];
+            [self.delegate IUClassIdentifier:[itemID cssActiveClass] CSSUpdated:[[self.project.compiler cssContentForIUCarouselPager:self hover:YES] string] forWidth:IUCSSMaxViewPortWidth];
         }
         else{
-            [self.delegate IUClassIdentifier:itemID CSSRemovedforWidth:IUCSSMaxViewPortWidth];
-            [self.delegate IUClassIdentifier:hoverItemID CSSRemovedforWidth:IUCSSMaxViewPortWidth];
-            [self.delegate IUClassIdentifier:activeItemID CSSRemovedforWidth:IUCSSMaxViewPortWidth];
+            [self.delegate IUClassIdentifier:[itemID cssClass] CSSRemovedforWidth:IUCSSMaxViewPortWidth];
+            [self.delegate IUClassIdentifier:[itemID cssHoverClass] CSSRemovedforWidth:IUCSSMaxViewPortWidth];
+            [self.delegate IUClassIdentifier:[itemID cssActiveClass] CSSRemovedforWidth:IUCSSMaxViewPortWidth];
         }
     }
     
