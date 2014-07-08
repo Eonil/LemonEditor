@@ -285,7 +285,7 @@
                 [self selectWithDrawRect];
             }
             if(isSelected){
-                [self moveIUByDragging];
+                [self moveIUByDragging:theEvent];
             }
             
             middleDragPoint = endDragPoint;
@@ -317,11 +317,22 @@
     isSelected = NO;
 }
 
-- (void)moveIUByDragging{
+- (void)moveIUByDragging:(NSEvent *)theEvent{
     isDragged = YES;
     NSPoint totalPoint = NSMakePoint(endDragPoint.x-startDragPoint.x, endDragPoint.y-startDragPoint.y);
     NSPoint diffPoint = NSMakePoint(endDragPoint.x - middleDragPoint.x, endDragPoint.y - middleDragPoint.y);
-    [((LMCanvasVC *)self.delegate) moveIUToDiffPoint:diffPoint totalDiffPoint:totalPoint];
+    
+    if([theEvent modifierFlags] & NSShiftKeyMask){
+        if(abs(diffPoint.x) > abs(diffPoint.y)){
+            [((LMCanvasVC *)self.delegate) moveIUToDiffPoint:NSMakePoint(diffPoint.x, 0) totalDiffPoint:NSMakePoint(totalPoint.x, 0)];
+        }
+        else{
+            [((LMCanvasVC *)self.delegate) moveIUToDiffPoint:NSMakePoint(0, diffPoint.y) totalDiffPoint:NSMakePoint(0, totalPoint.y)];
+        }
+    }
+    else{
+        [((LMCanvasVC *)self.delegate) moveIUToDiffPoint:diffPoint totalDiffPoint:totalPoint];
+    }
     
 }
 

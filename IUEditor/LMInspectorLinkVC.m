@@ -185,9 +185,6 @@
         [self setValue:nil forKeyPath:[_controller keyPathFromControllerToProperty:@"divLink"]];
         return;
     }
-    
-    NSString *link = [[_divLinkPB selectedItem] title];
-    
     if(_project){
         IUBox *box = [sender selectedItem].representedObject;
         if(box){

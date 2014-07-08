@@ -96,7 +96,6 @@ typedef enum _IUOverflowType{
 @property (nonatomic) NSString *text;
 @property (nonatomic) BOOL lineHeightAuto;
 
-- (void)updateAutoHeight;
 #endif
 
 

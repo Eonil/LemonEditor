@@ -380,10 +380,6 @@
     if (self.delegate) {
         [self CSSUpdatedForWidth:_css.editWidth isHover:YES];
         [self CSSUpdatedForWidth:_css.editWidth isHover:NO];
-        
-#if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
-        [self updateAutoHeight];
-#endif
     }
 }
 
@@ -788,13 +784,6 @@
     _lineHeightAuto = lineHeightAuto;
     [self updateHTML];
     [self updateJS];
-}
-
-
-- (void)updateAutoHeight{
-    if(self.delegate){
-        [self.delegate callWebScriptMethod:@"setTextAutoHeight" withArguments:nil];
-    }
 }
 
 
