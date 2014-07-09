@@ -502,6 +502,8 @@
 		69346623192B805000F82DAF /* LMCommandVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69346622192B805000F82DAF /* LMCommandVC.xib */; };
 		693849E41914D711005C0546 /* NSIndexPath+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */; };
 		694A985F196D13E000C1D630 /* JDNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A985E196D13E000C1D630 /* JDNetworkUtil.m */; };
+		694A9862196D184400C1D630 /* JDIntegerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9861196D184400C1D630 /* JDIntegerTextField.m */; };
+		694A9865196D197900C1D630 /* JDFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9864196D197900C1D630 /* JDFormatter.m */; };
 		694E3CDB18FCF739005077B3 /* IUCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 694E3CDA18FCF739005077B3 /* IUCarousel.m */; };
 		694E3CE118FCFDA6005077B3 /* IUItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 694E3CE018FCFDA6005077B3 /* IUItem.m */; };
 		6953852E18ED6EC800CC42E5 /* IUController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6953852D18ED6EC800CC42E5 /* IUController.m */; };
@@ -1271,6 +1273,10 @@
 		693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+JDExtension.m"; sourceTree = "<group>"; };
 		694A985D196D13E000C1D630 /* JDNetworkUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDNetworkUtil.h; sourceTree = "<group>"; };
 		694A985E196D13E000C1D630 /* JDNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDNetworkUtil.m; sourceTree = "<group>"; };
+		694A9860196D184400C1D630 /* JDIntegerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDIntegerTextField.h; sourceTree = "<group>"; };
+		694A9861196D184400C1D630 /* JDIntegerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDIntegerTextField.m; sourceTree = "<group>"; };
+		694A9863196D197900C1D630 /* JDFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFormatter.h; sourceTree = "<group>"; };
+		694A9864196D197900C1D630 /* JDFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFormatter.m; sourceTree = "<group>"; };
 		694E3CD918FCF739005077B3 /* IUCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUCarousel.h; sourceTree = "<group>"; };
 		694E3CDA18FCF739005077B3 /* IUCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUCarousel.m; sourceTree = "<group>"; };
 		694E3CDF18FCFDA6005077B3 /* IUItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUItem.h; path = IU/IUItem.h; sourceTree = "<group>"; };
@@ -2716,6 +2722,10 @@
 				693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */,
 				6905FB501925F17300E4DBC3 /* JDCode.h */,
 				6905FB511925F17300E4DBC3 /* JDCode.m */,
+				694A9860196D184400C1D630 /* JDIntegerTextField.h */,
+				694A9861196D184400C1D630 /* JDIntegerTextField.m */,
+				694A9863196D197900C1D630 /* JDFormatter.h */,
+				694A9864196D197900C1D630 /* JDFormatter.m */,
 			);
 			name = JD;
 			sourceTree = "<group>";
@@ -3633,6 +3643,7 @@
 				69757B0918D95BBC0095CBAC /* JDLogUtil.m in Sources */,
 				69757B0318D95BBC0095CBAC /* JDDateTimeUtil.m in Sources */,
 				696F2DE01965C5A400809D31 /* JDScreenRecorder.m in Sources */,
+				694A9862196D184400C1D630 /* JDIntegerTextField.m in Sources */,
 				3DA6F2FE1963A676004DF0AA /* LMHelpTextPopoverVC.m in Sources */,
 				3DED26DD19010B56001A1D67 /* LMPropertyIUHTMLVC.m in Sources */,
 				69757B0018D95BBC0095CBAC /* CALayer+JDExtension.m in Sources */,
@@ -3682,6 +3693,7 @@
 				3DED271D1904ADD9001A1D67 /* LMEventVariableTrigger.m in Sources */,
 				694E3CE118FCFDA6005077B3 /* IUItem.m in Sources */,
 				3DA6F3121963BC6E004DF0AA /* LMCollectionItemView.m in Sources */,
+				694A9865196D197900C1D630 /* JDFormatter.m in Sources */,
 				690A826B190A25D500DDBA86 /* IUDjangoProject.m in Sources */,
 				3DA6F30E1963B810004DF0AA /* LMHelpVideoPopoverVC.m in Sources */,
 				CB9BD6381914DC62002C9369 /* LMStartNewDjangoVC.m in Sources */,
