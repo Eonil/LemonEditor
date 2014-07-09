@@ -799,8 +799,7 @@ static NSWindowController *hudWC;
     [hudWC.window setFrame:hudFrame display:NO];
     [hudWC.window center];
     [hudWC showWindow:nil];
-    [hudWC.window makeKeyAndOrderFront:self];
-    [hudWC.window setOrderedIndex:0];
+    [hudWC.window setLevel:NSFloatingWindowLevel];
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(second* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [hudWC.window close];
