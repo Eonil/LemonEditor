@@ -138,6 +138,7 @@
 - (IBAction)clickLinkPopupButton:(id)sender {
     NSString *link = [[_pageLinkPopupButton selectedItem] title];
     if([link isEqualToString:@"None"]){
+        [self setValue:nil forKeyPath:[_controller keyPathFromControllerToProperty:@"link"]];
         return;
     }
     if(_project){
