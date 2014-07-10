@@ -183,10 +183,7 @@
         
         
         //change css
-        NSMutableArray *cssSizeArray = [mqSizeArray mutableCopy];
-        //remove default size
-        [cssSizeArray removeObjectAtIndex:0];
-        JDCode *cssCode = [self cssSource:document cssSizeArray:cssSizeArray isEdit:NO];
+        JDCode *cssCode = [self cssSource:document cssSizeArray:mqSizeArray isEdit:NO];
         [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCode:cssCode];
         
         //change html
@@ -496,11 +493,7 @@
     JDCode *webFontCode = [self webfontImportSourceForEdit];
     [sourceCode replaceCodeString:@"<!--WEBFONT_Insert-->" toCode:webFontCode];
     
-    //change css
-    NSMutableArray *cssSizeArray = [mqSizeArray mutableCopy];
-    //remove default size
-    [cssSizeArray removeObjectAtIndex:0];
-    JDCode *cssCode = [self cssSource:document cssSizeArray:cssSizeArray isEdit:YES];
+    JDCode *cssCode = [self cssSource:document cssSizeArray:mqSizeArray isEdit:YES];
     [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCode:cssCode];
     
     //change html
@@ -746,11 +739,20 @@
 
 
 -(JDCode *)cssSource:(IUSheet *)sheet cssSizeArray:(NSArray *)cssSizeArray isEdit:(BOOL)isEdit{
+    
+    NSMutableArray *mqSizeArray = [cssSizeArray mutableCopy];
+    //remove default size
+    NSInteger largestWidth = [[mqSizeArray objectAtIndex:0] integerValue];
+    [mqSizeArray removeObjectAtIndex:0];
+
+    
     JDCode *code = [[JDCode alloc] init];
     //    NSMutableString *css = [NSMutableString string];
     //default-
     [code addCodeLine:@"<style id=default>"];
     [code increaseIndentLevelForEdit];
+    [code addCodeWithFormat:@"body { min-width:%dpx }", largestWidth];
+
     
     NSDictionary *cssDict = [self cssSourceForIU:sheet width:IUCSSMaxViewPortWidth isEdit:isEdit];
     for (NSString *identifier in cssDict) {
@@ -769,14 +771,14 @@
     
 #pragma mark extract MQ css
     //mediaQuery css
-    //remove default size
-    for(NSNumber *sizeNumber in cssSizeArray){
+    for(NSNumber *sizeNumber in mqSizeArray){
         int size = [sizeNumber intValue];
         
         //        <style type="text/css" media="screen and (max-width:400px)" id="style400">
         [code addCodeLine:@"<style type=\"text/css\" "];
         [code addCodeWithFormat:@"media ='screen and (max-width:%dpx)' id='style%d'>" , size, size];
         [code increaseIndentLevelForEdit];
+        [code addCodeWithFormat:@"body { min-width:%dpx }", size];
         
         NSDictionary *cssDict = [self cssSourceForIU:sheet width:size isEdit:isEdit];
         for (NSString *identifier in cssDict) {
