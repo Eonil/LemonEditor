@@ -35,28 +35,22 @@
 }
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-#ifndef DEBUG
+#if DEBUG
     if ([JDEnvUtil isFirstExecution:@"IUEditor"]) {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://server.iueditor.org/download.php"]];
         [NSURLConnection connectionWithRequest:request delegate:nil];
     }
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://server.iueditor.org/use.php"]];
     [NSURLConnection connectionWithRequest:request delegate:nil];
-#endif
-    [JDLogUtil showLogLevel:YES andFileName:YES andFunctionName:YES andLineNumber:YES];
-    [JDLogUtil setGlobalLevel:JDLog_Level_Debug];
-    [JDLogUtil enableLogSection:IULogSource];
-    [JDLogUtil enableLogSection:IULogJS];
-    [JDLogUtil enableLogSection:IULogAction];
-//    [JDLogUtil enableLogSection:IULogText];
     
-
-    
-    
-#if DEBUG
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
+
 #else
-    [self showStartWC:self];
+    
+    //if there is no opend document,
+    if([[[NSDocumentController sharedDocumentController] documents] count] < 1){
+        [self showStartWC:self];
+    }
     
     notiManager = [[LMNotiManager alloc] init];
     [notiManager connectWithServerAfterDelay:0];
@@ -67,33 +61,16 @@
         [tutorialWC showWindow:self];
     }
     
-    
 #endif
-  
+    [JDLogUtil showLogLevel:YES andFileName:YES andFunctionName:YES andLineNumber:YES];
+    [JDLogUtil setGlobalLevel:JDLog_Level_Debug];
+    [JDLogUtil enableLogSection:IULogSource];
+    [JDLogUtil enableLogSection:IULogJS];
+    [JDLogUtil enableLogSection:IULogAction];
+//    [JDLogUtil enableLogSection:IULogText];
+    
 
-#pragma mark -
-#pragma mark canvas test
-#if 0
-    JDFatalLog(@"fatal");
-    JDErrorLog(@"error");
-    JDWarnLog(@"warn");
-    JDInfoLog(@"info");
-    JDDebugLog(@"debug");
-    JDTraceLog(@"trace");
-    
-    self.testController = [[TestController alloc] initWithWindowNibName:@"TestController"];
-    self.testController.mainWC = self.canvasWC;
-    [self.testController showWindow:nil];
-    [wc addSelectedIU:@"test"];
-    
-    NSArray *recents = [[NSDocumentController sharedDocumentController] recentDocumentURLs];
-    if ([recents count]){
-        [self loadDocument:[[recents objectAtIndex:0] path]];
-    }
-    else {
-        [self newDocument:self];
-    }
-#endif
+
     
 }
 
@@ -108,6 +85,32 @@
      preferenceWC = [[LMPreferenceWC alloc] initWithWindowNibName:@"LMPreferenceWC"];
     [preferenceWC showWindow:self];
 }
+
+
+
+- (IBAction)performHelp:(NSMenuItem *)sender{
+    LMHelpWC *hWC = [LMHelpWC sharedHelpWC];
+    if (sender.tag == 0) {
+        [hWC showHelpWebURL:[NSURL URLWithString:@"http://jdlaborg.github.io/LemonEditor/"] withTitle:@"About Project"];
+    }
+    else {
+        switch (sender.tag) {
+            case 1:
+                [hWC showHelpDocumentWithKey:@"RunningAProject"];
+                break;
+            case 2:
+                [hWC showHelpDocumentWithKey:@"tracing"];
+                break;
+            case 3:
+                [hWC showHelpDocumentWithKey:@"positionProperty"];
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
 
 #pragma mark - application delegate
 
@@ -140,27 +143,14 @@
     return YES;
 }
 
-- (IBAction)performHelp:(NSMenuItem *)sender{
-    LMHelpWC *hWC = [LMHelpWC sharedHelpWC];
-    if (sender.tag == 0) {
-        [hWC showHelpWebURL:[NSURL URLWithString:@"http://jdlaborg.github.io/LemonEditor/"] withTitle:@"About Project"];
+- (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename{
+    if([[NSFileManager defaultManager] fileExistsAtPath:filename]){
+        NSURL *url = [NSURL fileURLWithPath:filename];
+        [(IUProjectController *)[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:url display:YES completionHandler:nil];
+        return YES;
     }
-    else {
-        switch (sender.tag) {
-            case 1:
-                [hWC showHelpDocumentWithKey:@"RunningAProject"];
-                break;
-            case 2:
-                [hWC showHelpDocumentWithKey:@"tracing"];
-                break;
-            case 3:
-                [hWC showHelpDocumentWithKey:@"positionProperty"];
-                break;
-                
-            default:
-                break;
-        }
-    }
+    return NO;
 }
+
 
 @end

@@ -318,9 +318,14 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
 
 - (NSString *)fileWrapper:(NSFileWrapper *)fileWrapper addResourceNode:(IUResourceFile *)resource{
     if([[fileWrapper fileWrappers] objectForKey:resource.name] == nil){
-        NSFileWrapper *resourceWrapper = [[NSFileWrapper alloc] initWithURL:[NSURL fileURLWithPath:resource.originalFilePath] options:0 error:nil];
-        [resourceWrapper setPreferredFilename:resource.name];
-        return [fileWrapper addFileWrapper:resourceWrapper];
+        if(resource.originalFilePath){
+            NSFileWrapper *resourceWrapper = [[NSFileWrapper alloc] initWithURL:[NSURL fileURLWithPath:resource.originalFilePath] options:0 error:nil];
+            [resourceWrapper setPreferredFilename:resource.name];
+            return [fileWrapper addFileWrapper:resourceWrapper];
+        }
+        else{
+            return nil;
+        }
     }
     return resource.name;
 }

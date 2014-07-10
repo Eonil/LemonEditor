@@ -27,6 +27,7 @@
     [super openDocument:sender];
 }
 
+
 - (id)openUntitledDocumentAndDisplay:(BOOL)displayDocument error:(NSError *__autoreleasing *)outError{
     id document = [self makeUntitledDocumentOfType:[self defaultType] error:outError];
     [self addDocument:document];
@@ -98,7 +99,9 @@
 
 
 - (void)reopenDocumentForURL:(NSURL *)urlOrNil withContentsOfURL:(NSURL *)contentsURL display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument *, BOOL, NSError *))completionHandler{
-    [super reopenDocumentForURL:urlOrNil withContentsOfURL:contentsURL display:YES completionHandler:completionHandler];
+    if(urlOrNil){
+        [super reopenDocumentForURL:urlOrNil withContentsOfURL:contentsURL display:YES completionHandler:completionHandler];
+    }
 }
 
 
