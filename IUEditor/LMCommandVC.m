@@ -13,6 +13,7 @@
 #import "JDDateTimeUtil.h"
 #import "LMTutorialManager.h"
 #import "LMHelpWC.h"
+#import "JDNetworkUtil.h"
 
 @interface LMCommandVC ()
 @property (weak) IBOutlet NSButton *buildB;
@@ -87,7 +88,10 @@
     }
     else if (rule == IUCompileRuleDjango){
         if (runningState == 0) {
-            [self runOrStopServer:self];
+            BOOL result = [self runServer:self];
+            if (result == NO) {
+                return;
+            }
         }
         IUProject *project = _docController.project;
         BOOL result = [project build:nil];
@@ -122,38 +126,50 @@
     }
 }
 
-- (IBAction) runOrStopServer:(id)sender{
-    //FIXME: 제대로 동작안함
-    /*
-    if (runningState == 0) {
-        // stop server
-        serverTask = [[NSTask alloc] init];
-        stdOutput = [NSPipe pipe];
-        stdError = [NSPipe pipe];
-        
-        stdOutputHandle = [stdOutput fileHandleForReading];
-        stdErrorHandle = [stdError fileHandleForReading];
+- (BOOL) runServer:(id)sender{
+    //get port
+    NSString *port = [[NSUserDefaults standardUserDefaults] objectForKey:@"DjangoDebugPort"];
+    if (port == nil) {
+        port = @"8000";
+    }
+    
+    //check port is not occupied
+    if ([JDNetworkUtil isPortAvailable:[port integerValue]] == NO){
+        NSBeep();
+        NSString *alertString = [NSString stringWithFormat:@"Port %@ is occupied.\nGo Preference > Django and change port", port];
+        [JDUIUtil hudAlert:alertString second:2];
+        return NO;
+    }
 
-        [serverTask setStandardOutput:stdOutputHandle];
-        [serverTask setStandardError:stdErrorHandle];
-        runningState = 1;
+    //run server
+    serverTask = [[NSTask alloc] init];
+    stdOutput = [NSPipe pipe];
+    stdError = [NSPipe pipe];
+    
+    stdOutputHandle = [stdOutput fileHandleForReading];
+    stdErrorHandle = [stdError fileHandleForReading];
+        
+    [serverTask setStandardOutput:stdOutputHandle];
+    [serverTask setStandardError:stdErrorHandle];
+    runningState = 1;
         
         
-        [serverTask setLaunchPath:@"/usr/bin/python"];
-        [serverTask setCurrentDirectoryPath:_docController.project.directoryPath];
-        [serverTask setArguments:@[@"manage.py", @"runserver", @"8000"]];
+    [serverTask setLaunchPath:@"/usr/bin/python"];
+    [serverTask setCurrentDirectoryPath:_docController.project.directoryPath];
+    [serverTask setArguments:@[@"manage.py", @"runserver", port]];
         
-        [serverTask launch];
+    [serverTask launch];
+    return YES;
+}
+
+- (BOOL) stopServer:(id)sender{
+    // run server
+    if ([serverTask isRunning]) {
+        [serverTask terminate];
+        [serverTask waitUntilExit];
     }
-    else {
-        // run server
-        if ([serverTask isRunning]) {
-            [serverTask terminate];
-            [serverTask waitUntilExit];
-        }
-        runningState = 0;
-    }
-     */
+    runningState = NO;
+    return YES;
 }
 
 - (IBAction)changeCompilerRule:(id)sender {

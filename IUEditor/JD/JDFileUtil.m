@@ -10,6 +10,7 @@
 //
 
 #import "JDFileUtil.h"
+#import "JDShellUtil.h"
 
 static JDFileUtil *sharedJDFileUtill;
 
@@ -48,11 +49,11 @@ static JDFileUtil *sharedJDFileUtill;
 
 
 +(void)rmDirPath:(NSString*)path{
-    [JDFileUtil execute:@"/bin/mv" atDirectory:@"/" arguments:@[path, [@"~/.Trash" stringByExpandingTildeInPath]] stdOut:nil stdErr:nil];
+    [JDShellUtil execute:@"/bin/mv" atDirectory:@"/" arguments:@[path, [@"~/.Trash" stringByExpandingTildeInPath]] stdOut:nil stdErr:nil];
 }
 
 +(BOOL)touch:(NSString*)filePath{
-    NSInteger resultCode = [JDFileUtil execute:@"/usr/bin/touch" atDirectory:@"/" arguments:@[filePath] stdOut:nil stdErr:nil];
+    NSInteger resultCode = [JDShellUtil execute:@"/usr/bin/touch" atDirectory:@"/" arguments:@[filePath] stdOut:nil stdErr:nil];
     return !resultCode;
 }
 
@@ -141,40 +142,6 @@ static JDFileUtil *sharedJDFileUtill;
 
 
 
-+(NSInteger) execute:(NSString*)executePath atDirectory:(NSString*)directoryPath arguments:(NSArray*)arguments stdOut:(NSString**)stdOutLog stdErr:(NSString**)stdErrLog{
-    NSTask *task;
-    
-    task = [[NSTask alloc] init];
-    [task setLaunchPath: executePath];
-    
-    if ([arguments count]) {
-        [task setArguments: arguments];
-    }
-    
-    NSPipe *pipe = [NSPipe pipe];
-    NSPipe *pipe2 = [NSPipe pipe];
-    
-    [task setStandardOutput:pipe];
-    [task setStandardError:pipe2];
-    
-    NSFileHandle *file = [pipe fileHandleForReading];
-    NSFileHandle *file2 = [pipe2 fileHandleForReading];
-    
-    [task setCurrentDirectoryPath:directoryPath];
-    [task launch];
-    [task waitUntilExit];
-    
-    if (stdOutLog) {
-        NSData *data = [file readDataToEndOfFile];
-        *stdOutLog = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
-    }
-    if (stdErrLog) {
-        NSData *data = [file2 readDataToEndOfFile];
-        *stdErrLog = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
-    }
-    
-    return [task terminationStatus];
-}
 
 
 -(BOOL) appendToFile:(NSString*)path content:(NSString*)content{

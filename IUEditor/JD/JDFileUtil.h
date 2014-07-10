@@ -26,8 +26,6 @@
 - (NSURL *)openSavePanelWithAllowFileTypes:(NSArray *)fileTypes withTitle:(NSString *)title;
 
 
-+(NSInteger)execute:(NSString*)file atDirectory:(NSString*)runPath arguments:(NSArray*)arguments stdOut:(NSString**)stdOutLog stdErr:(NSString**)stdErrLog;
-
 
 +(BOOL)touch:(NSString*)filePath;
 +(void)rmDirPath:(NSString*)path;

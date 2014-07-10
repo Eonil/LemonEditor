@@ -504,6 +504,7 @@
 		694A985F196D13E000C1D630 /* JDNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A985E196D13E000C1D630 /* JDNetworkUtil.m */; };
 		694A9862196D184400C1D630 /* JDIntegerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9861196D184400C1D630 /* JDIntegerTextField.m */; };
 		694A9865196D197900C1D630 /* JDFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9864196D197900C1D630 /* JDFormatter.m */; };
+		694A9868196D202F00C1D630 /* LMLogWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9867196D202F00C1D630 /* LMLogWC.m */; };
 		694E3CDB18FCF739005077B3 /* IUCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 694E3CDA18FCF739005077B3 /* IUCarousel.m */; };
 		694E3CE118FCFDA6005077B3 /* IUItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 694E3CE018FCFDA6005077B3 /* IUItem.m */; };
 		6953852E18ED6EC800CC42E5 /* IUController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6953852D18ED6EC800CC42E5 /* IUController.m */; };
@@ -632,6 +633,7 @@
 		69DE5CE219614D880050D020 /* LMNotiMessageWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69DE5CE019614D880050D020 /* LMNotiMessageWC.m */; };
 		69DE5CE319614D880050D020 /* LMNotiMessageWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69DE5CE119614D880050D020 /* LMNotiMessageWC.xib */; };
 		69F1A37518E0624E004C5B30 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F1A37418E0624E004C5B30 /* WebKit.framework */; };
+		69F59BA5196D97EA00D6EAF5 /* JDShellUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F59BA4196D97EA00D6EAF5 /* JDShellUtil.m */; };
 		69FEC48A19483D6D00483C11 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FEC48919483D6D00483C11 /* Quartz.framework */; };
 		69FEC48E194845CA00483C11 /* scrollingAnimation.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 69FEC48D194845CA00483C11 /* scrollingAnimation.pdf */; };
 		69FFB27E1950305600DA2783 /* LMIUPropertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FFB27C1950305600DA2783 /* LMIUPropertyVC.m */; };
@@ -1277,6 +1279,8 @@
 		694A9861196D184400C1D630 /* JDIntegerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDIntegerTextField.m; sourceTree = "<group>"; };
 		694A9863196D197900C1D630 /* JDFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFormatter.h; sourceTree = "<group>"; };
 		694A9864196D197900C1D630 /* JDFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDFormatter.m; sourceTree = "<group>"; };
+		694A9866196D202F00C1D630 /* LMLogWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMLogWC.h; sourceTree = "<group>"; };
+		694A9867196D202F00C1D630 /* LMLogWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMLogWC.m; sourceTree = "<group>"; };
 		694E3CD918FCF739005077B3 /* IUCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUCarousel.h; sourceTree = "<group>"; };
 		694E3CDA18FCF739005077B3 /* IUCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUCarousel.m; sourceTree = "<group>"; };
 		694E3CDF18FCFDA6005077B3 /* IUItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUItem.h; path = IU/IUItem.h; sourceTree = "<group>"; };
@@ -1492,6 +1496,8 @@
 		69F1A37418E0624E004C5B30 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		69F1A37618E06262004C5B30 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		69F1A37818E0627A004C5B30 /* AppleScriptKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppleScriptKit.framework; path = System/Library/Frameworks/AppleScriptKit.framework; sourceTree = SDKROOT; };
+		69F59BA3196D97EA00D6EAF5 /* JDShellUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDShellUtil.h; sourceTree = "<group>"; };
+		69F59BA4196D97EA00D6EAF5 /* JDShellUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDShellUtil.m; sourceTree = "<group>"; };
 		69FEC48919483D6D00483C11 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		69FEC48D194845CA00483C11 /* scrollingAnimation.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = scrollingAnimation.pdf; sourceTree = "<group>"; };
 		69FFB27B1950305600DA2783 /* LMIUPropertyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMIUPropertyVC.h; sourceTree = "<group>"; };
@@ -2726,6 +2732,8 @@
 				694A9861196D184400C1D630 /* JDIntegerTextField.m */,
 				694A9863196D197900C1D630 /* JDFormatter.h */,
 				694A9864196D197900C1D630 /* JDFormatter.m */,
+				69F59BA3196D97EA00D6EAF5 /* JDShellUtil.h */,
+				69F59BA4196D97EA00D6EAF5 /* JDShellUtil.m */,
 			);
 			name = JD;
 			sourceTree = "<group>";
@@ -2733,6 +2741,8 @@
 		69C5759E18D6F61E0016F050 = {
 			isa = PBXGroup;
 			children = (
+				694A9866196D202F00C1D630 /* LMLogWC.h */,
+				694A9867196D202F00C1D630 /* LMLogWC.m */,
 				694A985D196D13E000C1D630 /* JDNetworkUtil.h */,
 				694A985E196D13E000C1D630 /* JDNetworkUtil.m */,
 				696F2DDE1965C5A400809D31 /* JDScreenRecorder.h */,
@@ -3679,10 +3689,12 @@
 				69757B0418D95BBC0095CBAC /* JDEnvUtil.m in Sources */,
 				3DB3ACE018EBEF5F0046DFB7 /* GuideLineLayer.m in Sources */,
 				3DFB86481961628800A20960 /* LMPropertyWebProgrammingVC.m in Sources */,
+				69F59BA5196D97EA00D6EAF5 /* JDShellUtil.m in Sources */,
 				69757B0B18D95BBC0095CBAC /* JDOutlineView.m in Sources */,
 				3D14AE041953D06600E7C2E4 /* LMPropertyTextVC.m in Sources */,
 				3DD4786E193DB33600639AB5 /* LMDebugSourceWC.m in Sources */,
 				069A0FE8195179D900476CFA /* LMPropertyOverflowVC.m in Sources */,
+				694A9868196D202F00C1D630 /* LMLogWC.m in Sources */,
 				CBA877EA1963D0F400075294 /* LMTutorialWC.m in Sources */,
 				69CFCAB218E95A0C00E3048A /* LMResourceVC.m in Sources */,
 				69757B1518D95BBC0095CBAC /* NSTextField+DragAndDrop.m in Sources */,

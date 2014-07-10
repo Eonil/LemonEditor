@@ -12,7 +12,7 @@
 #import "JDHerokuUtil.h"
 #import "NSString+JDExtension.h"
 #import "JDLogUtil.h"
-#import "JDFileUtil.h"
+#import "JDShellUtil.h"
 
 @implementation JDHerokuUtil
 
@@ -44,7 +44,7 @@
 +(NSString*)loginID{
     NSString *resPath = [[NSBundle mainBundle] pathForResource:@"herokuauth.sh" ofType:nil];
     NSString *errLog, *log;
-    NSInteger resultCode = [JDFileUtil execute:resPath atDirectory:@"/" arguments:nil stdOut:&log stdErr:&errLog];
+    NSInteger resultCode = [JDShellUtil execute:resPath atDirectory:@"/" arguments:nil stdOut:&log stdErr:&errLog];
     if (resultCode == 0) {
         return [[log stringByTrim] lastLine];
     }
@@ -54,7 +54,7 @@
 -(BOOL)create:(NSString*)appName resultLog:(NSString**)resultLog{
     NSString *stdOut;
     NSString *stdErr;
-    NSInteger returnCode = [JDFileUtil execute:@"/usr/bin/heroku" atDirectory:@"/" arguments:@[@"create",appName] stdOut:&stdOut stdErr:&stdErr];
+    NSInteger returnCode = [JDShellUtil execute:@"/usr/bin/heroku" atDirectory:@"/" arguments:@[@"create",appName] stdOut:&stdOut stdErr:&stdErr];
     if (returnCode) {
         if (resultLog) {
             *resultLog = stdErr;
@@ -71,7 +71,7 @@
     NSString *resPath = [[NSBundle mainBundle] pathForResource:@"heroku_login" ofType:nil];
     self.logging = YES;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
-        NSInteger resultCode = [JDFileUtil execute:resPath atDirectory:@"/" arguments:@[myid, mypasswd] stdOut:nil stdErr:nil];
+        NSInteger resultCode = [JDShellUtil execute:resPath atDirectory:@"/" arguments:@[myid, mypasswd] stdOut:nil stdErr:nil];
         dispatch_async(dispatch_get_main_queue(), ^(void){
             self.logging = NO;
             [self updateLoginInfo];
@@ -81,7 +81,7 @@
 }
 
 -(BOOL)combineGitPath:(NSString*)path appName:(NSString*)appName{
-    [JDFileUtil execute:@"/usr/bin/heroku" atDirectory:path arguments:@[@"git:remote", @"-a", appName] stdOut:nil stdErr:nil];
+    [JDShellUtil execute:@"/usr/bin/heroku" atDirectory:path arguments:@[@"git:remote", @"-a", appName] stdOut:nil stdErr:nil];
     return YES;
 }
 

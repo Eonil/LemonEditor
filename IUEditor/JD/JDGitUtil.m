@@ -10,7 +10,7 @@
 //
 
 #import "JDGitUtil.h"
-#import "JDFileUtil.h"
+#import "JDShellUtil.h"
 
 @implementation JDGitUtil{
     NSString *filePath;
@@ -27,7 +27,7 @@
 -(BOOL)gitInit{
     NSString *gitPath = [[NSBundle mainBundle] pathForResource:@"git" ofType:@""];
     NSString *log, *errLog;
-    NSInteger result = [JDFileUtil execute:gitPath atDirectory:filePath arguments:@[@"init"] stdOut:&log stdErr:&errLog];
+    NSInteger result = [JDShellUtil execute:gitPath atDirectory:filePath arguments:@[@"init"] stdOut:&log stdErr:&errLog];
     JDInfoLog(@"git init returned:\n%@ + %@", log, errLog);
     return !result;
 }
@@ -35,7 +35,7 @@
 -(BOOL)addAll{
     NSString *gitPath = [[NSBundle mainBundle] pathForResource:@"git" ofType:@""];
     NSString *log, *errLog;
-    NSInteger resultCode = [JDFileUtil execute:gitPath atDirectory:filePath arguments:@[@"add", @"."] stdOut:&log stdErr:&errLog];
+    NSInteger resultCode = [JDShellUtil execute:gitPath atDirectory:filePath arguments:@[@"add", @"."] stdOut:&log stdErr:&errLog];
     JDInfoLog(@"git init returned:\n%@ + %@", log, errLog);
     return !resultCode;
 }
@@ -44,7 +44,7 @@
     NSString *gitPath = [[NSBundle mainBundle] pathForResource:@"git" ofType:@""];
     NSString *msg = [NSString stringWithFormat:@"'%@'", commitMsg];
     NSString *log, *errLog;
-    NSInteger resultCode = [JDFileUtil execute:gitPath atDirectory:filePath arguments:@[@"commit", @"-a", @"-m",msg] stdOut:&log stdErr:&errLog];
+    NSInteger resultCode = [JDShellUtil execute:gitPath atDirectory:filePath arguments:@[@"commit", @"-a", @"-m",msg] stdOut:&log stdErr:&errLog];
     JDInfoLog(@"git init returned:\n%@ + %@", log, errLog);
     return !resultCode;
 
@@ -54,7 +54,7 @@
     NSString *gitPath = [[NSBundle mainBundle] pathForResource:@"git" ofType:@""];
 
     NSString *log, *errLog;
-    NSInteger resultCode = [JDFileUtil execute:gitPath atDirectory:filePath arguments:[NSMutableArray arrayWithObjects:@"push", remote, branch, nil] stdOut:&log stdErr:&errLog];
+    NSInteger resultCode = [JDShellUtil execute:gitPath atDirectory:filePath arguments:[NSMutableArray arrayWithObjects:@"push", remote, branch, nil] stdOut:&log stdErr:&errLog];
     
     return !resultCode;
     

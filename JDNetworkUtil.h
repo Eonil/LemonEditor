@@ -10,6 +10,17 @@
 
 @interface JDNetworkUtil : NSObject
 
+/**
+ Chack port is available
+ @return YES if port is not occupied, NO if not
+ */
 + (BOOL) isPortAvailable:(NSInteger)port;
+
+/**
+ Chack port is available
+ @return PID of port.
+ @note if port is available, return NSNotFound.
+ */
++ (NSInteger) pidOfPort:(NSInteger)port;
 
 @end
