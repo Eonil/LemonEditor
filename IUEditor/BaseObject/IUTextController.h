@@ -12,6 +12,7 @@
 
 @protocol IUTextControllerDelegate <NSObject>
 
+#if 0
 @property (readonly) IUCSS *css;
 
 - (NSString*)identifierForTextController;
@@ -19,10 +20,14 @@
 - (void)updateTextCSS:(IUCSS *)textCSS identifier:(NSString *)identifier;
 - (void)updateTextRangeFromID:(NSString *)fromID toID:(NSString *)toID;
 - (void)removeTextCSSIdentifier:(NSString *)identifier;
+
+#endif
 @end
 
 
 @interface IUTextController : NSObject <NSCoding, NSCopying, IUCSSDelegate>
+
+#if 0
 
 @property (weak) id <IUTextControllerDelegate> textDelegate;
 
@@ -41,4 +46,5 @@
 - (void)setEditWidth:(NSInteger)width;
 - (NSArray *)fontNameArray;
 
+#endif
 @end

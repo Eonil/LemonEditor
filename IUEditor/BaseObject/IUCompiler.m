@@ -735,6 +735,199 @@
     return code;
 }
 
+
+#pragma mark - HTML Attributes
+
+- (NSString*)HTMLAttributes:(IUBox*)iu option:(NSDictionary*)option isEdit:(BOOL)isEdit{
+    NSMutableString *retString = [NSMutableString string];
+    [retString appendFormat:@"id=%@", iu.htmlID];
+    
+    NSArray *classPedigree = [[iu class] classPedigreeTo:[IUBox class]];
+    NSMutableString *className = [NSMutableString string];
+    for (NSString *str in classPedigree) {
+        [className appendString:str];
+        [className appendString:@" "];
+    }
+    [className appendFormat:@" %@", iu.htmlID];
+    [className trim];
+    [retString appendFormat:@" class='%@'", className];
+    
+    if(isEdit && iu.shouldAddIUByUserInput) {
+        [retString appendString:@" hasChildren"];
+    }
+    
+    if (iu.positionType == IUPositionTypeAbsoluteCenter || iu.positionType == IUPositionTypeRelativeCenter) {
+        [retString appendString:@" horizontalCenter='1'"];
+    }
+    if (iu.opacityMove) {
+        [retString appendFormat:@" opacityMove='%.1f'", iu.opacityMove];
+    }
+    if (iu.xPosMove) {
+        [retString appendFormat:@" xPosMove='%.1f'", iu.xPosMove];
+    }
+#if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
+    if([iu isMemberOfClass:[IUBox class]] && iu.lineHeightAuto && iu.text.length > 0){
+        [retString appendString:@" autoLineHeight='1'"];
+    }
+#else
+#pragma mark IUText
+    if( [iu isKindOfClass:[IUText class]] ){
+        if(((IUText *)iu).lineHeightAuto){
+            [retString appendString:@" autoLineHeight='1'"];
+        }
+        
+    }
+#endif
+    
+#pragma mark IUImage
+    if ([iu isKindOfClass:[IUImage class]]) {
+        IUImage *iuImage = (IUImage*)iu;
+        if (iuImage.pgContentVariable && _rule == IUCompileRuleDjango) {
+            if ([iu.sheet isKindOfClass:[IUClass class]]) {
+                [retString appendFormat:@" src={{ object.%@ }}", iuImage.pgContentVariable];
+            }
+            else {
+                [retString appendFormat:@" src={{ %@ }}", iuImage.pgContentVariable];
+            }
+        }else{
+            //image tag attributes
+            if(iuImage.imageName){
+                
+                if([iuImage.imageName isHTTPURL]){
+                    [retString appendFormat:@" src='%@'", iuImage.imageName];
+                    
+                }
+                else{
+                    IUResourceFile *file = [self.resourceManager resourceFileWithName:iuImage.imageName];
+                    
+                    if(_rule == IUCompileRuleDjango && isEdit == NO){
+                        [retString appendFormat:@" src='/%@'", file.relativePath];
+                    }
+                    else{
+                        [retString appendFormat:@" src='%@'", file.relativePath];
+                    }
+                }
+            }
+            if(iuImage.altText){
+                [retString appendFormat:@" alt='%@'", iuImage.altText];
+            }
+        }
+    }
+    
+#pragma mark IUWebMovie
+    else if([iu isKindOfClass:[IUWebMovie class]]){
+        IUWebMovie *iuWebMovie = (IUWebMovie *)iu;
+        if(iuWebMovie.eventautoplay){
+            [retString appendString:@" eventAutoplay='1'"];
+            [retString appendFormat:@" videoid='%@'", iuWebMovie.thumbnailID];
+            [retString appendFormat:@" videotype='%@'", iuWebMovie.type];
+        }
+    }
+#pragma mark IUMovie
+    else if ([iu isKindOfClass:[IUMovie class]]) {
+        if(option){
+            BOOL editor = [[option objectForKey:@"editor"] boolValue];
+            if(editor == NO){
+                IUMovie *iuMovie = (IUMovie*)iu;
+                if (iuMovie.enableControl) {
+                    [retString appendString:@" controls"];
+                }
+                if (iuMovie.enableLoop) {
+                    [retString appendString:@" loop"];
+                }
+                if (iuMovie.enableMute) {
+                    [retString appendString:@" muted"];
+                }
+                if (iuMovie.enableAutoPlay) {
+                    [retString appendString:@" autoplay"];
+                }
+                if (iuMovie.posterPath) {
+                    [retString appendFormat:@" poster=%@", iuMovie.posterPath];
+                }
+            }
+        }
+    }
+#pragma mark IUCarouselItem
+    else if([iu isKindOfClass:[IUCarouselItem class]]){
+        [retString appendFormat:@" carouselID=%@", iu.parent.htmlID];
+    }
+#pragma mark IUCollection
+    else if ([iu isKindOfClass:[IUCollection class]]){
+        IUCollection *iuCollection = (IUCollection*)iu;
+        
+        if(iuCollection.responsiveSetting){
+            NSData *data = [NSJSONSerialization dataWithJSONObject:iuCollection.responsiveSetting options:0 error:nil];
+            [retString appendFormat:@" responsive=%@ defaultItemCount=%ld",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding], iuCollection.defaultItemCount];
+        }
+    }
+#pragma mark PGTextField
+    else if ([iu isKindOfClass:[PGTextField class]]){
+        PGTextField *pgTextField = (PGTextField *)iu;
+        if(pgTextField.inputName){
+            [retString appendFormat:@" name=\"%@\"",pgTextField.inputName];
+        }
+        if(pgTextField.placeholder){
+            [retString appendFormat:@" placeholder=\"%@\"",pgTextField.placeholder];
+        }
+        if(pgTextField.inputValue){
+            [retString appendFormat:@" value=\"%@\"",pgTextField.inputValue];
+        }
+        if(pgTextField.type == IUTextFieldTypePassword){
+            [retString appendFormat:@" type=\"password\""];
+        }
+        else {
+            [retString appendString:@" type=\"text\""];
+        }
+    }
+#pragma mark PGSubmitButton
+    else if ([iu isKindOfClass:[PGSubmitButton class]]){
+        [retString appendFormat:@" type=\"submit\" value=\"%@\"",((PGSubmitButton *)iu).label];
+    }
+#pragma mark PGForm
+    else if ([iu isKindOfClass:[PGForm class]]){
+        
+        NSString *targetStr;
+        if([((PGForm *)iu).target isKindOfClass:[NSString class]]){
+            targetStr = ((PGForm *)iu).target;
+        }
+        else if([((PGForm *)iu).target isKindOfClass:[IUBox class]]){
+            targetStr = ((IUBox *)((PGForm *)iu).target).htmlID;
+        }
+        
+        [retString appendFormat:@" method=\"post\" action=\"%@\"", targetStr];
+    }
+#pragma mark PGTextView
+    else if([iu isKindOfClass:[PGTextView class]]){
+        PGTextView *pgTextView = (PGTextView *)iu;
+        if(pgTextView.placeholder){
+            [retString appendFormat:@" placeholder=\"%@\"",pgTextView.placeholder];
+        }
+        if(pgTextView.inputName){
+            [retString appendFormat:@" name=\"%@\"",pgTextView.inputName];
+        }
+    }
+#pragma mark IUTransition
+    else if ([iu isKindOfClass:[IUTransition class]]){
+        IUTransition *transitionIU = (IUTransition*)iu;
+        if ([transitionIU.eventType length]) {
+            if ([transitionIU.eventType isEqualToString:kIUTransitionEventClick]) {
+                [retString appendFormat:@" transitionEvent=\"click\""];
+            }
+            else if ([transitionIU.eventType isEqualToString:kIUTransitionEventMouseOn]){
+                [retString appendFormat:@" transitionEvent=\"mouseOn\""];
+            }
+            else {
+                NSAssert(0, @"Missing Code");
+            }
+        }
+        if ([transitionIU.animation length]) {
+            [retString appendFormat:@" transitionAnimation=\"%@\"", [transitionIU.animation lowercaseString]];
+        }
+    }
+    
+    return retString;
+}
+
 #pragma mark - cssSource
 
 
@@ -886,99 +1079,103 @@
     return css;
 }
 
-#pragma mark css iupagelinkset
-
--(NSDictionary *)cssSourceForIUPageLinkSet:(PGPageLinkSet *)iu{
-    NSMutableDictionary *returnDict = [NSMutableDictionary dictionary];
-    
-    switch (iu.pageLinkAlign) {
-        case IUAlignLeft: break;
-        case IUAlignRight:{
-            NSString *identifier = [[iu.htmlID cssClass] stringByAppendingString:@" > div"];
-            [returnDict setObject:identifier forKey:@"float:right;"];
-        }
-        case IUAlignCenter:{
-            NSString *identifier = [[iu.htmlID cssClass] stringByAppendingString:@" > div"];
-            [returnDict setObject:identifier forKey:@"margin:auto;"];
-        }
-        default:  break;
-    }
-    
-    NSMutableString *pgLinkButton = [NSMutableString string];
-    CGFloat height = [iu.css.assembledTagDictionary[IUCSSTagHeight] floatValue];
-    [pgLinkButton appendFormat:@"    display:block; width:%.1fpx; height:%.1fpx; margin-left:%.1fpx; margin-right: %.1fpx; line-height:%.1fpx;", height, height, iu.buttonMargin, iu.buttonMargin, height];
-    [pgLinkButton appendFormat:@"    background-color:%@;", [iu.defaultButtonBGColor cssBGString]];
-
-    [returnDict setObject:pgLinkButton forKey:[iu.htmlID.cssClass stringByAppendingString:@" > div > ul > a > li"]];
-    [returnDict setObject:[iu.selectedButtonBGColor rgbString] forKey:[[iu.htmlID cssClass] stringByAppendingString:@" selected > div > ul > a > li"]];
-
-    return returnDict;
-}
-
 #pragma mark css default
 
+/**
+ @breif This method makes whole css source
+ */
 -(NSDictionary*)cssSourceForIU:(IUBox*)iu width:(int)width isEdit:(BOOL)isEdit{
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
-    BOOL isDefaultWidth = (width == IUCSSMaxViewPortWidth) ? YES : NO;
-    NSString *defaultCSSString = [self CSSContentFromAttributes:[iu CSSAttributesForWidth:width] ofClass:iu isHover:NO isDefaultWidth:isDefaultWidth isEdit:isEdit];
-    [dict setObject:defaultCSSString forKey:[NSString stringWithFormat:@".%@", iu.htmlID]];
-    
-    NSString *hoverCSS = [self CSSContentFromAttributes:[iu CSSAttributesForWidth:width] ofClass:iu isHover:YES isDefaultWidth:isDefaultWidth isEdit:isEdit];
-    if ([[hoverCSS stringByTrim] length]) {
-        [dict setObject:hoverCSS forKey:[NSString stringWithFormat:@".%@:hover", iu.htmlID]];
+    for(NSString *identifier in iu.cssIdentifierArray){
+        NSDictionary *cssContentDict = [self CSSContentWithIdentifier:identifier ofIU:iu width:width isEdit:isEdit];
+        NSString *cssString = [self CSSCodeFromDictionary:cssContentDict];
+        [dict setObject:cssString forKey:identifier];
     }
     
-#if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
-    
-    if([iu isKindOfClass:[IUText class]]){
-        IUText *textIU = (IUText *)iu;
-        NSDictionary *textCSSDict = textIU.textController.cssDict;
-        for(NSString *textIdentifier in textCSSDict.allKeys){
-            NSString *textCSSStr = [self fontCSSContentFromAttributes:[textIU textCSSAttributesForWidth:width textIdentifier:textIdentifier]];
-            [dict setObject:textCSSStr forKey:[NSString stringWithFormat:@".%@",textIdentifier]];
-        }
-    }
-    
-#endif
-    
-    if([iu isKindOfClass:[IUCarousel class]] && width == IUCSSMaxViewPortWidth){
-        NSDictionary * carouselDict =[self cssDictionaryForIUCarousel:(IUCarousel *)iu];
-        for (id key in carouselDict) {
-            [dict setObject:carouselDict[key] forKey:key];
-        }
-    }
-    
-    if ([iu isKindOfClass:[PGPageLinkSet class]] && width == IUCSSMaxViewPortWidth) {
-        NSDictionary *pagelinkSetDict = [self cssSourceForIUPageLinkSet:(PGPageLinkSet *)iu];
-        for (id key in pagelinkSetDict) {
-            [dict setObject:pagelinkSetDict[key] forKey:key];
-        }
-    }
     return dict;
 }
 
 
-
--(NSString*)CSSContentFromAttributes:(NSDictionary*)cssTagDictionary ofClass:(IUBox*)obj isHover:(BOOL)isHover isDefaultWidth:(BOOL)isDefaultWidth isEdit:(BOOL)isEdit{
-    //convert css tag dictionry to css string dictionary
-    NSMutableDictionary *cssStringDict = [[self cssStringDictionaryWithCSSTagDictionary:cssTagDictionary ofClass:obj isHover:isHover isEdit:isEdit] mutableCopy];
-    
-    if(isDefaultWidth == NO){
-        [cssStringDict removeObjectForKey:@"position"];
-        [cssStringDict removeObjectForKey:@"overflow"];
-        [cssStringDict removeObjectForKey:@"z-index"];
-    }
-    
-    //convert css string dictionary to css line
+- (NSString *)CSSCodeFromDictionary:(NSDictionary *)dictionary{
     NSMutableString *code = [NSMutableString string];
-    for (NSString *key in cssStringDict) {
-        [code appendFormat:@"%@:%@; ", key, cssStringDict[key]];
+    for (NSString *key in dictionary) {
+        [code appendFormat:@"%@:%@; ", key, dictionary[key]];
     }
     return code;
 }
 
 
+- (NSDictionary *)CSSContentWithIdentifier:(NSString *)identifier ofIU:(IUBox *)iu width:(NSInteger)width isEdit:(BOOL)isEdit{
+    //convert css tag dictionry or property css to css string dictionary
+    
+    NSMutableDictionary *cssDict = [NSMutableDictionary dictionary];
+    
+    if([identifier isEqualToString:[iu.htmlID cssClass]]){
+        cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForWidth:width] ofClass:iu isHover:NO isEdit:isEdit] mutableCopy];
+    }
+    else if([identifier isEqualToString:[iu.html cssHoverClass]]){
+        cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForWidth:width] ofClass:iu isHover:YES isEdit:isEdit] mutableCopy];
+    }
+    else{
+        cssDict = [self cssStringDictionaryWithIdentifier:identifier ofIU:iu isEdit:isEdit];
+    }
+    
+    if(width == IUCSSMaxViewPortWidth){
+        [cssDict removeObjectForKey:@"position"];
+        [cssDict removeObjectForKey:@"overflow"];
+        [cssDict removeObjectForKey:@"z-index"];
+    }
+    
+    return cssDict;
+    
+}
+
+/**
+ @breif this method makes property css dictionary
+ */
+-(IUCSSStringDictionary*)cssStringDictionaryWithIdentifier:(NSString *)identifier ofIU:(IUBox*)iu  isEdit:(BOOL)isEdit{
+    IUCSSStringDictionary *dict = [IUCSSStringDictionary dictionary];
+    
+#pragma mark - PGPageLinkSet
+    if([iu isKindOfClass:[PGPageLinkSet class]]){
+        
+        PGPageLinkSet *pageLinkSet = (PGPageLinkSet *)iu;
+        if([identifier isEqualToString:[pageLinkSet.htmlID.cssClass stringByAppendingString:pageLinkSetButtonCSSPostfix]]){
+            switch (pageLinkSet.pageLinkAlign) {
+                case IUAlignLeft: break;
+                case IUAlignRight:
+                    [dict putTag:@"float" string:@"right"];
+                case IUAlignCenter:
+                    [dict putTag:@"margin" string:@"auto"];
+                default:
+                    break;
+            }
+
+        }
+        else if([identifier isEqualToString:[pageLinkSet.htmlID.cssClass stringByAppendingString:pageLinkSetButtonLiCSSPostfix]]){
+            CGFloat height = [iu.css.assembledTagDictionary[IUCSSTagHeight] floatValue];
+            [dict putTag:@"display" string:@"block"];
+            [dict putTag:@"width" floatValue:height ignoreZero:YES unit:IUCSSUnitPixel];
+            [dict putTag:@"height" floatValue:height ignoreZero:YES unit:IUCSSUnitPixel];
+            [dict putTag:@"margin-left" floatValue:pageLinkSet.buttonMargin ignoreZero:YES unit:IUCSSUnitPixel];
+            [dict putTag:@"margin-right" floatValue:pageLinkSet.buttonMargin ignoreZero:YES unit:IUCSSUnitPixel];
+            [dict putTag:@"line-height" floatValue:height ignoreZero:YES unit:IUCSSUnitPixel];
+            [dict putTag:@"background-color" color:pageLinkSet.defaultButtonBGColor ignoreClearColor:NO];
+        }
+        else if([identifier isEqualToString:[pageLinkSet.htmlID.cssClass stringByAppendingString:pageLinkSetButtonSelectedLiCSSPostfix]]){
+             [dict putTag:@"background-color" color:pageLinkSet.selectedButtonBGColor ignoreClearColor:NO];
+        }
+    }
+    
+    return dict;
+}
+
+
+
+/**
+ @breif This method makes default css dictionary (1st property)
+*/
 -(IUCSSStringDictionary*)cssStringDictionaryWithCSSTagDictionary:(NSDictionary*)cssTagDict ofClass:(IUBox*)obj isHover:(BOOL)isHover isEdit:(BOOL)isEdit{
     IUCSSStringDictionary *dict = [IUCSSStringDictionary dictionary];
     id value;
@@ -1436,257 +1633,6 @@
     //end of else (not hover)
     return dict;
 
-}
-
-- (BOOL)isLastCharacterBRElement:(NSString *)text{
-    NSArray *textArray = [text componentsSeparatedByString:@"<br>"];
-    NSString *lastString =  [[textArray lastObject] stringByTrim];
-    if([lastString isEqualToString:@"</span>"]){
-        return YES;
-    }
-    return NO;
-}
-
-
--(NSString *)fontCSSContentFromAttributes:(NSDictionary*)attributeDict{
-    NSMutableString *retStr = [NSMutableString string];
-    NSString *fontName = attributeDict[IUCSSTagFontName];
-    if (fontName) {
-        [retStr appendFormat:@"font-family : %@;", [[LMFontController sharedFontController] cssForFontName:fontName]];
-    }
-    NSNumber *fontSize = attributeDict[IUCSSTagFontSize];
-    if (fontSize) {
-        [retStr appendFormat:@"font-size : %dpx;", [fontSize intValue]];
-    }
-    NSColor *fontColor = attributeDict[IUCSSTagFontColor];
-    if (fontColor){
-        [retStr appendFormat:@"color:%@;", [fontColor rgbString]];
-    }
-    BOOL boolValue =[attributeDict[IUCSSTagFontWeight] boolValue];
-    if(boolValue){
-        [retStr appendString:@"font-weight:bold;"];
-    }
-    boolValue = [attributeDict[IUCSSTagFontStyle] boolValue];
-    if(boolValue){
-        [retStr appendString:@"font-style:italic;"];
-    }
-    boolValue = [attributeDict[IUCSSTagTextDecoration] boolValue];
-    if(boolValue){
-        [retStr appendString:@"text-decoration:underline;"];
-    }
-    return retStr;
-}
-
-
-/*
--(void)insert:(NSMutableDictionary*)dict style:(NSString*)tag value:(id)value{
-    if ([tag isEqualToString:@"background-color"]) {
-        [self insert:dict string:[value rgbString] forTag:tag];
-    }
-    else if ([tag isEqualToString:@"position"]) {
-        [self insert:dict string:value forTag:tag];
-    }
-}
-
-
--(void)insert:(NSMutableDictionary*)dict string:(NSString*)value forTag:(NSString*)tag{
-    if ([value length]) {
-        [dict setObject:value forKey:tag];
-    }
-    else{
-        [dict removeObjectForKey:tag];
-    }
-}
-*/
-
-- (NSString*)HTMLAttributes:(IUBox*)iu option:(NSDictionary*)option isEdit:(BOOL)isEdit{
-    NSMutableString *retString = [NSMutableString string];
-    [retString appendFormat:@"id=%@", iu.htmlID];
-    
-    NSArray *classPedigree = [[iu class] classPedigreeTo:[IUBox class]];
-    NSMutableString *className = [NSMutableString string];
-    for (NSString *str in classPedigree) {
-        [className appendString:str];
-        [className appendString:@" "];
-    }
-    [className appendFormat:@" %@", iu.htmlID];
-    [className trim];
-    [retString appendFormat:@" class='%@'", className];
-    
-    if(isEdit && iu.shouldAddIUByUserInput) {
-        [retString appendString:@" hasChildren"];
-    }
-    
-    if (iu.positionType == IUPositionTypeAbsoluteCenter || iu.positionType == IUPositionTypeRelativeCenter) {
-        [retString appendString:@" horizontalCenter='1'"];
-    }
-    if (iu.opacityMove) {
-        [retString appendFormat:@" opacityMove='%.1f'", iu.opacityMove];
-    }
-    if (iu.xPosMove) {
-        [retString appendFormat:@" xPosMove='%.1f'", iu.xPosMove];
-    }
-#if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
-    if([iu isMemberOfClass:[IUBox class]] && iu.lineHeightAuto && iu.text.length > 0){
-        [retString appendString:@" autoLineHeight='1'"];
-    }
-#else
-#pragma mark IUText
-    if( [iu isKindOfClass:[IUText class]] ){
-        if(((IUText *)iu).lineHeightAuto){
-            [retString appendString:@" autoLineHeight='1'"];
-        }
-        
-    }
-#endif
-    
-#pragma mark IUImage
-    if ([iu isKindOfClass:[IUImage class]]) {
-        IUImage *iuImage = (IUImage*)iu;
-        if (iuImage.pgContentVariable && _rule == IUCompileRuleDjango) {
-            if ([iu.sheet isKindOfClass:[IUClass class]]) {
-                [retString appendFormat:@" src={{ object.%@ }}", iuImage.pgContentVariable];
-            }
-            else {
-                [retString appendFormat:@" src={{ %@ }}", iuImage.pgContentVariable];
-            }
-        }else{
-            //image tag attributes
-            if(iuImage.imageName){
-                
-                if([iuImage.imageName isHTTPURL]){
-                    [retString appendFormat:@" src='%@'", iuImage.imageName];
-                    
-                }
-                else{
-                    IUResourceFile *file = [self.resourceManager resourceFileWithName:iuImage.imageName];
-                    
-                    if(_rule == IUCompileRuleDjango && isEdit == NO){
-                        [retString appendFormat:@" src='/%@'", file.relativePath];
-                    }
-                    else{
-                        [retString appendFormat:@" src='%@'", file.relativePath];
-                    }
-                }
-            }
-            if(iuImage.altText){
-                [retString appendFormat:@" alt='%@'", iuImage.altText];
-            }
-        }
-    }
-
-#pragma mark IUWebMovie
-    else if([iu isKindOfClass:[IUWebMovie class]]){
-        IUWebMovie *iuWebMovie = (IUWebMovie *)iu;
-        if(iuWebMovie.eventautoplay){
-            [retString appendString:@" eventAutoplay='1'"];
-            [retString appendFormat:@" videoid='%@'", iuWebMovie.thumbnailID];
-            [retString appendFormat:@" videotype='%@'", iuWebMovie.type];
-        }
-    }
-#pragma mark IUMovie
-    else if ([iu isKindOfClass:[IUMovie class]]) {
-        if(option){
-            BOOL editor = [[option objectForKey:@"editor"] boolValue];
-            if(editor == NO){
-                IUMovie *iuMovie = (IUMovie*)iu;
-                if (iuMovie.enableControl) {
-                    [retString appendString:@" controls"];
-                }
-                if (iuMovie.enableLoop) {
-                    [retString appendString:@" loop"];
-                }
-                if (iuMovie.enableMute) {
-                    [retString appendString:@" muted"];
-                }
-                if (iuMovie.enableAutoPlay) {
-                    [retString appendString:@" autoplay"];
-                }
-                if (iuMovie.posterPath) {
-                    [retString appendFormat:@" poster=%@", iuMovie.posterPath];
-                }
-            }
-        }
-    }
-#pragma mark IUCarouselItem
-    else if([iu isKindOfClass:[IUCarouselItem class]]){
-        [retString appendFormat:@" carouselID=%@", iu.parent.htmlID];
-    }
-#pragma mark IUCollection
-    else if ([iu isKindOfClass:[IUCollection class]]){
-        IUCollection *iuCollection = (IUCollection*)iu;
-
-        if(iuCollection.responsiveSetting){
-            NSData *data = [NSJSONSerialization dataWithJSONObject:iuCollection.responsiveSetting options:0 error:nil];
-            [retString appendFormat:@" responsive=%@ defaultItemCount=%ld",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding], iuCollection.defaultItemCount];
-        }
-    }
-#pragma mark PGTextField
-    else if ([iu isKindOfClass:[PGTextField class]]){
-        PGTextField *pgTextField = (PGTextField *)iu;
-        if(pgTextField.inputName){
-            [retString appendFormat:@" name=\"%@\"",pgTextField.inputName];
-        }
-        if(pgTextField.placeholder){
-            [retString appendFormat:@" placeholder=\"%@\"",pgTextField.placeholder];
-        }
-        if(pgTextField.inputValue){
-            [retString appendFormat:@" value=\"%@\"",pgTextField.inputValue];
-        }
-        if(pgTextField.type == IUTextFieldTypePassword){
-            [retString appendFormat:@" type=\"password\""];
-        }
-        else {
-            [retString appendString:@" type=\"text\""];
-        }
-    }
-#pragma mark PGSubmitButton
-    else if ([iu isKindOfClass:[PGSubmitButton class]]){
-        [retString appendFormat:@" type=\"submit\" value=\"%@\"",((PGSubmitButton *)iu).label];
-    }
-#pragma mark PGForm
-    else if ([iu isKindOfClass:[PGForm class]]){
-        
-        NSString *targetStr;
-        if([((PGForm *)iu).target isKindOfClass:[NSString class]]){
-            targetStr = ((PGForm *)iu).target;
-        }
-        else if([((PGForm *)iu).target isKindOfClass:[IUBox class]]){
-            targetStr = ((IUBox *)((PGForm *)iu).target).htmlID;
-        }
-        
-        [retString appendFormat:@" method=\"post\" action=\"%@\"", targetStr];
-    }
-#pragma mark PGTextView
-    else if([iu isKindOfClass:[PGTextView class]]){
-        PGTextView *pgTextView = (PGTextView *)iu;
-        if(pgTextView.placeholder){
-            [retString appendFormat:@" placeholder=\"%@\"",pgTextView.placeholder];
-        }
-        if(pgTextView.inputName){
-            [retString appendFormat:@" name=\"%@\"",pgTextView.inputName];
-        }
-    }
-#pragma mark IUTransition
-    else if ([iu isKindOfClass:[IUTransition class]]){
-        IUTransition *transitionIU = (IUTransition*)iu;
-        if ([transitionIU.eventType length]) {
-            if ([transitionIU.eventType isEqualToString:kIUTransitionEventClick]) {
-                [retString appendFormat:@" transitionEvent=\"click\""];
-            }
-            else if ([transitionIU.eventType isEqualToString:kIUTransitionEventMouseOn]){
-                [retString appendFormat:@" transitionEvent=\"mouseOn\""];
-            }
-            else {
-                NSAssert(0, @"Missing Code");
-            }
-        }
-        if ([transitionIU.animation length]) {
-            [retString appendFormat:@" transitionAnimation=\"%@\"", [transitionIU.animation lowercaseString]];
-        }
-    }
-
-    return retString;
 }
 
 

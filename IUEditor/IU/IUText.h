@@ -11,6 +11,7 @@
 
 @interface IUText : IUBox <IUTextControllerDelegate>
 
+#if 0
 @property IUTextController *textController;
 #if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
 @property (nonatomic) BOOL lineHeightAuto;
@@ -26,4 +27,5 @@
 - (NSArray *)fontNameArray;
 - (void)updateAutoHeight;
 
+#endif 
 @end

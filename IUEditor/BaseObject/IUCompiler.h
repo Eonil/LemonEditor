@@ -37,8 +37,8 @@ typedef enum _IUCompileRule{
 - (JDCode * )editorHTML:(IUBox*)iu;
 
 //editor string
--(NSString*)CSSContentFromAttributes:(NSDictionary*)cssTagDictionary ofClass:(IUBox*)obj isHover:(BOOL)isHover isDefaultWidth:(BOOL)isDefaultWidth isEdit:(BOOL)isEdit;
-- (NSString *)fontCSSContentFromAttributes:(NSDictionary*)attributeDict;
+- (NSString *)CSSCodeFromDictionary:(NSDictionary *)dictionary;
+- (NSDictionary *)CSSContentWithIdentifier:(NSString *)identifier ofIU:(IUBox *)iu width:(NSInteger)width isEdit:(BOOL)isEdit;
 
 //carousel dict & string
 - (NSDictionary *)cssDictionaryForIUCarousel:(IUCarousel *)iu;

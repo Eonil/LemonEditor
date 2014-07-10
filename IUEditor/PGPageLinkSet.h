@@ -8,6 +8,10 @@
 
 #import "IUBox.h"
 
+static NSString *pageLinkSetButtonCSSPostfix = @" > div";
+static NSString *pageLinkSetButtonLiCSSPostfix = @" > div > ul > a > li";
+static NSString *pageLinkSetButtonSelectedLiCSSPostfix = @" selected > div > ul > a > li";
+
 @interface PGPageLinkSet : IUBox
 @property (nonatomic) NSString  *pageCountVariable;
 @property (nonatomic) IUAlign   pageLinkAlign;

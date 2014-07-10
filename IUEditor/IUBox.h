@@ -108,7 +108,6 @@ typedef enum _IUOverflowType{
 //CSS
 @property (readonly) IUCSS *css; //used by subclass
 - (NSArray *)cssIdentifierArray;
-- (NSDictionary*)CSSAttributesForWidth:(NSInteger)width;
 - (void)updateCSSForEditViewPort;
 - (void)updateCSSForMaxViewPort;
 

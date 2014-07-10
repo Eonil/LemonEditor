@@ -340,26 +340,19 @@
 
 #pragma mark - css
 
--(NSDictionary*)CSSAttributesForWidth:(NSInteger)width{
-    return [_css tagDictionaryForWidth:(int)width];
-}
+-(NSString*)cssForWidth:(NSInteger)width withIdentifier:(NSString *)identifer{
 
+    NSDictionary *dict = [self.project.compiler CSSContentWithIdentifier:identifer ofIU:self width:width isEdit:YES];
+    NSString *code = [self.project.compiler CSSCodeFromDictionary:dict];
 
--(NSString*)cssForWidth:(NSInteger)width isHover:(BOOL)isHover{
-    BOOL isDefaultWidth = (width == IUCSSMaxViewPortWidth) ? YES : NO;
-    return [self.project.compiler CSSContentFromAttributes:[self CSSAttributesForWidth:width] ofClass:self isHover:isHover isDefaultWidth:isDefaultWidth isEdit:YES];
+    return code;
 }
 
 //delegate from IUCSS
--(void)CSSUpdatedForWidth:(NSInteger)width isHover:(BOOL)isHover{
+-(void)CSSUpdatedForWidth:(NSInteger)width withIdentifier:(NSString *)identifer{
     if(self.delegate){
-        NSString *css = [self cssForWidth:width isHover:isHover];
-        if (isHover) {
-            [self.delegate IUClassIdentifier:[self.htmlID cssHoverClass] CSSUpdated:css forWidth:width];
-        }
-        else {
-            [self.delegate IUClassIdentifier:[self.htmlID cssClass]  CSSUpdated:css forWidth:width];
-        }
+        NSString *css = [self cssForWidth:width withIdentifier:identifer];
+        [self.delegate IUClassIdentifier:identifer CSSUpdated:css forWidth:width];
     }
 }
 /**
@@ -372,15 +365,15 @@
 
 - (void)updateCSSForMaxViewPort{
     if (self.delegate) {
-        [self CSSUpdatedForWidth:IUCSSMaxViewPortWidth isHover:YES];
-        [self CSSUpdatedForWidth:IUCSSMaxViewPortWidth isHover:NO];
+        [self CSSUpdatedForWidth:IUCSSMaxViewPortWidth withIdentifier:[self.htmlID cssClass]];
+        [self CSSUpdatedForWidth:IUCSSMaxViewPortWidth withIdentifier:[self.htmlID cssHoverClass]];
     }
 }
 
 - (void)updateCSSForEditViewPort{
     if (self.delegate) {
-        [self CSSUpdatedForWidth:_css.editWidth isHover:YES];
-        [self CSSUpdatedForWidth:_css.editWidth isHover:NO];
+        [self CSSUpdatedForWidth:_css.editWidth withIdentifier:[self.htmlID cssClass]];
+        [self CSSUpdatedForWidth:_css.editWidth withIdentifier:[self.htmlID cssHoverClass]];
     }
 }
 

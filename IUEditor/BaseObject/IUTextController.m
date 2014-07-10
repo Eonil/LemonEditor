@@ -9,6 +9,7 @@
 #import "IUTextController.h"
 #import "IUCSS.h"
 
+#if 0
 @interface IUTextController()
 
 @property NSRange selectedRange;
@@ -18,7 +19,12 @@
 @property NSMutableIndexSet *newlineIndexSet;
 @end
 
-@implementation IUTextController{
+#endif
+
+@implementation IUTextController
+
+#if 0
+{
     BOOL textMode;
 }
 
@@ -615,4 +621,6 @@
     [code appendString:@"</p>"];
     return code;
 }
+
+#endif
 @end

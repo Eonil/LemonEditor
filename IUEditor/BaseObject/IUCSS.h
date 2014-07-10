@@ -10,8 +10,9 @@
 
 @protocol IUCSSDelegate
 @required
--(void)CSSUpdatedForWidth:(NSInteger)width isHover:(BOOL)isHover;
--(BOOL)CSSShouldChangeValue:(id)value forTag:(IUCSSTag)tag forWidth:(NSInteger)width;
+- (void)updateCSSForEditViewPort;
+- (void)updateCSSForMaxViewPort;
+- (BOOL)CSSShouldChangeValue:(id)value forTag:(IUCSSTag)tag forWidth:(NSInteger)width;
 @end
 
 

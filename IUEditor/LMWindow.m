@@ -22,6 +22,11 @@
 #pragma mark mouse
 
 - (void)awakeFromNib{
+    
+    NSButton *closeButton = [self standardWindowButton:NSWindowCloseButton];
+    [closeButton setTarget:self];
+    [closeButton setAction:@selector(performClose:)];
+    
      closeWC = [[LMCloseWC alloc] initWithWindowNibName:[LMCloseWC class].className];
 
 }
