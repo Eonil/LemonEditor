@@ -72,7 +72,12 @@
 
 - (NSString*)outputSource{
     NSAssert(self.project.compiler, @"compiler");
-    return [self.project.compiler outputSource:self mqSizeArray:self.project.mqSizes];;
+    
+    NSSortDescriptor* sortOrder = [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: NO];
+    NSArray *sortedArray= [self.project.mqSizes sortedArrayUsingDescriptors: [NSArray arrayWithObject: sortOrder]];
+    
+    
+    return [self.project.compiler outputSource:self mqSizeArray:sortedArray];;
 }
 
 - (NSString*)outputInitJSSource{
