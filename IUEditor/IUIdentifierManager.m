@@ -48,7 +48,9 @@
     for (IUBox *iu in IUs) {
         [confirmed setObject:iu forKey:iu.htmlID];
         for (IUBox *child in iu.allChildren) {
-            [confirmed setObject:child forKey:child.htmlID];
+            if(child.htmlID){
+                [confirmed setObject:child forKey:child.htmlID];
+            }
         }
     }
 }

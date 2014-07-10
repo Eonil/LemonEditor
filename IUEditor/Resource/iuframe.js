@@ -4,9 +4,10 @@ function resizePageContentHeight(){
 	//make page content height
     var height=0;
     $('.IUPageContent').siblings().each(function(){height += $(this).height()});
-    height=$(window).height()-height;
-    $('.IUPageContent').css('height', height+'px');
-	
+    
+    //@deprecated
+    //remove to set pageContent height
+    
 	//make min height of page content
 	var minHeight=0;
     $('.IUPageContent').children().each(function(){

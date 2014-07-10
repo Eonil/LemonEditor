@@ -235,7 +235,7 @@
             [code addCodeLineWithFormat:@"{{object.%@}}", iu.pgContentVariable];
         }
         else {
-            [code addCodeLineWithFormat:@"<p>{{%@}}</p>", iu.pgContentVariable];
+            [code addCodeLineWithFormat:@"<p>{{%@|linebreaksbr}}</p>", iu.pgContentVariable];
         }
     }
     else if(iu.text && iu.text.length > 0){
@@ -367,9 +367,16 @@
         [code addCodeLine:@"    <div>"];
         [code addCodeLine:@"    <ul>"];
         [code addCodeLineWithFormat:@"        {%% for i in %@ %%}", [(PGPageLinkSet *)iu pageCountVariable]];
-        [code addCodeLineWithFormat:@"        <a href=/%@/{{i}}>", iu.link];
-        [code addCodeLine:@"            <li> {{i}} </li>"];
-        [code addCodeLine:@"        </a>"];
+
+        NSString *linkStr;
+        if([iu.link isKindOfClass:[IUBox class]]){
+            linkStr = ((IUBox *)iu.link).htmlID;
+        }
+        if(linkStr){
+            [code addCodeLineWithFormat:@"        <a href=/%@/{{i}}>", linkStr];
+            [code addCodeLine:@"            <li> {{i}} </li>"];
+            [code addCodeLine:@"        </a>"];
+        }
         [code addCodeLine:@"        {% endfor %}"];
         [code addCodeLine:@"    </ul>"];
         [code addCodeLine:@"    </div>"];
@@ -676,6 +683,7 @@
     }
 #pragma mark PGPageLinkSet
     else if ([iu isKindOfClass:[PGPageLinkSet class]]){
+
         [code addCodeLineWithFormat:@"<div %@>\n", [self HTMLAttributes:iu option:nil isEdit:YES]];
         [code addCodeLineWithFormat:@"    <div class='IUPageLinkSetClip'>\n"];
         [code addCodeLineWithFormat:@"       <ul>\n"];
@@ -1167,8 +1175,14 @@
             }
             else {
                 IUResourceFile *file = [self.resourceManager resourceFileWithName:value];
-                imgSrc = [[file relativePath] CSSURLString];
+                if(_rule == IUCompileRuleDjango && isEdit == NO){
+                    imgSrc = [[@"/" stringByAppendingString:[file relativePath]] CSSURLString];
+                }
+                else{
+                    imgSrc = [[file relativePath] CSSURLString];
+                }
             }
+            
             
             [dict putTag:@"background-image" string:imgSrc];
 
@@ -1534,7 +1548,7 @@
                 [retString appendFormat:@" src={{ object.%@ }}", iuImage.pgContentVariable];
             }
             else {
-                [retString appendFormat:@" src={{ %@ }}>", iuImage.pgContentVariable];
+                [retString appendFormat:@" src={{ %@ }}", iuImage.pgContentVariable];
             }
         }else{
             //image tag attributes
@@ -1546,7 +1560,13 @@
                 }
                 else{
                     IUResourceFile *file = [self.resourceManager resourceFileWithName:iuImage.imageName];
-                    [retString appendFormat:@" src='%@'", file.relativePath];
+                    
+                    if(_rule == IUCompileRuleDjango && isEdit == NO){
+                        [retString appendFormat:@" src='/%@'", file.relativePath];
+                    }
+                    else{
+                        [retString appendFormat:@" src='%@'", file.relativePath];
+                    }
                 }
             }
             if(iuImage.altText){

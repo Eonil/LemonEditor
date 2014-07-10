@@ -257,7 +257,7 @@
         self.propertyVArray = @[propertyIUMovieVC.view];
     }
     else if ([classString isEqualToString:@"PGPageLinkSet"]) {
-        self.propertyVArray = @[propertyPGPageLinkSetVC.view];
+        self.propertyVArray = @[propertyPGPageLinkSetVC.view, inspectorLinkVC.view];
     }
     else if ([classString isEqualToString:@"IUWebMovie"]) {
         self.propertyVArray = @[propertyIUWebMovieVC.view, propertyIUHTMLVC.view];

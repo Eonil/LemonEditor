@@ -176,6 +176,7 @@
     box.text = [_text copy];
     box.lineHeightAuto  = _lineHeightAuto;
 #endif
+    box.positionType = _positionType;
     box.css = newCSS;
     newCSS.delegate  = box;
     box.event = newEvent;
