@@ -31,8 +31,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="276" height="130"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="08X-X7-XQJ">
-                                <rect key="frame" x="77" y="107" width="184" height="21"/>
+                            <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="08X-X7-XQJ">
+                                <rect key="frame" x="77" y="107" width="152" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="184" id="XKI-y8-ZtL"/>
                                     <constraint firstAttribute="height" constant="19" id="sNc-EY-von"/>
@@ -40,24 +40,24 @@
                                 <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="smallSquare" trackingMode="selectOne" id="HzB-Y7-fs8">
                                     <font key="font" metaFont="smallSystem"/>
                                     <segments>
-                                        <segment label="Auto" width="32"/>
-                                        <segment image="bg_cover" width="29" selected="YES" tag="1">
+                                        <segment label="Auto" width="42"/>
+                                        <segment image="bg_cover" width="26" selected="YES" tag="1">
                                             <nil key="label"/>
                                         </segment>
-                                        <segment image="bg_contain" width="29">
+                                        <segment image="bg_contain">
                                             <nil key="label"/>
                                         </segment>
-                                        <segment image="bg_stretch" width="29">
+                                        <segment image="bg_stretch">
                                             <nil key="label"/>
                                         </segment>
-                                        <segment image="bg_center" width="29">
-                                            <nil key="label"/>
-                                        </segment>
-                                        <segment image="bg_fullsize" width="29">
+                                        <segment image="bg_fullsize">
                                             <nil key="label"/>
                                         </segment>
                                     </segments>
                                 </segmentedCell>
+                                <connections>
+                                    <action selector="clickSegementedControlBox:" target="-2" id="vhp-g0-cD7"/>
+                                </connections>
                             </segmentedControl>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GeA-Ft-SlO">
                                 <rect key="frame" x="4" y="112" width="65" height="14"/>
@@ -351,7 +351,6 @@
     </objects>
     <resources>
         <image name="auto_resize" width="19" height="18"/>
-        <image name="bg_center" width="14" height="10"/>
         <image name="bg_contain" width="14" height="10"/>
         <image name="bg_cover" width="14" height="10"/>
         <image name="bg_fullsize" width="14" height="10"/>

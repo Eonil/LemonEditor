@@ -1188,20 +1188,17 @@
 
             IUBGSizeType bgSizeType = [cssTagDict[IUCSSTagBGSize] intValue];
             switch (bgSizeType) {
-                case IUBGSizeTypeCenter:
-                    [dict putTag:@"background-position" string:@"center"];
-                    break;
                 case IUBGSizeTypeStretch:
                     [dict putTag:@"background-size" string:@"100% 100%"];
                     break;
                 case IUBGSizeTypeContain:
                     [dict putTag:@"background-size" string:@"contain"];
                     break;
+                case IUBGSizeTypeFull:
+                    [dict putTag:@"background-attachment" string:@"fixed"];
                 case IUBGSizeTypeCover:
                     [dict putTag:@"background-size" string:@"cover"];
                     break;
-                //case IUBGSizeTypeFull:
-                //    [dict putTag:@"background-size" string:@"<#string#>"];
                 default:
                     break;
             }

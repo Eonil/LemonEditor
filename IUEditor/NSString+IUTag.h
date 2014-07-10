@@ -64,7 +64,6 @@ typedef enum{
     IUBGSizeTypeCover,
     IUBGSizeTypeContain,
     IUBGSizeTypeStretch,
-    IUBGSizeTypeCenter,
     IUBGSizeTypeFull,
 }IUBGSizeType;
 

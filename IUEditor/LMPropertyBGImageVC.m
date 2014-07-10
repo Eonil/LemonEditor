@@ -24,6 +24,9 @@
 @property (weak) IBOutlet NSSegmentedControl *positionVSegmentedControl;
 @property (weak) IBOutlet NSButton *digitPositionBtn;
 
+
+@property BOOL fullSize;
+
 @end
 
 @implementation LMPropertyBGImageVC
@@ -61,18 +64,20 @@
     [_fitButton bind:@"enabled4" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"hasHeight"] options:IUBindingDictNotRaisesApplicable];
     
     
-    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:0 context:@"image"];
-    
     
 #pragma mark - size, repeat
     
     [_sizeSegementControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGSize] options:IUBindingDictNotRaisesApplicable];
+    [_sizeSegementControl bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
     
     [_repeatBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGRepeat] options:noRepeatBindingOption];
+    
+    [_repeatBtn bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
+    [_repeatBtn bind:@"enabled2" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
 
     
-    [_sizeSegementControl bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
-    [_repeatBtn bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
+    
+    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGSize] options:0 context:@"size"];
 
     
 #pragma mark - position
@@ -82,35 +87,60 @@
     
     [_digitPositionBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGEnableDigitPosition] options:IUBindingDictNotRaisesApplicable];
     
+    [_digitPositionBtn bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
+    [_digitPositionBtn bind:@"enabled2" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
+    
     [_xPositionTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGXPosition] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_yPositionTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGYPosition] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
 
     
 #pragma mark - enable position
-    //enable 1
+    //position Segement 1
     [_positionHSegmentedControl bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
     [_positionVSegmentedControl bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
 
-    [_digitPositionBtn bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
-
-    [_xPositionTF bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
-    [_yPositionTF bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
-    
-    //enable 2
     [_positionHSegmentedControl bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGEnableDigitPosition] options:IUBindingNegationAndNotRaise];
     [_positionVSegmentedControl bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGEnableDigitPosition] options:IUBindingNegationAndNotRaise];
     
+    [_positionHSegmentedControl bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
+    [_positionVSegmentedControl bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
+
+    //position TF
+    [_xPositionTF bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
+    [_yPositionTF bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
+    
     [_xPositionTF bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGEnableDigitPosition] options:IUBindingDictNotRaisesApplicable];
     [_yPositionTF bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGEnableDigitPosition] options:IUBindingDictNotRaisesApplicable];
+    
+    [_xPositionTF bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
+    [_yPositionTF bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
+    
+    
+
+
     
 }
 
 - (void)dealloc{
     //release 시점 확인용
     NSAssert(0, @"");
-  //  [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage]];
 }
+
+
+-(void)sizeContextDidChange:(NSDictionary *)dictionary{
+    IUBGSizeType selectedtype = (IUBGSizeType)[_sizeSegementControl selectedSegment];
+    if(selectedtype == IUBGSizeTypeFull){
+        [self setValue:@(1) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGVPosition]];
+        [self setValue:@(1) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGHPosition]];
+        self.fullSize = YES;
+    }
+    else{
+        self.fullSize = NO;
+    }
+}
+
+#pragma mark - combobox
 
 - (void)controlTextDidChange:(NSNotification *)obj{
     for (IUImage *image in self.controller.selectedObjects) {
@@ -129,6 +159,8 @@
         }
     }
 }
+
+#pragma mark - IBAction
 
 
 - (IBAction)performFitToImage:(id)sender { // Fit to Image button function
