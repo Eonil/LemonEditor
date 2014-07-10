@@ -77,10 +77,13 @@
 #define IUNotificationMQMaxSize @"MQMaxSize"
 
 
+//notification when console log is arrived
+#define IUNotificationConsoleLog @"ConsoleLog"
 
 //for text modification 2.0version
 #define CURRENT_TEXT_VERSION 1
 #define TEXT_SELECTION_VERSION 2
+
 
 
 #define CalledByNoti void

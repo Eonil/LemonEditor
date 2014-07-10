@@ -195,6 +195,8 @@
 
 
 - (void)awakeFromNib{
+    self.window.delegate = self;
+    
     NSCell *cell = [self.propertyMatrix cellAtRow:0 column:0];
     [self.propertyMatrix setToolTip:@"Appearance" forCell:cell];
     
@@ -402,5 +404,8 @@
     return _project.name;
 }
 
+- (void)windowWillClose:(NSNotification *)notification{
+    [commandVC stopServer:self];
+}
 
 @end

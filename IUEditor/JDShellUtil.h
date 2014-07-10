@@ -20,6 +20,7 @@
 @interface JDShellUtil : NSObject
 
 -(NSTask*)task;
+-(void)stop;
 /**
  write data to standard input.
  contray fuction of shellUtil: read:
@@ -29,6 +30,7 @@
 +(NSInteger)execute:(NSString*)file atDirectory:(NSString*)runPath arguments:(NSArray*)arguments stdOut:(NSString**)stdOutLog stdErr:(NSString**)stdErrLog;
 
 +(NSInteger)execute:(NSString*)command stdOut:(NSString**)stdOutLog stdErr:(NSString**)stdErrLog;
++(NSInteger)execute:(NSString*)command;
 
-
+-(int)execute:(NSString*)command delegate:(id <JDShellUtilPipeDelegate>)  delegate;
 @end

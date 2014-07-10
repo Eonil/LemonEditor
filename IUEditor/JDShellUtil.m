@@ -51,6 +51,17 @@
     return [task terminationStatus];
 }
 
++(NSInteger)execute:(NSString*)command{
+    NSTask *task;
+    task = [[NSTask alloc] init];
+    [task setLaunchPath: @"/bin/sh"];
+    
+    [task setArguments: @[@"-c" , command,]];
+    [task launch];
+    [task waitUntilExit];
+    return [task terminationStatus];
+}
+
 +(NSInteger)execute:(NSString*)command stdOut:(NSString**)stdOutLog stdErr:(NSString**)stdErrLog{
     NSTask *task;
     task = [[NSTask alloc] init];
@@ -73,9 +84,9 @@
         NSData *stdOutData = [stdOutHandle readDataToEndOfFile];
         *stdOutLog = [[NSString alloc] initWithData:stdOutData encoding:NSUTF8StringEncoding];
     }
-    if (stdOutLog) {
+    if (stdErrLog) {
         NSData *stdErrData = [stdErrHandle readDataToEndOfFile];
-        *stdOutLog = [[NSString alloc] initWithData:stdErrData encoding:NSUTF8StringEncoding];
+        *stdErrLog = [[NSString alloc] initWithData:stdErrData encoding:NSUTF8StringEncoding];
     }
     
     return [task terminationStatus];
@@ -83,6 +94,12 @@
 
 - (NSTask*)task{
     return _task;
+}
+
+-(void)stop{
+    [[NSNotificationCenter defaultCenter] removeObserver:self ];
+    [_task terminate];
+    [_task waitUntilExit];
 }
 
 -(int)execute:(NSString*)command delegate:(id <JDShellUtilPipeDelegate>)  delegate{
@@ -122,7 +139,7 @@
 
 - (void)errorHandleDataReceived:(NSNotification*)noti{
     NSData *d = [errorHandle availableData];
-    [_delegate shellUtil:self standardOutputDataReceived:d];
+    [_delegate shellUtil:self standardErrorDataReceived:d];
 }
 
 -(void)writeDataToStandardInput:(NSData*)data{

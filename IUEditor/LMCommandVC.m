@@ -14,16 +14,21 @@
 #import "LMTutorialManager.h"
 #import "LMHelpWC.h"
 #import "JDNetworkUtil.h"
+#import "JDShellUtil.h"
 
 @interface LMCommandVC ()
 @property (weak) IBOutlet NSButton *buildB;
 @property (weak) IBOutlet NSButton *serverB;
 @property (weak) IBOutlet NSPopUpButton *compilerB;
+@property (strong) IBOutlet NSWindow *portOccupiedWindow;
+@property (weak) IBOutlet NSTextField *portOccupiedText;
+@property (weak) IBOutlet NSButton *doNotShowAgainB;
 @property (weak) IBOutlet NSButton *recordingB;
+
+@property NSString *serverState;
 @end
 
 @implementation LMCommandVC {
-    BOOL runningState;
     NSTask *serverTask;
     __weak NSButton *_buildB;
     __weak NSButton *_serverB;
@@ -37,6 +42,8 @@
     NSFileHandle *stdErrorHandle;
 
     JDScreenRecorder *screenRecorder;
+    JDShellUtil *debugServerShell;
+
     BOOL recording;
 }
 
@@ -49,8 +56,12 @@
 }
 
 - (void)awakeFromNib{
-    [_compilerB bind:NSSelectedIndexBinding toObject:self withKeyPath:@"docController.project.compiler.rule" options:nil];
-    [self addObserver:self forKeyPath:@"docController.project.runnable" options:NSKeyValueObservingOptionInitial context:nil];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [_compilerB bind:NSSelectedIndexBinding toObject:self withKeyPath:@"docController.project.compiler.rule" options:nil];
+        [self addObserver:self forKeyPath:@"docController.project.runnable" options:NSKeyValueObservingOptionInitial context:nil];
+        [self changeCompilerRule:nil];
+    });
 }
 
 -(void)dealloc{
@@ -58,6 +69,15 @@
     NSAssert(0, @"");
     
     //[self removeObserver:self forKeyPath:@"docController.project.runnable"];
+}
+
+
+- (NSInteger)djangoDebugPort{
+    NSString *port = [[NSUserDefaults standardUserDefaults] objectForKey:@"DjangoDebugPort"];
+    if (port == nil) {
+        port = @"8000";
+    }
+    return [port integerValue];
 }
 
 -(void)docController_project_runnableDidChange:(NSDictionary*)change{
@@ -73,6 +93,38 @@
     }
 }
 
+- (void)showPortKillSheet:(NSString*)port{
+    NSInteger pid = [JDNetworkUtil pidOfPort:[port integerValue]];
+    NSString *processName = [JDNetworkUtil processNameOfPort:[port integerValue]];
+    NSString *str = [NSString stringWithFormat:@"Django debug port %@ is occupied by '%@ (PID %ld)'. Do you want to kill it?", port, processName, pid];
+    [_portOccupiedText setStringValue:str];
+    [self.view.window beginSheet:_portOccupiedWindow completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSModalResponseOK) {
+            //kill process
+            NSString *command = [NSString stringWithFormat:@"kill %ld", pid];
+            [JDShellUtil execute:command];
+
+            //build again
+            
+        }
+        else {
+            return;
+        }
+    }];
+    return;
+}
+
+- (void)shellUtil:(JDShellUtil*)util standardOutputDataReceived:(NSData*)data{
+    NSString *log = [[NSString alloc] initWithData:data encoding:4];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleLog object:self.view userInfo:@{@"Log": log}];
+}
+
+- (void)shellUtil:(JDShellUtil*)util standardErrorDataReceived:(NSData*)data{
+    NSString *log = [[NSString alloc] initWithData:data encoding:4];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleLog object:self.view userInfo:@{@"Log": log}];
+}
+
+
 - (IBAction)build:(id)sender {
     
     IUCompileRule rule = _docController.project.compiler.rule;
@@ -87,37 +139,32 @@
         [[NSWorkspace sharedWorkspace] openFile:firstPath];
     }
     else if (rule == IUCompileRuleDjango){
-        if (runningState == 0) {
-            BOOL result = [self runServer:self];
-            if (result == NO) {
-                return;
+        //get port
+        //run server
+        if ([debugServerShell.task isRunning] == NO) {
+            if ([JDNetworkUtil isPortAvailable:[self djangoDebugPort]]) {
+                [self runServer:nil];
             }
         }
+        
+        //compile
         IUProject *project = _docController.project;
         BOOL result = [project build:nil];
         if (result == NO) {
-            NSAssert(0, @"");
+            NSAssert(0, @"compile failed");
         }
-        IUSheet *node = [[_docController selectedObjects] firstObject];
         
-        //project or IUGroup
+        //open page
+        IUSheet *node = [[_docController selectedObjects] firstObject];
         if([node isKindOfClass:[IUSheet class]] == NO){
             node = [project.pageDocuments firstObject];
         }
+
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://127.0.0.1:%ld/%@",[self djangoDebugPort], [node.name lowercaseString]]];
         
-        BOOL runningLocal = [[NSUserDefaults standardUserDefaults] boolForKey:@"DjangoDebugLoopback"];
-        if (runningLocal) {
-            NSString *port = [[NSUserDefaults standardUserDefaults] objectForKey:@"DjangoDebugPort"];
-            if (port == nil) {
-                port = @"8000";
-            }
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://127.0.0.1:%@/%@",port, [node.name lowercaseString]]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [[NSWorkspace sharedWorkspace] openURL:url];
-        }
-        else {
-            NSString *firstPath = [project.directoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@.html",project.buildPath, [node.name lowercaseString]] ];
-            [[NSWorkspace sharedWorkspace] openFile:firstPath];
-        }
+        });
     }
     
     //show tutorial if needed
@@ -126,58 +173,64 @@
     }
 }
 
-- (BOOL) runServer:(id)sender{
+- (BOOL) runServer:(NSError **)error{
     //get port
+    NSString *command = [NSString stringWithFormat:@"%@ runserver %ld", [_docController.project.directoryPath stringByAppendingPathComponent:@"manage.py"], [self djangoDebugPort]];
+    debugServerShell = [[JDShellUtil alloc] init];
+    [debugServerShell execute:command delegate:self];
+    [self refreshServerState];
+    return YES;
+}
+
+
+- (IBAction)stopServer:(id)sender {
+    // run server
+    if (debugServerShell) {
+        [debugServerShell stop];
+        debugServerShell = nil;
+    }
     NSString *port = [[NSUserDefaults standardUserDefaults] objectForKey:@"DjangoDebugPort"];
     if (port == nil) {
         port = @"8000";
     }
-    
-    //check port is not occupied
-    if ([JDNetworkUtil isPortAvailable:[port integerValue]] == NO){
-        NSBeep();
-        NSString *alertString = [NSString stringWithFormat:@"Port %@ is occupied.\nGo Preference > Django and change port", port];
-        [JDUIUtil hudAlert:alertString second:2];
-        return NO;
+    NSInteger pid = [JDNetworkUtil pidOfPort:[port integerValue]];
+    if (pid != NSNotFound) {
+        //kill
+        NSString *killCommand = [NSString stringWithFormat:@"kill %ld", pid];
+        [JDShellUtil execute:killCommand];
     }
-
-    //run server
-    serverTask = [[NSTask alloc] init];
-    stdOutput = [NSPipe pipe];
-    stdError = [NSPipe pipe];
-    
-    stdOutputHandle = [stdOutput fileHandleForReading];
-    stdErrorHandle = [stdError fileHandleForReading];
-        
-    [serverTask setStandardOutput:stdOutputHandle];
-    [serverTask setStandardError:stdErrorHandle];
-    runningState = 1;
-        
-        
-    [serverTask setLaunchPath:@"/usr/bin/python"];
-    [serverTask setCurrentDirectoryPath:_docController.project.directoryPath];
-    [serverTask setArguments:@[@"manage.py", @"runserver", port]];
-        
-    [serverTask launch];
-    return YES;
+    [self refreshServerState];
 }
 
-- (BOOL) stopServer:(id)sender{
-    // run server
-    if ([serverTask isRunning]) {
-        [serverTask terminate];
-        [serverTask waitUntilExit];
+- (void)refreshServerState{
+    [self refreshServerStatePerform];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self refreshServerStatePerform];
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self refreshServerStatePerform];
+    });
+
+}
+
+- (void)refreshServerStatePerform{
+    NSInteger pid = [JDNetworkUtil pidOfPort:[self djangoDebugPort]];
+    if (pid == NSNotFound) {
+        self.serverState = nil;
+        return;
     }
-    runningState = NO;
-    return YES;
+    NSString *processName = [JDNetworkUtil processNameOfPort:[self djangoDebugPort]];
+    self.serverState = [NSString stringWithFormat:@"%@(%ld) is running", processName, pid];
 }
 
 - (IBAction)changeCompilerRule:(id)sender {
     _docController.project.compiler.rule = (int)[_compilerB indexOfSelectedItem];
-}
-
-- (IBAction)sync:(id)sender {
-    
+    if (_docController.project.compiler.rule == IUCompileRuleDefault) {
+        self.serverState = nil;
+    }
+    else {
+        [self refreshServerState];
+    }
 }
 
 - (IBAction)toggleRecording:(id)sender{
@@ -196,6 +249,20 @@
         [screenRecorder finishRecord];
         [JDUIUtil hudAlert:@"Recording saved at Desktop" second:3];
     }
+}
+- (IBAction)performCancelKillOccupiedProcess:(id)sender {
+    if ([_doNotShowAgainB integerValue]) {
+        //always yes
+        [[NSUserDefaults standardUserDefaults] setObject:@(NO) forKey:@"DebugPortKill"];
+    }
+    [self.view.window endSheet:_portOccupiedWindow returnCode:NSModalResponseCancel];
+}
+
+- (IBAction)performKillOccupiedProcess:(id)sender {
+    if ([_doNotShowAgainB integerValue]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"DebugPortKill"];
+    }
+    [self.view.window endSheet:_portOccupiedWindow returnCode:NSModalResponseOK];
 }
 
 

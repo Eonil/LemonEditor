@@ -23,4 +23,5 @@
  */
 + (NSInteger) pidOfPort:(NSInteger)port;
 
++ (NSString*) processNameOfPort:(NSInteger)port;
 @end
