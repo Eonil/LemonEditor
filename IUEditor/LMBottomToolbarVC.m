@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 JDLab. All rights reserved.
 //
 
-#import "LMTracingBarVC.h"
+#import "LMBottomToolbarVC.h"
 #import "LMTutorialManager.h"
 #import "LMHelpPopover.h"
 #import "LMWC.h"
 #import "LMHelpWC.h"
 
-@interface LMTracingBarVC ()
+@interface LMBottomToolbarVC ()
 
 @property (weak) IBOutlet NSComboBox *ghostImageComboBox;
 @property (weak) IBOutlet NSButton *ghostBtn;
@@ -24,19 +24,21 @@
 @property (weak) IBOutlet NSButton *refreshBtn;
 @property (weak) IBOutlet NSButton *leftInspectorBtn;
 @property (weak) IBOutlet NSButton *rightInspectorBtn;
+@property (weak) IBOutlet NSButton *logBtn;
 @property (weak) IBOutlet NSButton *borderBtn;
 @property (weak) IBOutlet NSButton *mailBtn;
 
 
 @end
 
-@implementation LMTracingBarVC
+@implementation LMBottomToolbarVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
+        [self loadView];
     }
     return self;
 }
@@ -124,6 +126,16 @@
     _resourceManager = resourceManager;
 }
 
+
+- (IBAction)helpTracing:(id)sender {
+    LMHelpWC *hWC = [LMHelpWC sharedHelpWC];
+    [hWC showHelpDocumentWithKey:@"tracing"];
+}
+
+
+#pragma mark - bottom tool
+
+
 - (IBAction)clickBorderBtn:(id)sender {
     BOOL showBorder = [[NSUserDefaults standardUserDefaults] boolForKey:@"showBorder"];
     [[NSUserDefaults standardUserDefaults] setBool:!showBorder forKey:@"showBorder"];
@@ -138,25 +150,35 @@
     [lmWC reloadCurrentDocument];
 }
 
-#pragma mark -
 - (IBAction)toggleLeftInspector:(id)sender {
-    BOOL showLeftInspector = [[NSUserDefaults standardUserDefaults] boolForKey:@"showLeftInspector"];
-    [[NSUserDefaults standardUserDefaults] setBool:!showLeftInspector forKey:@"showLeftInspector"];
+    LMWC *lmWC = [NSApp mainWindow].windowController;
+    NSInteger state = [_leftInspectorBtn state];
+    [lmWC setLeftInspectorState:state];
+
 }
 - (IBAction)toggleRightInspector:(id)sender {
-    BOOL showRightInspector = [[NSUserDefaults standardUserDefaults] boolForKey:@"showRightInspector"];
-    [[NSUserDefaults standardUserDefaults] setBool:!showRightInspector forKey:@"showRightInspector"];
+    
+    LMWC *lmWC = [NSApp mainWindow].windowController;
+    NSInteger state = [_rightInspectorBtn state];
+    [lmWC setRightInspectorState:state];
+    
+}
+
+- (void)setLogViewEnable:(BOOL)enable{
+    [_logBtn setEnabled:enable];
+}
+- (IBAction)toggleLogView:(id)sender {
+    LMWC *lmWC = [NSApp mainWindow].windowController;
+    NSInteger state = [_logBtn state];
+    [lmWC setLogViewState:state];
+
 }
 
 #pragma mark - mail
+
 - (IBAction)clickEmailBtn:(id)sender {
     NSString *url = [IUEmail stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [[NSWorkspace sharedWorkspace]  openURL:[NSURL URLWithString:url]];
-}
-
-- (IBAction)helpTracing:(id)sender {
-    LMHelpWC *hWC = [LMHelpWC sharedHelpWC];
-    [hWC showHelpDocumentWithKey:@"tracing"];
 }
 
 @end

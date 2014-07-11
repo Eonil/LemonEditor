@@ -4,14 +4,15 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="LMTracingBarVC">
+        <customObject id="-2" userLabel="File's Owner" customClass="LMBottomToolbarVC">
             <connections>
                 <outlet property="borderBtn" destination="AtM-vo-UJw" id="9bO-hK-CHv"/>
                 <outlet property="ghostBtn" destination="7kz-xZ-eTb" id="6qY-jM-ghB"/>
                 <outlet property="ghostImageComboBox" destination="dbv-8G-uEg" id="jjb-mH-mzA"/>
                 <outlet property="ghostXTF" destination="dRi-Rm-hE7" id="7dL-VP-Jda"/>
                 <outlet property="ghostYTF" destination="Ybl-bH-hL5" id="zIe-yh-6xI"/>
-                <outlet property="leftInspectorBtn" destination="TnF-d8-4GY" id="2Sa-Lw-TfB"/>
+                <outlet property="leftInspectorBtn" destination="qJX-Ll-ajr" id="Dd2-fX-imk"/>
+                <outlet property="logBtn" destination="TnF-d8-4GY" id="hR3-ab-Mly"/>
                 <outlet property="mailBtn" destination="Ic4-uz-kiy" id="R75-eS-KtM"/>
                 <outlet property="opacitySlider" destination="Q3k-Jt-7QC" id="Av8-gB-klE"/>
                 <outlet property="refreshBtn" destination="ZgI-8w-DCs" id="HUE-ET-IhF"/>
@@ -91,10 +92,24 @@
                                 </textFieldCell>
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="fph-Bf-9zu" userLabel="side menu">
-                                <rect key="frame" x="751" y="-1" width="150" height="31"/>
+                                <rect key="frame" x="721" y="-1" width="180" height="31"/>
                                 <subviews>
+                                    <button toolTip="Left Panel" translatesAutoresizingMaskIntoConstraints="NO" id="qJX-Ll-ajr" userLabel="leftInspectorBtn">
+                                        <rect key="frame" x="30" y="1" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="e10-jb-Qie"/>
+                                            <constraint firstAttribute="height" constant="30" id="eeH-95-txY"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_left_off" imagePosition="only" alignment="center" alternateImage="panel_left_on" state="on" imageScaling="proportionallyDown" inset="2" id="OOp-7m-awl">
+                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="toggleLeftInspector:" target="-2" id="en7-7k-CNm"/>
+                                        </connections>
+                                    </button>
                                     <button toolTip="Right Panel" translatesAutoresizingMaskIntoConstraints="NO" id="ekM-CH-Zbt" userLabel="rightInspectorBtn">
-                                        <rect key="frame" x="60" y="1" width="30" height="30"/>
+                                        <rect key="frame" x="90" y="1" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="3G0-yX-Do6"/>
                                             <constraint firstAttribute="width" constant="30" id="CVN-Yw-Lj0"/>
@@ -107,22 +122,22 @@
                                             <action selector="toggleRightInspector:" target="-2" id="ndt-ku-cvi"/>
                                         </connections>
                                     </button>
-                                    <button toolTip="Left Panel" translatesAutoresizingMaskIntoConstraints="NO" id="TnF-d8-4GY" userLabel="LeftInspectorBtn">
-                                        <rect key="frame" x="30" y="1" width="30" height="30"/>
+                                    <button toolTip="Left Panel" translatesAutoresizingMaskIntoConstraints="NO" id="TnF-d8-4GY" userLabel="logBtn">
+                                        <rect key="frame" x="60" y="1" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Dfa-uJ-gVZ"/>
                                             <constraint firstAttribute="width" constant="30" id="WQ2-qY-1IN"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_left_off" imagePosition="only" alignment="center" alternateImage="panel_left_on" state="on" imageScaling="proportionallyDown" inset="2" id="QK0-yL-BXt">
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="panel_bottom_off" imagePosition="only" alignment="center" alternateImage="panel_bottom_on" state="on" imageScaling="proportionallyDown" inset="2" id="QK0-yL-BXt">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="toggleLeftInspector:" target="-2" id="Gvg-oQ-EMz"/>
+                                            <action selector="toggleLogView:" target="-2" id="E38-Jc-Drf"/>
                                         </connections>
                                     </button>
                                     <button toolTip="Refresh" translatesAutoresizingMaskIntoConstraints="NO" id="ZgI-8w-DCs" userLabel="refreshBtn">
-                                        <rect key="frame" x="0.0" y="2" width="30" height="30"/>
+                                        <rect key="frame" x="0.0" y="1" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="cGd-pG-Viy"/>
                                             <constraint firstAttribute="height" constant="30" id="l9M-rr-Rdl"/>
@@ -136,7 +151,7 @@
                                         </connections>
                                     </button>
                                     <button toolTip="Border" translatesAutoresizingMaskIntoConstraints="NO" id="AtM-vo-UJw" userLabel="borderBtn">
-                                        <rect key="frame" x="90" y="1" width="30" height="30"/>
+                                        <rect key="frame" x="120" y="1" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="CoG-Wk-Nh8"/>
                                             <constraint firstAttribute="width" constant="30" id="Dnf-AR-6hu"/>
@@ -150,7 +165,7 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="Ic4-uz-kiy" userLabel="mailBtn">
-                                        <rect key="frame" x="120" y="1" width="30" height="30"/>
+                                        <rect key="frame" x="150" y="1" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="sTS-xa-kT1"/>
                                             <constraint firstAttribute="height" constant="30" id="sTh-h9-F20"/>
@@ -166,16 +181,17 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="AtM-vo-UJw" firstAttribute="leading" secondItem="ekM-CH-Zbt" secondAttribute="trailing" id="0kd-lj-uBF"/>
+                                    <constraint firstItem="ZgI-8w-DCs" firstAttribute="top" secondItem="Ic4-uz-kiy" secondAttribute="top" id="3c6-Ko-Qqv"/>
+                                    <constraint firstItem="qJX-Ll-ajr" firstAttribute="leading" secondItem="ZgI-8w-DCs" secondAttribute="trailing" id="9Iq-9N-cZE"/>
                                     <constraint firstItem="Ic4-uz-kiy" firstAttribute="top" secondItem="AtM-vo-UJw" secondAttribute="top" id="AM4-Mr-7tt"/>
-                                    <constraint firstAttribute="width" constant="150" id="EGP-Ly-V1x"/>
+                                    <constraint firstAttribute="width" constant="180" id="EGP-Ly-V1x"/>
                                     <constraint firstAttribute="trailing" secondItem="Ic4-uz-kiy" secondAttribute="trailing" id="FrW-xH-lyj"/>
+                                    <constraint firstItem="qJX-Ll-ajr" firstAttribute="top" secondItem="ZgI-8w-DCs" secondAttribute="top" id="GKa-Ra-yHE"/>
                                     <constraint firstAttribute="height" constant="31" id="GX7-bu-0Lj"/>
-                                    <constraint firstItem="TnF-d8-4GY" firstAttribute="leading" secondItem="ZgI-8w-DCs" secondAttribute="trailing" id="PPp-GQ-xap"/>
                                     <constraint firstItem="Ic4-uz-kiy" firstAttribute="top" secondItem="fph-Bf-9zu" secondAttribute="top" id="ReP-Fu-Vel"/>
-                                    <constraint firstItem="ZgI-8w-DCs" firstAttribute="top" secondItem="fph-Bf-9zu" secondAttribute="top" constant="-1" id="SVU-sG-jUJ"/>
                                     <constraint firstItem="ekM-CH-Zbt" firstAttribute="leading" secondItem="TnF-d8-4GY" secondAttribute="trailing" id="Tth-Pr-pL2"/>
+                                    <constraint firstItem="TnF-d8-4GY" firstAttribute="leading" secondItem="qJX-Ll-ajr" secondAttribute="trailing" id="VP5-Ra-6YY"/>
                                     <constraint firstItem="Ic4-uz-kiy" firstAttribute="top" secondItem="ekM-CH-Zbt" secondAttribute="top" id="cIi-PU-gXK"/>
-                                    <constraint firstItem="TnF-d8-4GY" firstAttribute="leading" secondItem="ZgI-8w-DCs" secondAttribute="trailing" id="s4V-3g-Lho"/>
                                     <constraint firstItem="Ic4-uz-kiy" firstAttribute="top" secondItem="TnF-d8-4GY" secondAttribute="top" id="xmS-tc-jNW"/>
                                     <constraint firstItem="Ic4-uz-kiy" firstAttribute="leading" secondItem="AtM-vo-UJw" secondAttribute="trailing" id="zHj-WU-1h2"/>
                                 </constraints>
@@ -272,12 +288,15 @@
                 <constraint firstItem="GO3-gA-Qc1" firstAttribute="top" secondItem="tnw-Pb-ALu" secondAttribute="top" id="fhM-lC-u2i"/>
                 <constraint firstAttribute="bottom" secondItem="GO3-gA-Qc1" secondAttribute="bottom" constant="-1" id="lqU-2M-EH2"/>
             </constraints>
+            <point key="canvasLocation" x="140" y="152"/>
         </customView>
     </objects>
     <resources>
         <image name="add_ghost_off" width="12" height="12"/>
         <image name="add_ghost_on" width="12" height="12"/>
         <image name="help" width="18" height="18"/>
+        <image name="panel_bottom_off" width="14" height="10"/>
+        <image name="panel_bottom_on" width="14" height="10"/>
         <image name="panel_left_off" width="14" height="10"/>
         <image name="panel_left_on" width="14" height="10"/>
         <image name="panel_right_off" width="14" height="10"/>

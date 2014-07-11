@@ -30,7 +30,7 @@
 #import "LMCommandVC.h"
 
 #import "LMTopToolbarVC.h"
-#import "LMTracingBarVC.h"
+#import "LMBottomToolbarVC.h"
 #import "LMIUPropertyVC.h"
 
 #import "IUDjangoProject.h"
@@ -40,11 +40,12 @@
 
 #import "LMConsoleVC.h"
 
+
 @interface LMWC ()
 
 //toolbar
 @property (weak) IBOutlet NSView *topToolbarV;
-@property (weak) IBOutlet NSView *tracingV;
+@property (weak) IBOutlet NSView *bottomToolbarV;
 
 //Left
 @property (weak) IBOutlet NSLayoutConstraint *leftVConstraint;
@@ -70,12 +71,13 @@
 @property (weak) IBOutlet NSView *widgetV;
 @property (weak) IBOutlet NSView *resourceV;
 
-//canvas
+//center
+@property (weak) IBOutlet NSSplitView *centerSplitV;
 @property (weak) IBOutlet NSView *centerV;
-@property (weak) IBOutlet NSMatrix *widgetMatrix;
+@property (weak) IBOutlet NSView *logV;
 
-//log
-@property (weak) IBOutlet WebView *logWebView;
+//server log
+@property (weak) IBOutlet WebView *serverView;
 
 @end
 
@@ -89,10 +91,11 @@
     LMCommandVC     *commandVC;
     
     //center
-    LMCanvasVC *canvasVC;
     LMTopToolbarVC  *topToolbarVC;
-    LMTracingBarVC     *tracingbarVC;
-    
+    LMCanvasVC *canvasVC;
+    LMConsoleVC *consoleVC;
+    LMBottomToolbarVC     *bottomToolbarVC;
+
     //right top
     LMIUPropertyVC  *iuInspectorVC;
     LMAppearanceVC  *appearanceVC;
@@ -102,8 +105,6 @@
     LMWidgetLibraryVC   *widgetLibraryVC;
     LMResourceVC    *resourceVC;
 
-    //console
-    LMConsoleVC *consoleVC;
     
     LMProjectConvertWC *pcWC;
 }
@@ -118,7 +119,7 @@
         commandVC = [[LMCommandVC alloc] initWithNibName:@"LMCommandVC" bundle:nil];
         canvasVC = [[LMCanvasVC alloc] initWithNibName:@"LMCanvasVC" bundle:nil];
         topToolbarVC = [[LMTopToolbarVC alloc] initWithNibName:@"LMTopToolbarVC" bundle:nil];
-        tracingbarVC = [[LMTracingBarVC alloc] initWithNibName:@"LMTracingBarVC" bundle:nil];
+        bottomToolbarVC = [[LMBottomToolbarVC alloc] initWithNibName:@"LMBottomToolbarVC" bundle:nil];
         widgetLibraryVC = [[LMWidgetLibraryVC alloc] initWithNibName:@"LMWidgetLibraryVC" bundle:nil];
         resourceVC = [[LMResourceVC alloc] initWithNibName:@"LMResourceVC" bundle:nil];
         appearanceVC = [[LMAppearanceVC alloc] initWithNibName:@"LMAppearanceVC" bundle:nil];
@@ -162,32 +163,37 @@
     ((LMWindow*)(self.window)).canvasView =  (LMCanvasView *)canvasVC.view;
     
     [_topToolbarV addSubviewFullFrame:topToolbarVC.view];
-    [_tracingV addSubviewFullFrame:tracingbarVC.view];
-    
+    [_bottomToolbarV addSubviewFullFrame:bottomToolbarVC.view];
+    [_logV addSubviewFullFrame:consoleVC.view];
     
     ////////////////right view/////////////////////////
     [_widgetV addSubviewFullFrame:widgetLibraryVC.view];
-    
     [_resourceV addSubviewFullFrame:resourceVC.view];
     
     [_appearanceV addSubviewFullFrame:appearanceVC.view];
-    
-    
     [_propertyV addSubviewFullFrame:iuInspectorVC.view];
-    
     [_eventV addSubviewFullFrame:eventVC.view];
     
     
 
     
-#pragma mark - inspector view
-    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"showLeftInspector" options:NSKeyValueObservingOptionInitial context:nil];
-    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"showRightInspector" options:NSKeyValueObservingOptionInitial context:nil];
-
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performDoubleClick:) name:IUNotificationDoubleClickCanvas object:self.window];
+    
+    
+    [self initLogView];
+
 }
 
+- (void)initLogView{
+    if([_project isKindOfClass:[IUDjangoProject class]]){
+        [bottomToolbarVC setLogViewEnable:YES];
+        [self setLogViewState:1];
+    }
+    else{
+        [bottomToolbarVC setLogViewEnable:NO];
+        [self setLogViewState:0];
+    }
+}
 
 - (void)performDoubleClick:(NSNotification*)noti{
     [_propertyTabV selectTabViewItemAtIndex:1];
@@ -211,16 +217,6 @@
     [self.propertyMatrix setToolTip:@"Event" forCell:cell3];
 
     
-    NSCell *cell4 = [self.widgetMatrix cellAtRow:0 column:0];
-    [self.widgetMatrix setToolTip:@"Widget" forCell:cell4];
-    
-    NSCell *cell5 = [self.widgetMatrix cellAtRow:0 column:1];
-    [self.widgetMatrix setToolTip:@"Library" forCell:cell5];
-    
-    NSCell *cell6 = [self.widgetMatrix cellAtRow:0 column:2];
-    [self.widgetMatrix setToolTip:@"Clipart" forCell:cell6];
-    
-    
     NSCell *cell7 = [self.clickWidgetTabMatrix cellAtRow:0 column:0];
     [self.clickWidgetTabMatrix setToolTip:@"Primary Widget" forCell:cell7];
     
@@ -230,7 +226,7 @@
 
 #if DEBUG
 #else
-    [[_logWebView mainFrame] loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://server.iueditor.org/log.html"]]];
+    [[_serverView mainFrame] loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://server.iueditor.org/log.html"]]];
 #endif
 }
 
@@ -239,10 +235,9 @@
     NSAssert(0, @"");
 }
 
--(void)showLeftInspectorDidChange:(NSDictionary *)change{
-    BOOL showLeftInspector = [[NSUserDefaults standardUserDefaults] boolForKey:@"showLeftInspector"];
-    [_leftV setHidden:!showLeftInspector];
-    if(showLeftInspector){
+- (void)setLeftInspectorState:(NSInteger)state{
+    [_leftV setHidden:!state];
+    if(state){
         [_leftVConstraint setConstant:0];
     }
     else{
@@ -250,17 +245,28 @@
     }
 }
 
--(void)showRightInspectorDidChange:(NSDictionary *)change{
-    BOOL showRightInspector = [[NSUserDefaults standardUserDefaults] boolForKey:@"showRightInspector"];
-    [_rightV setHidden:!showRightInspector];
+- (void)setRightInspectorState:(NSInteger)state{
+    [_rightV setHidden:!state];
     
-    if(showRightInspector){
+    if(state){
         [_rightVConstraint setConstant:0];
     }
     else{
         [_rightVConstraint setConstant:-300];
     }
 }
+
+- (void)setLogViewState:(NSInteger)state{
+    CGFloat height = [_centerSplitV bounds].size.height;
+
+    if(state){
+       [_centerSplitV setPosition:height-50 ofDividerAtIndex:0];
+    }
+    else{
+        [_centerSplitV setPosition:height ofDividerAtIndex:0];
+    }
+}
+
 
 -(LMWindow*)window{
     return (LMWindow*)[super window];
@@ -307,13 +313,13 @@
         widgetLibraryVC.project = _project;
         [widgetLibraryVC setProject:_project];
         iuInspectorVC.project = _project;
-
+  
         //set ResourceManager
         canvasVC.resourceManager = _project.resourceManager;
         resourceVC.manager = _project.resourceManager;
         appearanceVC.resourceManager = _project.resourceManager;
         iuInspectorVC.resourceManager = _project.resourceManager;
-        tracingbarVC.resourceManager = _project.resourceManager;
+        bottomToolbarVC.resourceManager = _project.resourceManager;
         
     }
 }
@@ -327,7 +333,7 @@
     if ([selectedNode isKindOfClass:[IUSheet class]]) {
         [stackVC setSheet:_selectedNode];
         [canvasVC setSheet:_selectedNode];
-        [tracingbarVC setSheet:_selectedNode];
+        [bottomToolbarVC setSheet:_selectedNode];
         [topToolbarVC setSheet:_selectedNode];
         
         //save for debug

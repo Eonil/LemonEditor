@@ -29,4 +29,8 @@
 - (void)reloadCurrentDocument;
 - (NSString *)projectName;
 
+- (void)setLeftInspectorState:(NSInteger)state;
+- (void)setRightInspectorState:(NSInteger)state;
+- (void)setLogViewState:(NSInteger)state;
+
 @end
