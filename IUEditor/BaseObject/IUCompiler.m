@@ -1121,7 +1121,7 @@
         cssDict = [self cssStringDictionaryWithIdentifier:identifier ofIU:iu isEdit:isEdit];
     }
     
-    if(width == IUCSSMaxViewPortWidth){
+    if(width != IUCSSMaxViewPortWidth){
         [cssDict removeObjectForKey:@"position"];
         [cssDict removeObjectForKey:@"overflow"];
         [cssDict removeObjectForKey:@"z-index"];
