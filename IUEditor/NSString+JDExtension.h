@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (JDExtension)
-
++ (NSString *)randomStringWithLength:(int)len;
 + (NSString *)stringWithValueMarker:(id)marker;
 
 - (NSString*)JSEscape;

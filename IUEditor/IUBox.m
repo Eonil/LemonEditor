@@ -42,6 +42,7 @@
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     if (self) {
+        NSAssert([self.htmlID length] != 0 , @"");
         [aDecoder decodeToObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"delegate", @"textType"]]];
         
         //VERSION COMPABILITY: texttype decode int issue
@@ -63,7 +64,10 @@
 
 -(void)encodeWithCoder:(NSCoder *)aCoder{
     if ([self.htmlID length] == 0) {
+#ifdef DEBUG
         NSAssert(0, @"");
+#endif 
+        self.htmlID = [NSString randomStringWithLength:8];
     }
     [aCoder encodeFromObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"identifierManager", @"textController"]]];
     [aCoder encodeObject:self.css forKey:@"css"];
