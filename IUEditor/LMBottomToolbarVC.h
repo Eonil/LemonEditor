@@ -15,6 +15,6 @@
 @property (nonatomic) IUResourceManager     *resourceManager;
 @property (nonatomic) IUSheet    *sheet;
 
-- (void)setLogViewEnable:(BOOL)enable;
+- (void)setConsoleViewEnable:(BOOL)enable;
 
 @end

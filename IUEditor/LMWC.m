@@ -74,7 +74,7 @@
 //center
 @property (weak) IBOutlet NSSplitView *centerSplitV;
 @property (weak) IBOutlet NSView *centerV;
-@property (weak) IBOutlet NSView *logV;
+@property (weak) IBOutlet NSView *consoleV;
 
 //server log
 @property (weak) IBOutlet WebView *serverView;
@@ -164,7 +164,7 @@
     
     [_topToolbarV addSubviewFullFrame:topToolbarVC.view];
     [_bottomToolbarV addSubviewFullFrame:bottomToolbarVC.view];
-    [_logV addSubviewFullFrame:consoleVC.view];
+    [_consoleV addSubviewFullFrame:consoleVC.view];
     
     ////////////////right view/////////////////////////
     [_widgetV addSubviewFullFrame:widgetLibraryVC.view];
@@ -175,25 +175,17 @@
     [_eventV addSubviewFullFrame:eventVC.view];
     
     
-
+    [self setLogViewState:0];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performDoubleClick:) name:IUNotificationDoubleClickCanvas object:self.window];
-    
-    
-    [self initLogView];
-
-}
-
-- (void)initLogView{
-    if([_project isKindOfClass:[IUDjangoProject class]]){
-        [bottomToolbarVC setLogViewEnable:YES];
-        [self setLogViewState:1];
-    }
-    else{
-        [bottomToolbarVC setLogViewEnable:NO];
+    [[NSNotificationCenter defaultCenter]addObserverForName:IUNotificationConsoleEnd object:self.window queue:nil usingBlock:^(NSNotification *note) {
         [self setLogViewState:0];
-    }
+    }];
+    [[NSNotificationCenter defaultCenter]addObserverForName:IUNotificationConsoleStart object:self.window queue:nil usingBlock:^(NSNotification *note) {
+        [self setLogViewState:1];
+    }];
 }
+
 
 - (void)performDoubleClick:(NSNotification*)noti{
     [_propertyTabV selectTabViewItemAtIndex:1];
@@ -257,12 +249,19 @@
 }
 
 - (void)setLogViewState:(NSInteger)state{
+    
     CGFloat height = [_centerSplitV bounds].size.height;
 
     if(state){
-       [_centerSplitV setPosition:height-50 ofDividerAtIndex:0];
+        CGFloat lastPosition = [[NSUserDefaults standardUserDefaults] doubleForKey:@"LastConsolePosition"];
+        if (lastPosition == 0) {
+            lastPosition = 50;
+        }
+       [_centerSplitV setPosition:height-lastPosition ofDividerAtIndex:0];
     }
     else{
+        CGFloat position = _consoleV.frame.size.height;
+        [[NSUserDefaults standardUserDefaults] setDouble:position forKey:@"LastConsolePosition"];
         [_centerSplitV setPosition:height ofDividerAtIndex:0];
     }
 }

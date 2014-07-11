@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="6154.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMWC">
@@ -13,6 +13,7 @@
                 <outlet property="centerV" destination="LCo-BM-DQN" id="a81-Fm-UQ1"/>
                 <outlet property="clickWidgetTabMatrix" destination="vUX-uW-fTu" id="ZFU-Ng-NiY"/>
                 <outlet property="commandV" destination="Nwr-vk-YZ2" id="0Yv-OA-2p6"/>
+                <outlet property="consoleV" destination="3fG-md-Skx" id="o7V-MH-chT"/>
                 <outlet property="eventV" destination="cND-E8-FNH" id="L2T-JZ-w7f"/>
                 <outlet property="leftBottomV" destination="4Tl-hR-JBi" id="Hgo-4P-SU6"/>
                 <outlet property="leftTopV" destination="efd-DN-4Bq" id="c6b-do-zjc"/>
@@ -38,7 +39,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="1420" height="887"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="1420" height="887"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -277,7 +278,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="670" id="HAH-ax-kRL"/>
                                 </constraints>
                             </customView>
-                            <customView fixedFrame="YES" id="3fG-md-Skx" userLabel="logV">
+                            <customView fixedFrame="YES" id="3fG-md-Skx" userLabel="consoleV">
                                 <rect key="frame" x="0.0" y="777" width="900" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </customView>
@@ -313,7 +314,6 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="4"/>
             </connections>
-            <point key="canvasLocation" x="140" y="125.5"/>
         </window>
     </objects>
     <resources>

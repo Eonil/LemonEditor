@@ -164,7 +164,7 @@
     
 }
 
-- (void)setLogViewEnable:(BOOL)enable{
+- (void)setConsoleViewEnable:(BOOL)enable{
     [_logBtn setEnabled:enable];
 }
 - (IBAction)toggleLogView:(id)sender {

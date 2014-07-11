@@ -79,6 +79,9 @@
 
 //notification when console log is arrived
 #define IUNotificationConsoleLog @"ConsoleLog"
+#define IUNotificationConsoleStart @"ConsoleStart"
+#define IUNotificationConsoleEnd @"ConsoleEnd"
+
 
 //for text modification 2.0version
 #define CURRENT_TEXT_VERSION 1

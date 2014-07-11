@@ -155,9 +155,12 @@
 - (BOOL) runServer:(NSError **)error{
     //get port
     NSString *command = [NSString stringWithFormat:@"%@ runserver %ld", [_docController.project.directoryPath stringByAppendingPathComponent:@"manage.py"], [self djangoDebugPort]];
-    debugServerShell = [[JDShellUtil alloc] init];
-    [debugServerShell execute:command delegate:self];
+    if ([debugServerShell.task isRunning] == NO) {
+        debugServerShell = [[JDShellUtil alloc] init];
+        [debugServerShell execute:command delegate:self];
+    }
     [self refreshServerState];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleStart object:self.view.window];
     return YES;
 }
 
@@ -179,6 +182,7 @@
         [JDShellUtil execute:killCommand];
     }
     [self refreshServerState];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleEnd object:self.view.window];
 }
 
 - (void)refreshServerState{
