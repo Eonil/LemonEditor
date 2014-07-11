@@ -38,6 +38,7 @@
 #import "LMProjectConvertWC.h"
 #import "IUProjectDocument.h"
 
+#import "LMConsoleVC.h"
 
 @interface LMWC ()
 
@@ -101,6 +102,8 @@
     LMWidgetLibraryVC   *widgetLibraryVC;
     LMResourceVC    *resourceVC;
 
+    //console
+    LMConsoleVC *consoleVC;
     
     LMProjectConvertWC *pcWC;
 }
@@ -121,6 +124,7 @@
         appearanceVC = [[LMAppearanceVC alloc] initWithNibName:@"LMAppearanceVC" bundle:nil];
         iuInspectorVC = [[LMIUPropertyVC alloc] initWithNibName:[LMIUPropertyVC class].className bundle:nil];
         eventVC = [[LMEventVC alloc] initWithNibName:@"LMEventVC" bundle:nil];
+        consoleVC = [[LMConsoleVC alloc] initWithNibName:@"LMConsoleVC" bundle:nil];
 
         
         //bind
