@@ -9,9 +9,9 @@
 #import "IUText.h"
 #import "IUSheet.h"
 #import "IUProject.h"
+#if 0
 
 @implementation IUText
-#if 0
 {
 
 }
@@ -160,6 +160,6 @@
     return array;
 }
 
-#endif
 
 @end
+#endif

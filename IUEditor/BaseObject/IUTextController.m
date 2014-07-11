@@ -19,11 +19,9 @@
 @property NSMutableIndexSet *newlineIndexSet;
 @end
 
-#endif
 
 @implementation IUTextController
 
-#if 0
 {
     BOOL textMode;
 }
@@ -622,5 +620,5 @@
     return code;
 }
 
-#endif
 @end
+#endif
