@@ -8,9 +8,7 @@
             <connections>
                 <outlet property="buildB" destination="mVA-rO-Kzp" id="WCW-lp-Wre"/>
                 <outlet property="compilerB" destination="Xvx-WQ-92o" id="HSL-tM-OjF"/>
-                <outlet property="doNotShowAgainB" destination="2OW-QU-eoh" id="W11-3H-ONe"/>
-                <outlet property="portOccupiedText" destination="oGJ-zi-9xR" id="VOT-0P-s0y"/>
-                <outlet property="portOccupiedWindow" destination="1KK-gt-dZy" id="4ta-Fa-GKx"/>
+                <outlet property="recordingB" destination="26b-KO-hSx" id="hVT-Tu-RyE"/>
                 <outlet property="serverB" destination="5iw-6s-TJH" id="Ikk-tb-hcU"/>
                 <outlet property="view" destination="c22-O7-iKe" id="97Q-ig-2HN"/>
             </connections>
@@ -75,6 +73,17 @@
                                     <binding destination="-2" name="value" keyPath="serverState" id="Tf9-y1-yNk"/>
                                 </connections>
                             </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26b-KO-hSx">
+                                <rect key="frame" x="194" y="13" width="26" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" bezelStyle="circular" image="record" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" id="Geb-NQ-ecv">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="label"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="toggleRecording:" target="-2" id="gaS-5V-UBb"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <color key="borderColor" red="0.50196081399917603" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
@@ -83,60 +92,10 @@
             </subviews>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="p9F-we-jaS"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="1KK-gt-dZy">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="207" width="419" height="151"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
-            <view key="contentView" id="kfo-j2-li1">
-                <rect key="frame" x="0.0" y="0.0" width="419" height="151"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oGJ-zi-9xR">
-                        <rect key="frame" x="18" y="80" width="383" height="51"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Django debug port 8000 is occupied by 'Python (PID 800'). Do you want to kill it?" id="KbW-OW-hYG">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2OW-QU-eoh">
-                        <rect key="frame" x="18" y="18" width="140" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="check" title="Do not show again" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wt1-xi-N2o">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qtk-N7-BWR">
-                        <rect key="frame" x="29" y="48" width="173" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="YES" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MAh-Lz-M2h">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="performKillOccupiedProcess:" target="-2" id="FZZ-X4-akE"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uay-tB-a3E">
-                        <rect key="frame" x="212" y="48" width="173" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="NO" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pJl-TA-2Oi">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="performCancelKillOccupiedProcess:" target="-2" id="5L3-md-9fn"/>
-                        </connections>
-                    </button>
-                </subviews>
-            </view>
-        </window>
     </objects>
     <resources>
         <image name="export" width="18" height="22"/>
         <image name="pause" width="15" height="18"/>
+        <image name="record" width="24" height="24"/>
     </resources>
 </document>

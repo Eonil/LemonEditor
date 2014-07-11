@@ -20,9 +20,6 @@
 @property (weak) IBOutlet NSButton *buildB;
 @property (weak) IBOutlet NSButton *serverB;
 @property (weak) IBOutlet NSPopUpButton *compilerB;
-@property (strong) IBOutlet NSWindow *portOccupiedWindow;
-@property (weak) IBOutlet NSTextField *portOccupiedText;
-@property (weak) IBOutlet NSButton *doNotShowAgainB;
 @property (weak) IBOutlet NSButton *recordingB;
 
 @property NSString *serverState;
@@ -61,6 +58,9 @@
         [_compilerB bind:NSSelectedIndexBinding toObject:self withKeyPath:@"docController.project.compiler.rule" options:nil];
         [self addObserver:self forKeyPath:@"docController.project.runnable" options:NSKeyValueObservingOptionInitial context:nil];
         [self changeCompilerRule:nil];
+#ifndef DEBUG
+        [_recordingB setHidden:YES];
+#endif
     });
 }
 
@@ -91,27 +91,6 @@
         [[_compilerB itemAtIndex:1] setEnabled:YES];
         [_compilerB setAutoenablesItems:YES];
     }
-}
-
-- (void)showPortKillSheet:(NSString*)port{
-    NSInteger pid = [JDNetworkUtil pidOfPort:[port integerValue]];
-    NSString *processName = [JDNetworkUtil processNameOfPort:[port integerValue]];
-    NSString *str = [NSString stringWithFormat:@"Django debug port %@ is occupied by '%@ (PID %ld)'. Do you want to kill it?", port, processName, pid];
-    [_portOccupiedText setStringValue:str];
-    [self.view.window beginSheet:_portOccupiedWindow completionHandler:^(NSModalResponse returnCode) {
-        if (returnCode == NSModalResponseOK) {
-            //kill process
-            NSString *command = [NSString stringWithFormat:@"kill %ld", pid];
-            [JDShellUtil execute:command];
-
-            //build again
-            
-        }
-        else {
-            return;
-        }
-    }];
-    return;
 }
 
 - (void)shellUtil:(JDShellUtil*)util standardOutputDataReceived:(NSData*)data{
@@ -250,20 +229,5 @@
         [JDUIUtil hudAlert:@"Recording saved at Desktop" second:3];
     }
 }
-- (IBAction)performCancelKillOccupiedProcess:(id)sender {
-    if ([_doNotShowAgainB integerValue]) {
-        //always yes
-        [[NSUserDefaults standardUserDefaults] setObject:@(NO) forKey:@"DebugPortKill"];
-    }
-    [self.view.window endSheet:_portOccupiedWindow returnCode:NSModalResponseCancel];
-}
-
-- (IBAction)performKillOccupiedProcess:(id)sender {
-    if ([_doNotShowAgainB integerValue]) {
-        [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"DebugPortKill"];
-    }
-    [self.view.window endSheet:_portOccupiedWindow returnCode:NSModalResponseOK];
-}
-
 
 @end
