@@ -42,7 +42,6 @@
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     if (self) {
-        NSAssert([self.htmlID length] != 0 , @"");
         [aDecoder decodeToObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"delegate", @"textType"]]];
         
         //VERSION COMPABILITY: texttype decode int issue
@@ -57,7 +56,7 @@
         _event = [aDecoder decodeObjectForKey:@"event"];
         _m_children=[aDecoder decodeObjectForKey:@"children"];
         changedCSSWidths = [NSMutableSet set];
-        
+        NSAssert([self.htmlID length] != 0 , @"");
     }
     return self;
 }
