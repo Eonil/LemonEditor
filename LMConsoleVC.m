@@ -29,11 +29,13 @@
 }
 
 - (void)addText:(NSNotification*)noti{
-    NSString *str = noti.userInfo[@"log"];
-    NSAttributedString* attr = [[NSAttributedString alloc] initWithString:str];
-    
-    [[_logV textStorage] appendAttributedString:attr];
-    [_logV scrollRangeToVisible:NSMakeRange([[_logV string] length], 0)];
+    NSString *str = noti.userInfo[@"Log"];
+    if (str) {
+        NSAttributedString* attr = [[NSAttributedString alloc] initWithString:str];
+        
+        [[_logV textStorage] appendAttributedString:attr];
+        [_logV scrollRangeToVisible:NSMakeRange([[_logV string] length], 0)];
+    }
 }
 
 - (void)dealloc{

@@ -18,7 +18,7 @@
 
 @interface LMCommandVC ()
 @property (weak) IBOutlet NSButton *buildB;
-@property (weak) IBOutlet NSButton *serverB;
+@property (weak) IBOutlet NSButton *stopServerB;
 @property (weak) IBOutlet NSPopUpButton *compilerB;
 @property (weak) IBOutlet NSButton *recordingB;
 
@@ -206,9 +206,11 @@
     _docController.project.compiler.rule = (int)[_compilerB indexOfSelectedItem];
     if (_docController.project.compiler.rule == IUCompileRuleDefault) {
         self.serverState = nil;
+        [self.stopServerB setHidden:YES];
     }
     else {
         [self refreshServerState];
+        [self.stopServerB setHidden:NO];
     }
 }
 
@@ -229,5 +231,7 @@
         [JDUIUtil hudAlert:@"Recording saved at Desktop" second:3];
     }
 }
+
+
 
 @end

@@ -121,9 +121,11 @@
     [_task setStandardError: stdErrPipe];
     errorHandle = [stdErrPipe fileHandleForReading];
     
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputHandleDataReceived:) name:NSFileHandleDataAvailableNotification  object:outputHandle];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(errorHandleDataReceived:) name:NSFileHandleDataAvailableNotification  object:errorHandle];
 
+    
     
     [outputHandle waitForDataInBackgroundAndNotify];
     [errorHandle waitForDataInBackgroundAndNotify];
@@ -132,14 +134,20 @@
     return [_task processIdentifier];
 }
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)outputHandleDataReceived:(NSNotification*)noti{
     NSData *d = [inputHandle availableData];
     [_delegate shellUtil:self standardOutputDataReceived:d];
+    [outputHandle waitForDataInBackgroundAndNotify];
 }
 
 - (void)errorHandleDataReceived:(NSNotification*)noti{
     NSData *d = [errorHandle availableData];
     [_delegate shellUtil:self standardErrorDataReceived:d];
+    [errorHandle waitForDataInBackgroundAndNotify];
 }
 
 -(void)writeDataToStandardInput:(NSData*)data{

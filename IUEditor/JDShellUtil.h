@@ -32,5 +32,10 @@
 +(NSInteger)execute:(NSString*)command stdOut:(NSString**)stdOutLog stdErr:(NSString**)stdErrLog;
 +(NSInteger)execute:(NSString*)command;
 
+/**
+ execute shell script
+ @return pid of process
+ @note Do not call this method more than once in one object
+ */
 -(int)execute:(NSString*)command delegate:(id <JDShellUtilPipeDelegate>)  delegate;
 @end

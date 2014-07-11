@@ -9,7 +9,7 @@
                 <outlet property="buildB" destination="mVA-rO-Kzp" id="WCW-lp-Wre"/>
                 <outlet property="compilerB" destination="Xvx-WQ-92o" id="HSL-tM-OjF"/>
                 <outlet property="recordingB" destination="26b-KO-hSx" id="hVT-Tu-RyE"/>
-                <outlet property="serverB" destination="5iw-6s-TJH" id="Ikk-tb-hcU"/>
+                <outlet property="stopServerB" destination="5iw-6s-TJH" id="gC8-kZ-b1M"/>
                 <outlet property="view" destination="c22-O7-iKe" id="97Q-ig-2HN"/>
             </connections>
         </customObject>
