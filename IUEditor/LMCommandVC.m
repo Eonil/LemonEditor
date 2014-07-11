@@ -122,7 +122,10 @@
         //run server
         if ([debugServerShell.task isRunning] == NO) {
             if ([JDNetworkUtil isPortAvailable:[self djangoDebugPort]]) {
-                [self runServer:nil];
+                BOOL result = [self runServer:nil];
+                if (result == NO) {
+                    return;
+                }
             }
         }
         
@@ -154,7 +157,12 @@
 
 - (BOOL) runServer:(NSError **)error{
     //get port
-    NSString *command = [NSString stringWithFormat:@"%@ runserver %ld", [_docController.project.directoryPath stringByAppendingPathComponent:@"manage.py"], [self djangoDebugPort]];
+    NSString *filePath = [_docController.project.directoryPath stringByAppendingPathComponent:@"manage.py"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath] == NO) {
+        [JDUIUtil hudAlert:@"No manage.py" second:2];
+        return NO;
+    }
+    NSString *command = [NSString stringWithFormat:@"%@ runserver %ld",filePath , [self djangoDebugPort]];
     if ([debugServerShell.task isRunning] == NO) {
         debugServerShell = [[JDShellUtil alloc] init];
         [debugServerShell execute:command delegate:self];
