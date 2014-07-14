@@ -13,8 +13,8 @@ $(document).ready(function(){
         var eventType = $(this).attr('transitionevent');
                             
         if (eventType=='mouseOn'){
-            $(this).bind('mouseenter',transitionAnimation);
-            $(this).bind('mouseleave',transitionAnimation);
+            $(this).mouseenter(transitionAnimationOn);
+            $(this).mouseleave(transitionAnimationOff);
         }
         else {
             $(this).bind(eventType, transitionAnimation);

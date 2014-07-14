@@ -21,6 +21,24 @@ function isMobile(){
 	}
 }
 
+function transitionAnimationOn(eventObject){
+    var secondObj = $(this).find('.IUItem')[1];
+	var effect = $(this).attr('transitionanimation');
+    var duration = $(this).attr('transitionduration');
+
+   	$(secondObj).show(effect, duration);
+   	$(this).data('isSelected', 'false');
+}
+
+function transitionAnimationOff(eventObject){
+    var secondObj = $(this).find('.IUItem')[1];
+    var isEndAnimation = $($(this).children()[1]).hasClass('IUItem');
+    var effect = $(this).attr('transitionanimation');
+    var duration = $(this).attr('transitionduration');
+    
+    $(secondObj).hide(effect, duration);
+    $(this).data('isSelected', 'true');
+}
 
 function transitionAnimation(eventObject){
     if (typeof isEditor != 'undefined' && isEditor == true){
@@ -29,20 +47,13 @@ function transitionAnimation(eventObject){
     var effect = $(this).attr('transitionanimation');
     var isSelected= $(this).data('isSelected');
     
-    var secondObj = $(this).find('.IUItem')[1];
     
    	if (isSelected=='true'){
-       	$(secondObj).hide(effect);
-       	$(this).data('isSelected', 'false');
+   		transitionAnimationOn(eventObject);
     }
    	else {
-        var isEndAnimation = $($(this).children()[1]).hasClass('IUItem');
-        
-        if(isEndAnimation== true){
-            $(secondObj).show(effect);
-            $(this).data('isSelected', 'true');
-        }
-    }
+   		transitionAnimationOff(eventOBject);
+   	}
 }
 
 $(document).ready(function(){
