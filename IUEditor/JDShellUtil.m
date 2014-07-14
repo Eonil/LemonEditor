@@ -139,6 +139,9 @@
 }
 
 - (void)outputHandleDataReceived:(NSNotification*)noti{
+    if ([inputHandle fileDescriptor] != 1) {
+        return;
+    }
     NSData *d = [inputHandle availableData];
     [_delegate shellUtil:self standardOutputDataReceived:d];
     [outputHandle waitForDataInBackgroundAndNotify];
