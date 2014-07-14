@@ -43,6 +43,7 @@
     self.currentEdit = 0;
     self.eventType = @"Click";
     self.animation = @"Blind";
+    self.duration  = 0.2;
     return self;
 }
 

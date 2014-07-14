@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMPropertyIUTransitionVC">
             <connections>
                 <outlet property="animationB" destination="qPD-tT-pbR" id="Pug-hQ-vPa"/>
+                <outlet property="durationTF" destination="Bru-yx-vSi" id="6Pl-ko-g5g"/>
                 <outlet property="eventB" destination="dTo-H4-a6n" id="S6C-A7-Gfo"/>
                 <outlet property="view" destination="uhF-ik-7pM" id="lAR-B2-KBi"/>
             </connections>
@@ -23,7 +24,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="90"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sBf-ZZ-8oY">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sBf-ZZ-8oY">
                                 <rect key="frame" x="14" y="68" width="70" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="66" id="hI9-sT-2Mg"/>
@@ -35,7 +36,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YGN-LR-sFn">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YGN-LR-sFn">
                                 <rect key="frame" x="19" y="42" width="65" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="61" id="2x7-HT-yMS"/>
@@ -47,7 +48,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <popUpButton verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dTo-H4-a6n">
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dTo-H4-a6n">
                                 <rect key="frame" x="84" y="66" width="190" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="184" id="bqG-93-jh6"/>
@@ -64,7 +65,7 @@
                                     </menu>
                                 </popUpButtonCell>
                             </popUpButton>
-                            <popUpButton verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qPD-tT-pbR">
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qPD-tT-pbR">
                                 <rect key="frame" x="84" y="41" width="190" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="THz-ze-rbd"/>
@@ -76,16 +77,44 @@
                                     <menu key="menu" title="OtherViews" id="2e2-wf-uFh"/>
                                 </popUpButtonCell>
                             </popUpButton>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bru-yx-vSi">
+                                <rect key="frame" x="87" y="17" width="184" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="rcP-Uo-JQq">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3i1-gu-nj1">
+                                <rect key="frame" x="19" y="18" width="65" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="61" id="Gib-0T-qJ4"/>
+                                    <constraint firstAttribute="height" constant="17" id="lc4-K4-F4e"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Duration" id="gF9-lW-LgV">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <constraints>
-                        <constraint firstItem="YGN-LR-sFn" firstAttribute="leading" secondItem="Df4-ls-jSP" secondAttribute="leading" constant="26" id="IZY-HU-FJ7"/>
+                        <constraint firstItem="3i1-gu-nj1" firstAttribute="top" secondItem="YGN-LR-sFn" secondAttribute="bottom" constant="7" id="3L5-6t-EVb"/>
+                        <constraint firstItem="Bru-yx-vSi" firstAttribute="trailing" secondItem="qPD-tT-pbR" secondAttribute="trailing" id="8Gd-Ip-7hs"/>
+                        <constraint firstItem="Bru-yx-vSi" firstAttribute="leading" secondItem="3i1-gu-nj1" secondAttribute="trailing" constant="5" id="HPH-tb-N90"/>
+                        <constraint firstItem="YGN-LR-sFn" firstAttribute="leading" secondItem="Df4-ls-jSP" secondAttribute="leading" constant="21" id="IZY-HU-FJ7"/>
                         <constraint firstItem="qPD-tT-pbR" firstAttribute="top" secondItem="dTo-H4-a6n" secondAttribute="bottom" constant="7" id="NEY-xG-MLH"/>
+                        <constraint firstItem="sBf-ZZ-8oY" firstAttribute="top" secondItem="Df4-ls-jSP" secondAttribute="top" constant="5" id="RGZ-Kl-yii"/>
+                        <constraint firstItem="3i1-gu-nj1" firstAttribute="leading" secondItem="YGN-LR-sFn" secondAttribute="leading" id="cFB-5j-s6h"/>
+                        <constraint firstItem="3i1-gu-nj1" firstAttribute="centerY" secondItem="Bru-yx-vSi" secondAttribute="centerY" id="enc-Mf-VXX"/>
                         <constraint firstItem="YGN-LR-sFn" firstAttribute="top" secondItem="sBf-ZZ-8oY" secondAttribute="bottom" constant="9" id="h26-Bo-Pt5"/>
                         <constraint firstItem="qPD-tT-pbR" firstAttribute="leading" secondItem="YGN-LR-sFn" secondAttribute="trailing" constant="5" id="m9h-lK-x0K"/>
                         <constraint firstAttribute="height" constant="90" id="mQD-bj-gA8"/>
                         <constraint firstItem="dTo-H4-a6n" firstAttribute="leading" secondItem="sBf-ZZ-8oY" secondAttribute="trailing" constant="5" id="o2q-qY-iCp"/>
-                        <constraint firstItem="sBf-ZZ-8oY" firstAttribute="leading" secondItem="Df4-ls-jSP" secondAttribute="leading" constant="21" id="ybU-FG-qgM"/>
+                        <constraint firstItem="dTo-H4-a6n" firstAttribute="top" secondItem="Df4-ls-jSP" secondAttribute="top" constant="3" id="qJ2-S6-Pc6"/>
+                        <constraint firstItem="sBf-ZZ-8oY" firstAttribute="leading" secondItem="Df4-ls-jSP" secondAttribute="leading" constant="16" id="ybU-FG-qgM"/>
                     </constraints>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -133,7 +162,6 @@
                 <outlet property="contentV" destination="Df4-ls-jSP" id="bfD-F7-tca"/>
                 <outlet property="titleV" destination="bdn-vy-fFC" id="40G-iG-1ov"/>
             </connections>
-            <point key="canvasLocation" x="99" y="20"/>
         </customView>
     </objects>
 </document>
