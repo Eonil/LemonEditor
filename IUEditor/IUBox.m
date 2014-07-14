@@ -56,6 +56,9 @@
         _event = [aDecoder decodeObjectForKey:@"event"];
         _m_children=[aDecoder decodeObjectForKey:@"children"];
         changedCSSWidths = [NSMutableSet set];
+        if ([self.htmlID length] == 0) {
+            self.htmlID = [NSString randomStringWithLength:8];
+        }
         NSAssert([self.htmlID length] != 0 , @"");
     }
     return self;
