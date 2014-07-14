@@ -107,7 +107,7 @@
 - (IBAction)build:(id)sender {
     
     IUCompileRule rule = _docController.project.compiler.rule;
-    if (rule == IUCompileRuleDefault) {
+    if (rule == IUCompileRuleDefault || rule == IUCompileRuleWordpress) {
         IUProject *project = _docController.project;
         BOOL result = [project build:nil];
         if (result == NO) {
@@ -216,13 +216,13 @@
 
 - (IBAction)changeCompilerRule:(id)sender {
     _docController.project.compiler.rule = (int)[_compilerB indexOfSelectedItem];
-    if (_docController.project.compiler.rule == IUCompileRuleDefault) {
-        self.serverState = nil;
-        [self.stopServerB setHidden:YES];
-    }
-    else {
+    if (_docController.project.compiler.rule == IUCompileRuleDjango) {
         [self refreshServerState];
         [self.stopServerB setHidden:NO];
+    }
+    else {
+        self.serverState = nil;
+        [self.stopServerB setHidden:YES];
     }
 }
 

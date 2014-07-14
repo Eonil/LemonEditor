@@ -496,6 +496,10 @@
 		690A8277190A2CC200DDBA86 /* new_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 690A8271190A2CC200DDBA86 /* new_default.png */; };
 		6919204718DCFC8200F8522B /* NSCoder+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6919204618DCFC8200F8522B /* NSCoder+JDExtension.m */; };
 		6919204A18DCFED000F8522B /* NSObject+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6919204918DCFED000F8522B /* NSObject+JDExtension.m */; };
+		691F91A91973C2EA00A4CFFF /* IUWordpressProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91A81973C2EA00A4CFFF /* IUWordpressProject.m */; };
+		691F91AD1973C5EF00A4CFFF /* WPSiteTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91AC1973C5EF00A4CFFF /* WPSiteTitle.m */; };
+		691F91B01973C66700A4CFFF /* IUPHP.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91AF1973C66700A4CFFF /* IUPHP.m */; };
+		691F91B31973CD6800A4CFFF /* WPSiteDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91B21973CD6800A4CFFF /* WPSiteDescription.m */; };
 		692C4DC21966A13600EAB2E7 /* PositionProperty.pages in Resources */ = {isa = PBXBuildFile; fileRef = 692C4DC11966A13600EAB2E7 /* PositionProperty.pages */; };
 		692C4DC41966A15400EAB2E7 /* tracingOverview.pages in Resources */ = {isa = PBXBuildFile; fileRef = 692C4DC31966A15400EAB2E7 /* tracingOverview.pages */; };
 		692C4DC61966A22D00EAB2E7 /* tracingOverview.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 692C4DC51966A22D00EAB2E7 /* tracingOverview.pdf */; };
@@ -1271,6 +1275,14 @@
 		6919204618DCFC8200F8522B /* NSCoder+JDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCoder+JDExtension.m"; path = "JD/NSCoder+JDExtension.m"; sourceTree = "<group>"; };
 		6919204818DCFED000F8522B /* NSObject+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JDExtension.h"; sourceTree = "<group>"; };
 		6919204918DCFED000F8522B /* NSObject+JDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JDExtension.m"; sourceTree = "<group>"; };
+		691F91A71973C2EA00A4CFFF /* IUWordpressProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUWordpressProject.h; sourceTree = "<group>"; };
+		691F91A81973C2EA00A4CFFF /* IUWordpressProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUWordpressProject.m; sourceTree = "<group>"; };
+		691F91AB1973C5EF00A4CFFF /* WPSiteTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPSiteTitle.h; sourceTree = "<group>"; };
+		691F91AC1973C5EF00A4CFFF /* WPSiteTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPSiteTitle.m; sourceTree = "<group>"; };
+		691F91AE1973C66700A4CFFF /* IUPHP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUPHP.h; sourceTree = "<group>"; };
+		691F91AF1973C66700A4CFFF /* IUPHP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUPHP.m; sourceTree = "<group>"; };
+		691F91B11973CD6800A4CFFF /* WPSiteDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPSiteDescription.h; sourceTree = "<group>"; };
+		691F91B21973CD6800A4CFFF /* WPSiteDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPSiteDescription.m; sourceTree = "<group>"; };
 		692C4DC11966A13600EAB2E7 /* PositionProperty.pages */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PositionProperty.pages; sourceTree = "<group>"; };
 		692C4DC31966A15400EAB2E7 /* tracingOverview.pages */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = tracingOverview.pages; sourceTree = "<group>"; };
 		692C4DC51966A22D00EAB2E7 /* tracingOverview.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = tracingOverview.pdf; sourceTree = "<group>"; };
@@ -2616,6 +2628,17 @@
 			path = classImage;
 			sourceTree = "<group>";
 		};
+		691F91AA1973C5D100A4CFFF /* IUWPGroup */ = {
+			isa = PBXGroup;
+			children = (
+				691F91AB1973C5EF00A4CFFF /* WPSiteTitle.h */,
+				691F91AC1973C5EF00A4CFFF /* WPSiteTitle.m */,
+				691F91B11973CD6800A4CFFF /* WPSiteDescription.h */,
+				691F91B21973CD6800A4CFFF /* WPSiteDescription.m */,
+			);
+			name = IUWPGroup;
+			sourceTree = "<group>";
+		};
 		692C4DC01966A04300EAB2E7 /* ManualPages */ = {
 			isa = PBXGroup;
 			children = (
@@ -2633,6 +2656,7 @@
 		694233A118D7E1A500C96A92 /* IU */ = {
 			isa = PBXGroup;
 			children = (
+				691F91AA1973C5D100A4CFFF /* IUWPGroup */,
 				3DED2774190E4151001A1D67 /* IUCarousel */,
 				3DF8029E18FE3F1A00913505 /* IUHTMLGroup */,
 				69D15F7118E898B10046FBB0 /* IUBackground.h */,
@@ -2683,6 +2707,8 @@
 				69CB92B3191B5F6800BEFBED /* PGPageLinkSet.m */,
 				3D1BACC719330240004C554F /* IUText.h */,
 				3D1BACC819330240004C554F /* IUText.m */,
+				691F91AE1973C66700A4CFFF /* IUPHP.h */,
+				691F91AF1973C66700A4CFFF /* IUPHP.m */,
 			);
 			name = IU;
 			sourceTree = "<group>";
@@ -2914,6 +2940,8 @@
 				69C5761D18D7051C0016F050 /* IUProject.m */,
 				690A8269190A25D500DDBA86 /* IUDjangoProject.h */,
 				690A826A190A25D500DDBA86 /* IUDjangoProject.m */,
+				691F91A71973C2EA00A4CFFF /* IUWordpressProject.h */,
+				691F91A81973C2EA00A4CFFF /* IUWordpressProject.m */,
 				6985CB9E18E31558008DBF50 /* IUSheetGroup.h */,
 				6985CB9F18E31558008DBF50 /* IUSheetGroup.m */,
 				69C5763E18D729830016F050 /* IUSheetController.h */,
@@ -3662,6 +3690,7 @@
 				69C4AA231909905500CF75E7 /* IUCollection.m in Sources */,
 				69C5763918D728CF0016F050 /* LMStackVC.m in Sources */,
 				69965420190F9F1D000379DA /* LMPropertyIUCollectionVC.m in Sources */,
+				691F91A91973C2EA00A4CFFF /* IUWordpressProject.m in Sources */,
 				3DB3ACCC18EBEF3D0046DFB7 /* InnerSizeBox.m in Sources */,
 				69D15F7318E898B10046FBB0 /* IUBackground.m in Sources */,
 				3D1BACC919330240004C554F /* IUText.m in Sources */,
@@ -3712,6 +3741,7 @@
 				69757B3718DAF1AB0095CBAC /* IUResourceGroup.m in Sources */,
 				3DB3ACE818EBEF9D0046DFB7 /* IUFrameDictionary.m in Sources */,
 				3D8D4B2A19179F910002C871 /* LMPropertyIUTextViewVC.m in Sources */,
+				691F91AD1973C5EF00A4CFFF /* WPSiteTitle.m in Sources */,
 				3DF8029A18FD0B2500913505 /* IUHTML.m in Sources */,
 				69F59BA9196ED5D100D6EAF5 /* LMConsoleVC.m in Sources */,
 				CB9BD63D1914DE23002C9369 /* LMStartNewPresentationVC.m in Sources */,
@@ -3741,6 +3771,7 @@
 				3DED271D1904ADD9001A1D67 /* LMEventVariableTrigger.m in Sources */,
 				694E3CE118FCFDA6005077B3 /* IUItem.m in Sources */,
 				3DA6F3121963BC6E004DF0AA /* LMCollectionItemView.m in Sources */,
+				691F91B31973CD6800A4CFFF /* WPSiteDescription.m in Sources */,
 				694A9865196D197900C1D630 /* JDFormatter.m in Sources */,
 				690A826B190A25D500DDBA86 /* IUDjangoProject.m in Sources */,
 				3DA6F30E1963B810004DF0AA /* LMHelpVideoPopoverVC.m in Sources */,
@@ -3804,6 +3835,7 @@
 				69B9A39618E5A2A30007D6E2 /* IUResourceFile.m in Sources */,
 				6905FB521925F17300E4DBC3 /* JDCode.m in Sources */,
 				3DED27221904AE1A001A1D67 /* LMEventVariableReceiverVC.m in Sources */,
+				691F91B01973C66700A4CFFF /* IUPHP.m in Sources */,
 				69B37F0D18DFDEE800DE620F /* LMFileNaviVC.m in Sources */,
 				690A82561909EB1B00DDBA86 /* PGTextField.m in Sources */,
 				690A409518E1645B00095263 /* LMWidgetLibraryVC.m in Sources */,

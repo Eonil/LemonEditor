@@ -10,7 +10,10 @@
 #import "LMWC.h"
 #import "JDLogUtil.h"
 #import "LMStartWC.h"
+
 #import "IUDjangoProject.h"
+#import "IUWordpressProject.h"
+
 #import "LMPreferenceWC.h"
 #import "IUProjectController.h"
 #import "LMNotiManager.h"
@@ -152,5 +155,7 @@
     return NO;
 }
 
+- (IBAction)newWP:(id)sender {
+}
 
 @end

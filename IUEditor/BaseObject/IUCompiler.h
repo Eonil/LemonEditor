@@ -21,6 +21,7 @@ static NSString * IUCompilerTagOption = @"tag";
 typedef enum _IUCompileRule{
     IUCompileRuleDefault,
     IUCompileRuleDjango,
+    IUCompileRuleWordpress,
 }IUCompileRule;
 
 @interface IUCompiler : NSObject

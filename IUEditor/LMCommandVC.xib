@@ -33,7 +33,8 @@
                                     <menu key="menu" title="OtherViews" id="q5y-LX-7eX">
                                         <items>
                                             <menuItem title="HTML" id="8d2-ew-nqM"/>
-                                            <menuItem title="Django" id="XgR-1Q-uiU"/>
+                                            <menuItem title="Django" id="fso-N9-RWL"/>
+                                            <menuItem title="Wordpress" id="XgR-1Q-uiU"/>
                                         </items>
                                     </menu>
                                 </popUpButtonCell>

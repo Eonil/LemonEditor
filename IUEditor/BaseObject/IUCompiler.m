@@ -40,6 +40,8 @@
 
 #import "LMFontController.h"
 
+#import "IUPHP.h"
+
 @implementation IUCompiler{
 }
 
@@ -197,6 +199,11 @@
             [sourceCode replaceCodeString:@"./resource/" toCodeString:@"/resource/"];
             [sourceCode replaceCodeString:@"('resource/" toCodeString:@"('/resource/"];
         }
+        if (_rule == IUCompileRuleWordpress) {
+            [sourceCode replaceCodeString:@"\"resource/" toCodeString:@"\"<?php bloginfo('template_url'); ?>/resource/"];
+            [sourceCode replaceCodeString:@"./resource/" toCodeString:@"<?php bloginfo('template_url'); ?>/resource/"];
+            [sourceCode replaceCodeString:@"('resource/" toCodeString:@"('<?php bloginfo('template_url'); ?>/resource/"];
+        }
     }
     
     
@@ -341,8 +348,8 @@
 #pragma mark IUImage
     else if([iu isKindOfClass:[IUImage class]]){
         [code addCodeLineWithFormat:@"<img %@ >", [self HTMLAttributes:iu option:nil isEdit:NO]];
-        
     }
+
 #pragma mark IUHTML
     else if([iu isKindOfClass:[IUHTML class]]){
         [code addCodeLineWithFormat:@"<div %@>", [self HTMLAttributes:iu option:nil isEdit:NO]];

@@ -32,7 +32,6 @@
     [encoder encodeObject:_mqSizes forKey:@"mqSizes"];
     [encoder encodeObject:_buildPath forKey:@"_buildPath"];
     [encoder encodeObject:_buildResourcePath forKey:@"_buildResourcePath"];
-    [encoder encodeInt32:_compiler.rule forKey:@"_compileRule"];
     [encoder encodeObject:_pageGroup forKey:@"_pageGroup"];
     [encoder encodeObject:_backgroundGroup forKey:@"_backgroundGroup"];
     [encoder encodeObject:_classGroup forKey:@"_classGroup"];
@@ -50,7 +49,6 @@
         
         _mqSizes = [[aDecoder decodeObjectForKey:@"mqSizes"] mutableCopy];
         _buildPath = [aDecoder decodeObjectForKey:@"_buildPath"];
-        _compiler.rule = [aDecoder decodeInt32ForKey:@"_compileRule"];
         _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _backgroundGroup = [aDecoder decodeObjectForKey:@"_backgroundGroup"];
         _classGroup = [aDecoder decodeObjectForKey:@"_classGroup"];
@@ -258,7 +256,12 @@
             break;
         case IUProjectTypePresentation:
             projectName = @"IUPresentationProject";
+            break;
+        case IUProjectTypeWordpress:
+            projectName = @"IUWordpressProject";
+            break;
         default:
+            assert(0);
             break;
     }
     return projectName;
@@ -277,7 +280,7 @@
 }
 
 - (BOOL)build:(NSError**)error{
-    NSAssert(_buildPath != nil, @"");
+    NSAssert(self.buildPath != nil, @"");
     NSString *buildPath = [self.directoryPath stringByAppendingPathComponent:self.buildPath];
     NSString *buildResourcePath = [self.directoryPath stringByAppendingPathComponent:self.buildResourcePath];
 

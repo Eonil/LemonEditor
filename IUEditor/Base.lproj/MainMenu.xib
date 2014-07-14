@@ -79,6 +79,11 @@
                                     <action selector="showStartWC:" target="494" id="ZIo-u7-pp3"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="NewWordpress (Beta)" keyEquivalent="W" id="P6J-fN-oa9">
+                                <connections>
+                                    <action selector="newWordpressDocument:" target="-1" id="DQt-B7-oib"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Open…" keyEquivalent="o" id="72">
                                 <connections>
                                     <action selector="openDocument:" target="-1" id="374"/>

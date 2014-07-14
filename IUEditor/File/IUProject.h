@@ -22,6 +22,7 @@ typedef enum {
     IUProjectTypeDefault,
     IUProjectTypeDjango,
     IUProjectTypePresentation,
+    IUProjectTypeWordpress,
 } IUProjectType;
 
 
@@ -53,7 +54,7 @@ static NSString *IUBackgroundGroupName = @"background";
 static NSString *IUClassGroupName = @"class";
 
 
-@interface IUProject : NSObject <IUFile, IUResourcePathProtocol>{
+@interface IUProject : NSObject <IUFile, IUResourcePathProtocol, NSCoding>{
     IUSheetGroup *_pageGroup;
     IUSheetGroup *_backgroundGroup;
     IUSheetGroup *_classGroup;

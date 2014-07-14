@@ -18,6 +18,13 @@
     [super newDocument:sender];
 }
 
+- (IBAction)newWordpressDocument:(id)sender{
+    NSString *url = [@"~/Sites/wordpress/sample.iu" stringByExpandingTildeInPath];
+    
+    newDocumentOption = @{IUProjectKeyType: @(IUProjectTypeWordpress), IUProjectKeyProjectPath: url, IUProjectKeyAppName: @"sample", IUProjectKeyBuildPath:@"wp-content/themes/sample", IUProjectKeyResourcePath:@"wp-content/themes/Sample/Resource"};
+    [super newDocument:sender];
+}
+
 - (void)newDocument:(id)sender withOption:(NSDictionary *)option{
     newDocumentOption = option;
     [self newDocument:sender];
