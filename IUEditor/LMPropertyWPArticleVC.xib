@@ -4,13 +4,14 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="LMPropertyWPContentVC">
+        <customObject id="-2" userLabel="File's Owner" customClass="LMPropertyWPArticleVC">
             <connections>
                 <outlet property="categoryB" destination="xMA-Na-Pr5" id="jdg-8R-zs7"/>
                 <outlet property="contentMTX" destination="u4K-2f-h16" id="dbw-gC-V8F"/>
                 <outlet property="dateB" destination="7do-1o-ViG" id="byl-Re-D8n"/>
                 <outlet property="tagB" destination="Ice-cP-n1U" id="ilS-N1-BJd"/>
                 <outlet property="timeB" destination="LmU-Ib-ec7" id="S2z-fw-5Uw"/>
+                <outlet property="titleB" destination="z7w-lX-qAd" id="Zp6-Qt-yig"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -27,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" id="K9G-q0-XVx">
-                                <rect key="frame" x="20" y="-6" width="127" height="28"/>
+                                <rect key="frame" x="20" y="1" width="127" height="28"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="WPContent - List" id="mC6-MR-rUZ">
                                     <font key="font" metaFont="smallSystemBold"/>
                                     <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -39,10 +40,10 @@
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
-                <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="APL-hN-Eyl" userLabel="title">
-                    <rect key="frame" x="0.0" y="39" width="300" height="93"/>
+                <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="APL-hN-Eyl" userLabel="content">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="81"/>
                     <view key="contentView">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="93"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="81"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button id="7do-1o-ViG">
@@ -80,7 +81,7 @@
                             <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autorecalculatesCellSize="YES" id="u4K-2f-h16">
                                 <rect key="frame" x="94" y="9" width="204" height="18"/>
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                <size key="cellSize" width="65" height="18"/>
+                                <size key="cellSize" width="62" height="18"/>
                                 <size key="intercellSpacing" width="4" height="2"/>
                                 <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="small" inset="2" id="Li6-Id-1JT">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -136,6 +137,14 @@
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
+                <button id="z7w-lX-qAd">
+                    <rect key="frame" x="57" y="107" width="47" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="title" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Bhc-ux-F9j">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
         </customView>
     </objects>

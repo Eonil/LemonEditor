@@ -1,15 +1,13 @@
 //
-//  IUPHP.h
+//  WPArticleTitle.h
 //  IUEditor
 //
-//  Created by jd on 2014. 7. 14..
+//  Created by jd on 2014. 7. 15..
 //  Copyright (c) 2014년 JDLab. All rights reserved.
 //
 
 #import "IUHTML.h"
 
-@interface IUPHP : IUHTML
-
-@property NSString *code;
+@interface WPArticleTitle : IUHTML
 
 @end

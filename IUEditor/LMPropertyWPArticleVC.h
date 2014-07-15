@@ -1,5 +1,5 @@
 //
-//  LMPropertyWPContentVC.h
+//  LMPropertyWPArticleVC
 //  IUEditor
 //
 //  Created by jw on 7/15/14.
@@ -10,7 +10,7 @@
 #import "IUController.h"
 #import "LMIUPropertyVC.h"
 
-@interface LMPropertyWPContentVC : NSViewController
+@interface LMPropertyWPArticleVC : NSViewController
 
 @property (weak, nonatomic) IUController *controller;
 

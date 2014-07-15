@@ -146,7 +146,6 @@
     //postion을 먼저 정한 후에 add 함
     [newIU setPosition:position];
     [parentIU addIU:newIU error:nil];
-    [self.controller rearrangeObjects];
     
     if ([parentIUID containsString:@"ImportedBy_"]) {
         NSString *parentIdentifier = [[parentIUID componentsSeparatedByString:@"_" ] objectAtIndex:1];
@@ -169,7 +168,6 @@
             [obj.parent removeIU:obj];
         }
     }
-    [self.controller rearrangeObjects];
 }
 
 -(void)insertImage:(NSString *)name atIU:(NSString *)identifier{
@@ -518,6 +516,8 @@
         
 
     }
+    
+    //TODO : REMOVE FOLLOWING CODE
     IUBox *iu = [_controller IUBoxByIdentifier:identifier];
 #if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
     else if([iu isKindOfClass:[IUText class]]){
@@ -970,7 +970,6 @@
     [parentElement removeChild:middleElement];
     
     [self deselectedAllIUs];
-    [self.controller rearrangeObjects];
 
     //remove layer
     [[self gridView] removeLayerWithIUIdentifier:identifier];

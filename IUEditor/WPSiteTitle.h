@@ -6,8 +6,8 @@
 //  Copyright (c) 2014년 JDLab. All rights reserved.
 //
 
-#import "IUPHP.h"
+#import "IUHTML.h"
 
-@interface WPSiteTitle : IUPHP <IUSampleTextProtocol>
+@interface WPSiteTitle : IUHTML <IUSampleTextProtocol>
 
 @end

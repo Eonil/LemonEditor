@@ -1,23 +1,24 @@
 //
-//  LMPropertyWPContentVC.m
+//  LMPropertyWPArticleVC
 //  IUEditor
 //
 //  Created by jw on 7/15/14.
 //  Copyright (c) 2014 JDLab. All rights reserved.
 //
 
-#import "LMPropertyWPContentVC.h"
+#import "LMPropertyWPArticleVC.h"
 
-@interface LMPropertyWPContentVC ()
+@interface LMPropertyWPArticleVC ()
 @property (weak) IBOutlet NSButton *dateB;
 @property (weak) IBOutlet NSButton *timeB;
 @property (weak) IBOutlet NSButton *categoryB;
 @property (weak) IBOutlet NSButton *tagB;
 @property (weak) IBOutlet NSMatrix *contentMTX;
+@property (weak) IBOutlet NSButton *titleB;
 
 @end
 
-@implementation LMPropertyWPContentVC
+@implementation LMPropertyWPArticleVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,11 +30,15 @@
 }
 
 - (void)awakeFromNib{
+    [_titleB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableTitle"] options:IUBindingDictNotRaisesApplicable];
+
+    /*
     [_dateB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableDate"] options:IUBindingDictNotRaisesApplicable];
     [_timeB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableTime"] options:IUBindingDictNotRaisesApplicable];
     [_categoryB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableCategory"] options:IUBindingDictNotRaisesApplicable];
     [_tagB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableTag"] options:IUBindingDictNotRaisesApplicable];
   //  [_contentMTX bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"contentType"] options:IUBindingDictNotRaisesApplicable];
+     */
 }
 
 

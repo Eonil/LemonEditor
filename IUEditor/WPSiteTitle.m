@@ -9,11 +9,15 @@
 #import "WPSiteTitle.h"
 
 @implementation WPSiteTitle
-- (NSString*)code{
-    return @"bloginfo();";
+
+- (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
+    self = [super initWithProject:project options:options];
+    self.innerHTML = @"<?bloginfo()?>";
+    return self;
 }
 
 - (NSString*)sampleText{
     return @"Site Title";
 }
+
 @end
