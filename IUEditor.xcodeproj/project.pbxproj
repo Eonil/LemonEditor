@@ -653,6 +653,7 @@
 		69FFB28C195041E500DA2783 /* LMPropertyProgrammingType1VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FFB287195041E500DA2783 /* LMPropertyProgrammingType1VC.xib */; };
 		69FFB28D195041E500DA2783 /* LMPropertyProgrammingType2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FFB289195041E500DA2783 /* LMPropertyProgrammingType2VC.m */; };
 		69FFB28E195041E500DA2783 /* LMPropertyProgrammingType2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FFB28A195041E500DA2783 /* LMPropertyProgrammingType2VC.xib */; };
+		CB2AA9C61974D43200DA7CCD /* WPPageLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9C51974D43200DA7CCD /* WPPageLinks.m */; };
 		CB9BD6381914DC62002C9369 /* LMStartNewDjangoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9BD6361914DC62002C9369 /* LMStartNewDjangoVC.m */; };
 		CB9BD6391914DC62002C9369 /* LMStartNewDjangoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9BD6371914DC62002C9369 /* LMStartNewDjangoVC.xib */; };
 		CB9BD63D1914DE23002C9369 /* LMStartNewPresentationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9BD63B1914DE23002C9369 /* LMStartNewPresentationVC.m */; };
@@ -1534,6 +1535,8 @@
 		69FFB288195041E500DA2783 /* LMPropertyProgrammingType2VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyProgrammingType2VC.h; sourceTree = "<group>"; };
 		69FFB289195041E500DA2783 /* LMPropertyProgrammingType2VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyProgrammingType2VC.m; sourceTree = "<group>"; };
 		69FFB28A195041E500DA2783 /* LMPropertyProgrammingType2VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyProgrammingType2VC.xib; sourceTree = "<group>"; };
+		CB2AA9C41974D43200DA7CCD /* WPPageLinks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPPageLinks.h; sourceTree = "<group>"; };
+		CB2AA9C51974D43200DA7CCD /* WPPageLinks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPPageLinks.m; sourceTree = "<group>"; };
 		CB9BD6351914DC62002C9369 /* LMStartNewDjangoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStartNewDjangoVC.h; sourceTree = "<group>"; };
 		CB9BD6361914DC62002C9369 /* LMStartNewDjangoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStartNewDjangoVC.m; sourceTree = "<group>"; };
 		CB9BD6371914DC62002C9369 /* LMStartNewDjangoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMStartNewDjangoVC.xib; sourceTree = "<group>"; };
@@ -2633,6 +2636,8 @@
 			children = (
 				691F91AB1973C5EF00A4CFFF /* WPSiteTitle.h */,
 				691F91AC1973C5EF00A4CFFF /* WPSiteTitle.m */,
+				CB2AA9C41974D43200DA7CCD /* WPPageLinks.h */,
+				CB2AA9C51974D43200DA7CCD /* WPPageLinks.m */,
 				691F91B11973CD6800A4CFFF /* WPSiteDescription.h */,
 				691F91B21973CD6800A4CFFF /* WPSiteDescription.m */,
 			);
@@ -3857,6 +3862,7 @@
 				69757B1018D95BBC0095CBAC /* JDTransformer.m in Sources */,
 				3D0D480918FFAF24000A5B53 /* LMTopToolbarVC.m in Sources */,
 				690A8267190A23F500DDBA86 /* LMStartWC.m in Sources */,
+				CB2AA9C61974D43200DA7CCD /* WPPageLinks.m in Sources */,
 				69CB92B8191B6A2600BEFBED /* LMPropertyIUPageLinkSetVC.m in Sources */,
 				69757B0F18D95BBC0095CBAC /* JDTextFieldCell.m in Sources */,
 				6919204A18DCFED000F8522B /* NSObject+JDExtension.m in Sources */,
