@@ -294,7 +294,7 @@
         if (_rule == IUCompileRuleDjango ) {
             [code addCodeLineWithFormat:@"<div %@>", [self HTMLAttributes:iuCollection option:nil isEdit:NO]];
             [code addCodeLineWithFormat:@"    {%% for object in %@ %%}", iuCollection.collectionVariable];
-            [code addCodeLineWithFormat:@"        {%% include '%@.html' %%}", iuCollection.prototypeClass.name];
+            [code addCodeLineWithFormat:@"        {%% include '%@.html' %%}", [iuCollection.prototypeClass.name lowercaseString]];
             [code addCodeLine:@"    {% endfor %}"];
             [code addCodeLineWithFormat:@"</div>"];
         }
@@ -374,7 +374,7 @@
 
         NSString *linkStr;
         if([iu.link isKindOfClass:[IUBox class]]){
-            linkStr = ((IUBox *)iu.link).htmlID;
+            linkStr = [((IUBox *)iu.link).htmlID lowercaseString];
         }
         if(linkStr){
             [code addCodeLineWithFormat:@"        <a href=/%@/{{i}}>", linkStr];
@@ -458,13 +458,13 @@
             linkStr = iu.link;
         }
         else if([iu.link isKindOfClass:[IUBox class]]){
-            linkStr = ((IUBox *)iu.link).htmlID;
+            linkStr = [((IUBox *)iu.link).htmlID lowercaseString];
         }
         NSString *linkURL = linkStr;
         if ([linkStr isHTTPURL] == NO) {
             if (_rule == IUCompileRuleDjango) {
                 if(iu.divLink){
-                    linkURL = [NSString stringWithFormat:@"/%@#%@", [linkStr lowercaseString], ((IUBox *)iu.divLink).htmlID];
+                    linkURL = [NSString stringWithFormat:@"/%@#%@", [linkStr lowercaseString], [((IUBox *)iu.divLink).htmlID lowercaseString]];
                 }
                 else{
                     linkURL = [NSString stringWithFormat:@"/%@", [linkStr lowercaseString]];
@@ -472,7 +472,7 @@
             }
             else {
                 if(iu.divLink){
-                    linkURL = [NSString stringWithFormat:@"./%@.html#%@", linkStr, ((IUBox *)iu.divLink).htmlID];
+                    linkURL = [NSString stringWithFormat:@"./%@.html#%@", linkStr, [((IUBox *)iu.divLink).htmlID lowercaseString]];
                 }
                 else{
                     linkURL = [NSString stringWithFormat:@"./%@.html", linkStr];
