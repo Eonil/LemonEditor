@@ -654,6 +654,9 @@
 		69FFB28D195041E500DA2783 /* LMPropertyProgrammingType2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FFB289195041E500DA2783 /* LMPropertyProgrammingType2VC.m */; };
 		69FFB28E195041E500DA2783 /* LMPropertyProgrammingType2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FFB28A195041E500DA2783 /* LMPropertyProgrammingType2VC.xib */; };
 		CB2AA9C61974D43200DA7CCD /* WPPageLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9C51974D43200DA7CCD /* WPPageLinks.m */; };
+		CB2AA9C91975030A00DA7CCD /* WPContentCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9C81975030A00DA7CCD /* WPContentCollection.m */; };
+		CB2AA9D219751CA200DA7CCD /* LMPropertyWPContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9D019751CA200DA7CCD /* LMPropertyWPContentVC.m */; };
+		CB2AA9D319751CA200DA7CCD /* LMPropertyWPContentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB2AA9D119751CA200DA7CCD /* LMPropertyWPContentVC.xib */; };
 		CB9BD6381914DC62002C9369 /* LMStartNewDjangoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9BD6361914DC62002C9369 /* LMStartNewDjangoVC.m */; };
 		CB9BD6391914DC62002C9369 /* LMStartNewDjangoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9BD6371914DC62002C9369 /* LMStartNewDjangoVC.xib */; };
 		CB9BD63D1914DE23002C9369 /* LMStartNewPresentationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9BD63B1914DE23002C9369 /* LMStartNewPresentationVC.m */; };
@@ -1537,6 +1540,11 @@
 		69FFB28A195041E500DA2783 /* LMPropertyProgrammingType2VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyProgrammingType2VC.xib; sourceTree = "<group>"; };
 		CB2AA9C41974D43200DA7CCD /* WPPageLinks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPPageLinks.h; sourceTree = "<group>"; };
 		CB2AA9C51974D43200DA7CCD /* WPPageLinks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPPageLinks.m; sourceTree = "<group>"; };
+		CB2AA9C71975030A00DA7CCD /* WPContentCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPContentCollection.h; sourceTree = "<group>"; };
+		CB2AA9C81975030A00DA7CCD /* WPContentCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPContentCollection.m; sourceTree = "<group>"; };
+		CB2AA9CF19751CA200DA7CCD /* LMPropertyWPContentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyWPContentVC.h; sourceTree = "<group>"; };
+		CB2AA9D019751CA200DA7CCD /* LMPropertyWPContentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyWPContentVC.m; sourceTree = "<group>"; };
+		CB2AA9D119751CA200DA7CCD /* LMPropertyWPContentVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyWPContentVC.xib; sourceTree = "<group>"; };
 		CB9BD6351914DC62002C9369 /* LMStartNewDjangoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStartNewDjangoVC.h; sourceTree = "<group>"; };
 		CB9BD6361914DC62002C9369 /* LMStartNewDjangoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStartNewDjangoVC.m; sourceTree = "<group>"; };
 		CB9BD6371914DC62002C9369 /* LMStartNewDjangoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMStartNewDjangoVC.xib; sourceTree = "<group>"; };
@@ -1710,6 +1718,7 @@
 				3DED26F819010BD6001A1D67 /* LMPropertyIUMailLinkVC.h */,
 				3DED26F919010BD6001A1D67 /* LMPropertyIUMailLinkVC.m */,
 				3DED26FA19010BD6001A1D67 /* LMPropertyIUMailLinkVC.xib */,
+				CB2AA9CA19751A6400DA7CCD /* WPGroup */,
 			);
 			name = IUPropertyVC;
 			sourceTree = "<group>";
@@ -2640,6 +2649,8 @@
 				CB2AA9C51974D43200DA7CCD /* WPPageLinks.m */,
 				691F91B11973CD6800A4CFFF /* WPSiteDescription.h */,
 				691F91B21973CD6800A4CFFF /* WPSiteDescription.m */,
+				CB2AA9C71975030A00DA7CCD /* WPContentCollection.h */,
+				CB2AA9C81975030A00DA7CCD /* WPContentCollection.m */,
 			);
 			name = IUWPGroup;
 			sourceTree = "<group>";
@@ -3023,6 +3034,16 @@
 			path = ../..;
 			sourceTree = "<group>";
 		};
+		CB2AA9CA19751A6400DA7CCD /* WPGroup */ = {
+			isa = PBXGroup;
+			children = (
+				CB2AA9CF19751CA200DA7CCD /* LMPropertyWPContentVC.h */,
+				CB2AA9D019751CA200DA7CCD /* LMPropertyWPContentVC.m */,
+				CB2AA9D119751CA200DA7CCD /* LMPropertyWPContentVC.xib */,
+			);
+			name = WPGroup;
+			sourceTree = "<group>";
+		};
 		CBA877E61963D04A00075294 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
@@ -3297,6 +3318,7 @@
 				690A8276190A2CC200DDBA86 /* new_pt@2x.png in Resources */,
 				262D4A981947FAF0006F5FBE /* border_icon_03.png in Resources */,
 				3DED26601900D313001A1D67 /* next@2x.png in Resources */,
+				CB2AA9D319751CA200DA7CCD /* LMPropertyWPContentVC.xib in Resources */,
 				2672A0AC19120A740050043E /* tool_collection@2x.png in Resources */,
 				3DF8043D18FE62FC00913505 /* tool_fblike.png in Resources */,
 				3DF8044918FE62FC00913505 /* tool_textfield.png in Resources */,
@@ -3726,6 +3748,7 @@
 				694A9862196D184400C1D630 /* JDIntegerTextField.m in Sources */,
 				3DA6F2FE1963A676004DF0AA /* LMHelpTextPopoverVC.m in Sources */,
 				3DED26DD19010B56001A1D67 /* LMPropertyIUHTMLVC.m in Sources */,
+				CB2AA9D219751CA200DA7CCD /* LMPropertyWPContentVC.m in Sources */,
 				69757B0018D95BBC0095CBAC /* CALayer+JDExtension.m in Sources */,
 				69757B0718D95BBC0095CBAC /* JDHerokuUtil.m in Sources */,
 				69CFDF161963D48900341B07 /* LMTutorialManager.m in Sources */,
@@ -3842,6 +3865,7 @@
 				3DED27221904AE1A001A1D67 /* LMEventVariableReceiverVC.m in Sources */,
 				691F91B01973C66700A4CFFF /* IUPHP.m in Sources */,
 				69B37F0D18DFDEE800DE620F /* LMFileNaviVC.m in Sources */,
+				CB2AA9C91975030A00DA7CCD /* WPContentCollection.m in Sources */,
 				690A82561909EB1B00DDBA86 /* PGTextField.m in Sources */,
 				690A409518E1645B00095263 /* LMWidgetLibraryVC.m in Sources */,
 				3D973F091946F45100FB893F /* IUProjectController.m in Sources */,

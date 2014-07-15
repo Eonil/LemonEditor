@@ -41,6 +41,7 @@
 #import "LMFontController.h"
 
 #import "IUPHP.h"
+#import "WPContentCollection.h"
 
 @implementation IUCompiler{
 }
@@ -1678,5 +1679,65 @@
     
     return code;
 }
+
+#pragma mark - PHP
+-(JDCode *)outputPHP:(IUBox *)iu{
+    return [self editorPHP:iu];
+    
+    JDCode *code = [[JDCode alloc] init];
+#pragma mark - IUPHP
+    if([iu isKindOfClass:[IUPHP class]]){
+     //   [code addCodeLine:@"<? %@ ?>"];
+    }
+
+    
+    return code;
+
+}
+
+-(JDCode *)editorPHP:(IUBox*)iu{
+    JDCode *code = [[JDCode alloc] init];
+#pragma mark - IUPHP
+    /*
+    if([iu isKindOfClass:[IUPHP class]]){
+        [code addCodeLine:@"<? %@ ?>"];
+    }
+     */
+#pragma mark - WPContentCollection
+     if([iu isKindOfClass:[WPContentCollection class]]){
+        WPContentCollection *collection = (WPContentCollection *)iu;
+        //start loop
+        [code addCodeLine:@"<? while ( have_posts() ) : the_post(); ?>"];
+        [code increaseIndentLevelForEdit];
+        
+        //content title
+        [code addCodeLine:@"<a href='<?php the_permalink(); ?>'><?php the_title(); ?></a>"];
+        
+        //date & time
+        NSString *dateTime;
+        if(collection.enableDate){
+            [code addCodeLine:@"<?php echo get_the_date(); ?>"];
+        }
+        if (collection.enableTime) {
+            [code addCodeLine:@"<?php echo get_the_time(); ?>"];
+        }
+        if (collection.enableCategory) {
+            [code addCodeLine:@"| Category: <?php the_category(', '); ?>"];
+        }
+        if (collection.enableTag) {
+            [code addCodeLine:@"| Tag: <?php the_tag(', '); ?>"];
+        }
+        
+        //content type sellection disable
+        [code addCodeLine:@"<?php if ( is_home() || is_category() || is_tag() ) { the_excerpt(); } else { the_content();} ?>"];
+        
+        
+        [code decreaseIndentLevelForEdit];
+        [code addCodeLine:@"<?php endwhile; ?> "];
+    }
+    
+    return code;
+}
+
 
 @end

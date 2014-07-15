@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMPropertyIUPageVC">
@@ -107,11 +107,11 @@
                 <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ecd-Lv-OtQ">
                     <rect key="frame" x="94" y="12" width="182" height="60"/>
                     <clipView key="contentView" id="H2e-jO-13p">
-                        <rect key="frame" x="1" y="1" width="183" height="58"/>
+                        <rect key="frame" x="1" y="1" width="180" height="58"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView importsGraphics="NO" richText="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1m8-52-1l5">
-                                <rect key="frame" x="0.0" y="0.0" width="183" height="58"/>
+                                <rect key="frame" x="0.0" y="0.0" width="180" height="58"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="minSize" width="180" height="58"/>
@@ -132,7 +132,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="wQJ-gZ-3JF">
-                        <rect key="frame" x="168" y="1" width="16" height="58"/>
+                        <rect key="frame" x="165" y="1" width="16" height="58"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
@@ -169,7 +169,6 @@
                 <constraint firstItem="bxA-m2-RBd" firstAttribute="trailing" secondItem="sPU-oT-D2Q" secondAttribute="trailing" id="vCf-vF-sro"/>
                 <constraint firstItem="f34-do-qhj" firstAttribute="leading" secondItem="SYg-Wu-bJe" secondAttribute="leading" id="vfl-SV-GZA"/>
             </constraints>
-            <point key="canvasLocation" x="143" y="434"/>
         </customView>
         <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVf-J8-lor" userLabel="javscript">
             <rect key="frame" x="80" y="11" width="185" height="60"/>
@@ -202,7 +201,6 @@
                 <rect key="frame" x="168" y="1" width="16" height="58"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
-            <point key="canvasLocation" x="408.5" y="187"/>
         </scrollView>
         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QWr-s1-3Ok">
             <rect key="frame" x="14" y="54" width="60" height="17"/>
@@ -215,7 +213,6 @@
                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
             </textFieldCell>
-            <point key="canvasLocation" x="249" y="191.5"/>
         </textField>
     </objects>
 </document>

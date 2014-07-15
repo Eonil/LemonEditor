@@ -49,4 +49,10 @@ typedef enum _IUCompileRule{
 #pragma mark manage JS source
 -(NSString *)outputJSArgs:(IUBox *)iu;
 -(NSString *)outputJSInitializeSource:(IUSheet *)document;
+
+#pragma mark PHP
+-(JDCode *)outputPHP:(IUBox *)iu;
+-(JDCode *)editorPHP:(IUBox *)iu;
+
+
 @end
