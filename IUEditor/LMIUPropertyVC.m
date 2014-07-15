@@ -27,6 +27,7 @@
 #import "LMPropertyPGFormVC.h"
 #import "PGSubmitButtonVC.h"
 #import "LMInspectorAltTextVC.h"
+#import "LMPropertyWPContentVC.h"
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 
@@ -72,6 +73,8 @@
     
     LMPropertyProgrammingType1VC *propertyPGType1VC;
     LMPropertyProgrammingType2VC *propertyPGType2VC;
+    
+    LMPropertyWPContentVC *propertyWPContentVC;
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     LMPropertyTextVC *propertyTextVC;
@@ -139,6 +142,7 @@
 #endif
         propertyWebProgramming = [[LMPropertyWebProgrammingVC alloc] initWithNibName:[LMPropertyWebProgrammingVC class].className bundle:nil];
         
+        propertyWPContentVC = [[LMPropertyWPContentVC alloc] initWithNibName:[LMPropertyWPContentVC class].className bundle:nil];
         
         [self loadView];
     }
@@ -173,6 +177,7 @@
     [propertyPGType2VC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
 
     [propertyWebProgramming bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+    [propertyWPContentVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     [propertyTextVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
@@ -287,6 +292,11 @@
     else if ([classString isEqualToString:@"IUBox"]){
         self.propertyVArray = [NSMutableArray arrayWithArray:@[propertyTextVC.view, inspectorLinkVC.view, propertyPGType2VC.view]];
         doubleClickFocusVC = propertyTextVC;
+    }
+
+#pragma mark WP
+    else if ([classString isEqualToString:@"WPContentCollection"]){
+        self.propertyVArray = @[propertyWPContentVC.view];
     }
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION

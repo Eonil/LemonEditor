@@ -7,11 +7,16 @@
 //
 
 #import "IUPHP.h"
+#import "IUProject.h"
 
 @implementation IUPHP
 
 - (NSString*)innerHTML{
-    return [NSString stringWithFormat:@"<? %@ ?>", self.code];
+    return [self php];
+}
+
+-(NSString*)php{
+    return [self.project.compiler editorPHP:self].string;
 }
 
 @end
