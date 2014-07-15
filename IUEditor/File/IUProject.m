@@ -284,12 +284,17 @@
     NSString *buildPath = [self.directoryPath stringByAppendingPathComponent:self.buildPath];
     NSString *buildResourcePath = [self.directoryPath stringByAppendingPathComponent:self.buildResourcePath];
 
-    [[NSFileManager defaultManager] removeItemAtPath:buildPath error:error];
+//    [[NSFileManager defaultManager] removeItemAtPath:buildPath error:error];
 
+    if ([[NSFileManager defaultManager] fileExistsAtPath:buildPath isDirectory:NO]) {
+        //remove file
+        [[NSFileManager defaultManager] removeItemAtPath:buildPath error:nil];
+    }
     [[NSFileManager defaultManager] createDirectoryAtPath:buildPath withIntermediateDirectories:YES attributes:nil error:error];
     
 //    [self initializeResource];
-  
+
+    [[NSFileManager defaultManager] removeItemAtPath:buildResourcePath error:nil];
     [[NSFileManager defaultManager] copyItemAtPath:_resourceGroup.absolutePath toPath:buildResourcePath error:error];
 
 
@@ -299,7 +304,8 @@
     for (IUSheet *doc in self.allDocuments) {
         NSString *outputString = [doc outputSource];
         
-        NSString *filePath = [[buildPath stringByAppendingPathComponent:doc.name] stringByAppendingPathExtension:@"html"];
+        NSString *filePath = [[buildPath stringByAppendingPathComponent:doc.name ] stringByAppendingPathExtension:@"html"];
+        [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
         if ([outputString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
             NSAssert(0, @"write fail");
         }
@@ -323,6 +329,8 @@
 
     NSString *initializeJSPath = [[resourceJSPath stringByAppendingPathComponent:@"iuinit"] stringByAppendingPathExtension:@"js"];
     NSError *myError;
+    
+    [[NSFileManager defaultManager] removeItemAtPath:initializeJSPath error:nil];
     if ([sourceCode.string writeToFile:initializeJSPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
         NSAssert(0, @"write fail");
     }
@@ -331,6 +339,7 @@
     //make event javascript file
     NSString *eventJSString = [eventVariable outputEventJSSource];
     NSString *eventJSFilePath = [[resourceJSPath stringByAppendingPathComponent:@"iuevent"] stringByAppendingPathExtension:@"js"];
+    [[NSFileManager defaultManager] removeItemAtPath:eventJSFilePath error:nil];
     if ([eventJSString writeToFile:eventJSFilePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
         NSAssert(0, @"write fail");
     }

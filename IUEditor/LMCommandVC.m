@@ -114,8 +114,14 @@
             NSAssert(0, @"");
         }
         IUSheet *doc = [[_docController selectedObjects] firstObject];
-        NSString *firstPath = [project.directoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@.html",project.buildPath, [doc.name lowercaseString]] ];
-        [[NSWorkspace sharedWorkspace] openFile:firstPath];
+        if (rule == IUCompileRuleDefault) {
+            NSString *firstPath = [project.directoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@.html",project.buildPath, [doc.name lowercaseString]] ];
+            [[NSWorkspace sharedWorkspace] openFile:firstPath];
+        }
+        else {
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://127.0.0.1/~%@/wordpress", NSUserName()]];
+            [[NSWorkspace sharedWorkspace] openURL:url];
+        }
     }
     else if (rule == IUCompileRuleDjango){
         //get port
