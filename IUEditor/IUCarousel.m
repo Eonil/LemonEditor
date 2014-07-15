@@ -152,11 +152,14 @@
     
     if (self.delegate) {
         if(self.enableColor){
-            [self.delegate IUClassIdentifier:[itemID cssClass] CSSUpdated:[[self.project.compiler cssContentForIUCarouselPager:self hover:NO] string] forWidth:IUCSSMaxViewPortWidth];
             
-            [self.delegate IUClassIdentifier:[itemID cssHoverClass] CSSUpdated:[[self.project.compiler cssContentForIUCarouselPager:self hover:YES] string] forWidth:IUCSSMaxViewPortWidth];
-            
-            [self.delegate IUClassIdentifier:[itemID cssActiveClass] CSSUpdated:[[self.project.compiler cssContentForIUCarouselPager:self hover:YES] string] forWidth:IUCSSMaxViewPortWidth];
+            if (self.delegate) {
+                [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[itemID cssClass]];
+                [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[itemID cssHoverClass]];
+                [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[itemID cssActiveClass]];
+
+            }
+
         }
         else{
             [self.delegate IUClassIdentifier:[itemID cssClass] CSSRemovedforWidth:IUCSSMaxViewPortWidth];
@@ -199,28 +202,21 @@
 
 - (void)cssForArrowImage:(IUCarouselArrow)type change:(BOOL)change{
     NSString *arrowID;
+    NSString *leftArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-prev", self.htmlID];
+    NSString *rightArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-next", self.htmlID];
+
     if(type == IUCarouselArrowLeft){
-        arrowID = @"bx-prev";
+        arrowID = leftArrowID;
     }
     else if(type == IUCarouselArrowRight){
-        arrowID = @"bx-next";
+        arrowID = rightArrowID;
     }
     if (self.delegate) {
-        NSDictionary *dict = [self.project.compiler cssDictionaryForIUCarousel:self];
-        for(NSString *identifier in dict.allKeys){
-            if([identifier containsString:arrowID]){
-                if(change){
-                    [self.delegate IUClassIdentifier:identifier CSSUpdated:[dict objectForKey:identifier] forWidth:self.css.editWidth];
-                }
-                else{
-                    [self.delegate IUClassIdentifier:identifier CSSRemovedforWidth:self.css.editWidth];
-                    
-                }
-                break;
-            }
-        }
+        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:arrowID];
+        
     }
 }
+
 #pragma mark JS reload
 - (void)setAutoplay:(BOOL)autoplay{
     _autoplay = autoplay;

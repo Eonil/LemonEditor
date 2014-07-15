@@ -1008,85 +1008,7 @@
 
 
 
-#pragma mark carousel css
 
--(JDCode *)cssContentForIUCarouselPager:(IUCarousel *)iu hover:(BOOL)hover{
-    JDCode *code = [[JDCode alloc] init];
-    if(hover){
-        //fall back
-        [code addCodeLineWithFormat:@"background:%@ !important;", [iu.selectColor cssBGString]];
-    }else{
-        [code addCodeLineWithFormat:@"background:%@ !important;", [iu.deselectColor cssBGString]];
-    }
-    return code;
-}
-
-- (NSString *)cssContentForIUCarouselArrow:(IUCarousel *)iu hover:(BOOL)hover location:(IUCarouselArrow)location carouselHeight:(NSInteger)height{
-    
-    
-    NSMutableString *css = [NSMutableString string];
-    NSString *imageName;
-    if(location == IUCarouselArrowLeft){
-        imageName = iu.leftArrowImage;
-    }
-    else if(location == IUCarouselArrowRight){
-        imageName = iu.rightArrowImage;
-    }
-    
-    NSImage *arrowImage;
-    if ([imageName isHTTPURL]) {
-        [css appendFormat:@"background:(%@) ;", imageName];
-        arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
-    }
-    else{
-        IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
-        NSString *imageRelativePath = [file relativePath];
-        [css appendFormat:@"background:%@ ;", [imageRelativePath CSSURLString]];
-        NSString *imageAbsolutePath = [file absolutePath];
-        arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
-    }
-    
-    [css appendFormat:@"height:%.0fpx ; ",arrowImage.size.height];
-    [css appendFormat:@"width:%.0fpx ;", arrowImage.size.width];
-    [css appendFormat:@"top:%.0fpx ;", (height/2-arrowImage.size.height/2)];
-
-    
-    return css;
-}
--(NSDictionary *)cssDictionaryForIUCarousel:(IUCarousel *)iu{
-    
-    NSMutableDictionary *css = [NSMutableDictionary dictionary];
-    if(iu.enableColor){
-        NSString *itemID = [NSString stringWithFormat:@"%@pager-item", iu.htmlID];
-        [css setObject:[[self cssContentForIUCarouselPager:iu hover:NO] string] forKey:[itemID cssClass]];
-        [css setObject:[[self cssContentForIUCarouselPager:iu hover:YES] string] forKey:[itemID cssHoverClass]];
-        [css setObject:[[self cssContentForIUCarouselPager:iu hover:YES] string] forKey:[itemID cssActiveClass]];
-    }
-    
-    
-    NSString *leftArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-prev", iu.htmlID];
-    if([iu.leftArrowImage isEqualToString:@"Default"] == NO){
-        NSInteger currentHeight = [iu.css.assembledTagDictionary[IUCSSTagHeight] integerValue];
-        
-        NSString *string = [self cssContentForIUCarouselArrow:iu hover:NO location:IUCarouselArrowLeft carouselHeight:currentHeight];
-        [css setObject:string forKey:leftArrowID];
-    }
-    else{
-        [css setObject:@"" forKey:leftArrowID];
-    }
-    
-    NSString *rightArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-next", iu.htmlID];
-    if([iu.rightArrowImage isEqualToString:@"Default"] == NO){
-        NSInteger currentHeight = [iu.css.assembledTagDictionary[IUCSSTagHeight] integerValue];
-        NSString *string = [self cssContentForIUCarouselArrow:iu hover:NO location:IUCarouselArrowRight carouselHeight:currentHeight];
-        [css setObject:string forKey:rightArrowID];
-    }
-    else{
-        [css setObject:@"" forKey:rightArrowID];
-    }
-    
-    return css;
-}
 
 #pragma mark css default
 
@@ -1177,6 +1099,52 @@
         else if([identifier isEqualToString:[pageLinkSet.htmlID.cssClass stringByAppendingString:pageLinkSetButtonSelectedLiCSSPostfix]]){
              [dict putTag:@"background-color" color:pageLinkSet.selectedButtonBGColor ignoreClearColor:NO];
         }
+    }
+#pragma mark - IUCarousel
+    else if([iu isKindOfClass:[IUCarousel class]]){
+        IUCarousel *carousel = (IUCarousel *)iu;
+        if([identifier isEqualToString:[[carousel.htmlID stringByAppendingString:@"pager-item"] cssClass]]){
+            [dict putTag:@"background" string:[NSString stringWithFormat:@"%@ !important", [carousel.deselectColor cssBGString]]];
+        }
+        else if ([identifier isEqualToString:[[carousel.htmlID stringByAppendingString:@"pager-item"] cssHoverClass]]
+                 || [identifier isEqualToString:[[carousel.htmlID stringByAppendingString:@"pager-item"] cssActiveClass]]){
+            
+            [dict putTag:@"background" string:[NSString stringWithFormat:@"%@ !important", [carousel.selectColor cssBGString]]];
+
+        }
+        else if ([identifier isEqualToString:[[carousel.htmlID cssClass] stringByAppendingString:@" .bx-wrapper .bx-controls-direction .bx-prev"]]
+                 || [identifier isEqualToString:[[carousel.htmlID cssClass] stringByAppendingString:@" .bx-wrapper .bx-controls-direction .bx-next"]]){
+            
+            NSString *imageName;
+            if([identifier containsString:@"bx-prev"]){
+                imageName = carousel.leftArrowImage;
+            }
+            else if([identifier containsString:@"bx-next"]){
+                imageName = carousel.rightArrowImage;
+            }
+            if([imageName isEqualToString:@"Default"] == NO){
+                NSImage *arrowImage;
+                if ([imageName isHTTPURL]) {
+                    [dict putTag:@"background" string:[imageName  CSSURLString]];
+                    arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
+
+                }
+                else{
+                    IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
+                    NSString *imageRelativePath = [file relativePath];
+                    [dict putTag:@"background" string:[imageRelativePath  CSSURLString]];
+                    NSString *imageAbsolutePath = [file absolutePath];
+                    arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
+
+                }
+                [dict putTag:@"height" floatValue:arrowImage.size.height ignoreZero:YES unit:IUCSSUnitPixel];
+                [dict putTag:@"width" floatValue:arrowImage.size.width ignoreZero:YES unit:IUCSSUnitPixel];
+                NSInteger currentHeight = [iu.css.assembledTagDictionary[IUCSSTagHeight] integerValue];
+                [dict putTag:@"top" floatValue:(currentHeight/2-arrowImage.size.height/2) ignoreZero:YES unit:IUCSSUnitPixel];
+            }
+            
+        }
+
     }
     
     return dict;

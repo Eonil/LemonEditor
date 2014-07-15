@@ -110,6 +110,7 @@ typedef enum _IUOverflowType{
 - (NSArray *)cssIdentifierArray;
 - (void)updateCSSForEditViewPort;
 - (void)updateCSSForMaxViewPort;
+- (void)CSSUpdatedForWidth:(NSInteger)width withIdentifier:(NSString *)identifer;
 
 //HTML
 -(NSString*)html;
