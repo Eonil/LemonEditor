@@ -8,9 +8,15 @@
 
 #import "IUHTML.h"
 
+typedef enum{
+ IUFBLikeColorLight,
+ IUFBLikeColorDark,
+}IUFBLikeColor;
+
 @interface IUFBLike : IUHTML
 
 @property NSString *likePage;
 @property BOOL showFriendsFace;
+@property IUFBLikeColor colorscheme;
 
 @end

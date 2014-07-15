@@ -236,7 +236,7 @@
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     if (self.rule == IUCompileRuleDjango && iu.pgContentVariable) {
         if ([iu.sheet isKindOfClass:[IUClass class]]) {
-            [code addCodeLineWithFormat:@"{{object.%@}}", iu.pgContentVariable];
+            [code addCodeLineWithFormat:@"<p>{{object.%@|linebreaksbr}}</p>", iu.pgContentVariable];
         }
         else {
             [code addCodeLineWithFormat:@"<p>{{%@|linebreaksbr}}</p>", iu.pgContentVariable];
@@ -294,7 +294,7 @@
         if (_rule == IUCompileRuleDjango ) {
             [code addCodeLineWithFormat:@"<div %@>", [self HTMLAttributes:iuCollection option:nil isEdit:NO]];
             [code addCodeLineWithFormat:@"    {%% for object in %@ %%}", iuCollection.collectionVariable];
-            [code addCodeLineWithFormat:@"        {%% include '%@.html' %%}", [iuCollection.prototypeClass.name lowercaseString]];
+            [code addCodeLineWithFormat:@"        {%% include '%@.html' %%}", iuCollection.prototypeClass.name];
             [code addCodeLine:@"    {% endfor %}"];
             [code addCodeLineWithFormat:@"</div>"];
         }
@@ -479,7 +479,13 @@
                 }
             }
         }
-        NSString *str = [NSString stringWithFormat:@"<a href='%@'>", linkURL];
+        NSString *str;
+        if(iu.linkTarget){
+            str = [NSString stringWithFormat:@"<a href='%@' target='_blank'>", linkURL];
+        }
+        else{
+            str = [NSString stringWithFormat:@"<a href='%@'>", linkURL];
+        }
         [code wrapTextWithStartString:str endString:@"</a>"];
     }
     return code;

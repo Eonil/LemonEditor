@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="divLinkPB" destination="N6o-Zq-VkT" id="3Kk-Im-W3z"/>
                 <outlet property="pageLinkPopupButton" destination="nGG-OI-Jvb" id="abY-zu-nNd"/>
+                <outlet property="targetCheckButton" destination="lxB-gq-nXw" id="3kk-AU-dGx"/>
                 <outlet property="urlCheckButton" destination="jRs-ai-7ge" id="Bov-w8-JUG"/>
                 <outlet property="urlTF" destination="hFF-Ft-P2S" id="LCl-Od-21q"/>
                 <outlet property="view" destination="niB-NK-igw" id="2CC-E5-Vdv"/>
@@ -17,11 +18,11 @@
         <customObject id="-3" userLabel="Application"/>
         <userDefaultsController representsSharedInstance="YES" id="nZS-8c-klJ"/>
         <customView id="niB-NK-igw">
-            <rect key="frame" x="0.0" y="0.0" width="290" height="116"/>
+            <rect key="frame" x="0.0" y="0.0" width="291" height="149"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="acu-TJ-o3H">
-                    <rect key="frame" x="20" y="94" width="31" height="14"/>
+                    <rect key="frame" x="20" y="127" width="31" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="Jg6-7p-e7E"/>
                         <constraint firstAttribute="width" constant="27" id="uW6-ma-Van"/>
@@ -33,7 +34,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1FF-4O-BWO">
-                    <rect key="frame" x="43" y="71" width="43" height="17"/>
+                    <rect key="frame" x="43" y="104" width="43" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="DhE-Xs-DbS"/>
                         <constraint firstAttribute="width" constant="39" id="rpm-M6-jsN"/>
@@ -45,7 +46,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gbF-b4-UKw">
-                    <rect key="frame" x="43" y="44" width="43" height="17"/>
+                    <rect key="frame" x="43" y="77" width="43" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="39" id="WXk-tf-tBv"/>
                         <constraint firstAttribute="height" constant="17" id="lr4-zf-QZM"/>
@@ -57,7 +58,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N6o-Zq-VkT">
-                    <rect key="frame" x="84" y="40" width="190" height="22"/>
+                    <rect key="frame" x="84" y="73" width="190" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="184" id="GO8-Nc-g2s"/>
                     </constraints>
@@ -71,7 +72,7 @@
                     </connections>
                 </popUpButton>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hFF-Ft-P2S">
-                    <rect key="frame" x="87" y="16" width="184" height="19"/>
+                    <rect key="frame" x="87" y="49" width="184" height="19"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="http://www.google.com" drawsBackground="YES" id="8Ao-Ja-qA9">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -82,7 +83,7 @@
                     </connections>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="jRs-ai-7ge">
-                    <rect key="frame" x="43" y="16" width="43" height="21"/>
+                    <rect key="frame" x="43" y="49" width="43" height="21"/>
                     <buttonCell key="cell" type="check" title="URL" bezelStyle="regularSquare" imagePosition="left" alignment="right" controlSize="small" state="on" inset="2" id="CPp-r6-pWe">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -92,7 +93,7 @@
                     </connections>
                 </button>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nGG-OI-Jvb">
-                    <rect key="frame" x="84" y="66" width="190" height="22"/>
+                    <rect key="frame" x="84" y="99" width="190" height="22"/>
                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Xfl-y8-ZvQ" id="y8K-0A-qML">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -108,6 +109,13 @@
                         <action selector="clickLinkPopupButton:" target="-2" id="jGI-wS-X29"/>
                     </connections>
                 </popUpButton>
+                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lxB-gq-nXw">
+                    <rect key="frame" x="84" y="26" width="123" height="18"/>
+                    <buttonCell key="cell" type="check" title="Open in a New Tab" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="TE7-TY-8AN">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="smallSystem"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="hFF-Ft-P2S" firstAttribute="top" secondItem="N6o-Zq-VkT" secondAttribute="bottom" constant="8" id="0cE-YQ-p3g"/>
@@ -128,6 +136,7 @@
                 <constraint firstItem="nGG-OI-Jvb" firstAttribute="leading" secondItem="N6o-Zq-VkT" secondAttribute="leading" id="wi7-G2-tzG"/>
                 <constraint firstItem="jRs-ai-7ge" firstAttribute="trailing" secondItem="gbF-b4-UKw" secondAttribute="trailing" id="xfr-GM-x2v"/>
             </constraints>
+            <point key="canvasLocation" x="920.5" y="432.5"/>
         </customView>
     </objects>
 </document>

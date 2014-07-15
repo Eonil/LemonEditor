@@ -196,6 +196,7 @@ typedef enum _IUOverflowType{
 - (NSString *)imageName;
 
 @property (nonatomic) id link, divLink;
+@property BOOL linkTarget;
 @property float opacityMove;
 @property float xPosMove;
 //0 for default, 1 for H1, 2 for H2

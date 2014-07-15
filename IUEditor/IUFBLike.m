@@ -20,8 +20,9 @@
     self = [super initWithProject:project options:options];
     if(self){
         self.innerHTML = @"";
-        _fbSource = @"<iframe src=\"//www.facebook.com/plugins/like.php?href=__FB_LINK_ADDRESS__+&amp;width&amp;layout=standard&amp;action=like&amp;show_faces=__SHOW_FACE__&amp;share=true&amp;\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; height:__HEIGHT__px\" allowTransparency=\"true\"></iframe>";
+        _fbSource = @"<iframe src=\"//www.facebook.com/plugins/like.php?href=__FB_LINK_ADDRESS__+&amp;width&amp;layout=standard&amp;action=like&amp;show_faces=__SHOW_FACE__&amp;share=true&amp;colorscheme=__COLOR_SCHEME__&amp;\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; height:__HEIGHT__px\" allowTransparency=\"true\"></iframe>";
         _showFriendsFace = YES;
+        _colorscheme = IUFBLikeColorLight;
         [self.css setValue:@(80) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
         [self.css setValue:@(320) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
         [self.css setValue:nil forTag:IUCSSTagBGColor forWidth:IUCSSMaxViewPortWidth];
@@ -31,13 +32,13 @@
 
 - (void)connectWithEditor{
     [super connectWithEditor];
-    [self addObserver:self forKeyPaths:@[@"showFriendsFace", @"likePage"] options:0 context:@"IUFBSource"];
+    [self addObserver:self forKeyPaths:@[@"showFriendsFace", @"likePage", @"colorscheme"] options:0 context:@"IUFBSource"];
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self =  [super initWithCoder:aDecoder];
     if(self){
-        _fbSource = @"<iframe src=\"//www.facebook.com/plugins/like.php?href=__FB_LINK_ADDRESS__+&amp;width&amp;layout=standard&amp;action=like&amp;show_faces=__SHOW_FACE__&amp;share=true&amp;\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; height:__HEIGHT__px\" allowTransparency=\"true\"></iframe>";
+        _fbSource = @"<iframe src=\"//www.facebook.com/plugins/like.php?href=__FB_LINK_ADDRESS__+&amp;width&amp;layout=standard&amp;action=like&amp;show_faces=__SHOW_FACE__&amp;share=true&amp;colorscheme=__COLOR_SCHEME__&amp;\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; height:__HEIGHT__px\" allowTransparency=\"true\"></iframe>";
         [aDecoder decodeToObject:self withProperties:[[IUFBLike class] properties]];
     }
     return self;
@@ -58,7 +59,7 @@
 }
 
 -(void) dealloc{
-    [self removeObserver:self forKeyPaths:@[@"showFriendsFace", @"likePage"]];
+    [self removeObserver:self forKeyPaths:@[@"showFriendsFace", @"likePage", @"colorscheme"]];
 }
 
 - (void)IUFBSourceContextDidChange:(NSDictionary *)change{
@@ -83,6 +84,16 @@
     NSString *pageStr = self.likePage;
     if(self.likePage.length == 0){
         pageStr = @"";
+    }
+    
+    switch (_colorscheme) {
+        case IUFBLikeColorLight:
+            source = [source stringByReplacingOccurrencesOfString:@"__COLOR_SCHEME__" withString:@"light"];
+            break;
+        case IUFBLikeColorDark:
+            source = [source stringByReplacingOccurrencesOfString:@"__COLOR_SCHEME__" withString:@"dark"];
+        default:
+            break;
     }
     
     source = [source stringByReplacingOccurrencesOfString:@"__FB_LINK_ADDRESS__" withString:pageStr];

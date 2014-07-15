@@ -12,6 +12,7 @@
 
 @property (weak) IBOutlet NSTextField *likePageTF;
 @property (weak) IBOutlet NSButton *friendFaceBtn;
+@property (weak) IBOutlet NSPopUpButton *colorschemePopupBtn;
 
 @end
 
@@ -29,6 +30,8 @@
 - (void)awakeFromNib{
     [_likePageTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"likePage"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_friendFaceBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"showFriendsFace"] options:IUBindingDictNotRaisesApplicable];
+
+    [_colorschemePopupBtn bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"colorscheme"] options:IUBindingDictNotRaisesApplicable];
 
     //enable
     NSDictionary *enableBindingOption = [NSDictionary

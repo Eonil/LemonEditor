@@ -17,6 +17,7 @@
 @property (weak) IBOutlet NSPopUpButton *divLinkPB; //not use for alpha 0.2 version
 @property (weak) IBOutlet NSButton *urlCheckButton;
 @property (weak) IBOutlet NSTextField *urlTF;
+@property (weak) IBOutlet NSButton *targetCheckButton;
 
 @end
 
@@ -39,6 +40,7 @@
     _urlTF.delegate = self;
     [_divLinkPB setEnabled:NO];
     
+    
     [self addObserver:self forKeyPath:@"controller.selectedObjects"
               options:0 context:@""];
 }
@@ -47,6 +49,8 @@
 - (void)setProject:(IUProject*)project{
     _project = project;
     [self updateLinkPopupButtonItems];
+    
+    [_targetCheckButton bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"linkTarget"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(structureChanged:) name:IUNotificationStructureDidChange object:project];
 }
@@ -87,12 +91,15 @@
         if (value == NSNoSelectionMarker || value == nil) {
             [_pageLinkPopupButton selectItemWithTitle:@"None"];
             [_urlTF setStringValue:@""];
+            [_targetCheckButton setEnabled:NO];
         }
         else if (value == NSMultipleValuesMarker) {
             [_pageLinkPopupButton selectItemWithTitle:@"None"];
             [_urlTF setStringValue:@"multiple"];
+            [_targetCheckButton setEnabled:YES];
         }
         else {
+            [_targetCheckButton setEnabled:YES];
             if([value isKindOfClass:[IUBox class]]){
                 [_pageLinkPopupButton selectItemWithTitle:((IUBox *)value).name];
                 [_urlCheckButton setState:0];
