@@ -37,6 +37,7 @@ p, span {
 
 a {
     color:black;
+    cursor:pointer;
 }
 
 body {
