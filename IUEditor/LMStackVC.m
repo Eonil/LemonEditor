@@ -66,7 +66,16 @@
 }
 
 - (void)structureChanged:(NSNotification *)notification{
-    [_outlineV reloadData];
+    [self.IUController rearrangeObjects];
+    if ([[notification.userInfo objectForKey:IUNotificationStructureChangeType] isEqualTo: IUNotificationStructureAdding]) {
+        IUBox *newOne = [notification.userInfo objectForKey:IUNotificationStructureChangedIU];
+        if (newOne) {
+            [self.IUController setSelectedObject:newOne];
+        }
+    }
+
+    //we don't need this
+    //[_outlineV reloadData];
 }
 
 -(void)keyDown:(NSEvent *)theEvent{

@@ -1,5 +1,5 @@
 //
-//  WPPageLink.h
+//  WPContentCollection.h
 //  IUEditor
 //
 //  Created by jw on 7/15/14.
@@ -8,6 +8,8 @@
 
 #import "IUBox.h"
 
-@interface WPPageLinks : IUBox
+@interface WPArticle : IUBox
+
+@property (nonatomic) BOOL enableTitle;
 
 @end

@@ -498,7 +498,6 @@
 		6919204A18DCFED000F8522B /* NSObject+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6919204918DCFED000F8522B /* NSObject+JDExtension.m */; };
 		691F91A91973C2EA00A4CFFF /* IUWordpressProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91A81973C2EA00A4CFFF /* IUWordpressProject.m */; };
 		691F91AD1973C5EF00A4CFFF /* WPSiteTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91AC1973C5EF00A4CFFF /* WPSiteTitle.m */; };
-		691F91B01973C66700A4CFFF /* IUPHP.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91AF1973C66700A4CFFF /* IUPHP.m */; };
 		691F91B31973CD6800A4CFFF /* WPSiteDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91B21973CD6800A4CFFF /* WPSiteDescription.m */; };
 		692C4DC21966A13600EAB2E7 /* PositionProperty.pages in Resources */ = {isa = PBXBuildFile; fileRef = 692C4DC11966A13600EAB2E7 /* PositionProperty.pages */; };
 		692C4DC41966A15400EAB2E7 /* tracingOverview.pages in Resources */ = {isa = PBXBuildFile; fileRef = 692C4DC31966A15400EAB2E7 /* tracingOverview.pages */; };
@@ -554,6 +553,7 @@
 		6979FC0818ED34E20060C3B4 /* LMPropertyFrameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6979FC0618ED34E20060C3B4 /* LMPropertyFrameVC.xib */; };
 		6983E71D18FFF54600D424B8 /* JDOutlineCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983E71C18FFF54600D424B8 /* JDOutlineCellView.m */; };
 		6985CBA018E31558008DBF50 /* IUSheetGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985CB9F18E31558008DBF50 /* IUSheetGroup.m */; };
+		69860E4A197555E8001C3F7F /* WPArticleTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 69860E49197555E8001C3F7F /* WPArticleTitle.m */; };
 		698BEA9919664CB00019C1C3 /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 698BEA9819664CB00019C1C3 /* record@2x.png */; };
 		698BEA9B19664CBD0019C1C3 /* record_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 698BEA9A19664CBD0019C1C3 /* record_stop.png */; };
 		698BEA9D19664CC50019C1C3 /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 698BEA9C19664CC50019C1C3 /* record.png */; };
@@ -654,9 +654,9 @@
 		69FFB28D195041E500DA2783 /* LMPropertyProgrammingType2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FFB289195041E500DA2783 /* LMPropertyProgrammingType2VC.m */; };
 		69FFB28E195041E500DA2783 /* LMPropertyProgrammingType2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FFB28A195041E500DA2783 /* LMPropertyProgrammingType2VC.xib */; };
 		CB2AA9C61974D43200DA7CCD /* WPPageLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9C51974D43200DA7CCD /* WPPageLinks.m */; };
-		CB2AA9C91975030A00DA7CCD /* WPContentCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9C81975030A00DA7CCD /* WPContentCollection.m */; };
-		CB2AA9D219751CA200DA7CCD /* LMPropertyWPContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9D019751CA200DA7CCD /* LMPropertyWPContentVC.m */; };
-		CB2AA9D319751CA200DA7CCD /* LMPropertyWPContentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB2AA9D119751CA200DA7CCD /* LMPropertyWPContentVC.xib */; };
+		CB2AA9C91975030A00DA7CCD /* WPArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9C81975030A00DA7CCD /* WPArticle.m */; };
+		CB2AA9D219751CA200DA7CCD /* LMPropertyWPArticleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9D019751CA200DA7CCD /* LMPropertyWPArticleVC.m */; };
+		CB2AA9D319751CA200DA7CCD /* LMPropertyWPArticleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB2AA9D119751CA200DA7CCD /* LMPropertyWPArticleVC.xib */; };
 		CB9BD6381914DC62002C9369 /* LMStartNewDjangoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9BD6361914DC62002C9369 /* LMStartNewDjangoVC.m */; };
 		CB9BD6391914DC62002C9369 /* LMStartNewDjangoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9BD6371914DC62002C9369 /* LMStartNewDjangoVC.xib */; };
 		CB9BD63D1914DE23002C9369 /* LMStartNewPresentationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9BD63B1914DE23002C9369 /* LMStartNewPresentationVC.m */; };
@@ -1283,8 +1283,6 @@
 		691F91A81973C2EA00A4CFFF /* IUWordpressProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUWordpressProject.m; sourceTree = "<group>"; };
 		691F91AB1973C5EF00A4CFFF /* WPSiteTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPSiteTitle.h; sourceTree = "<group>"; };
 		691F91AC1973C5EF00A4CFFF /* WPSiteTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPSiteTitle.m; sourceTree = "<group>"; };
-		691F91AE1973C66700A4CFFF /* IUPHP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUPHP.h; sourceTree = "<group>"; };
-		691F91AF1973C66700A4CFFF /* IUPHP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUPHP.m; sourceTree = "<group>"; };
 		691F91B11973CD6800A4CFFF /* WPSiteDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPSiteDescription.h; sourceTree = "<group>"; };
 		691F91B21973CD6800A4CFFF /* WPSiteDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPSiteDescription.m; sourceTree = "<group>"; };
 		692C4DC11966A13600EAB2E7 /* PositionProperty.pages */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PositionProperty.pages; sourceTree = "<group>"; };
@@ -1380,6 +1378,8 @@
 		6983E71C18FFF54600D424B8 /* JDOutlineCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDOutlineCellView.m; path = JD/JDOutlineCellView.m; sourceTree = "<group>"; };
 		6985CB9E18E31558008DBF50 /* IUSheetGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUSheetGroup.h; sourceTree = "<group>"; };
 		6985CB9F18E31558008DBF50 /* IUSheetGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUSheetGroup.m; sourceTree = "<group>"; };
+		69860E48197555E8001C3F7F /* WPArticleTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPArticleTitle.h; sourceTree = "<group>"; };
+		69860E49197555E8001C3F7F /* WPArticleTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPArticleTitle.m; sourceTree = "<group>"; };
 		698BEA9819664CB00019C1C3 /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record@2x.png"; sourceTree = "<group>"; };
 		698BEA9A19664CBD0019C1C3 /* record_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record_stop.png; sourceTree = "<group>"; };
 		698BEA9C19664CC50019C1C3 /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
@@ -1540,11 +1540,11 @@
 		69FFB28A195041E500DA2783 /* LMPropertyProgrammingType2VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyProgrammingType2VC.xib; sourceTree = "<group>"; };
 		CB2AA9C41974D43200DA7CCD /* WPPageLinks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPPageLinks.h; sourceTree = "<group>"; };
 		CB2AA9C51974D43200DA7CCD /* WPPageLinks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPPageLinks.m; sourceTree = "<group>"; };
-		CB2AA9C71975030A00DA7CCD /* WPContentCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPContentCollection.h; sourceTree = "<group>"; };
-		CB2AA9C81975030A00DA7CCD /* WPContentCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPContentCollection.m; sourceTree = "<group>"; };
-		CB2AA9CF19751CA200DA7CCD /* LMPropertyWPContentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyWPContentVC.h; sourceTree = "<group>"; };
-		CB2AA9D019751CA200DA7CCD /* LMPropertyWPContentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyWPContentVC.m; sourceTree = "<group>"; };
-		CB2AA9D119751CA200DA7CCD /* LMPropertyWPContentVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyWPContentVC.xib; sourceTree = "<group>"; };
+		CB2AA9C71975030A00DA7CCD /* WPArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPArticle.h; sourceTree = "<group>"; };
+		CB2AA9C81975030A00DA7CCD /* WPArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPArticle.m; sourceTree = "<group>"; };
+		CB2AA9CF19751CA200DA7CCD /* LMPropertyWPArticleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyWPArticleVC.h; sourceTree = "<group>"; };
+		CB2AA9D019751CA200DA7CCD /* LMPropertyWPArticleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyWPArticleVC.m; sourceTree = "<group>"; };
+		CB2AA9D119751CA200DA7CCD /* LMPropertyWPArticleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyWPArticleVC.xib; sourceTree = "<group>"; };
 		CB9BD6351914DC62002C9369 /* LMStartNewDjangoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStartNewDjangoVC.h; sourceTree = "<group>"; };
 		CB9BD6361914DC62002C9369 /* LMStartNewDjangoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStartNewDjangoVC.m; sourceTree = "<group>"; };
 		CB9BD6371914DC62002C9369 /* LMStartNewDjangoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMStartNewDjangoVC.xib; sourceTree = "<group>"; };
@@ -2649,8 +2649,10 @@
 				CB2AA9C51974D43200DA7CCD /* WPPageLinks.m */,
 				691F91B11973CD6800A4CFFF /* WPSiteDescription.h */,
 				691F91B21973CD6800A4CFFF /* WPSiteDescription.m */,
-				CB2AA9C71975030A00DA7CCD /* WPContentCollection.h */,
-				CB2AA9C81975030A00DA7CCD /* WPContentCollection.m */,
+				CB2AA9C71975030A00DA7CCD /* WPArticle.h */,
+				CB2AA9C81975030A00DA7CCD /* WPArticle.m */,
+				69860E48197555E8001C3F7F /* WPArticleTitle.h */,
+				69860E49197555E8001C3F7F /* WPArticleTitle.m */,
 			);
 			name = IUWPGroup;
 			sourceTree = "<group>";
@@ -2723,8 +2725,6 @@
 				69CB92B3191B5F6800BEFBED /* PGPageLinkSet.m */,
 				3D1BACC719330240004C554F /* IUText.h */,
 				3D1BACC819330240004C554F /* IUText.m */,
-				691F91AE1973C66700A4CFFF /* IUPHP.h */,
-				691F91AF1973C66700A4CFFF /* IUPHP.m */,
 			);
 			name = IU;
 			sourceTree = "<group>";
@@ -3037,9 +3037,9 @@
 		CB2AA9CA19751A6400DA7CCD /* WPGroup */ = {
 			isa = PBXGroup;
 			children = (
-				CB2AA9CF19751CA200DA7CCD /* LMPropertyWPContentVC.h */,
-				CB2AA9D019751CA200DA7CCD /* LMPropertyWPContentVC.m */,
-				CB2AA9D119751CA200DA7CCD /* LMPropertyWPContentVC.xib */,
+				CB2AA9CF19751CA200DA7CCD /* LMPropertyWPArticleVC.h */,
+				CB2AA9D019751CA200DA7CCD /* LMPropertyWPArticleVC.m */,
+				CB2AA9D119751CA200DA7CCD /* LMPropertyWPArticleVC.xib */,
 			);
 			name = WPGroup;
 			sourceTree = "<group>";
@@ -3318,7 +3318,7 @@
 				690A8276190A2CC200DDBA86 /* new_pt@2x.png in Resources */,
 				262D4A981947FAF0006F5FBE /* border_icon_03.png in Resources */,
 				3DED26601900D313001A1D67 /* next@2x.png in Resources */,
-				CB2AA9D319751CA200DA7CCD /* LMPropertyWPContentVC.xib in Resources */,
+				CB2AA9D319751CA200DA7CCD /* LMPropertyWPArticleVC.xib in Resources */,
 				2672A0AC19120A740050043E /* tool_collection@2x.png in Resources */,
 				3DF8043D18FE62FC00913505 /* tool_fblike.png in Resources */,
 				3DF8044918FE62FC00913505 /* tool_textfield.png in Resources */,
@@ -3740,6 +3740,7 @@
 				6919204718DCFC8200F8522B /* NSCoder+JDExtension.m in Sources */,
 				69CFDF111963B40400341B07 /* LMPreferenceHelpVC.m in Sources */,
 				69C5760D18D6FE020016F050 /* IUSheet.m in Sources */,
+				69860E4A197555E8001C3F7F /* WPArticleTitle.m in Sources */,
 				3DB3ACC518EBEF180046DFB7 /* LMWindow.m in Sources */,
 				3DA6F3021963A6B9004DF0AA /* LMHelpPopover.m in Sources */,
 				69757B0918D95BBC0095CBAC /* JDLogUtil.m in Sources */,
@@ -3748,7 +3749,7 @@
 				694A9862196D184400C1D630 /* JDIntegerTextField.m in Sources */,
 				3DA6F2FE1963A676004DF0AA /* LMHelpTextPopoverVC.m in Sources */,
 				3DED26DD19010B56001A1D67 /* LMPropertyIUHTMLVC.m in Sources */,
-				CB2AA9D219751CA200DA7CCD /* LMPropertyWPContentVC.m in Sources */,
+				CB2AA9D219751CA200DA7CCD /* LMPropertyWPArticleVC.m in Sources */,
 				69757B0018D95BBC0095CBAC /* CALayer+JDExtension.m in Sources */,
 				69757B0718D95BBC0095CBAC /* JDHerokuUtil.m in Sources */,
 				69CFDF161963D48900341B07 /* LMTutorialManager.m in Sources */,
@@ -3863,9 +3864,8 @@
 				69B9A39618E5A2A30007D6E2 /* IUResourceFile.m in Sources */,
 				6905FB521925F17300E4DBC3 /* JDCode.m in Sources */,
 				3DED27221904AE1A001A1D67 /* LMEventVariableReceiverVC.m in Sources */,
-				691F91B01973C66700A4CFFF /* IUPHP.m in Sources */,
 				69B37F0D18DFDEE800DE620F /* LMFileNaviVC.m in Sources */,
-				CB2AA9C91975030A00DA7CCD /* WPContentCollection.m in Sources */,
+				CB2AA9C91975030A00DA7CCD /* WPArticle.m in Sources */,
 				690A82561909EB1B00DDBA86 /* PGTextField.m in Sources */,
 				690A409518E1645B00095263 /* LMWidgetLibraryVC.m in Sources */,
 				3D973F091946F45100FB893F /* IUProjectController.m in Sources */,

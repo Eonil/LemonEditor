@@ -27,7 +27,7 @@
 #import "LMPropertyPGFormVC.h"
 #import "PGSubmitButtonVC.h"
 #import "LMInspectorAltTextVC.h"
-#import "LMPropertyWPContentVC.h"
+#import "LMPropertyWPArticleVC.h"
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 
@@ -74,7 +74,7 @@
     LMPropertyProgrammingType1VC *propertyPGType1VC;
     LMPropertyProgrammingType2VC *propertyPGType2VC;
     
-    LMPropertyWPContentVC *propertyWPContentVC;
+    LMPropertyWPArticleVC *propertyWPArticleVC;
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     LMPropertyTextVC *propertyTextVC;
@@ -142,7 +142,7 @@
 #endif
         propertyWebProgramming = [[LMPropertyWebProgrammingVC alloc] initWithNibName:[LMPropertyWebProgrammingVC class].className bundle:nil];
         
-        propertyWPContentVC = [[LMPropertyWPContentVC alloc] initWithNibName:[LMPropertyWPContentVC class].className bundle:nil];
+        propertyWPArticleVC = [[LMPropertyWPArticleVC alloc] initWithNibName:[LMPropertyWPArticleVC class].className bundle:nil];
         
         [self loadView];
     }
@@ -177,7 +177,7 @@
     [propertyPGType2VC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
 
     [propertyWebProgramming bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyWPContentVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+    [propertyWPArticleVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     [propertyTextVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
@@ -295,8 +295,8 @@
     }
 
 #pragma mark WP
-    else if ([classString isEqualToString:@"WPContentCollection"]){
-        self.propertyVArray = @[propertyWPContentVC.view];
+    else if ([classString isEqualToString:@"WPArticle"]){
+        self.propertyVArray = @[propertyWPArticleVC.view];
     }
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION

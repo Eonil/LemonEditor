@@ -39,9 +39,7 @@
 #endif
 
 #import "LMFontController.h"
-
-#import "IUPHP.h"
-#import "WPContentCollection.h"
+#import "WPArticle.h"
 
 @implementation IUCompiler{
 }
@@ -289,6 +287,7 @@
             [code addCode:[self outputHTMLAsBox:iu option:nil]];
         }
     }
+
 #pragma mark IUCollection
     else if ([iu isKindOfClass:[IUCollection class]]){
         IUCollection *iuCollection = (IUCollection*)iu;
@@ -450,6 +449,7 @@
         JDCode *outputCode = [self outputHTMLAsBox:iu option:nil];
         [code addCode:outputCode];
     }
+    
     
 #pragma mark - link
     if (iu.link && [iu isKindOfClass:[PGPageLinkSet class]] == NO) {
@@ -1685,16 +1685,15 @@
     return code;
 }
 
+#if 0
+
 #pragma mark - PHP
 -(JDCode *)outputPHP:(IUBox *)iu{
-    return [self editorPHP:iu];
-    
     JDCode *code = [[JDCode alloc] init];
 #pragma mark - IUPHP
     if([iu isKindOfClass:[IUPHP class]]){
-     //   [code addCodeLine:@"<? %@ ?>"];
+        [code addCodeLine:@"<? %@ ?>", iu.code];
     }
-
     
     return code;
 
@@ -1702,6 +1701,9 @@
 
 -(JDCode *)editorPHP:(IUBox*)iu{
     JDCode *code = [[JDCode alloc] init];
+    
+    
+    
 #pragma mark - IUPHP
     /*
     if([iu isKindOfClass:[IUPHP class]]){
@@ -1743,6 +1745,6 @@
     
     return code;
 }
-
+#endif
 
 @end

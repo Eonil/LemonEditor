@@ -9,8 +9,11 @@
 #import "WPSiteDescription.h"
 
 @implementation WPSiteDescription
-- (NSString*)code{
-    return @"bloginfo('description');";
+
+- (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
+    self = [super initWithProject:project options:options];
+    self.innerHTML = @"<? bloginfo('description'); ?>";
+    return self;
 }
 
 @end
