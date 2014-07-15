@@ -12,4 +12,8 @@
 - (NSString*)code{
     return @"bloginfo();";
 }
+
+- (NSString*)sampleText{
+    return @"Site Title";
+}
 @end

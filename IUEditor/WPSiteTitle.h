@@ -8,6 +8,6 @@
 
 #import "IUPHP.h"
 
-@interface WPSiteTitle : IUPHP
+@interface WPSiteTitle : IUPHP <IUSampleTextProtocol>
 
 @end

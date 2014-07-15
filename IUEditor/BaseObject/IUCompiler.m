@@ -570,6 +570,11 @@
             [code addCode:[self editorHTMLAsBOX:iu]];
         }
     }
+    else if ([iu conformsToProtocol:@protocol(IUSampleTextProtocol) ]){
+        IUBox <IUSampleTextProtocol> *sampleProtocolIU = (id)iu;
+        NSString *sampleText = [sampleProtocolIU sampleText];
+        [code addCodeLineWithFormat:@"<div %@ >%@</div>", [self HTMLAttributes:iu option:nil isEdit:YES], sampleText];
+    }
 #pragma mark IUCarouselItem
     else if([iu isKindOfClass:[IUCarouselItem class]]){
         [code addCodeLine:@"<li>"];
@@ -1540,7 +1545,7 @@
 #else
            [obj isMemberOfClass:[IUBox class]] ||
 #endif
-           [obj isKindOfClass:[PGTextField class]] || [obj isKindOfClass:[PGTextView class]] || [obj isKindOfClass:[PGPageLinkSet class]] || [obj isKindOfClass:[PGSubmitButton class]]){
+           [obj isKindOfClass:[PGTextField class]] || [obj isKindOfClass:[PGTextView class]] || [obj isKindOfClass:[PGPageLinkSet class]] || [obj isKindOfClass:[PGSubmitButton class]] || [obj conformsToProtocol:@protocol(IUSampleTextProtocol)]){
             
             value = cssTagDict[IUCSSTagFontName];
             if(value){
