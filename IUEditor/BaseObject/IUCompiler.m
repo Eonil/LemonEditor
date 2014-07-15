@@ -1098,8 +1098,10 @@
     
     for(NSString *identifier in iu.cssIdentifierArray){
         NSDictionary *cssContentDict = [self CSSContentWithIdentifier:identifier ofIU:iu width:width isEdit:isEdit];
-        NSString *cssString = [self CSSCodeFromDictionary:cssContentDict];
-        [dict setObject:cssString forKey:identifier];
+        if(cssContentDict.count > 0){
+            NSString *cssString = [self CSSCodeFromDictionary:cssContentDict];
+            [dict setObject:cssString forKey:identifier];
+        }
     }
     
     return dict;
