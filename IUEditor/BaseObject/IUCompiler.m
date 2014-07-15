@@ -464,10 +464,10 @@
         if ([linkStr isHTTPURL] == NO) {
             if (_rule == IUCompileRuleDjango) {
                 if(iu.divLink){
-                    linkURL = [NSString stringWithFormat:@"/%@#%@", [linkStr lowercaseString], [((IUBox *)iu.divLink).htmlID lowercaseString]];
+                    linkURL = [NSString stringWithFormat:@"/%@#%@", linkStr , ((IUBox *)iu.divLink).htmlID];
                 }
                 else{
-                    linkURL = [NSString stringWithFormat:@"/%@", [linkStr lowercaseString]];
+                    linkURL = [NSString stringWithFormat:@"/%@", linkStr];
                 }
             }
             else {
@@ -898,7 +898,7 @@
             targetStr = ((PGForm *)iu).target;
         }
         else if([((PGForm *)iu).target isKindOfClass:[IUBox class]]){
-            targetStr = ((IUBox *)((PGForm *)iu).target).htmlID;
+            targetStr = ((IUBox *)((PGForm *)iu).target).htmlID ;
         }
         
         [retString appendFormat:@" method=\"post\" action=\"%@\"", targetStr];

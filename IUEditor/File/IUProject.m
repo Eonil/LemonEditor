@@ -299,7 +299,7 @@
     for (IUSheet *doc in self.allDocuments) {
         NSString *outputString = [doc outputSource];
         
-        NSString *filePath = [[buildPath stringByAppendingPathComponent:[doc.name lowercaseString]] stringByAppendingPathExtension:@"html"];
+        NSString *filePath = [[buildPath stringByAppendingPathComponent:doc.name] stringByAppendingPathExtension:@"html"];
         if ([outputString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
             NSAssert(0, @"write fail");
         }

@@ -180,7 +180,12 @@
                         
                         NSMutableString *innerJS = [NSMutableString string];
                         [innerJS appendFormat:@"$(\"#%@\").show(", visibleID];
-                        [innerJS appendFormat:@"\"%@\", %ld);\n", typeStr, duration*100];
+                        if(duration > 0){
+                            [innerJS appendFormat:@"\"%@\", %ld);\n", typeStr, duration*100];
+                        }
+                        else{
+                            [innerJS appendFormat:@"\"%@\", 1);\n", typeStr];
+                        }
                         [innerJS appendFormat:@"$(\"#%@\").data(\"run%@\", 1);\n", visibleID, fnName];
                         
                         [fnStr appendString:[innerJS stringByAddingTab]];
@@ -194,7 +199,12 @@
                         [innerJS appendFormat:@"\t$(\"#%@\").hide();\n", visibleID];
                         [innerJS appendString:@"}\n"];
                         [innerJS appendString:@"else{\n"];
-                        [innerJS appendFormat:@"\t$(\"#%@\").hide(\"%@\",%ld);\n", visibleID, typeStr, duration*100];
+                        if(duration > 0){
+                            [innerJS appendFormat:@"\t$(\"#%@\").hide(\"%@\",%ld);\n", visibleID, typeStr, duration*100];
+                        }
+                        else{
+                            [innerJS appendFormat:@"\t$(\"#%@\").hide(\"%@\", 1);\n", visibleID, typeStr];
+                        }
                         [innerJS appendString:@"}"];
                         [fnStr appendString:[innerJS stringByAddingTab]];
                         [fnStr appendString:@"}"];
@@ -239,7 +249,12 @@
                         [innerJS appendFormat:@"width:\"%.2fpx\", height:\"%.2fpx\"}", width, height];
                         
                         NSInteger duration = [[receiverDict objectForKey:IUEventTagFrameDuration] integerValue];
-                        [innerJS appendFormat:@", %ld);", duration*100];
+                        if(duration > 0){
+                            [innerJS appendFormat:@", %ld);", duration*100];
+                        }
+                        else{
+                            [innerJS appendFormat:@", 1);"];
+                        }
                         
                         [fnStr appendString:[innerJS stringByAddingTab]];
                         [fnStr appendString:@"}"];
@@ -251,10 +266,20 @@
                         [innerJS appendFormat:@"var d_width =$(\"#%@\").data(\"width\");\n", frameID];
                         [innerJS appendFormat:@"var d_height =$(\"#%@\").data(\"height\");\n", frameID];
                         [innerJS appendString:@"if(clicked == undefined){\n"];
-                        [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, %ld);\n", frameID, duration*100];
+                        if(duration > 0){
+                            [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, %ld);\n", frameID, duration*100];
+                        }
+                        else{
+                            [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, 1 );\n", frameID];
+                        }
                         [innerJS appendString:@"}\n"];
                         [innerJS appendString:@"else{\n"];
-                        [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, %ld);\n", frameID, duration*100];
+                        if(duration > 0){
+                            [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, %ld);\n", frameID, duration*100];
+                        }
+                        else{
+                            [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height ,1});\n", frameID];
+                        }
                         [innerJS appendString:@"}"];
                         
                         [fnStr appendString:[innerJS stringByAddingTab]];
