@@ -8,6 +8,6 @@
 
 #import "IUBox.h"
 
-@interface WPPageLinks : IUBox
+@interface WPPageLinks : IUBox <IUCodeProtocol, IUSampleTextProtocol>
 
 @end

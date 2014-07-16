@@ -7,9 +7,15 @@
 //
 
 #import "WPArticleDate.h"
+#import "WPArticle.h"
 
 @implementation WPArticleDate
+
 -(NSString*)code{
     return @"<?php echo get_the_date(); ?>";
 }
+- (NSString*)sampleText{
+    return @"Publishing date will be here";
+}
+
 @end

@@ -8,6 +8,6 @@
 
 #import "IUBox.h"
 
-@interface WPArticleTitle : IUBox <IUCodeProtocol>
+@interface WPArticleTitle : IUBox <IUCodeProtocol, IUSampleTextProtocol>
 
 @end
