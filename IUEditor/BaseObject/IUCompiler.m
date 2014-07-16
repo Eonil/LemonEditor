@@ -169,11 +169,13 @@
     }
     else {
         IUResourceFile *file = [self.resourceManager resourceFileWithName:imageName];
-        if(_rule == IUCompileRuleDjango && isEdit == NO){
-            imgSrc = [@"/" stringByAppendingString:[file relativePath]];
-        }
-        else{
-            imgSrc = [file relativePath];
+        if(file){
+            if(_rule == IUCompileRuleDjango && isEdit == NO){
+                imgSrc = [@"/" stringByAppendingString:[file relativePath]];
+            }
+            else{
+                imgSrc = [file relativePath];
+            }
         }
     }
     return imgSrc;
