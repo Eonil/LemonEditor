@@ -59,7 +59,7 @@
 
 - (void)updatePageComboBoxContents{
     [_submitPageComboBox removeAllItems];
-    for (IUPage *page in [_project pageDocuments]) {
+    for (IUPage *page in [_project pageSheets]) {
         [_submitPageComboBox addItemWithObjectValue:[page.name copy]];
     }
 }

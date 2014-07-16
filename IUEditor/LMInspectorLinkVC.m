@@ -65,7 +65,7 @@
 - (void)updateLinkPopupButtonItems{
     [_pageLinkPopupButton removeAllItems];
     [_pageLinkPopupButton addItemWithTitle:@"None"];
-    for (IUPage *page in [_project pageDocuments]) {
+    for (IUPage *page in [_project pageSheets]) {
         NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:page.name action:nil keyEquivalent:@""];
         item.representedObject = page;
         [[_pageLinkPopupButton menu] addItem:item];

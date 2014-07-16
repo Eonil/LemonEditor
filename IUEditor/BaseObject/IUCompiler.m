@@ -264,7 +264,11 @@
 -(JDCode *)outputHTML:(IUBox *)iu{
     JDCode *code = [[JDCode alloc] init];
 #pragma mark IUPage
-    if ([iu isKindOfClass:[IUPage class]]) {
+    if ([iu conformsToProtocol:@protocol(IUCodeProtocol)]) {
+        id <IUCodeProtocol> iuCode = (id)iu;
+        [code addCodeLine:[iuCode code]];
+    }
+    else if ([iu isKindOfClass:[IUPage class]]) {
         IUPage *page = (IUPage*)iu;
         if (page.background) {
             [code addCodeLineWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:NO]];

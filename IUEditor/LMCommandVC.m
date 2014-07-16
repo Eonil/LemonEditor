@@ -115,8 +115,13 @@
         }
         IUSheet *doc = [[_docController selectedObjects] firstObject];
         if (rule == IUCompileRuleDefault) {
-            NSString *firstPath = [project.directoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@.html",project.buildPath, [doc.name lowercaseString]] ];
-            [[NSWorkspace sharedWorkspace] openFile:firstPath];
+            NSString *firstPath = [project buildPathForSheet:doc];
+            if ([[firstPath pathExtension] isEqualTo:@"html"]) {
+                [[NSWorkspace sharedWorkspace] openFile:firstPath];
+            }
+            else {
+                [[NSWorkspace sharedWorkspace] openFile:firstPath withApplication:@"Coda 2"];
+            }
         }
         else {
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://127.0.0.1/~%@/wordpress", NSUserName()]];
@@ -145,7 +150,7 @@
         //open page
         IUSheet *node = [[_docController selectedObjects] firstObject];
         if([node isKindOfClass:[IUSheet class]] == NO){
-            node = [project.pageDocuments firstObject];
+            node = [project.pageSheets firstObject];
         }
 
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://127.0.0.1:%ld/%@",[self djangoDebugPort], [node.name lowercaseString]]];

@@ -66,7 +66,7 @@
 
 -(void)selectFirstDocument{
     //find first document
-    [_documentController setSelectedObject:_project.pageDocuments.firstObject];
+    [_documentController setSelectedObject:_project.pageSheets.firstObject];
 }
 
 
@@ -247,7 +247,7 @@
             newDoc = [[IUPage alloc] initWithProject:self.project options:nil];
             [self.project addSheet:newDoc toSheetGroup:self.project.pageGroup];
             [self.project.identifierManager registerIUs:@[newDoc]];
-            IUBackground *defaultBG = self.project.backgroundDocuments[0];
+            IUBackground *defaultBG = self.project.backgroundSheets[0];
             [(IUPage*)newDoc setBackground:defaultBG];
         }
         else if([groupName isEqualToString:IUClassGroupName]){

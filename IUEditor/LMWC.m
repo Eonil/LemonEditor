@@ -280,7 +280,7 @@
         _project = document.project;
         //[canvasVC bind:@"documentBasePath" toObject:_project withKeyPath:@"path" options:nil];
         NSError *error;
-        NSAssert(_project.pageDocuments, @"");
+        NSAssert(_project.pageSheets, @"");
         NSAssert(_project.identifierManager, @"");
         NSAssert(_project.resourceManager, @"");
         

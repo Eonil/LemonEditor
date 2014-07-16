@@ -38,7 +38,7 @@
 - (void)structureChanged:(NSNotification*)noti{
     [_prototypeB removeAllItems];
     [_prototypeB addItemWithTitle:@"None"];
-    [_prototypeB addItemsWithTitles:[[_project classDocuments] valueForKey:@"name"]];
+    [_prototypeB addItemsWithTitles:[[_project classSheets] valueForKey:@"name"]];
 }
 
 - (void)setController:(IUController *)controller{
@@ -60,7 +60,7 @@
 }
 
 - (IBAction)performPrototypeChange:(NSPopUpButton *)sender {
-    IUClass *class = [[_project classDocuments] objectWithKey:@"name" value:sender.selectedItem.title];
+    IUClass *class = [[_project classSheets] objectWithKey:@"name" value:sender.selectedItem.title];
     NSArray *selectedIUs = _controller.selectedObjects;
     for (IUImport *iu in selectedIUs) {
         NSAssert([iu isKindOfClass:[IUImport class]], @"");

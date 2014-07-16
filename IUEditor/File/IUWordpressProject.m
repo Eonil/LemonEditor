@@ -18,75 +18,15 @@
     return YES;
 }
 
-- (BOOL)build:(NSError**)error{
-    NSAssert(self.buildPath != nil, @"");
+- (NSString*)buildPathForSheet:(IUSheet*)sheet{
     NSString *buildPath = [self.directoryPath stringByAppendingPathComponent:self.buildPath];
-    NSString *buildResourcePath = [self.directoryPath stringByAppendingPathComponent:self.buildResourcePath];
-    
-    //    [[NSFileManager defaultManager] removeItemAtPath:buildPath error:error];
-    
-    BOOL isDirectory;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:buildPath isDirectory:&isDirectory]) {
-        //remove file
-        if (isDirectory == NO) {
-            [[NSFileManager defaultManager] removeItemAtPath:buildPath error:nil];
-        }
+    if (sheet == nil) {
+        return buildPath;
     }
-    [[NSFileManager defaultManager] createDirectoryAtPath:buildPath withIntermediateDirectories:YES attributes:nil error:error];
-    
-    //    [self initializeResource];
-    
-    [[NSFileManager defaultManager] removeItemAtPath:buildResourcePath error:nil];
-    [[NSFileManager defaultManager] copyItemAtPath:_resourceGroup.absolutePath toPath:buildResourcePath error:error];
-    
-    
-    IUEventVariable *eventVariable = [[IUEventVariable alloc] init];
-    JDCode *initializeJSSource = [[JDCode alloc] init];
-    
-    for (IUSheet *doc in self.allDocuments) {
-        NSString *outputString = [doc outputSource];
-        
-        NSString *filePath = [[buildPath stringByAppendingPathComponent:doc.name ] stringByAppendingPathExtension:@"php"];
-        [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-        if ([outputString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
-            NSAssert(0, @"write fail");
-        }
-        
-        [eventVariable makeEventDictionary:doc];
-        
-        [initializeJSSource addCodeLineWithFormat:@"/* Initialize %@ */\n", doc.name];
-        [initializeJSSource addCodeLine:[doc outputInitJSSource]];
-        [initializeJSSource addNewLine];
+    else {
+        NSString *filePath = [[buildPath stringByAppendingPathComponent:sheet.name ] stringByAppendingPathExtension:@"php"];
+        return filePath;
     }
-    
-    NSString *resourceJSPath = [buildResourcePath stringByAppendingPathComponent:@"js"];
-    
-    //make initialize javascript file
-    
-    NSString *iuinitFilePath = [[NSBundle mainBundle] pathForResource:@"iuinit" ofType:@"js"];
-    
-    JDCode *sourceCode = [[JDCode alloc] initWithCodeString: [NSString stringWithContentsOfFile:iuinitFilePath encoding:NSUTF8StringEncoding error:nil]];
-    [sourceCode replaceCodeString:@"/*INIT_JS_REPLACEMENT*/" toCode:initializeJSSource];
-    
-    
-    NSString *initializeJSPath = [[resourceJSPath stringByAppendingPathComponent:@"iuinit"] stringByAppendingPathExtension:@"js"];
-    NSError *myError;
-    
-    [[NSFileManager defaultManager] removeItemAtPath:initializeJSPath error:nil];
-    if ([sourceCode.string writeToFile:initializeJSPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
-        NSAssert(0, @"write fail");
-    }
-    
-    
-    //make event javascript file
-    NSString *eventJSString = [eventVariable outputEventJSSource];
-    NSString *eventJSFilePath = [[resourceJSPath stringByAppendingPathComponent:@"iuevent"] stringByAppendingPathExtension:@"js"];
-    [[NSFileManager defaultManager] removeItemAtPath:eventJSFilePath error:nil];
-    if ([eventJSString writeToFile:eventJSFilePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
-        NSAssert(0, @"write fail");
-    }
-    
-    [JDUIUtil hudAlert:@"Build Success" second:2];
-    return YES;
 }
+
 @end
