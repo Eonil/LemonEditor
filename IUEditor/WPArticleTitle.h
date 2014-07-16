@@ -6,8 +6,8 @@
 //  Copyright (c) 2014년 JDLab. All rights reserved.
 //
 
-#import "IUHTML.h"
+#import "IUBox.h"
 
-@interface WPArticleTitle : IUHTML
+@interface WPArticleTitle : IUBox <IUCodeProtocol>
 
 @end

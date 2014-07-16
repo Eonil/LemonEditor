@@ -116,9 +116,9 @@ static NSString *IUClassGroupName = @"class";
 - (IUResourceManager *)resourceManager;
 
 - (NSArray*)allDocuments;
-- (NSArray*)pageDocuments;
-- (NSArray*)backgroundDocuments;
-- (NSArray*)classDocuments;
+- (NSArray*)pageSheets;
+- (NSArray*)backgroundSheets;
+- (NSArray*)classSheets;
 
 - (BOOL)runnable;
 
@@ -132,4 +132,5 @@ static NSString *IUClassGroupName = @"class";
 - (void)removeSheet:(IUSheet *)sheet toSheetGroup:(IUSheetGroup *)sheetGroup;
 
 - (void)connectWithEditor;
+- (NSString*)buildPathForSheet:(IUSheet*)sheet;
 @end

@@ -68,6 +68,11 @@ typedef enum _IUOverflowType{
 - (NSString*)sampleText;
 @end
 
+@protocol IUCodeProtocol
+@required
+- (NSString*)code;
+@end
+
 @class IUBox;
 @class IUSheet;
 @class IUProject;

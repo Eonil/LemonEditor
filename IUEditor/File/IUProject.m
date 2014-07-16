@@ -292,18 +292,28 @@
     return _buildResourcePath;
 }
 
+- (NSString*)buildPathForSheet:(IUSheet*)sheet{
+    NSString *buildPath = [self.directoryPath stringByAppendingPathComponent:self.buildPath];
+    if (sheet == nil) {
+        return buildPath;
+    }
+    else {
+        NSString *filePath = [[buildPath stringByAppendingPathComponent:sheet.name ] stringByAppendingPathExtension:@"html"];
+        return filePath;
+    }
+}
+
 - (BOOL)build:(NSError**)error{
     NSAssert(self.buildPath != nil, @"");
-    NSString *buildPath = [self.directoryPath stringByAppendingPathComponent:self.buildPath];
+    NSString *buildDirectoryPath = [self buildPathForSheet:nil];
     NSString *buildResourcePath = [self.directoryPath stringByAppendingPathComponent:self.buildResourcePath];
 
 //    [[NSFileManager defaultManager] removeItemAtPath:buildPath error:error];
-
-    if ([[NSFileManager defaultManager] fileExistsAtPath:buildPath isDirectory:NO]) {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:buildDirectoryPath isDirectory:NO]) {
         //remove file
-        [[NSFileManager defaultManager] removeItemAtPath:buildPath error:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:buildDirectoryPath error:nil];
     }
-    [[NSFileManager defaultManager] createDirectoryAtPath:buildPath withIntermediateDirectories:YES attributes:nil error:error];
+    [[NSFileManager defaultManager] createDirectoryAtPath:buildDirectoryPath withIntermediateDirectories:YES attributes:nil error:error];
     
 //    [self initializeResource];
 
@@ -314,19 +324,19 @@
     IUEventVariable *eventVariable = [[IUEventVariable alloc] init];
     JDCode *initializeJSSource = [[JDCode alloc] init];
 
-    for (IUSheet *doc in self.allDocuments) {
-        NSString *outputString = [doc outputSource];
+    for (IUSheet *sheet in self.allDocuments) {
+        NSString *outputString = [sheet outputSource];
         
-        NSString *filePath = [[buildPath stringByAppendingPathComponent:doc.name ] stringByAppendingPathExtension:@"html"];
+        NSString *filePath = [self buildPathForSheet:sheet];
         [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
         if ([outputString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
             NSAssert(0, @"write fail");
         }
         
-        [eventVariable makeEventDictionary:doc];
+        [eventVariable makeEventDictionary:sheet];
         
-        [initializeJSSource addCodeLineWithFormat:@"/* Initialize %@ */\n", doc.name];
-        [initializeJSSource addCodeLine:[doc outputInitJSSource]];
+        [initializeJSSource addCodeLineWithFormat:@"/* Initialize %@ */\n", sheet.name];
+        [initializeJSSource addCodeLine:[sheet outputInitJSSource]];
         [initializeJSSource addNewLine];
     }
     
@@ -510,19 +520,19 @@
 
 - (NSArray*)allDocuments{
     NSMutableArray *array = [NSMutableArray array];
-    [array addObjectsFromArray:self.pageDocuments];
-    [array addObjectsFromArray:self.backgroundDocuments];
-    [array addObjectsFromArray:self.classDocuments];
+    [array addObjectsFromArray:self.pageSheets];
+    [array addObjectsFromArray:self.backgroundSheets];
+    [array addObjectsFromArray:self.classSheets];
     return array;
 }
-- (NSArray*)pageDocuments{
+- (NSArray*)pageSheets{
     NSAssert(_pageGroup, @"pg");
     return _pageGroup.childrenFiles;
 }
-- (NSArray*)backgroundDocuments{
+- (NSArray*)backgroundSheets{
     return _backgroundGroup.childrenFiles;
 }
-- (NSArray*)classDocuments{
+- (NSArray*)classSheets{
     return _classGroup.childrenFiles;
 }
 
@@ -558,17 +568,17 @@
 - (void)addSheet:(IUSheet *)sheet toSheetGroup:(IUSheetGroup *)sheetGroup{
     if([sheetGroup isEqualTo:_pageGroup]){
         [self willChangeValueForKey:@"pageGroup"];
-        [self willChangeValueForKey:@"pageDocuments"];
+        [self willChangeValueForKey:@"pageSheets"];
 
     }
     else if([sheetGroup isEqualTo:_backgroundGroup]){
         [self willChangeValueForKey:@"backgroundGroup"];
-        [self willChangeValueForKey:@"backgroundDocuments"];
+        [self willChangeValueForKey:@"backgroundSheets"];
 
     }
     else if([sheetGroup isEqualTo:_classGroup]){
         [self willChangeValueForKey:@"classGroup"];
-        [self willChangeValueForKey:@"classDocuments"];
+        [self willChangeValueForKey:@"classSheets"];
 
     }
     
@@ -576,17 +586,17 @@
     
     if([sheetGroup isEqualTo:_pageGroup]){
         [self didChangeValueForKey:@"pageGroup"];
-        [self didChangeValueForKey:@"pageDocuments"];
+        [self didChangeValueForKey:@"pageSheets"];
 
     }
     else if([sheetGroup isEqualTo:_backgroundGroup]){
         [self didChangeValueForKey:@"backgroundGroup"];
-        [self didChangeValueForKey:@"backgroundDocuments"];
+        [self didChangeValueForKey:@"backgroundSheets"];
 
     }
     else if([sheetGroup isEqualTo:_classGroup]){
         [self didChangeValueForKey:@"classGroup"];
-        [self didChangeValueForKey:@"classDocuments"];
+        [self didChangeValueForKey:@"classSheets"];
 
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureAdding, IUNotificationStructureChangedIU: sheet}];
@@ -595,34 +605,34 @@
 - (void)removeSheet:(IUSheet *)sheet toSheetGroup:(IUSheetGroup *)sheetGroup{
     if([sheetGroup isEqualTo:_pageGroup]){
         [self willChangeValueForKey:@"pageGroup"];
-        [self willChangeValueForKey:@"pageDocuments"];
+        [self willChangeValueForKey:@"pageSheets"];
         
     }
     else if([sheetGroup isEqualTo:_backgroundGroup]){
         [self willChangeValueForKey:@"backgroundGroup"];
-        [self willChangeValueForKey:@"backgroundDocuments"];
+        [self willChangeValueForKey:@"backgroundSheets"];
         
     }
     else if([sheetGroup isEqualTo:_classGroup]){
         [self willChangeValueForKey:@"classGroup"];
-        [self willChangeValueForKey:@"classDocuments"];
+        [self willChangeValueForKey:@"classSheets"];
         
     }
     [sheetGroup removeSheet:sheet];
     
     if([sheetGroup isEqualTo:_pageGroup]){
         [self didChangeValueForKey:@"pageGroup"];
-        [self didChangeValueForKey:@"pageDocuments"];
+        [self didChangeValueForKey:@"pageSheets"];
         
     }
     else if([sheetGroup isEqualTo:_backgroundGroup]){
         [self didChangeValueForKey:@"backgroundGroup"];
-        [self didChangeValueForKey:@"backgroundDocuments"];
+        [self didChangeValueForKey:@"backgroundSheets"];
         
     }
     else if([sheetGroup isEqualTo:_classGroup]){
         [self didChangeValueForKey:@"classGroup"];
-        [self didChangeValueForKey:@"classDocuments"];
+        [self didChangeValueForKey:@"classSheets"];
         
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureChangeRemoving, IUNotificationStructureChangedIU: sheet}];

@@ -10,14 +10,12 @@
 
 @implementation WPSiteTitle
 
-- (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
-    self = [super initWithProject:project options:options];
-    self.innerHTML = @"<?bloginfo()?>";
-    return self;
-}
-
 - (NSString*)sampleText{
     return @"Site Title";
+}
+
+- (NSString*)code{
+    return @"<?bloginfo()?>";
 }
 
 @end

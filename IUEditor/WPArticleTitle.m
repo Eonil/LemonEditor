@@ -9,5 +9,7 @@
 #import "WPArticleTitle.h"
 
 @implementation WPArticleTitle
-
+-(NSString*)code{
+    return @"title";
+}
 @end
