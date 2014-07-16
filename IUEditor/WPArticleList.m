@@ -22,6 +22,9 @@
 
 - (NSString*)code{
     NSMutableString *str = [NSMutableString stringWithString:@"<? while ( have_posts() ) : the_post(); ?>"];
+    for (WPArticle *article in self.children) {
+        [str appendString:[article code]];
+    }
     [str appendString:@"<? endwhile ?>"];
     
     return str;

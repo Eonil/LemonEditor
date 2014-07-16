@@ -10,6 +10,6 @@
 
 @implementation WPArticleTitle
 -(NSString*)code{
-    return @"title";
+    return @"<?php the_title(); ?>";
 }
 @end

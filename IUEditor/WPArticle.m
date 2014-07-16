@@ -23,6 +23,7 @@
 }
 
 - (void)setEnableTitle:(BOOL)enableTitle{
+    _enableTitle = enableTitle;
     if (enableTitle) {
         [self.project.identifierManager resetUnconfirmedIUs];
         WPArticleTitle *title = [[WPArticleTitle alloc] initWithProject:self.project options:nil];
