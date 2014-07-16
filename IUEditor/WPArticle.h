@@ -8,7 +8,7 @@
 
 #import "IUBox.h"
 
-@interface WPArticle : IUBox <IUCodeProtocol>
+@interface WPArticle : IUBox
 
 @property (nonatomic) BOOL enableTitle;
 

@@ -69,7 +69,9 @@ typedef enum _IUOverflowType{
 @end
 
 @protocol IUCodeProtocol
-@required
+@optional
+- (NSString*)prefixCode;
+- (NSString*)postfixCode;
 - (NSString*)code;
 @end
 

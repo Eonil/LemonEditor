@@ -14,14 +14,6 @@
 @implementation WPArticle{
 }
 
-- (NSString*)code{
-    NSMutableString *code = [NSMutableString string];
-    for (id<IUCodeProtocol> child in self.children) {
-        [code appendString:[child code]];
-    }
-    return code;
-}
-
 - (void)setEnableTitle:(BOOL)enableTitle{
     _enableTitle = enableTitle;
     if (enableTitle) {

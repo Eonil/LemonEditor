@@ -53,7 +53,7 @@
     NSString *str = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
 
-    if ([string characterAtIndex:[string length] - 1] != '\n') {
+    if ([string length] && [string characterAtIndex:[string length] - 1] != '\n') {
         [string appendString:@"\n"];
     }
     [string appendString:whiteSpace];
