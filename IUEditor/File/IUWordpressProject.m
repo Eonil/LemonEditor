@@ -8,6 +8,8 @@
 
 #import "IUWordpressProject.h"
 #import "IUEventVariable.h"
+#import "JDShellUtil.h"
+
 @implementation IUWordpressProject
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -29,4 +31,13 @@
     }
 }
 
+- (BOOL)build:(NSError *__autoreleasing *)error{
+    BOOL result = [super build:error];
+    if (result) {
+        NSString *path = [self buildPathForSheet:nil];
+        NSString *command = [NSString stringWithFormat:@"touch %@", [path stringByAppendingPathComponent:@"style.css"]];
+        [JDShellUtil execute:command];
+    }
+    return result;
+}
 @end
