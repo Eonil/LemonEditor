@@ -36,6 +36,7 @@
     }
     [string appendString:whiteSpace];
     [string appendString:newCode];
+    [string appendString:@"\n"];
 }
 
 - (void)addNewLine{

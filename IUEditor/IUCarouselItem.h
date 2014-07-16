@@ -10,4 +10,6 @@
 
 @interface IUCarouselItem : IUItem
 
+@property BOOL isActive;
+
 @end

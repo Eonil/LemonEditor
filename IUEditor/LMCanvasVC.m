@@ -272,14 +272,6 @@
     [[self gridView] removeAllSelectionLayers];
     [[self gridView] removeAllTextPointLayer];
     
-
-    for(IUBox *box in self.controller.selectedObjects){
-        if([box isKindOfClass:[IUCarouselItem class]]){
-            NSInteger index = [box.parent.children indexOfObject:box];
-            [[self webView] selectCarousel:box.parent.htmlID atIndex:index];
-        }
-    }
-    
     for(NSString *IUID in self.controller.selectedIdentifiersWithImportIdentifier){
         if([frameDict.dict objectForKey:IUID]){
             NSRect frame = [[frameDict.dict objectForKey:IUID] rectValue];
@@ -527,11 +519,6 @@
 
     }
     IUBox *iu = [_controller IUBoxByIdentifier:identifier];
-    if([iu isKindOfClass:[IUCarousel class]]){
-        [[self webView] insertNewCarousel:identifier];
-        [self.controller rearrangeObjects];
-        [self.controller setSelectedObjectsByIdentifiers:@[identifier]];
-    }
 #if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
     else if([iu isKindOfClass:[IUText class]]){
         [(IUText *)iu updateAutoHeight];

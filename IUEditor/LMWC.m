@@ -297,9 +297,7 @@
             NSInteger frameSize = [number integerValue];
             [canvasVC addFrame:frameSize];
         }
-        
-        [_project copyResourceForDebug];
-        
+                
         //vc setting
         
         //construct widget library vc

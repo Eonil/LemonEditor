@@ -121,8 +121,6 @@ static NSString *IUClassGroupName = @"class";
 - (NSArray*)backgroundDocuments;
 - (NSArray*)classDocuments;
 
-- (void)copyResourceForDebug;
-
 - (BOOL)runnable;
 
 // return groups

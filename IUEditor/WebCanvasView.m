@@ -357,7 +357,6 @@
 
 - (void)runJSAfterRefreshCSS{
     [self reframeCenter];
-    [self redrawCarousels];
     [self updateTextAutoHeight];
     [self updateFrameDict];
 }
@@ -366,29 +365,6 @@
 
 - (id)callWebScriptMethod:(NSString *)function withArguments:(NSArray *)args{
     return [[self windowScriptObject] callWebScriptMethod:function withArguments:args];
-}
-- (void)insertNewCarousel:(NSString *)identifier{
-    NSArray* args = [NSArray arrayWithObjects:
-                     identifier,
-                     nil];
-    [[self windowScriptObject] callWebScriptMethod:@"insertNewCarousel" withArguments:args];
-
-
-}
-
-- (void)redrawCarousels{
-    [self stringByEvaluatingJavaScriptFromString:@"redrawCarousels()"];
-}
-
-- (void)selectCarousel:(NSString *)identifier atIndex:(NSInteger)index{
-    //function selectCarousel(iuid, index)
-    
-    NSArray* args = [NSArray arrayWithObjects:
-                     identifier,
-                     [NSNumber numberWithInteger:index],
-                     nil];
-    [[self windowScriptObject] callWebScriptMethod:@"selectCarousel" withArguments:args];
-    
 }
 
 - (void)resizePageContent{

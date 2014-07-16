@@ -302,25 +302,34 @@
             [code addCode:[self outputHTMLAsBox:iuCollection option:nil]];
         }
     }
-#pragma mark IUCarouselItem
-    else if([iu isKindOfClass:[IUCarouselItem class]]){
-        [code addCodeLine:@"<li>"];
-        [code increaseIndentLevelForEdit];
-        [code addCode:[self outputHTMLAsBox:iu option:nil]];
-        [code decreaseIndentLevelForEdit];
-        [code addCodeLine:@"</li>"];
-    }
 #pragma mark IUCarousel
     else if([iu isKindOfClass:[IUCarousel class]]){
         IUCarousel *carousel = (IUCarousel *)iu;
-        [code addCodeLineWithFormat:@"<div %@ initCarousel='%@'>", [self HTMLAttributes:iu option:nil isEdit:NO], [carousel carouselAttributes]];
-        [code addCodeLineWithFormat:@"<ul class='bxslider' id='bxslider_%@'>\n", iu.htmlID];
-        
+        [code addCodeLineWithFormat:@"<div %@>", [self HTMLAttributes:iu option:nil isEdit:YES]];
+        //carousel item
+        [code addCodeLineWithFormat:@"<div class='wrapper' id='wrapper_%@'>", iu.htmlID];
         for(IUItem *item in iu.children){
             [code addCode:[self outputHTML:item]];
         }
+        [code addCodeLine:@"</div>"];
         
-        [code addCodeLine:@"</ul></div>"];
+        //control
+        if(carousel.disableArrowControl == NO){
+            [code addCodeLine:@"<div class='Next'></div>"];
+            [code addCodeLine:@"<div class='Prev'></div>"];
+        }
+        
+        if(carousel.controlType == IUCarouselControlBottom){
+            [code addCodeLine:@"<ul class='Pager'>"];
+            [code increaseIndentLevelForEdit];
+            for(int i=0; i<iu.children.count; i++){
+                [code addCodeLine:@"<li></li>"];
+            }
+            [code decreaseIndentLevelForEdit];
+            [code addCodeLine:@"</ul>"];
+        }
+        
+        [code addCodeLine:@"</div>"];
     }
 #pragma mark IUMovie
     else if([iu isKindOfClass:[IUMovie class]]){
@@ -574,25 +583,35 @@
         NSString *sampleText = [sampleProtocolIU sampleText];
         [code addCodeLineWithFormat:@"<div %@ >%@</div>", [self HTMLAttributes:iu option:nil isEdit:YES], sampleText];
     }
-#pragma mark IUCarouselItem
-    else if([iu isKindOfClass:[IUCarouselItem class]]){
-        [code addCodeLine:@"<li>"];
-        [code increaseIndentLevelForEdit];
-        [code addCode:[self editorHTMLAsBOX:iu]];
-        [code decreaseIndentLevelForEdit];
-        [code addCodeLine:@"</li>"];
-    }
 #pragma mark IUCarousel
     else if([iu isKindOfClass:[IUCarousel class]]){
         IUCarousel *carousel = (IUCarousel *)iu;
-        [code addCodeLineWithFormat:@"<div %@ initCarousel='%@'>", [self HTMLAttributes:iu option:nil isEdit:YES], [carousel carouselAttributes]];
-        [code addCodeLineWithFormat:@"<ul class='bxslider' id='bxslider_%@'>", iu.htmlID];
-        
-        for(IUItem *item in iu.children){
+        [code addCodeLineWithFormat:@"<div %@>", [self HTMLAttributes:carousel option:nil isEdit:YES]];
+        //carousel item
+        for(IUCarouselItem *item in iu.children){
             [code addCode:[self editorHTML:item]];
+        }        
+        //control
+        if(carousel.disableArrowControl == NO){
+            [code addCodeLine:@"<div class='Next'></div>"];
+            [code addCodeLine:@"<div class='Prev'></div>"];
+        }
+        if(carousel.controlType == IUCarouselControlBottom){
+            [code addCodeLine:@"<ul class='Pager'>"];
+            [code increaseIndentLevelForEdit];
+            for(IUCarouselItem *item in iu.children){
+                if(item.isActive){
+                    [code addCodeLine:@"<li class='active'></li>"];
+                }
+                else{
+                    [code addCodeLine:@"<li></li>"];
+                }
+            }
+            [code decreaseIndentLevelForEdit];
+            [code addCodeLine:@"</ul>"];
         }
         
-        [code addCodeLine:@"</ul></div>"];
+        [code addCodeLine:@"</div>"];
     }
 #pragma mark IUImage
     else if([iu isKindOfClass:[IUImage class]]){
@@ -767,6 +786,13 @@
         [className appendString:@" "];
     }
     [className appendFormat:@" %@", iu.htmlID];
+    
+#pragma mark IUCarouselItem
+    if([iu isKindOfClass:[IUCarouselItem class]]){
+        if(isEdit && ((IUCarouselItem *)iu).isActive){
+            [className appendString:@" active"];
+        }
+    }
     [className trim];
     [retString appendFormat:@" class='%@'", className];
     
@@ -865,9 +891,14 @@
             }
         }
     }
-#pragma mark IUCarouselItem
-    else if([iu isKindOfClass:[IUCarouselItem class]]){
-        [retString appendFormat:@" carouselID=%@", iu.parent.htmlID];
+#pragma mark IUCarousel
+    else if([iu isKindOfClass:[IUCarousel class]]){
+        IUCarousel *carousel = (IUCarousel *)iu;
+        if(isEdit == NO && carousel.autoplay){
+            if(carousel.timer > 0){
+                [retString appendFormat:@" timer='%ld'", carousel.timer*1000];
+            }
+        }
     }
 #pragma mark IUCollection
     else if ([iu isKindOfClass:[IUCollection class]]){
@@ -1058,7 +1089,7 @@
     if([identifier isEqualToString:[iu.htmlID cssClass]]){
         cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForWidth:width] ofClass:iu isHover:NO isEdit:isEdit] mutableCopy];
     }
-    else if([identifier isEqualToString:[iu.htmlID cssHoverClass]]){
+    else if([identifier isEqualToString:[[iu.html cssClass] cssHoverClass]]){
         cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForWidth:width] ofClass:iu isHover:YES isEdit:isEdit] mutableCopy];
     }
     else{
@@ -1111,50 +1142,94 @@
              [dict putTag:@"background-color" color:pageLinkSet.selectedButtonBGColor ignoreClearColor:NO];
         }
     }
+#pragma mark - IUCarouselItem
+    else if([iu isKindOfClass:[IUCarouselItem class]]){
+        if(isEdit){
+            [dict putTag:@"width" intValue:100 ignoreZero:YES unit:IUCSSUnitPercent];
+            [dict putTag:@"height" intValue:100 ignoreZero:YES unit:IUCSSUnitPercent];
+            [dict putTag:@"left" intValue:0 ignoreZero:NO unit:IUCSSUnitPixel];
+        }
+    }
 #pragma mark - IUCarousel
     else if([iu isKindOfClass:[IUCarousel class]]){
         IUCarousel *carousel = (IUCarousel *)iu;
-        if([identifier isEqualToString:[[carousel.htmlID stringByAppendingString:@"pager-item"] cssClass]]){
-            [dict putTag:@"background" string:[NSString stringWithFormat:@"%@ !important", [carousel.deselectColor cssBGString]]];
+        if([identifier isEqualToString:carousel.pagerID]){
+            [dict putTag:@"background-color" color:carousel.deselectColor ignoreClearColor:NO];
         }
-        else if ([identifier isEqualToString:[[carousel.htmlID stringByAppendingString:@"pager-item"] cssHoverClass]]
-                 || [identifier isEqualToString:[[carousel.htmlID stringByAppendingString:@"pager-item"] cssActiveClass]]){
-            
-            [dict putTag:@"background" string:[NSString stringWithFormat:@"%@ !important", [carousel.selectColor cssBGString]]];
+        else if([identifier isEqualToString:[carousel.pagerID cssHoverClass]]
+                || [identifier isEqualToString:[carousel.pagerID cssActiveClass]]){
+            [dict putTag:@"background-color" color:carousel.selectColor ignoreClearColor:NO];
 
         }
-        else if ([identifier isEqualToString:[[carousel.htmlID cssClass] stringByAppendingString:@" .bx-wrapper .bx-controls-direction .bx-prev"]]
-                 || [identifier isEqualToString:[[carousel.htmlID cssClass] stringByAppendingString:@" .bx-wrapper .bx-controls-direction .bx-next"]]){
+        else if([identifier isEqualToString:carousel.pagerWrapperID]){
+            if(carousel.pagerPosition){
+                NSInteger currentWidth = [iu.css.assembledTagDictionary[IUCSSTagWidth] integerValue];
+
+                if(carousel.pagerPosition < 50){
+                    [dict putTag:@"text-align" string:@"left"];
+                    int left = (int)((currentWidth) * ((CGFloat)carousel.pagerPosition/100));
+                    [dict putTag:@"left" intValue:left ignoreZero:YES unit:IUCSSUnitPixel];
+                }
+                else if(carousel.pagerPosition == 50){
+                    [dict putTag:@"text-align" string:@"center"];
+                }
+                else if(carousel.pagerPosition < 100){
+                    [dict putTag:@"text-align" string:@"center"];
+                    int left = (int)((currentWidth) * ((CGFloat)(carousel.pagerPosition-50)/100));
+                    [dict putTag:@"left" intValue:left ignoreZero:YES unit:IUCSSUnitPixel];
+                    
+                }
+                else if(carousel.pagerPosition == 100){
+                    int right = (int)((currentWidth) * ((CGFloat)(100-carousel.pagerPosition)/100));
+                    [dict putTag:@"text-align" string:@"right"];
+                    [dict putTag:@"right" intValue:right ignoreZero:YES unit:IUCSSUnitPixel];
+                }
+            }
+            
+        }
+        else if([identifier isEqualToString:carousel.prevID]
+                || [identifier isEqualToString:carousel.nextID]){
             
             NSString *imageName;
-            if([identifier containsString:@"bx-prev"]){
+            if([identifier isEqualToString:carousel.prevID]){
                 imageName = carousel.leftArrowImage;
+                [dict putTag:@"left" intValue:carousel.leftX ignoreZero:YES unit:IUCSSUnitPixel];
+                [dict putTag:@"top" intValue:carousel.leftY ignoreZero:YES unit:IUCSSUnitPixel];
+
             }
-            else if([identifier containsString:@"bx-next"]){
+            else if([identifier isEqualToString:carousel.nextID]){
                 imageName = carousel.rightArrowImage;
-            }
-            if([imageName isEqualToString:@"Default"] == NO){
-                NSImage *arrowImage;
-                if ([imageName isHTTPURL]) {
-                    [dict putTag:@"background" string:[imageName  CSSURLString]];
-                    arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
+                [dict putTag:@"right" intValue:carousel.rightX ignoreZero:NO unit:IUCSSUnitPixel];
+                [dict putTag:@"top" intValue:carousel.rightY ignoreZero:YES unit:IUCSSUnitPixel];
 
-                }
-                else{
-                    IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
-                    NSString *imageRelativePath = [file relativePath];
-                    [dict putTag:@"background" string:[imageRelativePath  CSSURLString]];
-                    NSString *imageAbsolutePath = [file absolutePath];
-                    arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
 
-                }
-                [dict putTag:@"height" floatValue:arrowImage.size.height ignoreZero:YES unit:IUCSSUnitPixel];
-                [dict putTag:@"width" floatValue:arrowImage.size.width ignoreZero:YES unit:IUCSSUnitPixel];
-                NSInteger currentHeight = [iu.css.assembledTagDictionary[IUCSSTagHeight] integerValue];
-                [dict putTag:@"top" floatValue:(currentHeight/2-arrowImage.size.height/2) ignoreZero:YES unit:IUCSSUnitPixel];
             }
+            NSImage *arrowImage;
+            if ([imageName isHTTPURL]) {
+                [dict putTag:@"background" string:[imageName  CSSURLString]];
+                arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
+                
+            }
+            else{
+                IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
+                NSString *imageRelativePath = [file relativePath];
+                [dict putTag:@"background" string:[imageRelativePath  CSSURLString]];
+                NSString *imageAbsolutePath = [file absolutePath];
+                arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
+                
+            }
+            [dict putTag:@"height" floatValue:arrowImage.size.height ignoreZero:YES unit:IUCSSUnitPixel];
+            [dict putTag:@"width" floatValue:arrowImage.size.width ignoreZero:YES unit:IUCSSUnitPixel];
             
+            
+            //                NSInteger currentHeight = [iu.css.assembledTagDictionary[IUCSSTagHeight] integerValue];
+            //                [dict putTag:@"top" floatValue:(currentHeight/2-arrowImage.size.height/2) ignoreZero:YES unit:IUCSSUnitPixel];
         }
+        
+        
+        
+        
+        
 
     }
     
@@ -1348,10 +1423,13 @@
             }
             
         }
-        
-        value = cssTagDict[IUCSSTagDisplay];
-        if (value && [value boolValue] == NO) {
-            [dict putTag:@"display" string:@"none"];
+        if(isEdit){
+            //it should be used IN Editor Mode!!!
+            //Usage : Transition, carousel hidden
+            value = cssTagDict[IUCSSTagDisplay];
+            if (value && [value boolValue] == NO) {
+                [dict putTag:@"display" string:@"none"];
+            }
         }
         
         
@@ -1633,38 +1711,6 @@
 
 #pragma mark - manage JS source
 
--(NSString *)outputJSArgs:(IUBox *)iu{
-    NSMutableString *argStr = [NSMutableString string];
-    
-    if([iu isKindOfClass:[IUCarousel class]]){
-        IUCarousel *carouselIU = (IUCarousel *)iu;
-        [argStr appendString:@"{"];
-        if(carouselIU.autoplay){
-            [argStr appendString:@"auto:true, autoStart:true, "];
-        }
-        else{
-            [argStr appendString:@"auto:false, "];
-        }
-        if(carouselIU.disableArrowControl){
-            [argStr appendString:@"controls:false, "];
-        }
-        else{
-            [argStr appendString:@"controls:true, "];
-        }
-        switch (carouselIU.controlType) {
-            case IUCarouselControlTypeNone:
-                [argStr appendString:@"pager:false"];
-                break;
-            case IUCarouselControlBottom:
-                [argStr appendString:@"pager:true"];
-                break;
-        }
-        [argStr appendString:@"}"];
-    }
-    
-    return argStr;
-}
-
 -(NSString*)outputJSInitializeSource:(IUSheet *)document{
     JDCode *jsSource = [self outputJSSource:document];
     return [jsSource string];
@@ -1675,7 +1721,7 @@
    
     if([iu isKindOfClass:[IUCarousel class]]){
         [code addCodeLine:@"/* IUCarousel initialize */\n"];
-        [code addCodeLineWithFormat:@"$('#bxslider_%@').bxSlider(%@)", iu.htmlID, [self outputJSArgs:iu]];
+        [code addCodeLineWithFormat:@"initCarousel('%@')", iu.htmlID];
     }
     else if ([iu isKindOfClass:[IUBox class]]) {
         if (iu.children.count) {

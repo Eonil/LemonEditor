@@ -410,10 +410,10 @@
     NSString *sampleImgPath = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"jpg"];
     [imageGroup addResourceFileWithContentOfPath:sampleImgPath];
     
-    NSString *carouselImagePath = [[NSBundle mainBundle] pathForResource:@"bx_loader" ofType:@"gif"];
+    NSString *carouselImagePath = [[NSBundle mainBundle] pathForResource:@"arrow_left" ofType:@"png"];
     [imageGroup addResourceFileWithContentOfPath:carouselImagePath];
     
-    NSString *carouselImagePath2 = [[NSBundle mainBundle] pathForResource:@"controls" ofType:@"png"];
+    NSString *carouselImagePath2 = [[NSBundle mainBundle] pathForResource:@"arrow_right" ofType:@"png"];
     [imageGroup addResourceFileWithContentOfPath:carouselImagePath2];
     
     NSString *sampleVideoPath = [[NSBundle mainBundle] pathForResource:@"movie" ofType:@"mp4"];
@@ -426,9 +426,6 @@
     NSString *iuCSSPath = [[NSBundle mainBundle] pathForResource:@"iu" ofType:@"css"];
     [CSSGroup addResourceFileWithContentOfPath:iuCSSPath];
     
-    NSString *carouselCSSPath = [[NSBundle mainBundle] pathForResource:@"jquery.bxslider" ofType:@"css"];
-    [CSSGroup addResourceFileWithContentOfPath:carouselCSSPath];
-    
     //Java Script resource copy
     NSString *iuEditorJSPath = [[NSBundle mainBundle] pathForResource:@"iueditor" ofType:@"js"];
     [JSGroup addResourceFileWithContentOfPath:iuEditorJSPath];
@@ -439,14 +436,14 @@
     NSString *iuJSPath = [[NSBundle mainBundle] pathForResource:@"iu" ofType:@"js"];
     [JSGroup addResourceFileWithContentOfPath:iuJSPath];
     
-    NSString *bxsliderJSPath = [[NSBundle mainBundle] pathForResource:@"jquery.bxslider" ofType:@"js"];
-    [JSGroup addResourceFileWithContentOfPath:bxsliderJSPath];
+    NSString *carouselJSPath = [[NSBundle mainBundle] pathForResource:@"iucarousel" ofType:@"js"];
+    [JSGroup addResourceFileWithContentOfPath:carouselJSPath];
     
     NSString *ieJSPath = [[NSBundle mainBundle] pathForResource:@"jquery.backgroundSize" ofType:@"js"];
     [JSGroup addResourceFileWithContentOfPath:ieJSPath];
 }
 
-
+#if 0
 -(void)copyResourceForDebug{
     /*
     IUResourceGroup *JSGroup;
@@ -486,6 +483,7 @@
 
      */
 }
+#endif
 
 -(void)dealloc{
     JDInfoLog(@"Project Dealloc");

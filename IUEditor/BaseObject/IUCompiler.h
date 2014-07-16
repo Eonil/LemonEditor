@@ -41,12 +41,6 @@ typedef enum _IUCompileRule{
 - (NSString *)CSSCodeFromDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)CSSContentWithIdentifier:(NSString *)identifier ofIU:(IUBox *)iu width:(NSInteger)width isEdit:(BOOL)isEdit;
 
-//carousel dict & string
-- (NSDictionary *)cssDictionaryForIUCarousel:(IUCarousel *)iu;
-- (JDCode *)cssContentForIUCarouselPager:(IUCarousel *)iu hover:(BOOL)hover;
-- (NSString *)cssContentForIUCarouselArrow:(IUCarousel *)iu hover:(BOOL)hover location:(IUCarouselArrow)location carouselHeight:(NSInteger)height;
-
 #pragma mark manage JS source
--(NSString *)outputJSArgs:(IUBox *)iu;
 -(NSString *)outputJSInitializeSource:(IUSheet *)document;
 @end

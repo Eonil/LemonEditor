@@ -84,22 +84,6 @@
 	</dict>
 	<dict>
 		<key>isWidget</key>
-		<false/>
-		<key>className</key>
-		<string>IUInput</string>
-		<key>classImage</key>
-		<string>tool_textfield</string>
-		<key>navImage</key>
-		<string>stack_textfield</string>
-		<key>shortDesc</key>
-		<string>Input text &lt;input type=&apos;text&apos;&gt;</string>
-		<key>longDesc</key>
-		<string></string>
-		<key>widgetClass</key>
-		<integer>0</integer>
-	</dict>
-	<dict>
-		<key>isWidget</key>
 		<true/>
 		<key>className</key>
 		<string>PGPageLinkSet</string>

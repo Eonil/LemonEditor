@@ -17,18 +17,32 @@
 @property (strong) IBOutlet JDOutlineCellView *controlView;
 
 //set attributes
-
-@property (weak) IBOutlet NSMatrix *autoplayMatrix;
-@property (weak) IBOutlet NSMatrix *arrowControlMatrix;
-@property (weak) IBOutlet NSSegmentedControl *controllerSegmentedControl;
-
-@property (weak) IBOutlet NSButton *enableColor;
-@property (weak) IBOutlet NSColorWell *selectColor;
-@property (weak) IBOutlet NSColorWell *deselectColor;
-@property (weak) IBOutlet NSComboBox *leftImageComboBox;
-@property (weak) IBOutlet NSComboBox *rightImageComboBox;
 @property (weak) IBOutlet NSTextField *countTF;
 @property (weak) IBOutlet NSStepper *countStepper;
+
+//timer
+@property (weak) IBOutlet NSMatrix *autoplayMatrix;
+@property (weak) IBOutlet NSTextField *timeTF;
+@property (weak) IBOutlet NSStepper *timeStpper;
+
+//prev, next
+@property (weak) IBOutlet NSMatrix *arrowControlMatrix;
+@property (weak) IBOutlet NSComboBox *leftImageComboBox;
+@property (weak) IBOutlet NSComboBox *rightImageComboBox;
+@property (weak) IBOutlet NSTextField *leftImageXTF;
+@property (weak) IBOutlet NSTextField *leftImageYTF;
+@property (weak) IBOutlet NSStepper *leftImageXStpper;
+@property (weak) IBOutlet NSStepper *leftImageYStepper;
+@property (weak) IBOutlet NSTextField *rightImageXTF;
+@property (weak) IBOutlet NSStepper *rightImageXStpper;
+@property (weak) IBOutlet NSTextField *rightImageYTF;
+@property (weak) IBOutlet NSStepper *rightImageYStpper;
+
+//pager
+@property (weak) IBOutlet NSSegmentedControl *controllerSegmentedControl;
+@property (weak) IBOutlet NSColorWell *selectColor;
+@property (weak) IBOutlet NSColorWell *deselectColor;
+@property (weak) IBOutlet NSSlider *pagerPositionSlidr;
 
 
 @end
@@ -44,27 +58,46 @@
 }
 
 -(void)awakeFromNib{
+    //children
+    NSDictionary *numberBindingOption = @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
+    
+    [_countStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"count"] options:numberBindingOption];
+    [_countTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"count"] options:numberBindingOption];
+
+    //auto setting
     [_autoplayMatrix bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"autoplay"] options:IUBindingDictNotRaisesApplicable];
+    [_timeTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"timer"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_timeStpper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"timer"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    
+    
+    //prev, next
     [_arrowControlMatrix bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"disableArrowControl"] options:IUBindingDictNotRaisesApplicable];
-    [_controllerSegmentedControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"controlType"] options:IUBindingDictNotRaisesApplicable];
-    
-    
-    [_enableColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableColor"] options:IUBindingDictNotRaisesApplicable];
-    [_selectColor bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableColor"] options:IUBindingDictNotRaisesApplicable];
-    [_deselectColor bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableColor"] options:IUBindingDictNotRaisesApplicable];
-    [_selectColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"selectColor"] options:IUBindingDictNotRaisesApplicable];
-    [_deselectColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"deselectColor"] options:IUBindingDictNotRaisesApplicable];
-    
+    //image
     [_leftImageComboBox bind:NSContentBinding toObject:self withKeyPath:@"imageArray" options:IUBindingDictNotRaisesApplicable];
     [_rightImageComboBox bind:NSContentBinding toObject:self withKeyPath:@"imageArray" options:IUBindingDictNotRaisesApplicable];
     [_leftImageComboBox bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"leftArrowImage"] options:IUBindingDictNotRaisesApplicable];
     [_rightImageComboBox bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"rightArrowImage"] options:IUBindingDictNotRaisesApplicable];
     
+    //position-left
+    [_leftImageXStpper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"leftX"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_leftImageXTF  bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"leftX"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_leftImageYStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"leftY"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_leftImageYTF  bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"leftY"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
-    NSDictionary *numberBindingOption = @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
+    //position-right
+    [_rightImageXStpper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"rightX"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_rightImageXTF  bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"rightX"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_rightImageYStpper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"rightY"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_rightImageYTF  bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"rightY"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
-    [_countStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"count"] options:numberBindingOption];
-    [_countTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"count"] options:numberBindingOption];
+    
+    //pager
+    [_controllerSegmentedControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"controlType"] options:IUBindingDictNotRaisesApplicable];
+    [_selectColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"selectColor"] options:IUBindingDictNotRaisesApplicable];
+    [_deselectColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"deselectColor"] options:IUBindingDictNotRaisesApplicable];
+    [_pagerPositionSlidr bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pagerPosition"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    
+    
     
     
     [self addObserver:self forKeyPath:@"resourceManager.imageFiles" options:NSKeyValueObservingOptionInitial context:@"image"];
@@ -78,7 +111,7 @@
 
 //default Image 때문에 imageArray 사용 , resourceManager를 바로 호출하면 안됨.
 -(void)imageContextDidChange:(NSDictionary *)change{
-    self.imageArray = [@[@"Default"] arrayByAddingObjectsFromArray:self.resourceManager.imageFiles];
+    self.imageArray = self.resourceManager.imageFiles;
 }
 
 #pragma mark outlineview
@@ -155,4 +188,6 @@
 }
 
 
+- (IBAction)timeStepper:(id)sender {
+}
 @end

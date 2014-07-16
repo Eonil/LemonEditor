@@ -366,20 +366,24 @@
  
  */
 - (NSArray *)cssIdentifierArray{
-    return @[[self.htmlID cssClass], [self.htmlID cssHoverClass]];
+    return @[[self.htmlID cssClass], [[self.htmlID cssClass] cssHoverClass]];
 }
 
 - (void)updateCSSForMaxViewPort{
     if (self.delegate) {
-        [self CSSUpdatedForWidth:IUCSSMaxViewPortWidth withIdentifier:[self.htmlID cssClass]];
-        [self CSSUpdatedForWidth:IUCSSMaxViewPortWidth withIdentifier:[self.htmlID cssHoverClass]];
+        for(NSString *cssIdentifier in [self cssIdentifierArray]){
+            [self CSSUpdatedForWidth:IUCSSMaxViewPortWidth withIdentifier:cssIdentifier];
+            
+        }
     }
 }
 
 - (void)updateCSSForEditViewPort{
     if (self.delegate) {
-        [self CSSUpdatedForWidth:_css.editWidth withIdentifier:[self.htmlID cssClass]];
-        [self CSSUpdatedForWidth:_css.editWidth withIdentifier:[self.htmlID cssHoverClass]];
+        for(NSString *cssIdentifier in [self cssIdentifierArray]){
+            [self CSSUpdatedForWidth:_css.editWidth withIdentifier:cssIdentifier];
+            
+        }
     }
 }
 

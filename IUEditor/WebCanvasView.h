@@ -20,9 +20,6 @@
 - (void)runJSAfterRefreshCSS;
 - (void)updateFrameDict;
 - (void)reframeCenter;
-- (void)insertNewCarousel:(NSString *)identifier;
-- (void)redrawCarousels;
-- (void)selectCarousel:(NSString *)identifier atIndex:(NSInteger)index;
 - (void)resizePageContent;
 
 //call any javascript

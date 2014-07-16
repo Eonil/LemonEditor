@@ -25,28 +25,20 @@
         [self.css setValue:[NSColor clearColor] forTag:IUCSSTagBGColor forWidth:IUCSSMaxViewPortWidth];
         _selectColor = [NSColor blackColor];
         _deselectColor = [NSColor grayColor];
-        _rightArrowImage = @"Default";
-        _leftArrowImage = @"Default";
+        _rightArrowImage = @"arrow_right.png";
+        _leftArrowImage = @"arrow_left.png";
+        _leftY = 100;
+        _rightY = 100;
+        _pagerPosition = 50;
         initializing = NO;
     }
     return self;
 }
 
-- (void)connectWithEditor{
-    [super connectWithEditor];
-    [self addObserver:self forKeyPath:@"css.assembledTagDictionary.height" options:0 context:
-     @"height"];
-}
-
-
-
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self =  [super initWithCoder:aDecoder];
     if(self){
         [aDecoder decodeToObject:self withProperties:[[IUCarousel class] propertiesWithOutProperties:@[@"count"]]];
-        if (self.delegate) {
-            [self jsReloadForController];
-        }
     }
     return self;
 }
@@ -60,26 +52,48 @@
 
 - (id)copyWithZone:(NSZone *)zone{
     IUCarousel *carousel = [super copyWithZone:zone];
+    //auto
     carousel.autoplay = _autoplay;
-    carousel.enableColor = _enableColor;
+    carousel.timer = _timer;
+    //arrow
     carousel.disableArrowControl = _disableArrowControl;
+    carousel.leftArrowImage = [_leftArrowImage copy];
+    carousel.rightArrowImage = [_rightArrowImage copy];
+    carousel.leftX = _leftX;
+    carousel.leftY = _leftY;
+    carousel.rightX = _rightX;
+    carousel.rightY = _rightY;
+    
+    //pager
     carousel.controlType = _controlType;
     carousel.selectColor = [_selectColor copy];
     carousel.deselectColor = [_deselectColor copy];
-    carousel.leftArrowImage = [_leftArrowImage copy];
-    carousel.rightArrowImage = [_rightArrowImage copy];
-    carousel.count = [self count];
+    carousel.pagerPosition = _pagerPosition;
     
     return carousel;
 }
 
+
+- (void)connectWithEditor{
+    [super connectWithEditor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectionChanged:) name:IUNotificationSelectionDidChange object:nil];
+    
+    if(self.children.count > 0){
+        IUCarouselItem *item = self.children[0];
+        item.isActive = YES;
+    }
+    
+
+
+}
+
 -(void)dealloc{
-    [self removeObserver:self forKeyPath:@"css.assembledTagDictionary.height"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)setCount:(NSInteger)count{
     
-    if (count == 0 || count > 30 || count == self.children.count ) {
+    if (count <= 1 || count > 30 || count == self.children.count ) {
         return;
     }
     if( count < self.children.count ){
@@ -96,7 +110,6 @@
         for(NSInteger i=self.children.count; i <count; i++){
             IUCarouselItem *item = [[IUCarouselItem alloc] initWithProject:self.project options:nil];
             item.name = item.htmlID;
-//            item.carousel = self;
             [self addIU:item error:nil];
         }
         
@@ -104,33 +117,85 @@
             [self.project.identifierManager confirm];
         }
     }
-    [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.parent.htmlID];
-    [self jsReloadForController];
+
+    
+    [self updateHTML];
 }
 
 -(void)remakeChildrenHtmlID{
-    for (IUItem *item in self.children) {
+    for (IUCarouselItem *item in self.children) {
         if ([item isKindOfClass:[IUItem class]]) {
             [item setHtmlID:[NSString stringWithFormat:@"%@-Templorary%ld", self.name, [self.children indexOfObject:item]]];
         }
     }
-    for (IUItem *item in self.children) {
+    for (IUCarouselItem *item in self.children) {
         if ([item isKindOfClass:[IUItem class]]) {
             [item setHtmlID:[NSString stringWithFormat:@"%@-%ld", self.name, [self.children indexOfObject:item]]];
         }
     }
 }
 
+-(void)selectionChanged:(NSNotification*)noti{
+    NSMutableSet *set = [NSMutableSet setWithArray:self.children];
+    [set intersectSet:[NSSet setWithArray:[noti userInfo][@"selectedObjects"]]];
+    if ([set count] != 1) {
+        return;
+    }
+    IUBox *selectedChild = [set anyObject];
+    for(IUCarouselItem *item in self.children){
+        if([item isEqualTo:selectedChild]){
+            [item.css setValue:@(YES) forTag:IUCSSTagDisplay];
+            item.isActive = YES;
+        }
+        else{
+            [item.css setValue:@(NO) forTag:IUCSSTagDisplay];
+            item.isActive = NO;
+        }
+    }
+    
+    [self updateHTML];
+}
+
+- (NSInteger)count{
+    return [self.children count];
+}
+
 #pragma mark Inner CSS (Carousel)
+- (NSString *)pagerWrapperID{
+    return [NSString stringWithFormat:@"%@ > .Pager", [self.htmlID cssClass]];
+}
+
+- (NSString *)pagerID{
+    return [NSString stringWithFormat:@"%@ > .Pager > li", [self.htmlID cssClass]];
+}
+- (NSString *)prevID{
+    return [NSString stringWithFormat:@"%@ > .Prev", [self.htmlID cssClass]];
+}
+
+- (NSString *)nextID{
+    return [NSString stringWithFormat:@"%@ > .Next", [self.htmlID cssClass]];
+}
 
 - (NSArray *)cssIdentifierArray{
-    NSString *pagerItemID = [NSString stringWithFormat:@"%@pager-item", self.htmlID];
-    NSString *leftArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-prev", self.htmlID];
-    NSString *rightArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-next", self.htmlID];
-
     NSMutableArray *cssArray = [[super cssIdentifierArray] mutableCopy];
-    [cssArray addObjectsFromArray:@[[pagerItemID cssClass], [pagerItemID cssHoverClass], [pagerItemID cssActiveClass], leftArrowID, rightArrowID]];
+    
+    if(self.disableArrowControl == NO){
+        [cssArray addObject:self.prevID];
+        [cssArray addObject:self.nextID];
+    }
+    if(self.controlType == IUCarouselControlBottom){
+        [cssArray addObjectsFromArray:@[self.pagerID, [self.pagerID cssHoverClass], [self.pagerID cssActiveClass], self.pagerWrapperID]];
+    }
+    
     return cssArray;
+}
+
+
+#pragma mark - pager
+- (void)setControlType:(IUCarouselControlType)controlType{
+    _controlType = controlType;
+    [self updateHTML];
+    [self cssForItemColor];
 }
 
 - (void)setSelectColor:(NSColor *)selectColor{
@@ -142,115 +207,70 @@
     [self cssForItemColor];
 }
 
-- (void)setEnableColor:(BOOL)enableColor{
-    _enableColor = enableColor;
-    [self cssForItemColor];
+- (void)setPagerPosition:(NSInteger)pagerPosition{
+    _pagerPosition = pagerPosition;
+    if (self.delegate) {
+        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:self.pagerWrapperID];
+    }
 }
 
 - (void)cssForItemColor{
-    NSString *itemID = [NSString stringWithFormat:@"%@pager-item", self.htmlID];
-    
     if (self.delegate) {
-        if(self.enableColor){
-            
-            if (self.delegate) {
-                [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[itemID cssClass]];
-                [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[itemID cssHoverClass]];
-                [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[itemID cssActiveClass]];
-
-            }
-
-        }
-        else{
-            [self.delegate IUClassIdentifier:[itemID cssClass] CSSRemovedforWidth:IUCSSMaxViewPortWidth];
-            [self.delegate IUClassIdentifier:[itemID cssHoverClass] CSSRemovedforWidth:IUCSSMaxViewPortWidth];
-            [self.delegate IUClassIdentifier:[itemID cssActiveClass] CSSRemovedforWidth:IUCSSMaxViewPortWidth];
-        }
+        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:self.pagerID];
+        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self.pagerID cssHoverClass]];
+        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self.pagerID cssActiveClass]];
     }
-    
 }
 
-- (void)heightContextDidChange:(NSDictionary *)change{
-    //redraw arrowimage because of position
-    if(_leftArrowImage){
-        [self setLeftArrowImage:_leftArrowImage];
-    }
-    if(_rightArrowImage){
-        [self setRightArrowImage:_rightArrowImage];
-    }
+#pragma mark - arrow
+- (void)setDisableArrowControl:(BOOL)disableArrowControl{
+    _disableArrowControl = disableArrowControl;
+    [self updateHTML];
+    [self updateCSSForEditViewPort];
 }
 
 - (void)setLeftArrowImage:(NSString *)leftArrowImage{
     _leftArrowImage = leftArrowImage;
-    BOOL change = NO;
-    
-    if([leftArrowImage isEqualToString:@"Default"] == NO){
-        change = YES;
-    }
-    [self cssForArrowImage:IUCarouselArrowLeft change:change];
+    [self cssForArrowImage:IUCarouselArrowLeft];
 }
 
 - (void)setRightArrowImage:(NSString *)rightArrowImage{
     _rightArrowImage = rightArrowImage;
-    BOOL change = NO;
-    if([rightArrowImage isEqualToString:@"Default"] == NO){
-        change = YES;
-    }
-    [self cssForArrowImage:IUCarouselArrowRight change:change];
+    [self cssForArrowImage:IUCarouselArrowRight];
 
 }
 
-- (void)cssForArrowImage:(IUCarouselArrow)type change:(BOOL)change{
-    NSString *arrowID;
-    NSString *leftArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-prev", self.htmlID];
-    NSString *rightArrowID = [NSString stringWithFormat:@".%@ .bx-wrapper .bx-controls-direction .bx-next", self.htmlID];
+- (void)setLeftX:(int)leftX{
+    _leftX = leftX;
+    [self cssForArrowImage:IUCarouselArrowLeft];
+}
+- (void)setLeftY:(int)leftY{
+    _leftY = leftY;
+    [self cssForArrowImage:IUCarouselArrowLeft];
+}
 
+- (void)setRightX:(int)rightX{
+    _rightX = rightX;
+    [self cssForArrowImage:IUCarouselArrowRight];
+}
+- (void)setRightY:(int)rightY{
+    _rightY = rightY;
+    [self cssForArrowImage:IUCarouselArrowRight];
+}
+
+- (void)cssForArrowImage:(IUCarouselArrow)type{
+    NSString *arrowID;
     if(type == IUCarouselArrowLeft){
-        arrowID = leftArrowID;
+        arrowID = self.prevID;
     }
     else if(type == IUCarouselArrowRight){
-        arrowID = rightArrowID;
+        arrowID = self.nextID;
     }
+    
     if (self.delegate) {
         [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:arrowID];
         
     }
 }
 
-#pragma mark JS reload
-- (void)setAutoplay:(BOOL)autoplay{
-    _autoplay = autoplay;
-    if (self.delegate) {
-        [self jsReloadForController];
-    }
-}
-- (void)setDisableArrowControl:(BOOL)disableArrowControl{
-    _disableArrowControl = disableArrowControl;
-    if (self.delegate) {
-        [self jsReloadForController];
-    }
-}
-- (void)setControlType:(IUCarouselControlType)controlType{
-    _controlType = controlType;
-    if (self.delegate) {
-        [self jsReloadForController];
-    }
-}
-
-- (NSString *)carouselAttributes{
-    NSString *jsArgs = [self.project.compiler outputJSArgs:self];
-    return jsArgs;
-}
-
-- (NSInteger)count{
-    return [self.children count];
-}
-
-- (void)jsReloadForController{
-    NSString *jsArgs = [self carouselAttributes];
-    if(jsArgs){
-        NSString *innerJSArgs = [jsArgs stringByReplacingOccurrencesOfString:@"auto:true" withString:@"auto:false"];
-        [self.delegate callWebScriptMethod:@"reloadCarousels" withArguments:@[self.htmlID, innerJSArgs]];
-    }
-}
 @end

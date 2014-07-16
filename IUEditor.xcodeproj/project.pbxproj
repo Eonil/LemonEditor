@@ -210,14 +210,14 @@
 		3D8D4B2A19179F910002C871 /* LMPropertyIUTextViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8D4B2819179F910002C871 /* LMPropertyIUTextViewVC.m */; };
 		3D8D4B2B19179F910002C871 /* LMPropertyIUTextViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D8D4B2919179F910002C871 /* LMPropertyIUTextViewVC.xib */; };
 		3D973F091946F45100FB893F /* IUProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D973F081946F45100FB893F /* IUProjectController.m */; };
-		3D97D4571950251000826280 /* jssor.core.js in Resources */ = {isa = PBXBuildFile; fileRef = 3D97D4561950251000826280 /* jssor.core.js */; };
-		3D97D4591950254A00826280 /* jssor.slider.js in Resources */ = {isa = PBXBuildFile; fileRef = 3D97D4581950254A00826280 /* jssor.slider.js */; };
-		3D97D45B1950255200826280 /* jssor.utils.js in Resources */ = {isa = PBXBuildFile; fileRef = 3D97D45A1950255200826280 /* jssor.utils.js */; };
 		3D97D45D1950339500826280 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D97D45C1950339500826280 /* Defaults.plist */; };
 		3DA416B81935A6BE00559028 /* LMPreferenceFontVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */; };
 		3DA416B91935A6BE00559028 /* LMPreferenceFontVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */; };
 		3DA416BD1935ABB400559028 /* LMFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416BC1935ABB400559028 /* LMFontController.m */; };
 		3DA416C31935B29200559028 /* defaultFont.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DA416C21935B29200559028 /* defaultFont.plist */; };
+		3DA6C653197536C6004D6587 /* iucarousel.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DA6C652197536C6004D6587 /* iucarousel.js */; };
+		3DA6C65719763594004D6587 /* arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA6C65519763594004D6587 /* arrow_left.png */; };
+		3DA6C65819763594004D6587 /* arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA6C65619763594004D6587 /* arrow_right.png */; };
 		3DA6F2F919639E81004DF0AA /* LMHelpImagePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA6F2F719639E81004DF0AA /* LMHelpImagePopoverVC.m */; };
 		3DA6F2FA19639E81004DF0AA /* LMHelpImagePopoverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA6F2F819639E81004DF0AA /* LMHelpImagePopoverVC.xib */; };
 		3DA6F2FE1963A676004DF0AA /* LMHelpTextPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA6F2FC1963A676004DF0AA /* LMHelpTextPopoverVC.m */; };
@@ -375,7 +375,6 @@
 		3DED27231904AE1A001A1D67 /* LMEventVariableReceiverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DED27211904AE1A001A1D67 /* LMEventVariableReceiverVC.xib */; };
 		3DED27271904AE53001A1D67 /* LMEventVariableReceiverFrameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DED27251904AE53001A1D67 /* LMEventVariableReceiverFrameVC.m */; };
 		3DED27281904AE53001A1D67 /* LMEventVariableReceiverFrameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DED27261904AE53001A1D67 /* LMEventVariableReceiverFrameVC.xib */; };
-		3DED272B1904DFD1001A1D67 /* IUInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DED272A1904DFD1001A1D67 /* IUInput.m */; };
 		3DED272E1904E17E001A1D67 /* IUMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DED272D1904E17E001A1D67 /* IUMovie.m */; };
 		3DED27311904EDF0001A1D67 /* movie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3DED27301904ED15001A1D67 /* movie.mp4 */; };
 		3DED27341904F13B001A1D67 /* ic_movie.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DED27321904F13B001A1D67 /* ic_movie.png */; };
@@ -396,8 +395,6 @@
 		3DED2763190E38C5001A1D67 /* bx_loader.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3DED2760190E38C5001A1D67 /* bx_loader.gif */; };
 		3DED2764190E38C5001A1D67 /* controls.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DED2761190E38C5001A1D67 /* controls.png */; };
 		3DED276E190E3976001A1D67 /* jquery.bxslider.css in Resources */ = {isa = PBXBuildFile; fileRef = 3DED276D190E3976001A1D67 /* jquery.bxslider.css */; };
-		3DED276F190E3CAC001A1D67 /* jquery.bxslider.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DED2766190E38E5001A1D67 /* jquery.bxslider.min.js */; };
-		3DED2770190E3CAC001A1D67 /* jquery.bxslider.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DED2762190E38C5001A1D67 /* jquery.bxslider.js */; };
 		3DED2773190E4148001A1D67 /* IUCarouselItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DED2772190E4148001A1D67 /* IUCarouselItem.m */; };
 		3DED277F190F85E0001A1D67 /* bg_contain.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DED2777190F85E0001A1D67 /* bg_contain.png */; };
 		3DED2780190F85E0001A1D67 /* bg_contain@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DED2778190F85E0001A1D67 /* bg_contain@2x.png */; };
@@ -915,9 +912,6 @@
 		3D8D4B2919179F910002C871 /* LMPropertyIUTextViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyIUTextViewVC.xib; sourceTree = "<group>"; };
 		3D973F071946F45100FB893F /* IUProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUProjectController.h; sourceTree = "<group>"; };
 		3D973F081946F45100FB893F /* IUProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUProjectController.m; sourceTree = "<group>"; };
-		3D97D4561950251000826280 /* jssor.core.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jssor.core.js; sourceTree = "<group>"; };
-		3D97D4581950254A00826280 /* jssor.slider.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jssor.slider.js; sourceTree = "<group>"; };
-		3D97D45A1950255200826280 /* jssor.utils.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jssor.utils.js; sourceTree = "<group>"; };
 		3D97D45C1950339500826280 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		3DA416B51935A6BE00559028 /* LMPreferenceFontVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPreferenceFontVC.h; path = Editor/Preference/LMPreferenceFontVC.h; sourceTree = "<group>"; };
 		3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPreferenceFontVC.m; path = Editor/Preference/LMPreferenceFontVC.m; sourceTree = "<group>"; };
@@ -925,6 +919,9 @@
 		3DA416BB1935ABB400559028 /* LMFontController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMFontController.h; sourceTree = "<group>"; };
 		3DA416BC1935ABB400559028 /* LMFontController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMFontController.m; sourceTree = "<group>"; };
 		3DA416C21935B29200559028 /* defaultFont.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultFont.plist; sourceTree = "<group>"; };
+		3DA6C652197536C6004D6587 /* iucarousel.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = iucarousel.js; sourceTree = "<group>"; };
+		3DA6C65519763594004D6587 /* arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_left.png; sourceTree = "<group>"; };
+		3DA6C65619763594004D6587 /* arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_right.png; sourceTree = "<group>"; };
 		3DA6F2F619639E81004DF0AA /* LMHelpImagePopoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMHelpImagePopoverVC.h; path = IUEditor/Editor/LMHelpImagePopoverVC.h; sourceTree = "<group>"; };
 		3DA6F2F719639E81004DF0AA /* LMHelpImagePopoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMHelpImagePopoverVC.m; path = IUEditor/Editor/LMHelpImagePopoverVC.m; sourceTree = "<group>"; };
 		3DA6F2F819639E81004DF0AA /* LMHelpImagePopoverVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMHelpImagePopoverVC.xib; path = IUEditor/Editor/LMHelpImagePopoverVC.xib; sourceTree = "<group>"; };
@@ -1125,8 +1122,6 @@
 		3DED27241904AE53001A1D67 /* LMEventVariableReceiverFrameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMEventVariableReceiverFrameVC.h; sourceTree = "<group>"; };
 		3DED27251904AE53001A1D67 /* LMEventVariableReceiverFrameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMEventVariableReceiverFrameVC.m; sourceTree = "<group>"; };
 		3DED27261904AE53001A1D67 /* LMEventVariableReceiverFrameVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMEventVariableReceiverFrameVC.xib; sourceTree = "<group>"; };
-		3DED27291904DFD1001A1D67 /* IUInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUInput.h; sourceTree = "<group>"; };
-		3DED272A1904DFD1001A1D67 /* IUInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUInput.m; sourceTree = "<group>"; };
 		3DED272C1904E17E001A1D67 /* IUMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUMovie.h; sourceTree = "<group>"; };
 		3DED272D1904E17E001A1D67 /* IUMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUMovie.m; sourceTree = "<group>"; };
 		3DED27301904ED15001A1D67 /* movie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie.mp4; sourceTree = "<group>"; };
@@ -1151,8 +1146,6 @@
 		3DED275B190A2630001A1D67 /* IUEventVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUEventVariable.m; sourceTree = "<group>"; };
 		3DED2760190E38C5001A1D67 /* bx_loader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = bx_loader.gif; sourceTree = "<group>"; };
 		3DED2761190E38C5001A1D67 /* controls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = controls.png; sourceTree = "<group>"; };
-		3DED2762190E38C5001A1D67 /* jquery.bxslider.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.bxslider.js; sourceTree = "<group>"; };
-		3DED2766190E38E5001A1D67 /* jquery.bxslider.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.bxslider.min.js; sourceTree = "<group>"; };
 		3DED2769190E3956001A1D67 /* jquery.easing.1.3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.easing.1.3.js; sourceTree = "<group>"; };
 		3DED276A190E3956001A1D67 /* jquery.fitvids.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.fitvids.js; sourceTree = "<group>"; };
 		3DED276D190E3976001A1D67 /* jquery.bxslider.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = jquery.bxslider.css; sourceTree = "<group>"; };
@@ -1892,16 +1885,6 @@
 			name = StartProjectWindow;
 			sourceTree = "<group>";
 		};
-		3D97D4551950250000826280 /* carousel */ = {
-			isa = PBXGroup;
-			children = (
-				3D97D45A1950255200826280 /* jssor.utils.js */,
-				3D97D4561950251000826280 /* jssor.core.js */,
-				3D97D4581950254A00826280 /* jssor.slider.js */,
-			);
-			name = carousel;
-			sourceTree = "<group>";
-		};
 		3DA416BA1935AB9400559028 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -1922,6 +1905,75 @@
 				3D97D45C1950339500826280 /* Defaults.plist */,
 			);
 			name = plist;
+			sourceTree = "<group>";
+		};
+		3DA6C64F1975361D004D6587 /* DefaultGroup */ = {
+			isa = PBXGroup;
+			children = (
+				3DED272C1904E17E001A1D67 /* IUMovie.h */,
+				3DED272D1904E17E001A1D67 /* IUMovie.m */,
+				69C4AA181908E82900CF75E7 /* IUSection.h */,
+				69C4AA191908E82900CF75E7 /* IUSection.m */,
+				694E3CDF18FCFDA6005077B3 /* IUItem.h */,
+				694E3CE018FCFDA6005077B3 /* IUItem.m */,
+				69CFCA9918E9396C00E3048A /* IUHeader.h */,
+				69CFCA9A18E9396C00E3048A /* IUHeader.m */,
+				69CFCABE18EA8D1700E3048A /* IUImage.h */,
+				69CFCABF18EA8D1700E3048A /* IUImage.m */,
+				69D15F7118E898B10046FBB0 /* IUBackground.h */,
+				69D15F7218E898B10046FBB0 /* IUBackground.m */,
+				69757AC018D7EB680095CBAC /* IUBox.h */,
+				69757AC118D7EB680095CBAC /* IUBox.m */,
+				69C5760218D6FE020016F050 /* IUSheet.h */,
+				69C5760318D6FE020016F050 /* IUSheet.m */,
+				6954812618D7640A00CA02F1 /* IUPage.h */,
+				6954812718D7640A00CA02F1 /* IUPage.m */,
+				69CFCAB618E972DA00E3048A /* IUPageContent.h */,
+				69CFCAB718E972DA00E3048A /* IUPageContent.m */,
+			);
+			name = DefaultGroup;
+			sourceTree = "<group>";
+		};
+		3DA6C65019753626004D6587 /* ComplexGroup */ = {
+			isa = PBXGroup;
+			children = (
+				3DED2774190E4151001A1D67 /* IUCarousel */,
+				69C575FE18D6FE020016F050 /* IUClass.h */,
+				69C575FF18D6FE020016F050 /* IUClass.m */,
+				69C4AA1B1908E96F00CF75E7 /* IUImport.h */,
+				69C4AA1C1908E96F00CF75E7 /* IUImport.m */,
+				69C4AA211909905500CF75E7 /* IUCollection.h */,
+				69C4AA221909905500CF75E7 /* IUCollection.m */,
+				69AB7EAA19062598009E5195 /* IUTransition.h */,
+				69AB7EAB19062598009E5195 /* IUTransition.m */,
+			);
+			name = ComplexGroup;
+			sourceTree = "<group>";
+		};
+		3DA6C65119753651004D6587 /* PGGroup */ = {
+			isa = PBXGroup;
+			children = (
+				690A82541909EB1B00DDBA86 /* PGTextField.h */,
+				690A82551909EB1B00DDBA86 /* PGTextField.m */,
+				690A82571909EB2500DDBA86 /* PGTextView.h */,
+				690A82581909EB2500DDBA86 /* PGTextView.m */,
+				6999161B1919F05E000ECF57 /* PGSubmitButton.h */,
+				6999161C1919F05E000ECF57 /* PGSubmitButton.m */,
+				6999161E1919F090000ECF57 /* PGForm.h */,
+				6999161F1919F090000ECF57 /* PGForm.m */,
+				69CB92B2191B5F6800BEFBED /* PGPageLinkSet.h */,
+				69CB92B3191B5F6800BEFBED /* PGPageLinkSet.m */,
+			);
+			name = PGGroup;
+			sourceTree = "<group>";
+		};
+		3DA6C65419763480004D6587 /* clipArt */ = {
+			isa = PBXGroup;
+			children = (
+				3DA6C65519763594004D6587 /* arrow_left.png */,
+				3DA6C65619763594004D6587 /* arrow_right.png */,
+			);
+			name = clipArt;
 			sourceTree = "<group>";
 		};
 		3DB3ACC218EBEEFA0046DFB7 /* Canvas */ = {
@@ -2395,11 +2447,9 @@
 		3DED275D190E388F001A1D67 /* JS */ = {
 			isa = PBXGroup;
 			children = (
-				3D97D4551950250000826280 /* carousel */,
 				3DED2768190E3956001A1D67 /* plugins */,
-				3DED2766190E38E5001A1D67 /* jquery.bxslider.min.js */,
-				3DED2762190E38C5001A1D67 /* jquery.bxslider.js */,
 				3DE9C447193C7D0C00CCE374 /* jquery.backgroundSize.js */,
+				3DA6C652197536C6004D6587 /* iucarousel.js */,
 				3DB3ACEC18EBF7200046DFB7 /* iuframe.js */,
 				3DD9E97019122EAB0076BF4E /* iueditor.js */,
 				69B9A39A18E6B1860007D6E2 /* iu.js */,
@@ -2576,6 +2626,7 @@
 		690A409E18E170AC00095263 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				3DA6C65419763480004D6587 /* clipArt */,
 				CBA877EC1963D1A300075294 /* helpResource */,
 				3DA416C11935B26F00559028 /* plist */,
 				3D748C7819207B6B005665A3 /* icon */,
@@ -2661,55 +2712,17 @@
 		694233A118D7E1A500C96A92 /* IU */ = {
 			isa = PBXGroup;
 			children = (
+				3DA6C65119753651004D6587 /* PGGroup */,
+				3DA6C64F1975361D004D6587 /* DefaultGroup */,
+				3DA6C65019753626004D6587 /* ComplexGroup */,
 				691F91AA1973C5D100A4CFFF /* IUWPGroup */,
-				3DED2774190E4151001A1D67 /* IUCarousel */,
 				3DF8029E18FE3F1A00913505 /* IUHTMLGroup */,
-				69D15F7118E898B10046FBB0 /* IUBackground.h */,
-				69D15F7218E898B10046FBB0 /* IUBackground.m */,
-				69757AC018D7EB680095CBAC /* IUBox.h */,
-				69757AC118D7EB680095CBAC /* IUBox.m */,
-				69C5760218D6FE020016F050 /* IUSheet.h */,
-				69C5760318D6FE020016F050 /* IUSheet.m */,
-				6954812618D7640A00CA02F1 /* IUPage.h */,
-				6954812718D7640A00CA02F1 /* IUPage.m */,
-				69CFCAB618E972DA00E3048A /* IUPageContent.h */,
-				69CFCAB718E972DA00E3048A /* IUPageContent.m */,
 				69757B2318D95FDA0095CBAC /* NSMutableDictionary+IUTag.h */,
 				69757B2418D95FDA0095CBAC /* NSMutableDictionary+IUTag.m */,
 				69D15F6918E73E690046FBB0 /* NSString+IUTag.h */,
 				69D15F6A18E73E690046FBB0 /* NSString+IUTag.m */,
-				69CFCA9918E9396C00E3048A /* IUHeader.h */,
-				69CFCA9A18E9396C00E3048A /* IUHeader.m */,
-				69CFCABE18EA8D1700E3048A /* IUImage.h */,
-				69CFCABF18EA8D1700E3048A /* IUImage.m */,
 				6967425118F7D077008B7111 /* IUIdentifierManager.h */,
 				6967425218F7D077008B7111 /* IUIdentifierManager.m */,
-				694E3CDF18FCFDA6005077B3 /* IUItem.h */,
-				694E3CE018FCFDA6005077B3 /* IUItem.m */,
-				3DED27291904DFD1001A1D67 /* IUInput.h */,
-				3DED272A1904DFD1001A1D67 /* IUInput.m */,
-				3DED272C1904E17E001A1D67 /* IUMovie.h */,
-				3DED272D1904E17E001A1D67 /* IUMovie.m */,
-				69AB7EAA19062598009E5195 /* IUTransition.h */,
-				69AB7EAB19062598009E5195 /* IUTransition.m */,
-				69C4AA181908E82900CF75E7 /* IUSection.h */,
-				69C4AA191908E82900CF75E7 /* IUSection.m */,
-				69C575FE18D6FE020016F050 /* IUClass.h */,
-				69C575FF18D6FE020016F050 /* IUClass.m */,
-				69C4AA1B1908E96F00CF75E7 /* IUImport.h */,
-				69C4AA1C1908E96F00CF75E7 /* IUImport.m */,
-				69C4AA211909905500CF75E7 /* IUCollection.h */,
-				69C4AA221909905500CF75E7 /* IUCollection.m */,
-				690A82541909EB1B00DDBA86 /* PGTextField.h */,
-				690A82551909EB1B00DDBA86 /* PGTextField.m */,
-				690A82571909EB2500DDBA86 /* PGTextView.h */,
-				690A82581909EB2500DDBA86 /* PGTextView.m */,
-				6999161B1919F05E000ECF57 /* PGSubmitButton.h */,
-				6999161C1919F05E000ECF57 /* PGSubmitButton.m */,
-				6999161E1919F090000ECF57 /* PGForm.h */,
-				6999161F1919F090000ECF57 /* PGForm.m */,
-				69CB92B2191B5F6800BEFBED /* PGPageLinkSet.h */,
-				69CB92B3191B5F6800BEFBED /* PGPageLinkSet.m */,
 				3D1BACC719330240004C554F /* IUText.h */,
 				3D1BACC819330240004C554F /* IUText.m */,
 				691F91AE1973C66700A4CFFF /* IUPHP.h */,
@@ -3181,8 +3194,6 @@
 				3DD9E97219123B3E0076BF4E /* iueditor.js in Resources */,
 				3DE9C448193C7D0C00CCE374 /* jquery.backgroundSize.js in Resources */,
 				3DA416C31935B29200559028 /* defaultFont.plist in Resources */,
-				3DED276F190E3CAC001A1D67 /* jquery.bxslider.min.js in Resources */,
-				3DED2770190E3CAC001A1D67 /* jquery.bxslider.js in Resources */,
 				3DE202261966AFCF00976EBC /* agency_preview_mobile01.png in Resources */,
 				3DED27311904EDF0001A1D67 /* movie.mp4 in Resources */,
 				267CB19D190F93370079E565 /* tab_event_off.png in Resources */,
@@ -3230,6 +3241,7 @@
 				267CB19E190F93370079E565 /* tab_event_off@2x.png in Resources */,
 				3DED26671900D313001A1D67 /* ic_comp@2x.png in Resources */,
 				2641F457195A72FF00DDF1C3 /* bg_v_center@2x.png in Resources */,
+				3DA6C653197536C6004D6587 /* iucarousel.js in Resources */,
 				267CB198190F93370079E565 /* tab_clipart_off@2x.png in Resources */,
 				26620E4B19458A2100B728CD /* select_directory.png in Resources */,
 				3DED27231904AE1A001A1D67 /* LMEventVariableReceiverVC.xib in Resources */,
@@ -3358,7 +3370,6 @@
 				2628C92E191A31F600D9D8CD /* stack_form.png in Resources */,
 				261E5A8E19484F70002C286A /* tab_pg_off@2x.png in Resources */,
 				26378CDE194EC42A004B5001 /* import@2x.png in Resources */,
-				3D97D4591950254A00826280 /* jssor.slider.js in Resources */,
 				2628C9201919C8C800D9D8CD /* tab_secondary_off.png in Resources */,
 				3DED274F1907C4D0001A1D67 /* FBSampleImage.png in Resources */,
 				69B37F0E18DFDEE800DE620F /* LMFileNaviVC.xib in Resources */,
@@ -3402,6 +3413,7 @@
 				3DE2022C1966AFD500976EBC /* gallery_preview_mobile02.png in Resources */,
 				CBA877EB1963D0F400075294 /* LMTutorialWC.xib in Resources */,
 				267CB1A3190F93370079E565 /* tab_library_on.png in Resources */,
+				3DA6C65819763594004D6587 /* arrow_right.png in Resources */,
 				3DED26AC1900F43F001A1D67 /* ic_js@2x.png in Resources */,
 				3D748C82192095A1005665A3 /* LMPropertyIUPageVC.xib in Resources */,
 				262D4AA71947FB05006F5FBE /* radius_icon_02@2x.png in Resources */,
@@ -3410,7 +3422,6 @@
 				3DF8045018FE62FC00913505 /* tool_transition@2x.png in Resources */,
 				262D4AB719481DA2006F5FBE /* tab_on_03@2x.png in Resources */,
 				26A8140D196564FD006B9D50 /* trash_on.png in Resources */,
-				3D97D4571950251000826280 /* jssor.core.js in Resources */,
 				2628C927191A30A300D9D8CD /* stack_section@2x.png in Resources */,
 				3D748C861921D1BD005665A3 /* stack_carousel_item@2x.png in Resources */,
 				3DED26AB1900F43F001A1D67 /* ic_js.png in Resources */,
@@ -3471,7 +3482,7 @@
 				2608C1DF193DE6BC00DD1B42 /* warning.png in Resources */,
 				3D2E6BAC19653F3A00AC7DE5 /* EventVariableComplex.mp4 in Resources */,
 				2672A0A719120A650050043E /* stack_collection.png in Resources */,
-				3D97D45B1950255200826280 /* jssor.utils.js in Resources */,
+				3DA6C65719763594004D6587 /* arrow_left.png in Resources */,
 				3DED265C1900D313001A1D67 /* view_list@2x.png in Resources */,
 				26EFF41E194AECB900317C3E /* auto_resize@2x.png in Resources */,
 				2628C932191A360200D9D8CD /* stack_submit.png in Resources */,
@@ -3757,7 +3768,6 @@
 				3DED274D1907C140001A1D67 /* IUFBLike.m in Sources */,
 				69C5762C18D70B850016F050 /* LMWC.m in Sources */,
 				69757B2518D95FDA0095CBAC /* NSMutableDictionary+IUTag.m in Sources */,
-				3DED272B1904DFD1001A1D67 /* IUInput.m in Sources */,
 				69757B0418D95BBC0095CBAC /* JDEnvUtil.m in Sources */,
 				3DB3ACE018EBEF5F0046DFB7 /* GuideLineLayer.m in Sources */,
 				3DFB86481961628800A20960 /* LMPropertyWebProgrammingVC.m in Sources */,
