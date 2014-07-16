@@ -28,8 +28,7 @@
     NSSize originalSize;
     NSSize originalPercentSize;
     IUProject *_tempProject;
-    
-    BOOL isConnectedWithEditor;
+    BOOL    _didConnectedWithEditor;
 }
 
 
@@ -94,7 +93,7 @@
 }
 
 - (void)dealloc{
-    if (isConnectedWithEditor) {
+    if (self.didConnectWithEditor) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
     }
 }
@@ -162,7 +161,6 @@
 
 - (void)connectWithEditor{
     NSAssert(self.project, @"");
-    isConnectedWithEditor = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:nil];
     for (IUBox *box in self.children) {
@@ -202,6 +200,7 @@
     [box.project.identifierManager confirm];
     
     [box connectWithEditor];
+    box.didConnectWithEditor = YES;
 
     return box;
 }
@@ -432,6 +431,16 @@
     return [self insertIU:iu atIndex:index error:error];
 }
 
+-(BOOL)didConnectWithEditor{
+    return _didConnectedWithEditor;
+}
+
+-(void)setDidConnectWithEditor:(BOOL)didConnectWithEditor{
+    _didConnectedWithEditor = didConnectWithEditor;
+    for (IUBox *iu in self.children) {
+        [iu setDidConnectWithEditor:didConnectWithEditor];
+    }
+}
 
 -(BOOL)insertIU:(IUBox *)iu atIndex:(NSInteger)index  error:(NSError**)error{
     if ([iu isKindOfClass:[IUImport class]] && [[self sheet] isKindOfClass:[IUImport class]]) {
@@ -447,7 +456,10 @@
     }
     
     iu.parent = self;
-    [iu connectWithEditor];
+    if (self.didConnectWithEditor) {
+        [iu connectWithEditor];
+        iu.didConnectWithEditor = YES;
+    }
     
     if ([self.sheet isKindOfClass:[IUClass class]]) {
         for (IUBox *import in [(IUClass*)self.sheet references]) {
@@ -471,7 +483,7 @@
     [self updateJS];
     [iu bind:@"identifierManager" toObject:self withKeyPath:@"identifierManager" options:nil];
 
-    if (isConnectedWithEditor) {
+    if (self.didConnectWithEditor) {
         [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureAdding, IUNotificationStructureChangedIU: iu}];
     }
 

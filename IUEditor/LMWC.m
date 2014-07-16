@@ -320,6 +320,8 @@
         iuInspectorVC.resourceManager = _project.resourceManager;
         bottomToolbarVC.resourceManager = _project.resourceManager;
         
+        [_project connectWithEditor];
+        
     }
 }
 

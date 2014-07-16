@@ -79,6 +79,9 @@ typedef enum _IUOverflowType{
 -(id)initWithProject:(IUProject*)project options:(NSDictionary*)options;
 - (void)connectWithEditor;
 
+- (BOOL)didConnectWithEditor;
+- (void)setDidConnectWithEditor:(BOOL)connectedWithEditor;
+
 -(IUSheet *)sheet;
 
 
