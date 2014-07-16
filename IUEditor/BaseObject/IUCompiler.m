@@ -294,8 +294,22 @@
     JDCode *code = [[JDCode alloc] init];
 #pragma mark IUPage
     if ([iu conformsToProtocol:@protocol(IUCodeProtocol)]) {
-        id <IUCodeProtocol> iuCode = (id)iu;
-        [code addCodeLine:[iuCode code]];
+        NSObject <IUCodeProtocol>* iuCode = (id)iu;
+        [code addCodeWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:NO]];
+        if ([iuCode respondsToSelector:@selector(prefixCode)]) {
+            [code addCodeWithFormat:[iuCode prefixCode]];
+        }
+        if ([iuCode respondsToSelector:@selector(code)]) {
+            [code addCodeWithFormat:[iuCode code]];
+        }
+        if (iu.children.count) {
+            for (IUBox *child in iu.children) {
+                [code addCode:[self outputHTML:child]];
+            }
+        }
+        if ([iuCode respondsToSelector:@selector(postfixCode)]) {
+            [code addCodeWithFormat:[iuCode postfixCode]];
+        }
     }
     else if ([iu isKindOfClass:[IUPage class]]) {
         IUPage *page = (IUPage*)iu;

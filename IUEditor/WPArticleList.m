@@ -20,13 +20,11 @@
     return self;
 }
 
-- (NSString*)code{
-    NSMutableString *str = [NSMutableString stringWithString:@"<? while ( have_posts() ) : the_post(); ?>"];
-    for (WPArticle *article in self.children) {
-        [str appendString:[article code]];
-    }
-    [str appendString:@"<? endwhile ?>"];
-    
-    return str;
+- (NSString*)prefixCode{
+    return @"<? while ( have_posts() ) : the_post(); ?>";
+}
+
+- (NSString*)postfixCode{
+    return @"<? endwhile ?>";
 }
 @end
