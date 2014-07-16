@@ -15,6 +15,7 @@
 - (NSString*)JSEscape;
 - (BOOL)isHTTPURL;
 - (NSString*)CSSURLString;
+- (NSString *)faviconType;
 
 - (NSString*)lastLine;
 

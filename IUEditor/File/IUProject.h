@@ -100,8 +100,7 @@ static NSString *IUClassGroupName = @"class";
  @ important
  name , path are set by IUProjectDocument
  */
-@property   NSString    *name;
-@property   NSString    *path;
+@property   NSString    *name, *path, *author, *favicon;
 
 - (NSString*)directoryPath;
 - (NSString*)buildPath;

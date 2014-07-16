@@ -8,38 +8,40 @@
 
 #import "LMProjectPropertyWC.h"
 
-static LMProjectPropertyWC *gProjectPropertyWC = nil;
 
 @interface LMProjectPropertyWC ()
-@property IUProject *project;
+@property  IUProject *project;
+
+@property (weak) IBOutlet NSComboBox *faviconComboBox;
+@property (weak) IBOutlet NSTextField *authorTF;
 
 @end
 
 @implementation LMProjectPropertyWC{
-    IUProject *_project;
 }
-+ (LMProjectPropertyWC *)sharedProjectPropertyWC:(IUProject *)project{
-    if(gProjectPropertyWC == nil){
-        gProjectPropertyWC = [[LMProjectPropertyWC alloc] initWithWindowNibName:[LMProjectPropertyWC class].className];
-    }
-//    gProjectPropertyWC;
-    return gProjectPropertyWC;
-}
-
-- (instancetype)initWithWindow:(NSWindow *)window
-{
-    self = [super initWithWindow:window];
+- (id)initWithWindowNibName:(NSString *)windowNibName withIUProject:(IUProject *)project{
+    self = [super initWithWindowNibName:windowNibName];
     if (self) {
-        // Initialization code here.
+        _project = project;
     }
     return self;
-}
 
+}
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+        
+    [_authorTF bind:NSValueBinding toObject:self withKeyPath:@"project.author" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    [_faviconComboBox bind:NSContentBinding toObject:self withKeyPath:@"project.resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
+    [_faviconComboBox bind:NSValueBinding toObject:self withKeyPath:@"project.favicon" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+
+    
+}
+
+- (IBAction)pressOKBtn:(id)sender {
+    [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseOK];
+    [self close];
 }
 
 @end

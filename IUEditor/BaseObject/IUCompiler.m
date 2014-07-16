@@ -33,6 +33,7 @@
 #import "PGPageLinkSet.h"
 #import "IUTransition.h"
 #import "JDCode.h"
+#import "IUProject.h"
 
 #if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
 #import "IUText.h"
@@ -69,8 +70,16 @@
     if(page.keywords && page.keywords.length != 0){
         [code addCodeLineWithFormat:@"<meta name='keywords' content='%@'>", page.keywords];
     }
-    if(page.author && page.author.length != 0){
-        [code addCodeLineWithFormat:@"<meta name='author' content='%@'>", page.author];
+    if(page.project.author && page.project.author.length != 0){
+        [code addCodeLineWithFormat:@"<meta name='author' content='%@'>", page.project.author];
+    }
+    if(page.project.favicon && page.project.favicon.length > 0){
+
+        NSString *type = [page.project.favicon faviconType];
+        if(type){
+            NSString *imgSrc = [self imagePathWithImageName:page.project.favicon isEdit:NO];
+            [code addCodeLineWithFormat:@"<link rel='icon' type='image/%@' href='%@'>",type, imgSrc];
+        }
     }
 
     return code;
@@ -150,6 +159,24 @@
     else{
         return IUCSSUnitPixel;
     }
+}
+
+
+- (NSString *)imagePathWithImageName:(NSString *)imageName isEdit:(BOOL)isEdit{
+    NSString *imgSrc;
+    if ([imageName isHTTPURL]) {
+        return imageName;
+    }
+    else {
+        IUResourceFile *file = [self.resourceManager resourceFileWithName:imageName];
+        if(_rule == IUCompileRuleDjango && isEdit == NO){
+            imgSrc = [@"/" stringByAppendingString:[file relativePath]];
+        }
+        else{
+            imgSrc = [file relativePath];
+        }
+    }
+    return imgSrc;
 }
 
 
@@ -836,21 +863,8 @@
         }else{
             //image tag attributes
             if(iuImage.imageName){
-                
-                if([iuImage.imageName isHTTPURL]){
-                    [retString appendFormat:@" src='%@'", iuImage.imageName];
-                    
-                }
-                else{
-                    IUResourceFile *file = [self.resourceManager resourceFileWithName:iuImage.imageName];
-                    
-                    if(_rule == IUCompileRuleDjango && isEdit == NO){
-                        [retString appendFormat:@" src='/%@'", file.relativePath];
-                    }
-                    else{
-                        [retString appendFormat:@" src='%@'", file.relativePath];
-                    }
-                }
+                NSString *imgSrc = [self imagePathWithImageName:iuImage.imageName isEdit:NO];
+                [retString appendFormat:@" src='%@'", imgSrc];
             }
             if(iuImage.altText){
                 [retString appendFormat:@" alt='%@'", iuImage.altText];
@@ -1205,15 +1219,17 @@
 
             }
             NSImage *arrowImage;
+            
+            NSString *imgSrc = [[self imagePathWithImageName:imageName isEdit:isEdit] CSSURLString];
+            if(imgSrc){
+                [dict putTag:@"background" string:imgSrc];
+            }
+            
             if ([imageName isHTTPURL]) {
-                [dict putTag:@"background" string:[imageName  CSSURLString]];
                 arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
-                
             }
             else{
                 IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
-                NSString *imageRelativePath = [file relativePath];
-                [dict putTag:@"background" string:[imageRelativePath  CSSURLString]];
                 NSString *imageAbsolutePath = [file absolutePath];
                 arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
                 
@@ -1221,10 +1237,7 @@
             [dict putTag:@"height" floatValue:arrowImage.size.height ignoreZero:YES unit:IUCSSUnitPixel];
             [dict putTag:@"width" floatValue:arrowImage.size.width ignoreZero:YES unit:IUCSSUnitPixel];
             
-            
-            //                NSInteger currentHeight = [iu.css.assembledTagDictionary[IUCSSTagHeight] integerValue];
-            //                [dict putTag:@"top" floatValue:(currentHeight/2-arrowImage.size.height/2) ignoreZero:YES unit:IUCSSUnitPixel];
-        }
+            }
         
         
         
@@ -1442,21 +1455,7 @@
         
         value = cssTagDict[IUCSSTagImage];
         if(value){
-            NSString *imgSrc;
-            if ([value isHTTPURL]) {
-                imgSrc = [NSString stringWithFormat:@"url(%@)",value];
-            }
-            else {
-                IUResourceFile *file = [self.resourceManager resourceFileWithName:value];
-                if(_rule == IUCompileRuleDjango && isEdit == NO){
-                    imgSrc = [[@"/" stringByAppendingString:[file relativePath]] CSSURLString];
-                }
-                else{
-                    imgSrc = [[file relativePath] CSSURLString];
-                }
-            }
-            
-            
+            NSString *imgSrc = [[self imagePathWithImageName:value isEdit:isEdit] CSSURLString];
             [dict putTag:@"background-image" string:imgSrc];
 
             IUBGSizeType bgSizeType = [cssTagDict[IUCSSTagBGSize] intValue];

@@ -37,6 +37,8 @@
     [encoder encodeObject:_classGroup forKey:@"_classGroup"];
     [encoder encodeObject:_resourceGroup forKey:@"_resourceGroup"];
     [encoder encodeObject:_name forKey:@"_name"];
+    [encoder encodeObject:_favicon forKey:@"_favicon"];
+    [encoder encodeObject:_author forKey:@"_author"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -55,6 +57,9 @@
         _resourceGroup = [aDecoder decodeObjectForKey:@"_resourceGroup"];
         _name = [aDecoder decodeObjectForKey:@"_name"];
         _buildResourcePath = [aDecoder decodeObjectForKey:@"_buildResourcePath"];
+        
+        _favicon = [aDecoder decodeObjectForKey:@"_favicon"];
+        _author = [aDecoder decodeObjectForKey:@"_author"];
         
         //version code
         if ([[_pageGroup.name lowercaseString] isEqualToString:@"pages"]){

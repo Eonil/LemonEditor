@@ -11,7 +11,6 @@
 @interface LMPropertyIUPageVC ()
 @property (weak) IBOutlet NSTextField *titleTF;
 @property (weak) IBOutlet NSTextField *keywordsTF;
-@property (weak) IBOutlet NSTextField *authorTF;
 @property (unsafe_unretained) IBOutlet NSTextView *descriptionTV;
 @property (unsafe_unretained) IBOutlet NSTextView *extraCodeTF;
 
@@ -31,7 +30,6 @@
 - (void)awakeFromNib{
     [_titleTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"title"]  options:IUBindingDictNotRaisesApplicable];
     [_keywordsTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"keywords"]  options:IUBindingDictNotRaisesApplicable];
-    [_authorTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"author"]  options:IUBindingDictNotRaisesApplicable];
     
     [_extraCodeTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"extraCode"]  options:IUBindingDictNotRaisesApplicable];
 

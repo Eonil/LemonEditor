@@ -39,6 +39,7 @@
 #import "IUProjectDocument.h"
 
 #import "LMConsoleVC.h"
+#import "LMProjectPropertyWC.h"
 
 
 @interface LMWC ()
@@ -105,8 +106,9 @@
     LMWidgetLibraryVC   *widgetLibraryVC;
     LMResourceVC    *resourceVC;
 
-    
+    //sheet
     LMProjectConvertWC *pcWC;
+    LMProjectPropertyWC *projectPropertyWC;
 }
 
 - (id)initWithWindow:(NSWindow *)window
@@ -344,6 +346,7 @@
         return;
     }
     else if ([selectedNode isKindOfClass:[IUProject class]]){
+        [self openProjectPropertyWindow];
         return;
     }
     else if ([selectedNode isKindOfClass:[IUSheetGroup class]]){
@@ -374,6 +377,22 @@
 
 #pragma mark -
 #pragma mark select TavView
+- (void)openProjectPropertyWindow{
+    if(projectPropertyWC == nil){
+        projectPropertyWC = [[LMProjectPropertyWC alloc] initWithWindowNibName:[LMProjectPropertyWC class].className withIUProject:_project];
+    }
+    
+    [self.window beginSheet:projectPropertyWC.window completionHandler:^(NSModalResponse returnCode) {
+        switch (returnCode) {
+            case NSModalResponseOK:
+                break;
+            case NSModalResponseAbort:
+            default:
+                break;
+        }
+    }];
+}
+         
 
 - (IBAction)clickPropertyMatrix:(id)sender {
     NSMatrix *propertyMatrix = sender;

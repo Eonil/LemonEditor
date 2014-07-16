@@ -9,10 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "IUProject.h"
 
-@interface LMProjectPropertyWC : NSWindowController
+@interface LMProjectPropertyWC : NSWindowController 
 
-+ (LMProjectPropertyWC *)sharedProjectPropertyWC:(IUProject *)project;
-
-
+- (id)initWithWindowNibName:(NSString *)windowNibName withIUProject:(IUProject *)project;
 
 @end

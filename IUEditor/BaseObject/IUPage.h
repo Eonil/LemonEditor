@@ -22,7 +22,6 @@
 
 @property NSString *title;
 @property NSString *keywords;
-@property NSString *author;
 @property NSString *desc;
 @property NSString *extraCode;
 

@@ -45,6 +45,18 @@
     return [NSString stringWithFormat:@"url('%@')", self];
 }
 
+- (NSString *)faviconType{
+    NSString *extension = [self pathExtension];
+    if([extension isEqualToString:@"png"] ||
+       [extension isEqualToString:@"gif"]){
+        return extension;
+    }
+    else if([extension isEqualToString:@"ico"]){
+        return @"x-icon";
+    }
+    return nil;
+}
+
 - (NSString*)lastLine{
     NSInteger len = [self length];
     NSInteger i;
