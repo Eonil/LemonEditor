@@ -50,6 +50,17 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     array = [[aDecoder decodeObjectForKey:@"array"] mutableCopy];
+    
+    NSMutableArray *removedGroup = [NSMutableArray array];
+    for(IUResourceGroup *group in array){
+       if([group.name isEqualToString:IUJSResourceGroupName]
+          || [group.name isEqualToString:IUCSSResourceGroupName]){
+           [removedGroup addObject:group];
+       }
+    }
+    
+    [array removeObjectsInArray:removedGroup];
+    
     _name = [aDecoder decodeObjectForKey:@"_name"];
     _parent = [aDecoder decodeObjectForKey:@"_parent"];
     return self;

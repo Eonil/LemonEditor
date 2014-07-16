@@ -66,6 +66,10 @@
         if ([[_backgroundGroup.name lowercaseString] isEqualToString:@"backgrounds"]) {
             _backgroundGroup.name = IUBackgroundGroupName;
         }
+        
+        //TODO: initailizeResource 무조건 new로 만듦, css, js파일들이 안정화가 될때까지
+        [self initializeCSSJSResource];
+
         [_resourceManager setResourceGroup:_resourceGroup];
         [_identifierManager registerIUs:self.allDocuments];
         
@@ -83,6 +87,10 @@
     return self;
 }
 
+/**
+ @brief
+ It's for convert project
+ */
 -(id)initWithProject:(IUProject*)project options:(NSDictionary*)options error:(NSError**)error{
     self = [super init];
     
@@ -118,16 +126,18 @@
     
     _classGroup = [project.classGroup copy];
     _classGroup.project = self;
-    
+
+
     _resourceGroup = [project.resourceGroup copy];
     _resourceGroup.parent = self;
-
+    
     [_resourceManager setResourceGroup:_resourceGroup];
     [_identifierManager registerIUs:self.allDocuments];
     
     [self connectWithEditor];
     return self;
 }
+
 
 -(id)initWithCreation:(NSDictionary*)options error:(NSError**)error{
     self = [super init];
@@ -380,6 +390,40 @@
     return _compiler;
 }
 
+- (void)initializeCSSJSResource{
+    IUResourceGroup *JSGroup = [[IUResourceGroup alloc] init];
+    JSGroup.name = IUJSResourceGroupName;
+    [_resourceGroup addResourceGroup:JSGroup];
+    
+    IUResourceGroup *CSSGroup = [[IUResourceGroup alloc] init];
+    CSSGroup.name = IUCSSResourceGroupName;
+    [_resourceGroup addResourceGroup:CSSGroup];
+    
+    //CSS resource Copy
+    NSString *resetCSSPath = [[NSBundle mainBundle] pathForResource:@"reset" ofType:@"css"];
+    [CSSGroup addResourceFileWithContentOfPath:resetCSSPath];
+    
+    NSString *iuCSSPath = [[NSBundle mainBundle] pathForResource:@"iu" ofType:@"css"];
+    [CSSGroup addResourceFileWithContentOfPath:iuCSSPath];
+    
+    //Java Script resource copy
+    NSString *iuEditorJSPath = [[NSBundle mainBundle] pathForResource:@"iueditor" ofType:@"js"];
+    [JSGroup addResourceFileWithContentOfPath:iuEditorJSPath];
+    
+    NSString *iuFrameJSPath = [[NSBundle mainBundle] pathForResource:@"iuframe" ofType:@"js"];
+    [JSGroup addResourceFileWithContentOfPath:iuFrameJSPath];
+    
+    NSString *iuJSPath = [[NSBundle mainBundle] pathForResource:@"iu" ofType:@"js"];
+    [JSGroup addResourceFileWithContentOfPath:iuJSPath];
+    
+    NSString *carouselJSPath = [[NSBundle mainBundle] pathForResource:@"iucarousel" ofType:@"js"];
+    [JSGroup addResourceFileWithContentOfPath:carouselJSPath];
+    
+    NSString *ieJSPath = [[NSBundle mainBundle] pathForResource:@"jquery.backgroundSize" ofType:@"js"];
+    [JSGroup addResourceFileWithContentOfPath:ieJSPath];
+
+}
+
 - (void)initializeResource{
     //remove resource node if exist
     JDInfoLog(@"initilizeResource");
@@ -397,13 +441,6 @@
     videoGroup.name = IUVideoResourceGroupName;
     [_resourceGroup addResourceGroup:videoGroup];
     
-    IUResourceGroup *JSGroup = [[IUResourceGroup alloc] init];
-    JSGroup.name = IUJSResourceGroupName;
-    [_resourceGroup addResourceGroup:JSGroup];
-    
-    IUResourceGroup *CSSGroup = [[IUResourceGroup alloc] init];
-    CSSGroup.name = IUCSSResourceGroupName;
-    [_resourceGroup addResourceGroup:CSSGroup];
     
     
     //images resource copy
@@ -419,28 +456,7 @@
     NSString *sampleVideoPath = [[NSBundle mainBundle] pathForResource:@"movie" ofType:@"mp4"];
     [videoGroup addResourceFileWithContentOfPath:sampleVideoPath];
     
-    //CSS resource Copy
-    NSString *resetCSSPath = [[NSBundle mainBundle] pathForResource:@"reset" ofType:@"css"];
-    [CSSGroup addResourceFileWithContentOfPath:resetCSSPath];
-    
-    NSString *iuCSSPath = [[NSBundle mainBundle] pathForResource:@"iu" ofType:@"css"];
-    [CSSGroup addResourceFileWithContentOfPath:iuCSSPath];
-    
-    //Java Script resource copy
-    NSString *iuEditorJSPath = [[NSBundle mainBundle] pathForResource:@"iueditor" ofType:@"js"];
-    [JSGroup addResourceFileWithContentOfPath:iuEditorJSPath];
-
-    NSString *iuFrameJSPath = [[NSBundle mainBundle] pathForResource:@"iuframe" ofType:@"js"];
-    [JSGroup addResourceFileWithContentOfPath:iuFrameJSPath];
-    
-    NSString *iuJSPath = [[NSBundle mainBundle] pathForResource:@"iu" ofType:@"js"];
-    [JSGroup addResourceFileWithContentOfPath:iuJSPath];
-    
-    NSString *carouselJSPath = [[NSBundle mainBundle] pathForResource:@"iucarousel" ofType:@"js"];
-    [JSGroup addResourceFileWithContentOfPath:carouselJSPath];
-    
-    NSString *ieJSPath = [[NSBundle mainBundle] pathForResource:@"jquery.backgroundSize" ofType:@"js"];
-    [JSGroup addResourceFileWithContentOfPath:ieJSPath];
+    [self initializeCSSJSResource];
 }
 
 #if 0

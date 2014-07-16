@@ -69,7 +69,7 @@
         [self.css setValue:@(80) forTag:IUCSSTagHeight forWidth:self.css.editWidth];
         showFaces = @"true";
     }else{
-        [self.css setValue:@(35) forTag:IUCSSTagHeight forWidth:self.css.editWidth];
+        [self.css setValue:@(45) forTag:IUCSSTagHeight forWidth:self.css.editWidth];
         showFaces = @"false";
     }
     
