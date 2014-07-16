@@ -12,4 +12,7 @@
 -(NSString*)code{
     return @"<?php the_title(); ?>";
 }
+- (NSString*)sampleText{
+    return @"Article Title will be here";
+}
 @end

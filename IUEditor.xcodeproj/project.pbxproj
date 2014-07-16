@@ -659,6 +659,7 @@
 		CB2AA9C91975030A00DA7CCD /* WPArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9C81975030A00DA7CCD /* WPArticle.m */; };
 		CB2AA9D219751CA200DA7CCD /* LMPropertyWPArticleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9D019751CA200DA7CCD /* LMPropertyWPArticleVC.m */; };
 		CB2AA9D319751CA200DA7CCD /* LMPropertyWPArticleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB2AA9D119751CA200DA7CCD /* LMPropertyWPArticleVC.xib */; };
+		CB2AA9D61976749900DA7CCD /* WPMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9D51976749900DA7CCD /* WPMenu.m */; };
 		CB9BD6381914DC62002C9369 /* LMStartNewDjangoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9BD6361914DC62002C9369 /* LMStartNewDjangoVC.m */; };
 		CB9BD6391914DC62002C9369 /* LMStartNewDjangoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9BD6371914DC62002C9369 /* LMStartNewDjangoVC.xib */; };
 		CB9BD63D1914DE23002C9369 /* LMStartNewPresentationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9BD63B1914DE23002C9369 /* LMStartNewPresentationVC.m */; };
@@ -1551,6 +1552,8 @@
 		CB2AA9CF19751CA200DA7CCD /* LMPropertyWPArticleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyWPArticleVC.h; sourceTree = "<group>"; };
 		CB2AA9D019751CA200DA7CCD /* LMPropertyWPArticleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyWPArticleVC.m; sourceTree = "<group>"; };
 		CB2AA9D119751CA200DA7CCD /* LMPropertyWPArticleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyWPArticleVC.xib; sourceTree = "<group>"; };
+		CB2AA9D41976749900DA7CCD /* WPMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPMenu.h; sourceTree = "<group>"; };
+		CB2AA9D51976749900DA7CCD /* WPMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPMenu.m; sourceTree = "<group>"; };
 		CB9BD6351914DC62002C9369 /* LMStartNewDjangoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStartNewDjangoVC.h; sourceTree = "<group>"; };
 		CB9BD6361914DC62002C9369 /* LMStartNewDjangoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMStartNewDjangoVC.m; sourceTree = "<group>"; };
 		CB9BD6371914DC62002C9369 /* LMStartNewDjangoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMStartNewDjangoVC.xib; sourceTree = "<group>"; };
@@ -2663,6 +2666,8 @@
 				69860E4C197625C7001C3F7F /* WPArticleList.m */,
 				69860E51197666FE001C3F7F /* WPArticleDate.h */,
 				69860E52197666FE001C3F7F /* WPArticleDate.m */,
+				CB2AA9D41976749900DA7CCD /* WPMenu.h */,
+				CB2AA9D51976749900DA7CCD /* WPMenu.m */,
 			);
 			name = IUWPGroup;
 			sourceTree = "<group>";
@@ -3851,6 +3856,7 @@
 				693849E41914D711005C0546 /* NSIndexPath+JDExtension.m in Sources */,
 				3DF8046A18FF790400913505 /* LMPropertyShadowVC.m in Sources */,
 				69C575BE18D6F61E0016F050 /* LMAppDelegate.m in Sources */,
+				CB2AA9D61976749900DA7CCD /* WPMenu.m in Sources */,
 				690A409918E1665E00095263 /* LMGeneralObject.m in Sources */,
 				3DED2759190A1DA6001A1D67 /* IUEvent.m in Sources */,
 				69CFCA9B18E9396C00E3048A /* IUHeader.m in Sources */,
