@@ -78,7 +78,7 @@
         [_resourceManager setResourceGroup:_resourceGroup];
         [_identifierManager registerIUs:self.allDocuments];
         
-        [self connectWithEditor];
+
     }
     return self;
 }
@@ -138,8 +138,6 @@
     
     [_resourceManager setResourceGroup:_resourceGroup];
     [_identifierManager registerIUs:self.allDocuments];
-    
-    [self connectWithEditor];
     return self;
 }
 
@@ -204,7 +202,6 @@
     [_identifierManager registerIUs:self.allDocuments];
     
     //    ReturnNilIfFalse([self save]);
-    [self connectWithEditor];
     return self;
 }
 
@@ -215,6 +212,7 @@
     
     for (IUSheet *sheet in self.allDocuments) {
         [sheet connectWithEditor];
+        [sheet setDidConnectWithEditor:YES];
     }
 }
 

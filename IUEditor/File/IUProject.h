@@ -131,4 +131,5 @@ static NSString *IUClassGroupName = @"class";
 - (void)addSheet:(IUSheet *)sheet toSheetGroup:(IUSheetGroup *)sheetGroup;
 - (void)removeSheet:(IUSheet *)sheet toSheetGroup:(IUSheetGroup *)sheetGroup;
 
+- (void)connectWithEditor;
 @end
