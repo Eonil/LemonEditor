@@ -1,5 +1,5 @@
 //
-//  WPMenu.h
+//  WPMenuItem.h
 //  IUEditor
 //
 //  Created by jd on 2014. 7. 16..
@@ -8,6 +8,6 @@
 
 #import "IUBox.h"
 
-@interface WPMenu : IUBox <IUCodeProtocol, IUSampleTextProtocol>
+@interface WPMenuItem : IUBox
 
 @end
