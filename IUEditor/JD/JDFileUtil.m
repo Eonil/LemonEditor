@@ -200,7 +200,7 @@ static JDFileUtil *sharedJDFileUtill;
 
 +(BOOL)isImageFileExtension:(NSString*)extension{
     NSString *lowerExtension = [extension lowercaseString];
-    if ([lowerExtension isEqualToString:@"gif"] || [lowerExtension isEqualToString:@"jpg"] || [lowerExtension isEqualToString:@"jpeg"] || [lowerExtension isEqualToString:@"png"]) {
+    if ([lowerExtension isEqualToString:@"gif"] || [lowerExtension isEqualToString:@"jpg"] || [lowerExtension isEqualToString:@"jpeg"] || [lowerExtension isEqualToString:@"png"] || [lowerExtension isEqualToString:@"ico"]) {
         return YES;
     }
     return NO;
