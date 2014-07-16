@@ -22,7 +22,7 @@ static LMProjectPropertyWC *gProjectPropertyWC = nil;
     if(gProjectPropertyWC == nil){
         gProjectPropertyWC = [[LMProjectPropertyWC alloc] initWithWindowNibName:[LMProjectPropertyWC class].className];
     }
-    gProjectPropertyWC
+//    gProjectPropertyWC;
     return gProjectPropertyWC;
 }
 

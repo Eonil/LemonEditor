@@ -1089,7 +1089,7 @@
     if([identifier isEqualToString:[iu.htmlID cssClass]]){
         cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForWidth:width] ofClass:iu isHover:NO isEdit:isEdit] mutableCopy];
     }
-    else if([identifier isEqualToString:[[iu.html cssClass] cssHoverClass]]){
+    else if([identifier isEqualToString:[[iu.htmlID cssClass] cssHoverClass]]){
         cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForWidth:width] ofClass:iu isHover:YES isEdit:isEdit] mutableCopy];
     }
     else{
