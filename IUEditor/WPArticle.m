@@ -8,6 +8,8 @@
 
 #import "WPArticle.h"
 #import "WPArticleTitle.h"
+#import "WPArticleDate.h"
+
 #import "IUIdentifierManager.h"
 #import "IUProject.h"
 
@@ -31,5 +33,24 @@
         }
     }
 }
+
+- (void)setEnableDate:(BOOL)enableDate{
+    _enableDate = enableDate;
+    if (enableDate) {
+        [self.project.identifierManager resetUnconfirmedIUs];
+        WPArticleDate *date = [[WPArticleDate alloc] initWithProject:self.project options:nil];
+        [self addIU:date error:nil];
+        [self confirmIdentifier];
+        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureChangedIU object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureAdding, IUNotificationStructureChangedIU: date}];
+    }
+    else {
+        for (IUBox *box in self.children) {
+            if ([box isKindOfClass:[WPArticleTitle class]]) {
+                [self removeIU:box];
+            }
+        }
+    }
+}
+
 
 @end
