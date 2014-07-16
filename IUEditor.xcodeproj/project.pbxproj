@@ -554,6 +554,7 @@
 		6985CBA018E31558008DBF50 /* IUSheetGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985CB9F18E31558008DBF50 /* IUSheetGroup.m */; };
 		69860E4A197555E8001C3F7F /* WPArticleTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 69860E49197555E8001C3F7F /* WPArticleTitle.m */; };
 		69860E4D197625C7001C3F7F /* WPArticleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 69860E4C197625C7001C3F7F /* WPArticleList.m */; };
+		69860E53197666FE001C3F7F /* WPArticleDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69860E52197666FE001C3F7F /* WPArticleDate.m */; };
 		698BEA9919664CB00019C1C3 /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 698BEA9819664CB00019C1C3 /* record@2x.png */; };
 		698BEA9B19664CBD0019C1C3 /* record_stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 698BEA9A19664CBD0019C1C3 /* record_stop.png */; };
 		698BEA9D19664CC50019C1C3 /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 698BEA9C19664CC50019C1C3 /* record.png */; };
@@ -1381,6 +1382,8 @@
 		69860E49197555E8001C3F7F /* WPArticleTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPArticleTitle.m; sourceTree = "<group>"; };
 		69860E4B197625C7001C3F7F /* WPArticleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPArticleList.h; sourceTree = "<group>"; };
 		69860E4C197625C7001C3F7F /* WPArticleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPArticleList.m; sourceTree = "<group>"; };
+		69860E51197666FE001C3F7F /* WPArticleDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPArticleDate.h; sourceTree = "<group>"; };
+		69860E52197666FE001C3F7F /* WPArticleDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPArticleDate.m; sourceTree = "<group>"; };
 		698BEA9819664CB00019C1C3 /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record@2x.png"; sourceTree = "<group>"; };
 		698BEA9A19664CBD0019C1C3 /* record_stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record_stop.png; sourceTree = "<group>"; };
 		698BEA9C19664CC50019C1C3 /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
@@ -2744,6 +2747,8 @@
 				69860E49197555E8001C3F7F /* WPArticleTitle.m */,
 				69860E4B197625C7001C3F7F /* WPArticleList.h */,
 				69860E4C197625C7001C3F7F /* WPArticleList.m */,
+				69860E51197666FE001C3F7F /* WPArticleDate.h */,
+				69860E52197666FE001C3F7F /* WPArticleDate.m */,
 			);
 			name = IUWPGroup;
 			sourceTree = "<group>";
@@ -3899,6 +3904,7 @@
 				3D33BAD01935A4F600DA4F4A /* LMPreferenceWC.m in Sources */,
 				3DD47873193DCCF900639AB5 /* LMPropertyPGFormVC.m in Sources */,
 				69CFCAB818E972DA00E3048A /* IUPageContent.m in Sources */,
+				69860E53197666FE001C3F7F /* WPArticleDate.m in Sources */,
 				69D4EE6519654D9A00BAF8C1 /* LMDragAndDropButton.m in Sources */,
 				3DED27271904AE53001A1D67 /* LMEventVariableReceiverFrameVC.m in Sources */,
 				69B9A39F18E6B7E50007D6E2 /* NSTreeController+JDExtension.m in Sources */,

@@ -9,12 +9,8 @@
 #import "LMPropertyWPArticleVC.h"
 
 @interface LMPropertyWPArticleVC ()
-@property (weak) IBOutlet NSButton *dateB;
-@property (weak) IBOutlet NSButton *timeB;
-@property (weak) IBOutlet NSButton *categoryB;
-@property (weak) IBOutlet NSButton *tagB;
-@property (weak) IBOutlet NSMatrix *contentMTX;
 @property (weak) IBOutlet NSButton *titleB;
+@property (weak) IBOutlet NSButton *dateB;
 
 @end
 
@@ -31,7 +27,7 @@
 
 - (void)awakeFromNib{
     [_titleB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableTitle"] options:IUBindingDictNotRaisesApplicable];
-
+    [_dateB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableDate"] options:IUBindingDictNotRaisesApplicable];
     /*
     [_dateB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableDate"] options:IUBindingDictNotRaisesApplicable];
     [_timeB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableTime"] options:IUBindingDictNotRaisesApplicable];

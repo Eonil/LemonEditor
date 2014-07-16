@@ -11,5 +11,6 @@
 @interface WPArticle : IUBox
 
 @property (nonatomic) BOOL enableTitle;
+@property (nonatomic) BOOL enableDate;
 
 @end

@@ -310,6 +310,7 @@
         if ([iuCode respondsToSelector:@selector(postfixCode)]) {
             [code addCodeWithFormat:[iuCode postfixCode]];
         }
+        [code addCodeLine:@"</div>"];
     }
     else if ([iu isKindOfClass:[IUPage class]]) {
         IUPage *page = (IUPage*)iu;
