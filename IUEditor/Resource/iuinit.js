@@ -34,14 +34,14 @@ $(document).ready(function(){
 		});
 	}
                   
+    /*INIT_JS_REPLACEMENT*/
+                  
 	/* Initialize IUFrame.js */
-	console.log("ready : iuframe");
 	resizePageContentHeight();
 	resizeCollection();
 	reframeCenter();
 	resizePageLinkSet();
     setTextAutoHeight();
-
-/*INIT_JS_REPLACEMENT*/
             
+    console.log("ready : iuinit");
 });

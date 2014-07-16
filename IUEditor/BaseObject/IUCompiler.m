@@ -1353,7 +1353,6 @@
             if(value){
                 switch (obj.positionType) {
                     case IUPositionTypeAbsolute:
-                    case IUPositionTypeAbsoluteCenter:
                         [dict putTag:@"left" floatValue:[value floatValue] ignoreZero:NO unit:unit];
                         break;
                     case IUPositionTypeRelative:
