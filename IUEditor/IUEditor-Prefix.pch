@@ -75,6 +75,7 @@
 #define IUNotificationMQMaxChanged @"MQMaxChanged"
 #define IUNotificationMQSize @"MQSize"
 #define IUNotificationMQMaxSize @"MQMaxSize"
+#define IUNotificationMQOldMaxSize @"MQOldMaxSize"
 
 
 //notification when console log is arrived

@@ -34,6 +34,11 @@
 -(NSDictionary*)tagDictionaryForWidth:(NSInteger)width;
 -(NSArray*)allEditWidth;
 
+/**
+ @brief : copy max-size cssDictionary to specific width dictionary;
+ */
+- (void)copyMaxSizeToSize:(NSInteger)width;
+
 //observable.
 @property (readonly) NSMutableDictionary *assembledTagDictionary;
 @property (readonly) NSMutableDictionary *tagDictionaryForEditWidth;

@@ -94,6 +94,13 @@
     }
 }
 
+- (void)copyMaxSizeToSize:(NSInteger)width{
+    if(_cssFrameDict[@(width)] == nil){
+        NSMutableDictionary *cssDict = [_cssFrameDict[@(IUCSSMaxViewPortWidth)] mutableCopy];
+        [_cssFrameDict setObject:cssDict forKey:@(width)];
+    }
+}
+
 
 -(void)eradicateTag:(IUCSSTag)tag{
     for (id key in _cssFrameDict) {

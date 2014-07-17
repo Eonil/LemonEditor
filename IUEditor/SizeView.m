@@ -231,7 +231,12 @@
     NSInteger index = [[self sortedArray] indexOfObject:widthNumber];
     
     InnerSizeBox *removeView = boxManageView.subviews[index];
-    if(selectIndex == index){
+    if(index==0){
+        //it is largest box-select smallerbox
+        InnerSizeBox *nextBox = boxManageView.subviews[index+1];
+        [nextBox select];
+    }
+    else if(selectIndex == index){
         //select next larger box
         InnerSizeBox *nextBox = boxManageView.subviews[index-1];
         [nextBox select];
@@ -260,10 +265,14 @@
     NSInteger newWidth = [self.addFrameSizeField integerValue];
     [self addFrame:newWidth];
     [self.addFramePopover close];
-    
-    
-    //notification
-    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQAdded object:self userInfo:@{IUNotificationMQSize:@(newWidth)}];
+
+    InnerSizeBox *maxBox = (InnerSizeBox *)boxManageView.subviews[0];
+    InnerSizeBox *oldMaxBox = (InnerSizeBox *)boxManageView.subviews[1];
+//notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQAdded object:self
+                                                      userInfo:@{IUNotificationMQSize:@(newWidth),
+                                                                 IUNotificationMQOldMaxSize:@(oldMaxBox.frameWidth),
+                                                                 IUNotificationMQMaxSize:@(maxBox.frameWidth)}];
     
 }
 

@@ -95,6 +95,8 @@
 - (void)dealloc{
     if (self.didConnectWithEditor) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQAdded object:nil];
+
     }
 }
 
@@ -163,6 +165,8 @@
     NSAssert(self.project, @"");
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMQSize:) name:IUNotificationMQAdded object:nil];
+
     for (IUBox *box in self.children) {
         [box connectWithEditor];
     }
@@ -303,6 +307,18 @@
 
 
 #pragma mark - mq
+
+- (void)addMQSize:(NSNotification *)notification{
+    NSInteger size = [[notification.userInfo objectForKey:IUNotificationMQSize] integerValue];
+    NSInteger oldMaxSize = [[notification.userInfo valueForKey:IUNotificationMQOldMaxSize] integerValue];
+    NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
+
+    if(size == maxSize){
+        [_css copyMaxSizeToSize:oldMaxSize];
+    }
+    
+}
+
 
 - (void)changeMQSelect:(NSNotification *)notification{
     NSInteger selectedSize = [[notification.userInfo valueForKey:IUNotificationMQSize] integerValue];

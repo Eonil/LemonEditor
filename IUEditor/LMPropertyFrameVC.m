@@ -202,6 +202,8 @@
     NSAssert(0, @"");
 }
 
+#pragma mark - MQSize
+
 - (void)changeMQSelect:(NSNotification *)notification{
     NSInteger selectedSize = [[notification.userInfo valueForKey:IUNotificationMQSize] integerValue];
     NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
