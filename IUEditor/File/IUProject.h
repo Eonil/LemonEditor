@@ -58,7 +58,8 @@ static NSString *IUClassGroupName = @"class";
 @property NSString *user;
 @property NSString *password;
 @property NSString *host;
-@property NSString *remoteDirectory;
+@property NSString *remotePath;
+@property NSString *localPath;
 
 - (BOOL)isValid;
 

@@ -27,7 +27,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     self.host = [aDecoder decodeObjectForKey:@"host"];
-    self.remoteDirectory = [aDecoder decodeObjectForKey:@"remoteDirectory"];
+    self.remotePath = [aDecoder decodeObjectForKey:@"remotePath"];
     self.password = [aDecoder decodeObjectForKey:@"password"];
     self.user = [aDecoder decodeObjectForKey:@"user"];
     return self;
@@ -36,12 +36,12 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.user forKey:@"user"];
     [aCoder encodeObject:self.password forKey:@"password"];
-    [aCoder encodeObject:self.remoteDirectory forKey:@"remoteDirectory"];
+    [aCoder encodeObject:self.remotePath forKey:@"remotePath"];
     [aCoder encodeObject:self.host forKey:@"host"];
 }
 
 - (BOOL)isValid{
-    return [self.host length] && [self.remoteDirectory length] && [self.user length] && [self.password length];
+    return [self.host length] && [self.remotePath length] && [self.user length] && [self.password length];
 }
 @end
 
@@ -104,6 +104,10 @@
         [_identifierManager registerIUs:self.allDocuments];
         
         _serverInfo = [aDecoder decodeObjectForKey:@"serverInfo"];
+        if (_serverInfo == nil) {
+            //version control
+            _serverInfo = [[IUServerInfo alloc] init];
+        }
 
     }
     return self;
@@ -164,6 +168,9 @@
     
     [_resourceManager setResourceGroup:_resourceGroup];
     [_identifierManager registerIUs:self.allDocuments];
+    
+    _serverInfo = [[IUServerInfo alloc] init];
+    _serverInfo.localPath = [self path];
     return self;
 }
 
@@ -228,6 +235,7 @@
     [_identifierManager registerIUs:self.allDocuments];
     
     //    ReturnNilIfFalse([self save]);
+    _serverInfo = [[IUServerInfo alloc] init];
     return self;
 }
 
@@ -673,6 +681,9 @@
 }
 
 - (IUServerInfo*)serverInfo{
+    if (_serverInfo.localPath == nil) {
+        _serverInfo.localPath = [self directoryPath];
+    }
     return _serverInfo;
 }
 

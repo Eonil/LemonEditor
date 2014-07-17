@@ -18,8 +18,8 @@
 
 
 typedef enum _JDNetworkProtocol{
-    JDGit,
     JDSCP,
+    JDGit,
 } JDNetworkProtocol;
 
 @interface JDUploadUtil : NSObject

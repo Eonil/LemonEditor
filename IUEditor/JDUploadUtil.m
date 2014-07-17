@@ -36,14 +36,20 @@
 
 -(void)shellUtil:(JDShellUtil *)util standardErrorDataReceived:(NSData *)error{
     NSString *str = [[NSString alloc] initWithData:error encoding:NSUTF8StringEncoding];
+    NSLog(str, nil);
+
     if (str) {
         [self.delegate uploadUtilReceivedStdError:str];
     }
 }
 
+- (void)shellUtilExecutionFinished:(JDShellUtil *)util{
+    NSLog(@"------Terminated --- ");
+}
 
 - (void)shellUtil:(JDShellUtil *)util standardOutputDataReceived:(NSData *)data{
     NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(str, nil);
     if (str) {
         [self.delegate uploadUtilReceivedStdOutput:str];
     }

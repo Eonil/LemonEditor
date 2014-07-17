@@ -15,6 +15,13 @@
 @property (weak) IBOutlet NSComboBox *faviconComboBox;
 @property (weak) IBOutlet NSTextField *authorTF;
 
+
+@property (weak) IBOutlet NSTextField *hostTF;
+@property (weak) IBOutlet NSTextField *userTF;
+@property (weak) IBOutlet NSTextField *passwordTF;
+@property (weak) IBOutlet NSTextField *remoteTF;
+@property (weak) IBOutlet NSTextField *localTF;
+
 @end
 
 @implementation LMProjectPropertyWC{
@@ -30,11 +37,18 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    NSAssert(_project, @"should have project");
         
     [_authorTF bind:NSValueBinding toObject:self withKeyPath:@"project.author" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
     [_faviconComboBox bind:NSContentBinding toObject:self withKeyPath:@"project.resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
     [_faviconComboBox bind:NSValueBinding toObject:self withKeyPath:@"project.favicon" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+
+    [_hostTF bind:NSValueBinding toObject:_project.serverInfo withKeyPath:@"host" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_userTF bind:NSValueBinding toObject:_project.serverInfo withKeyPath:@"user" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_passwordTF bind:NSValueBinding toObject:_project.serverInfo withKeyPath:@"password" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_localTF bind:NSValueBinding toObject:_project.serverInfo withKeyPath:@"localPath" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_remoteTF bind:NSValueBinding toObject:_project.serverInfo withKeyPath:@"remotePath" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
 
     
 }

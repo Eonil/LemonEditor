@@ -82,6 +82,12 @@
     else {
         IUServerInfo *info = [self.docController.project serverInfo];
         if ([info isValid]) {
+            uploadUtil.user = info.user;
+            uploadUtil.host = info.host;
+            uploadUtil.password = info.password;
+            uploadUtil.protocol = 0;
+            uploadUtil.remoteDirectory = info.remotePath;
+            uploadUtil.localDirectory = info.localPath;
             [uploadUtil upload];
         }
         else {

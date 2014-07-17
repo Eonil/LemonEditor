@@ -150,13 +150,17 @@
 - (void)outputHandleDataReceived:(NSNotification*)noti{
     NSData *d = [outputHandle availableData];
     [_delegate shellUtil:self standardOutputDataReceived:d];
-    [outputHandle waitForDataInBackgroundAndNotify];
+    if ([self.task isRunning]) {
+        [outputHandle waitForDataInBackgroundAndNotify];
+    }
 }
 
 - (void)errorHandleDataReceived:(NSNotification*)noti{
     NSData *d = [errorHandle availableData];
     [_delegate shellUtil:self standardErrorDataReceived:d];
-    [errorHandle waitForDataInBackgroundAndNotify];
+    if ([self.task isRunning]) {
+        [errorHandle waitForDataInBackgroundAndNotify];
+    }
 }
 
 -(void)writeDataToStandardInput:(NSData*)data{
