@@ -155,6 +155,9 @@
 
 - (IBAction)outlineViewClicked:(NSOutlineView *)sender{
     NSTreeNode* clickItem = [sender itemAtRow:[sender clickedRow]];
+    if (clickItem == nil) {
+        return;
+    }
     BOOL extended = [sender isItemExpanded:clickItem];
     
     if (extended == NO) {
@@ -222,6 +225,7 @@
 - (void)removeDocument:(NSMenuItem*)sender{
     NSTreeNode *item = [_outlineV itemAtRow:sender.tag];
     IUSheet * node = [item representedObject];
+    IUSheetGroup *parent = node.group;
     if (node.group.childrenFiles.count == 1) {
         NSBeep();
         [JDUIUtil hudAlert:@"Each document folder should have at least one document" second:2];
@@ -229,6 +233,7 @@
     }
     [self.project removeSheet:node toSheetGroup:node.group];
     [self.project.identifierManager unregisterIUs:@[node]];
+    [_documentController setSelectedObject:[[parent childrenFiles] firstObject]];
     [_documentController rearrangeObjects];
 }
 
