@@ -73,9 +73,8 @@
 -(NSImage*)image{
     if (_image == nil) {
         NSImage *image;
-        NSString *pathExtension = [[_name pathExtension] lowercaseString];
-        if ([pathExtension isEqualToString:@"gif"] || [pathExtension isEqualToString:@"jpg"] ||
-            [pathExtension isEqualToString:@"png"] || [pathExtension isEqualToString:@"jpeg"]) {
+        NSString *pathExtension = [_name pathExtension];
+        if ([JDFileUtil isImageFileExtension:pathExtension]) {
             if ([[NSFileManager defaultManager] fileExistsAtPath:self.absolutePath]) {
                 image = [[NSImage alloc] initWithContentsOfFile:self.absolutePath];
             }
@@ -83,7 +82,7 @@
                 image = [[NSImage alloc] initWithContentsOfFile:self.originalFilePath];
             }
         }
-        if ([pathExtension isEqualToString:@"mp4"]){
+        if ([JDFileUtil isMovieFileExtension:pathExtension]){
             image = [NSImage imageNamed:@"tool_movie"];
         }
         _image = image;
