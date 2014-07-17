@@ -54,6 +54,16 @@ static NSString *IUBackgroundGroupName = @"background";
 static NSString *IUClassGroupName = @"class";
 
 
+@interface IUServerInfo : NSObject <NSCoding>
+@property NSString *user;
+@property NSString *password;
+@property NSString *host;
+@property NSString *remoteDirectory;
+
+- (BOOL)isValid;
+
+@end
+
 @interface IUProject : NSObject <IUFile, IUResourcePathProtocol, NSCoding>{
     IUSheetGroup *_pageGroup;
     IUSheetGroup *_backgroundGroup;
@@ -136,4 +146,7 @@ static NSString *IUClassGroupName = @"class";
 - (BOOL)isConnectedWithEditor;
 
 - (NSString*)buildPathForSheet:(IUSheet*)sheet;
+
+// server information
+- (IUServerInfo*)serverInfo;
 @end

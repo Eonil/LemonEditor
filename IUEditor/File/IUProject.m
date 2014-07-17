@@ -23,8 +23,31 @@
 
 @end
 
+@implementation IUServerInfo
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super init];
+    self.host = [aDecoder decodeObjectForKey:@"host"];
+    self.remoteDirectory = [aDecoder decodeObjectForKey:@"remoteDirectory"];
+    self.password = [aDecoder decodeObjectForKey:@"password"];
+    self.user = [aDecoder decodeObjectForKey:@"user"];
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:self.user forKey:@"user"];
+    [aCoder encodeObject:self.password forKey:@"password"];
+    [aCoder encodeObject:self.remoteDirectory forKey:@"remoteDirectory"];
+    [aCoder encodeObject:self.host forKey:@"host"];
+}
+
+- (BOOL)isValid{
+    return [self.host length] && [self.remoteDirectory length] && [self.user length] && [self.password length];
+}
+@end
+
 @implementation IUProject{
     BOOL _isConnectedWithEditor;
+    IUServerInfo *_serverInfo;
 }
 
 #pragma mark - init
@@ -40,6 +63,7 @@
     [encoder encodeObject:_name forKey:@"_name"];
     [encoder encodeObject:_favicon forKey:@"_favicon"];
     [encoder encodeObject:_author forKey:@"_author"];
+    [encoder encodeObject:_serverInfo forKey:@"serverInfo"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -79,6 +103,7 @@
         [_resourceManager setResourceGroup:_resourceGroup];
         [_identifierManager registerIUs:self.allDocuments];
         
+        _serverInfo = [aDecoder decodeObjectForKey:@"serverInfo"];
 
     }
     return self;
@@ -645,7 +670,10 @@
         [self didChangeValueForKey:@"classSheets"];
         
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureChangeRemoving, IUNotificationStructureChangedIU: sheet}];
+}
+
+- (IUServerInfo*)serverInfo{
+    return _serverInfo;
 }
 
 @end
