@@ -9,5 +9,6 @@
 #import "IUBox.h"
 
 @interface WPMenu : IUBox <IUCodeProtocol, IUSampleTextProtocol>
+@property NSInteger itemCount;
 
 @end
