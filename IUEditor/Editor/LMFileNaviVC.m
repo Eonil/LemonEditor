@@ -264,47 +264,45 @@
     }
 }
 
+#pragma mark - name change
+- (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor{
+    IUSheet *sheet = (IUSheet *)self.selection;
+    NSString *currentName = [fieldEditor string];
+    if([sheet.name isEqualToString:currentName] == NO){
+        return NO;
+    }
+    
+    return YES;
+}
 
-
-- (IBAction)fileNameEndEditing:(id)sender{
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
     NSAssert(_project.identifierManager, @"");
     
-    NSTextField *textField = (NSTextField *)sender;
     
     IUSheet *sheet = (IUSheet *)self.selection;
-    NSString *modifiedName = textField.stringValue;
+    NSString *modifiedName = fieldEditor.string;
     
     if([modifiedName stringByTrim].length == 0){
         [JDUIUtil hudAlert:@"Name should not be empty" second:2];
-        [textField setStringValue:sheet.name];
-        return;
-    }
-
-    
-    if([modifiedName isEqualToString:sheet.name]){
-        [textField setStringValue:sheet.name];
-        return;
+        return NO;
     }
     
     if([definedIdentifers containsString:modifiedName]
        || [definedPrefixIdentifiers containsPrefix:modifiedName]){
         [JDUIUtil hudAlert:@"This name is a program keyword" second:2];
-        [textField setStringValue:sheet.name];
-        return;
+        return NO;
     }
     
     NSCharacterSet *characterSet = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
     if([modifiedName rangeOfCharacterFromSet:characterSet].location != NSNotFound){
         [JDUIUtil hudAlert:@"Name should be alphabet or digit" second:2];
-        [textField setStringValue:sheet.name];
-        return;
+        return NO;
     }
     
     IUBox *box = [_project.identifierManager IUWithIdentifier:modifiedName];
     if (box != nil) {
         [JDUIUtil hudAlert:@"IU with same name exists" second:1];
-        [textField setStringValue:sheet.name];
-        return;
+        return NO;
     }
     
     [_project.identifierManager unregisterIUs:@[sheet]];
@@ -312,7 +310,7 @@
     [_project.identifierManager registerIUs:@[sheet]];
     sheet.name = modifiedName;
     
-    
+    return YES;
 }
 
 #pragma mark -

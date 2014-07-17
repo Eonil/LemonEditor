@@ -12,7 +12,7 @@
 #import "IUSheetController.h"
 #import "IUIdentifierManager.h"
 
-@interface LMFileNaviVC : NSViewController <NSOutlineViewDelegate, NSMenuDelegate>
+@interface LMFileNaviVC : NSViewController <NSOutlineViewDelegate, NSMenuDelegate, NSControlTextEditingDelegate>
 
 @property (nonatomic, readonly) id  selection;
 @property (strong, nonatomic) IBOutlet _binding_ IUSheetController *documentController;

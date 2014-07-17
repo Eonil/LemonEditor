@@ -65,7 +65,7 @@
                                                     </imageView>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="SgW-PA-7Lq">
                                                         <rect key="frame" x="27" y="6" width="188" height="14"/>
-                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="IUpage_1 [z:0]" id="BJ6-zR-sPX">
+                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" title="IUpage_1 [z:0]" id="BJ6-zR-sPX">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -98,7 +98,7 @@
                                                     </imageView>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Ohe-XE-7d4">
                                                         <rect key="frame" x="27" y="6" width="159" height="14"/>
-                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="pageContent" id="R0d-id-KWm">
+                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" title="pageContent" id="R0d-id-KWm">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -156,7 +156,7 @@
                                                             </allowedInputSourceLocales>
                                                         </textFieldCell>
                                                         <connections>
-                                                            <action selector="fileNameEndEditing:" target="-2" id="Cna-w3-TP8"/>
+                                                            <outlet property="delegate" destination="-2" id="qsw-bk-BkE"/>
                                                         </connections>
                                                     </textField>
                                                 </subviews>

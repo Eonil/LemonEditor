@@ -289,47 +289,48 @@
 }
 
 #pragma mark - name change
+- (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor{
+    IUBox *currentBox = (IUBox *)_IUController.selectedObjects[0];
+    NSString *currentName = [fieldEditor string];
+    if([currentBox.name isEqualToString:currentName] == NO){
+        return NO;
+    }
 
-- (IBAction)fileNameEndEditing:(id)sender{
+    return YES;
+}
+
+
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
     
     NSAssert(_sheet.project.identifierManager, @"");
     
-    NSTextField *textField = (NSTextField *)sender;
     
     IUBox *currentBox = (IUBox *)_IUController.selection;
-    NSString *modifiedName = textField.stringValue;
+    NSString *modifiedName = [control stringValue];
     
     if([modifiedName stringByTrim].length == 0){
         [JDUIUtil hudAlert:@"Name should not be empty" second:1];
-        [textField setStringValue:currentBox.name];
-        return;
-    }
-    
-    if([modifiedName isEqualToString:currentBox.name]){
-        [textField setStringValue:currentBox.name];
-        return;
+        return NO;
     }
     if([definedIdentifers containsString:modifiedName]
        || [definedPrefixIdentifiers containsPrefix:modifiedName]){
         [JDUIUtil hudAlert:@"This name is a program keyword" second:1];
-        [textField setStringValue:currentBox.name];
-        return;
+        return NO;
     }
     NSCharacterSet *characterSet = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
     if([modifiedName rangeOfCharacterFromSet:characterSet].location != NSNotFound){
         [JDUIUtil hudAlert:@"Name should be alphabet or digit" second:1];
-        [textField setStringValue:currentBox.name];
-        return;
+        return NO;
     }
     
     IUBox *box = [_sheet.project.identifierManager IUWithIdentifier:modifiedName];
     if (box != nil) {
         [JDUIUtil hudAlert:@"IU with same name exists" second:1];
-        [textField setStringValue:currentBox.name];
-        return;
+        return NO;
     }
     
     currentBox.name = modifiedName;
+    return YES;
 }
 
 @end
