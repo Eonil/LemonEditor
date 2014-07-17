@@ -20,5 +20,5 @@
 @property (nonatomic, readonly) NSArray *primaryWidgets;
 @property (nonatomic, readonly) NSArray *secondaryWidgets;
 @property (nonatomic, readonly) NSArray *PGWidgets;
-
+@property (nonatomic, readonly) NSArray *WPWidgets;
 @end
