@@ -16,4 +16,6 @@
 @property IUSheetController      *docController;
 - (IBAction)toggleRecording:(id)sender;
 - (IBAction)stopServer:(id)sender;
+- (IBAction)upload:(id)sender;
+
 @end

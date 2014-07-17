@@ -509,6 +509,8 @@
 		693849E41914D711005C0546 /* NSIndexPath+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */; };
 		693F24791977929C00451500 /* LMPropertyWPMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 693F24771977929C00451500 /* LMPropertyWPMenuVC.m */; };
 		693F247A1977929C00451500 /* LMPropertyWPMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */; };
+		693F24801977F67E00451500 /* JDUploadUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 693F247F1977F67E00451500 /* JDUploadUtil.m */; };
+		693F24821977F81400451500 /* JDUploadSCP.sh in Resources */ = {isa = PBXBuildFile; fileRef = 693F24811977F81400451500 /* JDUploadSCP.sh */; };
 		694A985F196D13E000C1D630 /* JDNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A985E196D13E000C1D630 /* JDNetworkUtil.m */; };
 		694A9862196D184400C1D630 /* JDIntegerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9861196D184400C1D630 /* JDIntegerTextField.m */; };
 		694A9865196D197900C1D630 /* JDFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9864196D197900C1D630 /* JDFormatter.m */; };
@@ -1303,6 +1305,9 @@
 		693F24761977929C00451500 /* LMPropertyWPMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyWPMenuVC.h; sourceTree = "<group>"; };
 		693F24771977929C00451500 /* LMPropertyWPMenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyWPMenuVC.m; sourceTree = "<group>"; };
 		693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyWPMenuVC.xib; sourceTree = "<group>"; };
+		693F247E1977F67E00451500 /* JDUploadUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDUploadUtil.h; sourceTree = "<group>"; };
+		693F247F1977F67E00451500 /* JDUploadUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDUploadUtil.m; sourceTree = "<group>"; };
+		693F24811977F81400451500 /* JDUploadSCP.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = JDUploadSCP.sh; sourceTree = "<group>"; };
 		694A985D196D13E000C1D630 /* JDNetworkUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDNetworkUtil.h; sourceTree = "<group>"; };
 		694A985E196D13E000C1D630 /* JDNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDNetworkUtil.m; sourceTree = "<group>"; };
 		694A9860196D184400C1D630 /* JDIntegerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDIntegerTextField.h; sourceTree = "<group>"; };
@@ -2855,6 +2860,9 @@
 				69757AF418D95BBC0095CBAC /* JDTransformer.m */,
 				69757AF518D95BBC0095CBAC /* JDUIUtil.h */,
 				69757AF618D95BBC0095CBAC /* JDUIUtil.m */,
+				693F24811977F81400451500 /* JDUploadSCP.sh */,
+				693F247E1977F67E00451500 /* JDUploadUtil.h */,
+				693F247F1977F67E00451500 /* JDUploadUtil.m */,
 				69757AFA18D95BBC0095CBAC /* JDWebUtil.h */,
 				69757AFB18D95BBC0095CBAC /* JDWebUtil.m */,
 				69757AFC18D95BBC0095CBAC /* NSMenu_JDExtension.h */,
@@ -3577,6 +3585,7 @@
 				3DED26C71900F65C001A1D67 /* ic_image@2x.png in Resources */,
 				262D4A941947FAF0006F5FBE /* border_icon_01.png in Resources */,
 				265FCC011953D08F00BD9068 /* reload.png in Resources */,
+				693F24821977F81400451500 /* JDUploadSCP.sh in Resources */,
 				3D2E6BA919653F3A00AC7DE5 /* EventFrame.mp4 in Resources */,
 				3DED26E319010B6B001A1D67 /* LMPropertyIUcarouselVC.xib in Resources */,
 				3DF803DE18FE62C900913505 /* align_full.png in Resources */,
@@ -3942,6 +3951,7 @@
 				3DF8046518FF784500913505 /* LMPropertyFontVC.m in Sources */,
 				69C5761E18D7051C0016F050 /* IUProject.m in Sources */,
 				69B9A39618E5A2A30007D6E2 /* IUResourceFile.m in Sources */,
+				693F24801977F67E00451500 /* JDUploadUtil.m in Sources */,
 				6905FB521925F17300E4DBC3 /* JDCode.m in Sources */,
 				3DED27221904AE1A001A1D67 /* LMEventVariableReceiverVC.m in Sources */,
 				69B37F0D18DFDEE800DE620F /* LMFileNaviVC.m in Sources */,

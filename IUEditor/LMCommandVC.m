@@ -16,6 +16,8 @@
 #import "JDNetworkUtil.h"
 #import "JDShellUtil.h"
 
+#import "JDUploadUtil.h"
+
 @interface LMCommandVC ()
 @property (weak) IBOutlet NSButton *buildB;
 @property (weak) IBOutlet NSButton *stopServerB;
@@ -40,6 +42,7 @@
 
     JDScreenRecorder *screenRecorder;
     JDShellUtil *debugServerShell;
+    JDUploadUtil *uploadUtil;
 
     BOOL recording;
 }
@@ -61,6 +64,7 @@
 #ifndef DEBUG
         [_recordingB setHidden:YES];
 #endif
+        uploadUtil = [[JDUploadUtil alloc] init];
     });
 }
 
@@ -70,6 +74,22 @@
     
     //[self removeObserver:self forKeyPath:@"docController.project.runnable"];
 }
+
+- (IBAction)upload:(id)sender{
+    if (uploadUtil.isUploading) {
+        [JDLogUtil alert:@"Upload Progressing.."];
+    }
+    else {
+        IUServerInfo *info = [self.docController.project serverInfo];
+        if ([info isValid]) {
+            [uploadUtil upload];
+        }
+        else {
+            [JDLogUtil alert:@"server info not valid. click project and set server info."];
+        }
+    }
+}
+
 
 
 - (NSInteger)djangoDebugPort{
@@ -92,6 +112,7 @@
         [_compilerB setAutoenablesItems:YES];
     }
 }
+
 
 - (void)shellUtil:(JDShellUtil*)util standardOutputDataReceived:(NSData*)data{
     NSString *log = [[NSString alloc] initWithData:data encoding:4];
