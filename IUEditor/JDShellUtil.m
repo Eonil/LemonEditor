@@ -130,6 +130,15 @@
     [outputHandle waitForDataInBackgroundAndNotify];
     [errorHandle waitForDataInBackgroundAndNotify];
     
+    __weak id <JDShellUtilPipeDelegate> weakDelegate = _delegate;
+    __weak typeof(self) weakSelf = self;
+
+    _task.terminationHandler =  ^(NSTask *aTask){
+        if ([weakDelegate respondsToSelector:@selector(shellUtilExecutionFinished:)]) {
+            [weakDelegate shellUtilExecutionFinished:weakSelf];
+        }
+    };
+    
     [_task launch];
     return [_task processIdentifier];
 }
