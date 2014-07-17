@@ -28,6 +28,7 @@
 #import "PGSubmitButtonVC.h"
 #import "LMInspectorAltTextVC.h"
 #import "LMPropertyWPArticleVC.h"
+#import "LMPropertyWPMenuVC.h"
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 
@@ -75,6 +76,7 @@
     LMPropertyProgrammingType2VC *propertyPGType2VC;
     
     LMPropertyWPArticleVC *propertyWPArticleVC;
+    LMPropertyWPMenuVC *propertyWPMenuVC;
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     LMPropertyTextVC *propertyTextVC;
@@ -143,6 +145,7 @@
         propertyWebProgramming = [[LMPropertyWebProgrammingVC alloc] initWithNibName:[LMPropertyWebProgrammingVC class].className bundle:nil];
         
         propertyWPArticleVC = [[LMPropertyWPArticleVC alloc] initWithNibName:[LMPropertyWPArticleVC class].className bundle:nil];
+        propertyWPMenuVC = [[LMPropertyWPMenuVC alloc] initWithNibName:[LMPropertyWPMenuVC class].className bundle:nil];
         
         [self loadView];
     }
@@ -177,7 +180,9 @@
     [propertyPGType2VC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
 
     [propertyWebProgramming bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+
     [propertyWPArticleVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+    [propertyWPMenuVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     [propertyTextVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
@@ -297,6 +302,9 @@
 #pragma mark WP
     else if ([classString isEqualToString:@"WPArticle"]){
         self.propertyVArray = @[propertyWPArticleVC.view];
+    }
+    else if ([classString isEqualToString:@"WPMenu"]){
+        self.propertyVArray = @[propertyWPMenuVC.view];
     }
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION

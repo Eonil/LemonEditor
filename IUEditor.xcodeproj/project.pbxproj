@@ -507,6 +507,8 @@
 		69317CB31947271F0065B6F4 /* LMHelpWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69317CB11947271F0065B6F4 /* LMHelpWC.xib */; };
 		69346623192B805000F82DAF /* LMCommandVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69346622192B805000F82DAF /* LMCommandVC.xib */; };
 		693849E41914D711005C0546 /* NSIndexPath+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */; };
+		693F24791977929C00451500 /* LMPropertyWPMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 693F24771977929C00451500 /* LMPropertyWPMenuVC.m */; };
+		693F247A1977929C00451500 /* LMPropertyWPMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */; };
 		694A985F196D13E000C1D630 /* JDNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A985E196D13E000C1D630 /* JDNetworkUtil.m */; };
 		694A9862196D184400C1D630 /* JDIntegerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9861196D184400C1D630 /* JDIntegerTextField.m */; };
 		694A9865196D197900C1D630 /* JDFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9864196D197900C1D630 /* JDFormatter.m */; };
@@ -1298,6 +1300,9 @@
 		69346622192B805000F82DAF /* LMCommandVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMCommandVC.xib; sourceTree = "<group>"; };
 		693849E21914D711005C0546 /* NSIndexPath+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+JDExtension.h"; sourceTree = "<group>"; };
 		693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+JDExtension.m"; sourceTree = "<group>"; };
+		693F24761977929C00451500 /* LMPropertyWPMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyWPMenuVC.h; sourceTree = "<group>"; };
+		693F24771977929C00451500 /* LMPropertyWPMenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyWPMenuVC.m; sourceTree = "<group>"; };
+		693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyWPMenuVC.xib; sourceTree = "<group>"; };
 		694A985D196D13E000C1D630 /* JDNetworkUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDNetworkUtil.h; sourceTree = "<group>"; };
 		694A985E196D13E000C1D630 /* JDNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDNetworkUtil.m; sourceTree = "<group>"; };
 		694A9860196D184400C1D630 /* JDIntegerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDIntegerTextField.h; sourceTree = "<group>"; };
@@ -3107,6 +3112,9 @@
 				CB2AA9CF19751CA200DA7CCD /* LMPropertyWPArticleVC.h */,
 				CB2AA9D019751CA200DA7CCD /* LMPropertyWPArticleVC.m */,
 				CB2AA9D119751CA200DA7CCD /* LMPropertyWPArticleVC.xib */,
+				693F24761977929C00451500 /* LMPropertyWPMenuVC.h */,
+				693F24771977929C00451500 /* LMPropertyWPMenuVC.m */,
+				693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */,
 			);
 			name = WPGroup;
 			sourceTree = "<group>";
@@ -3321,6 +3329,7 @@
 				26620E4B19458A2100B728CD /* select_directory.png in Resources */,
 				3DED27231904AE1A001A1D67 /* LMEventVariableReceiverVC.xib in Resources */,
 				267CB1BD190F95750079E565 /* bg_cover.png in Resources */,
+				693F247A1977929C00451500 /* LMPropertyWPMenuVC.xib in Resources */,
 				3DA6F2FF1963A676004DF0AA /* LMHelpTextPopoverVC.xib in Resources */,
 				2628C92A191A313C00D9D8CD /* tool_form.png in Resources */,
 				3DB3ACF318EBFDE20046DFB7 /* iuframe.js in Resources */,
@@ -3895,6 +3904,7 @@
 				3DE201F119667F6E00976EBC /* LMHelpLargeVideoPopoverVC.m in Sources */,
 				6999161D1919F05E000ECF57 /* PGSubmitButton.m in Sources */,
 				6954812818D7640A00CA02F1 /* IUPage.m in Sources */,
+				693F24791977929C00451500 /* LMPropertyWPMenuVC.m in Sources */,
 				69C5764018D729830016F050 /* IUSheetController.m in Sources */,
 				69AB7EAC19062598009E5195 /* IUTransition.m in Sources */,
 				58FF6B8E1946EA2B009A86F9 /* PGSubmitButtonVC.m in Sources */,
