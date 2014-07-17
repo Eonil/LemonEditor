@@ -16,13 +16,10 @@
 
 @property (weak) IBOutlet NSTabView *collectionTabV;
 
-@property (weak) IBOutlet NSCollectionView *primaryCollectionV;
-@property (weak) IBOutlet NSCollectionView *secondaryCollectionV;
-@property (weak) IBOutlet NSCollectionView *PGCollectionV;
-
 @property (weak) IBOutlet NSTabView *primaryTabView;
 @property (weak) IBOutlet NSTabView *secondaryTabView;
 @property (weak) IBOutlet NSTabView *PGTabView;
+@property (weak) IBOutlet NSTabView *WPTabView;
 
 @property (weak) IBOutlet NSButton *primaryListB;
 @property (weak) IBOutlet NSButton *primaryIconB;
@@ -30,6 +27,8 @@
 @property (weak) IBOutlet NSButton *secondaryIconB;
 @property (weak) IBOutlet NSButtonCell *PGListB;
 @property (weak) IBOutlet NSButton *PGIconB;
+@property (weak) IBOutlet NSButton *WPListB;
+@property (weak) IBOutlet NSButton *WPIconB;
 
 @end
 
@@ -53,6 +52,8 @@
     NSMutableArray *primaryArray = [NSMutableArray array];
     NSMutableArray *secondaryArray = [NSMutableArray array];
     NSMutableArray *PGArray = [NSMutableArray array];
+    NSMutableArray *WPArray = [NSMutableArray array];
+
     for (NSDictionary *dict in array) {
         
         BOOL isWidget = [dict[@"isWidget"] boolValue];
@@ -73,6 +74,9 @@
             else if(widgetClass == WidgetClassTypePG){
                 [PGArray addObject:obj];
             }
+            else if(widgetClass == WidgetClassTypeWP){
+                [WPArray addObject:obj];
+            }
         }
     }
     [self willChangeValueForKey:@"primaryWidgets"];
@@ -86,6 +90,11 @@
     [self willChangeValueForKey:@"PGWidgets"];
     _PGWidgets = PGArray;
     [self didChangeValueForKey:@"PGWidgets"];
+    
+    [self willChangeValueForKey:@"WPWidgets"];
+    _WPWidgets = WPArray;
+    [self didChangeValueForKey:@"WPWidgets"];
+
 }
 
 
@@ -165,6 +174,19 @@
     [_PGListB setEnabled:YES];
     [_PGIconB setEnabled:NO];
 }
+
+- (IBAction)clickWPList:(id)sender{
+    [_WPTabView selectTabViewItemAtIndex:0];
+    [_WPListB setEnabled:NO];
+    [_WPIconB setEnabled:YES];
+}
+
+- (IBAction)clickWPIcon:(id)sender {
+    [_WPTabView selectTabViewItemAtIndex:1];
+    [_WPListB setEnabled:YES];
+    [_WPIconB setEnabled:NO];
+}
+
 
 
 - (IBAction)clickWidgetTabMatrix:(id)sender {

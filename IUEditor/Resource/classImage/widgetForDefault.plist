@@ -20,7 +20,7 @@
 		<key>longDesc</key>
 		<string></string>
 		<key>widgetClass</key>
-		<integer>0</integer>
+		<integer>3</integer>
 	</dict>
 	<dict>
 		<key>manual</key>
@@ -40,7 +40,7 @@
 		<key>longDesc</key>
 		<string></string>
 		<key>widgetClass</key>
-		<integer>0</integer>
+		<integer>3</integer>
 	</dict>
 	<dict>
 		<key>manual</key>
@@ -60,7 +60,7 @@
 		<key>longDesc</key>
 		<string></string>
 		<key>widgetClass</key>
-		<integer>0</integer>
+		<integer>3</integer>
 	</dict>
 	<dict>
 		<key>manual</key>
@@ -80,7 +80,7 @@
 		<key>longDesc</key>
 		<string></string>
 		<key>widgetClass</key>
-		<integer>0</integer>
+		<integer>3</integer>
 	</dict>
 	<dict>
 		<key>manual</key>
