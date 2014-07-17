@@ -353,7 +353,7 @@
 #pragma mark IUCarousel
     else if([iu isKindOfClass:[IUCarousel class]]){
         IUCarousel *carousel = (IUCarousel *)iu;
-        [code addCodeLineWithFormat:@"<div %@>", [self HTMLAttributes:iu option:nil isEdit:YES]];
+        [code addCodeLineWithFormat:@"<div %@>", [self HTMLAttributes:iu option:nil isEdit:NO]];
         //carousel item
         [code addCodeLineWithFormat:@"<div class='wrapper' id='wrapper_%@'>", iu.htmlID];
         for(IUItem *item in iu.children){
@@ -1031,12 +1031,11 @@
     //default-
     [code addCodeLine:@"<style id=default>"];
     [code increaseIndentLevelForEdit];
-    [code addCodeWithFormat:@"body { min-width:%dpx }", largestWidth];
 
     
     NSDictionary *cssDict = [self cssSourceForIU:sheet width:IUCSSMaxViewPortWidth isEdit:isEdit];
     for (NSString *identifier in cssDict) {
-        [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
+        [code addCodeLineWithFormat:@"%@ {min-width:%dpx; %@}", identifier, largestWidth, cssDict[identifier]];
     }
     NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
     
@@ -1058,12 +1057,11 @@
         [code addCodeLine:@"<style type=\"text/css\" "];
         [code addCodeWithFormat:@"media ='screen and (max-width:%dpx)' id='style%d'>" , size, size];
         [code increaseIndentLevelForEdit];
-        [code addCodeWithFormat:@"body { min-width:%dpx }", size];
         
         NSDictionary *cssDict = [self cssSourceForIU:sheet width:size isEdit:isEdit];
         for (NSString *identifier in cssDict) {
             if ([[cssDict[identifier] stringByTrim]length]) {
-                [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
+                [code addCodeLineWithFormat:@"%@ {min-width:%dpx; %@}", identifier, size, cssDict[identifier]];
             }
         }
         
