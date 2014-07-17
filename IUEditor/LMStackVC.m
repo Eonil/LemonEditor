@@ -69,6 +69,7 @@
     [self.IUController rearrangeObjects];
     if ([[notification.userInfo objectForKey:IUNotificationStructureChangeType] isEqualTo: IUNotificationStructureAdding]) {
         IUBox *newOne = [notification.userInfo objectForKey:IUNotificationStructureChangedIU];
+        [self.IUController rearrangeObjects];
         if (newOne) {
             [self.IUController setSelectedObject:newOne];
         }
