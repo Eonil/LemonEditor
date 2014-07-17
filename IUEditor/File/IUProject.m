@@ -24,6 +24,7 @@
 @end
 
 @implementation IUProject{
+    BOOL _isConnectedWithEditor;
 }
 
 #pragma mark - init
@@ -212,8 +213,18 @@
     
     for (IUSheet *sheet in self.allDocuments) {
         [sheet connectWithEditor];
-        [sheet setDidConnectWithEditor:YES];
     }
+}
+
+- (void)setIsConnectedWithEditor{
+    _isConnectedWithEditor = YES;
+    for (IUSheet *sheet in self.allDocuments) {
+        [sheet setIsConnectedWithEditor];
+    }
+}
+
+- (BOOL)isConnectedWithEditor{
+    return _isConnectedWithEditor;
 }
 
 #pragma mark - mq
@@ -599,7 +610,6 @@
         [self didChangeValueForKey:@"classSheets"];
 
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureAdding, IUNotificationStructureChangedIU: sheet}];
 }
 
 - (void)removeSheet:(IUSheet *)sheet toSheetGroup:(IUSheetGroup *)sheetGroup{

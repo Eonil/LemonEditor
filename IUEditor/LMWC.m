@@ -321,7 +321,7 @@
         bottomToolbarVC.resourceManager = _project.resourceManager;
         
         [_project connectWithEditor];
-        
+        [_project setIsConnectedWithEditor];
     }
 }
 

@@ -98,6 +98,7 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
         
         IUProject *newProject = [[NSClassFromString([IUProject stringProjectType:projectType]) alloc] initWithCreation:projectDict error:&error];
         [newProject connectWithEditor];
+        [newProject setIsConnectedWithEditor];
         if (error != nil) {
             NSAssert(0, @"");
         }

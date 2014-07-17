@@ -28,7 +28,7 @@
     NSSize originalSize;
     NSSize originalPercentSize;
     IUProject *_tempProject;
-    BOOL    _didConnectedWithEditor;
+    BOOL    _isConnectedWithEditor;
 }
 
 
@@ -93,7 +93,7 @@
 }
 
 - (void)dealloc{
-    if (self.didConnectWithEditor) {
+    if (self.isConnectedWithEditor) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQAdded object:nil];
 
@@ -204,7 +204,7 @@
     [box.project.identifierManager confirm];
     
     [box connectWithEditor];
-    box.didConnectWithEditor = YES;
+    [box setIsConnectedWithEditor];
 
     return box;
 }
@@ -451,14 +451,14 @@
     return [self insertIU:iu atIndex:index error:error];
 }
 
--(BOOL)didConnectWithEditor{
-    return _didConnectedWithEditor;
+-(BOOL)isConnectedWithEditor{
+    return _isConnectedWithEditor;
 }
 
--(void)setDidConnectWithEditor:(BOOL)didConnectWithEditor{
-    _didConnectedWithEditor = didConnectWithEditor;
+-(void)setIsConnectedWithEditor{
+    _isConnectedWithEditor = YES;
     for (IUBox *iu in self.children) {
-        [iu setDidConnectWithEditor:didConnectWithEditor];
+        [iu setIsConnectedWithEditor];
     }
 }
 
@@ -476,9 +476,9 @@
     }
     
     iu.parent = self;
-    if (self.didConnectWithEditor) {
+    if (self.isConnectedWithEditor) {
         [iu connectWithEditor];
-        iu.didConnectWithEditor = YES;
+        [iu setIsConnectedWithEditor];
     }
     
     if ([self.sheet isKindOfClass:[IUClass class]]) {
@@ -503,7 +503,7 @@
     [self updateJS];
     [iu bind:@"identifierManager" toObject:self withKeyPath:@"identifierManager" options:nil];
 
-    if (self.didConnectWithEditor) {
+    if (self.isConnectedWithEditor) {
         [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureAdding, IUNotificationStructureChangedIU: iu}];
     }
 
