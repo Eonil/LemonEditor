@@ -185,11 +185,13 @@ $(window).resize(function(){
 
 $(document).ready(function(){
             console.log("ready : iueditor.js");
-            resizeBackgroundSize();
-            reInsertCarousel();
-            setTextAutoHeight();
+            resizePageContentHeight();
+            resizeCollection();
             reframeCenter();
+            resizePageLinkSet();
+            setTextAutoHeight();
             getIUUpdatedFrameThread();
+            
             console.log("endof : iueditor.js");
 
 });
