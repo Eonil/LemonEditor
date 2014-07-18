@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -138,7 +138,7 @@
                                     <constraint firstAttribute="height" constant="14" id="Gk1-hO-exu"/>
                                 </constraints>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Font Color" id="kUN-If-LR0">
-                                    <font key="font" metaFont="miniSystem"/>
+                                    <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -149,8 +149,8 @@
                                     <constraint firstAttribute="height" constant="13" id="YkA-0M-pfd"/>
                                     <constraint firstAttribute="width" constant="69" id="aRb-WY-nb9"/>
                                 </constraints>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Size / Height" id="epT-JP-YgM">
-                                    <font key="font" metaFont="miniSystem"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Size/Height" id="epT-JP-YgM">
+                                    <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -161,8 +161,8 @@
                                     <constraint firstAttribute="height" constant="13" id="Vg6-7e-VlT"/>
                                     <constraint firstAttribute="width" constant="69" id="yuL-Ru-Uni"/>
                                 </constraints>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Align / Option" id="JaD-b1-Qg6">
-                                    <font key="font" metaFont="miniSystem"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Align/Option" id="JaD-b1-Qg6">
+                                    <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
