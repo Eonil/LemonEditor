@@ -19,11 +19,10 @@ $(document).ready(function(){
         else {
             $(this).bind(eventType, transitionAnimation);
         }
-        var firstObj = $(this).children()[0];
+        var firstObj = $(this).children().filter('.IUItem')[0];
         $(firstObj).css('display', 'block');
-        var secondObj = $(this).children()[1];
+        var secondObj = $(this).children().filter('.IUItem')[1];
         $(secondObj).css('display', 'none');
-                            
 	});
                   
 	//move : current viewport pc type

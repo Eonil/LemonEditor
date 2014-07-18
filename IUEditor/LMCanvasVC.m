@@ -79,14 +79,12 @@
     [_debugBtn setHidden:YES];
 #endif
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadSheet) name:IUNotificationMQSelected object:nil];
 
     
 }
 -(void) dealloc{
     //release 시점 확인용
     NSAssert(0, @"");
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
     /*
     [self removeObserver:self forKeyPath:@"view.sizeView.sizeArray" ];
     [self removeObserver:self forKeyPaths:@[@"sheet.ghostImageName",

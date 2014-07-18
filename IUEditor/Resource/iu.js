@@ -26,7 +26,13 @@ function transitionAnimationOn(eventObject){
 	var effect = $(this).attr('transitionanimation');
     var duration = $(this).attr('transitionduration');
 
-   	$(secondObj).show(effect, duration);
+    if(duration <= 0){
+        $(secondObj).show(effect, 1);
+    }
+    else{
+        $(secondObj).show(effect, duration);
+    }
+
    	$(this).data('isSelected', 'false');
 }
 
@@ -36,7 +42,12 @@ function transitionAnimationOff(eventObject){
     var effect = $(this).attr('transitionanimation');
     var duration = $(this).attr('transitionduration');
     
-    $(secondObj).hide(effect, duration);
+    if(duration <= 0){
+        $(secondObj).hide(effect, 1);
+    }
+    else{
+        $(secondObj).hide(effect, duration);
+    }
     $(this).data('isSelected', 'true');
 }
 

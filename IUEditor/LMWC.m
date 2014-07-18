@@ -227,6 +227,8 @@
 - (void)dealloc{
     //release 시점 확인용
     NSAssert(0, @"");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
+
 }
 
 - (void)setLeftInspectorState:(NSInteger)state{
@@ -322,6 +324,9 @@
         
         [_project connectWithEditor];
         [_project setIsConnectedWithEditor];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentDocument) name:IUNotificationMQSelected object:nil];
+
     }
 }
 

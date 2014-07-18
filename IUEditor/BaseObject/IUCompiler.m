@@ -1058,10 +1058,10 @@
         [code addCodeWithFormat:@"media ='screen and (max-width:%dpx)' id='style%d'>" , size, size];
         [code increaseIndentLevelForEdit];
         
-        NSDictionary *cssDict = [self cssSourceForIU:sheet width:size isEdit:isEdit];
+        NSMutableDictionary *cssDict = [[self cssSourceForIU:sheet width:size isEdit:isEdit] mutableCopy];
         for (NSString *identifier in cssDict) {
             if ([[cssDict[identifier] stringByTrim]length]) {
-                [code addCodeLineWithFormat:@"%@ {min-width:%dpx; %@}", identifier, size, cssDict[identifier]];
+                [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
             }
         }
         
@@ -1126,11 +1126,15 @@
     else if([identifier isEqualToString:[[iu.htmlID cssClass] cssHoverClass]]){
         cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForWidth:width] ofClass:iu isHover:YES isEdit:isEdit] mutableCopy];
     }
-    else{
-        cssDict = [self cssStringDictionaryWithIdentifier:identifier ofIU:iu isEdit:isEdit];
-    }
     
+    [cssDict addEntriesFromDictionary:[self cssStringDictionaryWithIdentifier:identifier ofIU:iu isEdit:isEdit]];
+
     if(width != IUCSSMaxViewPortWidth){
+        
+        if([iu isKindOfClass:[IUPage class]] && [identifier isEqualToString:[iu.htmlID cssClass]]){
+            [cssDict putTag:@"min-width" intValue:(int)width ignoreZero:YES unit:IUCSSUnitPixel];
+        }
+
         [cssDict removeObjectForKey:@"position"];
         [cssDict removeObjectForKey:@"overflow"];
         [cssDict removeObjectForKey:@"z-index"];
