@@ -234,7 +234,6 @@
 - (void)dealloc{
     //release 시점 확인용
     NSAssert(0, @"");
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
 
 }
 
@@ -296,8 +295,12 @@
     //create project class
     [super setDocument:document];
     
+    if(document == nil){
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];   
+    }
+    
     //document == nil means window will be closed
-    if(document){
+    if(document && document.project){
         _project = document.project;
         //[canvasVC bind:@"documentBasePath" toObject:_project withKeyPath:@"path" options:nil];
         NSError *error;
