@@ -12,13 +12,11 @@
 #import "IUProject.h"
 
 @implementation IUCarousel{
-    BOOL initializing;
 }
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if(self){
-        initializing = YES;
         self.count = 3;
         [self.css setValue:@(500) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
         [self.css setValue:@(300) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
@@ -30,7 +28,6 @@
         _leftY = 100;
         _rightY = 100;
         _pagerPosition = 50;
-        initializing = NO;
     }
     return self;
 }
@@ -103,9 +100,10 @@
         }
     }
     else if(count > self.children.count) {
-        if (initializing == NO) {
+        if (self.isConnectedWithEditor) {
             [self.project.identifierManager resetUnconfirmedIUs];
         }
+        
 
         for(NSInteger i=self.children.count; i <count; i++){
             IUCarouselItem *item = [[IUCarouselItem alloc] initWithProject:self.project options:nil];
@@ -113,7 +111,7 @@
             [self addIU:item error:nil];
         }
         
-        if (initializing == NO) {
+        if (self.isConnectedWithEditor) {
             [self.project.identifierManager confirm];
         }
     }

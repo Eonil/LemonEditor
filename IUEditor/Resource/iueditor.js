@@ -7,8 +7,8 @@ $.fn.updatePixel = function(){
 	return this.each(function(){
                      var myName = this.id;
                      
-                     var display = $(this).css('display');
-                     if(display == 'none'){
+                     
+                     if($(this).is(':visible') == false){
                         return;
                      }
                      if($(this).hasClass("IUBackground")){

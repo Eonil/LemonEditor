@@ -16,7 +16,6 @@
 
 
 @implementation IUTransition{
-    
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -34,16 +33,18 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
-    _firstItem = [[IUItem alloc] initWithProject:project options:options];
-    _secondItem = [[IUItem alloc] initWithProject:project options:options];
-    [_secondItem.css setValue:@(NO) forTag:IUCSSTagDisplay forWidth:IUCSSMaxViewPortWidth];
-    
-    [self addIU:_firstItem error:nil];
-    [self addIU:_secondItem error:nil];
-    self.currentEdit = 0;
-    self.eventType = @"Click";
-    self.animation = @"Blind";
-    self.duration  = 0.2;
+    if(self){
+        _firstItem = [[IUItem alloc] initWithProject:project options:options];
+        _secondItem = [[IUItem alloc] initWithProject:project options:options];
+        [_secondItem.css setValue:@(NO) forTag:IUCSSTagDisplay forWidth:IUCSSMaxViewPortWidth];
+        
+        [self addIU:_firstItem error:nil];
+        [self addIU:_secondItem error:nil];
+        self.currentEdit = 0;
+        self.eventType = @"Click";
+        self.animation = @"Blind";
+        self.duration  = 0.2;
+    }
     return self;
 }
 
