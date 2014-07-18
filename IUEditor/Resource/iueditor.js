@@ -9,6 +9,11 @@ $.fn.updatePixel = function(){
                      
                      
                      if($(this).is(':visible') == false){
+                        var newPosition = $(this).iuPosition();
+                        newPosition.width = 0;
+                        newPosition.height = 0;
+                        this.position = newPosition;
+                        document.sharedFrameDict[myName] = this.position;
                         return;
                      }
                      if($(this).hasClass("IUBackground")){
