@@ -10,9 +10,10 @@
 
 @protocol JDUploadUtilDeleagate <NSObject>
 
+@required
 - (void)uploadUtilReceivedStdOutput:(NSString*)aMessage;
 - (void)uploadUtilReceivedStdError:(NSString*)aMessage;
-- (void)uploadFinished:(BOOL)result;
+- (void)uploadFinished:(int)terminationStatus;
 
 @end
 
@@ -35,6 +36,7 @@ typedef enum _JDNetworkProtocol{
 @property JDNetworkProtocol protocol;
 
 - (BOOL)upload;
+- (BOOL)download;
 - (BOOL)isUploading;
 
 @end

@@ -109,6 +109,10 @@
     //sheet
     LMProjectConvertWC *pcWC;
     LMProjectPropertyWC *projectPropertyWC;
+    
+    //log
+    
+    int consoleLogReferenceCount;
 }
 
 - (id)initWithWindow:(NSWindow *)window
@@ -177,14 +181,17 @@
     [_eventV addSubviewFullFrame:eventVC.view];
     
     
-    [self setLogViewState:0];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performDoubleClick:) name:IUNotificationDoubleClickCanvas object:self.window];
-    [[NSNotificationCenter defaultCenter]addObserverForName:IUNotificationConsoleEnd object:self.window queue:nil usingBlock:^(NSNotification *note) {
-        [self setLogViewState:0];
-    }];
+    
+    
+    // console log
+    [self setLogViewState:0];
     [[NSNotificationCenter defaultCenter]addObserverForName:IUNotificationConsoleStart object:self.window queue:nil usingBlock:^(NSNotification *note) {
-        [self setLogViewState:1];
+        [self increaseConsoleLogReferenceCount];
+    }];
+    [[NSNotificationCenter defaultCenter]addObserverForName:IUNotificationConsoleEnd object:self.window queue:nil usingBlock:^(NSNotification *note) {
+        [self decreaseConsoleLogReferenceCount];
     }];
 }
 
@@ -250,6 +257,16 @@
     else{
         [_rightVConstraint setConstant:-300];
     }
+}
+
+- (void)increaseConsoleLogReferenceCount{
+    consoleLogReferenceCount ++;
+    [self setLogViewState:consoleLogReferenceCount];
+}
+
+- (void)decreaseConsoleLogReferenceCount{
+    consoleLogReferenceCount --;
+    [self setLogViewState:consoleLogReferenceCount];
 }
 
 - (void)setLogViewState:(NSInteger)state{

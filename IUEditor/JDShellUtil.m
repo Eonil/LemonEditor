@@ -135,7 +135,9 @@
 
     _task.terminationHandler =  ^(NSTask *aTask){
         if ([weakDelegate respondsToSelector:@selector(shellUtilExecutionFinished:)]) {
-            [weakDelegate shellUtilExecutionFinished:weakSelf];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakDelegate shellUtilExecutionFinished:weakSelf];
+            });
         }
     };
     

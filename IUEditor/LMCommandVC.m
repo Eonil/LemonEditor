@@ -14,9 +14,6 @@
 #import "LMTutorialManager.h"
 #import "LMHelpWC.h"
 #import "JDNetworkUtil.h"
-#import "JDShellUtil.h"
-
-#import "JDUploadUtil.h"
 
 @interface LMCommandVC ()
 @property (weak) IBOutlet NSButton *buildB;
@@ -65,6 +62,7 @@
         [_recordingB setHidden:YES];
 #endif
         uploadUtil = [[JDUploadUtil alloc] init];
+        uploadUtil.delegate = self;
     });
 }
 
@@ -73,27 +71,6 @@
     NSAssert(0, @"");
     
     //[self removeObserver:self forKeyPath:@"docController.project.runnable"];
-}
-
-- (IBAction)upload:(id)sender{
-    if (uploadUtil.isUploading) {
-        [JDLogUtil alert:@"Upload Progressing.."];
-    }
-    else {
-        IUServerInfo *info = [self.docController.project serverInfo];
-        if ([info isValid]) {
-            uploadUtil.user = info.user;
-            uploadUtil.host = info.host;
-            uploadUtil.password = info.password;
-            uploadUtil.protocol = 0;
-            uploadUtil.remoteDirectory = info.remotePath;
-            uploadUtil.localDirectory = info.localPath;
-            [uploadUtil upload];
-        }
-        else {
-            [JDLogUtil alert:@"server info not valid. click project and set server info."];
-        }
-    }
 }
 
 
@@ -282,6 +259,67 @@
     }
 }
 
+
+#pragma mark -
+#pragma mark Upload
+
+- (IBAction)upload:(id)sender{
+    if (uploadUtil.isUploading) {
+        [JDLogUtil alert:@"Upload Progressing.."];
+    }
+    else {
+        IUServerInfo *info = [self.docController.project serverInfo];
+        if ([info isValid]) {
+            uploadUtil.user = info.user;
+            uploadUtil.host = info.host;
+            uploadUtil.password = info.password;
+            uploadUtil.protocol = 0;
+            uploadUtil.remoteDirectory = info.remotePath;
+            uploadUtil.localDirectory = info.localPath;
+            [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleStart object:self.view.window userInfo:nil];
+            [uploadUtil upload];
+        }
+        else {
+            [JDLogUtil alert:@"server info not valid. click project and set server info."];
+        }
+    }
+}
+
+
+- (void)uploadUtilReceivedStdOutput:(NSString*)aMessage{
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleLog object:self.view.window userInfo:@{IUNotificationConsoleLogText: aMessage}];
+    
+}
+- (void)uploadUtilReceivedStdError:(NSString*)aMessage{
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleLog object:self.view.window userInfo:@{IUNotificationConsoleLogText: aMessage}];
+}
+
+- (void)uploadFinished:(int)terminationStatus{
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleEnd object:self.view.window userInfo:nil];
+    
+}
+
+- (IBAction)download:(id)sender{
+    if (uploadUtil.isUploading) {
+        [JDLogUtil alert:@"Upload Progressing.."];
+    }
+    else {
+        IUServerInfo *info = [self.docController.project serverInfo];
+        if ([info isValid]) {
+            uploadUtil.user = info.user;
+            uploadUtil.host = info.host;
+            uploadUtil.password = info.password;
+            uploadUtil.protocol = 0;
+            uploadUtil.remoteDirectory = info.remotePath;
+            uploadUtil.localDirectory = info.localPath;
+            [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleStart object:self.view.window userInfo:nil];
+            [uploadUtil download];
+        }
+        else {
+            [JDLogUtil alert:@"server info not valid. click project and set server info."];
+        }
+    }
+}
 
 
 @end

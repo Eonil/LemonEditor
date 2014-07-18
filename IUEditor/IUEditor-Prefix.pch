@@ -82,6 +82,7 @@
 #define IUNotificationConsoleLog @"ConsoleLog"
 #define IUNotificationConsoleStart @"ConsoleStart"
 #define IUNotificationConsoleEnd @"ConsoleEnd"
+#define IUNotificationConsoleLogText @"Log"
 
 
 //for text modification 2.0version

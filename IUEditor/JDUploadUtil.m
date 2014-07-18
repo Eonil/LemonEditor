@@ -20,7 +20,22 @@
     if (self.protocol == JDSCP) {
         NSString *src = [[NSBundle mainBundle] pathForResource:@"JDUploadSCP" ofType:@"sh"];
         util = [[JDShellUtil alloc] init];
-        NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@", src, self.user, self.password, self.host, self.localDirectory, self.remoteDirectory];
+        NSString *to = [NSString stringWithFormat:@"%@@%@:%@", self.user, self.host, self.remoteDirectory];
+        NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@", src, self.localDirectory, to, self.password];
+        [util execute:command delegate:self];
+    }
+    else {
+        assert(0); // not coded yet
+    }
+    return YES;
+}
+
+- (BOOL)download{
+    if (self.protocol == JDSCP) {
+        NSString *src = [[NSBundle mainBundle] pathForResource:@"JDUploadSCP" ofType:@"sh"];
+        util = [[JDShellUtil alloc] init];
+        NSString *from = [NSString stringWithFormat:@"%@@%@:%@", self.user, self.host, self.remoteDirectory];
+        NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@", src, from , self.localDirectory, self.password];
         [util execute:command delegate:self];
     }
     else {
@@ -43,8 +58,8 @@
     }
 }
 
-- (void)shellUtilExecutionFinished:(JDShellUtil *)util{
-    NSLog(@"------Terminated --- ");
+- (void)shellUtilExecutionFinished:(JDShellUtil *)_util{
+    [self.delegate uploadFinished:[_util.task terminationStatus]];
 }
 
 - (void)shellUtil:(JDShellUtil *)util standardOutputDataReceived:(NSData *)data{
