@@ -88,7 +88,7 @@
         }
         
         if ([tag isFrameTag] == NO) {
-            [self.delegate updateCSSForEditViewPort];
+            [self.delegate updateCSSForViewPortWidth:width];
         }
         
     }

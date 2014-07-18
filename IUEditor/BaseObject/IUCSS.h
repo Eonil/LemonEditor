@@ -12,6 +12,7 @@
 @required
 - (void)updateCSSForEditViewPort;
 - (void)updateCSSForMaxViewPort;
+- (void)updateCSSForViewPortWidth:(NSInteger)width;
 - (BOOL)CSSShouldChangeValue:(id)value forTag:(IUCSSTag)tag forWidth:(NSInteger)width;
 @end
 

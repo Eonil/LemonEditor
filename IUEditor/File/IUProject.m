@@ -463,6 +463,10 @@
     NSString *iuCSSPath = [[NSBundle mainBundle] pathForResource:@"iu" ofType:@"css"];
     [CSSGroup addResourceFileWithContentOfPath:iuCSSPath];
     
+    NSString *iueditorCSSPath = [[NSBundle mainBundle] pathForResource:@"iueditor" ofType:@"css"];
+    [CSSGroup addResourceFileWithContentOfPath:iueditorCSSPath];
+
+    
     //Java Script resource copy
     NSString *iuEditorJSPath = [[NSBundle mainBundle] pathForResource:@"iueditor" ofType:@"js"];
     [JSGroup addResourceFileWithContentOfPath:iuEditorJSPath];

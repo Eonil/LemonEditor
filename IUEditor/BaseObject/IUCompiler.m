@@ -211,6 +211,8 @@
         NSString *initJS = @"<script type=\"text/javascript\" src=\"resource/js/iuinit.js\"></script>";
         [sourceCode replaceCodeString:@"<!-- IUInit.JS -->" toCodeString:initJS];
         
+        NSString *iuCSS = @"<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/css/iu.css\">";
+        [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCodeString:iuCSS];
         
         //change css
         JDCode *cssCode = [self cssSource:document cssSizeArray:mqSizeArray isEdit:NO];
@@ -563,6 +565,9 @@
     
     JDCode *webFontCode = [self webfontImportSourceForEdit];
     [sourceCode replaceCodeString:@"<!--WEBFONT_Insert-->" toCode:webFontCode];
+    
+    NSString *iuCSS = @"<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/css/iu.css\">";
+    [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCodeString:iuCSS];
     
     JDCode *cssCode = [self cssSource:document cssSizeArray:mqSizeArray isEdit:YES];
     [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCode:cssCode];
@@ -1127,17 +1132,14 @@
         cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForWidth:width] ofClass:iu isHover:YES isEdit:isEdit] mutableCopy];
     }
     
-    [cssDict addEntriesFromDictionary:[self cssStringDictionaryWithIdentifier:identifier ofIU:iu isEdit:isEdit]];
+    [cssDict addEntriesFromDictionary:[self cssStringDictionaryWithIdentifier:identifier ofIU:iu width:width isEdit:isEdit]];
 
     if(width != IUCSSMaxViewPortWidth){
-        
-        if([iu isKindOfClass:[IUPage class]] && [identifier isEqualToString:[iu.htmlID cssClass]]){
-            [cssDict putTag:@"min-width" intValue:(int)width ignoreZero:YES unit:IUCSSUnitPixel];
-        }
-
         [cssDict removeObjectForKey:@"position"];
         [cssDict removeObjectForKey:@"overflow"];
         [cssDict removeObjectForKey:@"z-index"];
+        [cssDict removeObjectForKey:@"float"];
+        [cssDict removeObjectForKey:@"display"];
     }
     
     return cssDict;
@@ -1147,11 +1149,17 @@
 /**
  @breif this method makes property css dictionary
  */
--(IUCSSStringDictionary*)cssStringDictionaryWithIdentifier:(NSString *)identifier ofIU:(IUBox*)iu  isEdit:(BOOL)isEdit{
+-(IUCSSStringDictionary*)cssStringDictionaryWithIdentifier:(NSString *)identifier ofIU:(IUBox*)iu width:(NSInteger)width isEdit:(BOOL)isEdit{
     IUCSSStringDictionary *dict = [IUCSSStringDictionary dictionary];
     
+#pragma mark - IUPage
+    if([iu isKindOfClass:[IUPage class]]){
+        if([identifier isEqualToString:[iu.htmlID cssClass]] && width != IUCSSMaxViewPortWidth){
+            [dict putTag:@"min-width" intValue:(int)width ignoreZero:YES unit:IUCSSUnitPixel];
+        }
+    }
 #pragma mark - PGPageLinkSet
-    if([iu isKindOfClass:[PGPageLinkSet class]]){
+    else if([iu isKindOfClass:[PGPageLinkSet class]]){
         
         PGPageLinkSet *pageLinkSet = (PGPageLinkSet *)iu;
         if([identifier isEqualToString:[pageLinkSet.htmlID.cssClass stringByAppendingString:pageLinkSetButtonCSSPostfix]]){
@@ -1178,14 +1186,6 @@
         }
         else if([identifier isEqualToString:[pageLinkSet.htmlID.cssClass stringByAppendingString:pageLinkSetButtonSelectedLiCSSPostfix]]){
              [dict putTag:@"background-color" color:pageLinkSet.selectedButtonBGColor ignoreClearColor:NO];
-        }
-    }
-#pragma mark - IUCarouselItem
-    else if([iu isKindOfClass:[IUCarouselItem class]]){
-        if(isEdit){
-            [dict putTag:@"width" intValue:100 ignoreZero:YES unit:IUCSSUnitPercent];
-            [dict putTag:@"height" intValue:100 ignoreZero:YES unit:IUCSSUnitPercent];
-            [dict putTag:@"left" intValue:0 ignoreZero:NO unit:IUCSSUnitPixel];
         }
     }
 #pragma mark - IUCarousel

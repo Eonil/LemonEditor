@@ -144,17 +144,16 @@
     IUBox *selectedChild = [set anyObject];
     for(IUCarouselItem *item in self.children){
         if([item isEqualTo:selectedChild]){
-            [item.css setValue:@(YES) forTag:IUCSSTagDisplay];
+            [item.css setValue:@(YES) forTag:IUCSSTagDisplay forWidth:IUCSSMaxViewPortWidth];
             item.isActive = YES;
         }
         else{
-            [item.css setValue:@(NO) forTag:IUCSSTagDisplay];
+            [item.css setValue:@(NO) forTag:IUCSSTagDisplay forWidth:IUCSSMaxViewPortWidth];
             item.isActive = NO;
         }
     }
     
     [self updateHTML];
-    [self updateJS];
 }
 
 - (NSInteger)count{
@@ -162,6 +161,8 @@
 }
 
 #pragma mark Inner CSS (Carousel)
+
+
 - (NSString *)pagerWrapperID{
     return [NSString stringWithFormat:@"%@ > .Pager", [self.htmlID cssClass]];
 }

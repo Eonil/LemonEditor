@@ -393,13 +393,16 @@
     }
 }
 
-- (void)updateCSSForEditViewPort{
+- (void)updateCSSForViewPortWidth:(NSInteger)width{
     if (self.delegate) {
         for(NSString *cssIdentifier in [self cssIdentifierArray]){
-            [self CSSUpdatedForWidth:_css.editWidth withIdentifier:cssIdentifier];
-            
+            [self CSSUpdatedForWidth:width withIdentifier:cssIdentifier];
         }
     }
+}
+
+- (void)updateCSSForEditViewPort{
+    [self updateCSSForViewPortWidth:_css.editWidth];
 }
 
 //delegation
