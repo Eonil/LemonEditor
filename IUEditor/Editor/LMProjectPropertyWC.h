@@ -13,4 +13,6 @@
 
 - (id)initWithWindowNibName:(NSString *)windowNibName withIUProject:(IUProject *)project;
 
+- (IUServerInfo*)serverInfo;
+
 @end

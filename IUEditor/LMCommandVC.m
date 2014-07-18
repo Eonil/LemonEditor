@@ -265,9 +265,9 @@
 
 - (IBAction)upload:(id)sender{
     if (uploadUtil.isUploading) {
-        [JDLogUtil alert:@"Upload Progressing.."];
+        [JDLogUtil alert:@"Upload was Progressing. Kill it and start new uploading"];
+        [uploadUtil terminate];
     }
-    else {
         IUServerInfo *info = [self.docController.project serverInfo];
         if ([info isValid]) {
             uploadUtil.user = info.user;
@@ -282,7 +282,6 @@
         else {
             [JDLogUtil alert:@"server info not valid. click project and set server info."];
         }
-    }
 }
 
 

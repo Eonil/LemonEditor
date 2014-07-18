@@ -19,7 +19,7 @@
 
 
 typedef enum _JDNetworkProtocol{
-    JDSCP,
+    JDSFTP,
     JDGit,
 } JDNetworkProtocol;
 
@@ -30,13 +30,15 @@ typedef enum _JDNetworkProtocol{
 @property NSString *host;
 @property NSString *user;
 @property NSString *password;
+@property NSString *syncDirectory;
 @property NSString *localDirectory;
 @property NSString *remoteDirectory;
+@property NSString *afterCommand;
 
 @property JDNetworkProtocol protocol;
 
 - (BOOL)upload;
 - (BOOL)download;
 - (BOOL)isUploading;
-
+- (BOOL)terminate;
 @end

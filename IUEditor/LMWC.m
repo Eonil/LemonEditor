@@ -347,6 +347,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentDocument) name:IUNotificationMQSelected object:nil];
 
+
     }
 }
 

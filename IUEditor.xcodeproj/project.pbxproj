@@ -498,6 +498,8 @@
 		690A8275190A2CC200DDBA86 /* new_django.png in Resources */ = {isa = PBXBuildFile; fileRef = 690A826F190A2CC200DDBA86 /* new_django.png */; };
 		690A8276190A2CC200DDBA86 /* new_pt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 690A8270190A2CC200DDBA86 /* new_pt@2x.png */; };
 		690A8277190A2CC200DDBA86 /* new_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 690A8271190A2CC200DDBA86 /* new_default.png */; };
+		690C5415197921BC00F57793 /* sftp.sh in Resources */ = {isa = PBXBuildFile; fileRef = 690C5413197921BC00F57793 /* sftp.sh */; };
+		690C5416197921BC00F57793 /* ssh.sh in Resources */ = {isa = PBXBuildFile; fileRef = 690C5414197921BC00F57793 /* ssh.sh */; };
 		6919204718DCFC8200F8522B /* NSCoder+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6919204618DCFC8200F8522B /* NSCoder+JDExtension.m */; };
 		6919204A18DCFED000F8522B /* NSObject+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6919204918DCFED000F8522B /* NSObject+JDExtension.m */; };
 		691F91A91973C2EA00A4CFFF /* IUWordpressProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91A81973C2EA00A4CFFF /* IUWordpressProject.m */; };
@@ -517,6 +519,7 @@
 		693F24801977F67E00451500 /* JDUploadUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 693F247F1977F67E00451500 /* JDUploadUtil.m */; };
 		693F24821977F81400451500 /* JDUploadSCP.sh in Resources */ = {isa = PBXBuildFile; fileRef = 693F24811977F81400451500 /* JDUploadSCP.sh */; };
 		693F24831978CFDB00451500 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69C575BF18D6F61E0016F050 /* MainMenu.xib */; };
+		693F24871978F9EF00451500 /* iueditor.css in Resources */ = {isa = PBXBuildFile; fileRef = 693F24861978F9EF00451500 /* iueditor.css */; };
 		694A985F196D13E000C1D630 /* JDNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A985E196D13E000C1D630 /* JDNetworkUtil.m */; };
 		694A9862196D184400C1D630 /* JDIntegerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9861196D184400C1D630 /* JDIntegerTextField.m */; };
 		694A9865196D197900C1D630 /* JDFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9864196D197900C1D630 /* JDFormatter.m */; };
@@ -1292,6 +1295,8 @@
 		690A826F190A2CC200DDBA86 /* new_django.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_django.png; sourceTree = "<group>"; };
 		690A8270190A2CC200DDBA86 /* new_pt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_pt@2x.png"; sourceTree = "<group>"; };
 		690A8271190A2CC200DDBA86 /* new_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_default.png; sourceTree = "<group>"; };
+		690C5413197921BC00F57793 /* sftp.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = sftp.sh; path = ../../../sftp.sh; sourceTree = "<group>"; };
+		690C5414197921BC00F57793 /* ssh.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = ssh.sh; path = ../../../ssh.sh; sourceTree = "<group>"; };
 		6919204518DCFC8200F8522B /* NSCoder+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSCoder+JDExtension.h"; path = "JD/NSCoder+JDExtension.h"; sourceTree = "<group>"; };
 		6919204618DCFC8200F8522B /* NSCoder+JDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCoder+JDExtension.m"; path = "JD/NSCoder+JDExtension.m"; sourceTree = "<group>"; };
 		6919204818DCFED000F8522B /* NSObject+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JDExtension.h"; sourceTree = "<group>"; };
@@ -1319,6 +1324,7 @@
 		693F247E1977F67E00451500 /* JDUploadUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDUploadUtil.h; sourceTree = "<group>"; };
 		693F247F1977F67E00451500 /* JDUploadUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDUploadUtil.m; sourceTree = "<group>"; };
 		693F24811977F81400451500 /* JDUploadSCP.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = JDUploadSCP.sh; sourceTree = "<group>"; };
+		693F24861978F9EF00451500 /* iueditor.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = iueditor.css; sourceTree = "<group>"; };
 		694A985D196D13E000C1D630 /* JDNetworkUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDNetworkUtil.h; sourceTree = "<group>"; };
 		694A985E196D13E000C1D630 /* JDNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDNetworkUtil.m; sourceTree = "<group>"; };
 		694A9860196D184400C1D630 /* JDIntegerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDIntegerTextField.h; sourceTree = "<group>"; };
@@ -2547,6 +2553,7 @@
 				3DED275F190E38C5001A1D67 /* images */,
 				3DA6CA84197CBA00004D6587 /* iueditor.css */,
 				3DED276D190E3976001A1D67 /* jquery.bxslider.css */,
+				693F24861978F9EF00451500 /* iueditor.css */,
 				696D1C9D18E5778400B4AB16 /* reset.css */,
 				69B9A39718E697F70007D6E2 /* iu.css */,
 			);
@@ -2840,6 +2847,8 @@
 		69757AD218D95BB10095CBAC /* JD */ = {
 			isa = PBXGroup;
 			children = (
+				690C5413197921BC00F57793 /* sftp.sh */,
+				690C5414197921BC00F57793 /* ssh.sh */,
 				6983E71B18FFF54600D424B8 /* JDOutlineCellView.h */,
 				6983E71C18FFF54600D424B8 /* JDOutlineCellView.m */,
 				69757AD318D95BBC0095CBAC /* CALayer+JDExtension.h */,
@@ -3351,6 +3360,7 @@
 				2641F457195A72FF00DDF1C3 /* bg_v_center@2x.png in Resources */,
 				3DA6C653197536C6004D6587 /* iucarousel.js in Resources */,
 				267CB198190F93370079E565 /* tab_clipart_off@2x.png in Resources */,
+				690C5415197921BC00F57793 /* sftp.sh in Resources */,
 				26620E4B19458A2100B728CD /* select_directory.png in Resources */,
 				3DED27231904AE1A001A1D67 /* LMEventVariableReceiverVC.xib in Resources */,
 				267CB1BD190F95750079E565 /* bg_cover.png in Resources */,
@@ -3423,6 +3433,7 @@
 				3DF8043D18FE62FC00913505 /* tool_fblike.png in Resources */,
 				3DF8044918FE62FC00913505 /* tool_textfield.png in Resources */,
 				2694CEFA193486760011E072 /* pause.png in Resources */,
+				690C5416197921BC00F57793 /* ssh.sh in Resources */,
 				3D2E6BB419653F5800AC7DE5 /* IUResponsive.mp4 in Resources */,
 				3DF8043918FE62FC00913505 /* tool_movie.png in Resources */,
 				3DED27351904F13B001A1D67 /* ic_movie@2x.png in Resources */,
@@ -3633,6 +3644,7 @@
 				2628C9211919C8C800D9D8CD /* tab_secondary_off@2x.png in Resources */,
 				3DED27531908C393001A1D67 /* clear_color_border@2x.png in Resources */,
 				698E840119358C14002CE47B /* LMProjectConvertWC.xib in Resources */,
+				693F24871978F9EF00451500 /* iueditor.css in Resources */,
 				265592D819615D7000F0C316 /* preview.png in Resources */,
 				3DF8044118FE62FC00913505 /* tool_navi.png in Resources */,
 				3DED26621900D313001A1D67 /* align_right@2x.png in Resources */,

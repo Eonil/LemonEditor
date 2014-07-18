@@ -60,6 +60,8 @@ static NSString *IUClassGroupName = @"class";
 @property NSString *host;
 @property NSString *remotePath;
 @property NSString *localPath;
+@property NSString *syncPath;
+@property NSString *afterCommand;
 
 - (BOOL)isValid;
 
