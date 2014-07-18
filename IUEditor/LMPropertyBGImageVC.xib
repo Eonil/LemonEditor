@@ -55,9 +55,6 @@
                                         </segment>
                                     </segments>
                                 </segmentedCell>
-                                <connections>
-                                    <action selector="clickSegementedControlBox:" target="-2" id="vhp-g0-cD7"/>
-                                </connections>
                             </segmentedControl>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GeA-Ft-SlO">
                                 <rect key="frame" x="4" y="112" width="65" height="14"/>

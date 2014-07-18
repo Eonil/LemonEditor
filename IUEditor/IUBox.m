@@ -381,7 +381,13 @@
  
  */
 - (NSArray *)cssIdentifierArray{
-    return @[[self.htmlID cssClass], [[self.htmlID cssClass] cssHoverClass]];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:@[[self.htmlID cssClass], [[self.htmlID cssClass] cssHoverClass]]];
+    
+    if(_pgContentVariable){
+        [array addObject:[[self.htmlID cssClass] stringByAppendingString:@">p"]];
+    }
+    
+    return array;
 }
 
 - (void)updateCSSForMaxViewPort{
@@ -564,7 +570,10 @@
 
 #pragma mark has frame
 - (BOOL)hasText{
-    return NO;
+    if(self.children.count > 0){
+        return NO;
+    }
+    return YES;
 }
 
 -(BOOL)hasX{

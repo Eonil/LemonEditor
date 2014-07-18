@@ -12,5 +12,5 @@
 
 @interface LMPropertyProgrammingType2VC : NSViewController
 
-@property IUController  *controller;
+@property (nonatomic) IUController  *controller;
 @end

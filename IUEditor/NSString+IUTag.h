@@ -74,6 +74,7 @@ static NSString * IUCSSTagBGGradientEndColor = @"bg-gradient-end";
 static NSString * IUCSSTagBGRepeat    = @"bacground-repeat";
 static NSString * IUCSSTagBGVPosition = @"bgV-position";
 static NSString * IUCSSTagBGHPosition = @"bgH-position";
+
 typedef enum{
     IUCSSBGVPostionTop,
     IUCSSBGVPostionCenter,
@@ -126,6 +127,7 @@ typedef enum{
 }IUAlign;
 
 static NSString * IUCSSTagLineHeight = @"lineHeight";
+static NSString * IUCSSTagEllipsis = @"ellipsis";
 
 
 static NSString * IUCSSTagShadowColor = @"shadowColor";

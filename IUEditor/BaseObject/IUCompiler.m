@@ -1263,11 +1263,24 @@
             
             }
         
-        
-        
-        
-        
-
+    }
+    #pragma mark - IUBox
+    else if([iu isKindOfClass:[IUBox class]]){
+        if(_rule == IUCompileRuleDjango && isEdit == NO && iu.pgContentVariable){
+            NSDictionary *cssDict = [iu.css tagDictionaryForWidth:width];
+            NSInteger line =  [cssDict[IUCSSTagEllipsis] integerValue];
+            if([identifier isEqualToString:[[iu.htmlID cssClass] stringByAppendingString:@">p"]])
+            if(line > 0){
+                if(line > 1){
+                    [dict putTag:@"display" string:@"-webkit-box"];
+                }
+                [dict putTag:@"overflow" string:@"hidden"];
+                [dict putTag:@"text-overflow" string:@"ellipsis"];
+                [dict putTag:@"-webkit-line-clamp" intValue:(int)line ignoreZero:YES unit:IUCSSUnitNone];
+                [dict putTag:@"-webkit-box-orient" string:@"vertical"];
+                [dict putTag:@"height" intValue:100 ignoreZero:NO unit:IUCSSUnitPercent];
+            }
+        }
     }
     
     return dict;
@@ -1716,6 +1729,8 @@
                 }
                 [dict putTag:@"text-align" string:alignText];
             }
+            
+
         }
         /*
         else{
