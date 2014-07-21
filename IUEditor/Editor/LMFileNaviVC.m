@@ -284,38 +284,41 @@
     NSAssert(_project.identifierManager, @"");
     
     
-    IUSheet *sheet = (IUSheet *)self.selection;
-    NSString *modifiedName = fieldEditor.string;
-    
-    if([modifiedName stringByTrim].length == 0){
-        [JDUIUtil hudAlert:@"Name should not be empty" second:2];
-        return NO;
+    if([self.view hasSubview:control]){
+        IUSheet *sheet = (IUSheet *)self.selection;
+        NSString *modifiedName = fieldEditor.string;
+        
+        if([modifiedName stringByTrim].length == 0){
+            [JDUIUtil hudAlert:@"Name should not be empty" second:2];
+            return NO;
+        }
+        
+        if([definedIdentifers containsString:modifiedName]
+           || [definedPrefixIdentifiers containsPrefix:modifiedName]){
+            [JDUIUtil hudAlert:@"This name is a program keyword" second:2];
+            return NO;
+        }
+        
+        NSCharacterSet *characterSet = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+        if([modifiedName rangeOfCharacterFromSet:characterSet].location != NSNotFound){
+            [JDUIUtil hudAlert:@"Name should be alphabet or digit" second:2];
+            return NO;
+        }
+        
+        IUBox *box = [_project.identifierManager IUWithIdentifier:modifiedName];
+        if (box != nil) {
+            [JDUIUtil hudAlert:@"IU with same name exists" second:1];
+            return NO;
+        }
+        
+        [_project.identifierManager unregisterIUs:@[sheet]];
+        sheet.htmlID = modifiedName;
+        [_project.identifierManager registerIUs:@[sheet]];
+        sheet.name = modifiedName;
+        
+        return YES;
     }
-    
-    if([definedIdentifers containsString:modifiedName]
-       || [definedPrefixIdentifiers containsPrefix:modifiedName]){
-        [JDUIUtil hudAlert:@"This name is a program keyword" second:2];
-        return NO;
-    }
-    
-    NSCharacterSet *characterSet = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
-    if([modifiedName rangeOfCharacterFromSet:characterSet].location != NSNotFound){
-        [JDUIUtil hudAlert:@"Name should be alphabet or digit" second:2];
-        return NO;
-    }
-    
-    IUBox *box = [_project.identifierManager IUWithIdentifier:modifiedName];
-    if (box != nil) {
-        [JDUIUtil hudAlert:@"IU with same name exists" second:1];
-        return NO;
-    }
-    
-    [_project.identifierManager unregisterIUs:@[sheet]];
-    sheet.htmlID = modifiedName;
-    [_project.identifierManager registerIUs:@[sheet]];
-    sheet.name = modifiedName;
-    
-    return YES;
+    return NO;
 }
 
 #pragma mark -

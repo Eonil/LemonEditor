@@ -264,11 +264,11 @@
 - (void)setName:(NSString *)name{
     //loading - not called rename notification
     if (_name == nil) {
-        _name = name;
+        _name = [name copy];
     }
     //rename precedure
     else {
-        _name = name;
+        _name = [name copy];
         [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:
                     @{IUNotificationStructureChangeType: IUNotificationStructureChangeTypeRenaming,
                       IUNotificationStructureChangedIU: self}];

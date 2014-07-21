@@ -314,33 +314,36 @@
     
     NSAssert(_sheet.project.identifierManager, @"");
     
-    
-    IUBox *currentBox = (IUBox *)_IUController.selection;
-    NSString *modifiedName = [control stringValue];
-    
-    if([modifiedName stringByTrim].length == 0){
-        [JDUIUtil hudAlert:@"Name should not be empty" second:1];
-        return NO;
+    if([self.view hasSubview:control]){ 
+        
+        IUBox *currentBox = (IUBox *)_IUController.selection;
+        NSString *modifiedName = [control stringValue];
+        
+        if([modifiedName stringByTrim].length == 0){
+            [JDUIUtil hudAlert:@"Name should not be empty" second:1];
+            return NO;
+        }
+        if([definedIdentifers containsString:modifiedName]
+           || [definedPrefixIdentifiers containsPrefix:modifiedName]){
+            [JDUIUtil hudAlert:@"This name is a program keyword" second:1];
+            return NO;
+        }
+        NSCharacterSet *characterSet = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+        if([modifiedName rangeOfCharacterFromSet:characterSet].location != NSNotFound){
+            [JDUIUtil hudAlert:@"Name should be alphabet or digit" second:1];
+            return NO;
+        }
+        
+        IUBox *box = [_sheet.project.identifierManager IUWithIdentifier:modifiedName];
+        if (box != nil) {
+            [JDUIUtil hudAlert:@"IU with same name exists" second:1];
+            return NO;
+        }
+        
+        currentBox.name = modifiedName;
+        return YES;
     }
-    if([definedIdentifers containsString:modifiedName]
-       || [definedPrefixIdentifiers containsPrefix:modifiedName]){
-        [JDUIUtil hudAlert:@"This name is a program keyword" second:1];
-        return NO;
-    }
-    NSCharacterSet *characterSet = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
-    if([modifiedName rangeOfCharacterFromSet:characterSet].location != NSNotFound){
-        [JDUIUtil hudAlert:@"Name should be alphabet or digit" second:1];
-        return NO;
-    }
-    
-    IUBox *box = [_sheet.project.identifierManager IUWithIdentifier:modifiedName];
-    if (box != nil) {
-        [JDUIUtil hudAlert:@"IU with same name exists" second:1];
-        return NO;
-    }
-    
-    currentBox.name = modifiedName;
-    return YES;
+    return NO;
 }
 
 @end
