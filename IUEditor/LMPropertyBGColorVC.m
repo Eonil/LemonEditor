@@ -47,7 +47,7 @@
 }
 
 - (void)makeClearColor:(id)sender{
-    [self setValue:nil forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGColor]];
+    [self setValue:[NSColor clearColor] forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGColor]];
 }
 - (IBAction)clickEnableGradient:(id)sender {
     if([_enableGradientBtn state]){
