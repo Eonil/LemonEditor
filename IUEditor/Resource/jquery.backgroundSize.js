@@ -36,7 +36,7 @@
 	};
                
 	// feature detection
-	if ( "backgroundSize" in div.style && !$.debugBGS ) { return; }
+	if ( "backgroundSize" in div.style ) { return; }
                
 	$.cssHooks.backgroundSize = {
 		set: function( elem, value ) {
