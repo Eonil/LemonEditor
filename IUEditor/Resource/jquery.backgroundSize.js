@@ -315,14 +315,15 @@
 
 function getStyleSheetPropertyValue(selectorText, propertyName) {
     // search backwards because the last match is more likely the right one
-    for (var s= document.styleSheets.length - 1; s >= 0; s--) {
-        var cssRules = document.styleSheets[s].cssRules ||
-                document.styleSheets[s].rules || []; // IE support
-        for (var c=0; c < cssRules.length; c++) {
-            if (cssRules[c].selectorText === selectorText)
-                return cssRules[c].style[propertyName];
-        }
+
+    var sheet = document.getElementById('default').styleSheet;
+    var cssRules = sheet.cssRules ||
+            sheet.rules || []; // IE support
+    for (var c=0; c < cssRules.length; c++) {
+        if (cssRules[c].selectorText === selectorText)
+            return cssRules[c].style[propertyName];
     }
+    
     return null;
 }
 
@@ -332,7 +333,7 @@ $(document).ready(function(){
 		 var id = '.'+$(this).attr('id');
 		 var size = getStyleSheetPropertyValue(id, 'background-size');
 		 //reset to make value in backgroundSize.js
-		 if(size != 'undefined'){
+		 if(size != undefined){
 			 $(this).css('background-size', size);
 		 }
 	 });
