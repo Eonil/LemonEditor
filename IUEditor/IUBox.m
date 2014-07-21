@@ -212,6 +212,10 @@
 - (BOOL)canCopy{
     return YES;
 }
+#pragma mark - Undo Manager
+- (NSUndoManager *)undoManager{
+   return [[[[NSApp mainWindow] windowController] document] undoManager];
+}
 
 #pragma mark - setXXX
 
@@ -284,6 +288,7 @@
 }
 
 - (void)setImageName:(NSString *)imageName{
+    
     NSDictionary *defaultTagDictionary = [_css tagDictionaryForWidth:IUCSSMaxViewPortWidth];
     if (defaultTagDictionary) {
         [_css setValue:imageName forTag:IUCSSTagImage forWidth:_css.editWidth];

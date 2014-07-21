@@ -76,21 +76,30 @@
 -(void)setValue:(id)value forTag:(IUCSSTag)tag forWidth:(NSInteger)width{
     if ([_delegate CSSShouldChangeValue:value forTag:tag forWidth:width]){
         NSMutableDictionary *cssDict = _cssFrameDict[@(width)];
-        if (cssDict == nil) {
-            cssDict = [NSMutableDictionary dictionary];
-            [_cssFrameDict setObject:cssDict forKey:@(width)];
-        }
-        if (value == nil) {
-            [cssDict removeObjectForKey:tag];
-            [_assembledTagDictionaryForEditWidth removeObjectForKey:tag];
-        }
-        else {
-            cssDict[tag] = value;
-            [_assembledTagDictionaryForEditWidth setObject:value forKey:tag];
-        }
         
-        if ([tag isFrameTag] == NO) {
-            [self.delegate updateCSSForViewPortWidth:width];
+        id currentValue = [cssDict objectForKey:tag];
+        if(currentValue == nil ||  [currentValue isNotEqualTo:value]){
+            
+            if([tag isFrameTag] == NO){
+                [[[self.delegate undoManager] prepareWithInvocationTarget:self] setValue:currentValue forTag:tag forWidth:width];
+            }
+            
+            if (cssDict == nil) {
+                cssDict = [NSMutableDictionary dictionary];
+                [_cssFrameDict setObject:cssDict forKey:@(width)];
+            }
+            if (value == nil) {
+                [cssDict removeObjectForKey:tag];
+                [_assembledTagDictionaryForEditWidth removeObjectForKey:tag];
+            }
+            else {
+                cssDict[tag] = value;
+                [_assembledTagDictionaryForEditWidth setObject:value forKey:tag];
+            }
+            
+            if ([tag isFrameTag] == NO) {
+                [self.delegate updateCSSForViewPortWidth:width];
+            }
         }
         
     }

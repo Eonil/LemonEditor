@@ -112,6 +112,8 @@ typedef enum _IUOverflowType{
 @property (nonatomic) BOOL lineHeightAuto;
 
 #endif
+//undoManager
+- (NSUndoManager *)undoManager;
 
 
 //Event

@@ -139,6 +139,17 @@
                                     <action selector="delete:" target="-1" id="235"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="48k-QC-sCY"/>
+                            <menuItem title="Undo" keyEquivalent="z" id="q1e-Pm-yyb">
+                                <connections>
+                                    <action selector="undo:" target="-1" id="CNk-pV-Qvt"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Redo" keyEquivalent="Z" id="k4p-2f-ihm">
+                                <connections>
+                                    <action selector="redo:" target="-1" id="MLb-18-eZd"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
