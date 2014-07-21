@@ -47,6 +47,8 @@
 - (id)copyWithZone:(NSZone *)zone{
     IUCSS *css = [[[self class] allocWithZone:zone] init];
     css.cssFrameDict = [self.cssFrameDict deepCopy];
+    css.editWidth = self.editWidth;
+    css.maxWidth = self.maxWidth;
     css.assembledTagDictionaryForEditWidth = [self.assembledTagDictionaryForEditWidth deepCopy];
     return css;
 }

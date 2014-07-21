@@ -129,7 +129,6 @@ typedef enum _IUOverflowType{
 
 //HTML
 -(NSString*)html;
--(NSString*)cssForWidth:(NSInteger)width isHover:(BOOL)isHover;
 - (void)updateHTML;
 
 //JS

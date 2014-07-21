@@ -495,9 +495,15 @@
             
             [import updateHTML];
             [import updateCSSForMaxViewPort];
+            if(_css.editWidth != IUCSSMaxViewPortWidth){
+                [import updateCSSForEditViewPort];
+            }
             
             for (IUBox *child in iu.children) {
                 [child updateCSSForMaxViewPort];
+                if(_css.editWidth != IUCSSMaxViewPortWidth){
+                    [child updateCSSForEditViewPort];
+                }
             }
         }
     }
@@ -505,8 +511,14 @@
 
     [iu updateHTML];
     [iu updateCSSForMaxViewPort];
+    if(_css.editWidth != IUCSSMaxViewPortWidth){
+        [iu updateCSSForEditViewPort];
+    }
     for (IUBox *child in iu.children) {
         [child updateCSSForMaxViewPort];
+        if(_css.editWidth != IUCSSMaxViewPortWidth){
+            [child updateCSSForEditViewPort];
+        }
     }
 
     [self updateJS];
