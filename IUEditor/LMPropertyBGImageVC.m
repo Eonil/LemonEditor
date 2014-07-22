@@ -123,8 +123,6 @@
 }
 
 - (void)dealloc{
-    //release 시점 확인용
-    NSAssert(0, @"");
 }
 
 

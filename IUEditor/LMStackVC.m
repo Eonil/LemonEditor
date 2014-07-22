@@ -346,4 +346,8 @@
     return NO;
 }
 
+- (void)dealloc{
+    NSLog(@"stack VC dealloc");
+}
+
 @end

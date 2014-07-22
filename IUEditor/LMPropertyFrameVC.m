@@ -198,8 +198,17 @@
 }
 
 - (void)dealloc{
-    //release 시점 확인용
-    NSAssert(0, @"");
+    NSArray *removeObservers = @[[_controller keyPathFromControllerToCSSTag:IUCSSTagX],
+                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagY],
+                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagWidth],
+                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagHeight],
+                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentX],
+                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentY],
+                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentWidth],
+                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentHeight]];
+
+    [self removeObserver:self forKeyPaths:removeObservers];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - MQSize

@@ -181,18 +181,13 @@
     [_eventV addSubviewFullFrame:eventVC.view];
     
     
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performDoubleClick:) name:IUNotificationDoubleClickCanvas object:self.window];
     
     
     // console log
     [self setLogViewState:0];
-    [[NSNotificationCenter defaultCenter] addObserverForName:IUNotificationConsoleStart object:self.window queue:nil usingBlock:^(NSNotification *note) {
-        [self increaseConsoleLogReferenceCount];
-    }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:IUNotificationConsoleEnd object:self.window queue:nil usingBlock:^(NSNotification *note) {
-        [self decreaseConsoleLogReferenceCount];
-    }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(increaseConsoleLogReferenceCount) name:IUNotificationConsoleStart object:self.window];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(decreaseConsoleLogReferenceCount) name:IUNotificationConsoleEnd object:self.window];
     
     //cell initialize
     NSCell *cell = [self.propertyMatrix cellAtRow:0 column:0];
@@ -234,18 +229,11 @@
     [self unbind:@"selectedNode"];
     [self unbind:@"documentController"];
     [self unbind:@"selectedTextRange"];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationConsoleStart object:self.window];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationConsoleEnd object:self.window];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
 
-
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    self.window.delegate = nil;
 }
 
 - (void)dealloc{
-    //release 시점 확인용
-    NSAssert(0, @"");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
 }
 

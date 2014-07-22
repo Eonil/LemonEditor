@@ -17,7 +17,7 @@
 
 @interface LMWC : NSWindowController <NSWindowDelegate>
 
-@property (nonatomic) _binding_ IUSheet *selectedNode;
+@property (nonatomic, weak) _binding_ IUSheet *selectedNode;
 @property (nonatomic, weak) _binding_ IUController   *IUController;
 @property (nonatomic, weak) _binding_ IUSheetController   *documentController;
 @property _binding_ NSRange selectedTextRange;

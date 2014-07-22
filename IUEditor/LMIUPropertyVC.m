@@ -210,9 +210,7 @@
 }
 
 -(void)dealloc{
-    //release 시점 확인용
-    NSAssert(0, @"");
-    //[_controller removeObserver:self forKeyPath:@"selectedObjects"];
+    [_controller removeObserver:self forKeyPath:@"selectedObjects"];
 }
 
 - (void)setResourceManager:(IUResourceManager *)resourceManager{

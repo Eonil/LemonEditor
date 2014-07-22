@@ -9,6 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "IUController.h"
 @interface LMPropertyProgrammingType1VC : NSViewController
-@property (nonatomic) IUController      *controller;
+@property (nonatomic, weak) IUController      *controller;
 
 @end

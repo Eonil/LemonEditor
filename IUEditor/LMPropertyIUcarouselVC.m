@@ -105,8 +105,7 @@
 }
 
 - (void)dealloc{
-    //release 시점 확인용
-    NSAssert(0, @"");
+    [self removeObserver:self forKeyPath:@"resourceManager.imageFiles"];
 }
 
 //default Image 때문에 imageArray 사용 , resourceManager를 바로 호출하면 안됨.
