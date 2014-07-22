@@ -303,12 +303,17 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"ssh" ofType:@"sh"];
     IUServerInfo *serverInfo = [self.docController.project serverInfo];
     
-    NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@ %@",filePath , serverInfo.restartUser, serverInfo.restartPassword, serverInfo.host, serverInfo.restartCommand];
-
-
-    restartServerShell = [[JDShellUtil alloc] init];
-    [restartServerShell execute:command delegate:self];
-    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleStart object:self.view.window];
+    if (serverInfo.restartPassword && serverInfo.host && serverInfo.restartCommand) {
+        NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@ %@",filePath , serverInfo.restartUser, serverInfo.restartPassword, serverInfo.host, serverInfo.restartCommand];
+        
+        
+        restartServerShell = [[JDShellUtil alloc] init];
+        [restartServerShell execute:command delegate:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleStart object:self.view.window];
+    }
+    else {
+        [JDLogUtil alert:@"Set Project Property First"];
+    }
 }
 
 - (void) shellUtilExecutionFinished:(JDShellUtil *)util{
