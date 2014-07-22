@@ -38,6 +38,10 @@
 
 }
 
+- (void)dealloc{
+    [self removeObserver:self forKeyPath:@"controller.selectedObjects"];
+}
+
 - (void)performFocus:(NSNotification *)noti{
     [self.view.window makeFirstResponder:_submitPageComboBox];
 }

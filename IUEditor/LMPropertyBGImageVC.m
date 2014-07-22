@@ -123,6 +123,8 @@
 }
 
 - (void)dealloc{
+    
+    [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGSize] context:@"size"];
 }
 
 

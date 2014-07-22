@@ -35,6 +35,10 @@
     [self addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"]  options:0 context:nil];
 }
 
+- (void)dealloc{
+    [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"]];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     id opacityMove = [self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"]];
     NSArray *selectedObj = [_controller selectedObjects ];
@@ -48,6 +52,7 @@
         }
     }
 }
+
 
 - (IBAction)clickHelpButton:(NSButton *)sender {
     LMHelpPopover *popover = [LMHelpPopover sharedHelpPopover];

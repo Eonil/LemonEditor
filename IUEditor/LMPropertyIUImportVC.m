@@ -32,7 +32,13 @@
 - (void)awakeFromNib{
     [self addObserver:self forKeyPath:@"controller.selectedObjects"
               options:0 context:@"selection"];
+    
 
+}
+
+- (void)dealloc{
+    [self removeObserver:self forKeyPath:@"controller.selectedObjects" context:@"selection"];
+    [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"prototypeClass"]];
 }
 
 - (void)structureChanged:(NSNotification*)noti{
@@ -53,10 +59,6 @@
     [self structureChanged:nil];
 }
 
-
-- (void)dealloc{
-    [self removeObserver:self forKeyPath:@"controller.selectedObjects"];
-}
 
 - (IBAction)performPrototypeChange:(NSPopUpButton *)sender {
     IUClass *class = [[_project classSheets] objectWithKey:@"name" value:sender.selectedItem.title];

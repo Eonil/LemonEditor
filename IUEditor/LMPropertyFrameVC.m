@@ -205,7 +205,8 @@
                                  [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentX],
                                  [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentY],
                                  [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentWidth],
-                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentHeight]];
+                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentHeight],
+                                 @"controller.selectedObjects"];
 
     [self removeObserver:self forKeyPaths:removeObservers];
     [[NSNotificationCenter defaultCenter] removeObserver:self];

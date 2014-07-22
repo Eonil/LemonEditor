@@ -42,8 +42,16 @@
     
     
     [self addObserver:self forKeyPath:@"controller.selectedObjects"
-              options:0 context:@""];
+              options:0 context:nil];
 }
+
+- (void)dealloc{
+    [self removeObserver:self forKeyPath:@"controller.selectedObjects"];
+    [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"link"] ];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+}
+
 
 
 - (void)setProject:(IUProject*)project{
@@ -200,10 +208,6 @@
         }
     }
  
-}
-
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

@@ -76,7 +76,9 @@
 }
 
 - (void)dealloc{
-    //release 시점 확인용
+    
+    [self removeObserver:self forKeyPath:@"controller.selectedObjects" context:@"selection"];
+
 }
 
 
