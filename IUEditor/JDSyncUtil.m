@@ -6,27 +6,27 @@
 //  Copyright (c) 2014년 JDLab. All rights reserved.
 //
 
-#import "JDUploadUtil.h"
+#import "JDSyncUtil.h"
 #import "JDShellUtil.h"
 
-@interface JDUploadUtil() <JDShellUtilPipeDelegate>
+@interface JDSyncUtil() <JDShellUtilPipeDelegate>
 @end
 
-@implementation JDUploadUtil {
+@implementation JDSyncUtil {
     JDShellUtil *util;
     JDShellUtil *afterUtil;
 }
 
 - (BOOL)upload{
     if (self.protocol == JDSFTP) {
-        NSString *src = [[NSBundle mainBundle] pathForResource:@"sftp" ofType:@"sh"];
+        NSString *src = [[NSBundle mainBundle] pathForResource:@"sftp_upload" ofType:@"sh"];
         util = [[JDShellUtil alloc] init];
         NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ %@", src, self.localDirectory, self.user, self.host, self.remoteDirectory, self.syncDirectory, self.password];
         NSLog(command, nil);
         [util execute:command delegate:self];
     }
     else {
-        assert(0); // not coded yet
+        NSAssert(0, @"Not Yet Coded"); // not coded yet
     }
     return YES;
 }
@@ -39,20 +39,19 @@
 
 - (BOOL)download{
     if (self.protocol == JDSFTP) {
-        NSString *src = [[NSBundle mainBundle] pathForResource:@"JDUploadSCP" ofType:@"sh"];
+        NSString *src = [[NSBundle mainBundle] pathForResource:@"sftp_download" ofType:@"sh"];
         util = [[JDShellUtil alloc] init];
-        NSString *from = [NSString stringWithFormat:@"%@@%@:%@", self.user, self.host, self.remoteDirectory];
-        NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@", src, from , self.localDirectory, self.password];
+        NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ %@", src, self.localDirectory, self.user, self.host, self.remoteDirectory, self.syncDirectory, self.password];
         NSLog(command, nil);
         [util execute:command delegate:self];
     }
     else {
-        assert(0); // not coded yet
+        NSAssert(0, @"Not Yet Coded"); // not coded yet
     }
     return YES;
 }
 
-- (BOOL)isUploading{
+- (BOOL)isSyncing{
     return [util.task isRunning];
 }
 
@@ -62,7 +61,7 @@
     NSLog(str, nil);
 
     if (str) {
-        [self.delegate uploadUtilReceivedStdError:str];
+        [self.delegate syncUtilReceivedStdError:str];
     }
 }
 
@@ -75,7 +74,7 @@
         [afterUtil execute:command delegate:self];
     }
     else {
-        [self.delegate uploadFinished:[_util.task terminationStatus]];
+        [self.delegate syncFinished:[_util.task terminationStatus]];
     }
 }
 
@@ -83,7 +82,7 @@
     NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(str, nil);
     if (str) {
-        [self.delegate uploadUtilReceivedStdOutput:str];
+        [self.delegate syncUtilReceivedStdOutput:str];
     }
 }
 @end

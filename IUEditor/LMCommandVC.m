@@ -39,7 +39,8 @@
 
     JDScreenRecorder *screenRecorder;
     JDShellUtil *debugServerShell;
-    JDUploadUtil *uploadUtil;
+    JDShellUtil *restartServerShell;
+    JDSyncUtil *syncUtil;
 
     BOOL recording;
 }
@@ -61,8 +62,8 @@
 #ifndef DEBUG
         [_recordingB setHidden:YES];
 #endif
-        uploadUtil = [[JDUploadUtil alloc] init];
-        uploadUtil.delegate = self;
+        syncUtil = [[JDSyncUtil alloc] init];
+        syncUtil.delegate = self;
     });
 }
 
@@ -264,20 +265,22 @@
 #pragma mark Upload
 
 - (IBAction)upload:(id)sender{
-    if (uploadUtil.isUploading) {
+    if (syncUtil.isSyncing) {
         [JDLogUtil alert:@"Upload was Progressing. Kill it and start new uploading"];
-        [uploadUtil terminate];
+        [syncUtil terminate];
     }
         IUServerInfo *info = [self.docController.project serverInfo];
-        if ([info isValid]) {
-            uploadUtil.user = info.user;
-            uploadUtil.host = info.host;
-            uploadUtil.password = info.password;
-            uploadUtil.protocol = 0;
-            uploadUtil.remoteDirectory = info.remotePath;
-            uploadUtil.localDirectory = info.localPath;
+        if ([info isSyncValid]) {
+            syncUtil.user = info.syncUser;
+            syncUtil.host = info.host;
+            syncUtil.password = info.syncPassword;
+            syncUtil.protocol = 0;
+            syncUtil.remoteDirectory = info.remotePath;
+            syncUtil.localDirectory = info.localPath;
+            syncUtil.syncDirectory = info.syncItems;
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleStart object:self.view.window userInfo:nil];
-            [uploadUtil upload];
+            [syncUtil upload];
         }
         else {
             [JDLogUtil alert:@"server info not valid. click project and set server info."];
@@ -285,38 +288,61 @@
 }
 
 
-- (void)uploadUtilReceivedStdOutput:(NSString*)aMessage{
+- (void)syncUtilReceivedStdOutput:(NSString*)aMessage{
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleLog object:self.view.window userInfo:@{IUNotificationConsoleLogText: aMessage}];
     
 }
-- (void)uploadUtilReceivedStdError:(NSString*)aMessage{
+- (void)syncUtilReceivedStdError:(NSString*)aMessage{
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleLog object:self.view.window userInfo:@{IUNotificationConsoleLogText: aMessage}];
 }
 
-- (void)uploadFinished:(int)terminationStatus{
+- (void)syncFinished:(int)terminationStatus{
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleEnd object:self.view.window userInfo:nil];
     
 }
 
+
+- (IBAction)serverRestart:(id)sender{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"ssh" ofType:@"sh"];
+    IUServerInfo *serverInfo = [self.docController.project serverInfo];
+    
+    NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@ %@",filePath , serverInfo.restartUser, serverInfo.restartPassword, serverInfo.host, serverInfo.restartCommand];
+
+
+    restartServerShell = [[JDShellUtil alloc] init];
+    [restartServerShell execute:command delegate:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleStart object:self.view.window];
+}
+
+- (void) shellUtilExecutionFinished:(JDShellUtil *)util{
+    if (util.name) {
+        NSString *log = [NSString stringWithFormat:@" ------ %@ Ended -----", util.name];
+        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleLog object:self.view.window userInfo:@{IUNotificationConsoleLogText: log}];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleEnd object:self.view.window];
+}
+
 - (IBAction)download:(id)sender{
-    if (uploadUtil.isUploading) {
-        [JDLogUtil alert:@"Upload Progressing.."];
+    if (syncUtil.isSyncing) {
+        [JDLogUtil alert:@"Syncing was Progressing. Kill it and start new downloading"];
+        [syncUtil terminate];
+    }
+    IUServerInfo *info = [self.docController.project serverInfo];
+    if ([info isSyncValid]) {
+        syncUtil.user = info.syncUser;
+        syncUtil.host = info.host;
+        syncUtil.password = info.syncPassword;
+        syncUtil.protocol = 0;
+        syncUtil.remoteDirectory = info.remotePath;
+        syncUtil.localDirectory = info.localPath;
+        syncUtil.syncDirectory = info.syncItems;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleStart object:self.view.window userInfo:nil];
+        syncUtil.tag = 0; //0 for download, 1 for upload
+        [syncUtil download];
     }
     else {
-        IUServerInfo *info = [self.docController.project serverInfo];
-        if ([info isValid]) {
-            uploadUtil.user = info.user;
-            uploadUtil.host = info.host;
-            uploadUtil.password = info.password;
-            uploadUtil.protocol = 0;
-            uploadUtil.remoteDirectory = info.remotePath;
-            uploadUtil.localDirectory = info.localPath;
-            [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleStart object:self.view.window userInfo:nil];
-            [uploadUtil download];
-        }
-        else {
-            [JDLogUtil alert:@"server info not valid. click project and set server info."];
-        }
+        [JDLogUtil alert:@"server info not valid. click project and set server info."];
     }
 }
 

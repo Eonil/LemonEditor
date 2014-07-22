@@ -10,13 +10,14 @@
 #import "IUCompiler.h"
 #import "IUSheetController.h"
 #import "JDShellUtil.h"
-#import "JDUploadUtil.h"
+#import "JDSyncUtil.h"
 
-@interface LMCommandVC : NSViewController <JDShellUtilPipeDelegate, JDUploadUtilDeleagate>
+@interface LMCommandVC : NSViewController <JDShellUtilPipeDelegate, JDSyncUtilDeleagate>
 
 @property IUSheetController      *docController;
 - (IBAction)toggleRecording:(id)sender;
 - (IBAction)stopServer:(id)sender;
 - (IBAction)upload:(id)sender;
 - (IBAction)download:(id)sender;
+- (IBAction)serverRestart:(id)sender;
 @end

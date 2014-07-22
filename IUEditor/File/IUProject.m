@@ -23,27 +23,6 @@
 
 @end
 
-@implementation IUServerInfo
-- (id)initWithCoder:(NSCoder *)aDecoder{
-    self = [super init];
-    self.host = [aDecoder decodeObjectForKey:@"host"];
-    self.remotePath = [aDecoder decodeObjectForKey:@"remotePath"];
-    self.password = [aDecoder decodeObjectForKey:@"password"];
-    self.user = [aDecoder decodeObjectForKey:@"user"];
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder{
-    [aCoder encodeObject:self.user forKey:@"user"];
-    [aCoder encodeObject:self.password forKey:@"password"];
-    [aCoder encodeObject:self.remotePath forKey:@"remotePath"];
-    [aCoder encodeObject:self.host forKey:@"host"];
-}
-
-- (BOOL)isValid{
-    return [self.host length] && [self.remotePath length] && [self.user length] && [self.password length];
-}
-@end
 
 @implementation IUProject{
     BOOL _isConnectedWithEditor;

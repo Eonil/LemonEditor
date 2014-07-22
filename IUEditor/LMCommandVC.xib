@@ -107,6 +107,17 @@
                                     <action selector="download:" target="-2" id="shN-X7-Nqa"/>
                                 </connections>
                             </button>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hC5-12-PyW">
+                                <rect key="frame" x="47" y="20" width="39" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="round" title="R" bezelStyle="circular" imagePosition="above" alignment="left" borderStyle="border" imageScaling="proportionallyDown" id="gFf-e5-lfh">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="label"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="serverRestart:" target="-2" id="qTD-R2-sdS"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <color key="borderColor" red="0.50196081399917603" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>

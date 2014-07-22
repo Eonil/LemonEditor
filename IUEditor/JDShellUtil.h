@@ -38,4 +38,6 @@
  @note Do not call this method more than once in one object
  */
 -(int)execute:(NSString*)command delegate:(id <JDShellUtilPipeDelegate>)  delegate;
+
+@property NSString *name;
 @end

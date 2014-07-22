@@ -11,6 +11,7 @@
 #import "IUCompiler.h"
 #import "IUSheetGroup.h"
 #import "IUFileProtocol.h"
+#import "IUServerInfo.h"
 
 typedef enum _IUGitType{
     IUGitTypeNone = 0,
@@ -53,19 +54,6 @@ static NSString *IUPageGroupName = @"page";
 static NSString *IUBackgroundGroupName = @"background";
 static NSString *IUClassGroupName = @"class";
 
-
-@interface IUServerInfo : NSObject <NSCoding>
-@property NSString *user;
-@property NSString *password;
-@property NSString *host;
-@property NSString *remotePath;
-@property NSString *localPath;
-@property NSString *syncPath;
-@property NSString *afterCommand;
-
-- (BOOL)isValid;
-
-@end
 
 @interface IUProject : NSObject <IUFile, IUResourcePathProtocol, NSCoding>{
     IUSheetGroup *_pageGroup;

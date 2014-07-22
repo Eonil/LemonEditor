@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol JDUploadUtilDeleagate <NSObject>
+@protocol JDSyncUtilDeleagate <NSObject>
 
 @required
-- (void)uploadUtilReceivedStdOutput:(NSString*)aMessage;
-- (void)uploadUtilReceivedStdError:(NSString*)aMessage;
-- (void)uploadFinished:(int)terminationStatus;
+- (void)syncUtilReceivedStdOutput:(NSString*)aMessage;
+- (void)syncUtilReceivedStdError:(NSString*)aMessage;
+- (void)syncFinished:(int)terminationStatus;
 
 @end
 
@@ -23,9 +23,9 @@ typedef enum _JDNetworkProtocol{
     JDGit,
 } JDNetworkProtocol;
 
-@interface JDUploadUtil : NSObject
+@interface JDSyncUtil : NSObject
 
-@property id <JDUploadUtilDeleagate> delegate;
+@property id <JDSyncUtilDeleagate> delegate;
 
 @property NSString *host;
 @property NSString *user;
@@ -34,11 +34,12 @@ typedef enum _JDNetworkProtocol{
 @property NSString *localDirectory;
 @property NSString *remoteDirectory;
 @property NSString *afterCommand;
+@property NSInteger tag;
 
 @property JDNetworkProtocol protocol;
 
 - (BOOL)upload;
 - (BOOL)download;
-- (BOOL)isUploading;
+- (BOOL)isSyncing;
 - (BOOL)terminate;
 @end
