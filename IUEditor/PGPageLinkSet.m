@@ -13,11 +13,17 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
-    _pageLinkAlign = IUAlignCenter;
-    _selectedButtonBGColor = [NSColor rgbColorRed:50 green:50 blue:50 alpha:0.5];
-    _defaultButtonBGColor = [NSColor rgbColorRed:50 green:50 blue:50 alpha:0.5];
-    _buttonMargin = 5.0f;
+    [[self undoManager] disableUndoRegistration];
+
+    if(self){
+        _pageLinkAlign = IUAlignCenter;
+        _selectedButtonBGColor = [NSColor rgbColorRed:50 green:50 blue:50 alpha:0.5];
+        _defaultButtonBGColor = [NSColor rgbColorRed:50 green:50 blue:50 alpha:0.5];
+        _buttonMargin = 5.0f;
+    }
     
+    [[self undoManager] enableUndoRegistration];
+
     return self;
 }
 
@@ -29,19 +35,29 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
+    [[self undoManager] disableUndoRegistration];
+
     [aDecoder decodeToObject:self withProperties:[[self class] properties]];
     _buttonMargin = 2;
+    
+    [[self undoManager] enableUndoRegistration];
+
     return self;
 }
 
 
 - (id)copyWithZone:(NSZone *)zone{
     PGPageLinkSet *iu = [super copyWithZone:zone];
+    [[self undoManager] disableUndoRegistration];
+
     iu.pageCountVariable = [_pageCountVariable copy];
     iu.pageLinkAlign = _pageLinkAlign;
     iu.selectedButtonBGColor = [_selectedButtonBGColor copy];
     iu.defaultButtonBGColor = [_defaultButtonBGColor copy];
     iu.buttonMargin = _buttonMargin;
+    
+    [[self undoManager] enableUndoRegistration];
+
     return iu;
 }
 

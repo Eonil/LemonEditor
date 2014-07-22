@@ -39,6 +39,9 @@
 
 
 - (void)setImageName:(NSString *)imageName{
+    
+    [[[self undoManager] prepareWithInvocationTarget:self] setImageName:_imageName];
+
     _imageName = imageName;
     [self updateHTML];
 }

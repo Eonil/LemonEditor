@@ -19,6 +19,8 @@
 -(id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if(self){
+        [[self undoManager] disableUndoRegistration];
+
         self.innerHTML = @"";
         _fbSource = @"<iframe src=\"//www.facebook.com/plugins/like.php?href=__FB_LINK_ADDRESS__+&amp;width&amp;layout=standard&amp;action=like&amp;show_faces=__SHOW_FACE__&amp;share=true&amp;colorscheme=__COLOR_SCHEME__&amp;\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; height:__HEIGHT__px\" allowTransparency=\"true\"></iframe>";
         _showFriendsFace = YES;
@@ -26,6 +28,9 @@
         [self.css setValue:@(80) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
         [self.css setValue:@(320) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
         [self.css setValue:nil forTag:IUCSSTagBGColor forWidth:IUCSSMaxViewPortWidth];
+        
+        [[self undoManager] enableUndoRegistration];
+
     }
     return self;
 }
@@ -38,8 +43,11 @@
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self =  [super initWithCoder:aDecoder];
     if(self){
+        [[self undoManager] disableUndoRegistration];
+
         [aDecoder decodeToObject:self withProperties:[[IUFBLike class] properties]];
         _fbSource = @"<iframe src=\"//www.facebook.com/plugins/like.php?href=__FB_LINK_ADDRESS__+&amp;width&amp;layout=standard&amp;action=like&amp;show_faces=__SHOW_FACE__&amp;share=true&amp;colorscheme=__COLOR_SCHEME__&amp;\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; height:__HEIGHT__px\" allowTransparency=\"true\"></iframe>";
+        [[self undoManager] enableUndoRegistration];
 
     }
     return self;

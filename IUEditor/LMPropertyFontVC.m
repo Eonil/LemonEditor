@@ -56,8 +56,15 @@
     [_lineHeightB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagLineHeight] options:IUBindingDictNotRaisesApplicable];
     [_textAlignB bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagTextAlign] options:IUBindingDictNotRaisesApplicable];
     
-    [self addObserver:self forKeyPath:@"controller.selectedObjects"
-              options:0 context:@"selection"];
+    [self addObserver:self forKeyPath:@"controller.selectedObjects" options:0 context:@"font"];
+    
+    //observing for undo
+    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontName] options:0 context:@"font"];
+    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontWeight] options:0 context:@"font"];
+    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontStyle] options:0 context:@"font"];
+    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagTextDecoration] options:0 context:@"font"];
+    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontSize] options:0 context:@"font"];
+
     
     _fontController = [LMFontController sharedFontController];
     [_fontListDC bind:NSContentDictionaryBinding toObject:_fontController withKeyPath:@"fontDict" options:nil];
@@ -106,6 +113,10 @@
 - (BOOL)isSelectedObjectFontType{
     BOOL isTextType = YES;
     
+    
+    if(_controller.selectedObjects.count < 1){
+        return NO;
+    }
     
     for(IUBox *box in _controller.selectedObjects){
         if([box isMemberOfClass:[IUBox class]] == NO &&
@@ -193,20 +204,20 @@
 }
 
 #else
-- (void)selectionContextDidChange:(NSDictionary *)change{
+- (void)fontContextDidChange:(NSDictionary *)change{
     
     if([self isSelectedObjectFontType]){
         
         if([self isSelectedObjectText]){
             [_fontStyleB setEnabled:YES];
             if([[_controller selectedObjects] count] ==1 ){
-                BOOL weight = [[_controller keyPathFromControllerToCSSTag:IUCSSTagFontWeight] boolValue];
+                BOOL weight = [[self valueForTag:IUCSSTagFontWeight] boolValue];
                 [_fontStyleB setSelected:weight forSegment:0];
-                
-                BOOL italic = [[_controller keyPathFromControllerToCSSTag:IUCSSTagFontStyle] boolValue];
+
+                BOOL italic = [[self valueForTag:IUCSSTagFontStyle] boolValue];
                 [_fontStyleB setSelected:italic forSegment:1];
                 
-                BOOL underline = [[_controller keyPathFromControllerToCSSTag:IUCSSTagTextDecoration] boolValue];
+                BOOL underline = [[self valueForTag:IUCSSTagTextDecoration] boolValue];
                 [_fontStyleB setSelected:underline forSegment:2];
             }
         }

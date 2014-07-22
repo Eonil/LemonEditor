@@ -20,9 +20,14 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
+    [[self undoManager] disableUndoRegistration];
+
     if (self) {
         [aDecoder decodeToObject:self withProperties:[IUTransition properties]];
     }
+    
+    [[self undoManager] enableUndoRegistration];
+
     return self;
 }
 
@@ -33,7 +38,10 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
+    [[self undoManager] disableUndoRegistration];
+
     if(self){
+
         _firstItem = [[IUItem alloc] initWithProject:project options:options];
         _secondItem = [[IUItem alloc] initWithProject:project options:options];
         [_secondItem.css setValue:@(NO) forTag:IUCSSTagDisplay forWidth:IUCSSMaxViewPortWidth];
@@ -45,6 +53,9 @@
         self.animation = @"Blind";
         self.duration  = 0.2;
     }
+    
+    [[self undoManager] enableUndoRegistration];
+
     return self;
 }
 

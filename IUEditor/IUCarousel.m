@@ -17,6 +17,8 @@
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if(self){
+        [[self undoManager] disableUndoRegistration];
+
         self.count = 3;
         [self.css setValue:@(500) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
         [self.css setValue:@(300) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
@@ -28,6 +30,9 @@
         _leftY = 100;
         _rightY = 100;
         _pagerPosition = 50;
+        
+        [[self undoManager] enableUndoRegistration];
+
     }
     return self;
 }
@@ -35,7 +40,12 @@
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self =  [super initWithCoder:aDecoder];
     if(self){
+        [[self undoManager] disableUndoRegistration];
+
         [aDecoder decodeToObject:self withProperties:[[IUCarousel class] propertiesWithOutProperties:@[@"count"]]];
+        
+        [[self undoManager] enableUndoRegistration];
+
     }
     return self;
 }
@@ -49,6 +59,9 @@
 
 - (id)copyWithZone:(NSZone *)zone{
     IUCarousel *carousel = [super copyWithZone:zone];
+    
+    [[self undoManager] disableUndoRegistration];
+
     //auto
     carousel.autoplay = _autoplay;
     carousel.timer = _timer;
@@ -66,6 +79,9 @@
     carousel.selectColor = [_selectColor copy];
     carousel.deselectColor = [_deselectColor copy];
     carousel.pagerPosition = _pagerPosition;
+    
+    [[self undoManager] enableUndoRegistration];
+
     
     return carousel;
 }
