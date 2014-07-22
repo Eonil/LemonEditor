@@ -53,6 +53,9 @@
 
 - (BOOL)containsPrefix:(NSString *)string{
     for (NSString *arrayStr in self) {
+        if(string.length < arrayStr.length){
+            continue;
+        }
         NSString *prefix = [string substringWithRange:NSMakeRange(0, arrayStr.length)];
         if ([arrayStr isEqualToString:prefix]) {
             return YES;

@@ -338,7 +338,7 @@
             [JDUIUtil hudAlert:@"Name should be alphabet or digit" second:1];
             return NO;
         }
-                
+        
         currentBox.name = modifiedName;
         return YES;
     }
