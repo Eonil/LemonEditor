@@ -15,6 +15,7 @@
 #import "LMWC.h"
 #import "IUPage.h"
 #import "IUClass.h"
+#import "IUHeader.h"
 
 @implementation LMStackOutlineView
 
@@ -317,6 +318,10 @@
     if([self.view hasSubview:control]){ 
         
         IUBox *currentBox = (IUBox *)_IUController.selection;
+        if([currentBox isKindOfClass:[IUHeader class]]){
+            [JDUIUtil hudAlert:@"Header should not be changed" second:1];
+            return NO;
+        }
         NSString *modifiedName = [control stringValue];
         
         if([modifiedName stringByTrim].length == 0){
@@ -333,13 +338,7 @@
             [JDUIUtil hudAlert:@"Name should be alphabet or digit" second:1];
             return NO;
         }
-        
-        IUBox *box = [_sheet.project.identifierManager IUWithIdentifier:modifiedName];
-        if (box != nil) {
-            [JDUIUtil hudAlert:@"IU with same name exists" second:1];
-            return NO;
-        }
-        
+                
         currentBox.name = modifiedName;
         return YES;
     }
