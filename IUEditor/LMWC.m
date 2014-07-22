@@ -147,7 +147,6 @@
         [eventVC bind:@"controller" toObject:self withKeyPath:@"IUController" options:nil];
         [topToolbarVC bind:@"sheetController" toObject:fileNaviVC withKeyPath:@"documentController" options:nil];
         
-        
         //project binding
         [canvasVC bind:@"documentBasePath" toObject:self withKeyPath:@"document.project.path" options:nil];
     }
@@ -180,6 +179,8 @@
     [_propertyV addSubviewFullFrame:iuInspectorVC.view];
     [_eventV addSubviewFullFrame:eventVC.view];
     
+
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performDoubleClick:) name:IUNotificationDoubleClickCanvas object:self.window];
     
@@ -299,6 +300,10 @@
     
     //document == nil means window will be closed
     if(document && document.project){
+        
+        //undo manager
+        _IUController.undoManager = [document undoManager];
+
         _project = document.project;
         //[canvasVC bind:@"documentBasePath" toObject:_project withKeyPath:@"path" options:nil];
         NSError *error;

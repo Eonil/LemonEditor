@@ -41,6 +41,7 @@
 
 -(IUBox*)firstDeepestBox;
 
+@property NSUndoManager *undoManager;
 @property _binding_ NSRange selectedTextRange;
 
 @end

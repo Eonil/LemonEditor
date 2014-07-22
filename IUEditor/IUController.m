@@ -173,8 +173,12 @@
 }
 
 
+
 -(void)trySetSelectedObjectsByIdentifiers:(NSArray *)identifiers{
     [JDLogUtil log:IULogAction key:@"canvas selected objects" string:[identifiers description]];
+    
+    [[self.undoManager prepareWithInvocationTarget:self] trySetSelectedObjectsByIdentifiers:[self selectedIdentifiers]];
+    
     IUSheet *document = [self.content firstObject];
     
     NSString *firstIdentifier = [identifiers firstObject];
@@ -234,6 +238,10 @@
 
 -(void)setSelectedObjectsByIdentifiers:(NSArray *)identifiers{
     [JDLogUtil log:IULogAction key:@"canvas selected objects" string:[identifiers description]];
+    
+    [[self.undoManager prepareWithInvocationTarget:self] trySetSelectedObjectsByIdentifiers:[self selectedIdentifiers]];
+
+    
     IUSheet *document = [self.content firstObject];
     NSArray *allChildren = [[document allChildren] arrayByAddingObject:document];
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(IUBox *iu, NSDictionary *bindings) {

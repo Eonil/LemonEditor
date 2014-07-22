@@ -49,6 +49,7 @@
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self){
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(structureChanged:) name:IUNotificationStructureDidChange object:self.view.window];
         [self loadView];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -63,7 +64,7 @@
 -(void)awakeFromNib{
     _outlineV.delegate = self;
     [_outlineV registerForDraggedTypes:@[@"stackVC", (id)kUTTypeIUType]];
-    
+        
 }
 
 - (void)dealloc{
