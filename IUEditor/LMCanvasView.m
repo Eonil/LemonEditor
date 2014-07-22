@@ -113,7 +113,6 @@
 }
 
 - (void)setHeightOfMainView:(CGFloat)height{
-//    [self.mainScrollView.contentView setHeight:height];
     if (height == self.mainView.frame.size.height) {
         return;
     }
@@ -355,6 +354,7 @@
     }
     if(isDragged){
         isDragged = NO;
+        [((LMCanvasVC *)(self.delegate)) endDragSession:self];
     }
     if(isSelectDragged){
         isSelectDragged = NO;

@@ -894,6 +894,17 @@
     }
 }
 
+- (void)endDragSession:(id)sender{
+    for(IUBox *obj in self.controller.selectedObjects){
+        if([self isParentMove:obj]){
+            [obj.parent endDragSession];
+        }
+        else{
+            [obj endDragSession];
+        }
+    }
+}
+
 
 - (void)extendIUToDiffSize:(NSSize)size totalDiffSize:(NSSize)totalSize{
     //drag pointlayer

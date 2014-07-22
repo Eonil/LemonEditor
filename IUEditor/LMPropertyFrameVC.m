@@ -362,6 +362,9 @@
 }
 
 - (void)setCSSFrameValue:(id)value forTag:(IUCSSTag)tag{
+    for (IUBox *iu in _controller.selectedObjects) {
+        [iu startDragSession];
+    }
     if ([value isEqualToString:@"-"]) {
         for (IUBox *box in _controller.selectedObjects) {
             [box.css eradicateTag:tag];
@@ -371,6 +374,7 @@
         [self setValue:value forKeyPath:[_controller keyPathFromControllerToCSSTag:tag]];
     }
     for (IUBox *iu in _controller.selectedObjects) {
+        [iu endDragSession];
         [iu updateCSSForEditViewPort];
     }
 }

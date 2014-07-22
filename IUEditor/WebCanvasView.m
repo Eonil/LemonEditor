@@ -131,6 +131,7 @@
     
     [self.VC startDragSession:self];
     [self.VC moveIUToDiffPoint:diffPoint totalDiffPoint:diffPoint];
+    [self.VC endDragSession:self];
 }
 
 

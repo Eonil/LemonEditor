@@ -24,9 +24,8 @@
 
 @implementation IUBox{
     NSMutableSet *changedCSSWidths;
-    NSPoint originalPoint;
-    NSSize originalSize;
-    NSSize originalPercentSize;
+    NSPoint originalPoint, originalPercentPoint;
+    NSSize originalSize, originalPercentSize;
     IUProject *_tempProject;
     BOOL    _isConnectedWithEditor;
 }
@@ -664,6 +663,120 @@
 
 #pragma mark move by drag & drop
 
+
+
+
+/*
+ drag 중간의 diff size로 하면 css에 의한 오차가 생김.
+ drag session이 시작될때부터 위치에서의 diff size로 계산해야 오차가 발생 안함.
+ drag session이 시작할때 그 때의 위치를 저장함.
+ */
+
+- (NSPoint)currentPosition{
+    NSInteger currentX = [_css.assembledTagDictionary[IUCSSTagX] integerValue];
+    NSInteger currentY = 0;
+    if([_css.assembledTagDictionary objectForKey:IUCSSTagY]){
+        currentY = [_css.assembledTagDictionary[IUCSSTagY] integerValue];
+    }
+    else if(self.positionType == IUPositionTypeRelative || self.positionType == IUPositionTypeFloatRight ||
+            self.positionType == IUPositionTypeFloatLeft){
+        NSPoint distancePoint = [self.delegate distanceFromIU:self.htmlID to:self.parent.htmlID];
+        currentY = distancePoint.y;
+    }
+    return NSMakePoint(currentX, currentY);
+}
+- (NSPoint)currentPercentPosition{
+    NSInteger currentX = 0;
+    NSInteger currentY = 0;
+    if([_css.assembledTagDictionary objectForKey:IUCSSTagPercentX]){
+        currentX = [_css.assembledTagDictionary[IUCSSTagPercentX] integerValue];
+    }
+    if([_css.assembledTagDictionary objectForKey:IUCSSTagPercentY]){
+        currentY = [_css.assembledTagDictionary[IUCSSTagPercentY] integerValue];
+    }
+    return NSMakePoint(currentX, currentY);
+}
+- (NSSize)currentSize{
+    NSInteger currentWidth = [_css.assembledTagDictionary[IUCSSTagWidth] integerValue];
+    NSInteger currentHeight = [_css.assembledTagDictionary[IUCSSTagHeight] integerValue];
+    
+    return NSMakeSize(currentWidth, currentHeight);
+}
+
+- (NSSize)currentPercentSize{
+    NSInteger currentPWidth = [_css.assembledTagDictionary[IUCSSTagPercentWidth] floatValue];
+    NSInteger currentPHeight = [_css.assembledTagDictionary[IUCSSTagPercentHeight] floatValue];
+    
+    return NSMakeSize(currentPWidth, currentPHeight);
+}
+- (void)startDragSession{
+    originalSize = [self currentSize];
+    originalPercentSize = [self currentPercentSize];
+    originalPoint = [self currentPosition];
+    originalPercentPoint = [self currentPercentPosition];
+}
+
+- (void)endDragSession{
+    [[self undoManager] beginUndoGrouping];
+    [[[self undoManager] prepareWithInvocationTarget:self] undoPoisition:originalPoint];
+    [[[self undoManager] prepareWithInvocationTarget:self] undoPercentPosition:originalPercentPoint];
+    [[[self undoManager] prepareWithInvocationTarget:self] undoSize:originalSize];
+    [[[self undoManager] prepareWithInvocationTarget:self] undoPercentSize:originalPercentSize];
+    [[self undoManager] endUndoGrouping];
+}
+
+- (void)undoPoisition:(NSPoint)point{
+    
+    [[[self undoManager] prepareWithInvocationTarget:self] undoPoisition:[self currentPosition]];
+    
+    if([self hasX] && [self canChangeXByUserInput]){
+        [_css setValue:@(point.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagX]];
+    }
+    if([self hasY] && [self canChangeYByUserInput]){
+        [_css setValue:@(point.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagY]];
+    }
+    [self updateCSSForEditViewPort];
+}
+
+- (void)undoPercentPosition:(NSPoint)point{
+    
+    [[[self undoManager] prepareWithInvocationTarget:self] undoPercentPosition:[self currentPercentPosition]];
+    
+    if([self hasX] && [self canChangeXByUserInput]){
+        [_css setValue:@(point.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentX]];
+    }
+    if([self hasY] && [self canChangeYByUserInput]){
+        [_css setValue:@(point.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentY]];
+    }
+    [self updateCSSForEditViewPort];
+}
+- (void)undoSize:(NSSize)size{
+    [[[self undoManager] prepareWithInvocationTarget:self] undoSize:[self currentSize]];
+
+    if([self hasWidth] && [self canChangeWidthByUserInput]){
+        [_css setValue:@(size.width) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagWidth]];
+    }
+    if([self hasHeight] && [self canChangeHeightByUserInput]){
+        [_css setValue:@(size.height) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagHeight]];
+    }
+    [self updateCSSForEditViewPort];
+
+}
+- (void)undoPercentSize:(NSSize)size{
+    
+    [[[self undoManager] prepareWithInvocationTarget:self] undoPercentSize:[self currentPercentSize]];
+
+    
+    if([self hasWidth] && [self canChangeWidthByUserInput]){
+        [_css setValue:@(size.width) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentWidth]];
+    }
+    if([self hasHeight] && [self canChangeHeightByUserInput]){
+        [_css setValue:@(size.height) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentHeight]];
+    }
+    [self updateCSSForEditViewPort];
+    
+}
+
 - (void)movePosition:(NSPoint)point withParentSize:(NSSize)parentSize{
     
     //Set Pixel
@@ -699,37 +812,6 @@
         }
     }
     
-}
-
-
-/*
- drag 중간의 diff size로 하면 css에 의한 오차가 생김.
- drag session이 시작될때부터 위치에서의 diff size로 계산해야 오차가 발생 안함.
- drag session이 시작할때 그 때의 위치를 저장함.
- */
-- (void)startDragSession{
-    NSInteger currentWidth = [_css.assembledTagDictionary[IUCSSTagWidth] integerValue];
-    NSInteger currentHeight = [_css.assembledTagDictionary[IUCSSTagHeight] integerValue];
-
-    originalSize = NSMakeSize(currentWidth, currentHeight);
-    
-    NSInteger currentPWidth = [_css.assembledTagDictionary[IUCSSTagPercentWidth] floatValue];
-    NSInteger currentPHeight = [_css.assembledTagDictionary[IUCSSTagPercentHeight] floatValue];
-
-    originalPercentSize = NSMakeSize(currentPWidth, currentPHeight);
-
-    NSInteger currentX = [_css.assembledTagDictionary[IUCSSTagX] integerValue];
-    NSInteger currentY = 0;
-    NSPoint distancePoint = [self.delegate distanceFromIU:self.htmlID to:self.parent.htmlID];
-
-    if([_css.assembledTagDictionary objectForKey:IUCSSTagY]){
-        currentY = [_css.assembledTagDictionary[IUCSSTagY] integerValue];
-    }
-    else if(self.positionType == IUPositionTypeRelative || self.positionType == IUPositionTypeFloatRight ||
-            self.positionType == IUPositionTypeFloatLeft){
-        currentY = distancePoint.y;
-    }
-    originalPoint = NSMakePoint(currentX, currentY);
 }
 
 - (void)increaseSize:(NSSize)size withParentSize:(NSSize)parentSize{
