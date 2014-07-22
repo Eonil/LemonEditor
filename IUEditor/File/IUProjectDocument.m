@@ -121,6 +121,7 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
 
 #pragma mark -
 
+
 - (LMWC *)lemonWindowController{
     if([[self windowControllers] count] > 0){
         return [[self windowControllers] objectAtIndex:0];
@@ -128,11 +129,22 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
     return nil;
 }
 
+
 - (void)makeWindowControllers{
     LMWC *wc = [[LMWC alloc] initWithWindowNibName:@"LMWC"];
     [self addWindowController:wc];
     
 }
+
+- (void)removeWindowController:(NSWindowController *)windowController{
+    
+    if([windowController isKindOfClass:[LMWC class]]){
+        LMWC *wc = (LMWC *)windowController;
+        [wc unbindAllbinding];
+    }
+    [super removeWindowController:windowController];
+}
+
 
 
 - (void)showWindows{

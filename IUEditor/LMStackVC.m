@@ -66,6 +66,7 @@
     
 }
 
+
 - (void)structureChanged:(NSNotification *)notification{
     [self.IUController rearrangeObjects];
     if ([[notification.userInfo objectForKey:IUNotificationStructureChangeType] isEqualTo: IUNotificationStructureAdding]) {

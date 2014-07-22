@@ -187,12 +187,34 @@
     
     // console log
     [self setLogViewState:0];
-    [[NSNotificationCenter defaultCenter]addObserverForName:IUNotificationConsoleStart object:self.window queue:nil usingBlock:^(NSNotification *note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:IUNotificationConsoleStart object:self.window queue:nil usingBlock:^(NSNotification *note) {
         [self increaseConsoleLogReferenceCount];
     }];
-    [[NSNotificationCenter defaultCenter]addObserverForName:IUNotificationConsoleEnd object:self.window queue:nil usingBlock:^(NSNotification *note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:IUNotificationConsoleEnd object:self.window queue:nil usingBlock:^(NSNotification *note) {
         [self decreaseConsoleLogReferenceCount];
     }];
+    
+    //cell initialize
+    NSCell *cell = [self.propertyMatrix cellAtRow:0 column:0];
+    [self.propertyMatrix setToolTip:@"Appearance" forCell:cell];
+    
+    NSCell *cell2 = [self.propertyMatrix cellAtRow:0 column:1];
+    [self.propertyMatrix setToolTip:@"Property" forCell:cell2];
+    
+    NSCell *cell3 = [self.propertyMatrix cellAtRow:0 column:2];
+    [self.propertyMatrix setToolTip:@"Event" forCell:cell3];
+    
+    
+    NSCell *cell7 = [self.clickWidgetTabMatrix cellAtRow:0 column:0];
+    [self.clickWidgetTabMatrix setToolTip:@"Primary Widget" forCell:cell7];
+    
+    NSCell *cell8 = [self.clickWidgetTabMatrix cellAtRow:0 column:1];
+    [self.clickWidgetTabMatrix setToolTip:@"Secondary Widget" forCell:cell8];
+    
+#if DEBUG
+#else
+    [[_serverView mainFrame] loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://server.iueditor.org/log.html"]]];
+#endif
 }
 
 
@@ -205,30 +227,20 @@
 }
 
 
-- (void)awakeFromNib{
-    self.window.delegate = self;
-    
-    NSCell *cell = [self.propertyMatrix cellAtRow:0 column:0];
-    [self.propertyMatrix setToolTip:@"Appearance" forCell:cell];
-    
-    NSCell *cell2 = [self.propertyMatrix cellAtRow:0 column:1];
-    [self.propertyMatrix setToolTip:@"Property" forCell:cell2];
 
-    NSCell *cell3 = [self.propertyMatrix cellAtRow:0 column:2];
-    [self.propertyMatrix setToolTip:@"Event" forCell:cell3];
 
-    
-    NSCell *cell7 = [self.clickWidgetTabMatrix cellAtRow:0 column:0];
-    [self.clickWidgetTabMatrix setToolTip:@"Primary Widget" forCell:cell7];
-    
-    NSCell *cell8 = [self.clickWidgetTabMatrix cellAtRow:0 column:1];
-    [self.clickWidgetTabMatrix setToolTip:@"Secondary Widget" forCell:cell8];
-    
+- (void)unbindAllbinding{
+    [self unbind:@"IUController"];
+    [self unbind:@"selectedNode"];
+    [self unbind:@"documentController"];
+    [self unbind:@"selectedTextRange"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationConsoleStart object:self.window];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationConsoleEnd object:self.window];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
 
-#if DEBUG
-#else
-    [[_serverView mainFrame] loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://server.iueditor.org/log.html"]]];
-#endif
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.window.delegate = nil;
 }
 
 - (void)dealloc{
@@ -295,9 +307,7 @@
     //create project class
     [super setDocument:document];
     
-    if(document == nil){
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];   
-    }
+    
     
     //document == nil means window will be closed
     if(document && document.project){
