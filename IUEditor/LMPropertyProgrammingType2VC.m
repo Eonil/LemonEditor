@@ -37,7 +37,7 @@
     
     [_contentTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pgContentVariable"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
-    NSDictionary *enableBinding = @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
+//    NSDictionary *enableBinding = @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
 
 //    [_ellipsisTF bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pgContentVariable"] options:enableBinding];
 //    [_ellipsisTF bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"hasText"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
