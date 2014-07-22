@@ -257,6 +257,8 @@
     if ([iu.pgVisibleConditionVariable length] && _rule == IUCompileRuleDjango) {
         [code addCodeLineWithFormat:@"{%%if %@%%}", iu.pgVisibleConditionVariable];
     }
+    
+    
     [code addCodeLineWithFormat:@"<%@ %@>", tag, [self HTMLAttributes:iu option:nil isEdit:NO]];
     if ( self.rule == IUCompileRuleDjango && [iu isKindOfClass:[PGForm class]]) {
         [code addCodeLine:@"{% csrf_token %}"];
@@ -863,6 +865,11 @@
     if (iu.xPosMove) {
         [retString appendFormat:@" xPosMove='%.1f'", iu.xPosMove];
     }
+    id value = [iu.css tagDictionaryForWidth:IUCSSMaxViewPortWidth][IUCSSTagImage];
+    if([value isDjangoVariable] && _rule == IUCompileRuleDjango){
+        [retString appendFormat:@" style='background-image:url(%@)'", value];
+    }
+    
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     if([iu isMemberOfClass:[IUBox class]] && iu.lineHeightAuto && iu.text.length > 0){
         [retString appendString:@" autoLineHeight='1'"];
@@ -1491,8 +1498,11 @@
         
         value = cssTagDict[IUCSSTagImage];
         if(value){
-            NSString *imgSrc = [[self imagePathWithImageName:value isEdit:isEdit] CSSURLString];
-            [dict putTag:@"background-image" string:imgSrc];
+            
+            if([value isDjangoVariable] == NO){
+                NSString *imgSrc = [[self imagePathWithImageName:value isEdit:isEdit] CSSURLString];
+                [dict putTag:@"background-image" string:imgSrc];
+            }
 
             IUBGSizeType bgSizeType = [cssTagDict[IUCSSTagBGSize] intValue];
             switch (bgSizeType) {

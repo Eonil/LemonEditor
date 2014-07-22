@@ -129,6 +129,14 @@
     return NO;
 }
 
+- (BOOL)isDjangoVariable{
+    if ([self length] > 2) {
+        if([self containsString:@"{{"]){
+            return YES;
+        }
+    }
+    return NO;
+}
 
 - (NSString*)nameWithoutExtensionAsFile{
     NSString *fileName = [self lastPathComponent];

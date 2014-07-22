@@ -14,6 +14,7 @@
 
 - (NSString*)JSEscape;
 - (BOOL)isHTTPURL;
+- (BOOL)isDjangoVariable;
 - (NSString*)CSSURLString;
 - (NSString *)faviconType;
 
