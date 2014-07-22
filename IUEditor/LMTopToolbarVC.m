@@ -40,6 +40,9 @@
 
 }
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 //set from lmwc

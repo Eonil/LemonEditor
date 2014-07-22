@@ -67,6 +67,7 @@
 }
 
 - (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"stack VC dealloc");
 }
 
