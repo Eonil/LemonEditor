@@ -33,7 +33,7 @@
 @implementation LMPropertyFontVC{
     NSString *currentFontName;
     NSUInteger currentFontSize;
-    
+    NSArray *observingList;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -56,14 +56,16 @@
     [_lineHeightB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagLineHeight] options:IUBindingDictNotRaisesApplicable];
     [_textAlignB bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagTextAlign] options:IUBindingDictNotRaisesApplicable];
     
-    [self addObserver:self forKeyPath:@"controller.selectedObjects" options:0 context:@"font"];
-    
     //observing for undo
-    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontName] options:0 context:@"font"];
-    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontWeight] options:0 context:@"font"];
-    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontStyle] options:0 context:@"font"];
-    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagTextDecoration] options:0 context:@"font"];
-    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontSize] options:0 context:@"font"];
+    observingList = @[[_controller keyPathFromControllerToCSSTag:IUCSSTagFontName],
+                      [_controller keyPathFromControllerToCSSTag:IUCSSTagFontWeight],
+                      [_controller keyPathFromControllerToCSSTag:IUCSSTagFontStyle],
+                      [_controller keyPathFromControllerToCSSTag:IUCSSTagTextDecoration],
+                      [_controller keyPathFromControllerToCSSTag:IUCSSTagFontSize],
+                      @"controller.selectedObjects",
+                      ];
+    
+    [self addObserver:self forKeyPaths:observingList options:0 context:@"font"];
 
     
     _fontController = [LMFontController sharedFontController];
@@ -83,9 +85,7 @@
 }
 
 - (void)dealloc{
-    
-    [self removeObserver:self forKeyPath:@"controller.selectedObjects" context:@"selection"];
-
+    [self removeObserver:self forKeyPaths:observingList];
 }
 
 
