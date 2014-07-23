@@ -14,6 +14,7 @@
 @interface LMTopToolbarVC (){
     NSMutableArray  *openTabDocuments;
     NSMutableArray  *hiddenTabDocuments;
+    __weak IUSheet *_sheet;
 }
 
 @property (weak) IBOutlet NSView *fileTabView;
@@ -41,6 +42,7 @@
 }
 
 - (void)dealloc{
+    [self.view removeObserver:self forKeyPath:@"frame"];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

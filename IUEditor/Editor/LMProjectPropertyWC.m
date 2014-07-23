@@ -10,7 +10,7 @@
 
 
 @interface LMProjectPropertyWC ()
-@property  IUProject *project;
+@property (weak)  IUProject *project;
 
 @property (weak) IBOutlet NSComboBox *faviconComboBox;
 @property (weak) IBOutlet NSTextField *authorTF;

@@ -37,7 +37,10 @@
     return self;
 }
 -(void)awakeFromNib{
-    [_outlineV registerForDraggedTypes:@[@"IUFileNavi"]];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [_outlineV registerForDraggedTypes:@[@"IUFileNavi"]];
+    });
 }
 
 - (void)setDocumentController:(IUSheetController *)documentController{

@@ -18,7 +18,7 @@
 
 @interface SizeView : NSView
 
-@property id delegate;
+@property (weak) id delegate;
 
 //addFrameSize
 @property (weak) IBOutlet NSButton *addBtn;

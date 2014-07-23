@@ -230,7 +230,13 @@
     [self unbind:@"selectedNode"];
     [self unbind:@"documentController"];
     [self unbind:@"selectedTextRange"];
-
+    
+    [commandVC unbind:@"docController"];
+    [canvasVC unbind:@"controller"];
+    [widgetLibraryVC unbind:@"controller"];
+    [appearanceVC unbind:@"controller"];
+    [iuInspectorVC unbind:@"controller"];
+    [topToolbarVC unbind:@"sheetController"];
 }
 
 - (void)dealloc{

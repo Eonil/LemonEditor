@@ -542,6 +542,7 @@
 #endif
 
 -(void)dealloc{
+    NSAssert(0, @"project dealloc");
     JDInfoLog(@"Project Dealloc");
 }
 

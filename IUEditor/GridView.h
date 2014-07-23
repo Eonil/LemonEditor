@@ -26,7 +26,7 @@
     NSMutableDictionary *cursorDict;
 }
 
-@property id delegate;
+@property (weak) id  delegate;
 
 - (void)addSelectionLayerWithIdentifier:(NSString *)iuID withFrame:(NSRect)frame;
 - (void)removeAllSelectionLayers;

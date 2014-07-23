@@ -21,10 +21,8 @@ typedef enum{
 
 @interface LMTopToolbarVC : NSViewController
 
-@property (nonatomic)  IUSheetController *sheetController;
-@property (nonatomic)  IUSheet    *sheet;
-
-
+@property (weak)  IUSheetController *sheetController;
+- (void)setSheet:(IUSheet *)sheet;
 
 //tabItem delegate
 - (void)selectTab:(IUSheet *)documentNode;

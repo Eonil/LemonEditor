@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUSheetController.h"
 #import "IUController.h"
 
 @interface LMStackOutlineView : NSOutlineView

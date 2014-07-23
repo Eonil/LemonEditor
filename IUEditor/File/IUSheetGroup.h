@@ -14,7 +14,7 @@
 
 @interface IUSheetGroup : NSObject < NSCoding, NSCopying>
 
-@property IUProject *project;
+@property (weak) IUProject *project;
 @property NSString *name;
 
 - (NSArray*)childrenFiles;

@@ -14,7 +14,7 @@
 
 @interface LMCanvasView : NSView
 
-@property id delegate;
+@property (weak) id delegate;
 
 @property (weak) IBOutlet NSScrollView *mainScrollView;
 @property  NSFlippedView *mainView;
