@@ -292,7 +292,12 @@
     }
     else{
         if(value && [value isEqual:textfield.stringValue] == NO){
-            [textfield setStringValue:value];
+            if([value isKindOfClass:[NSString class]]){
+                [textfield setStringValue:value];
+            }
+            else{
+                [textfield setStringValue:[value stringValue]];
+            }
         }
         [stepper setEnabled:YES];
         [stepper setIntegerValue:[value integerValue]];
