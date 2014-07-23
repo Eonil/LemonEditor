@@ -221,6 +221,7 @@
     _resourceManager = resourceManager;
     propertyIUCarouselVC.resourceManager = resourceManager;
     propertyIUMovieVC.resourceManager = resourceManager;
+    propertyIUPageVC.resourceManager = resourceManager;
 }
 
 
