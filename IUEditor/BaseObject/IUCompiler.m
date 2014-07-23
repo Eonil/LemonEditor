@@ -1286,6 +1286,9 @@
                 if(line > 1){
                     [dict putTag:@"display" string:@"-webkit-box"];
                 }
+                else if(line == 1){
+                    [dict putTag:@"white-space" string:@"nowrap"];
+                }
                 [dict putTag:@"overflow" string:@"hidden"];
                 [dict putTag:@"text-overflow" string:@"ellipsis"];
                 [dict putTag:@"-webkit-line-clamp" intValue:(int)line ignoreZero:YES unit:IUCSSUnitNone];
