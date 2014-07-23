@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -80,8 +80,8 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sPU-oT-D2Q">
-                    <rect key="frame" x="18" y="82" width="70" height="17"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sPU-oT-D2Q">
+                    <rect key="frame" x="17" y="81" width="70" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="dIJ-nq-UuS"/>
                         <constraint firstAttribute="width" constant="66" id="j8h-aS-dxc"/>
@@ -92,8 +92,8 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <scrollView ambiguous="YES" misplaced="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ecd-Lv-OtQ">
-                    <rect key="frame" x="95" y="38" width="182" height="60"/>
+                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ecd-Lv-OtQ">
+                    <rect key="frame" x="94" y="38" width="182" height="60"/>
                     <clipView key="contentView" id="H2e-jO-13p">
                         <rect key="frame" x="1" y="1" width="180" height="58"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,10 +124,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <comboBox verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XOZ-sr-TmI">
+                <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XOZ-sr-TmI">
                     <rect key="frame" x="94" y="9" width="185" height="22"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="159" id="Gxj-E4-rYa"/>
+                        <constraint firstAttribute="width" constant="182" id="Gxj-E4-rYa"/>
                         <constraint firstAttribute="height" constant="17" id="nMy-bl-uwp"/>
                     </constraints>
                     <comboBoxCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Path, Filename, URL..." drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="2a5-sE-v7a">
@@ -136,8 +136,8 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </comboBoxCell>
                 </comboBox>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmU-kj-ORp">
-                    <rect key="frame" x="20" y="13" width="70" height="17"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cmU-kj-ORp">
+                    <rect key="frame" x="20" y="11" width="70" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="66" id="CTc-06-eyt"/>
                         <constraint firstAttribute="height" constant="17" id="ysT-xn-PCi"/>
@@ -150,16 +150,24 @@
                 </textField>
             </subviews>
             <constraints>
+                <constraint firstItem="Ecd-Lv-OtQ" firstAttribute="leading" secondItem="f34-do-qhj" secondAttribute="leading" id="0OE-dK-5TC"/>
+                <constraint firstItem="XOZ-sr-TmI" firstAttribute="leading" secondItem="cmU-kj-ORp" secondAttribute="trailing" constant="6" id="16Y-6V-cjs"/>
                 <constraint firstItem="Hkh-9R-GLc" firstAttribute="top" secondItem="8b4-Ay-4LT" secondAttribute="top" constant="8" id="5Jw-fz-My0"/>
                 <constraint firstItem="gPK-O4-Tr2" firstAttribute="top" secondItem="Hkh-9R-GLc" secondAttribute="bottom" constant="4" id="783-ZK-0Cp"/>
+                <constraint firstItem="Ecd-Lv-OtQ" firstAttribute="top" secondItem="SYg-Wu-bJe" secondAttribute="bottom" constant="9" id="9pW-Sf-Dkd"/>
+                <constraint firstItem="XOZ-sr-TmI" firstAttribute="top" secondItem="Ecd-Lv-OtQ" secondAttribute="bottom" constant="8" symbolic="YES" id="EhL-7s-tFn"/>
                 <constraint firstItem="Hkh-9R-GLc" firstAttribute="leading" secondItem="8b4-Ay-4LT" secondAttribute="leading" constant="22" id="Elr-7C-Wbs"/>
+                <constraint firstItem="cmU-kj-ORp" firstAttribute="top" secondItem="sPU-oT-D2Q" secondAttribute="bottom" constant="53" id="EvF-Vr-axB"/>
                 <constraint firstItem="gPK-O4-Tr2" firstAttribute="leading" secondItem="8b4-Ay-4LT" secondAttribute="leading" constant="19" id="JPf-zt-3Ym"/>
                 <constraint firstItem="bxA-m2-RBd" firstAttribute="trailing" secondItem="gPK-O4-Tr2" secondAttribute="trailing" id="ObW-c0-m1R"/>
                 <constraint firstItem="f34-do-qhj" firstAttribute="top" secondItem="8b4-Ay-4LT" secondAttribute="top" constant="29" id="Qp7-lU-WiO"/>
                 <constraint firstItem="SYg-Wu-bJe" firstAttribute="top" secondItem="f34-do-qhj" secondAttribute="bottom" constant="8" id="RRJ-D6-5vA"/>
                 <constraint firstItem="f34-do-qhj" firstAttribute="leading" secondItem="Ecd-Lv-OtQ" secondAttribute="leading" id="T9W-CM-Zbx"/>
+                <constraint firstItem="cmU-kj-ORp" firstAttribute="leading" secondItem="Hkh-9R-GLc" secondAttribute="leading" id="cja-11-JJI"/>
                 <constraint firstItem="bxA-m2-RBd" firstAttribute="top" secondItem="gPK-O4-Tr2" secondAttribute="bottom" constant="10" id="gtE-MK-O5h"/>
                 <constraint firstItem="f34-do-qhj" firstAttribute="leading" secondItem="gPK-O4-Tr2" secondAttribute="trailing" constant="9" id="iYE-aQ-OyJ"/>
+                <constraint firstItem="sPU-oT-D2Q" firstAttribute="top" secondItem="bxA-m2-RBd" secondAttribute="bottom" constant="9" id="mI9-7I-LwV"/>
+                <constraint firstItem="Ecd-Lv-OtQ" firstAttribute="leading" secondItem="SYg-Wu-bJe" secondAttribute="leading" id="nbm-zt-fik"/>
                 <constraint firstItem="bxA-m2-RBd" firstAttribute="trailing" secondItem="sPU-oT-D2Q" secondAttribute="trailing" id="vCf-vF-sro"/>
                 <constraint firstItem="f34-do-qhj" firstAttribute="leading" secondItem="SYg-Wu-bJe" secondAttribute="leading" id="vfl-SV-GZA"/>
             </constraints>

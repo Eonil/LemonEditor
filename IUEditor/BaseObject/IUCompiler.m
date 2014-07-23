@@ -103,14 +103,14 @@
     //for google
     if(page.title && page.title.length != 0){
         [code addCodeLineWithFormat:@"<title>%@</title>", page.title];
-        [code addCodeLineWithFormat:@"<meta name='og:title' content='%@'>", page.title];
+        [code addCodeLineWithFormat:@"<meta property='og:title' content='%@' />", page.title];
         [code addCodeLineWithFormat:@"<meta name='twitter:title' content='%@'>", page.title];
         [code addCodeLineWithFormat:@"<meta itemprop='name' content='%@'>", page.title];
 
     }
     if(page.desc && page.desc.length != 0){
         [code addCodeLineWithFormat:@"<meta name='description' content='%@'>", page.desc];
-        [code addCodeLineWithFormat:@"<meta name='og:description' content='%@'>", page.desc];
+        [code addCodeLineWithFormat:@"<meta property='og:description' content='%@' />", page.desc];
         [code addCodeLineWithFormat:@"<meta name='twitter:description' content='%@'>", page.desc];
         [code addCodeLineWithFormat:@"<meta itemprop='description' content='%@'>", page.desc];
     }
@@ -119,13 +119,13 @@
     }
     if(page.project.author && page.project.author.length != 0){
         [code addCodeLineWithFormat:@"<meta name='author' content='%@'>", page.project.author];
-        [code addCodeLineWithFormat:@"<meta name='og:site_name' content='%@'>", page.project.author];
+        [code addCodeLineWithFormat:@"<meta property='og:site_name' content='%@' />", page.project.author];
         [code addCodeLineWithFormat:@"<meta name='twitter:creator' content='%@'>", page.project.author];
 
     }
     if(page.metaImage && page.metaImage.length !=0){
         NSString *imgSrc = [self imagePathWithImageName:page.metaImage isEdit:NO];
-        [code addCodeLineWithFormat:@"<meta name='og:image' content='%@'>", imgSrc];
+        [code addCodeLineWithFormat:@"<meta property='og:image' content='%@' />", imgSrc];
         [code addCodeLineWithFormat:@"<meta name='twitter:image' content='%@'>", imgSrc];
         [code addCodeLineWithFormat:@"<meta itemprop='image' content='%@'>", imgSrc];
 
