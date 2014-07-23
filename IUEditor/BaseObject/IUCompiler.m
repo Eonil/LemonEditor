@@ -539,7 +539,7 @@
             }
             else {
                 if(iu.divLink){
-                    linkURL = [NSString stringWithFormat:@"./%@.html#%@", linkStr, [((IUBox *)iu.divLink).htmlID lowercaseString]];
+                    linkURL = [NSString stringWithFormat:@"./%@.html#%@", linkStr, ((IUBox *)iu.divLink).htmlID];
                 }
                 else{
                     linkURL = [NSString stringWithFormat:@"./%@.html", linkStr];
