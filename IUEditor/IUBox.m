@@ -290,6 +290,11 @@
 
 
 - (void)setName:(NSString *)name{
+    
+    //ignore same name
+    if([_name isEqualToString:name]){
+        return;
+    }
     //loading - not called rename notification
     if (_name == nil) {
         _name = [name copy];
@@ -297,9 +302,11 @@
     //rename precedure
     else {
         _name = [name copy];
-        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:
-                    @{IUNotificationStructureChangeType: IUNotificationStructureChangeTypeRenaming,
-                      IUNotificationStructureChangedIU: self}];
+        if (self.isConnectedWithEditor) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:
+             @{IUNotificationStructureChangeType: IUNotificationStructureChangeTypeRenaming,
+               IUNotificationStructureChangedIU: self}];
+        }
     }
 }
 -(void)setLink:(id)link{
@@ -583,7 +590,10 @@
         [self.project.identifierManager unregisterIUs:@[iu]];
         [self.delegate IURemoved:iu.htmlID withParentID:iu.parent.htmlID];
         [_m_children removeObject:iu];
-        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureChangeRemoving, IUNotificationStructureChangedIU: iu}];
+        
+        if (self.isConnectedWithEditor) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureChangeRemoving, IUNotificationStructureChangedIU: iu}];
+        }
 
         return YES;
     }
@@ -601,7 +611,9 @@
     
     [self updateHTML];
     [self updateJS];
-    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureChangeReindexing, IUNotificationStructureChangedIU: iu}];
+    if (self.isConnectedWithEditor) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureChangeReindexing, IUNotificationStructureChangedIU: iu}];
+    }
     
     return YES;
 }

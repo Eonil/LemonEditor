@@ -68,10 +68,7 @@
 }
 
 -(void)dealloc{
-    //release 시점 확인용
-    NSAssert(0, @"");
-    
-    //[self removeObserver:self forKeyPath:@"docController.project.runnable"];
+    [self removeObserver:self forKeyPath:@"docController.project.runnable"];
 }
 
 

@@ -66,6 +66,10 @@
     
 }
 
+- (void)dealloc{
+    NSLog(@"stack VC dealloc");
+}
+
 
 - (void)structureChanged:(NSNotification *)notification{
     [self.IUController rearrangeObjects];
@@ -346,8 +350,5 @@
     return NO;
 }
 
-- (void)dealloc{
-    NSLog(@"stack VC dealloc");
-}
 
 @end
