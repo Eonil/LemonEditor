@@ -24,6 +24,7 @@
 #import "LMPropertyIUTextViewVC.h"
 #import "LMPropertyIUPageLinkSetVC.h"
 #import "LMPropertyIUPageVC.h"
+#import "LMPropertyAnalyticsVC.h"
 #import "LMPropertyPGFormVC.h"
 #import "PGSubmitButtonVC.h"
 #import "LMInspectorAltTextVC.h"
@@ -67,6 +68,7 @@
     LMPropertyIUTextViewVC *propertyPGTextViewVC;
     LMPropertyIUPageLinkSetVC *propertyPGPageLinkSetVC;
     LMPropertyIUPageVC * propertyIUPageVC;
+    LMPropertyAnalyticsVC *propertyAnalyticsVC;
     
     LMPropertyPGFormVC *propertyPGFormVC;
     
@@ -131,6 +133,7 @@
         
         propertyPGPageLinkSetVC = [[LMPropertyIUPageLinkSetVC alloc] initWithNibName:[LMPropertyIUPageLinkSetVC class].className bundle:nil];
         propertyIUPageVC = [[LMPropertyIUPageVC alloc] initWithNibName:[LMPropertyIUPageVC class].className bundle:nil];
+        propertyAnalyticsVC = [[LMPropertyAnalyticsVC alloc] initWithNibName:[LMPropertyAnalyticsVC class].className bundle:nil];
         propertyPGFormVC = [[LMPropertyPGFormVC alloc] initWithNibName:[LMPropertyPGFormVC class].className bundle:nil];
         
         propertyPGSubmitButtonVC = [[PGSubmitButtonVC alloc] initWithNibName:[PGSubmitButtonVC class].className bundle:nil];
@@ -173,6 +176,7 @@
     [propertyPGTextViewVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     [propertyPGPageLinkSetVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     [propertyIUPageVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+    [propertyAnalyticsVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     
     [propertyPGFormVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     [propertyPGSubmitButtonVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
@@ -290,7 +294,7 @@
         self.propertyVArray = [NSMutableArray arrayWithArray:@[inspectorAltTextVC.view, inspectorLinkVC.view, propertyPGType2VC.view]];
     }
     else if ([classString isEqualToString:@"IUPage"]){
-        self.propertyVArray = @[propertyIUPageVC.view];
+        self.propertyVArray = [NSMutableArray arrayWithArray:@[propertyIUPageVC.view, propertyAnalyticsVC.view]];
     }
     else if ([classString isEqualToString:@"IUBox"]){
         self.propertyVArray = [NSMutableArray arrayWithArray:@[propertyTextVC.view, inspectorLinkVC.view, propertyPGType2VC.view]];

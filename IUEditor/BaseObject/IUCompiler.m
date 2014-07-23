@@ -80,6 +80,11 @@
             [code addCodeLineWithFormat:@"<link rel='icon' type='image/%@' href='%@'>",type, imgSrc];
         }
     }
+    //for google analytics
+    if(page.googleCode && page.googleCode.length != 0){
+        [code addCodeLine:page.googleCode];
+          }
+
 
     return code;
 }

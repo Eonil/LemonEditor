@@ -24,6 +24,8 @@
 @property NSString *keywords;
 @property NSString *desc;
 @property NSString *extraCode;
+@property NSString *googleCode;
+
 
 -(void)setBackground:(IUBackground*)background;
 -(IUBackground*)background;
