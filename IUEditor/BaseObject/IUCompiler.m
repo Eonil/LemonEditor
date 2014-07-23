@@ -1052,7 +1052,7 @@
     
     NSDictionary *cssDict = [self cssSourceForIU:sheet width:IUCSSMaxViewPortWidth isEdit:isEdit];
     for (NSString *identifier in cssDict) {
-        [code addCodeLineWithFormat:@"%@ {min-width:%dpx; %@}", identifier, largestWidth, cssDict[identifier]];
+        [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
     }
     NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
     
@@ -1067,12 +1067,20 @@
     
 #pragma mark extract MQ css
     //mediaQuery css
-    for(NSNumber *sizeNumber in mqSizeArray){
-        int size = [sizeNumber intValue];
+    for(int count=0; count<mqSizeArray.count; count++){
+        int size = [[mqSizeArray objectAtIndex:count] intValue];
         
         //        <style type="text/css" media="screen and (max-width:400px)" id="style400">
-        [code addCodeLine:@"<style type=\"text/css\" "];
-        [code addCodeWithFormat:@"media ='screen and (max-width:%dpx)' id='style%d'>" , size, size];
+        
+        [code addString:@"<style type=\"text/css\" "];
+        if(count < mqSizeArray.count-1){
+            [code addCodeWithFormat:@"media ='screen and (min-width:%dpx) and (max-width:%dpx)' id='style%d'>" , size, largestWidth-1, size];
+            largestWidth = size;
+        }
+        else{
+            [code addCodeWithFormat:@"media ='screen and (max-width:%dpx)' id='style%d'>" , largestWidth-1, size];
+
+        }
         [code increaseIndentLevelForEdit];
         
         NSMutableDictionary *cssDict = [[self cssSourceForIU:sheet width:size isEdit:isEdit] mutableCopy];
@@ -1164,14 +1172,8 @@
 -(IUCSSStringDictionary*)cssStringDictionaryWithIdentifier:(NSString *)identifier ofIU:(IUBox*)iu width:(NSInteger)width isEdit:(BOOL)isEdit{
     IUCSSStringDictionary *dict = [IUCSSStringDictionary dictionary];
     
-#pragma mark - IUPage
-    if([iu isKindOfClass:[IUPage class]]){
-        if([identifier isEqualToString:[iu.htmlID cssClass]] && width != IUCSSMaxViewPortWidth){
-            [dict putTag:@"min-width" intValue:(int)width ignoreZero:YES unit:IUCSSUnitPixel];
-        }
-    }
 #pragma mark - PGPageLinkSet
-    else if([iu isKindOfClass:[PGPageLinkSet class]]){
+    if([iu isKindOfClass:[PGPageLinkSet class]]){
         
         PGPageLinkSet *pageLinkSet = (PGPageLinkSet *)iu;
         if([identifier isEqualToString:[pageLinkSet.htmlID.cssClass stringByAppendingString:pageLinkSetButtonCSSPostfix]]){

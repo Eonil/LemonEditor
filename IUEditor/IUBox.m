@@ -158,7 +158,7 @@
         [_css setValue:@"Auto" forTag:IUCSSTagLineHeight forWidth:IUCSSMaxViewPortWidth];
         [_css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forWidth:IUCSSMaxViewPortWidth];
         [_css setValue:@(12) forTag:IUCSSTagFontSize forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@"" forTag:IUCSSTagFontName forWidth:IUCSSMaxViewPortWidth];
+        [_css setValue:@"Helvetica" forTag:IUCSSTagFontName forWidth:IUCSSMaxViewPortWidth];
         
         changedCSSWidths = [NSMutableSet set];
         

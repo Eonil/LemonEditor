@@ -47,6 +47,9 @@
     [code pushIndent:indentLevel*4 prependIndent:YES];
     [string appendString:code.string];
 }
+- (void)addString:(NSString *)aString{
+    [string appendString:aString];
+}
 
 - (void)addCodeWithFormat:(NSString *)format, ...{
     va_list args;
