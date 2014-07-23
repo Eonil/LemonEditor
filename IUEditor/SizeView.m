@@ -8,7 +8,6 @@
 
 #import "SizeView.h"
 #import "JDUIUtil.h"
-#import "LMCanvasView.h"
 #import "LMCanvasVC.h"
 #import "LMRulerView.h"
 #import "LMWC.h"

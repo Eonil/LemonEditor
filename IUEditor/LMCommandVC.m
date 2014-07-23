@@ -68,8 +68,9 @@
 }
 
 -(void)dealloc{
-    //FIXME: overserver있는지 체크할것
-    [self removeObserver:self forKeyPath:@"docController.project.runnable"];
+    if(syncUtil){
+        [self removeObserver:self forKeyPath:@"docController.project.runnable"];
+    }
 }
 
 

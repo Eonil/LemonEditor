@@ -82,16 +82,19 @@
 
     
 }
+
+- (void)unbindAllBinding{
+    _debugWC.canvasVC = nil;
+    [((LMCanvasView *)self.view) unbindAllBinding];
+
+}
+
 -(void) dealloc{
-    //release 시점 확인용
-    NSAssert(0, @"");
-    /*
-    [self removeObserver:self forKeyPath:@"view.sizeView.sizeArray" ];
+    [self removeObserver:self forKeyPath:@"view.sizeView.sizeArray" context:@"mqCount"];
     [self removeObserver:self forKeyPaths:@[@"sheet.ghostImageName",
-                                         @"sheet.ghostX",
-                                         @"sheet.ghostY",
-                                         @"sheet.ghostOpacity"]];
-     */
+                                            @"sheet.ghostX",
+                                            @"sheet.ghostY",
+                                            @"sheet.ghostOpacity"] context:@"ghostImage"];
 }
 
 -(void)setController:(IUController *)controller{

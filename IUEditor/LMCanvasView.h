@@ -31,4 +31,5 @@
 
 - (void)startDraggingFromGridView;
 
+- (void)unbindAllBinding;
 @end

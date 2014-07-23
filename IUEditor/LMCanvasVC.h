@@ -15,6 +15,8 @@
 @class LMCanvasView;
 @interface LMCanvasVC : NSViewController <IUSourceDelegate>
 
+- (void)unbindAllBinding;
+
 @property (nonatomic) _binding_ IUSheet  *sheet;
 @property (nonatomic) _binding_ NSString    *documentBasePath;
 @property (nonatomic) IUResourceManager  *resourceManager;

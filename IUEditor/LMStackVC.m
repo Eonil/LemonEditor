@@ -37,7 +37,6 @@
 @interface LMStackVC ()
 
 @property (weak) IBOutlet LMStackOutlineView *outlineV;
-//@property (strong) IBOutlet IUController *controller;
 
 @end
 
@@ -69,7 +68,6 @@
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationStructureDidChange object:self.view.window];
-    NSLog(@"stack VC dealloc");
 }
 
 

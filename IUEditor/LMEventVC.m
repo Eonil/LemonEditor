@@ -62,6 +62,10 @@
                                nil];
 }
 
+- (void)dealloc{
+    
+}
+
 
 - (NSView *)contentViewOfTitleView:(NSView *)titleV{
     for(JDOutlineCellView *cellV in eventOutlineVOrderArray){

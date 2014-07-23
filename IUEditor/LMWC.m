@@ -237,6 +237,10 @@
     [appearanceVC unbind:@"controller"];
     [iuInspectorVC unbind:@"controller"];
     [topToolbarVC unbind:@"sheetController"];
+
+    ((LMWindow*)(self.window)).canvasView = nil;
+    [canvasVC unbindAllBinding];
+    
 }
 
 - (void)dealloc{

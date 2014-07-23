@@ -46,11 +46,21 @@
 
 }
 
+-(void)unbindAllBinding{
+    self.webView.VC = nil;
+    self.gridView.delegate= nil;
+    self.sizeView.delegate = nil;
+    self.delegate = nil;
+}
+
 -(void) dealloc{
+    [self.mainView removeObserver:self forKeyPath:@"frame"];
+    
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSViewBoundsDidChangeNotification object:[self.mainScrollView contentView]];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:[self sizeView]];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQMaxChanged object:[self sizeView]];
-    
+
     
 }
 - (BOOL)isFlipped{
