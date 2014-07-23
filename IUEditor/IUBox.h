@@ -118,8 +118,10 @@ typedef enum _IUOverflowType{
 
 //Event
 @property (readonly) IUEvent *event;
-@property NSString *pgVisibleConditionVariable;
-@property NSString *pgContentVariable;
+
+//Programming
+@property (nonatomic) NSString *pgVisibleConditionVariable;
+@property (nonatomic) NSString *pgContentVariable;
 
 
 //CSS

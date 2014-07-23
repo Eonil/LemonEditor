@@ -12,9 +12,9 @@
 
 @property (nonatomic) NSString *videoPath;
 @property NSString  *posterPath;
-@property NSString  *altText;
+@property (nonatomic) NSString  *altText;
 
-@property BOOL enableControl, enableLoop, enableAutoPlay, enableMute;
-@property BOOL cover;
+@property (nonatomic) BOOL enableControl, enableLoop, enableAutoPlay, enableMute;
+@property (nonatomic) BOOL cover;
 
 @end

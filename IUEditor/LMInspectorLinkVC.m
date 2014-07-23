@@ -90,7 +90,8 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
-    if([keyPath isEqualToString:@"controller.selectedObjects"]){
+    if([keyPath isEqualToString:@"controller.selectedObjects"]
+       || [[keyPath pathExtension] isEqualToString:@"link"]){
         
         [_divLinkPB setEnabled:NO];
         [_urlCheckButton setState:0];

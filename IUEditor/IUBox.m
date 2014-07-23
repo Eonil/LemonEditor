@@ -288,6 +288,7 @@
     _event = event;
 }
 
+#pragma mark - setXXX : can Undo
 
 - (void)setName:(NSString *)name{
     
@@ -310,17 +311,25 @@
     }
 }
 -(void)setLink:(id)link{
+    if([link isEqualTo:_link] == NO){
+        [[self.undoManager prepareWithInvocationTarget:self] setLink:_link];
+    }
     _link = link;
-    //    [self.delegate IU:self.htmlID setLink:link];
 }
 
 -(void)setDivLink:(id)divLink{
+    if([divLink isEqualTo:_divLink]== NO){
+        [[self.undoManager prepareWithInvocationTarget:self] setDivLink:_divLink];
+    }
     _divLink = divLink;
 }
 
 - (void)setImageName:(NSString *)imageName{
  
-    [[[self undoManager] prepareWithInvocationTarget:self] setImageName:_css.assembledTagDictionary[IUCSSTagImage]];
+    NSString *currentImage = _css.assembledTagDictionary[IUCSSTagImage];
+    if([currentImage isEqualToString:imageName] == NO){
+        [[[self undoManager] prepareWithInvocationTarget:self] setImageName:_css.assembledTagDictionary[IUCSSTagImage]];
+    }
     
     [self willChangeValueForKey:@"imageName"];
 
@@ -333,10 +342,31 @@
     
      [self didChangeValueForKey:@"imageName"];
 }
-
 - (NSString *)imageName{
     return _css.assembledTagDictionary[IUCSSTagImage];
 }
+
+
+
+- (void)setPgContentVariable:(NSString *)pgContentVariable{
+    if([pgContentVariable isEqualToString:_pgContentVariable]){
+        return;
+    }
+    [[[self undoManager] prepareWithInvocationTarget:self] setPgContentVariable:_pgContentVariable];
+
+    _pgContentVariable = pgContentVariable;
+}
+
+- (void)setPgVisibleConditionVariable:(NSString *)pgVisibleConditionVariable{
+    if([pgVisibleConditionVariable isEqualToString:_pgVisibleConditionVariable]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setPgVisibleConditionVariable:_pgVisibleConditionVariable];
+    
+    _pgVisibleConditionVariable = pgVisibleConditionVariable;
+}
+
 
 
 //iucontroller & inspectorVC sync가 안맞는듯.
