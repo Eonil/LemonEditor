@@ -239,6 +239,15 @@
     return _isConnectedWithEditor;
 }
 
+
+-(void)dealloc{
+    if([self isConnectedWithEditor]){
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQAdded object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQRemoved object:nil];
+    }
+    JDInfoLog(@"Project Dealloc");
+}
+
 #pragma mark - mq
 
 - (void)addMQSize:(NSNotification *)notification{
@@ -541,10 +550,6 @@
 }
 #endif
 
--(void)dealloc{
-    NSAssert(0, @"project dealloc");
-    JDInfoLog(@"Project Dealloc");
-}
 
 - (NSArray*)allDocuments{
     NSMutableArray *array = [NSMutableArray array];

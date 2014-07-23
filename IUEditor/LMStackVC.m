@@ -68,7 +68,7 @@
 }
 
 - (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationStructureDidChange object:self.view.window];
     NSLog(@"stack VC dealloc");
 }
 

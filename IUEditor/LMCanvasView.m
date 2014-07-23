@@ -47,10 +47,11 @@
 }
 
 -(void) dealloc{
-    //release 시점 확인용
-    NSAssert(0, @"");
-  //  [self.mainView removeObserver:self forKeyPath:@"frame"];
-  //  [[NSNotificationCenter defaultCenter] removeObserver:self name:NSViewBoundsDidChangeNotification object:[self.mainScrollView contentView]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSViewBoundsDidChangeNotification object:[self.mainScrollView contentView]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:[self sizeView]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQMaxChanged object:[self sizeView]];
+    
+    
 }
 - (BOOL)isFlipped{
     return YES;

@@ -101,7 +101,9 @@
 }
 
 -(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if([self isConnectedWithEditor]){
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
 }
 
 -(void)setCount:(NSInteger)count{

@@ -73,7 +73,9 @@
 }
 
 -(void) dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if([self isConnectedWithEditor]){
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationSelectionDidChange object:nil];
+    }
 }
 
 -(void)selectionChanged:(NSNotification*)noti{

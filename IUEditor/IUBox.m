@@ -96,14 +96,6 @@
     return self;
 }
 
-- (void)dealloc{
-    if (self.isConnectedWithEditor) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQAdded object:nil];
-
-    }
-}
-
 
 
 -(id)initWithProject:(IUProject*)project options:(NSDictionary*)options{
@@ -186,6 +178,15 @@
     
     [[self undoManager] enableUndoRegistration];
 
+}
+
+
+- (void)dealloc{
+    if (self.isConnectedWithEditor) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQAdded object:nil];
+        
+    }
 }
 
 

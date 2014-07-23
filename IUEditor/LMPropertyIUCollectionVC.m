@@ -42,7 +42,10 @@
               options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"selection"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectMQSize:) name:IUNotificationMQSelected object:nil];
 
+}
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
 }
 
 - (void)setProject:(IUProject*)project{

@@ -42,8 +42,8 @@
 }
 
 - (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationStructureDidChange object:nil];
     [self.view removeObserver:self forKeyPath:@"frame"];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

@@ -209,7 +209,7 @@
                                  @"controller.selectedObjects"];
 
     [self removeObserver:self forKeyPaths:removeObservers];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
 }
 
 #pragma mark - MQSize
