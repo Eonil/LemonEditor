@@ -8,9 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "IUController.h"
+#import "IUResourceManager.h"
 
-@interface LMPropertyIUPageVC : NSViewController
+
+@interface LMPropertyIUPageVC : NSViewController <NSComboBoxDelegate>
 
 @property (nonatomic) IUController      *controller;
+@property (nonatomic) IUResourceManager     *resourceManager;
 
 @end

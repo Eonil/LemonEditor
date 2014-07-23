@@ -20,11 +20,16 @@
  */
 @interface IUPage : IUSheet
 
+//meta tag
 @property NSString *title;
 @property NSString *keywords;
 @property NSString *desc;
+@property NSString *metaImage;
+
+
 @property NSString *extraCode;
 @property NSString *googleCode;
+
 
 
 -(void)setBackground:(IUBackground*)background;

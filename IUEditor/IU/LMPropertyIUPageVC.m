@@ -7,8 +7,12 @@
 //
 
 #import "LMPropertyIUPageVC.h"
+#import "IUPage.h"
 
 @interface LMPropertyIUPageVC ()
+
+@property (weak) IBOutlet NSComboBox *imageNameComboBox;
+
 @property (weak) IBOutlet NSTextField *titleTF;
 @property (weak) IBOutlet NSTextField *keywordsTF;
 @property (unsafe_unretained) IBOutlet NSTextView *descriptionTV;
@@ -22,12 +26,15 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
+        [self loadView];
     }
     return self;
 }
 
-- (void)awakeFromNib{
+-(void)setController:(IUController *)controller{
+    
+    _controller = controller;
+    
     [_titleTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"title"]  options:IUBindingDictNotRaisesApplicable];
     [_keywordsTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"keywords"]  options:IUBindingDictNotRaisesApplicable];
     
@@ -39,7 +46,30 @@
 
     
     [_descriptionTV bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"desc"]  options:bindingOption];
+    
+    [_imageNameComboBox bind:NSContentBinding toObject:self withKeyPath:@"resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
+    [_imageNameComboBox bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"image"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    _imageNameComboBox.delegate = self;
 
+}
+
+#pragma mark - combobox
+-(void)controlTextDidChange:(NSNotification *)obj{
+    for (IUPage *page in self.controller.selectedObjects) {
+        if ([page isKindOfClass:[IUPage class]]) {
+            id value = [_imageNameComboBox stringValue];
+            page.metaImage = value;
+        }
+    }
+}
+
+- (void)comboBoxSelectionDidChange:(NSNotification *)notification{
+    for (IUPage *page in self.controller.selectedObjects) {
+        if ([page isKindOfClass:[IUPage class]]) {
+            id value = [_imageNameComboBox objectValueOfSelectedItem];
+            page.metaImage = value;
+        }
+    }
 }
 
 @end

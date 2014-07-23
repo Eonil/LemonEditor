@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMPropertyIUPageVC">
             <connections>
                 <outlet property="descriptionTV" destination="1m8-52-1l5" id="WBW-1v-Gkl"/>
                 <outlet property="extraCodeTF" destination="PZ5-Co-ACn" id="9pW-17-hDo"/>
+                <outlet property="imageNameComboBox" destination="XOZ-sr-TmI" id="ae9-GO-9zH"/>
                 <outlet property="keywordsTF" destination="SYg-Wu-bJe" id="Nlx-PR-0gA"/>
                 <outlet property="titleTF" destination="f34-do-qhj" id="B1c-ON-cny"/>
                 <outlet property="view" destination="8b4-Ay-4LT" id="owA-tx-VVF"/>
@@ -123,6 +124,30 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
+                <comboBox verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XOZ-sr-TmI">
+                    <rect key="frame" x="94" y="9" width="185" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="159" id="Gxj-E4-rYa"/>
+                        <constraint firstAttribute="height" constant="17" id="nMy-bl-uwp"/>
+                    </constraints>
+                    <comboBoxCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Path, Filename, URL..." drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="2a5-sE-v7a">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </comboBoxCell>
+                </comboBox>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmU-kj-ORp">
+                    <rect key="frame" x="20" y="13" width="70" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="66" id="CTc-06-eyt"/>
+                        <constraint firstAttribute="height" constant="17" id="ysT-xn-PCi"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Image" id="MvB-0M-YRu">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="Hkh-9R-GLc" firstAttribute="top" secondItem="8b4-Ay-4LT" secondAttribute="top" constant="8" id="5Jw-fz-My0"/>
