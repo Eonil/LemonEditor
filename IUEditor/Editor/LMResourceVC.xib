@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMResourceVC">
@@ -109,11 +109,11 @@
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cit-5B-Q7I">
                                         <rect key="frame" x="0.0" y="-1" width="301" height="309"/>
                                         <clipView key="contentView" id="kJF-1i-Cif">
-                                            <rect key="frame" x="1" y="1" width="299" height="349"/>
+                                            <rect key="frame" x="1" y="1" width="299" height="307"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <collectionView selectable="YES" maxNumberOfColumns="4" id="PfT-En-tr1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="299" height="349"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="299" height="307"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
@@ -152,8 +152,8 @@
                                 <rect key="frame" x="1" y="1" width="300" height="29"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-N9-QL8">
-                                        <rect key="frame" x="7" y="5" width="205" height="19"/>
+                                    <searchField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-N9-QL8">
+                                        <rect key="frame" x="7" y="10" width="205" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="NQB-ud-P6C"/>
                                             <constraint firstAttribute="width" constant="205" id="wYw-fE-yYP"/>

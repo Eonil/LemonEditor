@@ -44,5 +44,7 @@ typedef enum _IUCompileRule{
 #pragma mark manage JS source
 -(NSString *)outputJSInitializeSource:(IUSheet *)document;
 
+#pragma mark clipart
+- (NSArray *)outputClipArtArray:(IUSheet *)document;
 
 @end

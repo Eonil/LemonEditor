@@ -22,6 +22,7 @@
 -(NSString*)editorSource;
 -(NSString*)outputSource;
 - (NSString*)outputInitJSSource;
+- (NSArray *)outputArrayClipArt;
 
 -(NSArray*)widthWithCSS;
 -(IUBox *)selectableIUAtPoint:(CGPoint)point;

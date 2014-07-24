@@ -22,6 +22,7 @@
 //connect VC
 #import "LMAppearanceVC.h"
 #import "LMResourceVC.h"
+#import "LMClipArtVC.h"
 #import "LMFileNaviVC.h"
 #import "LMStackVC.h"
 #import "LMWidgetLibraryVC.h"
@@ -71,6 +72,7 @@
 @property (weak) IBOutlet NSMatrix *clickWidgetTabMatrix;
 @property (weak) IBOutlet NSView *widgetV;
 @property (weak) IBOutlet NSView *resourceV;
+@property (weak) IBOutlet NSView *clipartV;
 
 //center
 @property (weak) IBOutlet NSSplitView *centerSplitV;
@@ -105,6 +107,8 @@
     //right bottom
     LMWidgetLibraryVC   *widgetLibraryVC;
     LMResourceVC    *resourceVC;
+    LMClipArtVC     *clipArtVC;
+    
 
     //sheet
     LMProjectConvertWC *pcWC;
@@ -128,6 +132,7 @@
         bottomToolbarVC = [[LMBottomToolbarVC alloc] initWithNibName:@"LMBottomToolbarVC" bundle:nil];
         widgetLibraryVC = [[LMWidgetLibraryVC alloc] initWithNibName:@"LMWidgetLibraryVC" bundle:nil];
         resourceVC = [[LMResourceVC alloc] initWithNibName:@"LMResourceVC" bundle:nil];
+        clipArtVC = [[LMClipArtVC alloc] initWithNibName:@"LMClipArtVC" bundle:nil];
         appearanceVC = [[LMAppearanceVC alloc] initWithNibName:@"LMAppearanceVC" bundle:nil];
         iuInspectorVC = [[LMIUPropertyVC alloc] initWithNibName:[LMIUPropertyVC class].className bundle:nil];
         eventVC = [[LMEventVC alloc] initWithNibName:@"LMEventVC" bundle:nil];
@@ -174,6 +179,7 @@
     ////////////////right view/////////////////////////
     [_widgetV addSubviewFullFrame:widgetLibraryVC.view];
     [_resourceV addSubviewFullFrame:resourceVC.view];
+    [_clipartV addSubviewFullFrame:clipArtVC.view];
     
     [_appearanceV addSubviewFullFrame:appearanceVC.view];
     [_propertyV addSubviewFullFrame:iuInspectorVC.view];

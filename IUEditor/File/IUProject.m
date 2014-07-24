@@ -356,7 +356,10 @@
     IUEventVariable *eventVariable = [[IUEventVariable alloc] init];
     JDCode *initializeJSSource = [[JDCode alloc] init];
 
+    NSMutableArray *clipArtArray = [NSMutableArray array];
     for (IUSheet *sheet in self.allDocuments) {
+        [clipArtArray addObjectsFromArray:[sheet outputArrayClipArt]];
+        
         NSString *outputString = [sheet outputSource];
         
         NSString *filePath = [self buildPathForSheet:sheet];
@@ -371,6 +374,14 @@
         [initializeJSSource addCodeLine:[sheet outputInitJSSource]];
         [initializeJSSource addNewLine];
     }
+    //copy clipart to build directory
+    NSString *copyPath = [buildResourcePath stringByAppendingPathComponent:@"clipart"];
+    [[NSFileManager defaultManager] createDirectoryAtPath:copyPath withIntermediateDirectories:YES attributes:nil error:error];
+
+    for(NSString *imageName in clipArtArray){
+        [[JDFileUtil util] copyBundleItem:imageName toDirectory:copyPath];
+    }
+    
     
     NSString *resourceJSPath = [buildResourcePath stringByAppendingPathComponent:@"js"];
     

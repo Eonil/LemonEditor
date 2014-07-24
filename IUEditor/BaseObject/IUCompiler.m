@@ -201,6 +201,27 @@
     return code;
 }
 
+- (NSArray *)outputClipArtArray:(IUSheet *)document{
+    NSMutableArray *array = [NSMutableArray array];
+    for (IUBox *box in document.allChildren){
+        NSString *imageName = box.imageName;
+        if(imageName){
+            NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"clipArtList" ofType:@"plist"];
+            NSArray *clipArtArray = [NSArray arrayWithContentsOfFile:plistPath];
+            
+            for(NSDictionary *dict in clipArtArray){
+                NSString *title = [dict objectForKey:@"title"];
+                if([title isEqualToString:imageName]){
+                    [array addObject:imageName];
+                    break;
+                }
+            }
+        }
+        
+    }
+
+    return array;
+}
 
 #pragma mark default
 
@@ -238,6 +259,19 @@
             }
             else{
                 imgSrc = [file relativePath];
+            }
+        }
+        else{
+            if(isEdit){
+                imgSrc = [[NSBundle mainBundle] pathForImageResource:imageName];
+            }
+            else{
+                if(_rule == IUCompileRuleDjango){
+                    imgSrc = [@"/resource/clipart/" stringByAppendingString:imageName];
+                }
+                else{
+                    imgSrc = [@"resource/clipart/" stringByAppendingString:imageName];
+                }
             }
         }
     }

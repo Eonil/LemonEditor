@@ -89,6 +89,9 @@
 - (NSString*)outputInitJSSource{
     return [self.project.compiler outputJSInitializeSource:self];
 }
+- (NSArray *)outputArrayClipArt{
+    return [self.project.compiler outputClipArtArray:self];
+}
 
 -(NSArray*)widthWithCSS{
     return @[];

@@ -12,6 +12,7 @@
                 <outlet property="centerSplitV" destination="BqL-ro-r2J" id="VjN-GT-Bwc"/>
                 <outlet property="centerV" destination="LCo-BM-DQN" id="a81-Fm-UQ1"/>
                 <outlet property="clickWidgetTabMatrix" destination="vUX-uW-fTu" id="ZFU-Ng-NiY"/>
+                <outlet property="clipartV" destination="OBJ-vE-U5d" id="7VC-in-Aye"/>
                 <outlet property="commandV" destination="Nwr-vk-YZ2" id="0Yv-OA-2p6"/>
                 <outlet property="consoleV" destination="3fG-md-Skx" id="o7V-MH-chT"/>
                 <outlet property="eventV" destination="cND-E8-FNH" id="L2T-JZ-w7f"/>
