@@ -11,7 +11,7 @@
 #import "IUPageContent.h"
 
 @implementation IUPage{
-    __weak IUPageContent *_pageContent;
+    IUPageContent *_pageContent;
     __weak IUBackground *_background;
 }
 
