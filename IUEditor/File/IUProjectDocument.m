@@ -140,7 +140,7 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
     
     if([windowController isKindOfClass:[LMWC class]]){
         LMWC *wc = (LMWC *)windowController;
-        [wc unbindAllbinding];
+        [wc prepareDealloc];
     }
     [super removeWindowController:windowController];
 }

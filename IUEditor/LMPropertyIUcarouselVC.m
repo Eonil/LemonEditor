@@ -105,10 +105,13 @@
 
 }
 
-- (void)dealloc{
+- (void)prepareDealloc{
     if (awaked) {
         [self removeObserver:self forKeyPath:@"resourceManager.imageFiles"];
     }
+}
+
+- (void)dealloc{
 }
 
 //default Image 때문에 imageArray 사용 , resourceManager를 바로 호출하면 안됨.

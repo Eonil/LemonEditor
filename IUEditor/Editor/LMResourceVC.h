@@ -13,5 +13,5 @@
 
 @property (nonatomic, weak) IUResourceManager *manager;
 
-- (void)unbindAllBinding;
+- (void)prepareDealloc;
 @end

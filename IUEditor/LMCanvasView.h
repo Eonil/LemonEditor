@@ -31,5 +31,5 @@
 
 - (void)startDraggingFromGridView;
 
-- (void)unbindAllBinding;
+- (void)prepareDealloc;
 @end

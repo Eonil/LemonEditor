@@ -24,7 +24,7 @@
 
 @property (nonatomic) IUBox *pastedNewIU;
 
-- (void)unbindAllbinding;
+- (void)prepareDealloc;
 
 - (void)selectFirstDocument;
 - (void)reloadCurrentDocument;

@@ -254,7 +254,7 @@
     [self.manager removeResourceFile:resourceFile];
 }
 
-- (void)unbindAllBinding{
+- (void)prepareDealloc{
     [_resourceArrayController unbind:NSContentArrayBinding];
 }
 

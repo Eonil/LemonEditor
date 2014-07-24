@@ -354,7 +354,9 @@
     return [(NSView*)[self.propertyVArray objectAtIndex:row] frame].size.height;
 }
 
-
+- (void)prepareDealloc{
+    [propertyIUCarouselVC prepareDealloc];
+}
 
 
 

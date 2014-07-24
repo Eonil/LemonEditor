@@ -231,7 +231,7 @@
 
 
 
-- (void)unbindAllbinding{
+- (void)prepareDealloc{
     [self unbind:@"IUController"];
     [self unbind:@"selectedNode"];
     [self unbind:@"documentController"];
@@ -245,9 +245,10 @@
     [topToolbarVC unbind:@"sheetController"];
 
     ((LMWindow*)(self.window)).canvasView = nil;
-    [canvasVC unbindAllBinding];
-    [commandVC unbindAllBinding];
-    [resourceVC unbindAllBinding];
+    [canvasVC prepareDealloc];
+    [commandVC prepareDealloc];
+    [resourceVC prepareDealloc];
+    [iuInspectorVC prepareDealloc];
 //    resourceVC.manager = nil;
 }
 

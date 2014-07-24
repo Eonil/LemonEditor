@@ -12,7 +12,7 @@
 
 @interface LMBottomToolbarVC : NSViewController <NSComboBoxDelegate>
 
-@property (nonatomic, weak) IUResourceManager     *resourceManager;
+@property (nonatomic) IUResourceManager     *resourceManager;
 @property (nonatomic, weak) IUSheet    *sheet;
 
 - (void)setConsoleViewEnable:(BOOL)enable;

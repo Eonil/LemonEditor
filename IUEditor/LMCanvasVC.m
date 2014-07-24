@@ -83,11 +83,11 @@
     
 }
 
-- (void)unbindAllBinding{
+- (void)prepareDealloc{
 #if DEBUG
     _debugWC.canvasVC = nil;
 #endif
-    [((LMCanvasView *)self.view) unbindAllBinding];
+    [((LMCanvasView *)self.view) prepareDealloc];
 
 }
 

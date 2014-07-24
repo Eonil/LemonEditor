@@ -46,7 +46,7 @@
 
 }
 
--(void)unbindAllBinding{
+-(void)prepareDealloc{
     self.webView.VC = nil;
     self.gridView.delegate= nil;
     self.sizeView.delegate = nil;

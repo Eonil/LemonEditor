@@ -18,4 +18,6 @@
 
 @property (nonatomic) NSArray *imageArray;
 
+- (void)prepareDealloc;
+
 @end

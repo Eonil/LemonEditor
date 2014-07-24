@@ -21,5 +21,5 @@
 - (IBAction)download:(id)sender;
 - (IBAction)serverRestart:(id)sender;
 
-- (void)unbindAllBinding;
+- (void)prepareDealloc;
 @end

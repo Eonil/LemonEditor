@@ -39,7 +39,7 @@
 - (void)dealloc{
     [JDLogUtil log:IULogDealloc string:@"ApperanceVC"];
 }
-- (void)unbindAllBinding{
+- (void)prepareDealloc{
     /*
     [propertyFrameVC unbind:@"controller"];
     [propertyBGImageVC unbind:@"controller"];

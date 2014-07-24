@@ -53,7 +53,7 @@
     return self;
 }
 
-- (void)unbindAllBinding{
+- (void)prepareDealloc{
     [self removeObserver:self forKeyPath:@"docController.project.runnable"];
     [_compilerB unbind:NSSelectedIndexBinding];
 }
