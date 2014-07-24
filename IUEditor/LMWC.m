@@ -143,7 +143,6 @@
         [self bind:@"IUController" toObject:stackVC withKeyPath:@"IUController" options:nil];
         [self bind:@"selectedNode" toObject:fileNaviVC withKeyPath:@"selection" options:nil];
         [self bind:@"documentController" toObject:fileNaviVC withKeyPath:@"documentController" options:nil];
-        [commandVC bind:@"docController" toObject:self withKeyPath:@"documentController" options:nil];
         [canvasVC bind:@"controller" toObject:self withKeyPath:@"IUController" options:nil];
         [self bind:@"selectedTextRange" toObject:self withKeyPath:@"selectedTextRange" options:nil];
         [widgetLibraryVC bind:@"controller" toObject:self withKeyPath:@"IUController" options:nil];
@@ -366,6 +365,7 @@
         appearanceVC.resourceManager = _project.resourceManager;
         iuInspectorVC.resourceManager = _project.resourceManager;
         bottomToolbarVC.resourceManager = _project.resourceManager;
+        commandVC.docController = self.documentController;
         
         [_project connectWithEditor];
         [_project setIsConnectedWithEditor];

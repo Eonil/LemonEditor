@@ -14,7 +14,7 @@
 
 @interface LMCommandVC : NSViewController <JDShellUtilPipeDelegate, JDSyncUtilDeleagate>
 
-@property (weak) IUSheetController      *docController;
+@property (weak, nonatomic) IUSheetController      *docController;
 - (IBAction)toggleRecording:(id)sender;
 - (IBAction)stopServer:(id)sender;
 - (IBAction)upload:(id)sender;

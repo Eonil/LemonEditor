@@ -58,24 +58,27 @@
     [_compilerB unbind:NSSelectedIndexBinding];
 }
 
-- (void)awakeFromNib{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [_compilerB bind:NSSelectedIndexBinding toObject:self withKeyPath:@"docController.project.compiler.rule" options:nil];
-        [self addObserver:self forKeyPath:@"docController.project.runnable" options:NSKeyValueObservingOptionInitial context:nil];
-        [self changeCompilerRule:nil];
+- (void)setDocController:(IUSheetController *)docController{
+    if (docController == nil) {
+        return;
+    }
+    NSAssert(docController.project, @"Should have docController.project for KVO issue");
+    _docController = docController;
+    [_compilerB bind:NSSelectedIndexBinding toObject:self withKeyPath:@"docController.project.compiler.rule" options:nil];
+    [self addObserver:self forKeyPath:@"docController.project.runnable" options:NSKeyValueObservingOptionInitial context:nil];
+    [self changeCompilerRule:nil];
 #ifndef DEBUG
-        [_recordingB setHidden:YES];
+    [_recordingB setHidden:YES];
 #endif
-        syncUtil = [[JDSyncUtil alloc] init];
-        syncUtil.delegate = self;
-    });
+    syncUtil = [[JDSyncUtil alloc] init];
+    syncUtil.delegate = self;
 }
 
 -(void)dealloc{
     if(syncUtil){
         [self removeObserver:self forKeyPath:@"docController.project.runnable"];
     }
+    [JDLogUtil log:IULogDealloc string:@"LMCommandVC"];
 }
 
 
