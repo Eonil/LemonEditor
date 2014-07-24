@@ -22,7 +22,10 @@
 
 
 - (void)awakeFromNib{
-    [self addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
+    });
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{

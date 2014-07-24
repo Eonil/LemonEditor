@@ -246,6 +246,7 @@
 
     ((LMWindow*)(self.window)).canvasView = nil;
     [canvasVC unbindAllBinding];
+    [commandVC unbindAllBinding];
     
 }
 

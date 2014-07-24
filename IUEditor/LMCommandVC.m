@@ -53,6 +53,11 @@
     return self;
 }
 
+- (void)unbindAllBinding{
+    [self removeObserver:self forKeyPath:@"docController.project.runnable"];
+    [_compilerB unbind:NSSelectedIndexBinding];
+}
+
 - (void)awakeFromNib{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

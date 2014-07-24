@@ -20,4 +20,6 @@
 - (IBAction)upload:(id)sender;
 - (IBAction)download:(id)sender;
 - (IBAction)serverRestart:(id)sender;
+
+- (void)unbindAllBinding;
 @end
