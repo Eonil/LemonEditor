@@ -123,8 +123,10 @@
 }
 
 - (void)dealloc{
-    
-    [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGSize] context:@"size"];
+    if (_controller) {
+        [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGSize]];
+    }
+    [JDLogUtil log:IULogDealloc string:@"LMPropertyBGImage"];
 }
 
 

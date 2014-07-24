@@ -10,7 +10,7 @@
 #import "IUController.h"
 
 @interface LMPropertyBorderVC : NSViewController
-@property (weak) IUController      *controller;
+@property (weak, nonatomic) IUController      *controller;
 
 
 

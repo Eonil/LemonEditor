@@ -47,7 +47,9 @@
 
 @end
 
-@implementation LMPropertyIUcarouselVC
+@implementation LMPropertyIUcarouselVC{
+    BOOL awaked;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -98,14 +100,15 @@
     [_pagerPositionSlidr bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pagerPosition"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
     
-    
-    
+    awaked = YES;
     [self addObserver:self forKeyPath:@"resourceManager.imageFiles" options:NSKeyValueObservingOptionInitial context:@"image"];
 
 }
 
 - (void)dealloc{
-    [self removeObserver:self forKeyPath:@"resourceManager.imageFiles"];
+    if (awaked) {
+        [self removeObserver:self forKeyPath:@"resourceManager.imageFiles"];
+    }
 }
 
 //default Image 때문에 imageArray 사용 , resourceManager를 바로 호출하면 안됨.

@@ -11,7 +11,7 @@
 
 @interface LMPropertyBGColorVC : NSViewController
 
-@property (weak) IUController      *controller;
+@property (nonatomic, weak) IUController      *controller;
 
 
 @end

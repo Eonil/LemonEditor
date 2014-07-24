@@ -11,8 +11,8 @@
 
 @interface LMPropertyIUImportVC : NSViewController
 
-@property (nonatomic) IUController      *controller;
-@property IUSheet *selectedClass;
+@property (nonatomic, weak) IUController      *controller;
+@property (weak) IUSheet *selectedClass;
 
 - (void)setProject:(IUProject*)project;
 

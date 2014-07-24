@@ -198,18 +198,21 @@
 }
 
 - (void)dealloc{
-    NSArray *removeObservers = @[[_controller keyPathFromControllerToCSSTag:IUCSSTagX],
-                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagY],
-                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagWidth],
-                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagHeight],
-                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentX],
-                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentY],
-                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentWidth],
-                                 [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentHeight],
-                                 @"controller.selectedObjects"];
-
-    [self removeObserver:self forKeyPaths:removeObservers];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
+    if (_controller) {
+        NSArray *removeObservers = @[[_controller keyPathFromControllerToCSSTag:IUCSSTagX],
+                                     [_controller keyPathFromControllerToCSSTag:IUCSSTagY],
+                                     [_controller keyPathFromControllerToCSSTag:IUCSSTagWidth],
+                                     [_controller keyPathFromControllerToCSSTag:IUCSSTagHeight],
+                                     [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentX],
+                                     [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentY],
+                                     [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentWidth],
+                                     [_controller keyPathFromControllerToCSSTag:IUCSSTagPercentHeight],
+                                     @"controller.selectedObjects"];
+        
+        [self removeObserver:self forKeyPaths:removeObservers];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
+    }
+    [JDLogUtil log:IULogDealloc string:@"LMPropertyFrameVC"];
 }
 
 #pragma mark - MQSize

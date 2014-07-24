@@ -12,6 +12,6 @@
 
 @interface LMPropertyFrameVC : NSViewController <NSTextFieldDelegate>
 
-@property (weak) IUController *controller;
+@property (weak, nonatomic) IUController *controller;
 
 @end
