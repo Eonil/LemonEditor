@@ -76,6 +76,7 @@
 }
 
 -(void) dealloc{
+    [JDLogUtil log:IULogDealloc string:@"BottomToolBar"];
     [self removeObserver:self forKeyPath:@"sheet.ghostImageName"];
 }
 

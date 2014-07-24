@@ -11,6 +11,7 @@
 #import "LMDragAndDropButton.h"
 @interface LMResourceVC : NSViewController <NSOpenSavePanelDelegate>
 
-@property (nonatomic) IUResourceManager *manager;
+@property (nonatomic, weak) IUResourceManager *manager;
 
+- (void)unbindAllBinding;
 @end

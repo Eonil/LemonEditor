@@ -19,7 +19,7 @@
 
 @interface IUResourceGroup : NSObject <IUFile, IUResourcePathProtocol, NSCoding, NSCopying>
 @property NSString *name;
-@property id <IUResourcePathProtocol> parent;
+@property (weak) id <IUResourcePathProtocol> parent;
 
 - (IUResourceFile*)addResourceFileWithContentOfPath:(NSString*)filePath;
 - (BOOL)addResourceGroup:(IUResourceGroup*)group;

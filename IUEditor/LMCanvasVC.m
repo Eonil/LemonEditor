@@ -85,11 +85,9 @@
 
 - (void)unbindAllBinding{
 #if DEBUG
-    
-
     _debugWC.canvasVC = nil;
-    [((LMCanvasView *)self.view) unbindAllBinding];
 #endif
+    [((LMCanvasView *)self.view) unbindAllBinding];
 
 }
 

@@ -19,7 +19,7 @@
 
 @property (nonatomic) _binding_ IUSheet  *sheet;
 @property (nonatomic) _binding_ NSString    *documentBasePath;
-@property (nonatomic) IUResourceManager  *resourceManager;
+@property (nonatomic, weak) IUResourceManager  *resourceManager;
 
 @property (nonatomic) IUController  *controller;
 

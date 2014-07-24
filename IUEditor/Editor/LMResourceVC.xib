@@ -12,7 +12,6 @@
                 <outlet property="resourceIconB" destination="i50-VL-0Xr" id="VM4-wn-o8N"/>
                 <outlet property="resourceListB" destination="12v-kS-W80" id="bGj-Zd-L3M"/>
                 <outlet property="tabView" destination="g6L-7m-n83" id="Ebn-hl-gve"/>
-                <outlet property="trashV" destination="b3B-4g-cu1" id="xAg-Wy-0Vf"/>
                 <outlet property="view" destination="iGv-yg-ab5" id="Hla-o2-Cng"/>
             </connections>
         </customObject>

@@ -26,7 +26,7 @@ typedef enum _IUCompileRule{
 
 @interface IUCompiler : NSObject
 
-@property IUResourceManager *resourceManager;
+@property (weak) IUResourceManager *resourceManager;
 @property IUCompileRule    rule;
 
 //build source

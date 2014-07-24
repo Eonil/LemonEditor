@@ -214,6 +214,7 @@
 }
 
 -(void)dealloc{
+    [JDLogUtil log:IULogDealloc string:@"LMIUPropertyVC"];
     [_controller removeObserver:self forKeyPath:@"selectedObjects"];
 }
 

@@ -194,4 +194,8 @@
     return nil;
 }
 
+- (void)dealloc{
+    [JDLogUtil log:IULogDealloc string:@"IUResourceManager"];
+}
+
 @end

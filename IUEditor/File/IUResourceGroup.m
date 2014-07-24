@@ -75,6 +75,9 @@
     return YES;
 }
 
+-(void)dealloc{
+    NSLog(@"IUResrouceGroup Defalloc");
+}
 
 -(NSString*)relativePath{
     if ([self.parent isKindOfClass:[IUProject class]]) {

@@ -247,7 +247,8 @@
     ((LMWindow*)(self.window)).canvasView = nil;
     [canvasVC unbindAllBinding];
     [commandVC unbindAllBinding];
-    
+    [resourceVC unbindAllBinding];
+//    resourceVC.manager = nil;
 }
 
 - (void)dealloc{

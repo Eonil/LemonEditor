@@ -254,4 +254,12 @@
     [self.manager removeResourceFile:resourceFile];
 }
 
+- (void)unbindAllBinding{
+    [_resourceArrayController unbind:NSContentArrayBinding];
+}
+
+- (void)dealloc{
+    [JDLogUtil log:IULogDealloc string:@"LMResourceVC"];
+}
+
 @end

@@ -17,6 +17,6 @@
 
 @interface LMCollectionItemView : NSView
 
-@property IBOutlet id<LMCollectionDelegate> delegate;
+@property (weak) IBOutlet id<LMCollectionDelegate> delegate;
 
 @end
