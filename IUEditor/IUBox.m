@@ -26,7 +26,7 @@
     NSMutableSet *changedCSSWidths;
     NSPoint originalPoint, originalPercentPoint;
     NSSize originalSize, originalPercentSize;
-    IUProject *_tempProject;
+    __weak IUProject *_tempProject;
     BOOL    _isConnectedWithEditor;
 }
 
