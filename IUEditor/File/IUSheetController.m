@@ -7,8 +7,10 @@
 //
 
 #import "IUSheetController.h"
+#import "NSTreeController+JDExtension.h"
 
 @implementation IUSheetController
+
 -(id)initWithDocument:(IUSheet*)document{
     NSAssert(document!=nil, @"document is nil");
     self = [super init];
@@ -44,5 +46,24 @@
 - (void)dealloc{
     [JDLogUtil log:IULogDealloc string:@"IUSheetController"];
 }
+- (BOOL)setSelectionIndexPaths:(NSArray *)indexPaths{
+    
+    return [self setUndoSelectionIndexPath:indexPaths[0]];
+}
+
+- (BOOL)setUndoSelectionIndexPath:(NSIndexPath *)indexPath{
+    NSIndexPath *currentIndexPath = [self selectionIndexPath];
+    if(currentIndexPath){
+        [[self.undoManager prepareWithInvocationTarget:self] setUndoSelectionIndexPath:currentIndexPath];
+    }
+    return [super setSelectionIndexPaths:@[indexPath]];
+}
+
+#pragma mark - Undo Manager
+- (NSUndoManager *)undoManager{
+    return [[[[NSApp mainWindow] windowController] document] undoManager];
+}
+
+
 
 @end
