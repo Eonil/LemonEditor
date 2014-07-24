@@ -46,9 +46,10 @@
     
     //get directory path of clipArts and plist file
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"clipArtList" ofType:@"plist"];
-    NSArray *clipArtArray = [NSArray arrayWithContentsOfFile:plistPath];
+    NSDictionary *clipArtDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 
-    for(NSDictionary *dict in clipArtArray){
+
+    for(NSDictionary *dict in clipArtDict.allValues){
         ClipArt *clip = [[ClipArt alloc] init];
         clip.title = [dict objectForKey:@"title"];
         clip.tag = [dict objectForKey:@"tag"];

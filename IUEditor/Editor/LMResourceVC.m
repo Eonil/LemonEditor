@@ -160,6 +160,13 @@
         for(int i = 0; i < [files count]; i++ )
         {
             NSURL* filePath = [files objectAtIndex:i];
+            NSString *filename = [filePath lastPathComponent];
+            NSImage *image = [NSImage imageNamed:filename];
+            if (image) {
+                NSLog(@"%@ is already existed", filename);
+            }
+            
+            
             [_manager insertResourceWithContentOfPath:[filePath path]];
         }
     }
@@ -178,6 +185,7 @@
     if (existedFile) {
         return NO;
     }
+    
     return YES;
 }
 

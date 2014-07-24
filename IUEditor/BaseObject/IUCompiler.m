@@ -207,14 +207,10 @@
         NSString *imageName = box.imageName;
         if(imageName){
             NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"clipArtList" ofType:@"plist"];
-            NSArray *clipArtArray = [NSArray arrayWithContentsOfFile:plistPath];
+            NSDictionary *clipArtDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
             
-            for(NSDictionary *dict in clipArtArray){
-                NSString *title = [dict objectForKey:@"title"];
-                if([title isEqualToString:imageName]){
-                    [array addObject:imageName];
-                    break;
-                }
+            if([clipArtDict objectForKey:imageName] != nil){
+                [array addObject:imageName];
             }
         }
         

@@ -188,9 +188,11 @@
     else if(filename != nil){
     //getting path
         IUResourceFile *file = [_resourceManager resourceFileWithName:filename];
-   
         NSString *path = file.absolutePath;
-        NSLog(@"%@", path);
+
+        if (file == nil) {
+            path = [[NSBundle mainBundle] pathForImageResource:filename];
+        }
         
         NSArray * imageReps = [NSBitmapImageRep imageRepsWithContentsOfFile:path];
         

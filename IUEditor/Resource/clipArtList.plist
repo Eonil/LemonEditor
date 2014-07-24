@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<array>
+<dict>
+	<key>default.jpg</key>
 	<dict>
 		<key>title</key>
 		<string>default.jpg</string>
 		<key>tag</key>
-		<string>default,</string>
+		<string>default, puppy, </string>
 	</dict>
-    <dict>
+	<key>arrow_left.png</key>
+	<dict>
 		<key>title</key>
 		<string>arrow_left.png</string>
 		<key>tag</key>
-		<string>arrow,</string>
+		<string>arrow, left, </string>
 	</dict>
+	<key>arrow_right.png</key>
 	<dict>
 		<key>title</key>
 		<string>arrow_right.png</string>
 		<key>tag</key>
-		<string>arrow,</string>
+		<string>arrow, right, </string>
 	</dict>
-</array>
+    <key>blueberry.png</key>
+	<dict>
+		<key>title</key>
+		<string>blueberry.png</string>
+		<key>tag</key>
+		<string>blue, berry, fruit, </string>
+	</dict>
+</dict>
 </plist>
