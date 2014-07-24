@@ -19,18 +19,26 @@
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if(self){
+        [self.undoManager disableUndoRegistration];
+
         _thumbnail = NO;
         _type = @"webMovie";
         self.webMovieSource = @"<iframe width=\"560\" height=\"315\" src=\"//www.youtube.com/embed/9bZkp7q19f0?list=PLEC422D53B7588DC7\" frameborder=\"0\" allowfullscreen></iframe>";
+        
+        [self.undoManager enableUndoRegistration];
     }
     return self;
 }
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self =  [super initWithCoder:aDecoder];
     if(self){
+        [self.undoManager disableUndoRegistration];
+
         [aDecoder decodeToObject:self withProperties:[[IUWebMovie class] properties]];
         //call thumbnail data
         self.webMovieSource = _webMovieSource;
+        
+        [self.undoManager enableUndoRegistration];
     }
     return self;
 }
@@ -41,11 +49,15 @@
 }
 - (id)copyWithZone:(NSZone *)zone{
     IUWebMovie *webMovie = [super copyWithZone:zone];
+    [self.undoManager disableUndoRegistration];
+    
     webMovie.thumbnail = self.thumbnail;
     webMovie.type = [_type copy];
     webMovie.thumbnailID = [_thumbnailID copy];
     webMovie.thumbnailPath = [_thumbnailPath copy];
     webMovie.webMovieSource = [_webMovieSource copy];
+    
+    [self.undoManager enableUndoRegistration];
     return webMovie;
 }
 
@@ -53,8 +65,17 @@
     return NO;
 }
 
+- (void)setEventautoplay:(BOOL)eventautoplay{
+    if(_eventautoplay == eventautoplay){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setEventautoplay:_eventautoplay];
+    _eventautoplay = eventautoplay;
+}
 
--(void)setWebMovieSource:(NSString *)aWebMovieSource{
+
+- (void)setWebMovieSource:(NSString *)aWebMovieSource{
     _webMovieSource = aWebMovieSource;
     _thumbnail = NO;
     

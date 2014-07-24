@@ -60,10 +60,12 @@
 
 - (id)copyWithZone:(NSZone *)zone{
     IUFBLike *iu = [super copyWithZone:zone];
+    [self.undoManager disableUndoRegistration];
     
     iu.likePage = [_likePage copy];
     iu.showFriendsFace = _showFriendsFace;
     
+    [self.undoManager enableUndoRegistration];
     return iu;
 }
 
@@ -110,7 +112,29 @@
     self.innerHTML = source;
 }
 
+- (void)setShowFriendsFace:(BOOL)showFriendsFace{
+    if(_showFriendsFace == showFriendsFace){
+        return;
+    }
+    [[self.undoManager prepareWithInvocationTarget:self] setShowFriendsFace:_showFriendsFace];
+    _showFriendsFace = showFriendsFace;
+}
 
+- (void)setColorscheme:(IUFBLikeColor)colorscheme{
+    if(_colorscheme == colorscheme){
+        return;
+    }
+    [[self.undoManager prepareWithInvocationTarget:self] setColorscheme:_colorscheme];
+    _colorscheme = colorscheme;
+}
+
+- (void)setLikePage:(NSString *)likePage{
+    if([likePage isEqualToString:_likePage]){
+        return;
+    }
+    [[self.undoManager prepareWithInvocationTarget:self] setLikePage:_likePage];
+    _likePage = likePage;
+}
 - (BOOL)canChangeWidthByUserInput{
     return NO;
 }

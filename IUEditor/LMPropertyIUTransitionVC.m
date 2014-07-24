@@ -31,7 +31,7 @@
 - (void)awakeFromNib{
     [_eventB bind:NSSelectedValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"eventType"] options:IUBindingDictNotRaisesApplicable];
     [_animationB bind:NSSelectedValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"animation"] options:IUBindingDictNotRaisesApplicable];
-    [_durationTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"duration"] options:IUBindingDictNotRaisesApplicable];
+    [_durationTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"animationDuration"] options:IUBindingDictNotRaisesApplicable];
 
     _typeArray = [IUEvent visibleTypeArray];
     

@@ -1114,7 +1114,7 @@
             else {
                 NSAssert(0, @"Missing Code");
             }
-            float duration = transitionIU.duration;
+            float duration = transitionIU.animationDuration;
             [retString appendFormat:@" transitionDuration=%.2f", duration * 1000];
         }
         if ([transitionIU.animation length]) {

@@ -106,6 +106,7 @@
     }
 }
 
+//FIXME:UNDO
 -(void)setCount:(NSInteger)count{
     
     if (count <= 1 || count > 30 || count == self.children.count ) {
@@ -211,21 +212,49 @@
 
 #pragma mark - pager
 - (void)setControlType:(IUCarouselControlType)controlType{
+    if(controlType == _controlType){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setControlType:_controlType];
+    
+    
     _controlType = controlType;
     [self updateHTML];
     [self cssForItemColor];
 }
 
 - (void)setSelectColor:(NSColor *)selectColor{
+    
+    if([selectColor isEqualTo:_selectColor]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setSelectColor:_selectColor];
+    
     _selectColor = selectColor;
     [self cssForItemColor];
 }
 - (void)setDeselectColor:(NSColor *)deselectColor{
+    
+    if([_deselectColor isEqualTo:deselectColor]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setDeselectColor:_deselectColor];
+    
     _deselectColor = deselectColor;
     [self cssForItemColor];
 }
 
 - (void)setPagerPosition:(NSInteger)pagerPosition{
+    
+    if(_pagerPosition == pagerPosition){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setPagerPosition:_pagerPosition];
+    
     _pagerPosition = pagerPosition;
     if (self.delegate) {
         [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:self.pagerWrapperID];
@@ -242,36 +271,85 @@
 
 #pragma mark - arrow
 - (void)setDisableArrowControl:(BOOL)disableArrowControl{
+    
+    if(_disableArrowControl == disableArrowControl){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setDisableArrowControl:_disableArrowControl];
+    
     _disableArrowControl = disableArrowControl;
     [self updateHTML];
     [self updateCSSForEditViewPort];
 }
 
 - (void)setLeftArrowImage:(NSString *)leftArrowImage{
+    
+    if([_leftArrowImage isEqualToString:leftArrowImage]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setLeftArrowImage:_leftArrowImage];
+    
     _leftArrowImage = leftArrowImage;
     [self cssForArrowImage:IUCarouselArrowLeft];
 }
 
 - (void)setRightArrowImage:(NSString *)rightArrowImage{
+    
+    if([_rightArrowImage isEqualToString:rightArrowImage]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setRightArrowImage:_rightArrowImage];
+    
     _rightArrowImage = rightArrowImage;
     [self cssForArrowImage:IUCarouselArrowRight];
 
 }
 
 - (void)setLeftX:(int)leftX{
+    
+    if(_leftX == leftX){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setLeftX:_leftX];
+    
     _leftX = leftX;
     [self cssForArrowImage:IUCarouselArrowLeft];
 }
 - (void)setLeftY:(int)leftY{
+    
+    if(_leftY == leftY){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setLeftY:_leftY];
+    
     _leftY = leftY;
     [self cssForArrowImage:IUCarouselArrowLeft];
 }
 
 - (void)setRightX:(int)rightX{
+    
+    if(_rightX == rightX){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setRightX:_rightX];
+    
     _rightX = rightX;
     [self cssForArrowImage:IUCarouselArrowRight];
 }
 - (void)setRightY:(int)rightY{
+    
+    if(_rightY == rightY){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setRightY:_rightY];
+    
     _rightY = rightY;
     [self cssForArrowImage:IUCarouselArrowRight];
 }
@@ -289,6 +367,26 @@
         [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:arrowID];
         
     }
+}
+
+#pragma mark - property for undo
+
+- (void)setAutoplay:(BOOL)autoplay{
+    if(autoplay == _autoplay){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setAutoplay:_autoplay];
+    _autoplay = autoplay;
+}
+
+- (void)setTimer:(NSInteger)timer{
+    if(timer == _timer){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setTimer:_timer];
+    _timer = timer;
 }
 
 @end

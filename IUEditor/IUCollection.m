@@ -9,16 +9,21 @@
 #import "IUCollection.h"
 
 @implementation IUCollection
+//TODO: responsiv setting is not implemented.
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
-    _collectionVariable = [aDecoder decodeObjectForKey:@"collectionVariable"];
-    _responsiveSetting = [aDecoder decodeObjectForKey:@"responsiveSetting"];
-    _responsiveSupport = [aDecoder decodeIntegerForKey:@"responsiveSupport"];
-    _defaultItemCount = [aDecoder decodeIntegerForKey:@"defaultItemCount"];
+    if(self){
+        [self.undoManager disableUndoRegistration];
+        
+        _collectionVariable = [aDecoder decodeObjectForKey:@"collectionVariable"];
+        _responsiveSetting = [aDecoder decodeObjectForKey:@"responsiveSetting"];
+        _responsiveSupport = [aDecoder decodeIntegerForKey:@"responsiveSupport"];
+        _defaultItemCount = [aDecoder decodeIntegerForKey:@"defaultItemCount"];
+
+        [self.undoManager enableUndoRegistration];
     
-    //template of array
-    //NSArray *array = @[@{@"width":@"600",@"count":@(2)}];
+    }
     return self;
 }
 
@@ -32,23 +37,50 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
-    self.defaultItemCount = 4;
-    self.responsiveSetting = [NSArray array];
+    if(self){
+        [self.undoManager disableUndoRegistration];
+        self.defaultItemCount = 4;
+        self.responsiveSetting = [NSArray array];
+        [self.undoManager enableUndoRegistration];
+    }
     return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone{
     IUCollection *iu = [super copyWithZone:zone];
-    iu.collectionVariable = [_collectionVariable copy];
-    iu.responsiveSupport = _responsiveSupport;
-    iu.responsiveSetting = [_responsiveSetting copy];
-    iu.defaultItemCount = _defaultItemCount;
+    if(iu){
+        [self.undoManager disableUndoRegistration];
+        iu.collectionVariable = [_collectionVariable copy];
+        iu.responsiveSupport = _responsiveSupport;
+        iu.responsiveSetting = [_responsiveSetting copy];
+        iu.defaultItemCount = _defaultItemCount;
+        [self.undoManager enableUndoRegistration];
+    }
     return iu;
 }
 
 - (void)setResponsiveSupport:(BOOL)responsiveSupport{
+    if(_responsiveSupport == responsiveSupport){
+        return;
+    }
+    [[self.undoManager prepareWithInvocationTarget:self] setResponsiveSupport:_responsiveSupport];
+    
     _responsiveSupport = responsiveSupport;
-    self.responsiveSetting = [NSArray array];
 }
 
+- (void)setDefaultItemCount:(NSInteger)defaultItemCount{
+    if(_defaultItemCount == defaultItemCount){
+        return;
+    }
+    [[self.undoManager prepareWithInvocationTarget:self] setDefaultItemCount:_defaultItemCount];
+    _defaultItemCount = defaultItemCount;
+}
+
+- (void)setCollectionVariable:(NSString *)collectionVariable{
+    if([_collectionVariable isEqualToString:collectionVariable]){
+        return;
+    }
+    [[self.undoManager prepareWithInvocationTarget:self] setCollectionVariable:_collectionVariable];
+    _collectionVariable = collectionVariable;
+}
 @end

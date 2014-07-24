@@ -9,7 +9,7 @@
 #import "IUImport.h"
 
 @interface IUCollection : IUImport
-@property NSString *collectionVariable;
+@property (nonatomic) NSString *collectionVariable;
 @property (nonatomic) BOOL responsiveSupport;
 @property (nonatomic) NSArray  *responsiveSetting;
 @property (nonatomic) NSInteger defaultItemCount;

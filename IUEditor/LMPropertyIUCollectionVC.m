@@ -36,16 +36,22 @@
 
 - (void)awakeFromNib{
     [_variableTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"collectionVariable"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+
     
     //observing
     [self addObserver:self forKeyPath:@"controller.selectedObjects"
-              options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"selection"];
+              options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];
+    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"defaultItemCount"]
+              options:0 context:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectMQSize:) name:IUNotificationMQSelected object:nil];
 
 }
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
+    [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"defaultItemCount"]];
+    [self removeObserver:self forKeyPath:@"controller.selectedObjects"];
 }
 
 - (void)setProject:(IUProject*)project{
@@ -61,7 +67,7 @@
     [self updateCount];
 }
 
-- (void)selectionContextDidChange:(NSDictionary *)change{
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     [self updateCount];
 }
 

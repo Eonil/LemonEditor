@@ -14,7 +14,13 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
-    self.prototypeClass = [aDecoder decodeObjectForKey:@"_prototypeClass"];
+    [self.undoManager disableUndoRegistration];
+    
+    if(self){
+        self.prototypeClass = [aDecoder decodeObjectForKey:@"_prototypeClass"];
+    }
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 
@@ -26,12 +32,24 @@
 
 - (id)copyWithZone:(NSZone *)zone{
     IUImport *iu = [super copyWithZone:zone];
+    [self.undoManager disableUndoRegistration];
+    
     iu.prototypeClass = _prototypeClass;
+    
+    [self.undoManager enableUndoRegistration];
     return iu;
 }
 
 - (void)setPrototypeClass:(IUClass *)prototypeClass{
+    
+    if([prototypeClass isEqualTo:_prototypeClass]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setPrototypeClass:_prototypeClass];
+
     [self willChangeValueForKey:@"children"];
+    
     [_prototypeClass removeReference:self];
     
     _prototypeClass = prototypeClass;

@@ -20,14 +20,13 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
-    [[self undoManager] disableUndoRegistration];
-
     if (self) {
+        [[self undoManager] disableUndoRegistration];
+        
         [aDecoder decodeToObject:self withProperties:[IUTransition properties]];
+        
+        [[self undoManager] enableUndoRegistration];
     }
-    
-    [[self undoManager] enableUndoRegistration];
-
     return self;
 }
 
@@ -38,9 +37,9 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
-    [[self undoManager] disableUndoRegistration];
-
+    
     if(self){
+        [[self undoManager] disableUndoRegistration];
 
         _firstItem = [[IUItem alloc] initWithProject:project options:options];
         _secondItem = [[IUItem alloc] initWithProject:project options:options];
@@ -51,19 +50,24 @@
         self.currentEdit = 0;
         self.eventType = @"Click";
         self.animation = @"Blind";
-        self.duration  = 0.2;
-    }
-    
-    [[self undoManager] enableUndoRegistration];
+        self.animationDuration  = 0.2;
+        
+        [[self undoManager] enableUndoRegistration];
 
+    }
     return self;
 }
 
 - (id)copyWithZone:(NSZone *)zone{
     IUTransition *iu = [super copyWithZone:zone];
+    [[self undoManager] disableUndoRegistration];
+
     iu.currentEdit = _currentEdit;
     iu.eventType = [_eventType copy];
     iu.animation = [_animation copy];
+    
+    [[self undoManager] enableUndoRegistration];
+
     return iu;
 }
 - (void)connectWithEditor{
@@ -72,13 +76,13 @@
 
 }
 
--(void) dealloc{
+- (void)dealloc{
     if([self isConnectedWithEditor]){
         [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationSelectionDidChange object:nil];
     }
 }
 
--(void)selectionChanged:(NSNotification*)noti{
+- (void)selectionChanged:(NSNotification*)noti{
     NSMutableSet *set = [NSMutableSet setWithArray:self.children];
     [set intersectSet:[NSSet setWithArray:[noti userInfo][@"selectedObjects"]]];
     if ([set count] != 1) {
@@ -112,6 +116,33 @@
         [_firstItem.css setValue:@(NO) forTag:IUCSSTagDisplay forWidth:IUCSSMaxViewPortWidth];
         [_secondItem.css setValue:@(YES) forTag:IUCSSTagDisplay forWidth:IUCSSMaxViewPortWidth];
     }
+}
+
+- (void)setEventType:(NSString *)eventType{
+    if([_eventType isEqualToString:eventType]){
+        return ;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setEventType:_eventType];
+    
+    _eventType = eventType;
+}
+
+- (void)setAnimation:(NSString *)animation{
+    if ([_animation isEqualToString:animation]) {
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setAnimation:_animation];
+    _animation = animation;
+}
+
+- (void)setAnimationDuration:(float)animationDuration{
+    if(_animationDuration == animationDuration){
+        return;
+    }
+    [[self.undoManager prepareWithInvocationTarget:self] setAnimationDuration:_animationDuration];
+    _animationDuration = animationDuration;
 }
 
 @end
