@@ -61,6 +61,8 @@
         else {
             NSAssert(0, @"");
         }
+        free(readonly);
+        free(type);
     }
     return self;
 }
