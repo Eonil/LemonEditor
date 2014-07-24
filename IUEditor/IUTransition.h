@@ -16,5 +16,5 @@ static NSString * kIUTransitionEventClick = @"Click";
 @property (nonatomic) NSInteger currentEdit;
 @property (nonatomic) NSString  *eventType;
 @property (nonatomic) NSString  *animation;
-@property (nonatomic) float animationDuration;
+@property (nonatomic) float duration;
 @end

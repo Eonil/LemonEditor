@@ -18,6 +18,6 @@ typedef enum{
 @property (nonatomic) NSString  *inputName;
 @property (nonatomic) NSString  *placeholder;
 @property (nonatomic) NSString  *inputValue;
-@property (nonatomic) IUTextFieldType tfType;
+@property (nonatomic) IUTextFieldType type;
 
 @end

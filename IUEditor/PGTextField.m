@@ -18,7 +18,7 @@
         
         _placeholder = @"placeholder";
         _inputValue = @"value example";
-        _tfType = IUTextFieldTypeDefault;
+        _type = IUTextFieldTypeDefault;
         
         [self.css setValue:@(130) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
         [self.css setValue:@(30) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
@@ -50,7 +50,7 @@
     iu.inputName = [_inputName copy];
     iu.placeholder = [_placeholder copy];
     iu.inputValue = [_inputValue copy];
-    iu.tfType = _tfType;
+    iu.type = _type;
     
     [self.undoManager enableUndoRegistration];
     return iu;
@@ -108,15 +108,15 @@
     [self updateHTML];
     [self updateJS];
 }
-- (void)setTfType:(IUTextFieldType)tfType{
+- (void)setType:(IUTextFieldType)type{
     
-    if(tfType == _tfType){
+    if(type == _type){
         return;
     }
     
-    [[self.undoManager prepareWithInvocationTarget:self] setTfType:_tfType];
+    [(PGTextField *)[self.undoManager prepareWithInvocationTarget:self] setType:_type];
     
-    _tfType = tfType;
+    _type = type;
     [self updateHTML];
     [self updateJS];
 }

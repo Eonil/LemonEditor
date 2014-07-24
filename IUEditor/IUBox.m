@@ -283,8 +283,24 @@
     _css = css;
 }
 
+#pragma <#arguments#>
+
 - (void)setEvent:(IUEvent *)event{
     _event = event;
+}
+
+- (void)setOpacityMove:(float)opacityMove{
+    if(_opacityMove != opacityMove){
+        [[self.undoManager prepareWithInvocationTarget:self] setOpacityMove:_opacityMove];
+        _opacityMove = opacityMove;
+    }
+}
+
+- (void)setXPosMove:(float)xPosMove{
+    if(_xPosMove != xPosMove){
+        [[self.undoManager prepareWithInvocationTarget:self] setXPosMove:_xPosMove];
+        _xPosMove = xPosMove;
+    }
 }
 
 #pragma mark - setXXX : can Undo

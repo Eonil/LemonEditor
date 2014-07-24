@@ -50,7 +50,7 @@
         self.currentEdit = 0;
         self.eventType = @"Click";
         self.animation = @"Blind";
-        self.animationDuration  = 0.2;
+        self.duration  = 0.2;
         
         [[self undoManager] enableUndoRegistration];
 
@@ -65,6 +65,7 @@
     iu.currentEdit = _currentEdit;
     iu.eventType = [_eventType copy];
     iu.animation = [_animation copy];
+    iu.duration = _duration;
     
     [[self undoManager] enableUndoRegistration];
 
@@ -137,12 +138,12 @@
     _animation = animation;
 }
 
-- (void)setAnimationDuration:(float)animationDuration{
-    if(_animationDuration == animationDuration){
+- (void)setDuration:(float)duration{
+    if(_duration == duration){
         return;
     }
-    [[self.undoManager prepareWithInvocationTarget:self] setAnimationDuration:_animationDuration];
-    _animationDuration = animationDuration;
+    [[self.undoManager prepareWithInvocationTarget:self] setAnimationDuration:_duration];
+    _duration = duration;
 }
 
 @end

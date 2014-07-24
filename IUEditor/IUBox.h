@@ -118,6 +118,10 @@ typedef enum _IUOverflowType{
 
 //Event
 @property (readonly) IUEvent *event;
+//scroll event
+@property (nonatomic) float opacityMove;
+@property (nonatomic) float xPosMove;
+
 
 //Programming
 @property (nonatomic) NSString *pgVisibleConditionVariable;
@@ -216,8 +220,8 @@ typedef enum _IUOverflowType{
 
 @property (nonatomic) id link, divLink;
 @property BOOL linkTarget;
-@property float opacityMove;
-@property float xPosMove;
+
+
 //0 for default, 1 for H1, 2 for H2
 @property IUTextType textType;
 

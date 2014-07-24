@@ -34,22 +34,22 @@ typedef enum{
 @interface IUEvent : NSObject <NSCopying>
 
 //trigger
-@property NSString *variable;
-@property NSInteger maxValue, initialValue;
-@property IUEventActionType actionType;
+@property (nonatomic) NSString *variable;
+@property (nonatomic) NSInteger maxValue, initialValue;
+@property (nonatomic) IUEventActionType actionType;
 
 //receiver
-@property BOOL  enableVisible;
+@property (nonatomic) BOOL  enableVisible;
 @property NSString *eqVisibleVariable;
 @property (nonatomic) NSString *eqVisible;
-@property NSInteger eqVisibleDuration;
-@property IUEventVisibleType directionType;
+@property (nonatomic) NSInteger eqVisibleDuration;
+@property (nonatomic) IUEventVisibleType directionType;
 
-@property BOOL enableFrame;
+@property (nonatomic) BOOL enableFrame;
 @property NSString *eqFrameVariable;
 @property (nonatomic) NSString *eqFrame;
-@property NSInteger eqFrameDuration;
-@property CGFloat   eqFrameWidth, eqFrameHeight;
+@property (nonatomic) NSInteger eqFrameDuration;
+@property (nonatomic) CGFloat   eqFrameWidth, eqFrameHeight;
 
 + (NSArray *)visibleTypeArray;
 

@@ -1063,7 +1063,7 @@
         if(pgTextField.inputValue){
             [retString appendFormat:@" value=\"%@\"",pgTextField.inputValue];
         }
-        if(pgTextField.tfType == IUTextFieldTypePassword){
+        if(pgTextField.type == IUTextFieldTypePassword){
             [retString appendFormat:@" type=\"password\""];
         }
         else {
@@ -1110,7 +1110,7 @@
             else {
                 NSAssert(0, @"Missing Code");
             }
-            float duration = transitionIU.animationDuration;
+            float duration = transitionIU.duration;
             [retString appendFormat:@" transitionDuration=%.2f", duration * 1000];
         }
         if ([transitionIU.animation length]) {

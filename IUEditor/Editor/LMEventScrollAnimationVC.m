@@ -30,8 +30,13 @@
 
 - (void)awakeFromNib{
     
-    [_opacityMoveTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_xPosMoveTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"xPosMove"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    NSDictionary *numberBindingOption = @{NSContinuouslyUpdatesValueBindingOption: @(YES),
+                           NSRaisesForNotApplicableKeysBindingOption:@(NO),
+                           NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
+
+    
+    [_opacityMoveTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"] options:numberBindingOption];
+    [_xPosMoveTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"xPosMove"] options:numberBindingOption];
     [self addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"]  options:0 context:nil];
 }
 
