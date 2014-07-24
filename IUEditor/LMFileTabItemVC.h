@@ -9,17 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import "IUSheetGroup.h"
 
-@interface LMTabBox : NSBox
-
-@property (weak) IBOutlet  id delegate;
-
-@end
 
 @interface LMFileTabItemVC : NSViewController
 
 @property (weak) id delegate;
-@property (weak) IBOutlet NSBox *fileBox;
-@property (weak) IBOutlet NSButton *fileNameBtn;
 @property (weak) IUSheet *sheet;
 
 - (void)setDeselectColor;

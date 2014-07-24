@@ -9,14 +9,13 @@
 #import "LMFileTabItemVC.h"
 #import "LMTopToolbarVC.h"
 
-@implementation LMTabBox
 
-
-@end
 
 @interface LMFileTabItemVC (){
 }
 
+@property (weak) IBOutlet NSBox *fileBox;
+@property (weak) IBOutlet NSButton *fileNameBtn;
 
 @end
 
@@ -31,7 +30,9 @@
 }
 
 - (void)awakeFromNib{
+
     [_fileNameBtn bind:@"title" toObject:self withKeyPath:@"sheet.name" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+
 }
 
 

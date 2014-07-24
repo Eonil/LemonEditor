@@ -50,20 +50,8 @@
             <color key="borderColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
             <color key="fillColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
         </box>
-        <button translatesAutoresizingMaskIntoConstraints="NO" id="25h-oS-rOZ">
-            <rect key="frame" x="0.0" y="0.0" width="140" height="30"/>
-            <constraints>
-                <constraint firstAttribute="height" constant="30" id="06X-a2-1LZ"/>
-                <constraint firstAttribute="width" constant="140" id="nGW-vv-40P"/>
-            </constraints>
-            <buttonCell key="cell" type="square" title="index.pgiu" bezelStyle="shadowlessSquare" image="tab_close" imagePosition="right" alignment="left" inset="2" id="8Qw-6u-mvq">
-                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                <font key="font" metaFont="smallSystem"/>
-            </buttonCell>
-        </button>
     </objects>
     <resources>
         <image name="next" width="13" height="9"/>
-        <image name="tab_close" width="10" height="10"/>
     </resources>
 </document>

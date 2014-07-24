@@ -12,13 +12,14 @@
 
 
 @interface LMTopToolbarVC (){
+    NSMutableArray  *openTabVCArray;
     NSMutableArray  *openTabDocuments;
     NSMutableArray  *hiddenTabDocuments;
     __weak IUSheet *_sheet;
 }
 
-@property (weak) IBOutlet NSView *fileTabView;
-@property (weak) IBOutlet NSButton *hiddenTabBtn;
+@property  IBOutlet NSView *fileTabView;
+@property  IBOutlet NSButton *hiddenTabBtn;
 
 @end
 
@@ -29,8 +30,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Initialization code here.
+        openTabVCArray = [NSMutableArray array];
         openTabDocuments = [NSMutableArray array];
         hiddenTabDocuments = [NSMutableArray array];
+        
     }
     return self;
 }
@@ -113,18 +116,18 @@
     [_fileTabView addSubviewDirectionLeftToRight:itemVC.view width:140];
     
     [itemVC setDeselectColor];
+    [openTabVCArray addObject:itemVC];
 }
 
 
 
 - (LMFileTabItemVC *)tabItemOfDocumentNode:(IUSheet *)sheet{
-    for(LMTabBox *item in _fileTabView.subviews){
-        NSAssert([item isKindOfClass:[LMTabBox class]], @"");
-        LMFileTabItemVC *itemVC = ((LMFileTabItemVC *)item.delegate);
+    for (LMFileTabItemVC *itemVC in openTabVCArray) {
         if([itemVC.sheet isEqualTo:sheet]){
             return itemVC;
         }
     }
+    
     return nil;
 }
 
@@ -257,9 +260,7 @@
     [_sheetController setSelectedObject:sheet];
     
     //tabcolor
-    for(LMTabBox *item in _fileTabView.subviews){
-        NSAssert([item isKindOfClass:[LMTabBox class]], @"");
-        LMFileTabItemVC *itemVC = ((LMFileTabItemVC *)item.delegate);
+    for(LMFileTabItemVC *itemVC in openTabVCArray){
         
         if([itemVC.sheet isEqualTo:sheet]){
             [itemVC setSelectColor];
@@ -297,7 +298,7 @@
         
     }
     [openTabDocuments removeObject:tabItem.sheet];
-    
+    [openTabVCArray removeObject:tabItem];
     
     //call by tabview
     if([sender isNotEqualTo:self]){
