@@ -28,15 +28,16 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
-
+        [self loadView];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectMQSize:) name:IUNotificationMQSelected object:nil];
     }
     return self;
 }
 
-- (void)awakeFromNib{
+- (void)setController:(IUController *)controller{
+    _controller = controller;
     [_variableTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"collectionVariable"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-
+    
     
     //observing
     [self addObserver:self forKeyPath:@"controller.selectedObjects"
@@ -44,12 +45,10 @@
     [self addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"defaultItemCount"]
               options:0 context:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectMQSize:) name:IUNotificationMQSelected object:nil];
-
 }
 
 - (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"defaultItemCount"]];
     [self removeObserver:self forKeyPath:@"controller.selectedObjects"];
 }
