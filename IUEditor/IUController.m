@@ -20,13 +20,12 @@
     IUBox       *_lastPastedIU;
 }
 
-
-- (void)awakeFromNib{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [self addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
-    });
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    [self addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
+    return self;
 }
+
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"selectedObjects"]) {

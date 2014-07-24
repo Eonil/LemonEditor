@@ -33,14 +33,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self loadView];
+        [_outlineV registerForDraggedTypes:@[@"IUFileNavi"]];
     }
     return self;
-}
--(void)awakeFromNib{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [_outlineV registerForDraggedTypes:@[@"IUFileNavi"]];
-    });
 }
 
 - (void)setDocumentController:(IUSheetController *)documentController{
