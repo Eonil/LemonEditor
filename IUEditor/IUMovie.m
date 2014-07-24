@@ -16,16 +16,15 @@
 
 @implementation IUMovie
 
-- (void)connectWithEditor{
-    [super connectWithEditor];
-    [self addObserver:self forKeyPaths:@[@"enableControl", @"enableLoop", @"enableMute", @"enableAutoPlay",@"cover", @"altText", @"posterPath"] options:0 context:@"attributes"];
-}
+
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self =  [super initWithCoder:aDecoder];
+    [self.undoManager disableUndoRegistration];
     if(self){
         [aDecoder decodeToObject:self withProperties:[[IUMovie class] properties]];
     }
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 
@@ -37,6 +36,7 @@
 
 -(id)copyWithZone:(NSZone *)zone{
     IUMovie *movie = [super copyWithZone:zone];
+    [self.undoManager disableUndoRegistration];
     movie.videoPath = [_videoPath copy];
     movie.altText = [_altText copy];
     movie.posterPath = [_posterPath copy];
@@ -46,11 +46,18 @@
     movie.enableLoop = _enableLoop;
     movie.enableMute = _enableMute;
     
+    [self.undoManager enableUndoRegistration];
     return movie;
 }
 
+- (void)connectWithEditor{
+    [super connectWithEditor];
+    [self addObserver:self forKeyPaths:@[@"posterPath"] options:0 context:@"attributes"];
+}
+
+
 -(void)dealloc{
-    [self removeObserver:self forKeyPaths:@[@"enableControl", @"enableLoop", @"enableMute", @"enableAutoPlay",@"cover", @"altText", @"posterPath"]];
+    [self removeObserver:self forKeyPaths:@[@"posterPath"]];
 }
 
 - (BOOL)shouldAddIUByUserInput{
@@ -59,14 +66,70 @@
 
 
 - (void)setVideoPath:(NSString *)videoPath{
-    _videoPath = videoPath;
-    if (self.delegate) {
-        [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.parent.htmlID];
+    if([videoPath isEqualToString:_videoPath]){
+        return;
     }
+    [[self.undoManager prepareWithInvocationTarget:self] setVideoPath:_videoPath];
+    _videoPath = videoPath;
+    
+    [self updateHTML];
+}
+
+- (void)setEnableAutoPlay:(BOOL)enableAutoPlay{
+    if(enableAutoPlay == _enableAutoPlay){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setEnableAutoPlay:_enableAutoPlay];
+    
+    _enableAutoPlay = enableAutoPlay;
+    [self updateHTML];
+
+}
+
+- (void)setEnableControl:(BOOL)enableControl{
+    if(enableControl == _enableControl){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setEnableControl:_enableControl];
+    _enableControl = enableControl;
+    [self updateHTML];
+
+}
+
+- (void)setEnableLoop:(BOOL)enableLoop{
+    if(_enableLoop == enableLoop){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setEnableLoop:_enableLoop];
+    _enableLoop = enableLoop;
+    [self updateHTML];
+
+}
+
+- (void)setEnableMute:(BOOL)enableMute{
+    if(_enableMute == enableMute){
+        return;
+    }
+    [[self.undoManager prepareWithInvocationTarget:self] setEnableMute:_enableMute];
+    _enableMute = enableMute;
+    [self updateHTML];
+
+}
+
+- (void)setCover:(BOOL)cover{
+    if(_cover == cover){
+        return;
+    }
+    [[self.undoManager prepareWithInvocationTarget:self] setCover:_cover];
+    _cover = cover;
+    [self updateHTML];
 }
 
 - (void)attributesContextDidChange:(NSDictionary *)change{
-    [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.parent.htmlID];
+    [self updateHTML];
 }
 
 @end

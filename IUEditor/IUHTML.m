@@ -12,16 +12,24 @@
 
 -(id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
+    [self.undoManager disableUndoRegistration];
+    
     if(self){
         _innerHTML = @"<div style=\"text-align:center;\"> Edit HTML Code at property tab. </div>";
     }
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self =  [super initWithCoder:aDecoder];
+    [self.undoManager disableUndoRegistration];
+    
     if(self){
         [aDecoder decodeToObject:self withProperties:[[IUHTML class] properties]];
     }
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 -(void)encodeWithCoder:(NSCoder *)aCoder{
@@ -32,9 +40,13 @@
 
 - (id)copyWithZone:(NSZone *)zone{
     IUHTML *html = [super copyWithZone:zone];
+    [self.undoManager disableUndoRegistration];
+    
     if(html){
         html.innerHTML = [_innerHTML copy];
     }
+    
+    [self.undoManager enableUndoRegistration];
     return html;
 }
 
