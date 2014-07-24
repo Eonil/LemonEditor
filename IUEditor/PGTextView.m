@@ -12,9 +12,10 @@
 
 -(id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
-    [[self undoManager] disableUndoRegistration];
 
     if(self){
+        [[self undoManager] disableUndoRegistration];
+
 
         _placeholder = @"placeholder";
         _inputValue = @"Sample Text";
@@ -24,21 +25,25 @@
         [self.css setValue:@"1.3" forTag:IUCSSTagLineHeight forWidth:IUCSSMaxViewPortWidth];
         [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign forWidth:IUCSSMaxViewPortWidth];
         
+        [[self undoManager] enableUndoRegistration];
+
+        
     }
-    [[self undoManager] enableUndoRegistration];
 
     return self;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self =  [super initWithCoder:aDecoder];
-    [[self undoManager] disableUndoRegistration];
 
     if(self){
+        [[self undoManager] disableUndoRegistration];
         
         [aDecoder decodeToObject:self withProperties:[[PGTextView class] properties]];
+        
+        [[self undoManager] enableUndoRegistration];
+
     }
-    [[self undoManager] enableUndoRegistration];
 
     return self;
 }
@@ -65,23 +70,43 @@
 }
 
 - (void)setPlaceholder:(NSString *)placeholder{
-    _placeholder = placeholder;
-    if(self.delegate){
-        [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.htmlID];
+    
+    if([placeholder isEqualToString:_placeholder]){
+        return;
     }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setPlaceholder:_placeholder];
+    
+    _placeholder = placeholder;
+
     
     [self updateHTML];
     [self updateJS];
 }
 
 - (void)setInputValue:(NSString *)inputValue{
-    _inputValue = inputValue;
-    if(self.delegate){
-        [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.htmlID];
+    
+    if([_inputValue isEqualToString:inputValue]){
+        return;
     }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setInputValue:_inputValue];
+    
+    _inputValue = inputValue;
+
     
     [self updateHTML];
     [self updateJS];
+}
+
+- (void)setInputName:(NSString *)inputName{
+    if([_inputName isEqualToString:inputName]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setInputName:_inputName];
+    
+    _inputName = inputName;
 }
 
 - (BOOL)hasText{

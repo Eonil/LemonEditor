@@ -13,7 +13,11 @@
 -(id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if (self) {
+        [self.undoManager disableUndoRegistration];
+        
         self.label = @"Submit"; //place holder 초기값은 Submit
+        
+        [self.undoManager enableUndoRegistration];
     }
     return self;
 }
@@ -31,16 +35,29 @@
 
 - (id)copyWithZone:(NSZone *)zone{
     PGSubmitButton *iu = [super copyWithZone:zone];
+    [self.undoManager disableUndoRegistration];
+    
     iu.label = [_label copy];
+    
+    [self.undoManager enableUndoRegistration];
     return iu;
 }
 
 
 - (void)setLabel:(NSString *)label{
-    if (label == nil)
+    
+    if([label isEqualToString:_label]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setLabel:_label];
+    
+    if (label == nil){
         _label = @"";   //place holder 에 빈칸 입력시 null 로 표시되는 것을 방지
-    else
+    }
+    else{
         _label = label;
+    }
     
     [self updateHTML];
     [self updateJS];

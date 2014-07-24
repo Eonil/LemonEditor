@@ -1067,7 +1067,7 @@
         if(pgTextField.inputValue){
             [retString appendFormat:@" value=\"%@\"",pgTextField.inputValue];
         }
-        if(pgTextField.type == IUTextFieldTypePassword){
+        if(pgTextField.tfType == IUTextFieldTypePassword){
             [retString appendFormat:@" type=\"password\""];
         }
         else {

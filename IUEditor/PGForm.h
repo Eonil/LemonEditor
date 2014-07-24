@@ -10,6 +10,6 @@
 
 @interface PGForm : IUBox
 
-@property id target;
+@property (nonatomic) id target;
 
 @end

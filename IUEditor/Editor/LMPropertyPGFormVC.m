@@ -33,14 +33,20 @@
 
 - (void)awakeFromNib{
     _submitPageComboBox.delegate = self;
-    [self addObserver:self forKeyPath:@"controller.selectedObjects"
-              options:0 context:@""];
+  
+}
+
+- (void)setController:(IUController *)controller{
+    _controller = controller;
+    
+    [self addObserver:self forKeyPaths:@[@"controller.selectedObjects", [_controller keyPathFromControllerToProperty:@"target"]]
+              options:0 context:nil];
 
 }
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationStructureDidChange object:_project];
-    [self removeObserver:self forKeyPath:@"controller.selectedObjects"];
+    [self removeObserver:self forKeyPaths:@[@"controller.selectedObjects", [_controller keyPathFromControllerToProperty:@"target"]]];
 }
 
 - (void)performFocus:(NSNotification *)noti{
@@ -101,7 +107,8 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     
-    if([keyPath isEqualToString:@"controller.selectedObjects"]){
+    if([keyPath isEqualToString:@"controller.selectedObjects"]
+       || [[keyPath pathExtension] isEqualToString:@"target"]){
         
 #pragma mark - set target
         id value = [self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"target"]];

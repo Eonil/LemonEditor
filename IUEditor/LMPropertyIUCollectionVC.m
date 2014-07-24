@@ -68,7 +68,11 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    [self updateCount];
+    
+    if([keyPath isEqualToString:@"controller.selectedObjects"]
+       || [[keyPath pathExtension] isEqualToString:@"defaultItemCount"]){
+        [self updateCount];
+    }
 }
 
 - (void)updateCount{
