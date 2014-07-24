@@ -26,12 +26,30 @@
     LMPropertyFontVC    *propertyFontVC;
     LMPropertyShadowVC  *propertyShadowVC;
     LMPropertyOverflowVC *propertyOverflowVC;
+    LMPropertyBGImageVC *propertyBGImageVC;
     
     NSMutableArray *outlineVOrderArray;
 }
 
 - (NSString*)CSSBindingPath:(IUCSSTag)tag{
     return [@"controller.selection.css.assembledTagDictionary." stringByAppendingString:tag];
+}
+
+
+- (void)dealloc{
+    NSLog(@"ApperanceVC dealloc");
+}
+- (void)unbindAllBinding{
+    /*
+    [propertyFrameVC unbind:@"controller"];
+    [propertyBGImageVC unbind:@"controller"];
+    [propertyBGImageVC unbind:@"resourceManager"];
+    [propertyBorderVC unbind:@"controller"];
+    [propertyBGColorVC unbind:@"controller"];
+    [propertyFontVC unbind:@"controller"];
+    [propertyShadowVC unbind:@"controller"];
+    [propertyOverflowVC unbind:@"controller"];
+     */
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,9 +60,9 @@
         propertyFrameVC = [[LMPropertyFrameVC alloc] initWithNibName:@"LMPropertyFrameVC" bundle:nil];
         [propertyFrameVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
         
-        self.propertyBGImageVC = [[LMPropertyBGImageVC alloc] initWithNibName:@"LMPropertyBGImageVC" bundle:nil];
-        [self.propertyBGImageVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-        [self.propertyBGImageVC bind:@"resourceManager" toObject:self withKeyPath:@"resourceManager" options:nil];
+        propertyBGImageVC = [[LMPropertyBGImageVC alloc] initWithNibName:@"LMPropertyBGImageVC" bundle:nil];
+        [propertyBGImageVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+        [propertyBGImageVC bind:@"resourceManager" toObject:self withKeyPath:@"resourceManager" options:nil];
         
         propertyBorderVC = [[LMPropertyBorderVC alloc] initWithNibName:@"LMPropertyBorderVC" bundle:nil];
         [propertyBorderVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
@@ -102,7 +120,7 @@
     outlineVOrderArray = [NSMutableArray array];
     [outlineVOrderArray addObject:propertyFrameVC.view];
     [outlineVOrderArray addObject:propertyBGColorVC.view];
-    [outlineVOrderArray addObject:self.propertyBGImageVC.view];
+    [outlineVOrderArray addObject:propertyBGImageVC.view];
     [outlineVOrderArray addObject:propertyFontVC.view];
     [outlineVOrderArray addObject:propertyShadowVC.view];
     [outlineVOrderArray addObject:propertyBorderVC.view];

@@ -13,9 +13,9 @@
 
 @interface LMPropertyBGImageVC : NSViewController <NSComboBoxDelegate>
 
-@property (nonatomic) IUController      *controller;
-@property (nonatomic) IUResourceManager     *resourceManager;
+@property (weak) IUController      *controller;
+@property (weak) IUResourceManager     *resourceManager;
 
 
-@property id content;
+@property (weak) id content;
 @end
