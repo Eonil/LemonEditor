@@ -183,9 +183,7 @@
 
 - (void)dealloc{
     if (self.isConnectedWithEditor) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQAdded object:nil];
-        
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
 }
 

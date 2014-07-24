@@ -19,7 +19,7 @@ typedef enum _IUResourceType{
 
 @interface IUResourceFile : NSObject <NSCopying>
 
-@property IUResourceGroup *parent;
+@property (weak) IUResourceGroup *parent;
 @property NSString *originalFilePath;
 -(id)initWithName:(NSString*)name;
 

@@ -11,8 +11,8 @@
 #import "IUPageContent.h"
 
 @implementation IUPage{
-    IUPageContent *_pageContent;
-    IUBackground *_background;
+    __weak IUPageContent *_pageContent;
+    __weak IUBackground *_background;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{

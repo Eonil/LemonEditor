@@ -24,7 +24,7 @@
 @property (weak) IBOutlet NSSegmentedControl *textAlignB;
 @property (weak) IBOutlet NSComboBox *lineHeightB;
 
-@property LMFontController *fontController;
+@property (weak) LMFontController *fontController;
 @property (strong) IBOutlet NSDictionaryController *fontListDC;
 
 @property NSArray *fontDefaultSizes;

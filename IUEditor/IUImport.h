@@ -11,5 +11,5 @@
 
 
 @interface IUImport : IUBox
-@property (nonatomic) IUClass  *prototypeClass;
+@property (nonatomic, weak) IUClass  *prototypeClass;
 @end

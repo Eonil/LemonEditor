@@ -27,6 +27,6 @@
 -(NSArray*)widthWithCSS;
 -(IUBox *)selectableIUAtPoint:(CGPoint)point;
 
-@property IUSheetGroup *group;
+@property (weak) IUSheetGroup *group;
 
 @end
