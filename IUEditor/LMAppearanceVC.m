@@ -37,7 +37,7 @@
 
 
 - (void)dealloc{
-    NSLog(@"ApperanceVC dealloc");
+    [JDLogUtil log:IULogDealloc string:@"ApperanceVC"];
 }
 - (void)unbindAllBinding{
     /*

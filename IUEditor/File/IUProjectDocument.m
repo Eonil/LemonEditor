@@ -186,6 +186,10 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
 }
 
 
+- (void)dealloc{
+    [JDLogUtil log:IULogDealloc string:@"IUProjectDocument"];
+}
+
 
 - (NSFileWrapper *)fileWrapperOfType:(NSString *)typeName error:(NSError **)outError
 {

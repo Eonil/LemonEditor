@@ -42,6 +42,7 @@
 }
 
 - (void)dealloc{
+    [JDLogUtil log:IULogDealloc string:@"TopToolbar"];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationStructureDidChange object:nil];
     [self.view removeObserver:self forKeyPath:@"frame"];
 }

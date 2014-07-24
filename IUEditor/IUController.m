@@ -40,6 +40,7 @@
 }
 - (void) dealloc{
     [self removeObserver:self forKeyPath:@"selectedObjects"];
+    [JDLogUtil log:IULogDealloc string:@"IUController"];
 }
 -(void)copySelectedIUToPasteboard:(id)sender{
     pasteboard = [NSArray arrayWithArray:self.selectedObjects];

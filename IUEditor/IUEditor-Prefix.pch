@@ -37,6 +37,7 @@
 #define IULogJS @"JS"
 #define IULogAction @"Action"
 #define IULogText @"Text"
+#define IULogDealloc @"Dealloc"
 
 #define IUBindingDictNotRaisesApplicable @{NSRaisesForNotApplicableKeysBindingOption:@(NO)}
 #define IUBindingNegationAndNotRaise  @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:NSNegateBooleanTransformerName}

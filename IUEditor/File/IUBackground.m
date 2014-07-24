@@ -63,4 +63,8 @@
     return NO;
 }
 
+- (void)dealloc{
+    [JDLogUtil log:IULogDealloc string:@"IUBackGround"];
+}
+
 @end

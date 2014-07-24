@@ -1943,4 +1943,7 @@
 }
 #endif
 
+- (void)dealloc{
+    [JDLogUtil log:IULogDealloc string:@"IUCompiler"];
+}
 @end

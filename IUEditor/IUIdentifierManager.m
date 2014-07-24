@@ -109,5 +109,7 @@
     return [confirmed objectForKey:identifier];
 }
 
-
+- (void)dealloc{
+    [JDLogUtil log:IULogDealloc string:@"IUIdentifierManager"];
+}
 @end

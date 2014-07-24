@@ -84,8 +84,12 @@
 }
 
 - (void)unbindAllBinding{
+#if DEBUG
+    
+
     _debugWC.canvasVC = nil;
     [((LMCanvasView *)self.view) unbindAllBinding];
+#endif
 
 }
 
@@ -95,6 +99,7 @@
                                             @"sheet.ghostX",
                                             @"sheet.ghostY",
                                             @"sheet.ghostOpacity"] context:@"ghostImage"];
+    [JDLogUtil log:IULogDealloc string:@"CanvasVC"];
 }
 
 -(void)setController:(IUController *)controller{

@@ -245,7 +245,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQAdded object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQRemoved object:nil];
     }
-    JDInfoLog(@"Project Dealloc");
+    [JDLogUtil log:IULogDealloc string:@"IUProject"];
 }
 
 #pragma mark - mq

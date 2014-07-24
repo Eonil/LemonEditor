@@ -46,6 +46,7 @@
 }
 
 - (void)dealloc{
+    [JDLogUtil log:IULogDealloc string:@"LMInspectorLinkVC"];
     [self removeObserver:self forKeyPath:@"controller.selectedObjects"];
     [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"link"] ];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationStructureDidChange object:_project];
