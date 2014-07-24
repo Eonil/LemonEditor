@@ -41,4 +41,8 @@
     [self didChangeValueForKey:@"sheet"];
 }
 
+- (void)dealloc{
+    [JDLogUtil log:IULogDealloc string:@"IUSheetController"];
+}
+
 @end

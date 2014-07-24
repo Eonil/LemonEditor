@@ -15,8 +15,11 @@
 -(id)initWithDocument:(IUSheet*)document;
 -(NSString*)keyPathFromDocumentControllerToEventVariables;
 
-@property (nonatomic, readonly) IUSheet *sheet;
-@property (nonatomic) IUProject *project;
+/* conform KVO */
+-(IUSheet*)sheet;
+
+/* conform KVO */
+-(IUProject *)project;
 
 
 @end
