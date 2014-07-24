@@ -38,7 +38,7 @@ const char *const _jd_level_short_names[] = {
 	"T"
 };
 
-static NSMutableSet *enableLogSection;
+static NSCountedSet *enableLogSection;
 
 @implementation JDLogUtil
 
@@ -123,7 +123,7 @@ static NSMutableSet *enableLogSection;
 
 +(void)enableLogSection:(NSString*)logSection{
     if (enableLogSection == nil) {
-        enableLogSection = [NSMutableSet set];
+        enableLogSection = [NSCountedSet set];
     }
     [enableLogSection addObject:logSection];
 }
@@ -136,8 +136,11 @@ static NSMutableSet *enableLogSection;
     }
 }
 
-+(void)log:(NSString *)key string:(NSString *)string{
-    NSLog(@"[Log] %@ : %@", key, string);
++(void)log:(NSString *)logSection string:(NSString *)string{
+    if ([enableLogSection containsObject:logSection]) {
+        NSLog(@"[Log] %@ %ld : %@", logSection, [enableLogSection countForObject:logSection], string);
+        [enableLogSection addObject:logSection];
+    }
 }
 
 +(void)log:(NSString*)logSection key:(NSString*)key frame:(NSRect)frame{
