@@ -25,7 +25,7 @@ typedef enum _JDNetworkProtocol{
 
 @interface JDSyncUtil : NSObject
 
-@property id <JDSyncUtilDeleagate> delegate;
+@property (weak) id <JDSyncUtilDeleagate> delegate;
 
 @property NSString *host;
 @property NSString *user;

@@ -13,7 +13,7 @@
     NSFileHandle *outputHandle;
     NSFileHandle *errorHandle;
     NSTask *_task;
-    id <JDShellUtilPipeDelegate> _delegate;
+    __weak id <JDShellUtilPipeDelegate> _delegate;
 }
 
 +(NSInteger) execute:(NSString*)executePath atDirectory:(NSString*)directoryPath arguments:(NSArray*)arguments stdOut:(NSString**)stdOutLog stdErr:(NSString**)stdErrLog{

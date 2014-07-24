@@ -75,9 +75,6 @@
 }
 
 -(void)dealloc{
-    if(syncUtil){
-        [self removeObserver:self forKeyPath:@"docController.project.runnable"];
-    }
     [JDLogUtil log:IULogDealloc string:@"LMCommandVC"];
 }
 
