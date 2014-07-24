@@ -50,9 +50,8 @@
 }
 
 -(void)dealloc{
-    //release 시점 확인용
-    NSAssert(0, @"dealloc");
-    //[_documentController removeObserver:self forKeyPath:@"selection"];
+    [JDLogUtil log:IULogDealloc string:@"FileNavi"];
+    [_documentController removeObserver:self forKeyPath:@"selection"];
 }
 
 #pragma mark -selection

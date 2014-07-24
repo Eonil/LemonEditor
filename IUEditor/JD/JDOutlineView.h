@@ -27,8 +27,8 @@
 - (void)selectItem:(id)item;
 - (id)selectedView;
 
-@property IBOutlet id <JDOutlineViewDataSource> JDDataSource;
+@property (weak) IBOutlet  id <JDOutlineViewDataSource> JDDataSource;
 @property NSInteger rightClickedIndex;
-@property IBOutlet id <JDOutlineViewKeyDelegate> keyDelegate;
+@property (weak) IBOutlet id <JDOutlineViewKeyDelegate> keyDelegate;
 
 @end
