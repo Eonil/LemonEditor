@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMClipArtVC">
@@ -21,26 +21,17 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="380"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <box autoresizesSubviews="NO" fixedFrame="YES" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="KDA-2G-pdt">
-                    <rect key="frame" x="0.0" y="337" width="301" height="44"/>
-                    <view key="contentView">
-                        <rect key="frame" x="1" y="1" width="299" height="42"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                    <color key="borderColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="fillColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </box>
                 <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="x5H-qt-cOg">
-                    <rect key="frame" x="0.0" y="31" width="300" height="307"/>
+                    <rect key="frame" x="0.0" y="31" width="300" height="349"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Tab" identifier="1" id="EC4-DB-ZTk" userLabel="Tab View Item - list">
                             <view key="view" id="2xr-B4-Kbw">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="307"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="349"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZV-PZ-uUW">
-                                        <rect key="frame" x="0.0" y="-1" width="302" height="309"/>
+                                        <rect key="frame" x="0.0" y="-1" width="302" height="351"/>
                                         <clipView key="contentView" id="Ioa-wr-P0N">
                                             <rect key="frame" x="1" y="1" width="300" height="307"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -129,8 +120,8 @@
                                 <rect key="frame" x="1" y="1" width="300" height="29"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <searchField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1N4-aq-iU7">
-                                        <rect key="frame" x="15" y="6" width="205" height="19"/>
+                                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1N4-aq-iU7">
+                                        <rect key="frame" x="7" y="5" width="205" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="ZU4-xD-Ru1"/>
                                             <constraint firstAttribute="width" constant="205" id="pY7-Fv-YAd"/>
@@ -149,7 +140,7 @@
                                             </binding>
                                         </connections>
                                     </searchField>
-                                    <button toolTip="Collection View" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Er4-sf-cqp" userLabel="iconBtn">
+                                    <button toolTip="Collection View" translatesAutoresizingMaskIntoConstraints="NO" id="Er4-sf-cqp" userLabel="iconBtn">
                                         <rect key="frame" x="268" y="1" width="29" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="1qZ-C5-lW0"/>
@@ -169,7 +160,7 @@
                                             <constraint firstAttribute="height" constant="28" id="HFg-Bv-IMg"/>
                                             <constraint firstAttribute="width" constant="28" id="tr6-n0-GUj"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="view_list" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="lyp-z2-S9Q">
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="view_list" imagePosition="only" alignment="center" enabled="NO" imageScaling="proportionallyDown" inset="2" id="lyp-z2-S9Q">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -187,7 +178,7 @@
                                 <constraint firstItem="AJ1-GR-9bw" firstAttribute="leading" secondItem="1N4-aq-iU7" secondAttribute="trailing" constant="30" id="JH5-rQ-9rI"/>
                                 <constraint firstItem="AJ1-GR-9bw" firstAttribute="top" secondItem="CXW-6N-I81" secondAttribute="top" constant="1" id="Ppw-4J-n5M"/>
                                 <constraint firstItem="1N4-aq-iU7" firstAttribute="top" secondItem="CXW-6N-I81" secondAttribute="top" constant="6" id="hk1-aM-TxU"/>
-                                <constraint firstItem="Er4-sf-cqp" firstAttribute="leading" secondItem="1N4-aq-iU7" secondAttribute="trailing" constant="48" id="mRN-2D-Ucq"/>
+                                <constraint firstItem="Er4-sf-cqp" firstAttribute="leading" secondItem="1N4-aq-iU7" secondAttribute="trailing" constant="56" id="mRN-2D-Ucq"/>
                             </constraints>
                             <color key="borderColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="fillColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -205,7 +196,7 @@
             </subviews>
             <constraints>
                 <constraint firstItem="x5H-qt-cOg" firstAttribute="trailing" secondItem="GPs-UK-h0n" secondAttribute="trailing" id="STI-Co-xiq"/>
-                <constraint firstItem="x5H-qt-cOg" firstAttribute="top" secondItem="1Gl-o9-iCT" secondAttribute="top" constant="42" id="UTI-LF-n7F"/>
+                <constraint firstItem="x5H-qt-cOg" firstAttribute="top" secondItem="1Gl-o9-iCT" secondAttribute="top" id="UTI-LF-n7F"/>
                 <constraint firstAttribute="bottom" secondItem="GPs-UK-h0n" secondAttribute="bottom" id="WSG-so-Lqb"/>
                 <constraint firstItem="GPs-UK-h0n" firstAttribute="leading" secondItem="1Gl-o9-iCT" secondAttribute="leading" id="eQW-7I-vBe"/>
                 <constraint firstItem="GPs-UK-h0n" firstAttribute="top" secondItem="x5H-qt-cOg" secondAttribute="bottom" id="htl-HQ-G99"/>

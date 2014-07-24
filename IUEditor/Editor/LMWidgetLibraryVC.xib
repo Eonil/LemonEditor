@@ -300,7 +300,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <button toolTip="Collection View" translatesAutoresizingMaskIntoConstraints="NO" id="BR5-iS-MYW" userLabel="iconBtn">
-                                                    <rect key="frame" x="229" y="3" width="29" height="28"/>
+                                                    <rect key="frame" x="229" y="2" width="29" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="28" id="Ee2-7e-Sig"/>
                                                         <constraint firstAttribute="width" constant="29" id="Psd-dz-SsW"/>
@@ -314,12 +314,12 @@
                                                     </connections>
                                                 </button>
                                                 <button toolTip="List View" translatesAutoresizingMaskIntoConstraints="NO" id="tsn-mg-JCz" userLabel="listBtn">
-                                                    <rect key="frame" x="203" y="3" width="27" height="28"/>
+                                                    <rect key="frame" x="203" y="2" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="BgD-5s-jhO"/>
                                                         <constraint firstAttribute="height" constant="28" id="atl-Lz-QwE"/>
                                                     </constraints>
-                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="view_list" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="fn8-nY-5gN">
+                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="view_list" imagePosition="only" alignment="center" enabled="NO" imageScaling="proportionallyDown" inset="2" id="fn8-nY-5gN">
                                                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
@@ -330,10 +330,10 @@
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="tsn-mg-JCz" firstAttribute="top" secondItem="R5h-BH-sR0" secondAttribute="top" id="81U-EZ-vdx"/>
+                                            <constraint firstItem="tsn-mg-JCz" firstAttribute="top" secondItem="R5h-BH-sR0" secondAttribute="top" constant="1" id="81U-EZ-vdx"/>
                                             <constraint firstAttribute="trailing" secondItem="BR5-iS-MYW" secondAttribute="trailing" constant="2" id="YZK-Mn-C7v"/>
                                             <constraint firstAttribute="height" constant="31" id="cvL-ER-gXU"/>
-                                            <constraint firstItem="BR5-iS-MYW" firstAttribute="top" secondItem="R5h-BH-sR0" secondAttribute="top" id="dNY-6a-euG"/>
+                                            <constraint firstItem="BR5-iS-MYW" firstAttribute="top" secondItem="R5h-BH-sR0" secondAttribute="top" constant="1" id="dNY-6a-euG"/>
                                             <constraint firstAttribute="trailing" secondItem="tsn-mg-JCz" secondAttribute="trailing" constant="30" id="pz8-LZ-Jhn"/>
                                         </constraints>
                                         <color key="borderColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
