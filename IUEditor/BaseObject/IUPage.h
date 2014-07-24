@@ -21,10 +21,7 @@
 @interface IUPage : IUSheet
 
 //meta tag
-@property NSString *title;
-@property NSString *keywords;
-@property NSString *desc;
-@property NSString *metaImage;
+@property (nonatomic) NSString *title, *keywords, *desc, *metaImage;
 
 
 @property NSString *extraCode;

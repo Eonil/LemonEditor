@@ -24,10 +24,16 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
-    [aDecoder decodeToObject:self withProperties:[IUPage properties]];
-    _pageContent = [aDecoder decodeObjectForKey:@"pageContent"];
-    _background = [aDecoder decodeObjectForKey:@"background"];
-    [_pageContent bind:@"delegate" toObject:self withKeyPath:@"delegate" options:nil];
+    if(self){
+        [self.undoManager disableUndoRegistration];
+        
+        [aDecoder decodeToObject:self withProperties:[IUPage properties]];
+        _pageContent = [aDecoder decodeObjectForKey:@"pageContent"];
+        _background = [aDecoder decodeObjectForKey:@"background"];
+        [_pageContent bind:@"delegate" toObject:self withKeyPath:@"delegate" options:nil];
+        
+        [self.undoManager enableUndoRegistration];
+    }
     return self;
 }
 
@@ -35,6 +41,7 @@
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if(self){
+        [self.undoManager disableUndoRegistration];
         
         [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagBGColor forWidth:IUCSSMaxViewPortWidth];
         
@@ -43,6 +50,8 @@
         [self.css eradicateTag:IUCSSTagY];
         [self.css eradicateTag:IUCSSTagWidth];
         [self.css eradicateTag:IUCSSTagHeight];
+        
+        [self.undoManager enableUndoRegistration];
     }
     return self;
 }
@@ -52,18 +61,6 @@
     [array removeObject:_background];
     [array removeObjectsInArray:[_background allChildren]];
     return array;
-}
-
-- (BOOL)floatRightChangeable{
-    return NO;
-}
-
-- (BOOL)canChangePositionType{
-    return NO;
-}
-
-- (BOOL)canChangeOverflow{
-    return NO;
 }
 
 
@@ -136,6 +133,46 @@
     }
 }
 
+#pragma mark - property
+
+- (void)setTitle:(NSString *)title{
+    if([_title isEqualToString:title]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setTitle:_title];
+    _title = title;
+}
+
+- (void)setKeywords:(NSString *)keywords{
+    if([_keywords isEqualToString:keywords]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setKeywords:_keywords];
+    _keywords = keywords;
+}
+
+- (void)setDesc:(NSString *)desc{
+    if([_desc isEqualToString:desc]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setDesc:_desc];
+    _desc = desc;
+}
+
+- (void)setMetaImage:(NSString *)metaImage{
+    if([_metaImage isEqualToString:metaImage]){
+        return;
+    }
+    [[self.undoManager prepareWithInvocationTarget:self] setMetaImage:_metaImage];
+    _metaImage = metaImage;
+}
+
+
+#pragma mark - shouldXXX, canXXX
+
 - (BOOL)canCopy{
     return NO;
 }
@@ -148,4 +185,20 @@
 -(BOOL)shouldAddIUByUserInput{
     return NO;
 }
+
+
+- (BOOL)floatRightChangeable{
+    return NO;
+}
+
+- (BOOL)canChangePositionType{
+    return NO;
+}
+
+- (BOOL)canChangeOverflow{
+    return NO;
+}
+
+
+
 @end
