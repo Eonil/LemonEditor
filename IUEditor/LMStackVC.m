@@ -43,17 +43,24 @@
 @implementation LMStackVC{
     NSArray *_draggingIndexPaths;
     id _lastClickedItem;
+    BOOL dealloced;
 }
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self){
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(structureChanged:) name:IUNotificationStructureDidChange object:self.view.window];
         [self loadView];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(structureChanged:) name:IUNotificationStructureDidChange object:self.view.window];
+
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            IUBox *deepBox = [_IUController firstDeepestBox];
-            [_IUController setSelectedObject:deepBox];
+            if (dealloced == NO) {
+                IUBox *deepBox = [_IUController firstDeepestBox];
+                if (dealloced == NO) {
+                    [_IUController setSelectedObject:deepBox];
+                }
+            }
         });
 
     }
@@ -67,6 +74,7 @@
 }
 
 - (void)dealloc{
+    dealloced = YES;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationStructureDidChange object:self.view.window];
 }
 
