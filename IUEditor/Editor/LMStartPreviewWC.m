@@ -7,6 +7,9 @@
 //
 
 #import "LMStartPreviewWC.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
+
 
 static LMStartPreviewWC *gStartPreviewWindow = nil;
 
@@ -22,9 +25,11 @@ static LMStartPreviewWC *gStartPreviewWindow = nil;
 
 @property (weak) IBOutlet NSButton *prevBtn;
 @property (weak) IBOutlet NSButton *nextBtn;
-@property (weak) IBOutlet NSTextField *imageCountTF;
+@property (weak) IBOutlet NSTextField *countTF;
 
+@property (weak) IBOutlet NSTabView *tabView;
 @property NSImageView *imageView;
+@property (weak) IBOutlet AVPlayerView *videoView;
 
 @end
 
@@ -88,7 +93,7 @@ static LMStartPreviewWC *gStartPreviewWindow = nil;
         [_sizeTF setStringValue:currentItem.mqSizes];
         [_featureTF setStringValue:currentItem.feature];
         
-        [self updateImageValue];
+        [self updatePreview];
     }
 }
 
@@ -104,18 +109,18 @@ static LMStartPreviewWC *gStartPreviewWindow = nil;
     return NO;
 
 }
-- (IBAction)clickNextImageBtn:(id)sender {
-    if(currentCount < currentItem.previewImageArray.count){
+- (IBAction)clickNextBtn:(id)sender {
+    if(currentCount <= currentItem.previewImageArray.count + currentItem.previewVideoArray.count){
         currentCount++;
     }
-    [self updateImageValue];
+    [self updatePreview];
 }
 
-- (IBAction)clickPrevImageBtn:(id)sender {
+- (IBAction)clickPrevBtn:(id)sender {
     if(currentCount > 1){
         currentCount--;
     }
-    [self updateImageValue];
+    [self updatePreview];
     
 }
 
@@ -127,12 +132,31 @@ static LMStartPreviewWC *gStartPreviewWindow = nil;
 
 }
 
-- (void)updateImageValue{
+- (void)updatePreview{
     
-    if(currentItem.previewImageArray.count > 0){
-        [_imageCountTF setStringValue:[NSString stringWithFormat:@"%ld/%ld", currentCount, currentItem.previewImageArray.count]];
+    NSInteger totalCount = currentItem.previewVideoArray.count + currentItem.previewImageArray.count;
+    [_countTF setStringValue:[NSString stringWithFormat:@"%ld/%ld", currentCount, totalCount]];
+
+    
+    if(currentCount <= currentItem.previewImageArray.count){
+        [_tabView selectTabViewItemAtIndex:0];
         NSImage *image = [NSImage imageNamed:currentItem.previewImageArray[currentCount-1]];
         [_imageView setImage:image];
+    }
+    else if(currentCount <= totalCount){
+        [_tabView selectTabViewItemAtIndex:1];
+        NSInteger videoCount = currentCount - currentItem.previewImageArray.count-1;
+        NSString *videoName = currentItem.previewVideoArray[videoCount];
+        NSString *videoPath = [[NSBundle mainBundle] pathForResource:[videoName stringByDeletingPathExtension] ofType:[videoName pathExtension]];
+        NSURL *url = [NSURL fileURLWithPath:videoPath];
+        if(url){
+            AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url];
+            if(item){
+                _videoView.player = [AVPlayer playerWithPlayerItem:item];
+                [_videoView.player play];
+            }
+        }
+
     }
 
 }

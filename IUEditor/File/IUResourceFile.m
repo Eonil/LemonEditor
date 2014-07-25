@@ -101,7 +101,7 @@
     if ([pathExtension isEqualToString:@"css"]) {
         return IUResourceTypeCSS;
     }
-    if ([pathExtension isEqualToString:@"mp4"]) {
+    if ([JDFileUtil isMovieFileExtension:pathExtension]) {
         return IUResourceTypeVideo;
     }
     if ([JDFileUtil isImageFileExtension:pathExtension]){

@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <plugIn identifier="com.apple.AVKitIBPlugin" version="6154.17"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMStartPreviewWC">
             <connections>
+                <outlet property="countTF" destination="bIa-Qv-vf7" id="ZDF-Y9-vFo"/>
                 <outlet property="descTF" destination="sNw-sX-s05" id="tlP-J0-Nqz"/>
                 <outlet property="featureTF" destination="GBS-sg-OL4" id="gUV-rJ-EUD"/>
-                <outlet property="imageCountTF" destination="bIa-Qv-vf7" id="Tl7-f2-YGj"/>
                 <outlet property="imageScrollView" destination="qUf-Ft-HhW" id="4xr-Ph-ZUi"/>
                 <outlet property="imageView" destination="MFW-Yy-Kx1" id="nHD-mr-vZ8"/>
                 <outlet property="nameTF" destination="w1o-0c-Rlf" id="Iey-jR-lqg"/>
-                <outlet property="nextBtn" destination="tWM-qE-s5c" id="yJ1-o0-FyC"/>
-                <outlet property="prevBtn" destination="UCw-Wj-T0Y" id="cHR-gv-GqH"/>
+                <outlet property="nextBtn" destination="tWM-qE-s5c" id="SB8-SJ-xaq"/>
+                <outlet property="prevBtn" destination="UCw-Wj-T0Y" id="Idj-Bn-Ra6"/>
                 <outlet property="projectTypeTF" destination="Zmg-yt-bWF" id="BsM-vJ-rbQ"/>
                 <outlet property="sizeTF" destination="rba-Z4-pnn" id="DO8-2X-RxT"/>
+                <outlet property="tabView" destination="bqf-SE-Sd1" id="c71-Ux-Vpi"/>
+                <outlet property="videoView" destination="JKq-xs-82I" id="QKM-Af-ldu"/>
                 <outlet property="window" destination="gBu-hL-ExQ" id="CxE-4V-Dm0"/>
             </connections>
         </customObject>
@@ -145,7 +148,7 @@ IU beginner</string>
                                         <font key="font" metaFont="miniSystem"/>
                                     </buttonCell>
                                     <connections>
-                                        <action selector="clickNextImageBtn:" target="-2" id="ow2-P9-ghb"/>
+                                        <action selector="clickNextBtn:" target="-2" id="igs-NJ-cC9"/>
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UCw-Wj-T0Y">
@@ -159,7 +162,7 @@ IU beginner</string>
                                         <font key="font" metaFont="miniSystem"/>
                                     </buttonCell>
                                     <connections>
-                                        <action selector="clickPrevImageBtn:" target="-2" id="Z3I-m4-eiM"/>
+                                        <action selector="clickPrevBtn:" target="-2" id="Ryf-5b-Xi7"/>
                                     </connections>
                                 </button>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GBS-sg-OL4">
@@ -210,38 +213,75 @@ IU beginner</string>
                             <rect key="frame" x="0.0" y="0.0" width="960" height="480"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUf-Ft-HhW">
+                                <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="bqf-SE-Sd1">
                                     <rect key="frame" x="0.0" y="0.0" width="960" height="480"/>
-                                    <clipView key="contentView" id="WBV-An-4AD" customClass="LMCenterClipView">
-                                        <rect key="frame" x="1" y="1" width="166" height="79"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <subviews>
-                                            <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YmJ-mS-2Og">
-                                                <rect key="frame" x="45" y="32" width="194" height="2"/>
+                                    <font key="font" metaFont="system"/>
+                                    <tabViewItems>
+                                        <tabViewItem label="Image" identifier="1" id="7F0-jq-Yv2" userLabel="ImageView">
+                                            <view key="view" id="qAx-0J-qbt">
+                                                <rect key="frame" x="0.0" y="0.0" width="960" height="480"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MFW-Yy-Kx1">
-                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="kus-yJ-SA5"/>
-                                                    </imageView>
+                                                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUf-Ft-HhW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="960" height="480"/>
+                                                        <clipView key="contentView" id="WBV-An-4AD" customClass="LMCenterClipView">
+                                                            <rect key="frame" x="1" y="1" width="166" height="79"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YmJ-mS-2Og">
+                                                                    <rect key="frame" x="-51" y="126" width="134" height="184"/>
+                                                                    <subviews>
+                                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MFW-Yy-Kx1">
+                                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="kus-yJ-SA5"/>
+                                                                        </imageView>
+                                                                    </subviews>
+                                                                </view>
+                                                            </subviews>
+                                                        </clipView>
+                                                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="0yB-n4-nUS">
+                                                            <rect key="frame" x="1" y="80" width="166" height="15"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </scroller>
+                                                        <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="aOW-By-4dv">
+                                                            <rect key="frame" x="167" y="1" width="15" height="79"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </scroller>
+                                                    </scrollView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="qUf-Ft-HhW" firstAttribute="leading" secondItem="qAx-0J-qbt" secondAttribute="leading" id="EgV-Zi-6GN"/>
+                                                    <constraint firstAttribute="bottom" secondItem="qUf-Ft-HhW" secondAttribute="bottom" id="TBk-Uj-avw"/>
+                                                    <constraint firstItem="qUf-Ft-HhW" firstAttribute="top" secondItem="qAx-0J-qbt" secondAttribute="top" id="inE-cI-uy9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="qUf-Ft-HhW" secondAttribute="trailing" id="pij-eh-kiv"/>
+                                                </constraints>
                                             </view>
-                                        </subviews>
-                                    </clipView>
-                                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="0yB-n4-nUS">
-                                        <rect key="frame" x="1" y="80" width="166" height="15"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                    </scroller>
-                                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="aOW-By-4dv">
-                                        <rect key="frame" x="167" y="1" width="15" height="79"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                    </scroller>
-                                </scrollView>
+                                        </tabViewItem>
+                                        <tabViewItem label="View" identifier="2" id="LvN-cD-co0" userLabel="VideoView">
+                                            <view key="view" id="l8R-8i-KNy">
+                                                <rect key="frame" x="0.0" y="0.0" width="960" height="480"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <avPlayerView translatesAutoresizingMaskIntoConstraints="NO" id="JKq-xs-82I">
+                                                        <rect key="frame" x="0.0" y="0.0" width="960" height="480"/>
+                                                    </avPlayerView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="JKq-xs-82I" firstAttribute="leading" secondItem="l8R-8i-KNy" secondAttribute="leading" id="1eJ-Xg-dfZ"/>
+                                                    <constraint firstItem="JKq-xs-82I" firstAttribute="top" secondItem="l8R-8i-KNy" secondAttribute="top" id="7EW-Xg-BSG"/>
+                                                    <constraint firstAttribute="bottom" secondItem="JKq-xs-82I" secondAttribute="bottom" id="Iyr-Uw-HXJ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="JKq-xs-82I" secondAttribute="trailing" id="ccI-tz-lt6"/>
+                                                </constraints>
+                                            </view>
+                                        </tabViewItem>
+                                    </tabViewItems>
+                                </tabView>
                             </subviews>
                         </view>
                         <constraints>
-                            <constraint firstItem="qUf-Ft-HhW" firstAttribute="leading" secondItem="8D8-Je-sm2" secondAttribute="leading" id="8kY-Ig-F6w"/>
-                            <constraint firstAttribute="trailing" secondItem="qUf-Ft-HhW" secondAttribute="trailing" id="FlS-Kw-FW7"/>
-                            <constraint firstItem="qUf-Ft-HhW" firstAttribute="top" secondItem="8D8-Je-sm2" secondAttribute="top" id="cx0-7Y-A7d"/>
-                            <constraint firstAttribute="bottom" secondItem="qUf-Ft-HhW" secondAttribute="bottom" id="ySQ-U1-Wuq"/>
+                            <constraint firstAttribute="trailing" secondItem="bqf-SE-Sd1" secondAttribute="trailing" id="FAR-Mb-0pA"/>
+                            <constraint firstAttribute="bottom" secondItem="bqf-SE-Sd1" secondAttribute="bottom" id="Ghs-xV-bw7"/>
+                            <constraint firstItem="bqf-SE-Sd1" firstAttribute="leading" secondItem="8D8-Je-sm2" secondAttribute="leading" id="RrZ-Fk-QX5"/>
+                            <constraint firstItem="bqf-SE-Sd1" firstAttribute="top" secondItem="8D8-Je-sm2" secondAttribute="top" id="TGy-KN-Yqa"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

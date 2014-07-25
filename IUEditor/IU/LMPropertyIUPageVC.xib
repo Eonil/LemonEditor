@@ -8,8 +8,8 @@
             <connections>
                 <outlet property="descriptionTV" destination="1m8-52-1l5" id="WBW-1v-Gkl"/>
                 <outlet property="extraCodeTF" destination="PZ5-Co-ACn" id="9pW-17-hDo"/>
-                <outlet property="imageNameComboBox" destination="XOZ-sr-TmI" id="ae9-GO-9zH"/>
                 <outlet property="keywordsTF" destination="SYg-Wu-bJe" id="Nlx-PR-0gA"/>
+                <outlet property="metaImageTF" destination="zpI-DI-pH2" id="PSA-si-E4K"/>
                 <outlet property="titleTF" destination="f34-do-qhj" id="B1c-ON-cny"/>
                 <outlet property="view" destination="8b4-Ay-4LT" id="owA-tx-VVF"/>
             </connections>
@@ -124,18 +124,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XOZ-sr-TmI">
-                    <rect key="frame" x="94" y="9" width="185" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="182" id="Gxj-E4-rYa"/>
-                        <constraint firstAttribute="height" constant="17" id="nMy-bl-uwp"/>
-                    </constraints>
-                    <comboBoxCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Path, Filename, URL..." drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="2a5-sE-v7a">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </comboBoxCell>
-                </comboBox>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cmU-kj-ORp">
                     <rect key="frame" x="20" y="11" width="70" height="17"/>
                     <constraints>
@@ -148,14 +136,20 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zpI-DI-pH2">
+                    <rect key="frame" x="96" y="8" width="180" height="19"/>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Bfd-V5-7gU">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="Ecd-Lv-OtQ" firstAttribute="leading" secondItem="f34-do-qhj" secondAttribute="leading" id="0OE-dK-5TC"/>
-                <constraint firstItem="XOZ-sr-TmI" firstAttribute="leading" secondItem="cmU-kj-ORp" secondAttribute="trailing" constant="6" id="16Y-6V-cjs"/>
                 <constraint firstItem="Hkh-9R-GLc" firstAttribute="top" secondItem="8b4-Ay-4LT" secondAttribute="top" constant="8" id="5Jw-fz-My0"/>
                 <constraint firstItem="gPK-O4-Tr2" firstAttribute="top" secondItem="Hkh-9R-GLc" secondAttribute="bottom" constant="4" id="783-ZK-0Cp"/>
                 <constraint firstItem="Ecd-Lv-OtQ" firstAttribute="top" secondItem="SYg-Wu-bJe" secondAttribute="bottom" constant="9" id="9pW-Sf-Dkd"/>
-                <constraint firstItem="XOZ-sr-TmI" firstAttribute="top" secondItem="Ecd-Lv-OtQ" secondAttribute="bottom" constant="8" symbolic="YES" id="EhL-7s-tFn"/>
                 <constraint firstItem="Hkh-9R-GLc" firstAttribute="leading" secondItem="8b4-Ay-4LT" secondAttribute="leading" constant="22" id="Elr-7C-Wbs"/>
                 <constraint firstItem="cmU-kj-ORp" firstAttribute="top" secondItem="sPU-oT-D2Q" secondAttribute="bottom" constant="53" id="EvF-Vr-axB"/>
                 <constraint firstItem="gPK-O4-Tr2" firstAttribute="leading" secondItem="8b4-Ay-4LT" secondAttribute="leading" constant="19" id="JPf-zt-3Ym"/>

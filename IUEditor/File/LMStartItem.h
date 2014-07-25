@@ -21,6 +21,7 @@
 @property NSString *mqSizes;
 @property IUProjectType projectType;
 @property NSArray *previewImageArray;
+@property NSArray *previewVideoArray;
 
 - (id)initWithDict:(NSDictionary *)dict;
 

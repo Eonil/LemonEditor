@@ -11,9 +11,8 @@
 #import "IUResourceManager.h"
 
 
-@interface LMPropertyIUPageVC : NSViewController <NSComboBoxDelegate>
+@interface LMPropertyIUPageVC : NSViewController
 
 @property (nonatomic) IUController      *controller;
-@property (nonatomic) IUResourceManager     *resourceManager;
 
 @end

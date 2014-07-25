@@ -11,7 +11,7 @@
 
 @interface LMPropertyIUPageVC ()
 
-@property (weak) IBOutlet NSComboBox *imageNameComboBox;
+@property (weak) IBOutlet NSTextField *metaImageTF;
 
 @property (weak) IBOutlet NSTextField *titleTF;
 @property (weak) IBOutlet NSTextField *keywordsTF;
@@ -35,10 +35,13 @@
     
     _controller = controller;
     
-    [_titleTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"title"]  options:IUBindingDictNotRaisesApplicable];
-    [_keywordsTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"keywords"]  options:IUBindingDictNotRaisesApplicable];
+    [_titleTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"title"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_keywordsTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"keywords"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
-    [_extraCodeTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"extraCode"]  options:IUBindingDictNotRaisesApplicable];
+    [_extraCodeTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"extraCode"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    
+    [_metaImageTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"image"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+
 
     NSDictionary *bindingOption = [NSDictionary
                                    dictionaryWithObjects:@[[NSNumber numberWithBool:NO], [NSNumber numberWithBool:YES]]
@@ -46,30 +49,8 @@
 
     
     [_descriptionTV bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"desc"]  options:bindingOption];
-    
-//    [_imageNameComboBox bind:NSContentBinding toObject:self withKeyPath:@"resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
-    [_imageNameComboBox bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"image"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    _imageNameComboBox.delegate = self;
 
-}
-
-#pragma mark - combobox
--(void)controlTextDidChange:(NSNotification *)obj{
-    for (IUPage *page in self.controller.selectedObjects) {
-        if ([page isKindOfClass:[IUPage class]]) {
-            id value = [_imageNameComboBox stringValue];
-            page.metaImage = value;
-        }
-    }
-}
-
-- (void)comboBoxSelectionDidChange:(NSNotification *)notification{
-    for (IUPage *page in self.controller.selectedObjects) {
-        if ([page isKindOfClass:[IUPage class]]) {
-            id value = [_imageNameComboBox objectValueOfSelectedItem];
-            page.metaImage = value;
-        }
-    }
+   
 }
 
 @end

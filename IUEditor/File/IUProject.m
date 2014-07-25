@@ -513,7 +513,7 @@
     NSString *carouselImagePath2 = [[NSBundle mainBundle] pathForResource:@"arrow_right" ofType:@"png"];
     [imageGroup addResourceFileWithContentOfPath:carouselImagePath2];
     
-    NSString *sampleVideoPath = [[NSBundle mainBundle] pathForResource:@"movie" ofType:@"mp4"];
+    NSString *sampleVideoPath = [[NSBundle mainBundle] pathForResource:@"iueditor" ofType:@"mp4"];
     [videoGroup addResourceFileWithContentOfPath:sampleVideoPath];
     
     [self initializeCSSJSResource];

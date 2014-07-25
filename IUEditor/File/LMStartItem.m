@@ -22,6 +22,7 @@
         self.desc = [dict objectForKey:@"desc"];
         self.mqSizes = [dict objectForKey:@"pageSize"];
         self.previewImageArray = [dict objectForKey:@"previewImages"];
+        self.previewVideoArray = [dict objectForKey:@"previewVideos"];
         self.packagePath = [dict objectForKey:@"projectPackageFile"];
         self.feature = [dict objectForKey:@"feature"];
         

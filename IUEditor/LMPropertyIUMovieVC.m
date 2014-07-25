@@ -54,6 +54,11 @@
 
 }
 
+- (void)dealloc{
+    _fileNameComboBox.delegate = nil;
+    [self removeObserver:self forKeyPath:@"controller.selectedObjects" context:@"selection"];
+}
+
 - (void)selectionContextDidChange:(NSDictionary *)change{
     id videoPath = [self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"videoPath"]];
     
@@ -95,7 +100,8 @@
         [self setValue:nil forKeyPath:[_controller keyPathFromControllerToProperty:@"posterPath"] ];
         [self setValue:nil forKeyPath:[_controller keyPathFromControllerToProperty:@"videoPath"] ];
     }
-    else if(videoFileName && videoFileName.length > 0){
+    else if(videoFileName && videoFileName.length > 0
+            && [JDFileUtil isMovieFileExtension:[videoFileName pathExtension]]){
         
         //get thumbnail from video file
         NSURL *moviefileURL;
