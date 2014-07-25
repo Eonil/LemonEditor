@@ -9,7 +9,6 @@
 #import "PGPageLinkSet.h"
 
 @implementation PGPageLinkSet
-//FIXME:!! not working
 
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
@@ -63,24 +62,58 @@
 }
 
 - (void)setPageLinkAlign:(IUAlign)pageLinkAlign{
+    if (_pageLinkAlign == pageLinkAlign) {
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setPageLinkAlign:_pageLinkAlign];
+    
     _pageLinkAlign = pageLinkAlign;
     [self updateCSSForEditViewPort];
+
 }
 
 - (void)setSelectedButtonBGColor:(NSColor *)selectedButtonBGColor{
+    
+    if([_selectedButtonBGColor isEqualTo:selectedButtonBGColor]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setSelectedButtonBGColor:_selectedButtonBGColor];
+    
     _selectedButtonBGColor = selectedButtonBGColor;
     [self updateCSSForMaxViewPort];
 }
 
 - (void)setDefaultButtonBGColor:(NSColor *)defaultButtonBGColor{
+    
+    if([_defaultButtonBGColor isEqualTo:defaultButtonBGColor]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setDefaultButtonBGColor:_defaultButtonBGColor];
+    
     _defaultButtonBGColor = defaultButtonBGColor;
     [self updateCSSForMaxViewPort];
 }
 
 - (void)setButtonMargin:(float)buttonMargin{
-    _buttonMargin = buttonMargin;
-    [self updateCSSForMaxViewPort];
+    
+    if(_buttonMargin != buttonMargin){
+    
+        [[self.undoManager prepareWithInvocationTarget:self] setButtonMargin:_buttonMargin];
+        
+        _buttonMargin = buttonMargin;
+        [self updateCSSForMaxViewPort];
+    }
 }
+#pragma mark - shouldXXX
+
+- (BOOL)shouldAddIUByUserInput{
+    return NO;
+}
+
+#pragma mark - css
 
 - (NSArray *)cssIdentifierArray{
     NSMutableArray *cssIdentifiers = [[super cssIdentifierArray] mutableCopy];

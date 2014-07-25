@@ -51,11 +51,6 @@ a{
     color: white;
 }
 
-.PGPageLinkSet > div {
-    margin-left:auto;
-    margin-right:auto;
-}
-
 .IUCarousel > .wrapper{
     position:absolute;
 }

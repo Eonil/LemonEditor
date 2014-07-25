@@ -1368,7 +1368,6 @@
 		693F247E1977F67E00451500 /* JDSyncUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDSyncUtil.h; sourceTree = "<group>"; };
 		693F247F1977F67E00451500 /* JDSyncUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDSyncUtil.m; sourceTree = "<group>"; };
 		693F24811977F81400451500 /* JDUploadSCP.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = JDUploadSCP.sh; sourceTree = "<group>"; };
-		693F24861978F9EF00451500 /* iueditor.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = iueditor.css; sourceTree = "<group>"; };
 		694A985D196D13E000C1D630 /* JDNetworkUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDNetworkUtil.h; sourceTree = "<group>"; };
 		694A985E196D13E000C1D630 /* JDNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDNetworkUtil.m; sourceTree = "<group>"; };
 		694A9860196D184400C1D630 /* JDIntegerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDIntegerTextField.h; sourceTree = "<group>"; };
@@ -2642,7 +2641,6 @@
 				3DED275F190E38C5001A1D67 /* images */,
 				3DA6CA84197CBA00004D6587 /* iueditor.css */,
 				3DED276D190E3976001A1D67 /* jquery.bxslider.css */,
-				693F24861978F9EF00451500 /* iueditor.css */,
 				696D1C9D18E5778400B4AB16 /* reset.css */,
 				69B9A39718E697F70007D6E2 /* iu.css */,
 			);
