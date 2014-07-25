@@ -42,6 +42,8 @@
 #define IUBindingDictNotRaisesApplicable @{NSRaisesForNotApplicableKeysBindingOption:@(NO)}
 #define IUBindingNegationAndNotRaise  @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:NSNegateBooleanTransformerName}
 #define IUBindingDictNotRaisesApplicableAndContinuousUpdate @{NSContinuouslyUpdatesValueBindingOption: @(YES), NSRaisesForNotApplicableKeysBindingOption:@(NO)}
+#define IUBindingDictNumberAndNotRaisesApplicable @{NSContinuouslyUpdatesValueBindingOption:@(YES),NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"}
+
 
 #define IUVideoResourceDidChange @"VideoResourceDidChange"
 #define IUImageResourceDidChange @"ImageResourceDidChange"

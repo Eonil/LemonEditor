@@ -55,7 +55,7 @@
 
 -(id)transformedValue:(id)value {
     if (value == nil) {
-        return [NSNumber numberWithInt:1];
+        return [NSNumber numberWithInt:100];
     }
     else {
         if ([value respondsToSelector: @selector(floatValue)]) {

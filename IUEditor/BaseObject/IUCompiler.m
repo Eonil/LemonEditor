@@ -1581,7 +1581,7 @@
         if(isEdit){
             //it should be used IN Editor Mode!!!
             //Usage : Transition, carousel hidden
-            value = cssTagDict[IUCSSTagDisplay];
+            value = cssTagDict[IUCSSTagEditorDisplay];
             if (value && [value boolValue] == NO) {
                 [dict putTag:@"display" string:@"none"];
             }
@@ -1589,10 +1589,21 @@
         
         
 #pragma mark background-image and color
+        value = cssTagDict[IUCSSTagDisplayHidden];
+        if(value && [value boolValue]){
+            [dict putTag:@"display" string:@"none"];
+        }
+        
         value = cssTagDict[IUCSSTagBGColor];
         if(value){
             NSColor *color = value;
             [dict putTag:@"background-color" string:[color cssBGString]];
+        }
+        
+        value = cssTagDict[IUCSSTagOpacity];
+        if(value){
+            [dict putTag:@"opacity" floatValue:[value floatValue]/100 ignoreZero:NO unit:IUCSSUnitNone];
+            [dict putTag:@"filter" string:[NSString stringWithFormat:@"alpha(opacity=%d)", [value intValue]]];
         }
         
         value = cssTagDict[IUCSSTagImage];

@@ -10,7 +10,7 @@
 #import "IUController.h"
 
 
-@interface LMPropertyOverflowVC : NSViewController <NSTextFieldDelegate>
+@interface LMPropertyDisplayVC : NSViewController <NSTextFieldDelegate>
 
 @property (weak, nonatomic) IUController *controller;
 

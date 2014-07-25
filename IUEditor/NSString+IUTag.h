@@ -136,9 +136,12 @@ static NSString * IUCSSTagShadowHorizontal = @"shadowHorizontal";
 static NSString * IUCSSTagShadowSpread = @"shadowSpread";
 static NSString * IUCSSTagShadowBlur = @"shadowBlur";
 
+static NSString * IUCSSTagDisplayHidden = @"displayHidden";
+static NSString * IUCSSTagOpacity = @"opacity";
+
 //it should be used IN Editor Mode!!!
 //Usage : Transition, carousel hidden
-static NSString * IUCSSTagDisplay = @"display";
+static NSString * IUCSSTagEditorDisplay = @"editorDisplay";
 
 //hover CSS
 static NSString * IUCSSTagHoverBGImagePositionEnable = @"HoverBGImagePositionEnable";

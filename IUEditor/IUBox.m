@@ -110,7 +110,7 @@
         _event = [[IUEvent alloc] init];
         _m_children = [NSMutableArray array];
         
-        
+        _overflowType = IUOverflowTypeHidden;
         
         [_css setValue:@(0) forTag:IUCSSTagXUnit forWidth:IUCSSMaxViewPortWidth];
         [_css setValue:@(0) forTag:IUCSSTagYUnit forWidth:IUCSSMaxViewPortWidth];
@@ -203,6 +203,8 @@
         box.text = [_text copy];
         box.lineHeightAuto  = _lineHeightAuto;
 #endif
+        
+        box.overflowType = _overflowType;
         box.positionType = _positionType;
         box.css = newCSS;
         newCSS.delegate  = box;

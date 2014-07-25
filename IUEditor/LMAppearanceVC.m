@@ -12,7 +12,7 @@
 #import "LMPropertyBGColorVC.h"
 #import "LMPropertyFontVC.h"
 #import "LMPropertyShadowVC.h"
-#import "LMPropertyOverflowVC.h"
+#import "LMPropertyDisplayVC.h"
 
 @interface LMAppearanceVC ()
 @property (weak) IBOutlet NSOutlineView *outlineV;
@@ -25,7 +25,7 @@
     LMPropertyBGColorVC *propertyBGColorVC;
     LMPropertyFontVC    *propertyFontVC;
     LMPropertyShadowVC  *propertyShadowVC;
-    LMPropertyOverflowVC *propertyOverflowVC;
+    LMPropertyDisplayVC *propertyDisplayVC;
     LMPropertyBGImageVC *propertyBGImageVC;
     
     NSMutableArray *outlineVOrderArray;
@@ -76,8 +76,8 @@
         propertyShadowVC = [[LMPropertyShadowVC alloc] initWithNibName:@"LMPropertyShadowVC" bundle:nil];
         [propertyShadowVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
         
-        propertyOverflowVC = [[LMPropertyOverflowVC alloc] initWithNibName:@"LMPropertyOverflowVC" bundle:nil];
-        [propertyOverflowVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+        propertyDisplayVC = [[LMPropertyDisplayVC alloc] initWithNibName:@"LMPropertyDisplayVC" bundle:nil];
+        [propertyDisplayVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
         
 
         [self loadView];
@@ -124,7 +124,7 @@
     [outlineVOrderArray addObject:propertyFontVC.view];
     [outlineVOrderArray addObject:propertyShadowVC.view];
     [outlineVOrderArray addObject:propertyBorderVC.view];
-    [outlineVOrderArray addObject:propertyOverflowVC.view];
+    [outlineVOrderArray addObject:propertyDisplayVC.view];
 }
 
 - (NSView *)contentViewOfTitleView:(NSView *)titleV{
@@ -145,7 +145,7 @@
         if([((JDOutlineCellView *)propertyFrameVC.view).titleV isEqualTo:item]){
             return 0;
         }
-        else if([((JDOutlineCellView *)propertyOverflowVC.view).titleV isEqualTo:item]){
+        else if([((JDOutlineCellView *)propertyDisplayVC.view).titleV isEqualTo:item]){
             return 0;
         }
         else if([[item identifier] isEqualToString:@"title"]){
@@ -169,7 +169,7 @@
     if([((JDOutlineCellView *)propertyFrameVC.view).titleV isEqualTo:item]){
             return NO;
     }
-    else if([((JDOutlineCellView *)propertyOverflowVC.view).titleV isEqualTo:item]){
+    else if([((JDOutlineCellView *)propertyDisplayVC.view).titleV isEqualTo:item]){
         return 0;
     }
 
