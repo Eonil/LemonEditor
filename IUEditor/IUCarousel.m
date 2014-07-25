@@ -106,7 +106,6 @@
     }
 }
 
-//FIXME:UNDO
 -(void)setCount:(NSInteger)count{
     
     if (count <= 1 || count > 30 || count == self.children.count ) {

@@ -108,7 +108,7 @@
 -(id)initWithProject:(IUProject*)project options:(NSDictionary*)options error:(NSError**)error{
     self = [super init];
     
-    _mqSizes = [NSMutableArray arrayWithArray:@[@(defaultFrameWidth), @320]];
+    _mqSizes = [project.mqSizes mutableCopy];
     
     
     _compiler = [[IUCompiler alloc] init];
