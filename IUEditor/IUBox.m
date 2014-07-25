@@ -565,6 +565,8 @@
         return NO;
     }
     
+    [[self.undoManager prepareWithInvocationTarget:self] removeIU:iu];
+    
     [_m_children insertObject:iu atIndex:index];
     
     //iu 의 delegate와 children
@@ -630,9 +632,13 @@
 
 -(BOOL)removeIU:(IUBox *)iu{
     if([iu shouldRemoveIU]){
+        
+        NSInteger index = [_m_children indexOfObject:iu];
+        [[self.undoManager prepareWithInvocationTarget:self] insertIU:iu atIndex:index error:nil];
+        
         //IURemoved 호출한 다음에 m_children을 호출해야함.
         //border를 지울려면 controller 에 iu 정보 필요.
-        [self.project.identifierManager unregisterIUs:@[iu]];
+        //[self.project.identifierManager unregisterIUs:@[iu]];
         [self.delegate IURemoved:iu.htmlID withParentID:iu.parent.htmlID];
         [_m_children removeObject:iu];
         
@@ -646,8 +652,11 @@
 }
 
 -(BOOL)changeIUIndex:(IUBox*)iu to:(NSUInteger)index error:(NSError**)error{
-    //자기보다 앞으로 갈 경우
     NSInteger currentIndex = [_m_children indexOfObject:iu];
+
+    [[self.undoManager prepareWithInvocationTarget:self] changeIUIndex:iu to:currentIndex error:nil];
+    
+    //자기보다 앞으로 갈 경우
     [_m_children removeObject:iu];
     if (index > currentIndex) {
         index --;
@@ -664,6 +673,7 @@
 }
 
 -(BOOL)removeIUAtIndex:(NSUInteger)index{
+    
     IUBox *box = [_m_children objectAtIndex:index];
     return [self removeIU:box];
 }
