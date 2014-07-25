@@ -142,7 +142,7 @@
     if(_duration == duration){
         return;
     }
-    [[self.undoManager prepareWithInvocationTarget:self] setAnimationDuration:_duration];
+    [(IUTransition *)[self.undoManager prepareWithInvocationTarget:self] setDuration:_duration];
     _duration = duration;
 }
 
