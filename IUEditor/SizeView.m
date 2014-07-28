@@ -142,8 +142,12 @@
 
 - (void)selectBox:(InnerSizeBox *)selectBox{
     NSUInteger newSelectIndex = [boxManageView.subviews indexOfObject:selectBox];
+    InnerSizeBox *currentBox = [boxManageView.subviews objectAtIndex:selectIndex];
+    [[self.undoManager prepareWithInvocationTarget:self] selectBox:currentBox];
+
     
     if(newSelectIndex != selectIndex){
+
         selectIndex = newSelectIndex;
     }
     
@@ -193,6 +197,9 @@
         return ;
     }
     
+    [[self.undoManager prepareWithInvocationTarget:self] removeFrame:width];
+    
+    
     [_sizeArray addObject:widthNumber];
     NSRect boxFrame = NSMakeRect(0, 0, width, self.frame.size.height);
     InnerSizeBox *newBox = [[InnerSizeBox alloc] initWithFrame:boxFrame width:width];
@@ -224,6 +231,8 @@
         JDWarnLog(@"last width : can't remove it");
         return;
     }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] addFrame:width];
     
 
     NSNumber *widthNumber = [NSNumber numberWithInteger:width];
@@ -273,6 +282,11 @@
                                                                  IUNotificationMQOldMaxSize:@(oldMaxBox.frameWidth),
                                                                  IUNotificationMQMaxSize:@(maxBox.frameWidth)}];
     
+}
+
+#pragma mark - Undo Manager
+- (NSUndoManager *)undoManager{
+    return [[[[NSApp mainWindow] windowController] document] undoManager];
 }
 
 
