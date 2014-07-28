@@ -32,12 +32,13 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
+        [self loadView];
     }
     return self;
 }
 
-- (void)awakeFromNib{
+- (void)setController:(IUController *)controller{
+    _controller = controller;
     [_altTextTF bind:@"value" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"altText"] options:@{NSContinuouslyUpdatesValueBindingOption: @(YES)}];
     [_fileNameComboBox bind:@"content" toObject:self withKeyPath:@"resourceManager.videoFiles" options:IUBindingDictNotRaisesApplicable];
     [_controlBtn bind:@"value" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableControl"] options:IUBindingDictNotRaisesApplicable];
@@ -51,11 +52,10 @@
     [self addObserver:self forKeyPath:@"controller.selectedObjects"
               options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"selection"];
 
-
 }
 
 - (void)dealloc{
-    if(_fileNameComboBox){
+    if (_controller) {
         _fileNameComboBox.delegate = nil;
         [self removeObserver:self forKeyPath:@"controller.selectedObjects" context:@"selection"];
     }
