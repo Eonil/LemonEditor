@@ -142,9 +142,6 @@
 
 - (void)selectBox:(InnerSizeBox *)selectBox{
     NSUInteger newSelectIndex = [boxManageView.subviews indexOfObject:selectBox];
-    InnerSizeBox *currentBox = [boxManageView.subviews objectAtIndex:selectIndex];
-    [[self.undoManager prepareWithInvocationTarget:self] selectBox:currentBox];
-
     
     if(newSelectIndex != selectIndex){
 

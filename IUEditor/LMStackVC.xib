@@ -226,11 +226,6 @@
                 <constraint firstItem="Osv-wT-Jh4" firstAttribute="top" secondItem="IoX-Be-25j" secondAttribute="top" constant="28" id="zMO-oZ-2I6"/>
             </constraints>
         </customView>
-        <slider verticalHuggingPriority="750" id="gSF-NI-ilk">
-            <rect key="frame" x="0.0" y="0.0" width="96" height="21"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="UmT-Te-jVO"/>
-        </slider>
     </objects>
     <resources>
         <image name="add_section" width="14" height="14"/>

@@ -17,4 +17,8 @@
 
 @property (weak)  IUSheet    *sheet; //set by lmwc
 @property (strong) IBOutlet IUController *IUController;
+
+- (IBAction)copy:(id)sender;
+- (IBAction)paste:(id)sender;
+
 @end

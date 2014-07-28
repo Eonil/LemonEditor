@@ -31,6 +31,20 @@
     }
 }
 
+- (IBAction)copy:(id)sender{
+    if(self.delegate){
+        [(LMStackVC *)self.delegate copy:sender];
+    }
+}
+
+- (IBAction)paste:(id)sender{
+    if(self.delegate){
+        [(LMStackVC *)self.delegate paste:sender];
+    }
+}
+
+
+
 @end
 
 
@@ -281,6 +295,14 @@
     }
     return NO;
     
+}
+#pragma mark - copy & paste
+- (IBAction)copy:(id)sender{
+    [_IUController copySelectedIUToPasteboard:self];
+}
+
+- (IBAction)paste:(id)sender{
+    [_IUController pasteToSelectedIU:self];
 }
 
 #pragma mark - button
