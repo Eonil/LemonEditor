@@ -52,12 +52,24 @@
     
     [_prototypeClass removeReference:self];
     
+    if(prototypeClass == nil){
+        //remove layers
+        for(IUBox *box in _prototypeClass.allChildren){
+            NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_%@",self.htmlID, box.htmlID];
+            [self.delegate IURemoved:modifiedHTMLID withParentID:self.htmlID];
+        }
+        
+        NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_class",self.htmlID];
+        [self.delegate IURemoved:modifiedHTMLID withParentID:self.htmlID];
+
+    }
+    
     _prototypeClass = prototypeClass;
     _prototypeClass.delegate = self.delegate;
  
     [_prototypeClass addReference:self];
+    [self updateHTML];
     if (self.delegate) {
-        [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.parent.htmlID];
         for (IUBox *iu in [prototypeClass.allChildren arrayByAddingObject:prototypeClass]) {
             [iu updateCSSForMaxViewPort];
         }
