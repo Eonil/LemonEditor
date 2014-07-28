@@ -55,8 +55,10 @@
 }
 
 - (void)dealloc{
-    _fileNameComboBox.delegate = nil;
-    [self removeObserver:self forKeyPath:@"controller.selectedObjects" context:@"selection"];
+    if(_fileNameComboBox){
+        _fileNameComboBox.delegate = nil;
+        [self removeObserver:self forKeyPath:@"controller.selectedObjects" context:@"selection"];
+    }
 }
 
 - (void)selectionContextDidChange:(NSDictionary *)change{
