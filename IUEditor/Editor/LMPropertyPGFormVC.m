@@ -45,7 +45,7 @@
 }
 
 - (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationStructureDidChange object:_project];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeObserver:self forKeyPaths:@[@"controller.selectedObjects", [_controller keyPathFromControllerToProperty:@"target"]]];
 }
 

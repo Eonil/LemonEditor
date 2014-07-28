@@ -89,7 +89,7 @@
 
 - (void)dealloc{
     dealloced = YES;
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationStructureDidChange object:self.view.window];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

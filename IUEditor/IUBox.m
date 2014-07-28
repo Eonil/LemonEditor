@@ -182,9 +182,7 @@
 
 
 - (void)dealloc{
-    if (self.isConnectedWithEditor) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
