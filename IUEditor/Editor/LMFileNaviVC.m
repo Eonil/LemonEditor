@@ -262,6 +262,8 @@
             [self.documentController rearrangeObjects];
             [self.documentController setSelectedObject:newDoc];
         }
+        [newDoc connectWithEditor];
+        [newDoc setIsConnectedWithEditor];
         [[self.project identifierManager] confirm];
     }
 }
