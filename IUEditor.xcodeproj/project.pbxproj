@@ -222,6 +222,7 @@
 		3D8D4B2B19179F910002C871 /* LMPropertyIUTextViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D8D4B2919179F910002C871 /* LMPropertyIUTextViewVC.xib */; };
 		3D973F091946F45100FB893F /* IUProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D973F081946F45100FB893F /* IUProjectController.m */; };
 		3D97D45D1950339500826280 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D97D45C1950339500826280 /* Defaults.plist */; };
+		3D994A0F1986097D005DBB2B /* Event.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D994A0E1986097D005DBB2B /* Event.zip */; };
 		3DA416B81935A6BE00559028 /* LMPreferenceFontVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */; };
 		3DA416B91935A6BE00559028 /* LMPreferenceFontVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */; };
 		3DA416BD1935ABB400559028 /* LMFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416BC1935ABB400559028 /* LMFontController.m */; };
@@ -279,7 +280,6 @@
 		3DBD7C2C19612FEC003E386C /* iueditor_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBD7C2919612FEC003E386C /* iueditor_preview.png */; };
 		3DBD7C2D19612FEC003E386C /* iueditor_thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBD7C2A19612FEC003E386C /* iueditor_thumbnail.png */; };
 		3DBD7C2E19612FEC003E386C /* iueditor_thumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DBD7C2B19612FEC003E386C /* iueditor_thumbnail@2x.png */; };
-		3DC4AAE6198200B50024170A /* Event.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3DC4AAE5198200B50024170A /* Event.zip */; };
 		3DC4AAEC198200DF0024170A /* event_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC4AAE7198200DF0024170A /* event_01.png */; };
 		3DC4AAED198200DF0024170A /* event_mobile_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3DC4AAE8198200DF0024170A /* event_mobile_video.mp4 */; };
 		3DC4AAEE198200DF0024170A /* event_thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DC4AAE9198200DF0024170A /* event_thumbnail.png */; };
@@ -972,6 +972,7 @@
 		3D973F071946F45100FB893F /* IUProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUProjectController.h; sourceTree = "<group>"; };
 		3D973F081946F45100FB893F /* IUProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUProjectController.m; sourceTree = "<group>"; };
 		3D97D45C1950339500826280 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
+		3D994A0E1986097D005DBB2B /* Event.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Event.zip; sourceTree = "<group>"; };
 		3DA416B51935A6BE00559028 /* LMPreferenceFontVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPreferenceFontVC.h; path = Editor/Preference/LMPreferenceFontVC.h; sourceTree = "<group>"; };
 		3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPreferenceFontVC.m; path = Editor/Preference/LMPreferenceFontVC.m; sourceTree = "<group>"; };
 		3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPreferenceFontVC.xib; path = Editor/Preference/LMPreferenceFontVC.xib; sourceTree = "<group>"; };
@@ -1055,7 +1056,6 @@
 		3DBD7C2919612FEC003E386C /* iueditor_preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iueditor_preview.png; sourceTree = "<group>"; };
 		3DBD7C2A19612FEC003E386C /* iueditor_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iueditor_thumbnail.png; sourceTree = "<group>"; };
 		3DBD7C2B19612FEC003E386C /* iueditor_thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iueditor_thumbnail@2x.png"; sourceTree = "<group>"; };
-		3DC4AAE5198200B50024170A /* Event.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Event.zip; sourceTree = "<group>"; };
 		3DC4AAE7198200DF0024170A /* event_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = event_01.png; sourceTree = "<group>"; };
 		3DC4AAE8198200DF0024170A /* event_mobile_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = event_mobile_video.mp4; sourceTree = "<group>"; };
 		3DC4AAE9198200DF0024170A /* event_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = event_thumbnail.png; sourceTree = "<group>"; };
@@ -2242,7 +2242,7 @@
 		3DC4AAE21982002E0024170A /* Event */ = {
 			isa = PBXGroup;
 			children = (
-				3DC4AAE5198200B50024170A /* Event.zip */,
+				3D994A0E1986097D005DBB2B /* Event.zip */,
 				3DC4AAE7198200DF0024170A /* event_01.png */,
 				3DC4AAE8198200DF0024170A /* event_mobile_video.mp4 */,
 				3DC4AAE9198200DF0024170A /* event_thumbnail.png */,
@@ -3610,6 +3610,7 @@
 				2641F452195A72FF00DDF1C3 /* bg_h_right.png in Resources */,
 				267CB1BA190F95750079E565 /* bg_center@2x.png in Resources */,
 				3DED2709190125F1001A1D67 /* ruler.png in Resources */,
+				3D994A0F1986097D005DBB2B /* Event.zip in Resources */,
 				3DED26801900D329001A1D67 /* stack_fblike.png in Resources */,
 				69B9A39818E697F70007D6E2 /* iu.css in Resources */,
 				267CB1AE190F93370079E565 /* tab_tools_off@2x.png in Resources */,
@@ -3868,7 +3869,6 @@
 				3DF803D918FE62C900913505 /* start_reference.png in Resources */,
 				3DE201F61966893E00976EBC /* width_tablet@2x.png in Resources */,
 				3D2E6BAD19653F3A00AC7DE5 /* EventVisible.mp4 in Resources */,
-				3DC4AAE6198200B50024170A /* Event.zip in Resources */,
 				3DE202271966AFCF00976EBC /* agency_preview_mobile02.png in Resources */,
 				3DE2021A1966AF8D00976EBC /* agency_preview02.png in Resources */,
 				3DF803EB18FE62C900913505 /* stack_view.png in Resources */,

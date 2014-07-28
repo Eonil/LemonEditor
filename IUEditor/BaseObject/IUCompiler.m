@@ -1248,7 +1248,6 @@
         [cssDict removeObjectForKey:@"overflow"];
         [cssDict removeObjectForKey:@"z-index"];
         [cssDict removeObjectForKey:@"float"];
-        [cssDict removeObjectForKey:@"display"];
     }
     
     return cssDict;
@@ -1613,78 +1612,79 @@
                 NSString *imgSrc = [[self imagePathWithImageName:value isEdit:isEdit] CSSURLString];
                 [dict putTag:@"background-image" string:imgSrc];
             }
-
-            IUBGSizeType bgSizeType = [cssTagDict[IUCSSTagBGSize] intValue];
-            switch (bgSizeType) {
-                case IUBGSizeTypeStretch:
-                    [dict putTag:@"background-size" string:@"100% 100%"];
+        }
+        
+        IUBGSizeType bgSizeType = [cssTagDict[IUCSSTagBGSize] intValue];
+        switch (bgSizeType) {
+            case IUBGSizeTypeStretch:
+                [dict putTag:@"background-size" string:@"100% 100%"];
+                break;
+            case IUBGSizeTypeContain:
+                [dict putTag:@"background-size" string:@"contain"];
+                break;
+            case IUBGSizeTypeFull:
+                [dict putTag:@"background-attachment" string:@"fixed"];
+            case IUBGSizeTypeCover:
+                [dict putTag:@"background-size" string:@"cover"];
+                break;
+            default:
+                break;
+        }
+        
+        BOOL digitBGPosition = [cssTagDict[IUCSSTagBGEnableDigitPosition] boolValue];
+        if(digitBGPosition){
+            id bgValue = cssTagDict[IUCSSTagBGXPosition];
+            [dict putTag:@"background-position-x" intValue:[bgValue intValue] ignoreZero:YES unit:IUCSSUnitPixel];
+            
+            bgValue = cssTagDict[IUCSSTagBGYPosition];
+            [dict putTag:@"background-position-y" intValue:[bgValue intValue] ignoreZero:YES unit:IUCSSUnitPixel];
+        }
+        else{
+            NSString *vString, *hString;
+            IUCSSBGVPostion vPosition = [cssTagDict[IUCSSTagBGVPosition] intValue];
+            switch (vPosition) {
+                case IUCSSBGVPostionTop:
+                    vString = @"top";
                     break;
-                case IUBGSizeTypeContain:
-                    [dict putTag:@"background-size" string:@"contain"];
+                case IUCSSBGVPostionCenter:
+                    vString = @"center";
                     break;
-                case IUBGSizeTypeFull:
-                    [dict putTag:@"background-attachment" string:@"fixed"];
-                case IUBGSizeTypeCover:
-                    [dict putTag:@"background-size" string:@"cover"];
+                case IUCSSBGVPostionBottom:
+                    vString = @"bottom";
                     break;
                 default:
                     break;
             }
             
-            BOOL digitBGPosition = [cssTagDict[IUCSSTagBGEnableDigitPosition] boolValue];
-            if(digitBGPosition){
-                id bgValue = cssTagDict[IUCSSTagBGXPosition];
-                [dict putTag:@"background-position-x" intValue:[bgValue intValue] ignoreZero:YES unit:IUCSSUnitPixel];
-                
-                bgValue = cssTagDict[IUCSSTagBGYPosition];
-                [dict putTag:@"background-position-y" intValue:[bgValue intValue] ignoreZero:YES unit:IUCSSUnitPixel];
+            IUCSSBGHPostion hPosition = [cssTagDict[IUCSSTagBGHPosition] intValue];
+            switch (hPosition) {
+                case IUCSSBGHPostionLeft:
+                    hString = @"left";
+                    break;
+                case IUCSSBGHPostionCenter:
+                    hString = @"center";
+                    break;
+                case IUCSSBGHPostionRight:
+                    hString= @"right";
+                    break;
+                default:
+                    break;
             }
-            else{
-                NSString *vString, *hString;
-                IUCSSBGVPostion vPosition = [cssTagDict[IUCSSTagBGVPosition] intValue];
-                switch (vPosition) {
-                    case IUCSSBGVPostionTop:
-                        vString = @"top";
-                        break;
-                    case IUCSSBGVPostionCenter:
-                        vString = @"center";
-                        break;
-                    case IUCSSBGVPostionBottom:
-                        vString = @"bottom";
-                        break;
-                    default:
-                        break;
-                }
-                
-                IUCSSBGHPostion hPosition = [cssTagDict[IUCSSTagBGHPosition] intValue];
-                switch (hPosition) {
-                    case IUCSSBGHPostionLeft:
-                        hString = @"left";
-                        break;
-                    case IUCSSBGHPostionCenter:
-                        hString = @"center";
-                        break;
-                    case IUCSSBGHPostionRight:
-                        hString= @"right";
-                        break;
-                    default:
-                        break;
-                }
-                [dict putTag:@"background-position" string:[NSString stringWithFormat:@"%@ %@", vString, hString]];
-                
-            }
+            [dict putTag:@"background-position" string:[NSString stringWithFormat:@"%@ %@", vString, hString]];
             
-            id bgValue = cssTagDict[IUCSSTagBGRepeat];
-            BOOL repeat = [bgValue boolValue];
-            if(repeat){
-                [dict putTag:@"background-repeat" string:@"repeat"];
-            }
-            else{
-                [dict putTag:@"background-repeat" string:@"no-repeat"];
-            }
+        }
+        
+        id bgValue = cssTagDict[IUCSSTagBGRepeat];
+        BOOL repeat = [bgValue boolValue];
+        if(repeat){
+            [dict putTag:@"background-repeat" string:@"repeat"];
         }
         else{
-            BOOL enableGraident = [cssTagDict[IUCSSTagBGGradient] boolValue];
+            [dict putTag:@"background-repeat" string:@"no-repeat"];
+        }
+        
+        BOOL enableGraident = [cssTagDict[IUCSSTagBGGradient] boolValue];
+        if(cssTagDict[IUCSSTagBGGradient] && enableGraident){
             NSColor *bgColor1 = cssTagDict[IUCSSTagBGGradientStartColor];
             NSColor *bgColor2 = cssTagDict[IUCSSTagBGGradientEndColor];
             
