@@ -137,34 +137,10 @@
             }
             
 #pragma mark make body;
-            NSMutableString *eventString = [NSMutableString string];
             
             value = [oneDict objectForKey:IUEventTagIUID];
             if(value){
                 IUEventActionType type = [[oneDict objectForKey:IUEventTagActionType] intValue];
-                
-                NSArray *bindingIUArray = value;
-                for(NSString *bindingIUID in bindingIUArray){
-                    
-                    [eventString appendFormat:@"/* [IU:%@] Event Declaration */\n", bindingIUID];
-                    [eventString appendFormat:@"$(\"#%@\").", bindingIUID];
-                    
-                    if(type == IUEventActionTypeClick){
-                        [eventString appendString:@"click(function(){"];
-                    }
-                    else if(type == IUEventActionTypeHover){
-                        [eventString appendString:@"hover(function(){"];
-                    }
-                    else{
-                        JDFatalLog(@"no action type");
-                    }
-                    [eventString appendNewline];
-                    [eventString appendTabAndString:[NSString stringWithFormat:@"%@++;",variable]];
-                    [eventString appendNewline];
-                    [eventString appendTabAndString:[NSString stringWithFormat:@"if( %@ > MAX_IU_%@ ){ %@ = INIT_IU_%@ }\n",variable, variable, variable, variable]];
-                    [eventString appendNewline];
-                }
-                
                 
 #pragma mark make event innerJS
                 NSArray *receiverArray = [oneDict objectForKey:IUEventTagReceiverArray];
@@ -308,10 +284,33 @@
                 }//End of receiverArray
                 [initializeFn appendString:innerfunctionStr];
                 
-                [eventString appendString:[innerfunctionStr stringByAddingTab]];
-                [eventString appendString:@"});"];
-                [eventString appendNewline];
-                [eventString appendNewline];
+                //initialize source
+                NSMutableString *eventString = [NSMutableString string];
+                NSArray *bindingIUArray = [oneDict objectForKey:IUEventTagIUID];;
+                for(NSString *bindingIUID in bindingIUArray){
+                    
+                    [eventString appendFormat:@"/* [IU:%@] Event Declaration */\n", bindingIUID];
+                    [eventString appendFormat:@"$(\"#%@\").", bindingIUID];
+                    
+                    if(type == IUEventActionTypeClick){
+                        [eventString appendString:@"click(function(){"];
+                    }
+                    else if(type == IUEventActionTypeHover){
+                        [eventString appendString:@"hover(function(){"];
+                    }
+                    else{
+                        JDFatalLog(@"no action type");
+                    }
+                    [eventString appendNewline];
+                    [eventString appendTabAndString:[NSString stringWithFormat:@"%@++;",variable]];
+                    [eventString appendNewline];
+                    [eventString appendTabAndString:[NSString stringWithFormat:@"if( %@ > MAX_IU_%@ ){ %@ = INIT_IU_%@ }\n",variable, variable, variable, variable]];
+                    [eventString appendNewline];
+                    [eventString appendString:[innerfunctionStr stringByAddingTab]];
+                    [eventString appendString:@"});\n"];
+                    [eventString appendNewline];
+
+                }
                 [body appendString:eventString];
 
             }
