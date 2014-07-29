@@ -386,12 +386,14 @@
         [initializeJSSource addNewLine];
     }
     //copy clipart to build directory
-    if (clipArtArray != nil) {
+    if (clipArtArray.count != 0) {
         NSString *copyPath = [buildResourcePath stringByAppendingPathComponent:@"clipArt"];
         [[NSFileManager defaultManager] createDirectoryAtPath:copyPath withIntermediateDirectories:YES attributes:nil error:error];
         
         for(NSString *imageName in clipArtArray){
-            [[JDFileUtil util] copyBundleItem:[imageName lastPathComponent] toDirectory:copyPath];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:[buildResourcePath stringByAppendingPathComponent:imageName] isDirectory:NO] == NO) {
+                [[JDFileUtil util] copyBundleItem:[imageName lastPathComponent] toDirectory:copyPath];
+            }
         }
     }
     
