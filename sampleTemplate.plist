@@ -77,60 +77,89 @@
 		<key>projectPackageFile</key>
 		<string>gallery.zip</string>
 	</dict>
+	<dict>
+		<key>feature</key>
+		<string>Django (including Django Project), Responsive, Transition</string>
+		<key>isReady</key>
+		<true/>
+		<key>thumbnail</key>
+		<string>event_thumbnail</string>
+		<key>name</key>
+		<string>Event</string>
+		<key>type</key>
+		<real>1</real>
+		<key>desc</key>
+		<string>Event Sample page</string>
+		<key>pageSize</key>
+		<string>960 / 320 (Support PC, Mobile)</string>
+		<key>previewImages</key>
+		<array>
+			<string>event_01.png</string>
+		</array>
+		<key>previewVideos</key>
+		<array>
+			<string>event_video.mp4</string>
+			<string>event_mobile_video.mp4</string>
+		</array>
+		<key>projectPackageFile</key>
+		<string>Event.zip</string>
+	</dict>
+	<dict>
+		<key>feature</key>
+		<string>Django (including Django Project), Responsive, Transition</string>
+		<key>isReady</key>
+		<true/>
+		<key>thumbnail</key>
+		<string>resume_thumbnail</string>
+		<key>name</key>
+		<string>Resume</string>
+		<key>type</key>
+		<real>1</real>
+		<key>desc</key>
+		<string>Resume Sample page</string>
+		<key>pageSize</key>
+		<string>960 / 768 / 320 (Support PC, Tablet, Mobile)</string>
+		<key>previewImages</key>
+		<array>
+			<string>resume_preview_pc.png</string>
+			<string>resume_preview_tablet.png</string>
+			<string>resume_preview_mobile.png</string>
+		</array>
+		<key>previewVideos</key>
+		<array/>
+		<key>projectPackageFile</key>
+		<string>Resume.zip</string>
+	</dict>
     <dict>
         <key>feature</key>
-        <string>Django (including Django Project), Responsive, Transition</string>
+        <string>Responsive, Transition</string>
         <key>isReady</key>
         <true/>
         <key>thumbnail</key>
-        <string>event_thumbnail</string>
+        <string>cs_thumbnail</string>
         <key>name</key>
-        <string>Event</string>
+        <string>Cooking School</string>
         <key>type</key>
-        <real>1</real>
+        <real>0</real>
         <key>desc</key>
-        <string>Event Sample page</string>
-        <key>pageSize</key>
-        <string>960 / 320 (Support PC, Mobile)</string>
-        <key>previewImages</key>
-        <array>
-            <string>event_01.png</string>
-        </array>
-        <key>previewVideos</key>
-        <array>
-            <string>event_video.mp4</string>
-            <string>event_mobile_video.mp4</string>
-        </array>
-        <key>projectPackageFile</key>
-        <string>Event.zip</string>
-    </dict>
-    <dict>
-        <key>feature</key>
-        <string>Django (including Django Project), Responsive, Transition</string>
-        <key>isReady</key>
-        <true/>
-        <key>thumbnail</key>
-        <string>resume_thumbnail</string>
-        <key>name</key>
-        <string>Resume</string>
-        <key>type</key>
-        <real>1</real>
-        <key>desc</key>
-        <string>Resume Sample page</string>
+        <string>Cooking School sample page</string>
         <key>pageSize</key>
         <string>960 / 768 / 320 (Support PC, Tablet, Mobile)</string>
         <key>previewImages</key>
         <array>
-            <string>resume_preview_pc.png</string>
-            <string>resume_preview_tablet.png</string>
-            <string>resume_preview_mobile.png</string>
-        </array>
-        <key>previewVideos</key>
-        <array>
+            <string>cs_pc_01.png</string>
+            <string>cs_pc_02.png</string>
+            <string>cs_pc_03.png</string>
+            <string>cs_tablet_01.png</string>
+            <string>cs_tablet_02.png</string>
+            <string>cs_tablet_03.png</string>
+            <string>cs_mobile_01.png</string>
+            <string>cs_mobile_02.png</string>
+            <string>cs_mobile_03.png</string>
         </array>
         <key>projectPackageFile</key>
-        <string>Resume.zip</string>
+        <string>CookingSchool.zip</string>
     </dict>
-	
+
 </array>
 </plist>
