@@ -11,6 +11,8 @@
 		<string>iueditor_thumbnail</string>
 		<key>name</key>
 		<string>IUEditor</string>
+        <key>fileName</key>
+        <string>IUEditor</string>
 		<key>type</key>
 		<real>0</real>
 		<key>desc</key>
@@ -34,6 +36,8 @@
 		<string>agency_thumbnail</string>
 		<key>name</key>
 		<string>Agency</string>
+        <key>fileName</key>
+        <string>Agency</string>
 		<key>type</key>
 		<real>0</real>
 		<key>desc</key>
@@ -61,6 +65,8 @@
 		<string>gallery_thumb</string>
 		<key>name</key>
 		<string>Gallery</string>
+        <key>fileName</key>
+        <string>Gallery</string>
 		<key>type</key>
 		<real>1</real>
 		<key>desc</key>
@@ -86,6 +92,8 @@
 		<string>event_thumbnail</string>
 		<key>name</key>
 		<string>Event</string>
+        <key>fileName</key>
+        <string>Event</string>
 		<key>type</key>
 		<real>1</real>
 		<key>desc</key>
@@ -113,6 +121,8 @@
 		<string>resume_thumbnail</string>
 		<key>name</key>
 		<string>Resume</string>
+        <key>fileName</key>
+        <string>Resume</string>
 		<key>type</key>
 		<real>1</real>
 		<key>desc</key>
@@ -139,6 +149,8 @@
         <string>cs_thumbnail</string>
         <key>name</key>
         <string>Cooking School</string>
+        <key>fileName</key>
+        <string>CookingSchool</string>
         <key>type</key>
         <real>0</real>
         <key>desc</key>

@@ -25,6 +25,7 @@
         self.previewVideoArray = [dict objectForKey:@"previewVideos"];
         self.packagePath = [dict objectForKey:@"projectPackageFile"];
         self.feature = [dict objectForKey:@"feature"];
+        self.fileName = [dict objectForKey:@"fileName"];
         
     }
     return self;

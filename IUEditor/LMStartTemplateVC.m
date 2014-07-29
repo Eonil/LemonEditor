@@ -64,11 +64,11 @@
     }
     
     
-    NSURL *targetURL = [url URLByAppendingPathComponent:item.name];
+    NSURL *targetURL = [url URLByAppendingPathComponent:item.fileName];
     NSString *targetPath = [targetURL path];
     [[JDFileUtil util] unzipResource:item.packagePath toDirectory:targetPath createDirectory:YES];
     
-    NSURL *openURL = [[[NSURL fileURLWithPath:targetPath] URLByAppendingPathComponent:item.name ] URLByAppendingPathExtension:@"iu"];
+    NSURL *openURL = [[[NSURL fileURLWithPath:targetPath] URLByAppendingPathComponent:item.fileName ] URLByAppendingPathExtension:@"iu"];
     [(IUProjectController *)[NSDocumentController sharedDocumentController] openDocumentWithContentsOfURL:openURL display:YES completionHandler:nil];
     [self.view.window close];
 

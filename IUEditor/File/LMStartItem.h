@@ -13,6 +13,7 @@
 
 //property for loading project
 @property NSImage *thumbnail;
+@property NSString *fileName;
 @property NSString *name;
 @property NSString *packagePath;
 
