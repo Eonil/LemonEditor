@@ -60,6 +60,7 @@ static NSString *IUClassGroupName = @"class";
     IUSheetGroup *_backgroundGroup;
     IUSheetGroup *_classGroup;
     IUResourceGroup *_resourceGroup;
+    IUServerInfo *_serverInfo;
     
     IUCompiler *_compiler;
     IUResourceManager *_resourceManager;

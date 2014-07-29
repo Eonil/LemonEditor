@@ -26,7 +26,6 @@
 
 @implementation IUProject{
     BOOL _isConnectedWithEditor;
-    IUServerInfo *_serverInfo;
 }
 
 #pragma mark - init
