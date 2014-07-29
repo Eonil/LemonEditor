@@ -387,11 +387,6 @@
     }
 }
 
-- (void)setValue:(id)value forKeyPath:(NSString *)keyPath{
-    NSLog([NSString stringWithFormat:@"LMPropertyFrame VC : %@, %@", keyPath, [value description]], nil);
-    [super setValue:value forKeyPath:keyPath];
-}
-
 - (IBAction)helpMenu:(id)sender {
     NSLog(@"this is help menu");
     helpWC = [LMHelpWC sharedHelpWC];
