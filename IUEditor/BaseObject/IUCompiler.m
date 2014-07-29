@@ -277,21 +277,44 @@
 
 
 #pragma mark - output body source
+- (NSString *)outputCSSSource:(IUSheet*)sheet mqSizeArray:(NSArray *)mqSizeArray{
+    //change css
+    JDCode *cssCode = [self cssSource:sheet cssSizeArray:mqSizeArray isEdit:NO];
+    
+    if(_rule == IUCompileRuleDefault){
+        [cssCode replaceCodeString:@"\"resource/" toCodeString:@"../"];
+        [cssCode replaceCodeString:@"./resource/" toCodeString:@"../"];
+        [cssCode replaceCodeString:@"('resource/" toCodeString:@"('../"];
+    }
+    else if (_rule == IUCompileRuleDjango) {
+        [cssCode replaceCodeString:@"\"resource/" toCodeString:@"\"/resource/"];
+        [cssCode replaceCodeString:@"./resource/" toCodeString:@"/resource/"];
+        [cssCode replaceCodeString:@"('resource/" toCodeString:@"('/resource/"];
+    }
+    else if (_rule == IUCompileRuleWordpress) {
+        [cssCode replaceCodeString:@"\"resource/" toCodeString:@"\"<?php bloginfo('template_url'); ?>/resource/"];
+        [cssCode replaceCodeString:@"./resource/" toCodeString:@"<?php bloginfo('template_url'); ?>/resource/"];
+        [cssCode replaceCodeString:@"('resource/" toCodeString:@"('<?php bloginfo('template_url'); ?>/resource/"];
+    }
+    
+    return cssCode.string;
+}
 
--(NSString*)outputSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray{
-    if ([document isKindOfClass:[IUClass class]]) {
-        return [self outputHTML:document].string;
+
+-(NSString*)outputHTMLSource:(IUSheet*)sheet{
+    if ([sheet isKindOfClass:[IUClass class]]) {
+        return [self outputHTML:sheet].string;
     }
     NSString *templateFilePath = [[NSBundle mainBundle] pathForResource:@"webTemplate" ofType:@"html"];
     
     JDCode *sourceCode = [[JDCode alloc] initWithCodeString: [NSString stringWithContentsOfFile:templateFilePath encoding:NSUTF8StringEncoding error:nil]];
 
     //replace metadata;
-    if([document isKindOfClass:[IUPage class]]){
-        JDCode *metaCode = [self metadataSource:(IUPage *)document];
+    if([sheet isKindOfClass:[IUPage class]]){
+        JDCode *metaCode = [self metadataSource:(IUPage *)sheet];
         [sourceCode replaceCodeString:@"<!--METADATA_Insert-->" toCode:metaCode];
         
-        JDCode *webFontCode = [self webfontImportSourceForOutput:(IUPage *)document];
+        JDCode *webFontCode = [self webfontImportSourceForOutput:(IUPage *)sheet];
         [sourceCode replaceCodeString:@"<!--WEBFONT_Insert-->" toCode:webFontCode];
 
         
@@ -305,15 +328,14 @@
         NSString *initJS = @"<script type=\"text/javascript\" src=\"resource/js/iuinit.js\"></script>";
         [sourceCode replaceCodeString:@"<!-- IUInit.JS -->" toCodeString:initJS];
         
-        NSString *iuCSS = @"<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/css/iu.css\">";
-        [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCodeString:iuCSS];
+        JDCode *iuCSS = [[JDCode alloc] initWithCodeString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/css/iu.css\">"];
+        [iuCSS addCodeLineWithFormat:[NSString stringWithFormat:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/css/%@.css\">", sheet.name]];
+        [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];
         
-        //change css
-        JDCode *cssCode = [self cssSource:document cssSizeArray:mqSizeArray isEdit:NO];
-        [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCode:cssCode];
+        [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCodeString:@""];
         
         //change html
-        JDCode *htmlCode = [self outputHTML:document];
+        JDCode *htmlCode = [self outputHTML:sheet];
         [sourceCode replaceCodeString:@"<!--HTML_Replacement-->" toCode:htmlCode];
         
         JDSectionInfoLog( IULogSource, @"source : %@", [@"\n" stringByAppendingString:sourceCode.string]);
@@ -1135,8 +1157,10 @@
     JDCode *code = [[JDCode alloc] init];
     //    NSMutableString *css = [NSMutableString string];
     //default-
-    [code addCodeLine:@"<style id=default>"];
-    [code increaseIndentLevelForEdit];
+    if(isEdit){
+        [code addCodeLine:@"<style id=default>"];
+        [code increaseIndentLevelForEdit];
+    }
 
     
     NSDictionary *cssDict = [self cssSourceForIU:sheet width:IUCSSMaxViewPortWidth isEdit:isEdit];
@@ -1151,24 +1175,43 @@
             [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
         }
     }
-    [code decreaseIndentLevelForEdit];
-    [code addCodeLine:@"</style>"];
+    if(isEdit){
+        [code decreaseIndentLevelForEdit];
+        [code addCodeLine:@"</style>"];
+    }
+    
+    [code addNewLine];
     
 #pragma mark extract MQ css
     //mediaQuery css
     for(int count=0; count<mqSizeArray.count; count++){
         int size = [[mqSizeArray objectAtIndex:count] intValue];
         
-        //        <style type="text/css" media="screen and (max-width:400px)" id="style400">
+
         
-        [code addString:@"<style type=\"text/css\" "];
-        if(count < mqSizeArray.count-1){
-            [code addCodeWithFormat:@"media ='screen and (min-width:%dpx) and (max-width:%dpx)' id='style%d'>" , size, largestWidth-1, size];
-            largestWidth = size;
+        if(isEdit){
+            //edit는 stylesheet html tag로 들어감
+            //<style type="text/css" media="screen and (max-width:400px)" id="style400">
+            if(count < mqSizeArray.count-1){
+                [code addCodeWithFormat:@"<style type=\"text/css\" media ='screen and (min-width:%dpx) and (max-width:%dpx)' id='style%d'>" , size, largestWidth-1, size];
+                largestWidth = size;
+            }
+            else{
+                [code addCodeWithFormat:@"<style type=\"text/css\" media ='screen and (max-width:%dpx)' id='style%d'>" , largestWidth-1, size];
+                
+            }
         }
         else{
-            [code addCodeWithFormat:@"media ='screen and (max-width:%dpx)' id='style%d'>" , largestWidth-1, size];
-
+            //build는 css파일로 따로 뽑아줌
+            if(count < mqSizeArray.count-1){
+                [code addCodeWithFormat:@"@media screen and (min-width:%dpx) and (max-width:%dpx){" , size, largestWidth-1];
+                largestWidth = size;
+            }
+            else{
+                [code addCodeWithFormat:@"@media screen and (max-width:%dpx){" , largestWidth-1];
+                
+            }
+            
         }
         [code increaseIndentLevelForEdit];
         
@@ -1190,7 +1233,13 @@
             }
         }
         [code decreaseIndentLevelForEdit];
-        [code addCodeLine:@"</style>"];
+        
+        if(isEdit){
+            [code addCodeLine:@"</style>"];
+        }
+        else{
+            [code addCodeLine:@"}"];
+        }
     }
     
     return code;

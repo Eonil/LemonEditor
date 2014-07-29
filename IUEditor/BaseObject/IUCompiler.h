@@ -30,7 +30,8 @@ typedef enum _IUCompileRule{
 @property IUCompileRule    rule;
 
 //build source
-- (NSString *)outputSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray;
+- (NSString *)outputCSSSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray;
+- (NSString*)outputHTMLSource:(IUSheet*)document;
 - (JDCode *)outputHTML:(IUBox *)iu;
 
 //editor source

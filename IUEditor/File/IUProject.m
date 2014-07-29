@@ -351,6 +351,9 @@
 
     [[NSFileManager defaultManager] removeItemAtPath:buildResourcePath error:nil];
     [[NSFileManager defaultManager] copyItemAtPath:_resourceGroup.absolutePath toPath:buildResourcePath error:error];
+    
+    NSString *resourceCSSPath = [buildResourcePath stringByAppendingPathComponent:@"css"];
+
 
 
     IUEventVariable *eventVariable = [[IUEventVariable alloc] init];
@@ -358,16 +361,25 @@
 
     NSMutableArray *clipArtArray = [NSMutableArray array];
     for (IUSheet *sheet in self.allDocuments) {
+        //clipart
         [clipArtArray addObjectsFromArray:[sheet outputArrayClipArt]];
         
-        NSString *outputString = [sheet outputSource];
-        
-        NSString *filePath = [self buildPathForSheet:sheet];
-        [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-        if ([outputString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
+        //html
+        NSString *outputHTML = [sheet outputHTMLSource];
+        NSString *htmlPath = [self buildPathForSheet:sheet];
+        [[NSFileManager defaultManager] removeItemAtPath:htmlPath error:nil];
+        if ([outputHTML writeToFile:htmlPath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
+            NSAssert(0, @"write fail");
+        }
+        //css
+        NSString *outputCSS = [sheet outputCSSSource];
+        NSString *cssPath = [[resourceCSSPath stringByAppendingPathComponent:sheet.name] stringByAppendingPathExtension:@"css"];
+        [[NSFileManager defaultManager] removeItemAtPath:cssPath error:nil];
+        if ([outputCSS writeToFile:cssPath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
             NSAssert(0, @"write fail");
         }
         
+        //js
         [eventVariable makeEventDictionary:sheet];
         
         [initializeJSSource addCodeLineWithFormat:@"/* Initialize %@ */\n", sheet.name];
@@ -382,11 +394,8 @@
         [[JDFileUtil util] copyBundleItem:imageName toDirectory:copyPath];
     }
     
-    
-    NSString *resourceJSPath = [buildResourcePath stringByAppendingPathComponent:@"js"];
-    
     //make initialize javascript file
-    
+    NSString *resourceJSPath = [buildResourcePath stringByAppendingPathComponent:@"js"];
     NSString *iuinitFilePath = [[NSBundle mainBundle] pathForResource:@"iuinit" ofType:@"js"];
     
     JDCode *sourceCode = [[JDCode alloc] initWithCodeString: [NSString stringWithContentsOfFile:iuinitFilePath encoding:NSUTF8StringEncoding error:nil]];
@@ -400,8 +409,6 @@
     if ([sourceCode.string writeToFile:initializeJSPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
         NSAssert(0, @"write fail");
     }
-
-    
     //make event javascript file
     NSString *eventJSString = [eventVariable outputEventJSSource];
     NSString *eventJSFilePath = [[resourceJSPath stringByAppendingPathComponent:@"iuevent"] stringByAppendingPathExtension:@"js"];
@@ -409,6 +416,12 @@
     if ([eventJSString writeToFile:eventJSFilePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
         NSAssert(0, @"write fail");
     }
+    
+    //copy js for IE
+    NSString *ieJSPath = [resourceJSPath stringByAppendingPathComponent:@"ie"];
+    [[NSFileManager defaultManager] createDirectoryAtPath:ieJSPath withIntermediateDirectories:YES attributes:nil error:error];
+    [[JDFileUtil util] copyBundleItem:@"jquery.backgroundSize.js" toDirectory:ieJSPath];
+    [[JDFileUtil util] copyBundleItem:@"respond.min.js" toDirectory:ieJSPath];
     
     [JDUIUtil hudAlert:@"Build Success" second:2];
     return YES;
@@ -479,9 +492,6 @@
     NSString *carouselJSPath = [[NSBundle mainBundle] pathForResource:@"iucarousel" ofType:@"js"];
     [JSGroup addResourceFileWithContentOfPath:carouselJSPath];
     
-    NSString *ieJSPath = [[NSBundle mainBundle] pathForResource:@"jquery.backgroundSize" ofType:@"js"];
-    [JSGroup addResourceFileWithContentOfPath:ieJSPath];
-
 }
 
 - (void)initializeResource{

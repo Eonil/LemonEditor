@@ -20,7 +20,10 @@
 
 #pragma mark editor source
 -(NSString*)editorSource;
--(NSString*)outputSource;
+
+#pragma mark output Source
+- (NSString*)outputHTMLSource;
+- (NSString*)outputCSSSource;
 - (NSString*)outputInitJSSource;
 - (NSArray *)outputArrayClipArt;
 

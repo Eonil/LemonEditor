@@ -160,7 +160,8 @@ static JDFileUtil *sharedJDFileUtill;
 
 -(NSError*)copyBundleItem:(NSString *)filename toDirectory:(NSString *)directoryPath{
     NSError *result;
-    NSString *resourceFilePath =[[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/%@",filename];
+    
+    NSString *resourceFilePath =[[NSBundle mainBundle] pathForResource:[filename stringByDeletingPathExtension] ofType:[filename pathExtension]];
     NSString *newFilePath      =[directoryPath stringByAppendingFormat:@"/%@",filename];
     [[NSFileManager defaultManager] copyItemAtPath:resourceFilePath toPath:newFilePath error:&result];
     if (result) {

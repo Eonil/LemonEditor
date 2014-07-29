@@ -76,14 +76,19 @@
     return [self.project.compiler editorSource:self mqSizeArray:sortedArray];
 }
 
-- (NSString*)outputSource{
+- (NSString *)outputCSSSource{
     NSAssert(self.project.compiler, @"compiler");
     
     NSSortDescriptor* sortOrder = [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: NO];
     NSArray *sortedArray= [self.project.mqSizes sortedArrayUsingDescriptors: [NSArray arrayWithObject: sortOrder]];
     
+    return [self.project.compiler outputCSSSource:self mqSizeArray:sortedArray];
     
-    return [self.project.compiler outputSource:self mqSizeArray:sortedArray];;
+}
+
+- (NSString*)outputHTMLSource{
+    NSAssert(self.project.compiler, @"compiler");
+    return [self.project.compiler outputHTMLSource:self];
 }
 
 - (NSString*)outputInitJSSource{
