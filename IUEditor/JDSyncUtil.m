@@ -19,7 +19,8 @@
 
 - (BOOL)upload{
     if (self.protocol == JDSFTP) {
-        NSString *src = [[NSBundle mainBundle] pathForResource:@"sftp_upload" ofType:@"sh"];
+        
+        NSString *src = [[NSBundle mainBundle] pathForResource:@"scp_upload" ofType:@"sh"];
         util = [[JDShellUtil alloc] init];
         NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ %@", src, self.localDirectory, self.user, self.host, self.remoteDirectory, self.syncDirectory, self.password];
         NSLog(command, nil);
@@ -39,7 +40,7 @@
 
 - (BOOL)download{
     if (self.protocol == JDSFTP) {
-        NSString *src = [[NSBundle mainBundle] pathForResource:@"sftp_download" ofType:@"sh"];
+        NSString *src = [[NSBundle mainBundle] pathForResource:@"scp_download" ofType:@"sh"];
         util = [[JDShellUtil alloc] init];
         NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ %@", src, self.localDirectory, self.user, self.host, self.remoteDirectory, self.syncDirectory, self.password];
         NSLog(command, nil);

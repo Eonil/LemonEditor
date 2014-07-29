@@ -205,6 +205,8 @@
 		3D14AE041953D06600E7C2E4 /* LMPropertyTextVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D14AE021953D06600E7C2E4 /* LMPropertyTextVC.m */; };
 		3D14AE051953D06600E7C2E4 /* LMPropertyTextVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D14AE031953D06600E7C2E4 /* LMPropertyTextVC.xib */; };
 		3D19E42019874A6B00A50D35 /* respond.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 3D19E41F19874A6B00A50D35 /* respond.min.js */; };
+		3D19E4251987805E00A50D35 /* scp_download.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3D19E42319877F0400A50D35 /* scp_download.sh */; };
+		3D19E4261987805E00A50D35 /* scp_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3D19E42419877F2000A50D35 /* scp_upload.sh */; };
 		3D1BACC919330240004C554F /* IUText.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1BACC819330240004C554F /* IUText.m */; };
 		3D2E6B8E19640DED00AC7DE5 /* SelectionBorderLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2E6B8D19640DED00AC7DE5 /* SelectionBorderLayer.m */; };
 		3D2E6BA11965212700AC7DE5 /* helpPdf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E6BA01965212700AC7DE5 /* helpPdf.plist */; };
@@ -959,6 +961,8 @@
 		3D14AE021953D06600E7C2E4 /* LMPropertyTextVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPropertyTextVC.m; path = Editor/LMPropertyTextVC.m; sourceTree = "<group>"; };
 		3D14AE031953D06600E7C2E4 /* LMPropertyTextVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyTextVC.xib; path = Editor/LMPropertyTextVC.xib; sourceTree = "<group>"; };
 		3D19E41F19874A6B00A50D35 /* respond.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = respond.min.js; sourceTree = "<group>"; };
+		3D19E42319877F0400A50D35 /* scp_download.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = scp_download.sh; sourceTree = "<group>"; };
+		3D19E42419877F2000A50D35 /* scp_upload.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = scp_upload.sh; sourceTree = "<group>"; };
 		3D1BACC719330240004C554F /* IUText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUText.h; path = IU/IUText.h; sourceTree = "<group>"; };
 		3D1BACC819330240004C554F /* IUText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUText.m; path = IU/IUText.m; sourceTree = "<group>"; };
 		3D2E6B8C19640DED00AC7DE5 /* SelectionBorderLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionBorderLayer.h; path = Editor/SelectionBorderLayer.h; sourceTree = "<group>"; };
@@ -1784,6 +1788,18 @@
 				3D19E41F19874A6B00A50D35 /* respond.min.js */,
 			);
 			name = ie8;
+			sourceTree = "<group>";
+		};
+		3D19E422198777B600A50D35 /* script */ = {
+			isa = PBXGroup;
+			children = (
+				69BD0C86197D649600CB4815 /* sftp_upload.sh */,
+				69BD0C8A197D64CE00CB4815 /* sftp_download.sh */,
+				69BD0C88197D64AB00CB4815 /* ssh.sh */,
+				3D19E42319877F0400A50D35 /* scp_download.sh */,
+				3D19E42419877F2000A50D35 /* scp_upload.sh */,
+			);
+			name = script;
 			sourceTree = "<group>";
 		};
 		3D2E6B881963D73500AC7DE5 /* popover */ = {
@@ -2988,13 +3004,11 @@
 		69757AD218D95BB10095CBAC /* JD */ = {
 			isa = PBXGroup;
 			children = (
+				3D19E422198777B600A50D35 /* script */,
 				6983E71B18FFF54600D424B8 /* JDOutlineCellView.h */,
 				6983E71C18FFF54600D424B8 /* JDOutlineCellView.m */,
 				69757AD318D95BBC0095CBAC /* CALayer+JDExtension.h */,
 				69757AD418D95BBC0095CBAC /* CALayer+JDExtension.m */,
-				69BD0C86197D649600CB4815 /* sftp_upload.sh */,
-				69BD0C8A197D64CE00CB4815 /* sftp_download.sh */,
-				69BD0C88197D64AB00CB4815 /* ssh.sh */,
 				69757B1A18D95C980095CBAC /* NSArray+JDExtension.h */,
 				69757B1B18D95C980095CBAC /* NSArray+JDExtension.m */,
 				69757B1D18D95F1E0095CBAC /* NSDictionary+JDExtension.h */,
@@ -3453,6 +3467,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D19E4251987805E00A50D35 /* scp_download.sh in Resources */,
+				3D19E4261987805E00A50D35 /* scp_upload.sh in Resources */,
 				3DC4AAF2198224F40024170A /* iueditor.mp4 in Resources */,
 				3DA6CA86197E6580004D6587 /* MainMenu.xib in Resources */,
 				3DA6CA85197CBA00004D6587 /* iueditor.css in Resources */,
