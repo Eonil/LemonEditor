@@ -690,7 +690,7 @@
     JDCode *webFontCode = [self webfontImportSourceForEdit];
     [sourceCode replaceCodeString:@"<!--WEBFONT_Insert-->" toCode:webFontCode];
     
-    NSString *iuCSS = @"<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/css/iu.css\">";
+    NSString *iuCSS = @"<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/css/iueditor.css\">";
     [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCodeString:iuCSS];
     
     JDCode *cssCode = [self cssSource:document cssSizeArray:mqSizeArray isEdit:YES];
