@@ -42,6 +42,7 @@
 #import "LMConsoleVC.h"
 #import "LMProjectPropertyWC.h"
 
+#import "LMServerWC.h"
 
 @interface LMWC ()
 
@@ -113,6 +114,7 @@
     //sheet
     LMProjectConvertWC *pcWC;
     LMProjectPropertyWC *projectPropertyWC;
+    LMServerWC *serverWC;
     
     //log
     
@@ -136,8 +138,6 @@
         appearanceVC = [[LMAppearanceVC alloc] initWithNibName:@"LMAppearanceVC" bundle:nil];
         iuInspectorVC = [[LMIUPropertyVC alloc] initWithNibName:[LMIUPropertyVC class].className bundle:nil];
         eventVC = [[LMEventVC alloc] initWithNibName:@"LMEventVC" bundle:nil];
-        consoleVC = [[LMConsoleVC alloc] initWithNibName:@"LMConsoleVC" bundle:nil];
-
         
         //bind
         [self bind:@"IUController" toObject:stackVC withKeyPath:@"IUController" options:nil];
@@ -161,6 +161,9 @@
 
 - (void)windowDidLoad
 {
+    //consoleVC needs window to receive notification
+    consoleVC = [[LMConsoleVC alloc] initWithNibName:@"LMConsoleVC" bundle:nil window:self.window];
+
     [_leftTopV addSubviewFullFrame:stackVC.view];
     [_leftBottomV addSubviewFullFrame:fileNaviVC.view];
     [_commandV addSubviewFullFrame:commandVC.view];
@@ -249,6 +252,10 @@
     [resourceVC prepareDealloc];
     [iuInspectorVC prepareDealloc];
 //    resourceVC.manager = nil;
+}
+
+- (void)showServerVC:(id)sender{
+    
 }
 
 - (void)dealloc{
@@ -485,6 +492,17 @@
 
 - (void)windowWillClose:(NSNotification *)notification{
     [commandVC stopServer:self];
+}
+
+- (IBAction)showServerWC:(id)sender{
+    if (serverWC == nil) {
+        serverWC = [[LMServerWC alloc] initWithWindowNibName:@"LMServerWC"];
+        [serverWC setNotificationSender:self.window];
+        [serverWC setProject:_project];
+    }
+    [self.window beginSheet:serverWC.window completionHandler:^(NSModalResponse returnCode) {
+        //do nothing
+    }];
 }
 
 @end

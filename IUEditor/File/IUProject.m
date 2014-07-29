@@ -692,7 +692,8 @@
 
 - (IUServerInfo*)serverInfo{
     if (_serverInfo.localPath == nil) {
-        _serverInfo.localPath = [self directoryPath];
+        _serverInfo.localPath = [[self directoryPath] stringByDeletingLastPathComponent];
+        _serverInfo.syncItem = [self.directoryPath lastPathComponent];
     }
     return _serverInfo;
 }

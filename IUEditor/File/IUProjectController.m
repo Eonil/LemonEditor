@@ -68,11 +68,15 @@
         }
         else {
             url = [self fileURLForNewDocumentOfType:typeName];
+            NSString *fileName = [url lastPathComponent];
+            NSString *appName = [[url lastPathComponent] stringByDeletingPathExtension];
+            url = [[url URLByDeletingLastPathComponent] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@", appName, fileName]];
         }
         
         if( url ){
             [(IUProjectDocument *)document makeNewProjectWithOption:newDocumentOption URL:url];
             newDocumentOption = nil;
+            [[NSFileManager defaultManager] createDirectoryAtURL:[url URLByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:nil];
             [document saveToURL:url ofType:typeName forSaveOperation:NSSaveOperation delegate:self didSaveSelector:@selector(newDocument:didSave:contextInfo:) contextInfo:(__bridge void *)([NSNumber numberWithBool:YES])];
         }
     }

@@ -15,17 +15,14 @@
 
 @implementation LMConsoleVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil window:(NSWindow *)window
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self loadView];
+        NSAssert(window, @"Should have window");
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addText:) name:IUNotificationConsoleLog object:window];
     }
     return self;
-}
-
-- (void)awakeFromNib{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addText:) name:IUNotificationConsoleLog object:self.view.window];
 }
 
 - (void)addText:(NSNotification*)noti{
@@ -39,6 +36,6 @@
 }
 
 - (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationConsoleLog object:self.view.window];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

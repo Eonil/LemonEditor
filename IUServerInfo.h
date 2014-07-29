@@ -16,7 +16,7 @@
 @property NSString *syncPassword;
 @property NSString *remotePath;
 @property NSString *localPath;
-@property NSString *syncItems;
+@property NSString *syncItem;
 
 
 @property BOOL isServerNeedRestart;

@@ -9,5 +9,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface LMConsoleVC : NSViewController
-
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil window:(NSWindow*)window;
 @end

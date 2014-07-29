@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -157,10 +157,16 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Project" id="lXh-Vg-hj8">
                         <items>
-                            <menuItem title="Convert As..." id="d3C-pD-zXv">
+                            <menuItem title="Server Management" id="d3C-pD-zXv">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="convertProject:" target="-1" id="ex9-ra-VYF"/>
+                                    <action selector="showServerWC:" target="-1" id="wXw-uj-Uv9"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Convert As..." id="JHk-ME-u7H">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="convertProject:" target="-1" id="Dn8-O1-sDT"/>
                                 </connections>
                             </menuItem>
                         </items>

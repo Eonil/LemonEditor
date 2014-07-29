@@ -17,9 +17,6 @@
 @property (weak, nonatomic) IUSheetController      *docController;
 - (IBAction)toggleRecording:(id)sender;
 - (IBAction)stopServer:(id)sender;
-- (IBAction)upload:(id)sender;
-- (IBAction)download:(id)sender;
-- (IBAction)serverRestart:(id)sender;
 
 - (void)prepareDealloc;
 @end

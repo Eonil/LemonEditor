@@ -28,10 +28,6 @@
 
 }
 
-- (IUServerInfo*)serverInfo{
-    return _project.serverInfo;
-}
-
 - (void)windowDidLoad
 {
     [super windowDidLoad];
