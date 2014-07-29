@@ -174,17 +174,18 @@
         return 0;
     }
 }
-- (void)setMaxWidth{
+- (BOOL)setMaxWidth{
     InnerSizeBox *maxBox = (InnerSizeBox *)boxManageView.subviews[0];
     if(maxBox){
         if(maxBox.frameWidth > boxManageView.frame.size.width){
             [boxManageView setWidth:maxBox.frameWidth];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQMaxChanged object:self userInfo:@{IUNotificationMQSize:@(selectedWidth), IUNotificationMQMaxSize:@(maxBox.frameWidth)}];
-
+            return YES;
             
         }
     }
+    return NO;
 }
 
 - (void)addFrame:(NSInteger)width{
@@ -219,8 +220,12 @@
         NSView *frontView = boxManageView.subviews[0];
         [boxManageView addSubviewLeftInFrameWithFrame:newBox positioned:NSWindowBelow relativeTo:frontView];
     }
-    [self setMaxWidth];
+    BOOL isMaxChanged = [self setMaxWidth];
+    if(isMaxChanged){
+        [self selectBox:newBox];
+    }
     [self setColorBox:newBox];
+    
 
 }
 - (void)removeFrame:(NSInteger)width{
