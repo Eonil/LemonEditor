@@ -174,18 +174,16 @@
         return 0;
     }
 }
-- (BOOL)setMaxWidth{
+- (void)setMaxWidth:(BOOL)max{
     InnerSizeBox *maxBox = (InnerSizeBox *)boxManageView.subviews[0];
     if(maxBox){
         if(maxBox.frameWidth > boxManageView.frame.size.width){
             [boxManageView setWidth:maxBox.frameWidth];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQMaxChanged object:self userInfo:@{IUNotificationMQSize:@(selectedWidth), IUNotificationMQMaxSize:@(maxBox.frameWidth)}];
-            return YES;
-            
         }
     }
-    return NO;
+    if(max){
+        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQMaxChanged object:self userInfo:@{IUNotificationMQSize:@(selectedWidth), IUNotificationMQMaxSize:@(maxBox.frameWidth)}];
+    }
 }
 
 - (void)addFrame:(NSInteger)width{
@@ -203,6 +201,7 @@
     InnerSizeBox *newBox = [[InnerSizeBox alloc] initWithFrame:boxFrame width:width];
     newBox.boxDelegate = self;
     NSInteger index = [[self sortedArray] indexOfObject:widthNumber];
+    BOOL isMaxChanged = NO;
     
     if(index > 0){
         //view가 중간에 들어갈때
@@ -217,10 +216,12 @@
     }
     else{
         //maximumsize임
+        isMaxChanged = YES;
         NSView *frontView = boxManageView.subviews[0];
         [boxManageView addSubviewLeftInFrameWithFrame:newBox positioned:NSWindowBelow relativeTo:frontView];
     }
-    BOOL isMaxChanged = [self setMaxWidth];
+    
+    [self setMaxWidth:isMaxChanged];
     if(isMaxChanged){
         [self selectBox:newBox];
     }
@@ -240,11 +241,13 @@
     NSNumber *widthNumber = [NSNumber numberWithInteger:width];
     NSInteger index = [[self sortedArray] indexOfObject:widthNumber];
     
+    BOOL isMaxChanged = NO;
     InnerSizeBox *removeView = boxManageView.subviews[index];
     if(index==0){
         //it is largest box-select smallerbox
         InnerSizeBox *nextBox = boxManageView.subviews[index+1];
         [nextBox select];
+        isMaxChanged = YES;
     }
     else if(selectIndex == index){
         //select next larger box
@@ -258,7 +261,7 @@
     [_sizeArray removeObject:widthNumber];
     
     //set maxWidth in case of removing maxWidth 
-    [self setMaxWidth];
+    [self setMaxWidth:isMaxChanged];
     
     //notification
      [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQRemoved object:self userInfo:@{IUNotificationMQSize:@(width)}];
