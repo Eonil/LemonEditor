@@ -197,7 +197,6 @@
             [code addCodeLine:[fontController headerForFontName:fontName]];
         }
     }
-    
     return code;
 }
 

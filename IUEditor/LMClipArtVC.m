@@ -41,10 +41,8 @@
 }
 
 - (void)initClipArtInfo{
-    //initialize clipArts array
-    //self.clipArts = [NSMutableArray array];
     
-    //get directory path of clipArts and plist file
+    //get the path of plist file
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"clipArtList" ofType:@"plist"];
     NSDictionary *clipArtDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 
@@ -67,20 +65,14 @@
 
 - (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard{
     
-    //get index number of selected item
-    //NSUInteger index = [indexes firstIndex];
-    
     //get copy from selected item
     if([self.clipArtArrayController selectedObjects].count > 1 ){
         return NO;
     }
     ClipArt *copiedClip = [[self.clipArtArrayController selectedObjects] objectAtIndex:0];
+    NSString * temp = [@"clipart" stringByAppendingPathComponent:copiedClip.title];
+
     
-    //declare a pasteboard type
-//    [pasteboard declareTypes:@[@"clipTag", @"clipTitle"] owner:nil];
-    
-    //write the selected item's title string to the pasteboard
-//    [pasteboard setString:copiedClip.tag forType:@"clipTag"];
     [pasteboard setString:copiedClip.title forType:kUTTypeIUImageResource];
     
     return YES;
@@ -94,7 +86,6 @@
     
     ClipArt *copiedClip = [[self.clipArtArrayController selectedObjects] objectAtIndex:0];
     return copiedClip.image;
-    //return node.image;
 }
 
 
