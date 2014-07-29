@@ -23,7 +23,7 @@
         NSString *src = [[NSBundle mainBundle] pathForResource:@"scp_upload" ofType:@"sh"];
         util = [[JDShellUtil alloc] init];
         NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ %@", src, self.localDirectory, self.user, self.host, self.remoteDirectory, self.syncDirectory, self.password];
-        NSLog(command, nil);
+        JDTraceLog(command, nil);
         [util execute:command delegate:self];
     }
     else {
@@ -43,7 +43,7 @@
         NSString *src = [[NSBundle mainBundle] pathForResource:@"scp_download" ofType:@"sh"];
         util = [[JDShellUtil alloc] init];
         NSString *command = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@ %@", src, self.localDirectory, self.user, self.host, self.remoteDirectory, self.syncDirectory, self.password];
-        NSLog(command, nil);
+        JDTraceLog(command, nil);
         [util execute:command delegate:self];
     }
     else {

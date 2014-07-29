@@ -34,6 +34,10 @@
 -(void)awakeFromNib{
     [_collectionListV bind:NSContentBinding toObject:_resourceArrayController withKeyPath:@"arrangedObjects" options:nil];
     [_collectionIconV bind:NSContentBinding toObject:_resourceArrayController withKeyPath:@"arrangedObjects" options:nil];
+}
+
+- (void)setManager:(IUResourceManager *)manager{
+    _manager = manager;
     [_resourceArrayController bind:NSContentArrayBinding toObject:self withKeyPath:@"manager.imageAndVideoFiles" options:nil];
 }
 

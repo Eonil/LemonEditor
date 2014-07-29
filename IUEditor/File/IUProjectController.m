@@ -114,6 +114,7 @@
     if(urlOrNil){
         [super reopenDocumentForURL:urlOrNil withContentsOfURL:contentsURL display:YES completionHandler:completionHandler];
     }
+    
 }
 
 
