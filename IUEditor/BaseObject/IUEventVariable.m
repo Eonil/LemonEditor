@@ -58,7 +58,16 @@
         if(variable){
             NSMutableDictionary *oneDict = [self eventCollectionDictOfVariable:variable];
             [oneDict setObject:variable forKey:IUEventTagVariable];
-            [oneDict setObject:obj.htmlID forKey:IUEventTagIUID];
+            if([oneDict objectForKey:IUEventTagIUID]){
+                NSMutableArray *ids = [[oneDict objectForKey:IUEventTagIUID] mutableCopy];
+                if([ids containsString:obj.htmlID] == NO){
+                    [ids addObject:obj.htmlID];
+                    [oneDict setObject:ids forKey:IUEventTagIUID];
+                }
+            }
+            else{
+                [oneDict setObject:@[obj.htmlID] forKey:IUEventTagIUID];
+            }
             [oneDict setObject:@(obj.event.initialValue) forKey:IUEventTagInitialValue];
             [oneDict setObject:@(obj.event.maxValue) forKey:IUEventTagMaxValue];
             [oneDict setObject:@(obj.event.actionType) forKey:IUEventTagActionType];
@@ -132,24 +141,29 @@
             
             value = [oneDict objectForKey:IUEventTagIUID];
             if(value){
-                [eventString appendFormat:@"/* [IU:%@] Event Declaration */\n", value];
-                [eventString appendFormat:@"$(\"#%@\").", value];
-                
                 IUEventActionType type = [[oneDict objectForKey:IUEventTagActionType] intValue];
-                if(type == IUEventActionTypeClick){
-                    [eventString appendString:@"click(function(){"];
+                
+                NSArray *bindingIUArray = value;
+                for(NSString *bindingIUID in bindingIUArray){
+                    
+                    [eventString appendFormat:@"/* [IU:%@] Event Declaration */\n", bindingIUID];
+                    [eventString appendFormat:@"$(\"#%@\").", bindingIUID];
+                    
+                    if(type == IUEventActionTypeClick){
+                        [eventString appendString:@"click(function(){"];
+                    }
+                    else if(type == IUEventActionTypeHover){
+                        [eventString appendString:@"hover(function(){"];
+                    }
+                    else{
+                        JDFatalLog(@"no action type");
+                    }
+                    [eventString appendNewline];
+                    [eventString appendTabAndString:[NSString stringWithFormat:@"%@++;",variable]];
+                    [eventString appendNewline];
+                    [eventString appendTabAndString:[NSString stringWithFormat:@"if( %@ > MAX_IU_%@ ){ %@ = INIT_IU_%@ }\n",variable, variable, variable, variable]];
+                    [eventString appendNewline];
                 }
-                else if(type == IUEventActionTypeHover){
-                    [eventString appendString:@"hover(function(){"];
-                }
-                else{
-                    JDFatalLog(@"no action type");
-                }
-                [eventString appendNewline];
-                [eventString appendTabAndString:[NSString stringWithFormat:@"%@++;",variable]];
-                [eventString appendNewline];
-                [eventString appendTabAndString:[NSString stringWithFormat:@"if( %@ > MAX_IU_%@ ){ %@ = INIT_IU_%@ }\n",variable, variable, variable, variable]];
-                [eventString appendNewline];
                 
                 
 #pragma mark make event innerJS
