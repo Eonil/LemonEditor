@@ -70,10 +70,9 @@
         return NO;
     }
     ClipArt *copiedClip = [[self.clipArtArrayController selectedObjects] objectAtIndex:0];
-    NSString * temp = [@"clipart" stringByAppendingPathComponent:copiedClip.title];
+    NSString * titleWithDir = [@"clipArt" stringByAppendingPathComponent:copiedClip.title];
 
-    
-    [pasteboard setString:copiedClip.title forType:kUTTypeIUImageResource];
+    [pasteboard setString:titleWithDir forType:kUTTypeIUImageResource];
     
     return YES;
 }

@@ -387,11 +387,11 @@
         [initializeJSSource addNewLine];
     }
     //copy clipart to build directory
-    NSString *copyPath = [buildResourcePath stringByAppendingPathComponent:@"clipart"];
+    NSString *copyPath = [buildResourcePath stringByAppendingPathComponent:@"clipArt"];
     [[NSFileManager defaultManager] createDirectoryAtPath:copyPath withIntermediateDirectories:YES attributes:nil error:error];
 
     for(NSString *imageName in clipArtArray){
-        [[JDFileUtil util] copyBundleItem:imageName toDirectory:copyPath];
+        [[JDFileUtil util] copyBundleItem:[imageName lastPathComponent] toDirectory:copyPath];
     }
     
     //make initialize javascript file

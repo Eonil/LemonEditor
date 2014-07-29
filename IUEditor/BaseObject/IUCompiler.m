@@ -204,12 +204,16 @@
     NSMutableArray *array = [NSMutableArray array];
     for (IUBox *box in document.allChildren){
         NSString *imageName = box.imageName;
+        
         if(imageName){
-            NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"clipArtList" ofType:@"plist"];
-            NSDictionary *clipArtDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-            
-            if([clipArtDict objectForKey:imageName] != nil){
-                [array addObject:imageName];
+            if([[imageName pathComponents][0] isEqualToString:@"clipArt"]){
+                NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"clipArtList" ofType:@"plist"];
+                NSDictionary *clipArtDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+                
+                //[[imageName componentsSeparatedByString:@"/"] objectAtIndex:1]]
+                if([clipArtDict objectForKey:[imageName lastPathComponent]] != nil){
+                    [array addObject:imageName];
+                }
             }
         }
         
@@ -246,7 +250,23 @@
     if ([imageName isHTTPURL]) {
         return imageName;
     }
+    //clipart
+    //path : clipart/arrow_right.png
+    else if([[imageName pathComponents][0] isEqualToString:@"clipArt"]){
+        if(isEdit){
+            imgSrc = [[NSBundle mainBundle] pathForImageResource:[imageName lastPathComponent]];
+        }
+        else{
+            if(_rule == IUCompileRuleDjango){
+                imgSrc = [@"/resource/" stringByAppendingString:imageName];
+            }
+            else{
+                imgSrc = [@"resource/" stringByAppendingString:imageName];
+            }
+        }
+    }
     else {
+        
         IUResourceFile *file = [self.resourceManager resourceFileWithName:imageName];
         if(file){
             if(_rule == IUCompileRuleDjango && isEdit == NO){
@@ -256,19 +276,7 @@
                 imgSrc = [file relativePath];
             }
         }
-        else{
-            if(isEdit){
-                imgSrc = [[NSBundle mainBundle] pathForImageResource:imageName];
-            }
-            else{
-                if(_rule == IUCompileRuleDjango){
-                    imgSrc = [@"/resource/clipart/" stringByAppendingString:imageName];
-                }
-                else{
-                    imgSrc = [@"resource/clipart/" stringByAppendingString:imageName];
-                }
-            }
-        }
+        
     }
     return imgSrc;
 }
@@ -1012,7 +1020,7 @@
         }else{
             //image tag attributes
             if(iuImage.imageName){
-                NSString *imgSrc = [self imagePathWithImageName:iuImage.imageName isEdit:NO];
+                NSString *imgSrc = [self imagePathWithImageName:iuImage.imageName isEdit:isEdit];
                 [retString appendFormat:@" src='%@'", imgSrc];
             }
             if(iuImage.altText){
