@@ -210,7 +210,6 @@
                 NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"clipArtList" ofType:@"plist"];
                 NSDictionary *clipArtDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
                 
-                //[[imageName componentsSeparatedByString:@"/"] objectAtIndex:1]]
                 if([clipArtDict objectForKey:[imageName lastPathComponent]] != nil){
                     [array addObject:imageName];
                 }

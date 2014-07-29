@@ -193,7 +193,8 @@
         NSString *path = file.absolutePath;
 
         if (file == nil) {
-            path = [[NSBundle mainBundle] pathForImageResource:filename];
+            
+            path = [[NSBundle mainBundle] pathForImageResource:[filename lastPathComponent]];
         }
         
         NSArray * imageReps = [NSBitmapImageRep imageRepsWithContentsOfFile:path];
