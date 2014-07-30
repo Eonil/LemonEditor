@@ -23,11 +23,13 @@
 @property (weak) IBOutlet NSSegmentedControl *fontStyleB;
 @property (weak) IBOutlet NSSegmentedControl *textAlignB;
 @property (weak) IBOutlet NSComboBox *lineHeightB;
+@property (weak) IBOutlet NSComboBox *letterSpacingComboBox;
 
 @property (weak) LMFontController *fontController;
 @property (strong) IBOutlet NSDictionaryController *fontListDC;
 
 @property NSArray *fontDefaultSizes;
+@property NSArray *fontDefaultLetterSpacing;
 @end
 
 @implementation LMPropertyFontVC{
@@ -44,6 +46,7 @@
         currentFontSize = 12;
         self.fontDefaultSizes = @[@(6), @(8), @(9), @(10), @(11), @(12),
                                   @(14), @(18), @(21), @(24), @(30), @(36), @(48), @(60), @(72)];
+        self.fontDefaultLetterSpacing = @[@(0), @(-0.1), @(-0.2), @(0.1), @(0.2), @(0.5), @(1.0)];
         [self loadView];
     }
     return self;
@@ -81,6 +84,8 @@
     _fontSizeComboBox.delegate = self;
     _fontSizeComboBox.dataSource = self;
     _lineHeightB.delegate = self;
+    _letterSpacingComboBox.delegate = self;
+    _letterSpacingComboBox.dataSource = self;
     
 }
 
@@ -249,7 +254,7 @@
             [self setValue:@(currentFontSize) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontSize]];
         }
         
-        if([self valueForTag:IUCSSTagFontSize] == NSMultipleValuesMarker){
+        else if([self valueForTag:IUCSSTagFontSize] == NSMultipleValuesMarker){
             NSString *placeholder = [NSString stringWithValueMarker:NSMultipleValuesMarker];
             [[_fontSizeComboBox cell] setPlaceholderString:placeholder];
             [_fontSizeComboBox setStringValue:@""];
@@ -261,6 +266,19 @@
             [_fontSizeComboBox setStringValue:[NSString stringWithFormat:@"%ld", iuFontSize]];
         }
         
+        //set LetterSpacing
+        if([self valueForTag:IUCSSTagTextLetterSpacing] == NSMultipleValuesMarker){
+            NSString *placeholder = [NSString stringWithValueMarker:NSMultipleValuesMarker];
+            [[_letterSpacingComboBox cell] setPlaceholderString:placeholder];
+            [_letterSpacingComboBox setStringValue:@""];
+            
+        }
+        else{
+            CGFloat letterSpacing = [[self valueForTag:IUCSSTagTextLetterSpacing] floatValue];
+            [[_letterSpacingComboBox cell] setPlaceholderString:@""];
+            [_letterSpacingComboBox setStringValue:[NSString stringWithFormat:@"%.1f", letterSpacing]];
+        }
+        
         //enable font type box
         [_fontB setEnabled:YES];
         [_fontSizeComboBox setEnabled:YES];
@@ -269,6 +287,8 @@
         [_lineHeightB setEnabled:YES];
         [_lineHeightB setEditable:YES];
         [_textAlignB setEnabled:YES];
+        [_letterSpacingComboBox setEditable:YES];
+        [_letterSpacingComboBox setEnabled:YES];
 
     }
     else{
@@ -281,6 +301,9 @@
         [_lineHeightB setEditable:NO];
         [_textAlignB setEnabled:NO];
         [_fontStyleB setEnabled:NO];
+        [_letterSpacingComboBox setEditable:NO];
+        [_letterSpacingComboBox setEnabled:NO];
+
     }
     
 }
@@ -306,6 +329,11 @@
         NSInteger size = [[_fontDefaultSizes objectAtIndex:index] integerValue];
         [self updateFontSize:size];
     }
+    else if([currentComboBox isEqualTo:_letterSpacingComboBox]){
+        NSInteger index = [_letterSpacingComboBox indexOfSelectedItem];
+        CGFloat spacing = [[_fontDefaultLetterSpacing objectAtIndex:index] floatValue];
+        [self updateLetterSpacing:spacing];
+    }
     else if([_lineHeightB isEqualTo:_lineHeightB]){
         [self updateLineHeight:[_lineHeightB objectValueOfSelectedItem]];
     }
@@ -316,9 +344,14 @@
     [self setValue:currentFontName forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontName]];
 }
 
-- (void)updateFontSize:(NSInteger)fontSize;{
+- (void)updateFontSize:(NSInteger)fontSize{
     currentFontSize = fontSize;
     [self setValue:@(currentFontSize) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontSize]];
+}
+
+- (void)updateLetterSpacing:(CGFloat)sapcing{
+    [self setValue:@(sapcing) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagTextLetterSpacing]];
+
 }
 
 - (void)updateLineHeight:(NSString *)lineHeightStr{
@@ -347,6 +380,10 @@
         }
         [self updateFontSize:fontSize];
     }
+    else if([control isEqualTo:_letterSpacingComboBox]){
+        CGFloat letterSpacing = [[fieldEditor string] floatValue];
+        [self updateLetterSpacing:letterSpacing];
+    }
     else if([control isEqualTo:_lineHeightB]){
         [self updateLineHeight:[fieldEditor string]];
     }
@@ -357,7 +394,7 @@
 
 - (BOOL)control:(NSControl *)control didFailToFormatString:(NSString *)string errorDescription:(NSString *)error{
 
-    if([control isEqualTo:_fontSizeComboBox]){
+    if([control isEqualTo:_fontSizeComboBox] || [control isEqualTo:_letterSpacingComboBox]){
         NSString *digit = [string stringByTrimmingCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]];
         if(digit){
             [control setStringValue:digit];
@@ -392,10 +429,24 @@
 #pragma mark combobox dataSource
 
 - (NSInteger)numberOfItemsInComboBox:(NSComboBox *)aComboBox{
-    return _fontDefaultSizes.count;
+    if([aComboBox isEqualTo:_fontSizeComboBox]){
+        return _fontDefaultSizes.count;
+    }
+    else if([aComboBox isEqualTo:_letterSpacingComboBox]){
+        return _fontDefaultLetterSpacing.count;
+    }
+    
+    return 0;
 }
 - (id)comboBox:(NSComboBox *)categoryCombo objectValueForItemAtIndex:(NSInteger)row {
-    return [_fontDefaultSizes objectAtIndex:row];
+    if([categoryCombo isEqualTo:_fontSizeComboBox]){
+        return [_fontDefaultSizes objectAtIndex:row];
+    }
+    else if([categoryCombo isEqualTo:_letterSpacingComboBox]){
+        return [_fontDefaultLetterSpacing objectAtIndex:row];
+    }
+
+    return nil;
 }
 
 @end

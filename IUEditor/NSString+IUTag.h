@@ -127,6 +127,7 @@ typedef enum{
 }IUAlign;
 
 static NSString * IUCSSTagLineHeight = @"lineHeight";
+static NSString * IUCSSTagTextLetterSpacing = @"letterSpacing";
 static NSString * IUCSSTagEllipsis = @"ellipsis";
 
 

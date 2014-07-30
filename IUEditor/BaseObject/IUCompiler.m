@@ -1832,6 +1832,7 @@
         }
         
         if(
+#pragma mark - Text CSS
 #if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
            [obj isKindOfClass:[IUText class]]||
 #else
@@ -1851,6 +1852,11 @@
             if(value){
                 NSColor *color=cssTagDict[IUCSSTagFontColor];
                 [dict putTag:@"color" color:color ignoreClearColor:YES];
+            }
+            
+            value = cssTagDict[IUCSSTagTextLetterSpacing];
+            if(value){
+                [dict putTag:@"letter-spacing" floatValue:[value floatValue] ignoreZero:YES unit:IUCSSUnitPixel];
             }
             
             value = cssTagDict[IUCSSTagLineHeight];
