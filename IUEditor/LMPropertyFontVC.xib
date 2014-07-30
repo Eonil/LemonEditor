@@ -86,6 +86,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="276" height="105"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fux-uA-5kK">
+                                <rect key="frame" x="3" y="13" width="75" height="13"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="13" id="GBN-bU-Hdk"/>
+                                    <constraint firstAttribute="width" constant="71" id="URz-23-5Qm"/>
+                                </constraints>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Letter spacing" id="cWG-tm-H0K">
+                                    <font key="font" metaFont="system" size="10"/>
+                                    <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cw0-rI-yGQ">
+                                <rect key="frame" x="77" y="7" width="99" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="7GB-fh-lxH"/>
+                                    <constraint firstAttribute="width" constant="96" id="S1G-AZ-kZJ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="96" id="cCp-CM-jVp"/>
+                                </constraints>
+                                <comboBoxCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="fM5-lO-11C">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <objectValues>
+                                        <string>Item 1</string>
+                                        <string>Item 2</string>
+                                        <string>Item 3</string>
+                                    </objectValues>
+                                </comboBoxCell>
+                            </comboBox>
                             <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="EF9-cy-hVF">
                                 <rect key="frame" x="77" y="86" width="182" height="18"/>
                                 <constraints>
@@ -211,6 +241,7 @@
                     <constraints>
                         <constraint firstItem="FLi-Cj-znY" firstAttribute="top" secondItem="ZNa-jN-U2r" secondAttribute="bottom" constant="8" id="4Eo-Ur-HJh"/>
                         <constraint firstItem="ZNa-jN-U2r" firstAttribute="leading" secondItem="E1V-BP-x9X" secondAttribute="trailing" constant="2" id="6R4-yU-DJ2"/>
+                        <constraint firstItem="Fux-uA-5kK" firstAttribute="leading" secondItem="wwI-vY-XSo" secondAttribute="leading" constant="5" id="CNt-cy-GpK"/>
                         <constraint firstItem="ijX-xs-4Bj" firstAttribute="leading" secondItem="wwI-vY-XSo" secondAttribute="leading" constant="6" id="Ef6-Ap-ais"/>
                         <constraint firstItem="EF9-cy-hVF" firstAttribute="leading" secondItem="ijX-xs-4Bj" secondAttribute="trailing" constant="10" id="GYL-Qs-e9b"/>
                         <constraint firstItem="ijX-xs-4Bj" firstAttribute="top" secondItem="wwI-vY-XSo" secondAttribute="top" constant="4" id="HMS-Jf-osI"/>
@@ -218,45 +249,21 @@
                         <constraint firstItem="uve-V4-Xm0" firstAttribute="top" secondItem="T6Q-UK-fkM" secondAttribute="bottom" constant="8" id="Krj-S2-jJa"/>
                         <constraint firstItem="uve-V4-Xm0" firstAttribute="leading" secondItem="FLi-Cj-znY" secondAttribute="trailing" constant="8" id="SK1-sP-1qB"/>
                         <constraint firstItem="aa0-py-Hfu" firstAttribute="top" secondItem="E1V-BP-x9X" secondAttribute="bottom" constant="12" id="V6H-Fc-qZM"/>
+                        <constraint firstAttribute="height" constant="105" id="V8q-Wy-wKh"/>
                         <constraint firstItem="T6Q-UK-fkM" firstAttribute="top" secondItem="EF9-cy-hVF" secondAttribute="bottom" constant="7" id="WUr-VV-eQb"/>
                         <constraint firstItem="E1V-BP-x9X" firstAttribute="top" secondItem="ijX-xs-4Bj" secondAttribute="bottom" constant="10" id="bqM-rp-SK3"/>
                         <constraint firstItem="ZNa-jN-U2r" firstAttribute="top" secondItem="EF9-cy-hVF" secondAttribute="bottom" constant="7" id="mPQ-uS-YMD"/>
                         <constraint firstItem="aa0-py-Hfu" firstAttribute="leading" secondItem="wwI-vY-XSo" secondAttribute="leading" constant="6" id="plw-gN-N3Q"/>
                         <constraint firstItem="FLi-Cj-znY" firstAttribute="leading" secondItem="aa0-py-Hfu" secondAttribute="trailing" constant="2" id="s6N-G6-653"/>
+                        <constraint firstItem="cw0-rI-yGQ" firstAttribute="leading" secondItem="Fux-uA-5kK" secondAttribute="trailing" constant="1" id="t6u-Vy-XE4"/>
+                        <constraint firstItem="cw0-rI-yGQ" firstAttribute="top" secondItem="FLi-Cj-znY" secondAttribute="bottom" constant="7" id="u2O-JD-4hZ"/>
                         <constraint firstItem="E1V-BP-x9X" firstAttribute="leading" secondItem="ijX-xs-4Bj" secondAttribute="leading" id="wSh-Id-awT"/>
                         <constraint firstItem="EF9-cy-hVF" firstAttribute="top" secondItem="wwI-vY-XSo" secondAttribute="top" constant="1" id="wtR-Uj-Wld"/>
+                        <constraint firstItem="Fux-uA-5kK" firstAttribute="top" secondItem="aa0-py-Hfu" secondAttribute="bottom" constant="13" id="zgL-r2-dsj"/>
                     </constraints>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fux-uA-5kK">
-                    <rect key="frame" x="3" y="13" width="73" height="13"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="13" id="GBN-bU-Hdk"/>
-                        <constraint firstAttribute="width" constant="69" id="fgw-Cw-ftX"/>
-                    </constraints>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Letter spacing" id="cWG-tm-H0K">
-                        <font key="font" metaFont="system" size="10"/>
-                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cw0-rI-yGQ">
-                    <rect key="frame" x="77" y="9" width="99" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="96" id="S1G-AZ-kZJ"/>
-                    </constraints>
-                    <comboBoxCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="fM5-lO-11C">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        <objectValues>
-                            <string>Item 1</string>
-                            <string>Item 2</string>
-                            <string>Item 3</string>
-                        </objectValues>
-                    </comboBoxCell>
-                </comboBox>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="8Lc-u6-K0I" secondAttribute="trailing" id="1lL-Dq-KmH"/>
@@ -264,12 +271,8 @@
                 <constraint firstItem="8Lc-u6-K0I" firstAttribute="leading" secondItem="xNk-L9-0dh" secondAttribute="leading" id="81V-jH-y74"/>
                 <constraint firstItem="8Lc-u6-K0I" firstAttribute="top" secondItem="xNk-L9-0dh" secondAttribute="top" id="JcH-30-rTG"/>
                 <constraint firstItem="wwI-vY-XSo" firstAttribute="leading" secondItem="xNk-L9-0dh" secondAttribute="leading" id="W5E-mB-VFy"/>
-                <constraint firstItem="cw0-rI-yGQ" firstAttribute="leading" secondItem="Fux-uA-5kK" secondAttribute="trailing" constant="3" id="Yzn-uz-vBX"/>
                 <constraint firstAttribute="bottom" secondItem="wwI-vY-XSo" secondAttribute="bottom" id="Zjq-u5-KdC"/>
-                <constraint firstItem="Fux-uA-5kK" firstAttribute="baseline" secondItem="cw0-rI-yGQ" secondAttribute="baseline" id="bfk-v4-P14"/>
                 <constraint firstAttribute="trailing" secondItem="wwI-vY-XSo" secondAttribute="trailing" id="cpJ-Ui-a4B"/>
-                <constraint firstItem="Fux-uA-5kK" firstAttribute="leading" secondItem="xNk-L9-0dh" secondAttribute="leading" constant="5" id="gfb-fF-KaY"/>
-                <constraint firstItem="cw0-rI-yGQ" firstAttribute="top" secondItem="8Lc-u6-K0I" secondAttribute="bottom" constant="75" id="u6q-th-QL9"/>
             </constraints>
             <connections>
                 <outlet property="contentV" destination="wwI-vY-XSo" id="ykd-0c-lQf"/>
