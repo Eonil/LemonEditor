@@ -28,6 +28,19 @@
 		<key>isLoadable</key>
 		<false/>
 	</dict>
+	<key>HelveticaNeue-Light</key>
+	<dict>
+		<key>name</key>
+		<string>HelveticaNeue-Light</string>
+		<key>link</key>
+		<string></string>
+		<key>css</key>
+		<string>HelveticaNeue-Light</string>
+		<key>editable</key>
+		<false/>
+		<key>isLoadable</key>
+		<false/>
+	</dict>
 	<key>Roboto</key>
 	<dict>
 		<key>name</key>

@@ -37,7 +37,7 @@ static LMFontController *gFontController = nil;
         [self initializeFontList];
     }
     else{
-        _fontDict = [userFontDict mutableCopy];
+        [_fontDict addEntriesFromDictionary:[userFontDict mutableCopy]];
     }
 }
 
