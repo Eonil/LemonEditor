@@ -232,6 +232,11 @@
     [self.project.identifierManager unregisterIUs:@[node]];
     [_documentController setSelectedObject:[[parent childrenFiles] firstObject]];
     [_documentController rearrangeObjects];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:
+     @{IUNotificationStructureChangeType: IUNotificationStructureChangeRemoving,
+       IUNotificationStructureChangedIU: node}];
+
 }
 
 
