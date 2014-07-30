@@ -60,7 +60,6 @@
     
     
 #pragma mark bottom right tools
-    [_borderBtn bind:@"state" toObject:[NSUserDefaults standardUserDefaults] withKeyPath:@"showBorder" options:nil];
     [self addObserver:self forKeyPath:@"sheet.ghostImageName" options:0 context:nil];
     _ghostImageComboBox.delegate = self;
     
@@ -71,8 +70,6 @@
         [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"showRightInspector"];
     }
     
-    [_leftInspectorBtn bind:@"state" toObject:[NSUserDefaults standardUserDefaults] withKeyPath:@"showLeftInspector" options:IUBindingDictNotRaisesApplicable];
-    [_rightInspectorBtn bind:@"state" toObject:[NSUserDefaults standardUserDefaults]  withKeyPath:@"showRightInspector" options:IUBindingDictNotRaisesApplicable];
 }
 
 -(void) dealloc{

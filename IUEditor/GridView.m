@@ -77,6 +77,10 @@
     return self;
 }
 
+- (void)dealloc{
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"showBorder"];
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"showGhost"];
+}
 
 - (BOOL)isFlipped{
     return YES;
