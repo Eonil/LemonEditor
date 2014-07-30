@@ -17,8 +17,10 @@
 
 @property (weak)  IUSheet    *sheet; //set by lmwc
 @property (strong) IBOutlet IUController *IUController;
+@property (weak) id notificationSender;
 
 - (IBAction)copy:(id)sender;
 - (IBAction)paste:(id)sender;
+- (void)connectWithEditor;
 
 @end

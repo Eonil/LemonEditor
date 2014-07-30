@@ -219,6 +219,9 @@
 #else
     [[_serverView mainFrame] loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://server.iueditor.org/log.html"]]];
 #endif
+    
+    [stackVC setNotificationSender:_project];
+    [stackVC connectWithEditor];
 }
 
 
@@ -254,9 +257,6 @@
 //    resourceVC.manager = nil;
 }
 
-- (void)showServerVC:(id)sender{
-    
-}
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationDoubleClickCanvas object:self.window];

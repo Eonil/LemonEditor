@@ -64,8 +64,6 @@
     if(self){
         
         [self loadView];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(structureChanged:) name:IUNotificationStructureDidChange object:self.view.window];
 
         /*
         * warning - racing condition : 가끔죽음.
@@ -74,7 +72,7 @@
             if (dealloced == NO) {
                 IUBox *deepBox = [_IUController firstDeepestBox];
                 if (dealloced == NO) {
-                    [_IUController setSelectedObject:deepBox];
+//                    [_IUController setSelectedObject:deepBox];
                 }
             }
         });
@@ -87,8 +85,14 @@
 -(void)awakeFromNib{
     _outlineV.delegate = self;
     [_outlineV registerForDraggedTypes:@[@"stackVC", (id)kUTTypeIUType]];
-        
 }
+
+- (void)connectWithEditor{
+ //   self.view.window;
+    NSAssert(_notificationSender, @"shoud have notificationSender");
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(structureChanged:) name:IUNotificationStructureDidChange object:_notificationSender];
+}
+
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
