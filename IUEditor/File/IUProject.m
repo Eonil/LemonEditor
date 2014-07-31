@@ -149,6 +149,10 @@
     
     _serverInfo = [[IUServerInfo alloc] init];
     _serverInfo.localPath = [self path];
+    
+    // create build directory
+    [[NSFileManager defaultManager] createDirectoryAtPath:self.absoluteBuildPath withIntermediateDirectories:YES attributes:nil error:nil];
+
     return self;
 }
 
@@ -214,6 +218,9 @@
     
     //    ReturnNilIfFalse([self save]);
     _serverInfo = [[IUServerInfo alloc] init];
+    
+    // create build directory
+    [[NSFileManager defaultManager] createDirectoryAtPath:self.absoluteBuildPath withIntermediateDirectories:YES attributes:nil error:nil];
     return self;
 }
 
@@ -319,6 +326,10 @@
     return _buildPath;
 }
 
+- (NSString*)absoluteBuildPath{
+    return [[self directoryPath] stringByAppendingPathComponent:_buildPath];
+}
+
 - (NSString*)buildResourcePath{
     return _buildResourcePath;
 }
@@ -335,20 +346,20 @@
 }
 
 - (BOOL)build:(NSError**)error{
+    /*
+     Note :
+     Do not delete build path. Instead, overwrite files.
+     If needed, remove all files (except hidden file started with '.'), due to issus of git, heroku and editer such as Coda.
+     NSFileManager's (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents attributes:(NSDictionary *)attributes automatically overwrites file.
+     */
     NSAssert(self.buildPath != nil, @"");
     NSString *buildDirectoryPath = [self buildPathForSheet:nil];
     NSString *buildResourcePath = [self.directoryPath stringByAppendingPathComponent:self.buildResourcePath];
 
-//    [[NSFileManager defaultManager] removeItemAtPath:buildPath error:error];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:buildDirectoryPath isDirectory:NO]) {
-        //remove file
-        [[NSFileManager defaultManager] removeItemAtPath:buildDirectoryPath error:nil];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:buildDirectoryPath] == NO) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:buildDirectoryPath withIntermediateDirectories:YES attributes:nil error:error];
     }
-    [[NSFileManager defaultManager] createDirectoryAtPath:buildDirectoryPath withIntermediateDirectories:YES attributes:nil error:error];
     
-//    [self initializeResource];
-
-    [[NSFileManager defaultManager] removeItemAtPath:buildResourcePath error:nil];
     [[NSFileManager defaultManager] copyItemAtPath:_resourceGroup.absolutePath toPath:buildResourcePath error:error];
     
     NSString *resourceCSSPath = [buildResourcePath stringByAppendingPathComponent:@"css"];
@@ -366,14 +377,16 @@
         //html
         NSString *outputHTML = [sheet outputHTMLSource];
         NSString *htmlPath = [self buildPathForSheet:sheet];
-        [[NSFileManager defaultManager] removeItemAtPath:htmlPath error:nil];
+
+        //note : writeToFile: automatically overwrite
         if ([outputHTML writeToFile:htmlPath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
             NSAssert(0, @"write fail");
         }
         //css
         NSString *outputCSS = [sheet outputCSSSource];
         NSString *cssPath = [[resourceCSSPath stringByAppendingPathComponent:sheet.name] stringByAppendingPathExtension:@"css"];
-        [[NSFileManager defaultManager] removeItemAtPath:cssPath error:nil];
+
+        //note : writeToFile: automatically overwrite
         if ([outputCSS writeToFile:cssPath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
             NSAssert(0, @"write fail");
         }
@@ -408,7 +421,6 @@
     NSString *initializeJSPath = [[resourceJSPath stringByAppendingPathComponent:@"iuinit"] stringByAppendingPathExtension:@"js"];
     NSError *myError;
     
-    [[NSFileManager defaultManager] removeItemAtPath:initializeJSPath error:nil];
     if ([sourceCode.string writeToFile:initializeJSPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
         NSAssert(0, @"write fail");
     }

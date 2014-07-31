@@ -199,6 +199,9 @@
         case JDDateStringTimestampType2://2011-01-03  at 13.23.25 PM
             [dateFormat setDateFormat:@"YYYY-MM-dd at HH.mm.ss a"];
             break;
+        case JDDateStringTimestampType://2011-01-03 13:23:25
+            [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+            break;
         default:
             NSAssert(0, @"not handled");
 	}

@@ -43,6 +43,7 @@
 #import "LMProjectPropertyWC.h"
 
 #import "LMServerWC.h"
+#import "LMHerokuWC.h"
 
 @interface LMWC ()
 
@@ -115,6 +116,7 @@
     LMProjectConvertWC *pcWC;
     LMProjectPropertyWC *projectPropertyWC;
     LMServerWC *serverWC;
+    LMHerokuWC *herokuWC;
     
     //log
     
@@ -501,6 +503,17 @@
         [serverWC setProject:_project];
     }
     [self.window beginSheet:serverWC.window completionHandler:^(NSModalResponse returnCode) {
+        //do nothing
+    }];
+}
+
+- (IBAction)showHerokuWC:(id)sender{
+    if (herokuWC == nil) {
+        herokuWC = [[LMHerokuWC alloc] initWithWindowNibName:@"LMHerokuWC"];
+        NSString *absoluteBuildPath = [_project absoluteBuildPath];
+        [herokuWC setGitRepoPath:absoluteBuildPath];
+    }
+    [self.window beginSheet:herokuWC.window completionHandler:^(NSModalResponse returnCode) {
         //do nothing
     }];
 }

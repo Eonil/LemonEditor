@@ -106,6 +106,7 @@ static NSString *IUClassGroupName = @"class";
 
 - (NSString*)directoryPath;
 - (NSString*)buildPath;
+- (NSString*)absoluteBuildPath;
 - (NSString*)buildResourcePath;
 
 //build

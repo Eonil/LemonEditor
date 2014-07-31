@@ -15,7 +15,6 @@
 
 @protocol JDHerokuUtilLoginDelegate <NSObject>
 @required
-
 -(void)herokuUtil:(JDHerokuUtil*)util loginProcessFinishedWithResultCode:(NSInteger)resultCode;
 @end
 
@@ -29,11 +28,15 @@ static NSString * kNotiHerokuLogin = @"kNotiHerokuLogin";
 -(BOOL)create:(NSString*)appName resultLog:(NSString**)resultLog;
 -(void)login:(NSString*)myid password:(NSString*)mypasswd;
 -(BOOL)combineGitPath:(NSString*)path appName:(NSString*)appName;
--(void)updateLoginInfo;
++(NSString*)configMessageForPath:(NSString*)path;
+//-(void)updateLoginInfo;
 
 @property NSString *loginID;
-@property BOOL  logging;
-@property BOOL  logined;
-@property id <JDHerokuUtilLoginDelegate>    loginDelegate;
 
+- (BOOL)logging;
++(NSString*)loginID;
++ (NSString*)herokuAppNameAtPath:(NSString*)path;
+
+@property id <JDHerokuUtilLoginDelegate>    loginDelegate;
+- (void)prepareHerokuUpload:(NSString*)path;
 @end

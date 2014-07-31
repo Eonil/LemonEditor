@@ -12,17 +12,35 @@
 #import "JDGitUtil.h"
 #import "JDShellUtil.h"
 
+@interface JDGitUtil () <JDShellUtilPipeDelegate>
+@end
+
 @implementation JDGitUtil{
     NSString *filePath;
+    JDShellUtil *shellUtil;
 }
 
--(id)initWithFilePath:(NSString*)_filePath{
+-(id)initWithGitRepoPath:(NSString*)_filePath{
     self = [super init];
     if (self) {
-        filePath = _filePath;
+        filePath = [_filePath copy];
+        shellUtil = [[JDShellUtil alloc] init];
     }
     return self;
 }
+
+-(BOOL)isGitRepo{
+    NSString *stdOut;
+    NSString *stdErr;
+    NSString *gitPath = [[NSBundle mainBundle] pathForResource:@"git" ofType:@""];
+
+    [JDShellUtil execute:gitPath atDirectory:filePath arguments:@[@"status"] stdOut:&stdOut stdErr:&stdErr];
+    if ([stdErr containsString:@"fatal"]) {
+        return NO;
+    }
+    return YES;
+}
+
 
 -(BOOL)gitInit{
     NSString *gitPath = [[NSBundle mainBundle] pathForResource:@"git" ofType:@""];
@@ -45,19 +63,33 @@
     NSString *msg = [NSString stringWithFormat:@"'%@'", commitMsg];
     NSString *log, *errLog;
     NSInteger resultCode = [JDShellUtil execute:gitPath atDirectory:filePath arguments:@[@"commit", @"-a", @"-m",msg] stdOut:&log stdErr:&errLog];
-    JDInfoLog(@"git init returned:\n%@ + %@", log, errLog);
+    JDInfoLog(@"git commit returned:\n%@ + %@", log, errLog);
     return !resultCode;
 
 }
 
--(BOOL)push:(NSString*)remote branch:(NSString*)branch{
+-(void)push:(NSString*)remote branch:(NSString*)branch force:(BOOL)force{
     NSString *gitPath = [[NSBundle mainBundle] pathForResource:@"git" ofType:@""];
+    NSMutableArray *arguments = [@[@"push", @"--force", remote, branch] mutableCopy];
+    if (force == NO) {
+        [arguments removeObjectAtIndex:1];
+    }
+    [shellUtil execute:gitPath atDirectory:filePath arguments:arguments delegate:self];
+}
 
-    NSString *log, *errLog;
-    NSInteger resultCode = [JDShellUtil execute:gitPath atDirectory:filePath arguments:[NSMutableArray arrayWithObjects:@"push", remote, branch, nil] stdOut:&log stdErr:&errLog];
-    
-    return !resultCode;
-    
+- (void)shellUtil:(JDShellUtil*)util standardOutputDataReceived:(NSData*)data{
+    NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if ([message length]) {
+        [self.delegate gitUtil:self pushMessageReceived:message];
+    }
+}
+
+- (void)shellUtil:(JDShellUtil*)util standardErrorDataReceived:(NSData*)data{
+    [self.delegate gitUtil:self pushMessageReceived:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+}
+
+- (void)shellUtilExecutionFinished:(JDShellUtil*)util{
+    [self.delegate gitUtilPushFinished:self];
 }
 
 @end

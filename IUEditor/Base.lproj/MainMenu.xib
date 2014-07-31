@@ -163,6 +163,12 @@
                                     <action selector="showServerWC:" target="-1" id="wXw-uj-Uv9"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Heroku Management" id="bcu-sX-COC">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showHerokuWC:" target="-1" id="NxN-EL-8Ic"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Convert As..." id="JHk-ME-u7H">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>

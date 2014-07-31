@@ -39,6 +39,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 #if DEBUG
+#else
     if ([JDEnvUtil isFirstExecution:@"IUEditor"]) {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://server.iueditor.org/download.php"]];
         [NSURLConnection connectionWithRequest:request delegate:nil];
@@ -48,8 +49,6 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
 
-#else
-    
     //if there is no opend document,
     if([[[NSDocumentController sharedDocumentController] documents] count] < 1){
         [self showStartWC:self];

@@ -614,6 +614,8 @@
 		69317CB21947271F0065B6F4 /* LMHelpWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69317CB01947271F0065B6F4 /* LMHelpWC.m */; };
 		69317CB31947271F0065B6F4 /* LMHelpWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69317CB11947271F0065B6F4 /* LMHelpWC.xib */; };
 		69346623192B805000F82DAF /* LMCommandVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69346622192B805000F82DAF /* LMCommandVC.xib */; };
+		69347430198A8B21009E4472 /* composer.zip in Resources */ = {isa = PBXBuildFile; fileRef = 6934742F198A8B21009E4472 /* composer.zip */; };
+		69347432198A9D52009E4472 /* index.php in Resources */ = {isa = PBXBuildFile; fileRef = 69347431198A9D52009E4472 /* index.php */; };
 		693849E41914D711005C0546 /* NSIndexPath+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */; };
 		693F24791977929C00451500 /* LMPropertyWPMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 693F24771977929C00451500 /* LMPropertyWPMenuVC.m */; };
 		693F247A1977929C00451500 /* LMPropertyWPMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */; };
@@ -706,6 +708,12 @@
 		69BD0C87197D649600CB4815 /* sftp_upload.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69BD0C86197D649600CB4815 /* sftp_upload.sh */; };
 		69BD0C89197D64AB00CB4815 /* ssh.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69BD0C88197D64AB00CB4815 /* ssh.sh */; };
 		69BD0C8B197D64CE00CB4815 /* sftp_download.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69BD0C8A197D64CE00CB4815 /* sftp_download.sh */; };
+		69BE6A4C1987E1DA00F84850 /* LMHerokuWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BE6A4A1987E1DA00F84850 /* LMHerokuWC.m */; };
+		69BE6A4D1987E1DA00F84850 /* LMHerokuWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A4B1987E1DA00F84850 /* LMHerokuWC.xib */; };
+		69BE6A4F1987F55C00F84850 /* herokuauth.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A4E1987F55C00F84850 /* herokuauth.sh */; };
+		69BE6A511989527000F84850 /* git in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A501989527000F84850 /* git */; };
+		69BE6A551989847300F84850 /* config.ru in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A541989847300F84850 /* config.ru */; };
+		69BE6A571989848300F84850 /* config.ruunit in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A561989848300F84850 /* config.ruunit */; };
 		69C4AA1A1908E82900CF75E7 /* IUSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C4AA191908E82900CF75E7 /* IUSection.m */; };
 		69C4AA1D1908E96F00CF75E7 /* IUImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C4AA1C1908E96F00CF75E7 /* IUImport.m */; };
 		69C4AA231909905500CF75E7 /* IUCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C4AA221909905500CF75E7 /* IUCollection.m */; };
@@ -1525,6 +1533,8 @@
 		69317CB01947271F0065B6F4 /* LMHelpWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMHelpWC.m; sourceTree = "<group>"; };
 		69317CB11947271F0065B6F4 /* LMHelpWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMHelpWC.xib; sourceTree = "<group>"; };
 		69346622192B805000F82DAF /* LMCommandVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMCommandVC.xib; sourceTree = "<group>"; };
+		6934742F198A8B21009E4472 /* composer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = composer.zip; path = ../composer.zip; sourceTree = "<group>"; };
+		69347431198A9D52009E4472 /* index.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = index.php; path = ../index.php; sourceTree = "<group>"; };
 		693849E21914D711005C0546 /* NSIndexPath+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+JDExtension.h"; sourceTree = "<group>"; };
 		693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+JDExtension.m"; sourceTree = "<group>"; };
 		693F24761977929C00451500 /* LMPropertyWPMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyWPMenuVC.h; sourceTree = "<group>"; };
@@ -1533,8 +1543,8 @@
 		693F247E1977F67E00451500 /* JDSyncUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDSyncUtil.h; sourceTree = "<group>"; };
 		693F247F1977F67E00451500 /* JDSyncUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDSyncUtil.m; sourceTree = "<group>"; };
 		693F24811977F81400451500 /* JDUploadSCP.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = JDUploadSCP.sh; sourceTree = "<group>"; };
-		694A985D196D13E000C1D630 /* JDNetworkUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDNetworkUtil.h; sourceTree = "<group>"; };
-		694A985E196D13E000C1D630 /* JDNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDNetworkUtil.m; sourceTree = "<group>"; };
+		694A985D196D13E000C1D630 /* JDNetworkUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDNetworkUtil.h; path = ../JDNetworkUtil.h; sourceTree = "<group>"; };
+		694A985E196D13E000C1D630 /* JDNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDNetworkUtil.m; path = ../JDNetworkUtil.m; sourceTree = "<group>"; };
 		694A9860196D184400C1D630 /* JDIntegerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDIntegerTextField.h; sourceTree = "<group>"; };
 		694A9861196D184400C1D630 /* JDIntegerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDIntegerTextField.m; sourceTree = "<group>"; };
 		694A9863196D197900C1D630 /* JDFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDFormatter.h; sourceTree = "<group>"; };
@@ -1551,8 +1561,8 @@
 		6967425218F7D077008B7111 /* IUIdentifierManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUIdentifierManager.m; sourceTree = "<group>"; };
 		696D1C9918E5366400B4AB16 /* webTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = webTemplate.html; sourceTree = "<group>"; };
 		696D1C9D18E5778400B4AB16 /* reset.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = reset.css; sourceTree = "<group>"; };
-		696F2DDE1965C5A400809D31 /* JDScreenRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDScreenRecorder.h; sourceTree = "<group>"; };
-		696F2DDF1965C5A400809D31 /* JDScreenRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDScreenRecorder.m; sourceTree = "<group>"; };
+		696F2DDE1965C5A400809D31 /* JDScreenRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDScreenRecorder.h; path = ../JDScreenRecorder.h; sourceTree = "<group>"; };
+		696F2DDF1965C5A400809D31 /* JDScreenRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDScreenRecorder.m; path = ../JDScreenRecorder.m; sourceTree = "<group>"; };
 		69757AC018D7EB680095CBAC /* IUBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUBox.h; sourceTree = "<group>"; };
 		69757AC118D7EB680095CBAC /* IUBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUBox.m; sourceTree = "<group>"; };
 		69757AD318D95BBC0095CBAC /* CALayer+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CALayer+JDExtension.h"; path = "JD/CALayer+JDExtension.h"; sourceTree = "<group>"; };
@@ -1638,8 +1648,8 @@
 		698E83FE19358C14002CE47B /* LMProjectConvertWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMProjectConvertWC.m; path = ../LMProjectConvertWC.m; sourceTree = "<group>"; };
 		698E83FF19358C14002CE47B /* LMProjectConvertWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMProjectConvertWC.xib; path = ../LMProjectConvertWC.xib; sourceTree = "<group>"; };
 		698E8447193664E0002CE47B /* IUFileProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUFileProtocol.h; sourceTree = "<group>"; };
-		69917A8419658880001D42C6 /* IUResponsiveSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUResponsiveSection.h; path = IUEditor/IUResponsiveSection.h; sourceTree = "<group>"; };
-		69917A8519658880001D42C6 /* IUResponsiveSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUResponsiveSection.m; path = IUEditor/IUResponsiveSection.m; sourceTree = "<group>"; };
+		69917A8419658880001D42C6 /* IUResponsiveSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUResponsiveSection.h; sourceTree = "<group>"; };
+		69917A8519658880001D42C6 /* IUResponsiveSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUResponsiveSection.m; sourceTree = "<group>"; };
 		6996541D190F9F1D000379DA /* LMPropertyIUCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyIUCollectionVC.h; sourceTree = "<group>"; };
 		6996541E190F9F1D000379DA /* LMPropertyIUCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyIUCollectionVC.m; sourceTree = "<group>"; };
 		6996541F190F9F1D000379DA /* LMPropertyIUCollectionVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyIUCollectionVC.xib; sourceTree = "<group>"; };
@@ -1662,9 +1672,9 @@
 		69B37F0A18DFDEE800DE620F /* LMFileNaviVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMFileNaviVC.h; path = Editor/LMFileNaviVC.h; sourceTree = "<group>"; };
 		69B37F0B18DFDEE800DE620F /* LMFileNaviVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMFileNaviVC.m; path = Editor/LMFileNaviVC.m; sourceTree = "<group>"; };
 		69B37F0C18DFDEE800DE620F /* LMFileNaviVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMFileNaviVC.xib; path = Editor/LMFileNaviVC.xib; sourceTree = "<group>"; };
-		69B45C3A1986BBC90087FDFD /* LMServerWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMServerWC.h; sourceTree = "<group>"; };
-		69B45C3B1986BBC90087FDFD /* LMServerWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMServerWC.m; sourceTree = "<group>"; };
-		69B45C3C1986BBC90087FDFD /* LMServerWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMServerWC.xib; sourceTree = "<group>"; };
+		69B45C3A1986BBC90087FDFD /* LMServerWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMServerWC.h; path = ../LMServerWC.h; sourceTree = "<group>"; };
+		69B45C3B1986BBC90087FDFD /* LMServerWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMServerWC.m; path = ../LMServerWC.m; sourceTree = "<group>"; };
+		69B45C3C1986BBC90087FDFD /* LMServerWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMServerWC.xib; path = ../LMServerWC.xib; sourceTree = "<group>"; };
 		69B4D7F8192B5155008429B3 /* LMCommandVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMCommandVC.h; sourceTree = "<group>"; };
 		69B4D7F9192B5155008429B3 /* LMCommandVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMCommandVC.m; sourceTree = "<group>"; };
 		69B9A39418E5A2A30007D6E2 /* IUResourceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUResourceFile.h; sourceTree = "<group>"; };
@@ -1678,6 +1688,13 @@
 		69BD0C86197D649600CB4815 /* sftp_upload.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = sftp_upload.sh; sourceTree = "<group>"; };
 		69BD0C88197D64AB00CB4815 /* ssh.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ssh.sh; sourceTree = "<group>"; };
 		69BD0C8A197D64CE00CB4815 /* sftp_download.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = sftp_download.sh; sourceTree = "<group>"; };
+		69BE6A491987E1DA00F84850 /* LMHerokuWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMHerokuWC.h; path = ../LMHerokuWC.h; sourceTree = "<group>"; };
+		69BE6A4A1987E1DA00F84850 /* LMHerokuWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMHerokuWC.m; path = ../LMHerokuWC.m; sourceTree = "<group>"; };
+		69BE6A4B1987E1DA00F84850 /* LMHerokuWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMHerokuWC.xib; path = ../LMHerokuWC.xib; sourceTree = "<group>"; };
+		69BE6A4E1987F55C00F84850 /* herokuauth.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = herokuauth.sh; path = ../herokuauth.sh; sourceTree = "<group>"; };
+		69BE6A501989527000F84850 /* git */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = git; path = ../git; sourceTree = "<group>"; };
+		69BE6A541989847300F84850 /* config.ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config.ru; path = ../config.ru; sourceTree = "<group>"; };
+		69BE6A561989848300F84850 /* config.ruunit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config.ruunit; path = ../config.ruunit; sourceTree = "<group>"; };
 		69C4AA181908E82900CF75E7 /* IUSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUSection.h; sourceTree = "<group>"; };
 		69C4AA191908E82900CF75E7 /* IUSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUSection.m; sourceTree = "<group>"; };
 		69C4AA1B1908E96F00CF75E7 /* IUImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUImport.h; sourceTree = "<group>"; };
@@ -2542,6 +2559,10 @@
 		3DD4786A193DB2F900639AB5 /* IUDebug */ = {
 			isa = PBXGroup;
 			children = (
+				694A985D196D13E000C1D630 /* JDNetworkUtil.h */,
+				694A985E196D13E000C1D630 /* JDNetworkUtil.m */,
+				696F2DDE1965C5A400809D31 /* JDScreenRecorder.h */,
+				696F2DDF1965C5A400809D31 /* JDScreenRecorder.m */,
 				3DD4786B193DB33600639AB5 /* LMDebugSourceWC.h */,
 				3DD4786C193DB33600639AB5 /* LMDebugSourceWC.m */,
 				3DD4786D193DB33600639AB5 /* LMDebugSourceWC.xib */,
@@ -3176,9 +3197,30 @@
 			name = ManualPages;
 			sourceTree = "<group>";
 		};
+		69347433198ADD9B009E4472 /* SyncUtil */ = {
+			isa = PBXGroup;
+			children = (
+				69BE6A491987E1DA00F84850 /* LMHerokuWC.h */,
+				69BE6A4A1987E1DA00F84850 /* LMHerokuWC.m */,
+				69BE6A4B1987E1DA00F84850 /* LMHerokuWC.xib */,
+				69B45C3A1986BBC90087FDFD /* LMServerWC.h */,
+				69B45C3B1986BBC90087FDFD /* LMServerWC.m */,
+				69B45C3C1986BBC90087FDFD /* LMServerWC.xib */,
+				6934742F198A8B21009E4472 /* composer.zip */,
+				69BE6A541989847300F84850 /* config.ru */,
+				69347431198A9D52009E4472 /* index.php */,
+				69BE6A561989848300F84850 /* config.ruunit */,
+				69BE6A501989527000F84850 /* git */,
+				69BE6A4E1987F55C00F84850 /* herokuauth.sh */,
+			);
+			name = SyncUtil;
+			sourceTree = "<group>";
+		};
 		694233A118D7E1A500C96A92 /* IU */ = {
 			isa = PBXGroup;
 			children = (
+				69917A8419658880001D42C6 /* IUResponsiveSection.h */,
+				69917A8519658880001D42C6 /* IUResponsiveSection.m */,
 				3DA6C65119753651004D6587 /* PGGroup */,
 				3DA6C64F1975361D004D6587 /* DefaultGroup */,
 				3DA6C65019753626004D6587 /* ComplexGroup */,
@@ -3287,15 +3329,6 @@
 		69C5759E18D6F61E0016F050 = {
 			isa = PBXGroup;
 			children = (
-				69B45C3A1986BBC90087FDFD /* LMServerWC.h */,
-				69B45C3B1986BBC90087FDFD /* LMServerWC.m */,
-				69B45C3C1986BBC90087FDFD /* LMServerWC.xib */,
-				694A985D196D13E000C1D630 /* JDNetworkUtil.h */,
-				694A985E196D13E000C1D630 /* JDNetworkUtil.m */,
-				696F2DDE1965C5A400809D31 /* JDScreenRecorder.h */,
-				696F2DDF1965C5A400809D31 /* JDScreenRecorder.m */,
-				69917A8419658880001D42C6 /* IUResponsiveSection.h */,
-				69917A8519658880001D42C6 /* IUResponsiveSection.m */,
 				CBFBE67C192A07A300F03F76 /* SampleTemplate */,
 				690A409E18E170AC00095263 /* Resource */,
 				69DE5CE419614E2B0050D020 /* Server */,
@@ -3350,6 +3383,7 @@
 		69C575B018D6F61E0016F050 /* IUEditor */ = {
 			isa = PBXGroup;
 			children = (
+				69347433198ADD9B009E4472 /* SyncUtil */,
 				3D97D44E194ABF0100826280 /* StartProjectWindow */,
 				3D33BACC1935A4BF00DA4F4A /* Preference */,
 				3DB3ACE918EBEFCF0046DFB7 /* IULib */,
@@ -3694,6 +3728,7 @@
 				06855616198A63430073FA83 /* johnny_automatic_Frederick_the_Great.png in Resources */,
 				3DED26BA1900F450001A1D67 /* panel_left_off@2x.png in Resources */,
 				3DD4787E193DDCE100639AB5 /* LMEventScrollAnimationVC.xib in Resources */,
+				69BE6A4D1987E1DA00F84850 /* LMHerokuWC.xib in Resources */,
 				3DED26651900D313001A1D67 /* ic_background@2x.png in Resources */,
 				2632846A1963E519006CDB7D /* agency_thumbnail.png in Resources */,
 				06855618198A63430073FA83 /* johnny_automatic_Georges_Clemenceau.png in Resources */,
@@ -3819,6 +3854,7 @@
 				3DED27431907898A001A1D67 /* video_bg.png in Resources */,
 				3DED264B1900D2EE001A1D67 /* align_full@2x.png in Resources */,
 				26120AB61962E5ED00EF3703 /* import_large@2x.png in Resources */,
+				69BE6A571989848300F84850 /* config.ruunit in Resources */,
 				262D4A951947FAF0006F5FBE /* border_icon_01@2x.png in Resources */,
 				690A8276190A2CC200DDBA86 /* new_pt@2x.png in Resources */,
 				06855606198A63430073FA83 /* home-chest_of_drawers.png in Resources */,
@@ -3895,6 +3931,7 @@
 				06855632198A63430073FA83 /* raffaella_biscuso_Chair.png in Resources */,
 				CBA878081963DCF300075294 /* tutorialList.plist in Resources */,
 				2628C92E191A31F600D9D8CD /* stack_form.png in Resources */,
+				69BE6A551989847300F84850 /* config.ru in Resources */,
 				3DC4AAEE198200DF0024170A /* event_thumbnail.png in Resources */,
 				261E5A8E19484F70002C286A /* tab_pg_off@2x.png in Resources */,
 				26378CDE194EC42A004B5001 /* import@2x.png in Resources */,
@@ -3924,6 +3961,7 @@
 				2641F454195A72FF00DDF1C3 /* bg_v_bottom.png in Resources */,
 				3DF8041918FE62F200913505 /* view_border.png in Resources */,
 				69CFCAC318EAA21E00E3048A /* sample.jpg in Resources */,
+				69BE6A4F1987F55C00F84850 /* herokuauth.sh in Resources */,
 				692C4DC41966A15400EAB2E7 /* tracingOverview.pages in Resources */,
 				3DF803E718FE62C900913505 /* ic_document.png in Resources */,
 				26378CDD194EC42A004B5001 /* import.png in Resources */,
@@ -4072,6 +4110,7 @@
 				06855615198A63430073FA83 /* johnny_automatic_flat_file.png in Resources */,
 				3DF8045918FE874400913505 /* LMAppearanceVC.xib in Resources */,
 				267CB1AD190F93370079E565 /* tab_tools_off.png in Resources */,
+				69347432198A9D52009E4472 /* index.php in Resources */,
 				69BD0C8B197D64CE00CB4815 /* sftp_download.sh in Resources */,
 				3DED274A19078991001A1D67 /* clear_color@2x.png in Resources */,
 				06855619198A63430073FA83 /* johnny_automatic_Giovanni_Martinelli.png in Resources */,
@@ -4121,6 +4160,7 @@
 				068555BC198A56740073FA83 /* Anonymous_Einstein.png in Resources */,
 				69C575BB18D6F61E0016F050 /* Credits.rtf in Resources */,
 				2672A0A1191207710050043E /* stack_textview.png in Resources */,
+				69BE6A511989527000F84850 /* git in Resources */,
 				698BEAA119667D140019C1C3 /* width_mobile.png in Resources */,
 				3DBD7C2519612107003E386C /* LMStartPreviewWC.xib in Resources */,
 				3DBD7C2D19612FEC003E386C /* iueditor_thumbnail.png in Resources */,
@@ -4158,6 +4198,7 @@
 				69FFB27F1950305600DA2783 /* LMIUPropertyVC.xib in Resources */,
 				3DA6C66B19768843004D6587 /* gallery_thumb.png in Resources */,
 				267CB19F190F93370079E565 /* tab_event_on.png in Resources */,
+				69347430198A8B21009E4472 /* composer.zip in Resources */,
 				690A408E18E14A4E00095263 /* LMStackVC.xib in Resources */,
 				3DED270619010C71001A1D67 /* LMPropertyIUFBLikeVC.xib in Resources */,
 				0685563B198A63430073FA83 /* tom_wooden_bookcase.png in Resources */,
@@ -4469,6 +4510,7 @@
 				69B37F0D18DFDEE800DE620F /* LMFileNaviVC.m in Sources */,
 				CB2AA9C91975030A00DA7CCD /* WPArticle.m in Sources */,
 				690A82561909EB1B00DDBA86 /* PGTextField.m in Sources */,
+				69BE6A4C1987E1DA00F84850 /* LMHerokuWC.m in Sources */,
 				690A409518E1645B00095263 /* LMWidgetLibraryVC.m in Sources */,
 				3D973F091946F45100FB893F /* IUProjectController.m in Sources */,
 				3DED275C190A2630001A1D67 /* IUEventVariable.m in Sources */,

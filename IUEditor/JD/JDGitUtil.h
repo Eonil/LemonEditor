@@ -11,11 +11,22 @@
 
 #import <Foundation/Foundation.h>
 
+@class JDGitUtil;
+@protocol JDGitUtilDelegate
+@required
+- (void)gitUtil:(JDGitUtil*)util pushMessageReceived:(NSString*)aMessage;
+- (void)gitUtilPushFinished:(JDGitUtil*)util;
+@end
+
 @interface JDGitUtil : NSObject
 
--(id)initWithFilePath:(NSString*)filePath;
+-(id)initWithGitRepoPath:(NSString*)filePath;
+-(BOOL)isGitRepo;
 -(BOOL)gitInit;
 -(BOOL)addAll;
 -(BOOL)commit:(NSString*)commitMsg;
--(BOOL)push:(NSString*)remote branch:(NSString*)branch;
+-(void)push:(NSString*)remote branch:(NSString*)branch force:(BOOL)force;
+
+@property id <JDGitUtilDelegate> delegate;
+
 @end

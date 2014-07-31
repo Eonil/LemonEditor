@@ -102,6 +102,48 @@
     [_task waitUntilExit];
 }
 
+
+-(int)execute:(NSString*)command atDirectory:(NSString*)directory arguments:(NSArray*)arguments delegate:(id <JDShellUtilPipeDelegate>)  delegate{
+    _delegate = delegate;
+    _task = [[NSTask alloc] init];
+    [_task setLaunchPath:command];
+    [_task setCurrentDirectoryPath:directory];
+    [_task setArguments:arguments];
+    
+    NSPipe *stdInputPipe = [NSPipe pipe];
+    [_task setStandardInput: stdInputPipe];
+    inputHandle = [stdInputPipe fileHandleForWriting];
+    
+    NSPipe *stdOutPipe = [NSPipe pipe];
+    [_task setStandardOutput: stdOutPipe];
+    outputHandle = [stdOutPipe fileHandleForReading];
+    
+    NSPipe *stdErrPipe = [NSPipe pipe];
+    [_task setStandardError: stdErrPipe];
+    errorHandle = [stdErrPipe fileHandleForReading];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputHandleDataReceived:) name:NSFileHandleDataAvailableNotification  object:outputHandle];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(errorHandleDataReceived:) name:NSFileHandleDataAvailableNotification  object:errorHandle];
+    
+    [outputHandle waitForDataInBackgroundAndNotify];
+    [errorHandle waitForDataInBackgroundAndNotify];
+    
+    __weak id <JDShellUtilPipeDelegate> weakDelegate = _delegate;
+    __weak typeof(self) weakSelf = self;
+    
+    _task.terminationHandler =  ^(NSTask *aTask){
+        if ([weakDelegate respondsToSelector:@selector(shellUtilExecutionFinished:)]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakDelegate shellUtilExecutionFinished:weakSelf];
+            });
+        }
+    };
+    
+    [_task launch];
+    return [_task processIdentifier];
+}
+
+
 -(int)execute:(NSString*)command delegate:(id <JDShellUtilPipeDelegate>)  delegate{
     _delegate = delegate;
     _task = [[NSTask alloc] init];
