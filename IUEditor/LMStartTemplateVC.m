@@ -63,9 +63,14 @@
         return;
     }
     
-    
     NSURL *targetURL = [url URLByAppendingPathComponent:item.fileName];
     NSString *targetPath = [targetURL path];
+    if([[NSFileManager defaultManager] fileExistsAtPath:targetPath]){
+        [JDUIUtil hudAlert:@"There is already same IU Document, Choose another Dicrectory" second:2];
+        return;
+    }
+    
+    
     [[JDFileUtil util] unzipResource:item.packagePath toDirectory:targetPath createDirectory:YES];
     
     NSURL *openURL = [[[NSURL fileURLWithPath:targetPath] URLByAppendingPathComponent:item.fileName ] URLByAppendingPathExtension:@"iu"];

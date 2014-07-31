@@ -106,7 +106,9 @@
 }
 
 - (void)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument *, BOOL, NSError *))completionHandler{
-    [super openDocumentWithContentsOfURL:url display:displayDocument completionHandler:completionHandler];
+    if(url){
+        [super openDocumentWithContentsOfURL:url display:displayDocument completionHandler:completionHandler];
+    }
 }
 
 
