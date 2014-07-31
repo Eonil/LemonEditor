@@ -46,7 +46,6 @@
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"clipArtList" ofType:@"plist"];
     NSDictionary *clipArtDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
 
-
     for(NSDictionary *dict in clipArtDict.allValues){
         ClipArt *clip = [[ClipArt alloc] init];
         clip.title = [dict objectForKey:@"title"];
@@ -54,11 +53,11 @@
         clip.image = [NSImage imageNamed:clip.title];
         [self.clipArtArrayController addObject:clip];
     }
-    
+    //sort the clipArts
+    NSSortDescriptor *sorter = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject: sorter];
+    [self.clipArtArrayController setSortDescriptors:sortDescriptors];
 }
-
-
-
 
 
 #pragma mark - collectionView Drag
