@@ -617,6 +617,7 @@
 		69346623192B805000F82DAF /* LMCommandVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69346622192B805000F82DAF /* LMCommandVC.xib */; };
 		69347430198A8B21009E4472 /* composer.zip in Resources */ = {isa = PBXBuildFile; fileRef = 6934742F198A8B21009E4472 /* composer.zip */; };
 		69347432198A9D52009E4472 /* index.php in Resources */ = {isa = PBXBuildFile; fileRef = 69347431198A9D52009E4472 /* index.php */; };
+		69347435198B6878009E4472 /* heroku_login in Resources */ = {isa = PBXBuildFile; fileRef = 69347434198B6878009E4472 /* heroku_login */; };
 		693849E41914D711005C0546 /* NSIndexPath+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */; };
 		693F24791977929C00451500 /* LMPropertyWPMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 693F24771977929C00451500 /* LMPropertyWPMenuVC.m */; };
 		693F247A1977929C00451500 /* LMPropertyWPMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */; };
@@ -1537,6 +1538,7 @@
 		69346622192B805000F82DAF /* LMCommandVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMCommandVC.xib; sourceTree = "<group>"; };
 		6934742F198A8B21009E4472 /* composer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = composer.zip; path = ../composer.zip; sourceTree = "<group>"; };
 		69347431198A9D52009E4472 /* index.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = index.php; path = ../index.php; sourceTree = "<group>"; };
+		69347434198B6878009E4472 /* heroku_login */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = heroku_login; sourceTree = "<group>"; };
 		693849E21914D711005C0546 /* NSIndexPath+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+JDExtension.h"; sourceTree = "<group>"; };
 		693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+JDExtension.m"; sourceTree = "<group>"; };
 		693F24761977929C00451500 /* LMPropertyWPMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyWPMenuVC.h; sourceTree = "<group>"; };
@@ -3331,6 +3333,7 @@
 		69C5759E18D6F61E0016F050 = {
 			isa = PBXGroup;
 			children = (
+				69347434198B6878009E4472 /* heroku_login */,
 				55E10CE5198B595400C7BE1E /* heroku */,
 				CBFBE67C192A07A300F03F76 /* SampleTemplate */,
 				690A409E18E170AC00095263 /* Resource */,
@@ -4031,6 +4034,7 @@
 				26EFF41D194AECB900317C3E /* auto_resize.png in Resources */,
 				3DED270119010C55001A1D67 /* LMPropertyIUTransitionVC.xib in Resources */,
 				3DF8044218FE62FC00913505 /* tool_navi@2x.png in Resources */,
+				69347435198B6878009E4472 /* heroku_login in Resources */,
 				3DB3ACFE18EC1F700046DFB7 /* LMCanvasVC.xib in Resources */,
 				3DED26BB1900F450001A1D67 /* panel_left_on.png in Resources */,
 				267CB1B9190F95750079E565 /* bg_center.png in Resources */,
