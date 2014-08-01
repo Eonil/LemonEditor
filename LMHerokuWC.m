@@ -27,8 +27,11 @@
 @property (weak) IBOutlet NSTextField *passwordTF;
 @property (weak) IBOutlet NSButton *herokuLoginB;
 @property (weak) IBOutlet NSTextField *herokuIDTF;
+@property (weak) IBOutlet NSTextField *herokuIDLabel;
 @property NSString *herokuApp;
 @property (weak) IBOutlet NSButton *herokuAppB;
+
+@property BOOL herokuLogined;
 
 @end
 
@@ -54,13 +57,6 @@
 {
     [super windowDidLoad];
     // check heroku login
-    self.herokuID = [JDHerokuUtil loginID];
-    if (self.herokuID) {
-        [_herokuIDTF setHidden:YES];
-        [_herokuLoginB setHidden:YES];
-        [_passwordTF setHidden:YES];
-        [_passwordLabel setHidden:YES];
-    }
     [self refreshGitUI];
     [self setShowHerokuLoginInfo];
     [self setShowHerokuAppInfo];
@@ -84,10 +80,7 @@
 }
 
 -(void)herokuUtil:(JDHerokuUtil*)util loginProcessFinishedWithResultCode:(NSInteger)resultCode{
-    self.herokuID = [JDHerokuUtil loginID];
-    if (self.herokuID) {
-        [_herokuIDTF setHidden:YES];
-    }
+    [self setShowHerokuLoginInfo];
 }
 
 - (IBAction)herokuInit:(id)sender {
@@ -144,26 +137,31 @@
 }
 
 - (void)setShowHerokuAppInfo{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (windowLoaded) {
-            [self addHerokuLog:[JDHerokuUtil configMessageForPath:self.gitRepoPath]];
-            [self addHerokuLog:@"\n"];
-        }
-        self.herokuApp = [JDHerokuUtil herokuAppNameAtPath:self.gitRepoPath];
-
-        if (self.herokuApp) {
-            [self.herokuAppNameTF setHidden:YES];
-            [self.herokuAppNameLabel setHidden:NO];
-            [self.herokuAppB setHidden:YES];
-            [self.herokuVisitB setHidden:NO];
-        }
-        else {
-            [self.herokuAppNameTF setHidden:NO];
-            [self.herokuAppNameLabel setHidden:YES];
-            [self.herokuAppB setHidden:NO];
-            [self.herokuVisitB setHidden:YES];
-        }
-    });
+    if  (self.herokuLogined){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (windowLoaded) {
+                [self addHerokuLog:[JDHerokuUtil configMessageForPath:self.gitRepoPath]];
+                [self addHerokuLog:@"\n"];
+            }
+            self.herokuApp = [JDHerokuUtil herokuAppNameAtPath:self.gitRepoPath];
+            
+            if (self.herokuApp) {
+                [self.herokuAppNameTF setHidden:YES];
+                [self.herokuAppNameLabel setHidden:NO];
+                [self.herokuAppB setHidden:YES];
+                [self.herokuVisitB setHidden:NO];
+            }
+            else {
+                [self.herokuAppNameTF setHidden:NO];
+                [self.herokuAppNameLabel setHidden:YES];
+                [self.herokuAppB setHidden:NO];
+                [self.herokuVisitB setHidden:YES];
+            }
+        });
+    }
+    else {
+        
+    }
 }
 - (IBAction)performHerokuVisit:(id)sender {
     NSString *urlString = [NSString stringWithFormat:@"http://%@.herokuapp.com", self.herokuApp];
@@ -172,6 +170,23 @@
 }
 
 - (void)setShowHerokuLoginInfo{
+    self.herokuID = [JDHerokuUtil loginID];
+    if (self.herokuID) {
+        self.herokuLogined = YES;
+        [_herokuIDLabel setHidden:NO];
+        [_herokuIDTF setHidden:YES];
+        [_herokuLoginB setHidden:YES];
+        [_passwordTF setHidden:YES];
+        [_passwordLabel setHidden:YES];
+    }
+    else {
+        self.herokuLogined = NO;
+        [_herokuIDLabel setHidden:YES];
+        [_herokuIDTF setHidden:NO];
+        [_herokuLoginB setHidden:NO];
+        [_passwordTF setHidden:NO];
+        [_passwordLabel setHidden:NO];
+    }
 }
 
 - (NSString*)gitRepoPath{

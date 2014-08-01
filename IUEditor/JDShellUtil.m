@@ -17,6 +17,7 @@
 }
 
 +(NSInteger) execute:(NSString*)executePath atDirectory:(NSString*)directoryPath arguments:(NSArray*)arguments stdOut:(NSString**)stdOutLog stdErr:(NSString**)stdErrLog{
+    NSAssert(executePath, @"execute path is nil");
     NSTask *task;
     
     task = [[NSTask alloc] init];

@@ -579,6 +579,7 @@
 		3DF8046B18FF790400913505 /* LMPropertyShadowVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DF8046918FF790400913505 /* LMPropertyShadowVC.xib */; };
 		3DFB86481961628800A20960 /* LMPropertyWebProgrammingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB86461961628800A20960 /* LMPropertyWebProgrammingVC.m */; };
 		3DFB86491961628800A20960 /* LMPropertyWebProgrammingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB86471961628800A20960 /* LMPropertyWebProgrammingVC.xib */; };
+		55E10CE6198B595400C7BE1E /* heroku in Resources */ = {isa = PBXBuildFile; fileRef = 55E10CE5198B595400C7BE1E /* heroku */; };
 		58FF6B8E1946EA2B009A86F9 /* PGSubmitButtonVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FF6B8C1946EA2B009A86F9 /* PGSubmitButtonVC.m */; };
 		58FF6B8F1946EA2B009A86F9 /* PGSubmitButtonVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FF6B8D1946EA2B009A86F9 /* PGSubmitButtonVC.xib */; };
 		6905FB521925F17300E4DBC3 /* JDCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6905FB511925F17300E4DBC3 /* JDCode.m */; };
@@ -1484,6 +1485,7 @@
 		3DFB86451961628800A20960 /* LMPropertyWebProgrammingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyWebProgrammingVC.h; path = Editor/LMPropertyWebProgrammingVC.h; sourceTree = "<group>"; };
 		3DFB86461961628800A20960 /* LMPropertyWebProgrammingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPropertyWebProgrammingVC.m; path = Editor/LMPropertyWebProgrammingVC.m; sourceTree = "<group>"; };
 		3DFB86471961628800A20960 /* LMPropertyWebProgrammingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyWebProgrammingVC.xib; path = Editor/LMPropertyWebProgrammingVC.xib; sourceTree = "<group>"; };
+		55E10CE5198B595400C7BE1E /* heroku */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = heroku; sourceTree = "<group>"; };
 		58FF6B8B1946EA2B009A86F9 /* PGSubmitButtonVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGSubmitButtonVC.h; sourceTree = "<group>"; };
 		58FF6B8C1946EA2B009A86F9 /* PGSubmitButtonVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGSubmitButtonVC.m; sourceTree = "<group>"; };
 		58FF6B8D1946EA2B009A86F9 /* PGSubmitButtonVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PGSubmitButtonVC.xib; sourceTree = "<group>"; };
@@ -3329,6 +3331,7 @@
 		69C5759E18D6F61E0016F050 = {
 			isa = PBXGroup;
 			children = (
+				55E10CE5198B595400C7BE1E /* heroku */,
 				CBFBE67C192A07A300F03F76 /* SampleTemplate */,
 				690A409E18E170AC00095263 /* Resource */,
 				69DE5CE419614E2B0050D020 /* Server */,
@@ -3708,6 +3711,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55E10CE6198B595400C7BE1E /* heroku in Resources */,
 				3D19E4251987805E00A50D35 /* scp_download.sh in Resources */,
 				3D19E4261987805E00A50D35 /* scp_upload.sh in Resources */,
 				3DC4AAF2198224F40024170A /* iueditor.mp4 in Resources */,
