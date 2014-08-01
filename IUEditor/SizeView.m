@@ -210,7 +210,8 @@
         [boxManageView addSubviewLeftInFrameWithFrame:newBox positioned:NSWindowAbove relativeTo:preView];
     }
     else if(boxManageView.subviews.count == 0){
-        //make first 
+        //make first
+        isMaxChanged = YES;
         [boxManageView addSubviewLeftInFrameWithFrame:newBox];
         [newBox select];
     }
