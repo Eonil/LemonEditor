@@ -17,6 +17,9 @@ expect {
 	"Authentication successful." {
 		exit 0
 	}
+    "Email:" {
+        exit 1
+    }
 	default {
 		exit 1
 	}

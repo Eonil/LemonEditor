@@ -30,9 +30,10 @@
 @property (weak) IBOutlet NSTextField *herokuIDLabel;
 @property NSString *herokuApp;
 @property (weak) IBOutlet NSButton *herokuAppB;
+@property BOOL showHerokuAppInfo;
 
 @property BOOL herokuLogined;
-
+@property NSString *herokuLoginLog;
 @end
 
 @implementation LMHerokuWC  {
@@ -80,7 +81,14 @@
 }
 
 -(void)herokuUtil:(JDHerokuUtil*)util loginProcessFinishedWithResultCode:(NSInteger)resultCode{
-    [self setShowHerokuLoginInfo];
+    if (resultCode == 1) {
+        //login failed
+        self.herokuLoginLog = @"Login Failed";
+    }
+    else {
+        self.herokuLoginLog = @"Login Success";
+        [self setShowHerokuLoginInfo];
+    }
 }
 
 - (IBAction)herokuInit:(id)sender {
@@ -91,6 +99,8 @@
         //YES
         //combine git
         [herokuUtil combineGitPath:self.gitRepoPath appName:self.appName];
+        [JDUIUtil hudAlert:@"App created. Press Sync." second:2];
+        [self addHerokuLog:@"App created. Press Sync."];
         [self setShowHerokuAppInfo];
     }
     else {
@@ -106,6 +116,7 @@
         self.isGitRepo = YES;
         [self.gitInitB setHidden:YES];
         [self refreshGitUI];
+        [self showHerokuAppInfo];
     }
 }
 
@@ -137,7 +148,8 @@
 }
 
 - (void)setShowHerokuAppInfo{
-    if  (self.herokuLogined){
+    if (self.herokuLogined && self.isGitRepo) {
+        self.showHerokuAppInfo = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (windowLoaded) {
                 [self addHerokuLog:[JDHerokuUtil configMessageForPath:self.gitRepoPath]];
@@ -160,9 +172,10 @@
         });
     }
     else {
-        
+        self.showHerokuAppInfo = NO;
     }
 }
+    
 - (IBAction)performHerokuVisit:(id)sender {
     NSString *urlString = [NSString stringWithFormat:@"http://%@.herokuapp.com", self.herokuApp];
     NSURL *url = [NSURL URLWithString:urlString];

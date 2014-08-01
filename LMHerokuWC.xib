@@ -7,9 +7,14 @@
         <customObject id="-2" userLabel="File's Owner" customClass="LMHerokuWC">
             <connections>
                 <outlet property="gitInitB" destination="bHE-m0-SWX" id="p2i-PE-1he"/>
+                <outlet property="herokuAppB" destination="llg-An-9Lg" id="Dg1-y9-0XF"/>
+                <outlet property="herokuAppNameLabel" destination="O62-A3-qUw" id="l7e-iG-oSs"/>
+                <outlet property="herokuAppNameTF" destination="tAZ-ol-GRt" id="NKT-69-8LI"/>
                 <outlet property="herokuIDLabel" destination="kFY-GD-cUb" id="Ujm-Xh-nd0"/>
                 <outlet property="herokuIDTF" destination="f26-BR-5SD" id="QOM-Hq-FFv"/>
                 <outlet property="herokuLoginB" destination="cZD-eA-GEn" id="FVz-vJ-nyp"/>
+                <outlet property="herokuTV" destination="8GO-eS-y8X" id="tBo-6w-TM3"/>
+                <outlet property="herokuVisitB" destination="G5p-uo-dj0" id="GCa-Js-2Vm"/>
                 <outlet property="passwordLabel" destination="ECI-Vq-7fC" id="NZS-jD-yVc"/>
                 <outlet property="passwordTF" destination="GFr-vr-jBL" id="gPt-x9-LN6"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
@@ -161,6 +166,9 @@ Gw
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.herokuLoginLog" id="aHp-f2-thG"/>
+                        </connections>
                     </textField>
                     <box autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Vfk-nr-v1c">
                         <rect key="frame" x="12" y="455" width="372" height="5"/>
@@ -265,8 +273,6 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="-2" name="editable" keyPath="self.isGitRepo" id="GKh-UF-1Hl"/>
-                                    <binding destination="-2" name="enabled" keyPath="self.isGitRepo" previousBinding="GKh-UF-1Hl" id="EyD-fU-ds3"/>
                                     <binding destination="-2" name="value" keyPath="self.appName" id="4Cc-9T-iaP">
                                         <dictionary key="options">
                                             <bool key="NSContinuouslyUpdatesValue" value="YES"/>
@@ -283,7 +289,6 @@ Gw
                                 </buttonCell>
                                 <connections>
                                     <action selector="herokuInit:" target="-2" id="vb9-UN-VXY"/>
-                                    <binding destination="-2" name="enabled" keyPath="self.isGitRepo" id="mgZ-21-pC9"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O62-A3-qUw">
@@ -337,7 +342,7 @@ Gw
                                 </scroller>
                             </scrollView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G5p-uo-dj0">
-                                <rect key="frame" x="283" y="100" width="129" height="28"/>
+                                <rect key="frame" x="302" y="97" width="129" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Visit" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6dn-y6-bt9">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -350,7 +355,7 @@ Gw
                             </button>
                         </subviews>
                         <connections>
-                            <binding destination="-2" name="hidden" keyPath="self.herokuLogined" id="Odh-Ff-R1g">
+                            <binding destination="-2" name="hidden" keyPath="self.showHerokuAppInfo" id="EhI-b6-TeB">
                                 <dictionary key="options">
                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
                                 </dictionary>
@@ -358,15 +363,15 @@ Gw
                         </connections>
                     </customView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kF4-Up-avG">
-                        <rect key="frame" x="62" y="155" width="400" height="14"/>
+                        <rect key="frame" x="55" y="158" width="400" height="14"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You should login Heroku first." id="jvx-SA-lxc">
+                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You should login Heroku and initialize Git repo first." id="jvx-SA-lxc">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="-2" name="hidden" keyPath="self.herokuLogined" id="NKo-Ap-gG0"/>
+                            <binding destination="-2" name="hidden" keyPath="self.showHerokuAppInfo" id="Ldi-dV-WXb"/>
                         </connections>
                     </textField>
                 </subviews>
