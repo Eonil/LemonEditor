@@ -88,6 +88,7 @@
     else {
         self.herokuLoginLog = @"Login Success";
         [self setShowHerokuLoginInfo];
+        [self setShowHerokuAppInfo];
     }
 }
 
