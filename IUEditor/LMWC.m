@@ -381,6 +381,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentDocument) name:IUNotificationMQSelected object:nil];
 
+        self.window.title = [NSString stringWithFormat:@"%@.iu (%@)", _project.name, NSStringFromClass([_project class])];
 
     }
 }
