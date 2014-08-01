@@ -138,19 +138,6 @@
     [self updateHTML];
 }
 
--(void)remakeChildrenHtmlID{
-    for (IUCarouselItem *item in self.children) {
-        if ([item isKindOfClass:[IUItem class]]) {
-            [item setHtmlID:[NSString stringWithFormat:@"%@-Templorary%ld", self.name, [self.children indexOfObject:item]]];
-        }
-    }
-    for (IUCarouselItem *item in self.children) {
-        if ([item isKindOfClass:[IUItem class]]) {
-            [item setHtmlID:[NSString stringWithFormat:@"%@-%ld", self.name, [self.children indexOfObject:item]]];
-        }
-    }
-}
-
 -(void)selectionChanged:(NSNotification*)noti{
     NSMutableSet *set = [NSMutableSet setWithArray:self.children];
     [set intersectSet:[NSSet setWithArray:[noti userInfo][@"selectedObjects"]]];

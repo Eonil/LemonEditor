@@ -30,6 +30,8 @@
 #import "LMInspectorAltTextVC.h"
 #import "LMPropertyWPArticleVC.h"
 #import "LMPropertyWPMenuVC.h"
+#import "LMPropertyIUMenuBarVC.h"
+#import "LMPropertyIUMenuItemVC.h"
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 
@@ -52,7 +54,6 @@
     
     //iubox property
     LMPropertyIUHTMLVC  *propertyIUHTMLVC;
-    
     LMPropertyIUMovieVC *propertyIUMovieVC;
     LMPropertyIUFBLikeVC *propertyIUFBLikeVC;
     LMPropertyIUcarouselVC *propertyIUCarouselVC;
@@ -61,22 +62,27 @@
     LMPropertyIUWebMovieVC  *propertyIUWebMovieVC;
     LMPropertyIUImportVC    *propertyIUImportVC;
     
-    LMPropertyIUMailLinkVC  *propertyIUMailLinkVC;
-    LMPropertyIUTextFieldVC *propertyPGTextFieldVC;
-    LMPropertyIUCollectionVC  *propertyIUCollectionVC;
-    
     LMPropertyIUTextViewVC *propertyPGTextViewVC;
     LMPropertyIUPageLinkSetVC *propertyPGPageLinkSetVC;
     LMPropertyIUPageVC * propertyIUPageVC;
     LMPropertyAnalyticsVC *propertyAnalyticsVC;
     
-    LMPropertyPGFormVC *propertyPGFormVC;
+    LMPropertyIUMenuBarVC *propertyIUMenuBarVC;
+    LMPropertyIUMenuItemVC *propertyIUMenuItemVC;
     
+    //pg property
+    LMPropertyIUMailLinkVC  *propertyIUMailLinkVC;
+    LMPropertyIUTextFieldVC *propertyPGTextFieldVC;
+    LMPropertyIUCollectionVC  *propertyIUCollectionVC;
+    LMPropertyPGFormVC *propertyPGFormVC;
     PGSubmitButtonVC *propertyPGSubmitButtonVC;
     
     LMPropertyProgrammingType1VC *propertyPGType1VC;
     LMPropertyProgrammingType2VC *propertyPGType2VC;
+    LMPropertyWebProgrammingVC *propertyWebProgramming;
+
     
+    //wp property
     LMPropertyWPArticleVC *propertyWPArticleVC;
     LMPropertyWPMenuVC *propertyWPMenuVC;
     
@@ -84,7 +90,6 @@
     LMPropertyTextVC *propertyTextVC;
 #endif
     
-    LMPropertyWebProgrammingVC *propertyWebProgramming;
 
 
     NSViewController <IUPropertyDoubleClickReceiver> *doubleClickFocusVC;
@@ -112,6 +117,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        //default
         inspectorLinkVC = [[LMInspectorLinkVC alloc] initWithNibName:[LMInspectorLinkVC class].className bundle:nil];
         inspectorAltTextVC = [[LMInspectorAltTextVC alloc] initWithNibName:[LMInspectorAltTextVC class].className bundle:nil];
         
@@ -126,7 +132,11 @@
         propertyIUImportVC = [[LMPropertyIUImportVC alloc] initWithNibName:[LMPropertyIUImportVC class].className bundle:nil];
         
         propertyIUMailLinkVC = [[LMPropertyIUMailLinkVC alloc] initWithNibName:[LMPropertyIUMailLinkVC class].className bundle:nil];
+        
+        propertyIUMenuBarVC = [[LMPropertyIUMenuBarVC alloc] initWithNibName:[LMPropertyIUMenuBarVC class].className bundle:nil];
+        propertyIUMenuItemVC = [[LMPropertyIUMenuItemVC alloc] initWithNibName:[LMPropertyIUMenuItemVC class].className bundle:nil];
 
+        //pg
         propertyPGTextFieldVC = [[LMPropertyIUTextFieldVC alloc] initWithNibName:[LMPropertyIUTextFieldVC class].className bundle:nil];
         propertyIUCollectionVC = [[LMPropertyIUCollectionVC alloc] initWithNibName:[LMPropertyIUCollectionVC class].className bundle:nil];
         propertyPGTextViewVC = [[LMPropertyIUTextViewVC alloc] initWithNibName:[LMPropertyIUTextViewVC class].className bundle:nil];
@@ -147,6 +157,7 @@
 #endif
         propertyWebProgramming = [[LMPropertyWebProgrammingVC alloc] initWithNibName:[LMPropertyWebProgrammingVC class].className bundle:nil];
         
+        //wp
         propertyWPArticleVC = [[LMPropertyWPArticleVC alloc] initWithNibName:[LMPropertyWPArticleVC class].className bundle:nil];
         propertyWPMenuVC = [[LMPropertyWPMenuVC alloc] initWithNibName:[LMPropertyWPMenuVC class].className bundle:nil];
         
@@ -173,6 +184,10 @@
     [propertyPGTextFieldVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     [propertyIUCollectionVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     
+    [propertyIUMenuBarVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+    [propertyIUMenuItemVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+    
+    //pg
     [propertyPGTextViewVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     [propertyPGPageLinkSetVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     [propertyIUPageVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
@@ -185,6 +200,7 @@
 
     [propertyWebProgramming bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
 
+    //wp
     [propertyWPArticleVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     [propertyWPMenuVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     
@@ -289,6 +305,12 @@
     }
     else if ([classString isEqualToString:@"IUCollection"]){
         self.propertyVArray = @[propertyIUCollectionVC.view, propertyIUImportVC.view];
+    }
+    else if([classString isEqualToString:@"IUMenuBar"]){
+        self.propertyVArray = @[propertyIUMenuBarVC.view, inspectorLinkVC.view];
+    }
+    else if ([classString isEqualToString:@"IUMenuItem"]){
+        self.propertyVArray = @[propertyIUMenuItemVC.view, inspectorLinkVC.view];
     }
 #pragma mark IU-Simple
     else if ([classString isEqualToString:@"IUImage"]){

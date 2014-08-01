@@ -18,6 +18,7 @@
         [self.css setValue:[NSColor rgbColorRed:50 green:50 blue:50 alpha:1] forTag:IUCSSTagBGColor forWidth:IUCSSMaxViewPortWidth];
         
         self.positionType = IUPositionTypeRelative;
+        self.overflowType = IUOverflowTypeVisible;
         
         
         IUBox *titleBox = [[IUBox alloc] initWithProject:project options:options];
@@ -38,11 +39,13 @@
     }
     return self;
 }
-
 -(BOOL)shouldRemoveIU{
     return NO;
 }
 
+- (BOOL)canChangeOverflow{
+    return NO;
+}
 - (BOOL)canChangePositionType{
     return NO;
 }

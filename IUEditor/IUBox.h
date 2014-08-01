@@ -124,7 +124,6 @@ typedef enum _IUOverflowType{
 @property (nonatomic) float opacityMove;
 @property (nonatomic) float xPosMove;
 
-
 //Programming
 @property (nonatomic) NSString *pgVisibleConditionVariable;
 @property (nonatomic) NSString *pgContentVariable;

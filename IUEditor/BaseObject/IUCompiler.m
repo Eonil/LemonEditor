@@ -34,6 +34,8 @@
 #import "IUTransition.h"
 #import "JDCode.h"
 #import "IUProject.h"
+#import "IUMenuBar.h"
+#import "IUMenuItem.h"
 
 #if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
 #import "IUText.h"
@@ -418,7 +420,7 @@
 
 -(JDCode *)outputHTML:(IUBox *)iu{
     JDCode *code = [[JDCode alloc] init];
-#pragma mark IUPage
+#pragma mark IUBox
     if ([iu conformsToProtocol:@protocol(IUCodeProtocol)]) {
         NSObject <IUCodeProtocol>* iuCode = (id)iu;
         [code addCodeWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:NO]];
@@ -438,6 +440,7 @@
         }
         [code addCodeLine:@"</div>"];
     }
+#pragma mark IUPage
     else if ([iu isKindOfClass:[IUPage class]]) {
         IUPage *page = (IUPage*)iu;
         if (page.background) {
@@ -461,7 +464,59 @@
             [code addCode:[self outputHTMLAsBox:iu option:nil]];
         }
     }
+#pragma mark IUMenuBar
+    else if([iu isKindOfClass:[IUMenuBar class]]){
+        IUMenuBar *menuBar =(IUMenuBar *)iu;
+        [code addCodeLineWithFormat:@"<div %@>", [self HTMLAttributes:menuBar option:nil isEdit:NO]];
+        NSString *title = menuBar.mobileTitle;
+        if(title == nil){
+            title = @"MENU";
+        }
+        [code addCodeLineWithFormat:@"<div class=\"mobile-button\">%@<div class='menu-top'></div><div class='menu-bottom'></div></div>", title];
+        
+        if(menuBar.children.count > 0){
+            [code increaseIndentLevelForEdit];
+            [code addCodeLine:@"<ul>"];
+            
+            [code increaseIndentLevelForEdit];
+            for (IUBox *child in menuBar.children){
+                [code addCode:[self outputHTML:child]];
+            }
+            [code decreaseIndentLevelForEdit];
+            [code addCodeLine:@"</ul>"];
+            [code decreaseIndentLevelForEdit];
+        }
+        
+        [code addCodeLine:@"</div>"];
+        
+    }
+#pragma mark IUMenuItem
+    else if([iu isKindOfClass:[IUMenuItem class]]){
+        IUMenuItem *menuItem = (IUMenuItem *)iu;
+        [code addCodeLineWithFormat:@"<li %@>", [self HTMLAttributes:menuItem option:nil isEdit:NO]];
+        [code increaseIndentLevelForEdit];
 
+        if(menuItem.link){
+            [code addCodeLineWithFormat:@"%@%@</a>", [self linkHeaderString:menuItem], menuItem.text];
+        }
+        else{
+            [code addCodeLineWithFormat:@"<a href='#'>%@</a>", menuItem.text];
+        }
+        if(menuItem.children.count > 0){
+            [code addCodeLine:@"<div class='closure'></div>"];
+            [code addCodeLine:@"<ul>"];
+            [code increaseIndentLevelForEdit];
+            for(IUBox *child in menuItem.children){
+                [code addCode:[self outputHTML:child]];
+            }
+            [code decreaseIndentLevelForEdit];
+            [code addCodeLine:@"</ul>"];
+        }
+        
+        [code decreaseIndentLevelForEdit];
+        [code addCodeLine:@"</li>"];
+        
+    }
 #pragma mark IUCollection
     else if ([iu isKindOfClass:[IUCollection class]]){
         IUCollection *iuCollection = (IUCollection*)iu;
@@ -635,46 +690,66 @@
     
     
 #pragma mark - link
-    if (iu.link && [iu isKindOfClass:[PGPageLinkSet class]] == NO) {
-        
-        NSString *linkStr;
-        if([iu.link isKindOfClass:[NSString class]]){
-            linkStr = iu.link;
-        }
-        else if([iu.link isKindOfClass:[IUBox class]]){
-            linkStr = [((IUBox *)iu.link).htmlID lowercaseString];
-        }
-        NSString *linkURL = linkStr;
-        if ([linkStr isHTTPURL] == NO) {
-            if (_rule == IUCompileRuleDjango) {
-                if(iu.divLink){
-                    linkURL = [NSString stringWithFormat:@"/%@#%@", linkStr , ((IUBox *)iu.divLink).htmlID];
-                }
-                else{
-                    linkURL = [NSString stringWithFormat:@"/%@", linkStr];
-                }
-            }
-            else {
-                if(iu.divLink){
-                    linkURL = [NSString stringWithFormat:@"./%@.html#%@", linkStr, ((IUBox *)iu.divLink).htmlID];
-                }
-                else{
-                    linkURL = [NSString stringWithFormat:@"./%@.html", linkStr];
-                }
-            }
-        }
-        NSString *str;
-        if(iu.linkTarget){
-            str = [NSString stringWithFormat:@"<a href='%@' target='_blank'>", linkURL];
-        }
-        else{
-            str = [NSString stringWithFormat:@"<a href='%@'>", linkURL];
-        }
-        [code wrapTextWithStartString:str endString:@"</a>"];
+    if (iu.link && [self hasLink:iu]) {
+        NSString *linkStr = [self linkHeaderString:iu];
+        [code wrapTextWithStartString:linkStr endString:@"</a>"];
     }
     return code;
     
 }
+
+#pragma mark - link Header
+
+- (BOOL)hasLink:(IUBox *)iu{
+    if([iu isKindOfClass:[PGPageLinkSet class]]
+       || [iu isKindOfClass:[IUMenuBar class]]
+       || [iu isKindOfClass:[IUMenuItem class]]){
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (NSString *)linkHeaderString:(IUBox *)iu{
+    NSString *linkStr;
+    
+    if([iu.link isKindOfClass:[NSString class]]){
+        linkStr = iu.link;
+    }
+    else if([iu.link isKindOfClass:[IUBox class]]){
+        linkStr = [((IUBox *)iu.link).htmlID lowercaseString];
+    }
+    NSString *linkURL = linkStr;
+    if ([linkStr isHTTPURL] == NO) {
+        if (_rule == IUCompileRuleDjango) {
+            if(iu.divLink){
+                linkURL = [NSString stringWithFormat:@"/%@#%@", linkStr , ((IUBox *)iu.divLink).htmlID];
+            }
+            else{
+                linkURL = [NSString stringWithFormat:@"/%@", linkStr];
+            }
+        }
+        else {
+            if(iu.divLink){
+                linkURL = [NSString stringWithFormat:@"./%@.html#%@", linkStr, ((IUBox *)iu.divLink).htmlID];
+            }
+            else{
+                linkURL = [NSString stringWithFormat:@"./%@.html", linkStr];
+            }
+        }
+    }
+    NSString *str;
+    if(iu.linkTarget){
+        str = [NSString stringWithFormat:@"<a href='%@' target='_blank'>", linkURL];
+    }
+    else{
+        str = [NSString stringWithFormat:@"<a href='%@'>", linkURL];
+    }
+    
+    return linkStr;
+}
+
+
 
 #pragma mark - editor body source
 
@@ -756,10 +831,65 @@
             [code addCode:[self editorHTMLAsBOX:iu]];
         }
     }
+#pragma mark IUBox
     else if ([iu conformsToProtocol:@protocol(IUSampleTextProtocol) ]){
         IUBox <IUSampleTextProtocol> *sampleProtocolIU = (id)iu;
         NSString *sampleText = [sampleProtocolIU sampleText];
         [code addCodeLineWithFormat:@"<div %@ >%@</div>", [self HTMLAttributes:iu option:nil isEdit:YES], sampleText];
+    }
+    
+#pragma mark IUMenuBar
+    else if([iu isKindOfClass:[IUMenuBar class]]){
+        IUMenuBar *menuBar =(IUMenuBar *)iu;
+        [code addCodeLineWithFormat:@"<div %@>", [self HTMLAttributes:menuBar option:nil isEdit:NO]];
+        NSString *title = menuBar.mobileTitle;
+        if(title == nil){
+            title = @"MENU";
+        }
+        [code addCodeLineWithFormat:@"<div class=\"mobile-button\">%@<div class='menu-top'></div><div class='menu-bottom'></div></div>", title];
+        
+        if(menuBar.children.count > 0){
+            [code increaseIndentLevelForEdit];
+            [code addCodeLine:@"<ul>"];
+            
+            [code increaseIndentLevelForEdit];
+            for (IUBox *child in menuBar.children){
+                [code addCode:[self outputHTML:child]];
+            }
+            [code decreaseIndentLevelForEdit];
+            [code addCodeLine:@"</ul>"];
+            [code decreaseIndentLevelForEdit];
+        }
+        
+        [code addCodeLine:@"</div>"];
+        
+    }
+#pragma mark IUMenuItem
+    else if([iu isKindOfClass:[IUMenuItem class]]){
+        IUMenuItem *menuItem = (IUMenuItem *)iu;
+        [code addCodeLineWithFormat:@"<li %@>", [self HTMLAttributes:menuItem option:nil isEdit:NO]];
+        [code increaseIndentLevelForEdit];
+        
+        if(menuItem.link){
+            [code addCodeLineWithFormat:@"%@%@</a>", [self linkHeaderString:menuItem], menuItem.text];
+        }
+        else{
+            [code addCodeLineWithFormat:@"<a href='#'>%@</a>", menuItem.text];
+        }
+        if(menuItem.children.count > 0){
+            [code addCodeLine:@"<div class='closure'></div>"];
+            [code addCodeLine:@"<ul>"];
+            [code increaseIndentLevelForEdit];
+            for(IUBox *child in menuItem.children){
+                [code addCode:[self outputHTML:child]];
+            }
+            [code decreaseIndentLevelForEdit];
+            [code addCodeLine:@"</ul>"];
+        }
+        
+        [code decreaseIndentLevelForEdit];
+        [code addCodeLine:@"</li>"];
+        
     }
 #pragma mark IUCarousel
     else if([iu isKindOfClass:[IUCarousel class]]){
@@ -969,6 +1099,23 @@
     if([iu isKindOfClass:[IUCarouselItem class]]){
         if(isEdit && ((IUCarouselItem *)iu).isActive){
             [className appendString:@" active"];
+        }
+    }
+#pragma mark IUMenuBar, IUMenuItem
+    else if([iu isKindOfClass:[IUMenuBar class]] ||
+            [iu isKindOfClass:[IUMenuItem class]]){
+        if(iu.children.count >0){
+            [className appendString:@" has-sub"];
+        }
+        
+        if([iu isKindOfClass:[IUMenuBar class]]){
+            IUMenuBar *menuBar = (IUMenuBar *)iu;
+            if(menuBar.align == IUAlignCenter){
+                [className appendString:@" align-center"];
+            }
+            else if(menuBar.align == IUAlignRight){
+                [className appendString:@" align-right"];
+            }
         }
     }
     [className trim];
@@ -1348,6 +1495,42 @@
         }
         else if([identifier isEqualToString:[pageLinkSet.htmlID.cssClass stringByAppendingString:pageLinkSetButtonSelectedLiCSSPostfix]]){
              [dict putTag:@"background-color" color:pageLinkSet.selectedButtonBGColor ignoreClearColor:NO];
+        }
+    }
+#pragma mark - IUMenuItem{
+    else if([iu isKindOfClass:[IUMenuItem class]]){
+        IUMenuItem *menuItem = (IUMenuItem *)iu;
+        if([identifier isEqualToString:menuItem.itemIdentifier]){
+            id value = [menuItem.css tagDictionaryForWidth:width][IUCSSTagBGColor];
+            if(value){
+                [dict putTag:@"background-color" color:value ignoreClearColor:NO];
+            }
+            value = [menuItem.css tagDictionaryForWidth:width][IUCSSTagFontColor];
+            if(value){
+                [dict putTag:@"color" color:value ignoreClearColor:NO];
+            }
+            
+        }
+        else if([identifier isEqualToString:menuItem.closureIdentifier]){
+            id value = [menuItem.css tagDictionaryForWidth:width][IUCSSTagFontColor];
+            if(value){
+                NSString *color = [[(NSColor *)value rgbString] stringByAppendingString:@"!important"];
+                if(menuItem.depth == 1){
+                    [dict putTag:@"border-top-color" string:color];
+                }
+                else if(menuItem.depth ==2){
+                    [dict putTag:@"border-left-color" string:color];
+                }
+            }
+        }
+        else if([identifier isEqualToString:menuItem.hoverItemIdentifier] ||
+                [identifier isEqualToString:menuItem.activeItemIdentifier]){
+            if(menuItem.bgActive){
+                [dict putTag:@"background-color" color:menuItem.bgActive ignoreClearColor:NO];
+            }
+            if(menuItem.fontActive){
+                [dict putTag:@"color" color:menuItem.fontActive ignoreClearColor:NO];
+            }
         }
     }
 #pragma mark - IUCarousel

@@ -290,7 +290,7 @@
     _css = css;
 }
 
-#pragma <#arguments#>
+#pragma mark - Event
 
 - (void)setEvent:(IUEvent *)event{
     _event = event;

@@ -348,9 +348,9 @@
 	</dict>
 	<dict>
 		<key>isWidget</key>
-		<false/>
+		<true/>
 		<key>className</key>
-		<string>IUNavigation</string>
+		<string>IUMenuBar</string>
 		<key>classImage</key>
 		<string>tool_navi</string>
 		<key>navImage</key>
@@ -361,6 +361,14 @@
 		<string></string>
 		<key>widgetClass</key>
 		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>isWidget</key>
+		<false/>
+		<key>className</key>
+		<string>IUMenuItem</string>
+		<key>navImage</key>
+		<string>stack_carousel_item</string>
 	</dict>
 	<dict>
 		<key>isWidget</key>

@@ -24,9 +24,6 @@
     return NO;
 }
 
--(NSString*)hoverIdentifier{
-    return [self stringByAppendingString:@":hover"];
-}
 
 - (BOOL)isHoverTag{
     if ([self isSameTag:IUCSSTagHoverBGImagePositionEnable] || [self isSameTag:IUCSSTagHoverBGImageX] || [self isSameTag:IUCSSTagHoverBGImageY]
