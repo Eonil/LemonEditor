@@ -163,6 +163,12 @@
     [self updateAssembledTagDictionary];
 }
 
+-(void)removeTagDictionaryForWidth:(NSInteger)width{
+    if([_cssFrameDict objectForKey:@(width)]){
+        [_cssFrameDict removeObjectForKey:@(width)];
+    }
+}
+
 -(NSMutableDictionary*)tagDictionaryForEditWidth{
     return _cssFrameDict[@(_editWidth)];
 }

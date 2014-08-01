@@ -33,6 +33,7 @@
 -(void)eradicateTag:(IUCSSTag)type;
 
 //get css tag dictionary for specific width
+-(void)removeTagDictionaryForWidth:(NSInteger)width;
 -(NSDictionary*)tagDictionaryForWidth:(NSInteger)width;
 -(NSArray*)allEditWidth;
 

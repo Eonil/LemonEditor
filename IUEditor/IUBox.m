@@ -171,7 +171,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMQSize:) name:IUNotificationMQAdded object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMQSize:) name:IUNotificationMQRemoved object:nil];
     for (IUBox *box in self.children) {
         [box connectWithEditor];
     }
@@ -405,6 +405,12 @@
         [_css copyMaxSizeToSize:oldMaxSize];
     }
     
+}
+
+- (void)removeMQSize:(NSNotification *)notification{
+    NSInteger size = [[notification.userInfo objectForKey:IUNotificationMQSize] integerValue];
+    [_css removeTagDictionaryForWidth:size];
+
 }
 
 

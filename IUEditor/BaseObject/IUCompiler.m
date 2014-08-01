@@ -1652,6 +1652,9 @@
         if(value && [value boolValue]){
             [dict putTag:@"display" string:@"none"];
         }
+        else{
+            [dict putTag:@"display" string:@"inherit"];
+        }
         
         value = cssTagDict[IUCSSTagBGColor];
         if(value){
