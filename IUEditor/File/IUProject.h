@@ -55,7 +55,7 @@ static NSString *IUBackgroundGroupName = @"background";
 static NSString *IUClassGroupName = @"class";
 
 
-@interface IUProject : NSObject <IUFile, IUResourcePathProtocol, NSCoding>{
+@interface IUProject : NSObject <IUFile, IUResourcePathProtocol, NSCoding, NSFileManagerDelegate>{
     IUSheetGroup *_pageGroup;
     IUSheetGroup *_backgroundGroup;
     IUSheetGroup *_classGroup;

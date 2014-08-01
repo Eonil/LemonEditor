@@ -345,6 +345,13 @@
     }
 }
 
+- (BOOL)fileManager:(NSFileManager *)fileManager shouldProceedAfterError:(NSError *)error copyingItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath{
+    if ([error code] == NSFileWriteFileExistsError) //error code for: The operation couldn’t be completed. File exists
+        return YES;
+    else
+        return NO;
+}
+
 - (BOOL)build:(NSError**)error{
     /*
      Note :
@@ -360,8 +367,9 @@
         [[NSFileManager defaultManager] createDirectoryAtPath:buildDirectoryPath withIntermediateDirectories:YES attributes:nil error:error];
     }
     
+    [[NSFileManager defaultManager] setDelegate:self];
     [[NSFileManager defaultManager] copyItemAtPath:_resourceGroup.absolutePath toPath:buildResourcePath error:error];
-    
+    [[NSFileManager defaultManager] setDelegate:nil];
     NSString *resourceCSSPath = [buildResourcePath stringByAppendingPathComponent:@"css"];
 
 

@@ -40,7 +40,7 @@
     
     [_extraCodeTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"extraCode"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
-    [_metaImageTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"image"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_metaImageTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"metaImage"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
 
 
     NSDictionary *bindingOption = [NSDictionary
