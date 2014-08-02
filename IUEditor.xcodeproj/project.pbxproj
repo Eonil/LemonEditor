@@ -579,7 +579,6 @@
 		3DF8046B18FF790400913505 /* LMPropertyShadowVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DF8046918FF790400913505 /* LMPropertyShadowVC.xib */; };
 		3DFB86481961628800A20960 /* LMPropertyWebProgrammingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DFB86461961628800A20960 /* LMPropertyWebProgrammingVC.m */; };
 		3DFB86491961628800A20960 /* LMPropertyWebProgrammingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB86471961628800A20960 /* LMPropertyWebProgrammingVC.xib */; };
-		55E10CE6198B595400C7BE1E /* heroku in Resources */ = {isa = PBXBuildFile; fileRef = 55E10CE5198B595400C7BE1E /* heroku */; };
 		58FF6B8E1946EA2B009A86F9 /* PGSubmitButtonVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FF6B8C1946EA2B009A86F9 /* PGSubmitButtonVC.m */; };
 		58FF6B8F1946EA2B009A86F9 /* PGSubmitButtonVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FF6B8D1946EA2B009A86F9 /* PGSubmitButtonVC.xib */; };
 		6905FB521925F17300E4DBC3 /* JDCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6905FB511925F17300E4DBC3 /* JDCode.m */; };
@@ -617,7 +616,8 @@
 		69346623192B805000F82DAF /* LMCommandVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69346622192B805000F82DAF /* LMCommandVC.xib */; };
 		69347430198A8B21009E4472 /* composer.zip in Resources */ = {isa = PBXBuildFile; fileRef = 6934742F198A8B21009E4472 /* composer.zip */; };
 		69347432198A9D52009E4472 /* index.php in Resources */ = {isa = PBXBuildFile; fileRef = 69347431198A9D52009E4472 /* index.php */; };
-		69347435198B6878009E4472 /* heroku_login in Resources */ = {isa = PBXBuildFile; fileRef = 69347434198B6878009E4472 /* heroku_login */; };
+		69347435198B6878009E4472 /* heroku_login.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69347434198B6878009E4472 /* heroku_login.sh */; };
+		69347439198C0F84009E4472 /* heroku_push.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69347438198C0F84009E4472 /* heroku_push.sh */; };
 		693849E41914D711005C0546 /* NSIndexPath+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */; };
 		693F24791977929C00451500 /* LMPropertyWPMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 693F24771977929C00451500 /* LMPropertyWPMenuVC.m */; };
 		693F247A1977929C00451500 /* LMPropertyWPMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */; };
@@ -712,7 +712,7 @@
 		69BD0C8B197D64CE00CB4815 /* sftp_download.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69BD0C8A197D64CE00CB4815 /* sftp_download.sh */; };
 		69BE6A4C1987E1DA00F84850 /* LMHerokuWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BE6A4A1987E1DA00F84850 /* LMHerokuWC.m */; };
 		69BE6A4D1987E1DA00F84850 /* LMHerokuWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A4B1987E1DA00F84850 /* LMHerokuWC.xib */; };
-		69BE6A4F1987F55C00F84850 /* herokuauth.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A4E1987F55C00F84850 /* herokuauth.sh */; };
+		69BE6A4F1987F55C00F84850 /* heroku_auth.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A4E1987F55C00F84850 /* heroku_auth.sh */; };
 		69BE6A511989527000F84850 /* git in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A501989527000F84850 /* git */; };
 		69BE6A551989847300F84850 /* config.ru in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A541989847300F84850 /* config.ru */; };
 		69BE6A571989848300F84850 /* config.ruunit in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A561989848300F84850 /* config.ruunit */; };
@@ -1486,7 +1486,6 @@
 		3DFB86451961628800A20960 /* LMPropertyWebProgrammingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyWebProgrammingVC.h; path = Editor/LMPropertyWebProgrammingVC.h; sourceTree = "<group>"; };
 		3DFB86461961628800A20960 /* LMPropertyWebProgrammingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPropertyWebProgrammingVC.m; path = Editor/LMPropertyWebProgrammingVC.m; sourceTree = "<group>"; };
 		3DFB86471961628800A20960 /* LMPropertyWebProgrammingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyWebProgrammingVC.xib; path = Editor/LMPropertyWebProgrammingVC.xib; sourceTree = "<group>"; };
-		55E10CE5198B595400C7BE1E /* heroku */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = heroku; sourceTree = "<group>"; };
 		58FF6B8B1946EA2B009A86F9 /* PGSubmitButtonVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGSubmitButtonVC.h; sourceTree = "<group>"; };
 		58FF6B8C1946EA2B009A86F9 /* PGSubmitButtonVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGSubmitButtonVC.m; sourceTree = "<group>"; };
 		58FF6B8D1946EA2B009A86F9 /* PGSubmitButtonVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PGSubmitButtonVC.xib; sourceTree = "<group>"; };
@@ -1538,7 +1537,8 @@
 		69346622192B805000F82DAF /* LMCommandVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMCommandVC.xib; sourceTree = "<group>"; };
 		6934742F198A8B21009E4472 /* composer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = composer.zip; path = ../composer.zip; sourceTree = "<group>"; };
 		69347431198A9D52009E4472 /* index.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = index.php; path = ../index.php; sourceTree = "<group>"; };
-		69347434198B6878009E4472 /* heroku_login */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = heroku_login; sourceTree = "<group>"; };
+		69347434198B6878009E4472 /* heroku_login.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = heroku_login.sh; path = ../heroku_login.sh; sourceTree = "<group>"; };
+		69347438198C0F84009E4472 /* heroku_push.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = heroku_push.sh; path = ../heroku_push.sh; sourceTree = "<group>"; };
 		693849E21914D711005C0546 /* NSIndexPath+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+JDExtension.h"; sourceTree = "<group>"; };
 		693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+JDExtension.m"; sourceTree = "<group>"; };
 		693F24761977929C00451500 /* LMPropertyWPMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyWPMenuVC.h; sourceTree = "<group>"; };
@@ -1695,7 +1695,7 @@
 		69BE6A491987E1DA00F84850 /* LMHerokuWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMHerokuWC.h; path = ../LMHerokuWC.h; sourceTree = "<group>"; };
 		69BE6A4A1987E1DA00F84850 /* LMHerokuWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMHerokuWC.m; path = ../LMHerokuWC.m; sourceTree = "<group>"; };
 		69BE6A4B1987E1DA00F84850 /* LMHerokuWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMHerokuWC.xib; path = ../LMHerokuWC.xib; sourceTree = "<group>"; };
-		69BE6A4E1987F55C00F84850 /* herokuauth.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = herokuauth.sh; path = ../herokuauth.sh; sourceTree = "<group>"; };
+		69BE6A4E1987F55C00F84850 /* heroku_auth.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = heroku_auth.sh; path = ../heroku_auth.sh; sourceTree = "<group>"; };
 		69BE6A501989527000F84850 /* git */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = git; path = ../git; sourceTree = "<group>"; };
 		69BE6A541989847300F84850 /* config.ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config.ru; path = ../config.ru; sourceTree = "<group>"; };
 		69BE6A561989848300F84850 /* config.ruunit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config.ruunit; path = ../config.ruunit; sourceTree = "<group>"; };
@@ -3204,6 +3204,9 @@
 		69347433198ADD9B009E4472 /* SyncUtil */ = {
 			isa = PBXGroup;
 			children = (
+				69347434198B6878009E4472 /* heroku_login.sh */,
+				69BE6A4E1987F55C00F84850 /* heroku_auth.sh */,
+				69347438198C0F84009E4472 /* heroku_push.sh */,
 				69BE6A491987E1DA00F84850 /* LMHerokuWC.h */,
 				69BE6A4A1987E1DA00F84850 /* LMHerokuWC.m */,
 				69BE6A4B1987E1DA00F84850 /* LMHerokuWC.xib */,
@@ -3215,7 +3218,6 @@
 				69347431198A9D52009E4472 /* index.php */,
 				69BE6A561989848300F84850 /* config.ruunit */,
 				69BE6A501989527000F84850 /* git */,
-				69BE6A4E1987F55C00F84850 /* herokuauth.sh */,
 			);
 			name = SyncUtil;
 			sourceTree = "<group>";
@@ -3333,8 +3335,6 @@
 		69C5759E18D6F61E0016F050 = {
 			isa = PBXGroup;
 			children = (
-				69347434198B6878009E4472 /* heroku_login */,
-				55E10CE5198B595400C7BE1E /* heroku */,
 				CBFBE67C192A07A300F03F76 /* SampleTemplate */,
 				690A409E18E170AC00095263 /* Resource */,
 				69DE5CE419614E2B0050D020 /* Server */,
@@ -3714,7 +3714,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55E10CE6198B595400C7BE1E /* heroku in Resources */,
 				3D19E4251987805E00A50D35 /* scp_download.sh in Resources */,
 				3D19E4261987805E00A50D35 /* scp_upload.sh in Resources */,
 				3DC4AAF2198224F40024170A /* iueditor.mp4 in Resources */,
@@ -3968,7 +3967,7 @@
 				2641F454195A72FF00DDF1C3 /* bg_v_bottom.png in Resources */,
 				3DF8041918FE62F200913505 /* view_border.png in Resources */,
 				69CFCAC318EAA21E00E3048A /* sample.jpg in Resources */,
-				69BE6A4F1987F55C00F84850 /* herokuauth.sh in Resources */,
+				69BE6A4F1987F55C00F84850 /* heroku_auth.sh in Resources */,
 				692C4DC41966A15400EAB2E7 /* tracingOverview.pages in Resources */,
 				3DF803E718FE62C900913505 /* ic_document.png in Resources */,
 				26378CDD194EC42A004B5001 /* import.png in Resources */,
@@ -4034,7 +4033,7 @@
 				26EFF41D194AECB900317C3E /* auto_resize.png in Resources */,
 				3DED270119010C55001A1D67 /* LMPropertyIUTransitionVC.xib in Resources */,
 				3DF8044218FE62FC00913505 /* tool_navi@2x.png in Resources */,
-				69347435198B6878009E4472 /* heroku_login in Resources */,
+				69347435198B6878009E4472 /* heroku_login.sh in Resources */,
 				3DB3ACFE18EC1F700046DFB7 /* LMCanvasVC.xib in Resources */,
 				3DED26BB1900F450001A1D67 /* panel_left_on.png in Resources */,
 				267CB1B9190F95750079E565 /* bg_center.png in Resources */,
@@ -4238,6 +4237,7 @@
 				69860E6019768148001C3F7F /* wp.jpg in Resources */,
 				CBA878051963D3CF00075294 /* Tutorial05_en.png in Resources */,
 				06855608198A63430073FA83 /* JicJac_Chair.png in Resources */,
+				69347439198C0F84009E4472 /* heroku_push.sh in Resources */,
 				267CB1A0190F93370079E565 /* tab_event_on@2x.png in Resources */,
 				3DED26881900D329001A1D67 /* stack_html.png in Resources */,
 				2628C937191A361800D9D8CD /* tool_submit@2x.png in Resources */,

@@ -10,31 +10,50 @@
 #import "JDHerokuUtil.h"
 #import "JDGitUtil.h"
 #import "JDDateTimeUtil.h"
+#import "JDShellUtil.h"
 
 @interface LMHerokuWC  () <JDHerokuUtilLoginDelegate, JDGitUtilDelegate>
+
+//git info
+@property BOOL     isGitRepo; // yes to repo. no to not initialized repo
+@property NSString *gitRepoStatus; // text for git repo status log
+
+//heroku login information
 @property NSString *herokuID;
 @property NSString *password;
-@property NSString *appName;
-@property BOOL     isGitRepo;
-@property NSString *gitRepoStatus;
+
+//heroku app information
+@property NSString *herokuAppName;
+
+
 @property (weak) IBOutlet NSButton *gitInitB;
+
+
 @property (weak) IBOutlet NSTextField *herokuAppNameTF;
 @property (weak) IBOutlet NSTextField *herokuAppNameLabel;
-@property (unsafe_unretained) IBOutlet NSTextView *herokuTV;
 @property (weak) IBOutlet NSButton *herokuVisitB;
+@property (weak) IBOutlet NSButton *herokuCreateB;
 
-@property (weak) IBOutlet NSTextField *passwordLabel;
-@property (weak) IBOutlet NSTextField *passwordTF;
-@property (weak) IBOutlet NSButton *herokuLoginB;
-@property (weak) IBOutlet NSTextField *herokuIDTF;
-@property (weak) IBOutlet NSTextField *herokuIDLabel;
-@property NSString *herokuApp;
-@property (weak) IBOutlet NSButton *herokuAppB;
-@property BOOL showHerokuAppInfo;
+@property (unsafe_unretained) IBOutlet NSTextView *herokuTV;
 
 @property BOOL herokuLogined;
 @property NSString *herokuLoginLog;
+
+
+@property (strong) IBOutlet NSView *herokuNotInstalledV;
+@property (strong) IBOutlet NSView *gitInfoV;
+@property (strong) IBOutlet NSView *herokuNotLoginedV;
+@property (strong) IBOutlet NSView *herokuLoginedV;
+@property (strong) IBOutlet NSView *herokuAppInfoV;
+
+
+
+
 @end
+
+
+
+
 
 @implementation LMHerokuWC  {
     JDHerokuUtil *herokuUtil;
@@ -58,22 +77,103 @@
 {
     [super windowDidLoad];
     // check heroku login
-    [self refreshGitUI];
-    [self setShowHerokuLoginInfo];
-    [self setShowHerokuAppInfo];
+    
+    [self rearrangeView];
     windowLoaded = YES;
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
-- (IBAction)sync:(id)sender{
-    //create configru
-    [herokuUtil prepareHerokuUpload:_gitRepoPath];
-    
-    [gitUtil addAll];
-    NSString *commitMessage = [JDDateTimeUtil stringForDate:[NSDate date] option:JDDateStringTimestampType];
-    [gitUtil commit:commitMessage];
-    [gitUtil push:@"heroku" branch:@"master" force:YES];
+
+
+- (void)setGitRepoPath:(NSString *)path{
+    _gitRepoPath = [path copy];
+    gitUtil = [[JDGitUtil alloc] initWithGitRepoPath:_gitRepoPath];
+    gitUtil.delegate = self;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:_gitRepoPath isDirectory:NO] == NO) {
+        self.isGitRepo = NO;
+        self.gitRepoStatus = @"No directory Existed. Please build first.";
+    }
+    else {
+        self.isGitRepo = [gitUtil isGitRepo];
+    }
 }
+
+
+
+- (NSString*)gitRepoPath{
+    return _gitRepoPath;
+}
+
+- (void)rearrangeView{
+    BOOL herokuInstalled = [JDShellUtil canFindCommand:@"heroku"];
+    
+    //hide all view
+    [self.herokuNotInstalledV setHidden:YES];
+    [self.gitInfoV setHidden:YES];
+    [self.herokuNotLoginedV setHidden:YES];
+    [self.herokuLoginedV setHidden:YES];
+    [self.herokuAppInfoV setHidden:YES];
+
+    if (herokuInstalled == NO) {
+        //show
+        [self.herokuNotInstalledV setHidden:NO];
+    }
+    else {
+        [self.gitInfoV setHidden:NO];
+        [self.gitInitB setHidden:NO];
+
+        BOOL isGitRepo = [gitUtil isGitRepo];
+        if (isGitRepo) {
+            //hide git init button
+            [self.gitInitB setHidden:YES];
+
+            //show heroku login info
+            self.herokuID = [JDHerokuUtil loginID];
+
+            if (self.herokuID == NO) {
+                [self.herokuNotLoginedV setHidden:NO];
+            }
+            else {
+                [self.herokuLoginedV setHidden:NO];
+                [self.herokuAppInfoV setHidden:NO];
+                self.herokuAppName = [JDHerokuUtil herokuAppNameAtPath:self.gitRepoPath];
+                if (self.herokuAppName) {
+                    [self.herokuAppNameTF setHidden:YES];
+                    [self.herokuCreateB setHidden:YES];
+                    
+                    [self.herokuAppNameLabel setHidden:NO];
+                    [self.herokuVisitB setHidden:NO];
+                }
+                else {
+                    [self.herokuAppNameTF setHidden:NO];
+                    [self.herokuCreateB setHidden:NO];
+                    
+                    [self.herokuAppNameLabel setHidden:YES];
+                    [self.herokuVisitB setHidden:YES];
+                }
+            }
+        }
+    }
+}
+
+#pragma mark Heroku Not Install V
+
+- (IBAction)visitHerokuDownloadPage:(id)sender{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://toolbelt.heroku.com" ]];
+}
+
+#pragma mark Git Info V
+
+- (IBAction)gitInit:(id)sender{
+    JDGitUtil *util = [[JDGitUtil alloc] initWithGitRepoPath:_gitRepoPath];
+    BOOL result = [util gitInit];
+    if (result) {
+        self.isGitRepo = YES;
+        [self.gitInitB setHidden:YES];
+        [self rearrangeView];
+    }
+}
+
+#pragma mark Heroku Login
 
 - (IBAction)login:(id)sender {
     herokuUtil.loginDelegate = self;
@@ -87,22 +187,25 @@
     }
     else {
         self.herokuLoginLog = @"Login Success";
-        [self setShowHerokuLoginInfo];
-        [self setShowHerokuAppInfo];
+        [self rearrangeView];
     }
 }
 
-- (IBAction)herokuInit:(id)sender {
+
+#pragma mark Heroku App Info
+
+- (IBAction)herokuCreate:(id)sender {
     //heroku create app
     NSString *resultLog;
-    BOOL result = [herokuUtil create:self.appName resultLog:&resultLog];
+    NSString *enteredHerokuAppName = [self.herokuAppNameTF stringValue];
+    BOOL result = [herokuUtil create:enteredHerokuAppName resultLog:&resultLog];
     if (result) {
         //YES
         //combine git
-        [herokuUtil combineGitPath:self.gitRepoPath appName:self.appName];
+        [herokuUtil combineGitPath:self.gitRepoPath appName:enteredHerokuAppName];
         [JDUIUtil hudAlert:@"App created. Press Sync." second:2];
-        [self addHerokuLog:@"App created. Press Sync."];
-        [self setShowHerokuAppInfo];
+        [self addHerokuLog:@"App created. Press Sync.\n"];
+        [self rearrangeView];
     }
     else {
         //Failed
@@ -110,105 +213,23 @@
     }
 }
 
-- (IBAction)gitInit:(id)sender{
-    JDGitUtil *util = [[JDGitUtil alloc] initWithGitRepoPath:_gitRepoPath];
-    BOOL result = [util gitInit];
-    if (result) {
-        self.isGitRepo = YES;
-        [self.gitInitB setHidden:YES];
-        [self refreshGitUI];
-        [self showHerokuAppInfo];
-    }
-}
 
-- (void)refreshGitUI{
-    if (self.isGitRepo) {
-        self.gitRepoStatus = @"Git Status OK";
-        [self.gitInitB setHidden:YES];
-    }
-    else {
-        self.gitRepoStatus = @"Not Set : Need to be initialized";
-        [self.gitInitB setHidden:NO];
-    }
-}
-
-- (void)setGitRepoPath:(NSString *)path{
-    _gitRepoPath = [path copy];
-    gitUtil = [[JDGitUtil alloc] initWithGitRepoPath:_gitRepoPath];
-    gitUtil.delegate = self;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:_gitRepoPath isDirectory:NO] == NO) {
-        self.isGitRepo = NO;
-        self.gitRepoStatus = @"No directory Existed. Please build first.";
-    }
-    else {
-        self.isGitRepo = [gitUtil isGitRepo];
-        [self refreshGitUI];
-    }
-    [self setShowHerokuLoginInfo];
-    [self setShowHerokuAppInfo];
-}
-
-- (void)setShowHerokuAppInfo{
-    if (self.herokuLogined && self.isGitRepo) {
-        self.showHerokuAppInfo = YES;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (windowLoaded) {
-                [self addHerokuLog:[JDHerokuUtil configMessageForPath:self.gitRepoPath]];
-                [self addHerokuLog:@"\n"];
-            }
-            self.herokuApp = [JDHerokuUtil herokuAppNameAtPath:self.gitRepoPath];
-            
-            if (self.herokuApp) {
-                [self.herokuAppNameTF setHidden:YES];
-                [self.herokuAppNameLabel setHidden:NO];
-                [self.herokuAppB setHidden:YES];
-                [self.herokuVisitB setHidden:NO];
-            }
-            else {
-                [self.herokuAppNameTF setHidden:NO];
-                [self.herokuAppNameLabel setHidden:YES];
-                [self.herokuAppB setHidden:NO];
-                [self.herokuVisitB setHidden:YES];
-            }
-        });
-    }
-    else {
-        self.showHerokuAppInfo = NO;
-    }
-}
-    
 - (IBAction)performHerokuVisit:(id)sender {
-    NSString *urlString = [NSString stringWithFormat:@"http://%@.herokuapp.com", self.herokuApp];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@.herokuapp.com", self.herokuAppName];
     NSURL *url = [NSURL URLWithString:urlString];
     [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
-- (void)setShowHerokuLoginInfo{
-    self.herokuID = [JDHerokuUtil loginID];
-    if (self.herokuID) {
-        self.herokuLogined = YES;
-        [_herokuIDLabel setHidden:NO];
-        [_herokuIDTF setHidden:YES];
-        [_herokuLoginB setHidden:YES];
-        [_passwordTF setHidden:YES];
-        [_passwordLabel setHidden:YES];
-    }
-    else {
-        self.herokuLogined = NO;
-        [_herokuIDLabel setHidden:YES];
-        [_herokuIDTF setHidden:NO];
-        [_herokuLoginB setHidden:NO];
-        [_passwordTF setHidden:NO];
-        [_passwordLabel setHidden:NO];
-    }
-}
 
-- (NSString*)gitRepoPath{
-    return _gitRepoPath;
-}
 
-- (IBAction)pressCancel:(id)sender {
-    [self.window.sheetParent endSheet:self.window];
+- (IBAction)sync:(id)sender{
+    //create configru
+    [herokuUtil prepareHerokuUpload:_gitRepoPath];
+    
+    [gitUtil addAll];
+    NSString *commitMessage = [JDDateTimeUtil stringForDate:[NSDate date] option:JDDateStringTimestampType];
+    [gitUtil commit:commitMessage];
+    [gitUtil pushHeroku:YES];
 }
 
 - (void)gitUtil:(JDGitUtil*)util pushMessageReceived:(NSString*)aMessage{
@@ -218,9 +239,16 @@
 - (void)gitUtilPushFinished:(JDGitUtil*)util{
     [self addHerokuLog:@"\n"];
     [self addHerokuLog:@"---- SYNC FINISHED ---\n"];
-//    [JDUIUtil hudAlert:@"Sync Success" second:3];
-//    [self.window.sheetParent c]
+    //    [JDUIUtil hudAlert:@"Sync Success" second:3];
+    //    [self.window.sheetParent c]
 }
+
+
+
+- (IBAction)pressCancel:(id)sender {
+    [self.window.sheetParent endSheet:self.window];
+}
+
 
 - (void)addHerokuLog:(NSString*)str{
     if ([str length]) {

@@ -40,4 +40,6 @@
 -(int)execute:(NSString*)command atDirectory:(NSString*)directory arguments:(NSArray*)arguments delegate:(id <JDShellUtilPipeDelegate>)delegate;
 
 @property NSString *name;
+
++ (BOOL)canFindCommand:(NSString*)command;
 @end

@@ -77,6 +77,18 @@
     [shellUtil execute:gitPath atDirectory:filePath arguments:arguments delegate:self];
 }
 
+-(void)pushHeroku:(BOOL)force{
+    NSString *herokuPushPath = [[NSBundle mainBundle] pathForResource:@"heroku_push" ofType:@""];
+    NSString *gitPath =  [[NSBundle mainBundle] pathForResource:@"git" ofType:@""];
+    if (force) {
+        [shellUtil execute:herokuPushPath atDirectory:filePath arguments:@[gitPath, @"force"] delegate:self];
+    }
+    else {
+        [shellUtil execute:herokuPushPath atDirectory:filePath arguments:@[gitPath] delegate:self];
+    }
+}
+
+
 - (void)shellUtil:(JDShellUtil*)util standardOutputDataReceived:(NSData*)data{
     NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if ([message length]) {

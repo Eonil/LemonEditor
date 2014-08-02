@@ -34,7 +34,8 @@
 }
 
 +(NSString*)loginID{
-    NSString *resPath = [[NSBundle mainBundle] pathForResource:@"herokuauth.sh" ofType:nil];
+    NSString *resPath = [[NSBundle mainBundle] pathForResource:@"heroku_auth" ofType:@"sh"];
+
     NSString *errLog, *log;
     NSInteger resultCode = [JDShellUtil execute:resPath atDirectory:@"/" arguments:nil stdOut:&log stdErr:&errLog];
     if (resultCode == 0) {
@@ -60,11 +61,12 @@
 }
 
 -(void)login:(NSString*)myid password:(NSString*)mypasswd{
-    NSString *resPath = [[NSBundle mainBundle] pathForResource:@"heroku_login" ofType:nil];
     [self willChangeValueForKey:@"logging"];
     _logging = YES;
     [self didChangeValueForKey:@"logging"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
+        NSString *resPath = [[NSBundle mainBundle] pathForResource:@"heroku_login" ofType:@"sh"];
+
         NSInteger resultCode = [JDShellUtil execute:resPath atDirectory:@"/" arguments:@[myid, mypasswd] stdOut:nil stdErr:nil];
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [self willChangeValueForKey:@"logging"];

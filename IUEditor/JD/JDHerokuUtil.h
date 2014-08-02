@@ -39,4 +39,5 @@ static NSString * kNotiHerokuLogin = @"kNotiHerokuLogin";
 
 @property id <JDHerokuUtilLoginDelegate>    loginDelegate;
 - (void)prepareHerokuUpload:(NSString*)path;
+
 @end

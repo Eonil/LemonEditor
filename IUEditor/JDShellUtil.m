@@ -213,6 +213,15 @@
     [outputHandle writeData:data];
 }
 
++ (BOOL)canFindCommand:(NSString*)command{
+    NSString *stdOut;
+    NSString *stdErr;
+    [self execute:command stdOut:&stdOut stdErr:&stdErr];
+    if ([stdErr containsString:@"command not found"]) {
+        return NO;
+    }
+    return YES;
+}
 
 
 @end
