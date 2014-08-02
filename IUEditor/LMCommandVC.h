@@ -12,7 +12,7 @@
 #import "JDShellUtil.h"
 #import "JDSyncUtil.h"
 
-@interface LMCommandVC : NSViewController <JDShellUtilPipeDelegate, JDSyncUtilDeleagate>
+@interface LMCommandVC : NSViewController <JDShellUtilPipeDelegate>
 
 @property (weak, nonatomic) IUSheetController      *docController;
 - (IBAction)toggleRecording:(id)sender;
