@@ -9,6 +9,14 @@
 #import "WPArticleList.h"
 #import "WPArticle.h"
 
+/*
+ code structure
+ 
+ WP article list prefix code
+       [wp article code]
+ wp article list postfix code
+ */
+
 @implementation WPArticleList
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
