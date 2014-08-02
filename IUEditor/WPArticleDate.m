@@ -17,5 +17,9 @@
 - (NSString*)sampleText{
     return @"Publishing date will be here";
 }
+- (BOOL)shouldCompileFontInfo{
+    return YES;
+}
+
 
 @end

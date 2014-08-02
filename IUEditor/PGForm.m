@@ -46,8 +46,5 @@
     
 }
 
-- (BOOL)hasText{
-    return NO;
-}
 @end
     

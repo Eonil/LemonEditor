@@ -690,11 +690,11 @@
 
 
 #pragma mark has frame
-- (BOOL)hasText{
-    if(self.children.count > 0){
-        return NO;
+- (BOOL)shouldCompileFontInfo{
+    if (self.text || self.pgContentVariable) {
+        return YES;
     }
-    return YES;
+    return NO;
 }
 
 -(BOOL)hasX{

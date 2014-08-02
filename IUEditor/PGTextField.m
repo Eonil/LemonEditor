@@ -66,7 +66,7 @@
 
 #pragma mark -
 #pragma mark setting
-- (BOOL)hasText{
+- (BOOL)shouldCompileFontInfo{
     return YES;
 }
 

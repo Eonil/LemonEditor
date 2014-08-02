@@ -183,7 +183,7 @@ typedef enum _IUOverflowType{
 - (BOOL)hasY;
 - (BOOL)hasWidth;
 - (BOOL)hasHeight;
-- (BOOL)hasText;
+- (BOOL)shouldCompileFontInfo;
 
 - (void)setPixelFrame:(NSRect)frame;
 - (void)setPercentFrame:(NSRect)frame;

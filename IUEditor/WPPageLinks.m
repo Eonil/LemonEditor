@@ -15,4 +15,9 @@
 - (NSString*)sampleText{
     return @"Page numbers will be here.";
 }
+
+- (BOOL)shouldCompileFontInfo{
+    return YES;
+}
+
 @end

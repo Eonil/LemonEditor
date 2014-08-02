@@ -40,10 +40,10 @@
 //    NSDictionary *enableBinding = @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
 
 //    [_ellipsisTF bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pgContentVariable"] options:enableBinding];
-//    [_ellipsisTF bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"hasText"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+//    [_ellipsisTF bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"shouldCompileFontInfo"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
 //    [_ellipsisStepper bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pgContentVariable"] options:enableBinding];
-//    [_ellipsisStepper bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"hasText"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+//    [_ellipsisStepper bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"shouldCompileFontInfo"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
     [_ellipsisTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagEllipsis] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_ellipsisStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagEllipsis] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];

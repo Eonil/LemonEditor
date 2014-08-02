@@ -109,7 +109,7 @@
     _inputName = inputName;
 }
 
-- (BOOL)hasText{
+- (BOOL)shouldCompileFontInfo{
     return YES;
 }
 

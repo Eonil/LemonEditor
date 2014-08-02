@@ -993,7 +993,7 @@
     }
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
-    if([iu isMemberOfClass:[IUBox class]] && iu.lineHeightAuto && iu.text.length > 0){
+    if([iu shouldCompileFontInfo]){
         [retString appendString:@" autoLineHeight='1'"];
     }
 #else
@@ -1844,10 +1844,10 @@
 #if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
            [obj isKindOfClass:[IUText class]]||
 #else
-           [obj isMemberOfClass:[IUBox class]] ||
+           [obj shouldCompileFontInfo]
 #endif
-           [obj isKindOfClass:[PGTextField class]] || [obj isKindOfClass:[PGTextView class]] || [obj isKindOfClass:[PGPageLinkSet class]] || [obj isKindOfClass:[PGSubmitButton class]] || [obj conformsToProtocol:@protocol(IUSampleTextProtocol)]){
-            
+
+           ){
             value = cssTagDict[IUCSSTagFontName];
             if(value){
                 NSString *font=cssTagDict[IUCSSTagFontName];

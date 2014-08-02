@@ -18,4 +18,8 @@
     return @"<?bloginfo()?>";
 }
 
+- (BOOL)shouldCompileFontInfo{
+    return YES;
+}
+
 @end

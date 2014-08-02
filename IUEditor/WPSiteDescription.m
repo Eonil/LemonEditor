@@ -16,4 +16,8 @@
     return self;
 }
 
+- (BOOL)shouldCompileFontInfo{
+    return YES;
+}
+
 @end

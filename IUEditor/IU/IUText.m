@@ -73,7 +73,7 @@
 #pragma mark -
 #pragma mark manage text
 
-- (BOOL)hasText{
+- (BOOL)shouldCompileFontInfo{
     return YES;
 }
 
