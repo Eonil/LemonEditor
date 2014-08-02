@@ -66,8 +66,8 @@
 
 - (IBAction)performProjectDirSelect:(id)sender {
     self.djangoProjectDir = [[[JDFileUtil util] openDirectoryByNSOpenPanel:@"Select Django Project Directory"] path];
-    self.djangoResourceDir = [self.djangoProjectDir stringByAppendingPathComponent:@"templates/resource"];
-    self.djangoTemplateDir = [self.djangoProjectDir stringByAppendingPathComponent:@"templates"];
+    self.djangoTemplateDir = @"FileDirectory/templates";
+    self.djangoResourceDir = @"FileDirectory/templates/resource";
 }
 
 - (IBAction)performResourceDirSelect:(id)sender {

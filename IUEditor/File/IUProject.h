@@ -71,6 +71,8 @@ static NSString *IUClassGroupName = @"class";
     
     NSString  *_path;
     NSMutableArray *_mqSizes;
+    
+    int   IUEditorVersion;
 }
 
 //create project
@@ -105,9 +107,12 @@ static NSString *IUClassGroupName = @"class";
 @property   NSString    *name, *path, *author, *favicon;
 
 - (NSString*)directoryPath;
+
 - (NSString*)buildPath;
-- (NSString*)absoluteBuildPath;
 - (NSString*)buildResourcePath;
+
+- (NSString*)absoluteBuildPath;
+- (NSString*)absoluteBuildResourcePath;
 
 //build
 - (IUCompiler *)compiler;
@@ -138,7 +143,7 @@ static NSString *IUClassGroupName = @"class";
 - (void)setIsConnectedWithEditor;
 - (BOOL)isConnectedWithEditor;
 
-- (NSString*)buildPathForSheet:(IUSheet*)sheet;
+- (NSString*)absoluteBuildPathForSheet:(IUSheet*)sheet;
 
 // server information
 - (IUServerInfo*)serverInfo;

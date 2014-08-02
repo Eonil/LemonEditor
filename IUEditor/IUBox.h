@@ -81,6 +81,8 @@ typedef enum _IUOverflowType{
 
 @interface IUBox : NSObject <NSCoding, IUCSSDelegate, NSCopying>{
     NSMutableArray *_m_children;
+    
+    int IUEditorVersion;
 }
 
 -(id)initWithProject:(IUProject*)project options:(NSDictionary*)options;

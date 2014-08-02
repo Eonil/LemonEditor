@@ -63,6 +63,9 @@
         
         [[self undoManager] enableUndoRegistration];
 
+        
+        /* version control code */
+        IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
     }
     return self;
 }
@@ -79,7 +82,7 @@
     [aCoder encodeObject:self.event forKey:@"event"];
     [aCoder encodeObject:_m_children forKey:@"children"];
     
-    
+    [aCoder encodeInt:1 forKey:@"IUEditorVersion"];
 }
 
 -(id)init{
@@ -92,6 +95,7 @@
         _m_children = [NSMutableArray array];
         
         changedCSSWidths = [NSMutableSet set];
+        IUEditorVersion = 1;
     }
     return self;
 }
@@ -157,6 +161,9 @@
         [project.identifierManager setNewIdentifierAndRegisterToTemp:self withKey:nil];
         self.name = self.htmlID;
         [[self undoManager] enableUndoRegistration];
+        
+        // version control
+        IUEditorVersion = 1;
     }
     
     return self;

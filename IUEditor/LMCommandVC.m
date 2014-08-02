@@ -109,13 +109,8 @@
         }
         IUSheet *doc = [[_docController selectedObjects] firstObject];
         if (rule == IUCompileRuleDefault) {
-            NSString *firstPath = [project buildPathForSheet:doc];
-            if ([[firstPath pathExtension] isEqualTo:@"html"]) {
-                [[NSWorkspace sharedWorkspace] openFile:firstPath];
-            }
-            else {
-                [[NSWorkspace sharedWorkspace] openFile:firstPath withApplication:@"Coda 2"];
-            }
+            NSString *firstPath = [project.absoluteBuildPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.html",[doc.name lowercaseString]]];
+            [[NSWorkspace sharedWorkspace] openFile:firstPath];
         }
         else {
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://127.0.0.1/~%@/wordpress", NSUserName()]];

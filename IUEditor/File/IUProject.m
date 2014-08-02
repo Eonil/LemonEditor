@@ -42,6 +42,7 @@
     [encoder encodeObject:_favicon forKey:@"_favicon"];
     [encoder encodeObject:_author forKey:@"_author"];
     [encoder encodeObject:_serverInfo forKey:@"serverInfo"];
+    [encoder encodeInt:1 forKey:@"IUEditorVersion"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -98,13 +99,19 @@
             _serverInfo = [[IUServerInfo alloc] init];
         }
 
+        /* version control code */
+        IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
+        if (IUEditorVersion < 1) {
+            _buildPath = @"$IUFileDirectory/$AppName_build";
+            _buildResourcePath = @"$IUFileDirectory/$AppName_build/resource";
+        }
+        IUEditorVersion = 1;
     }
     return self;
 }
 - (id)init{
     self = [super init];
     if(self){
-        _buildPath = @"build";
         _mqSizes = [NSMutableArray array];
         _compiler = [[IUCompiler alloc] init];
     }
@@ -134,12 +141,12 @@
     
     _buildPath = [[options objectForKey:IUProjectKeyBuildPath] relativePathFrom:self.path];
     if (_buildPath == nil) {
-        _buildPath = @"build";
+        _buildPath = @"$IUFileDirectory/$AppName_build";
     }
     
     _buildResourcePath = [[options objectForKey:IUProjectKeyResourcePath] relativePathFrom:self.path];
     if (_buildResourcePath == nil) {
-        _buildResourcePath = @"build/resource";
+        _buildResourcePath = @"$IUFileDirectory/$AppName_build/resource";
     }
     
     _pageGroup = [project.pageGroup copy];
@@ -164,6 +171,7 @@
     // create build directory
     [[NSFileManager defaultManager] createDirectoryAtPath:self.absoluteBuildPath withIntermediateDirectories:YES attributes:nil error:nil];
 
+    IUEditorVersion = 1;
     return self;
 }
 
@@ -187,12 +195,12 @@
 
     _buildPath = [[options objectForKey:IUProjectKeyBuildPath] relativePathFrom:self.path];
     if (_buildPath == nil) {
-        _buildPath = @"build";
+        _buildPath = @"$IUFileDirectory/$AppName_build";
     }
     
     _buildResourcePath = [[options objectForKey:IUProjectKeyResourcePath] relativePathFrom:self.path];
     if (_buildResourcePath == nil) {
-        _buildResourcePath = @"build/resource";
+        _buildResourcePath = @"$IUFileDirectory/$AppName_build/resource";
     }
 
     _pageGroup = [[IUSheetGroup alloc] init];
@@ -232,6 +240,8 @@
     
     // create build directory
     [[NSFileManager defaultManager] createDirectoryAtPath:self.absoluteBuildPath withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    IUEditorVersion = 1;
     return self;
 }
 
@@ -338,20 +348,33 @@
 }
 
 - (NSString*)absoluteBuildPath{
-    return [[self directoryPath] stringByAppendingPathComponent:_buildPath];
+    NSMutableString *str = [_buildPath mutableCopy];
+    [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[self directoryPath] options:0 range:NSMakeRange(0, [str length])];
+    [str replaceOccurrencesOfString:@"$AppName" withString:[self name] options:0 range:NSMakeRange(0, [str length])];
+
+    NSString *returnPath = [str stringByExpandingTildeInPath];
+    return returnPath;
 }
 
 - (NSString*)buildResourcePath{
     return _buildResourcePath;
 }
 
-- (NSString*)buildPathForSheet:(IUSheet*)sheet{
-    NSString *buildPath = [self.directoryPath stringByAppendingPathComponent:self.buildPath];
+- (NSString*)absoluteBuildResourcePath{
+    NSMutableString *str = [_buildResourcePath mutableCopy];
+    [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[self directoryPath] options:0 range:NSMakeRange(0, [str length])];
+    [str replaceOccurrencesOfString:@"$AppName" withString:[self name] options:0 range:NSMakeRange(0, [str length])];
+    
+    NSString *returnPath = [str stringByExpandingTildeInPath];
+    return returnPath;
+}
+
+- (NSString*)absoluteBuildPathForSheet:(IUSheet*)sheet{
     if (sheet == nil) {
-        return buildPath;
+        return self.absoluteBuildPath;
     }
     else {
-        NSString *filePath = [[buildPath stringByAppendingPathComponent:sheet.name ] stringByAppendingPathExtension:@"html"];
+        NSString *filePath = [[self.absoluteBuildPath stringByAppendingPathComponent:sheet.name ] stringByAppendingPathExtension:@"html"];
         return filePath;
     }
 }
@@ -371,8 +394,8 @@
      NSFileManager's (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents attributes:(NSDictionary *)attributes automatically overwrites file.
      */
     NSAssert(self.buildPath != nil, @"");
-    NSString *buildDirectoryPath = [self buildPathForSheet:nil];
-    NSString *buildResourcePath = [self.directoryPath stringByAppendingPathComponent:self.buildResourcePath];
+    NSString *buildDirectoryPath = [self absoluteBuildPath];
+    NSString *buildResourcePath = [self absoluteBuildResourcePath];
 
     if ([[NSFileManager defaultManager] fileExistsAtPath:buildDirectoryPath] == NO) {
         [[NSFileManager defaultManager] createDirectoryAtPath:buildDirectoryPath withIntermediateDirectories:YES attributes:nil error:error];
@@ -395,7 +418,7 @@
         
         //html
         NSString *outputHTML = [sheet outputHTMLSource];
-        NSString *htmlPath = [self buildPathForSheet:sheet];
+        NSString *htmlPath = [self absoluteBuildPathForSheet:sheet];
 
         //note : writeToFile: automatically overwrite
         if ([outputHTML writeToFile:htmlPath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
