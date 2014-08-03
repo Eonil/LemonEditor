@@ -7,8 +7,9 @@
 //
 
 #import "IUBox.h"
+#import "IUProtocols.h"
 
-@interface WPMenu : IUBox <IUCodeProtocol, IUSampleTextProtocol>
+@interface WPMenu : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
 @property NSInteger itemCount;
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation WPSiteTitle
 
-- (NSString*)sampleText{
+- (NSString*)sampleHTML{
     return @"Site title will be here.";
 }
 

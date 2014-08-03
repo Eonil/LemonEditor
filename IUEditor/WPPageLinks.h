@@ -7,7 +7,8 @@
 //
 
 #import "IUBox.h"
+#import "IUProtocols.h"
 
-@interface WPPageLinks : IUBox <IUCodeProtocol, IUSampleTextProtocol>
+@interface WPPageLinks : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
 
 @end

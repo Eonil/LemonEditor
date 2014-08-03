@@ -7,6 +7,7 @@
 //
 
 #import "IUBox.h"
+#import "IUProtocols.h"
 
-@interface WPArticleDate : IUBox <IUCodeProtocol, IUSampleTextProtocol>
+@interface WPArticleDate : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
 @end

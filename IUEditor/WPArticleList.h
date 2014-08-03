@@ -7,6 +7,8 @@
 //
 
 #import "IUBox.h"
+#import "IUProtocols.h"
+
 
 @interface WPArticleList : IUBox <IUCodeProtocol>
 

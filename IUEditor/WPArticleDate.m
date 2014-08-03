@@ -14,7 +14,7 @@
 -(NSString*)code{
     return @"<?php echo get_the_date(); ?>";
 }
-- (NSString*)sampleText{
+- (NSString*)sampleHTML{
     return @"Publishing date will be here";
 }
 - (BOOL)shouldCompileFontInfo{

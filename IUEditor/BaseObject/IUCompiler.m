@@ -7,6 +7,8 @@
 //
 
 #import "IUCompiler.h"
+#import "IUProtocols.h"
+
 #import "NSString+JDExtension.h"
 #import "IUSheet.h"
 #import "NSDictionary+JDExtension.h"
@@ -831,11 +833,10 @@
             [code addCode:[self editorHTMLAsBOX:iu]];
         }
     }
-#pragma mark IUBox
-    else if ([iu conformsToProtocol:@protocol(IUSampleTextProtocol) ]){
-        IUBox <IUSampleTextProtocol> *sampleProtocolIU = (id)iu;
-        NSString *sampleText = [sampleProtocolIU sampleText];
-        [code addCodeLineWithFormat:@"<div %@ >%@</div>", [self HTMLAttributes:iu option:nil isEdit:YES], sampleText];
+    else if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol) ]){
+        IUBox <IUSampleHTMLProtocol> *sampleProtocolIU = (id)iu;
+        NSString *sampleHTML = [sampleProtocolIU sampleHTML];
+        [code addCodeLineWithFormat:@"<div %@ >%@</div>", [self HTMLAttributes:iu option:nil isEdit:YES], sampleHTML];
     }
     
 #pragma mark IUMenuBar

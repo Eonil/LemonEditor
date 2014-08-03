@@ -1532,6 +1532,7 @@
 		690A826F190A2CC200DDBA86 /* new_django.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_django.png; sourceTree = "<group>"; };
 		690A8270190A2CC200DDBA86 /* new_pt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_pt@2x.png"; sourceTree = "<group>"; };
 		690A8271190A2CC200DDBA86 /* new_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_default.png; sourceTree = "<group>"; };
+		690D465A198E8F3200478EC9 /* IUProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUProtocols.h; sourceTree = "<group>"; };
 		6919204518DCFC8200F8522B /* NSCoder+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSCoder+JDExtension.h"; path = "JD/NSCoder+JDExtension.h"; sourceTree = "<group>"; };
 		6919204618DCFC8200F8522B /* NSCoder+JDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCoder+JDExtension.m"; path = "JD/NSCoder+JDExtension.m"; sourceTree = "<group>"; };
 		6919204818DCFED000F8522B /* NSObject+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JDExtension.h"; sourceTree = "<group>"; };
@@ -3369,6 +3370,7 @@
 		69C5759E18D6F61E0016F050 = {
 			isa = PBXGroup;
 			children = (
+				690D465A198E8F3200478EC9 /* IUProtocols.h */,
 				CBFBE67C192A07A300F03F76 /* SampleTemplate */,
 				690A409E18E170AC00095263 /* Resource */,
 				69DE5CE419614E2B0050D020 /* Server */,

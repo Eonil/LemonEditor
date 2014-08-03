@@ -7,7 +7,9 @@
 //
 
 #import "IUBox.h"
+#import "IUProtocols.h"
 
-@interface WPSiteTitle : IUBox <IUSampleTextProtocol, IUCodeProtocol>
+
+@interface WPSiteTitle : IUBox <IUSampleHTMLProtocol, IUCodeProtocol>
 
 @end

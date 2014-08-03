@@ -13,7 +13,7 @@
     return @"<?php the_title(); ?>";
 }
 
-- (NSString*)sampleText{
+- (NSString*)sampleHTML{
     return @"Article Title will be here";
 }
 
