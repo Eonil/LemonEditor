@@ -20,5 +20,13 @@
 @property (nonatomic) NSString *mobileTitle;
 @property (nonatomic) NSColor *mobileTitleColor, *iconColor;
 
+- (NSString *)mobileButtonIdentifier;
+- (NSString *)topButtonIdentifier;
+- (NSString *)bottomButtonIdentifier;
+
+//editor mode - display : mobile version
+@property BOOL isOpened;
+- (NSString *)editorDisplayIdentifier;
+
 
 @end

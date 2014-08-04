@@ -98,20 +98,9 @@ a{
 .IUMenuItem > a{
     display:block;
     text-align:center;
-    /*FIXME : color*/
-    background-color : gray;
-    color:black;
-}
-.IUMenuItem:hover > a,
-.IUMenuItem.active > a
-{
-    /*FIXME : COLOR */
-    background-color:black;
-    color:white;
 }
 
 .IUMenuItem > ul{
-    /*FIXME : display-on-off*/
     display:none;
 }
 .IUMenuItem > ul.open{
@@ -135,25 +124,15 @@ a{
 .IUMenuBar > ul > li{
     float:left;
     height:100%;
-    
-    /* FIXME: 100/the number of childrens*/
-    width:33.33%
 }
 
-.IUMenuBar > ul > li > a{
-    /* FIXME :height is equal to IUMenuBar*/
-    line-height:81px;
-}
 
 .IUMenuBar >ul > li > div.closure{
     position: absolute;
     width: 0;
     height: 0;
     border: 8px solid transparent;
-    border-top-color: #d3eced;
     right: 20px;
-    /* FIXME:height is equal to position*/
-    top: 35px;
 }
 
 /* menuItem : depth - 2*/
@@ -170,7 +149,6 @@ a{
     width: 0;
     height: 0;
     border: 5px solid transparent;
-    border-left-color: white;
     top: 17px;
     right: 20px;
 }
@@ -199,8 +177,6 @@ a{
         display:block;
         text-indent:10%;
         cursor:pointer;
-        /*FIXME:height*/
-        line-height:66px;
     }
     .IUMenuBar .menu-top{
         display: block;
@@ -212,8 +188,6 @@ a{
         border-top: 2px solid #d3eced;
         border-bottom: 2px solid #d3eced;
         right: 25px;
-        /*FIXME:height*/
-        top: 28px;
     }
     .IUMenuBar .menu-bottom{
         display: block;
@@ -223,8 +197,6 @@ a{
         width: 22px;
         border-top: 2px solid #d3eced;
         right: 25px;
-        /*FIXME:height-menu-top+10px*/
-        top: 38px;
     }
     /* menuItem : depth - 1*/
     .IUMenuBar > ul{
@@ -261,7 +233,6 @@ a{
         width: 0;
         height: 0;
         border: 5px solid transparent;
-        border-top-color: white;
         top: 17px;
         right: 20px;
     }

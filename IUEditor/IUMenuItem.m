@@ -39,7 +39,7 @@
     if(self){
         [[self undoManager] disableUndoRegistration];
         
-        [aDecoder decodeToObject:self withProperties:[[IUMenuItem class] properties]];
+        [aDecoder decodeToObject:self withProperties:[[IUMenuItem class] propertiesWithOutProperties:@[@"isOpened"]]];
         
         [[self undoManager] enableUndoRegistration];
     }
@@ -48,7 +48,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [super encodeWithCoder:aCoder];
-    [aCoder encodeFromObject:self withProperties:[[IUMenuItem class] properties]];
+    [aCoder encodeFromObject:self withProperties:[[IUMenuItem class]  propertiesWithOutProperties:@[@"isOpened"]]];
 }
 
 - (id)copyWithZone:(NSZone *)zone{
@@ -63,9 +63,58 @@
 }
 
 
+- (void)connectWithEditor{
+    [super connectWithEditor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectionChanged:) name:IUNotificationSelectionDidChange object:nil];
+    [self addObserver:self forKeyPath:@"parent.css.assembledTagDictionary.height" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"height"];
+
+
+}
+
+- (void)dealloc{
+    if([self isConnectedWithEditor]){
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self removeObserver:self forKeyPath:@"parent.css.assembledTagDictionary.height"];
+    }
+}
+
+
+-(void)selectionChanged:(NSNotification*)noti{
+    
+    if(self.children.count > 0 && self.css.editWidth > 640){
+        NSMutableSet *set = [NSMutableSet setWithArray:[self.allChildren arrayByAddingObject:self]];
+        [set intersectSet:[NSSet setWithArray:[noti userInfo][@"selectedObjects"]]];
+        
+        if ([set count] >= 1) {
+            _isOpened = YES;
+        }
+        else{
+            _isOpened = NO;
+        }
+        
+        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self editorDisplayIdentifier]];
+
+    }
+    
+}
+
+
+- (void)heightContextDidChange:(NSDictionary *)dictionary{
+    JDInfoLog(@"haha");
+    if(self.depth==1){
+        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self itemIdentifier]];
+        if(self.children.count >0){
+            [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self closureIdentifier]];
+        }
+
+    }
+}
+
+
+
 #pragma mark - count
 - (void)setCount:(NSInteger)count{
-    if (count <= 1 || count > 20 || count == self.children.count ) {
+    if (count < 1 || count > 20 || count == self.children.count ) {
         return;
     }
     if( count < self.children.count ){
@@ -139,9 +188,18 @@
     }
     [[self.undoManager prepareWithInvocationTarget:self] setFontActive:_fontActive];
     _fontActive = fontActive;
+    
+    [self cssForItemColor];
 }
 
 #pragma mark - css
+- (NSString *)editorDisplayIdentifier{
+    if(self.children.count > 0){
+        return [[self.htmlID cssClass] stringByAppendingString:@" > ul"];
+    }
+    return nil;
+}
+
 - (NSString *)itemIdentifier{
     return [[self.htmlID cssClass] stringByAppendingString:@" > a"];
 }
@@ -161,7 +219,7 @@
 
 - (NSArray *)cssIdentifierArray{
     if(self.children.count > 0){
-        return @[[self.htmlID cssClass], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier], [self closureIdentifier]];
+        return @[[self.htmlID cssClass], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier], [self closureIdentifier], [self editorDisplayIdentifier]];
     }
     else{
         return @[[self.htmlID cssClass], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier]];

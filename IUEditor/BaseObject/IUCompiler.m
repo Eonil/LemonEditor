@@ -1464,10 +1464,12 @@
 /**
  @breif this method makes property css dictionary
  */
+#pragma mark - property css dictionary
+
 -(IUCSSStringDictionary*)cssStringDictionaryWithIdentifier:(NSString *)identifier ofIU:(IUBox*)iu width:(NSInteger)width isEdit:(BOOL)isEdit{
     IUCSSStringDictionary *dict = [IUCSSStringDictionary dictionary];
     
-#pragma mark - PGPageLinkSet
+#pragma mark PGPageLinkSet
     if([iu isKindOfClass:[PGPageLinkSet class]]){
         
         PGPageLinkSet *pageLinkSet = (PGPageLinkSet *)iu;
@@ -1497,7 +1499,34 @@
              [dict putTag:@"background-color" color:pageLinkSet.selectedButtonBGColor ignoreClearColor:NO];
         }
     }
-#pragma mark - IUMenuItem{
+#pragma mark IUMenuBar
+    else if([iu isKindOfClass:[IUMenuBar class]]){
+        IUMenuBar *menuBar = (IUMenuBar *)iu;
+        if(width < 640){
+            int height = [[menuBar.css tagDictionaryForWidth:width][IUCSSTagHeight] intValue];
+            if([identifier isEqualToString:menuBar.mobileButtonIdentifier]){
+                [dict putTag:@"line-height" intValue:height ignoreZero:YES unit:IUCSSUnitPixel];
+            }
+            else if([identifier isEqualToString:menuBar.topButtonIdentifier]){
+                int top = (height -10)/2;
+                [dict putTag:@"top" intValue:top ignoreZero:YES unit:IUCSSUnitPixel];
+            }
+            else if([identifier isEqualToString:menuBar.bottomButtonIdentifier]){
+                int top =(height -10)/2 +10;
+                [dict putTag:@"top" intValue:top ignoreZero:YES unit:IUCSSUnitPixel];
+            }
+            else if([identifier isEqualToString:menuBar.editorDisplayIdentifier] && isEdit){
+                if(menuBar.isOpened){
+                    [dict putTag:@"display" string:@"block"];
+                }
+                else{
+                    [dict putTag:@"display" string:@"none"];
+                }
+            }
+        }
+        
+    }
+#pragma mark IUMenuItem{
     else if([iu isKindOfClass:[IUMenuItem class]]){
         IUMenuItem *menuItem = (IUMenuItem *)iu;
         if([identifier isEqualToString:menuItem.itemIdentifier]){
@@ -1509,19 +1538,36 @@
             if(value){
                 [dict putTag:@"color" color:value ignoreClearColor:NO];
             }
+            value = [menuItem.parent.css tagDictionaryForWidth:width][IUCSSTagHeight];
+            if(value){
+                [dict putTag:@"line-height" intValue:[value intValue] ignoreZero:YES unit:IUCSSUnitPixel];
+            }
             
         }
         else if([identifier isEqualToString:menuItem.closureIdentifier]){
             id value = [menuItem.css tagDictionaryForWidth:width][IUCSSTagFontColor];
             if(value){
-                NSString *color = [[(NSColor *)value rgbString] stringByAppendingString:@"!important"];
+                NSString *color = [(NSColor *)value rgbString];
                 if(menuItem.depth == 1){
                     [dict putTag:@"border-top-color" string:color];
                 }
                 else if(menuItem.depth ==2){
-                    [dict putTag:@"border-left-color" string:color];
+                    if(width > 640){
+                        [dict putTag:@"border-left-color" string:color];
+                    }
+                    else{
+                        [dict putTag:@"border-left-color" string:@"transparent"];
+                        [dict putTag:@"border-top-color" string:color];
+                    }
                 }
             }
+            value = [menuItem.parent.css tagDictionaryForWidth:width][IUCSSTagHeight];
+            if(value){
+                int top = ([value intValue] - 10)/2;
+                [dict putTag:@"top" intValue:top ignoreZero:YES unit:IUCSSUnitPixel];
+
+            }
+
         }
         else if([identifier isEqualToString:menuItem.hoverItemIdentifier] ||
                 [identifier isEqualToString:menuItem.activeItemIdentifier]){
@@ -1532,8 +1578,21 @@
                 [dict putTag:@"color" color:menuItem.fontActive ignoreClearColor:NO];
             }
         }
+        else if([identifier isEqualToString:menuItem.editorDisplayIdentifier] && isEdit){
+            if(width  > 640){
+                if(menuItem.isOpened){
+                    [dict putTag:@"display" string:@"block"];
+                }
+                else{
+                    [dict putTag:@"display" string:@"none"];
+                }
+            }
+            else{
+                [dict putTag:@"display" string:@"block"];
+            }
+        }
     }
-#pragma mark - IUCarousel
+#pragma mark IUCarousel
     else if([iu isKindOfClass:[IUCarousel class]]){
         IUCarousel *carousel = (IUCarousel *)iu;
         if([identifier isEqualToString:carousel.pagerID]){
@@ -1609,7 +1668,7 @@
             }
         
     }
-    #pragma mark - IUBox
+    #pragma mark IUBox
     else if([iu isKindOfClass:[IUBox class]]){
         if(_rule == IUCompileRuleDjango && isEdit == NO && iu.pgContentVariable){
             NSDictionary *cssDict = [iu.css tagDictionaryForWidth:width];

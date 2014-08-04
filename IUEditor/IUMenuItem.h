@@ -22,5 +22,10 @@
 - (NSString *)hoverItemIdentifier;
 - (NSString *)activeItemIdentifier;
 - (NSString *)closureIdentifier;
+- (NSString *)editorDisplayIdentifier;
+
+//editor mode- display
+@property BOOL isOpened;
+
 
 @end

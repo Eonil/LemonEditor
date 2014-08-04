@@ -24,6 +24,14 @@
         self.mobileTitle = @"MENU";
         self.iconColor = [NSColor whiteColor];
         
+        if (self.hasWidth) {
+            [self.css setValue:@(420) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
+        }
+        if (self.hasHeight) {
+            [self.css setValue:@(50) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
+        }
+        
+        
         [[self undoManager] enableUndoRegistration];
     }
     return self;
@@ -59,6 +67,75 @@
     
     [self.undoManager enableUndoRegistration];
     return menuBar;
+}
+
+- (void)connectWithEditor{
+    [super connectWithEditor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectionChanged:) name:IUNotificationSelectionDidChange object:nil];
+    
+    [self addObserver:self forKeyPath:@"css.assembledTagDictionary.height" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"height"];
+}
+
+- (void)dealloc{
+    if([self isConnectedWithEditor]){
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self removeObserver:self forKeyPath:@"css.assembledTagDictionary.height"];
+    }
+}
+-(void)selectionChanged:(NSNotification*)noti{
+    
+    if(self.children.count > 0 && self.css.editWidth <= 640){
+        NSMutableSet *set = [NSMutableSet setWithArray:[self.allChildren arrayByAddingObject:self]];
+        [set intersectSet:[NSSet setWithArray:[noti userInfo][@"selectedObjects"]]];
+        
+        if ([set count] >= 1) {
+            _isOpened = YES;
+        }
+        else{
+            _isOpened = NO;
+        }
+        
+        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self editorDisplayIdentifier]];
+        
+    }
+    
+}
+
+- (void)heightContextDidChange:(NSDictionary *)dictionary{
+    JDInfoLog(@"haha");
+    
+    if(self.css.editWidth <= 640){
+        //mobile에서만 사용하는 button들
+        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self mobileButtonIdentifier]];
+        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self topButtonIdentifier]];
+        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self topButtonIdentifier]];
+    }
+}
+#pragma mark - css identifier
+
+- (NSString *)editorDisplayIdentifier{
+    if(self.children.count > 0){
+        return [[self.htmlID cssClass] stringByAppendingString:@" > ul"];
+    }
+    return nil;
+}
+
+- (NSString *)mobileButtonIdentifier{
+    return [[self.htmlID cssClass] stringByAppendingString:@" > .mobile-button"];
+}
+
+- (NSString *)topButtonIdentifier{
+    return [[self.htmlID cssClass] stringByAppendingString:@" .menu-top"];
+}
+
+- (NSString *)bottomButtonIdentifier{
+    return [[self.htmlID cssClass] stringByAppendingString:@" .menu-bottom"];
+}
+
+- (NSArray *)cssIdentifierArray{
+    NSMutableArray *array = [[super cssIdentifierArray] mutableCopy];
+    [array addObjectsFromArray:@[self.mobileButtonIdentifier, self.topButtonIdentifier, self.bottomButtonIdentifier]];
+    return array;
 }
 
 #pragma mark - count
