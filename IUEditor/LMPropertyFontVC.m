@@ -337,7 +337,7 @@
         CGFloat spacing = [[_fontDefaultLetterSpacing objectAtIndex:index] floatValue];
         [self updateLetterSpacing:spacing];
     }
-    else if([_lineHeightB isEqualTo:_lineHeightB]){
+    else if([currentComboBox isEqualTo:_lineHeightB]){
         [self updateLineHeight:[_lineHeightB objectValueOfSelectedItem]];
     }
 }
@@ -358,13 +358,20 @@
 }
 
 - (void)updateLineHeight:(NSString *)lineHeightStr{
-    if([_controller.selection respondsToSelector:@selector(setLineHeightAuto:)]){
-        
-        if([lineHeightStr isEqualToString:@"Auto"]){
-            [_controller.selection setLineHeightAuto:YES];
-        }
-        else{
-            [_controller.selection setLineHeightAuto:NO];
+    
+    //???: selection repondstoselector not working. why?
+    //    if([_controller.selection respondsToSelector:@selector(setLineHeightAuto:)]){
+
+    //replace to selectedobject
+    for(IUBox *box in _controller.selectedObjects){
+        if([box respondsToSelector:@selector(setLineHeightAuto:)]){
+            
+            if([lineHeightStr isEqualToString:@"Auto"]){
+                [box setLineHeightAuto:YES];
+            }
+            else{
+                [box setLineHeightAuto:NO];
+            }
         }
     }
 }

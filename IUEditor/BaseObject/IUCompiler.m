@@ -1141,7 +1141,9 @@
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     if([iu shouldCompileFontInfo]){
-        [retString appendString:@" autoLineHeight='1'"];
+        if(iu.lineHeightAuto){
+            [retString appendString:@" autoLineHeight='1'"];
+        }
     }
 #else
 #pragma mark IUText
@@ -2089,7 +2091,8 @@
            [obj shouldCompileFontInfo]
 #endif
 
-           ){
+           )
+        {
             value = cssTagDict[IUCSSTagFontName];
             if(value){
                 NSString *font=cssTagDict[IUCSSTagFontName];
@@ -2119,8 +2122,7 @@
 
                     }
                 }
-                
-                if([value isEqualToString:@"Auto"]== NO){
+               else{
                     [dict putTag:@"line-height" floatValue:[value floatValue] ignoreZero:YES unit:IUCSSUnitNone];
                 }
             }
