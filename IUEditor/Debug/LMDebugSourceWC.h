@@ -11,7 +11,9 @@
 
 @interface LMDebugSourceWC : NSWindowController
 
-@property (unsafe_unretained) IBOutlet NSTextView *codeTextView;
 @property LMCanvasVC *canvasVC;
+
+
+- (void)setCurrentSource:(NSString *)source;
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -7,6 +7,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="LMDebugSourceWC">
             <connections>
                 <outlet property="codeTextView" destination="5Rt-8d-oeL" id="Nf5-yX-QyX"/>
+                <outlet property="searchField" destination="pvc-ez-pHp" id="1Md-pK-C50"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -15,27 +16,27 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="657" height="790"/>
+            <rect key="contentRect" x="196" y="240" width="931" height="790"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="657" height="790"/>
+                <rect key="frame" x="0.0" y="0.0" width="931" height="790"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHP-a8-vt4">
-                        <rect key="frame" x="0.0" y="30" width="657" height="760"/>
+                        <rect key="frame" x="0.0" y="30" width="931" height="760"/>
                         <clipView key="contentView" id="52i-Ss-XLK">
                             <rect key="frame" x="1" y="1" width="238" height="133"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textView importsGraphics="NO" richText="NO" usesInspectorBar="YES" findStyle="bar" incrementalSearchingEnabled="YES" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="5Rt-8d-oeL">
+                                <textView importsGraphics="NO" richText="NO" selectionGranularity="word" findStyle="panel" incrementalSearchingEnabled="YES" allowsUndo="YES" fieldEditor="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="5Rt-8d-oeL">
                                     <rect key="frame" x="0.0" y="0.0" width="238" height="758"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="655" height="758"/>
-                                    <size key="maxSize" width="744" height="10000000"/>
+                                    <size key="minSize" width="929" height="758"/>
+                                    <size key="maxSize" width="931" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="655" height="758"/>
-                                    <size key="maxSize" width="744" height="10000000"/>
+                                    <size key="minSize" width="929" height="758"/>
+                                    <size key="maxSize" width="931" height="10000000"/>
                                 </textView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,10 +82,74 @@
                     <constraint firstItem="Lb5-Ge-dJ5" firstAttribute="top" secondItem="sHP-a8-vt4" secondAttribute="bottom" constant="4" id="zjM-Vi-z1R"/>
                 </constraints>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="42BD7EC6-F1A3-41D5-9A84-6638FFE745FC" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="zdq-e9-l2f">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="RGq-lf-Odz"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="ec3-3s-1QK"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="Tyx-eZ-HbW"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="5cy-st-Hw0"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="nKZ-9T-G0z"/>
+                    <toolbarItem implicitItemIdentifier="8DC6D773-F0E6-4219-9044-D98E3B10CD14" label="Search" paletteLabel="Search" id="QCm-Ja-bkr">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="96" height="22"/>
+                        <size key="maxSize" width="621" height="22"/>
+                        <searchField key="view" verticalHuggingPriority="750" id="pvc-ez-pHp">
+                            <rect key="frame" x="0.0" y="14" width="621" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsSearchStringImmediately="YES" sendsWholeSearchString="YES" id="pas-fQ-W8b">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </searchFieldCell>
+                            <connections>
+                                <action selector="searchField:" target="-2" id="FFb-zj-HFk"/>
+                            </connections>
+                        </searchField>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="1F117DFD-5C64-4224-B21B-C1F818C76880" label="Next" paletteLabel="Next" id="q02-gr-bX9">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="30" height="32"/>
+                        <size key="maxSize" width="92" height="54"/>
+                        <button key="view" verticalHuggingPriority="750" id="c2d-hO-RD0">
+                            <rect key="frame" x="1" y="15" width="58" height="38"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="push" title=">" bezelStyle="rounded" imagePosition="overlaps" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="A7F-X2-vND">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="smallSystem"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="nextSearch:" target="-2" id="eAm-H0-bla"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="C2FE031D-F68B-4A1C-BDD8-7674372662FC" label="Previous" paletteLabel="Previous" id="fqd-eI-ImM">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="48" height="31"/>
+                        <size key="maxSize" width="82" height="38"/>
+                        <button key="view" verticalHuggingPriority="750" id="cvJ-kx-f0v">
+                            <rect key="frame" x="2" y="15" width="58" height="38"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="push" title="&lt;" bezelStyle="rounded" imagePosition="overlaps" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2nx-KO-aC6">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="smallSystem"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="previousSearch:" target="-2" id="OEi-gZ-pty"/>
+                        </connections>
+                    </toolbarItem>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="QCm-Ja-bkr"/>
+                    <toolbarItem reference="fqd-eI-ImM"/>
+                    <toolbarItem reference="q02-gr-bX9"/>
+                    <toolbarItem reference="nKZ-9T-G0z"/>
+                </defaultToolbarItems>
+            </toolbar>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="117.5" y="522"/>
+            <point key="canvasLocation" x="-206.5" y="490"/>
         </window>
     </objects>
 </document>

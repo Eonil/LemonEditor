@@ -1054,7 +1054,7 @@
 - (IBAction)showCurrentSource:(id)sender {
     NSString *htmlSource =  [(DOMHTMLElement *)[[[[self webView] mainFrame] DOMDocument] documentElement] outerHTML];
     [_debugWC showWindow:self];
-    [_debugWC.codeTextView setString:htmlSource];
+    [_debugWC setCurrentSource:htmlSource];
     NSLog(@"\n%@\n",htmlSource);
 }
 
