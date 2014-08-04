@@ -290,6 +290,9 @@
                 for(NSString *bindingIUID in bindingIUArray){
                     
                     [eventString appendFormat:@"/* [IU:%@] Event Declaration */\n", bindingIUID];
+                    if(type == IUEventActionTypeClick){
+                        [eventString appendFormat:@"$(\"#%@\").css('cursor', 'pointer');\n", bindingIUID];
+                    }
                     [eventString appendFormat:@"$(\"#%@\").", bindingIUID];
                     
                     if(type == IUEventActionTypeClick){
