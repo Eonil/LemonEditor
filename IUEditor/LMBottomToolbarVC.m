@@ -66,9 +66,23 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"showLeftInspector"] == nil) {
         [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"showLeftInspector"];
     }
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"showRightInspector"] == nil) {
         [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"showRightInspector"];
     }
+    
+
+//initialize
+    BOOL showBorder = [[NSUserDefaults standardUserDefaults] boolForKey:@"showBorder"];
+    [_borderBtn setState:showBorder];
+    
+    BOOL showLeftInspector = [[NSUserDefaults standardUserDefaults] boolForKey:@"showLeftInspector"];
+    [_leftInspectorBtn setState:showLeftInspector];
+    
+    BOOL showRightInspector = [[NSUserDefaults standardUserDefaults] boolForKey:@"showRightInspector"];
+    [_rightInspectorBtn setState:showRightInspector];
+    
+
     
 }
 
