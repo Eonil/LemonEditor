@@ -7,6 +7,7 @@
 //
 
 #import "LMDebugSourceWC.h"
+#import "IUProject.h"
 
 @interface LMDebugSourceWC ()
 @property (weak) IBOutlet NSSearchField *searchField;
@@ -64,8 +65,12 @@
         findRange =  [wholeString rangeOfString:searchString options:NSCaseInsensitiveSearch range:NSMakeRange(start, wholeString.length -start)];
         
     }
-    
-    [_codeTextView setSelectedRanges:selecteRanges];
+    if(selecteRanges.count > 0){
+        [_codeTextView setSelectedRanges:selecteRanges];
+    }
+    else{
+        [_codeTextView setSelectedRange:NSMakeRange(0, 0)];
+    }
 }
 
 - (IBAction)previousSearch:(id)sender {
@@ -102,6 +107,23 @@
 }
 
 #pragma mark - button
+- (IBAction)openAsAFile:(id)sender {
+    NSString *buildPath = [_canvasVC.sheet.project absoluteBuildPath];
+
+    if ([[NSFileManager defaultManager] fileExistsAtPath:buildPath]) {
+
+        //debug_html
+        NSString *debugFileName= [[_canvasVC.sheet.name stringByAppendingString:@"_debug"] stringByAppendingPathExtension:@"html"];
+        NSString *filePath = [buildPath stringByAppendingPathComponent:debugFileName];
+        
+        if ([[_codeTextView string] writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil] == NO){
+            NSAssert(0, @"write fail");
+        }
+        
+        [[NSWorkspace sharedWorkspace] openFile:filePath];
+
+    }
+}
 
 - (IBAction)applyCurrentSource:(id)sender {
 #if DEBUG

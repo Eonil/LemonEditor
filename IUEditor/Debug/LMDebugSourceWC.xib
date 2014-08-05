@@ -138,11 +138,29 @@
                             <action selector="previousSearch:" target="-2" id="OEi-gZ-pty"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="0ACA0C26-9116-4B6B-9404-5EB76CDF99BD" label="open" paletteLabel="open" id="Sbn-vV-gR8">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="82" height="32"/>
+                        <size key="maxSize" width="136" height="43"/>
+                        <button key="view" verticalHuggingPriority="750" id="KSk-4Y-0Pg">
+                            <rect key="frame" x="0.0" y="14" width="136" height="43"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="push" title="open as a file" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZZc-jd-ud4">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                        <connections>
+                            <action selector="openAsAFile:" target="-2" id="nzh-ow-uUy"/>
+                        </connections>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="QCm-Ja-bkr"/>
                     <toolbarItem reference="fqd-eI-ImM"/>
                     <toolbarItem reference="q02-gr-bX9"/>
+                    <toolbarItem reference="5cy-st-Hw0"/>
+                    <toolbarItem reference="Sbn-vV-gR8"/>
                     <toolbarItem reference="nKZ-9T-G0z"/>
                 </defaultToolbarItems>
             </toolbar>
