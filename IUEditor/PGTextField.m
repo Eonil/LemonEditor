@@ -20,8 +20,8 @@
         _inputValue = @"value example";
         _type = IUTextFieldTypeDefault;
         
-        [self.css setValue:@(130) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:@(30) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
+        [self.css setValue:@(130) forTag:IUCSSTagPixelWidth forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:@(30) forTag:IUCSSTagPixelHeight forWidth:IUCSSDefaultViewPort];
         
         [self.undoManager enableUndoRegistration];
     }

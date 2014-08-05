@@ -43,17 +43,39 @@
     if(self){
         [self.undoManager disableUndoRegistration];
         
-        [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagBGColor forWidth:IUCSSMaxViewPortWidth];
+        [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagBGColor forWidth:IUCSSDefaultViewPort];
         
-        
-        [self.css eradicateTag:IUCSSTagX];
-        [self.css eradicateTag:IUCSSTagY];
-        [self.css eradicateTag:IUCSSTagWidth];
-        [self.css eradicateTag:IUCSSTagHeight];
+        [self.css eradicateTag:IUCSSTagPixelX];
+        [self.css eradicateTag:IUCSSTagPixelY];
+        [self.css eradicateTag:IUCSSTagPixelWidth];
+        [self.css eradicateTag:IUCSSTagPixelHeight];
+
+        [self.css eradicateTag:IUCSSTagPercentX];
+        [self.css eradicateTag:IUCSSTagPercentY];
+        [self.css eradicateTag:IUCSSTagPercentWidth];
+        [self.css eradicateTag:IUCSSTagPercentHeight];
+
         
         [self.undoManager enableUndoRegistration];
+        self.positionType = IUPositionTypeRelative;
     }
     return self;
+}
+
+- (BOOL)hasHeight{
+    return NO;
+}
+
+- (BOOL)hasWidth{
+    return NO;
+}
+
+- (BOOL)hasY{
+    return NO;
+}
+
+- (BOOL)hasX{
+    return NO;
 }
 
 - (NSMutableArray *)allIdentifierChildren{

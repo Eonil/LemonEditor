@@ -644,6 +644,7 @@
 		694E3CE118FCFDA6005077B3 /* IUItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 694E3CE018FCFDA6005077B3 /* IUItem.m */; };
 		6953852E18ED6EC800CC42E5 /* IUController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6953852D18ED6EC800CC42E5 /* IUController.m */; };
 		6954812818D7640A00CA02F1 /* IUPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6954812718D7640A00CA02F1 /* IUPage.m */; };
+		69604769198FE56400605FA2 /* IUCSSCompiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 69604768198FE56400605FA2 /* IUCSSCompiler.m */; };
 		6967425318F7D077008B7111 /* IUIdentifierManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6967425218F7D077008B7111 /* IUIdentifierManager.m */; };
 		696D1C9A18E5366400B4AB16 /* webTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = 696D1C9918E5366400B4AB16 /* webTemplate.html */; };
 		696D1C9B18E5366400B4AB16 /* webTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = 696D1C9918E5366400B4AB16 /* webTemplate.html */; };
@@ -1596,6 +1597,8 @@
 		6953852D18ED6EC800CC42E5 /* IUController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUController.m; sourceTree = "<group>"; };
 		6954812618D7640A00CA02F1 /* IUPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUPage.h; path = BaseObject/IUPage.h; sourceTree = "<group>"; };
 		6954812718D7640A00CA02F1 /* IUPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUPage.m; path = BaseObject/IUPage.m; sourceTree = "<group>"; };
+		69604767198FE56400605FA2 /* IUCSSCompiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUCSSCompiler.h; sourceTree = "<group>"; };
+		69604768198FE56400605FA2 /* IUCSSCompiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUCSSCompiler.m; sourceTree = "<group>"; };
 		6967425118F7D077008B7111 /* IUIdentifierManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUIdentifierManager.h; sourceTree = "<group>"; };
 		6967425218F7D077008B7111 /* IUIdentifierManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUIdentifierManager.m; sourceTree = "<group>"; };
 		696D1C9918E5366400B4AB16 /* webTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = webTemplate.html; sourceTree = "<group>"; };
@@ -3303,6 +3306,8 @@
 				6967425218F7D077008B7111 /* IUIdentifierManager.m */,
 				3D1BACC719330240004C554F /* IUText.h */,
 				3D1BACC819330240004C554F /* IUText.m */,
+				69604767198FE56400605FA2 /* IUCSSCompiler.h */,
+				69604768198FE56400605FA2 /* IUCSSCompiler.m */,
 			);
 			name = IU;
 			sourceTree = "<group>";
@@ -4606,6 +4611,7 @@
 				69757B0818D95BBC0095CBAC /* JDKeyDelegatedTableView.m in Sources */,
 				69757B0618D95BBC0095CBAC /* JDGitUtil.m in Sources */,
 				3DD478811945850E00639AB5 /* IUProjectDocument.m in Sources */,
+				69604769198FE56400605FA2 /* IUCSSCompiler.m in Sources */,
 				3DED27181904AD7D001A1D67 /* LMEventMouseOnVC.m in Sources */,
 				3DB3ACD218EBEF4F0046DFB7 /* GridView.m in Sources */,
 				699916201919F090000ECF57 /* PGForm.m in Sources */,

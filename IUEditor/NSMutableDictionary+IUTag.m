@@ -82,5 +82,16 @@
     [self removeObjectForKey:tag];
 }
 
+@end
+
+@implementation NSDictionary (IUTag)
+
+-(NSString*)CSSCode{
+    NSMutableString *code = [NSMutableString string];
+    for (NSString *key in self) {
+        [code appendFormat:@"%@:%@; ", key, self[key]];
+    }
+    return code;
+}
 
 @end

@@ -1,5 +1,4 @@
 .IUBox{
-    position:absolute;
     display:block;
     border-style:solid;
     overflow:hidden;
@@ -15,13 +14,11 @@ a{
 }
 
 .IUHeader{
-    position:relative;
     width:100%;
     overflow:visible;
 }
 
 .IUPageContent{
-    position:relative;
     min-height:100px;
     width:100%;
 }

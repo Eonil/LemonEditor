@@ -13,6 +13,8 @@
 #import "JDCode.h"
 #import "IUResourceManager.h"
 
+@class IUCSSCode;
+
 static NSString * IUCompilerTagOption = @"tag";
 
 @class IUSheet;
@@ -26,7 +28,7 @@ typedef enum _IUCompileRule{
 
 @interface IUCompiler : NSObject
 
-@property (weak) IUResourceManager *resourceManager;
+@property (weak, nonatomic) IUResourceManager *resourceManager;
 @property IUCompileRule    rule;
 
 //build source
@@ -48,4 +50,5 @@ typedef enum _IUCompileRule{
 #pragma mark clipart
 - (NSArray *)outputClipArtArray:(IUSheet *)document;
 
+- (IUCSSCode*)cssCodeForIU:(IUBox*)iu;
 @end

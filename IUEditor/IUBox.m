@@ -11,7 +11,10 @@
 #import "IUBox.h"
 #import "NSObject+JDExtension.h"
 #import "NSCoder+JDExtension.h"
+
 #import "IUCompiler.h"
+#import "IUCSSCompiler.h"
+
 #import "IUSheet.h"
 #import "IUBox.h"
 #import "IUClass.h"
@@ -116,10 +119,10 @@
         
         _overflowType = IUOverflowTypeHidden;
         
-        [_css setValue:@(0) forTag:IUCSSTagXUnit forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@(0) forTag:IUCSSTagYUnit forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@(0) forTag:IUCSSTagWidthUnit forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@(0) forTag:IUCSSTagHeightUnit forWidth:IUCSSMaxViewPortWidth];
+        [_css setValue:@(0) forTag:IUCSSTagXUnitIsPercent forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagYUnitIsPercent forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagWidthUnitIsPercent forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagHeightUnitIsPercent forWidth:IUCSSDefaultViewPort];
         
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
         _lineHeightAuto = YES;
@@ -127,34 +130,34 @@
         
         
         if (self.hasWidth) {
-            [_css setValue:@(100) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
+            [_css setValue:@(100) forTag:IUCSSTagPixelWidth forWidth:IUCSSDefaultViewPort];
         }
         if (self.hasHeight) {
-            [_css setValue:@(60) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
+            [_css setValue:@(60) forTag:IUCSSTagPixelHeight forWidth:IUCSSDefaultViewPort];
         }
         
         //background
-        [_css setValue:[NSColor randomColor] forTag:IUCSSTagBGColor forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@(IUBGSizeTypeAuto) forTag:IUCSSTagBGSize forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@(0) forTag:IUCSSTagBGXPosition forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@(0) forTag:IUCSSTagBGYPosition forWidth:IUCSSMaxViewPortWidth];
+        [_css setValue:[NSColor randomColor] forTag:IUCSSTagBGColor forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(IUBGSizeTypeAuto) forTag:IUCSSTagBGSize forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagBGXPosition forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagBGYPosition forWidth:IUCSSDefaultViewPort];
         
         //border
-        [_css setValue:@(0) forTag:IUCSSTagBorderTopWidth forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@(0) forTag:IUCSSTagBorderLeftWidth forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@(0) forTag:IUCSSTagBorderRightWidth forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@(0) forTag:IUCSSTagBorderBottomWidth forWidth:IUCSSMaxViewPortWidth];
+        [_css setValue:@(0) forTag:IUCSSTagBorderTopWidth forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagBorderLeftWidth forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagBorderRightWidth forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagBorderBottomWidth forWidth:IUCSSDefaultViewPort];
         
-        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderTopColor forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderLeftColor forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderRightColor forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderBottomColor forWidth:IUCSSMaxViewPortWidth];
+        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderTopColor forWidth:IUCSSDefaultViewPort];
+        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderLeftColor forWidth:IUCSSDefaultViewPort];
+        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderRightColor forWidth:IUCSSDefaultViewPort];
+        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderBottomColor forWidth:IUCSSDefaultViewPort];
         
         //font-type
-        [_css setValue:@"Auto" forTag:IUCSSTagLineHeight forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@(12) forTag:IUCSSTagFontSize forWidth:IUCSSMaxViewPortWidth];
-        [_css setValue:@"Helvetica" forTag:IUCSSTagFontName forWidth:IUCSSMaxViewPortWidth];
+        [_css setValue:@"Auto" forTag:IUCSSTagLineHeight forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(12) forTag:IUCSSTagFontSize forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@"Helvetica" forTag:IUCSSTagFontName forWidth:IUCSSDefaultViewPort];
         
         changedCSSWidths = [NSMutableSet set];
         
@@ -356,11 +359,11 @@
     [self willChangeValueForKey:@"imageName"];
 
 
-    NSDictionary *defaultTagDictionary = [_css tagDictionaryForWidth:IUCSSMaxViewPortWidth];
+    NSDictionary *defaultTagDictionary = [_css tagDictionaryForWidth:IUCSSDefaultViewPort];
     if (defaultTagDictionary) {
         [_css setValue:imageName forTag:IUCSSTagImage forWidth:_css.editWidth];
     }
-    [_css setValue:imageName forTag:IUCSSTagImage forWidth:IUCSSMaxViewPortWidth];
+    [_css setValue:imageName forTag:IUCSSTagImage forWidth:IUCSSDefaultViewPort];
     
      [self didChangeValueForKey:@"imageName"];
 }
@@ -426,7 +429,7 @@
     NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
 
     if (selectedSize == maxSize) {
-        [_css setEditWidth:IUCSSMaxViewPortWidth];
+        [_css setEditWidth:IUCSSDefaultViewPort];
     }
     else {
         [_css setEditWidth:selectedSize];
@@ -474,7 +477,7 @@
 -(void)CSSUpdatedForWidth:(NSInteger)width withIdentifier:(NSString *)identifer{
     if(self.delegate){
         NSString *css = [self cssForWidth:width withIdentifier:identifer];
-        [self.delegate IUClassIdentifier:identifer CSSUpdated:css forWidth:width];
+        [self.delegate IUClassIdentifier:identifer CSSUpdated:css viewPort:width];
     }
 }
 /**
@@ -493,8 +496,8 @@
 
 - (void)updateCSSForMaxViewPort{
     if (self.delegate) {
-        for(NSString *cssIdentifier in [self cssIdentifierArray]){
-            [self CSSUpdatedForWidth:IUCSSMaxViewPortWidth withIdentifier:cssIdentifier];
+        for(NSString *cssClass in [self cssIdentifierArray]){
+            [self CSSUpdatedForWidth:IUCSSDefaultViewPort withIdentifier:cssClass];
             
         }
     }
@@ -502,14 +505,22 @@
 
 - (void)updateCSSForViewPortWidth:(NSInteger)width{
     if (self.delegate) {
-        for(NSString *cssIdentifier in [self cssIdentifierArray]){
-            [self CSSUpdatedForWidth:width withIdentifier:cssIdentifier];
+        for(NSString *cssClass in [self cssIdentifierArray]){
+            [self CSSUpdatedForWidth:width withIdentifier:cssClass];
         }
     }
 }
 
-- (void)updateCSSForEditViewPort{
-    [self updateCSSForViewPortWidth:_css.editWidth];
+- (void)updateCSS{
+    if (self.delegate) {
+        IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
+        for (NSNumber *viewPort in cssCode.allViewPorts) {
+            NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithTarget:IUTargetEditor viewPort:[viewPort intValue]];
+            for (NSString *identifier in dictionaryWithIdentifier) {
+                [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier] viewPort:[viewPort intValue]];
+            }
+        }
+    }
 }
 
 //delegation
@@ -597,31 +608,20 @@
         for (IUBox *import in [(IUClass*)self.sheet references]) {
             
             [import updateHTML];
-            [import updateCSSForMaxViewPort];
-            if(_css.editWidth != IUCSSMaxViewPortWidth){
-                [import updateCSSForEditViewPort];
-            }
+            [import updateCSS];
             
             for (IUBox *child in iu.children) {
-                [child updateCSSForMaxViewPort];
-                if(_css.editWidth != IUCSSMaxViewPortWidth){
-                    [child updateCSSForEditViewPort];
-                }
+                [child updateCSS];
             }
         }
     }
     
 
     [iu updateHTML];
-    [iu updateCSSForMaxViewPort];
-    if(_css.editWidth != IUCSSMaxViewPortWidth){
-        [iu updateCSSForEditViewPort];
-    }
+    [iu updateCSS];
+
     for (IUBox *child in iu.children) {
-        [child updateCSSForMaxViewPort];
-        if(_css.editWidth != IUCSSMaxViewPortWidth){
-            [child updateCSSForEditViewPort];
-        }
+        [child updateCSS];
     }
 
     [self updateJS];
@@ -739,8 +739,8 @@
 #pragma mark setFrame
 
 - (void)setPosition:(NSPoint)position{
-    [_css setValue:@(position.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagX]];
-    [_css setValue:@(position.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagY]];
+    [_css setValue:@(position.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelX]];
+    [_css setValue:@(position.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelY]];
 }
 
 - (void)setPercentFrame:(NSRect)frame{
@@ -761,10 +761,10 @@
 }
 
 - (void)setPixelFrame:(NSRect)frame{
-    [_css setValue:@(frame.origin.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagX]];
-    [_css setValue:@(frame.origin.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagY]];
-    [_css setValue:@(frame.size.height) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagHeight]];
-    [_css setValue:@(frame.size.width) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagWidth]];
+    [_css setValue:@(frame.origin.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelX]];
+    [_css setValue:@(frame.origin.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelY]];
+    [_css setValue:@(frame.size.height) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelHeight]];
+    [_css setValue:@(frame.size.width) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelWidth]];
     
 }
 
@@ -785,10 +785,10 @@
  */
 
 - (NSPoint)currentPosition{
-    NSInteger currentX = [_css.assembledTagDictionary[IUCSSTagX] integerValue];
+    NSInteger currentX = [_css.assembledTagDictionary[IUCSSTagPixelX] integerValue];
     NSInteger currentY = 0;
-    if([_css.assembledTagDictionary objectForKey:IUCSSTagY]){
-        currentY = [_css.assembledTagDictionary[IUCSSTagY] integerValue];
+    if([_css.assembledTagDictionary objectForKey:IUCSSTagPixelY]){
+        currentY = [_css.assembledTagDictionary[IUCSSTagPixelY] integerValue];
     }
     else if(self.positionType == IUPositionTypeRelative || self.positionType == IUPositionTypeFloatRight ||
             self.positionType == IUPositionTypeFloatLeft){
@@ -809,8 +809,8 @@
     return NSMakePoint(currentX, currentY);
 }
 - (NSSize)currentSize{
-    NSInteger currentWidth = [_css.assembledTagDictionary[IUCSSTagWidth] integerValue];
-    NSInteger currentHeight = [_css.assembledTagDictionary[IUCSSTagHeight] integerValue];
+    NSInteger currentWidth = [_css.assembledTagDictionary[IUCSSTagPixelWidth] integerValue];
+    NSInteger currentHeight = [_css.assembledTagDictionary[IUCSSTagPixelHeight] integerValue];
     
     return NSMakeSize(currentWidth, currentHeight);
 }
@@ -842,12 +842,12 @@
     [[[self undoManager] prepareWithInvocationTarget:self] undoPoisition:[self currentPosition]];
     
     if([self hasX] && [self canChangeXByUserInput]){
-        [_css setValue:@(point.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagX]];
+        [_css setValue:@(point.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelX]];
     }
     if([self hasY] && [self canChangeYByUserInput]){
-        [_css setValue:@(point.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagY]];
+        [_css setValue:@(point.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelY]];
     }
-    [self updateCSSForEditViewPort];
+    [self updateCSS];
 }
 
 - (void)undoPercentPosition:(NSPoint)point{
@@ -860,18 +860,18 @@
     if([self hasY] && [self canChangeYByUserInput]){
         [_css setValue:@(point.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentY]];
     }
-    [self updateCSSForEditViewPort];
+    [self updateCSS];
 }
 - (void)undoSize:(NSSize)size{
     [[[self undoManager] prepareWithInvocationTarget:self] undoSize:[self currentSize]];
 
     if([self hasWidth] && [self canChangeWidthByUserInput]){
-        [_css setValue:@(size.width) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagWidth]];
+        [_css setValue:@(size.width) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelWidth]];
     }
     if([self hasHeight] && [self canChangeHeightByUserInput]){
-        [_css setValue:@(size.height) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagHeight]];
+        [_css setValue:@(size.height) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelHeight]];
     }
-    [self updateCSSForEditViewPort];
+    [self updateCSS];
 
 }
 - (void)undoPercentSize:(NSSize)size{
@@ -885,7 +885,7 @@
     if([self hasHeight] && [self canChangeHeightByUserInput]){
         [_css setValue:@(size.height) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentHeight]];
     }
-    [self updateCSSForEditViewPort];
+    [self updateCSS];
     
 }
 
@@ -895,9 +895,9 @@
     if([self hasX] && [self canChangeXByUserInput]){
         NSInteger currentX = originalPoint.x + point.x;
         
-        [_css setValue:@(currentX) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagX]];
+        [_css setValue:@(currentX) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelX]];
         //set Percent if enablePercent
-        BOOL enablePercentX = [self percentUnitAtCSSTag:IUCSSTagXUnit];
+        BOOL enablePercentX = [self percentUnitAtCSSTag:IUCSSTagXUnitIsPercent];
         if(enablePercentX){
             CGFloat percentX = 0;
             if(parentSize.width!=0){
@@ -911,10 +911,10 @@
     if([self hasY] && [self canChangeYByUserInput]){
         
         NSInteger currentY = originalPoint.y + point.y;
-        [_css setValue:@(currentY) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagY]];
+        [_css setValue:@(currentY) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelY]];
         
         
-        BOOL enablePercentY = [self percentUnitAtCSSTag:IUCSSTagYUnit];
+        BOOL enablePercentY = [self percentUnitAtCSSTag:IUCSSTagYUnitIsPercent];
         if(enablePercentY){
             CGFloat percentY = 0;
             if(parentSize.height!=0){
@@ -930,7 +930,7 @@
     if([self hasWidth] && [self canChangeWidthByUserInput]){
         NSInteger currentWidth = originalSize.width;
         currentWidth += size.width;
-        [_css setValue:@(currentWidth) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagWidth]];
+        [_css setValue:@(currentWidth) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelWidth]];
         
         CGFloat percentWidth = originalPercentSize.width;
         if(parentSize.width!=0){
@@ -943,7 +943,7 @@
     if([self hasHeight] && [self canChangeHeightByUserInput]){
         NSInteger currentHeight = originalSize.height;
         currentHeight += size.height;
-        [_css setValue:@(currentHeight) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagHeight]];
+        [_css setValue:@(currentHeight) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelHeight]];
         
         CGFloat percentHeight = originalPercentSize.height;
         if(parentSize.height!=0){
@@ -1012,7 +1012,7 @@
     }
     
     _positionType = positionType;
-    [self updateCSSForEditViewPort];
+    [self updateCSS];
     [self updateHTML];
     [self updateJS];
     if (centerChanged) {
@@ -1022,7 +1022,7 @@
 
 - (void)setOverflowType:(IUOverflowType)overflowType{
     _overflowType = overflowType;
-    [self updateCSSForEditViewPort];
+    [self updateCSS];
     [self updateHTML];
 }
 
@@ -1046,4 +1046,13 @@
 
 #endif
 
+- (NSString*)cssClass{
+    return [@"." stringByAppendingString:self.htmlID];
+}
+- (NSString*)cssHoverClass{
+    return [NSString stringWithFormat:@".%@ :hover", self.htmlID];
+}
+- (NSString*)cssActiveClass{
+    return [NSString stringWithFormat:@".%@ :active", self.htmlID];
+}
 @end

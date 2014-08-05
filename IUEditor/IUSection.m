@@ -13,15 +13,15 @@
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if(self){
-        [self.css setValue:@(0) forTag:IUCSSTagXUnit forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:@(0) forTag:IUCSSTagYUnit forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:@(1) forTag:IUCSSTagWidthUnit forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:@(0) forTag:IUCSSTagHeightUnit forWidth:IUCSSMaxViewPortWidth];
+        [self.css setValue:@(0) forTag:IUCSSTagXUnitIsPercent forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:@(0) forTag:IUCSSTagYUnitIsPercent forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:@(1) forTag:IUCSSTagWidthUnitIsPercent forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:@(0) forTag:IUCSSTagHeightUnitIsPercent forWidth:IUCSSDefaultViewPort];
         
-        [self.css setValue:@(100) forTag:IUCSSTagPercentWidth forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:@(500) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:@(0) forTag:IUCSSTagX forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:@(0) forTag:IUCSSTagY forWidth:IUCSSMaxViewPortWidth];
+        [self.css setValue:@(100) forTag:IUCSSTagPercentWidth forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:@(500) forTag:IUCSSTagPixelHeight forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:@(0) forTag:IUCSSTagPixelX forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:@(0) forTag:IUCSSTagPixelY forWidth:IUCSSDefaultViewPort];
         
         self.positionType = IUPositionTypeRelative;
      }

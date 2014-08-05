@@ -451,8 +451,8 @@
 }
 
 - (void)setDefaultTextAttribute:(IUCSS *)css{
-    [css setValue:@"Arial" forTag:IUCSSTagFontName forWidth:IUCSSMaxViewPortWidth];
-    [css setValue:@(12) forTag:IUCSSTagFontSize forWidth:IUCSSMaxViewPortWidth];
+    [css setValue:@"Arial" forTag:IUCSSTagFontName forWidth:IUCSSDefaultViewPort];
+    [css setValue:@(12) forTag:IUCSSTagFontSize forWidth:IUCSSDefaultViewPort];
 }
 
 

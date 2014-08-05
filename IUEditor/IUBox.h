@@ -15,7 +15,7 @@
 @protocol IUSourceDelegate <NSObject>
 @required
 
--(void)IUClassIdentifier:(NSString *)identifier CSSUpdated:(NSString*)css forWidth:(NSInteger)width;
+-(void)IUClassIdentifier:(NSString *)identifier CSSUpdated:(NSString*)css viewPort:(NSInteger)width;
 -(void)IUClassIdentifier:(NSString *)identifier CSSRemovedforWidth:(NSInteger)width;
 -(void)removeAllCSSWithIdentifier:(NSString *)identifier;
 
@@ -121,7 +121,7 @@ typedef enum _IUOverflowType{
 //CSS
 @property (readonly) IUCSS *css; //used by subclass
 - (NSArray *)cssIdentifierArray;
-- (void)updateCSSForEditViewPort;
+- (void)updateCSS;
 - (void)updateCSSForMaxViewPort;
 - (void)CSSUpdatedForWidth:(NSInteger)width withIdentifier:(NSString *)identifer;
 
@@ -214,5 +214,9 @@ typedef enum _IUOverflowType{
 
 //0 for default, 1 for H1, 2 for H2
 @property IUTextType textType;
+
+- (NSString*)cssClass;
+- (NSString*)cssHoverClass;
+- (NSString*)cssActiveClass;
 
 @end

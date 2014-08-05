@@ -25,9 +25,9 @@
         self.sizeType = IUTweetButtonSizeTypeMeidum;
         self.countType = IUTweetButtonCountTypeNone;
         
-        [self.css setValue:@(20) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:@(56) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:nil forTag:IUCSSTagBGColor forWidth:IUCSSMaxViewPortWidth];
+        [self.css setValue:@(20) forTag:IUCSSTagPixelHeight forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:@(56) forTag:IUCSSTagPixelWidth forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:nil forTag:IUCSSTagBGColor forWidth:IUCSSDefaultViewPort];
         
         [[self undoManager] enableUndoRegistration];
         
@@ -162,8 +162,8 @@
         }
     }
     
-    [self.css setValue:@(currentSize.height) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
-    [self.css setValue:@(currentSize.width) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
+    [self.css setValue:@(currentSize.height) forTag:IUCSSTagPixelHeight forWidth:IUCSSDefaultViewPort];
+    [self.css setValue:@(currentSize.width) forTag:IUCSSTagPixelWidth forWidth:IUCSSDefaultViewPort];
 
     [self updateCSSForMaxViewPort];
     

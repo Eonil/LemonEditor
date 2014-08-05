@@ -17,8 +17,8 @@
 }
 
 -(BOOL)isFrameTag{
-    if ([self isSameTag:IUCSSTagWidth] || [self isSameTag:IUCSSTagHeight] || [self isSameTag:IUCSSTagPercentHeight] || [self isSameTag:IUCSSTagPercentWidth]
-        || [self isSameTag:IUCSSTagX] || [self isSameTag:IUCSSTagPercentX] || [self isSameTag:IUCSSTagY] || [self isSameTag:IUCSSTagPercentY]) {
+    if ([self isSameTag:IUCSSTagPixelWidth] || [self isSameTag:IUCSSTagPixelHeight] || [self isSameTag:IUCSSTagPercentHeight] || [self isSameTag:IUCSSTagPercentWidth]
+        || [self isSameTag:IUCSSTagPixelX] || [self isSameTag:IUCSSTagPercentX] || [self isSameTag:IUCSSTagPixelY] || [self isSameTag:IUCSSTagPercentY]) {
         return YES;
     }
     return NO;

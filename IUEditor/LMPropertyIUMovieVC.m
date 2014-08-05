@@ -148,8 +148,8 @@
             [self setValue:thumbFile.relativePath forKeyPath:[_controller keyPathFromControllerToProperty:@"posterPath"] ];
             
             
-            [self setValue:@(thumbnail.size.width) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagWidth]];
-            [self setValue:@(thumbnail.size.height) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHeight]];
+            [self setValue:@(thumbnail.size.width) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagPixelWidth]];
+            [self setValue:@(thumbnail.size.height) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagPixelHeight]];
         }
         
     }

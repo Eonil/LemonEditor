@@ -80,7 +80,7 @@
 
 - (void)updateNewLine:(NSRange)range htmlNode:(DOMHTMLElement *)node{
     [_textController selectTextRange:range htmlNode:node];
-    [self updateCSSForEditViewPort];
+    [self updateCSS];
     [self updateAutoHeight];
 }
 
@@ -134,8 +134,8 @@
     IUCSS *css = [_textController.cssDict objectForKey:identifier];
     return [css tagDictionaryForWidth:(int)width];
 }
-- (void)updateCSSForEditViewPort{
-    [super updateCSSForEditViewPort];
+- (void)updateCSS{
+    [super updateCSS];
     [self updateAutoHeight];
 }
 

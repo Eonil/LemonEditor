@@ -25,5 +25,8 @@
 -(void)putTag:(IUCSSTag)tag string:(NSString*)stringValue;
 
 -(void)removeTag:(IUCSSTag)key;
+@end
 
+@interface NSDictionary (IUTag)
+- (NSString*)CSSCode;
 @end

@@ -69,7 +69,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setPageLinkAlign:_pageLinkAlign];
     
     _pageLinkAlign = pageLinkAlign;
-    [self updateCSSForEditViewPort];
+    [self updateCSS];
 
 }
 

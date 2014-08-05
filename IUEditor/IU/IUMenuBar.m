@@ -25,10 +25,10 @@
         self.iconColor = [NSColor whiteColor];
         
         if (self.hasWidth) {
-            [self.css setValue:@(420) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
+            [self.css setValue:@(420) forTag:IUCSSTagPixelWidth forWidth:IUCSSDefaultViewPort];
         }
         if (self.hasHeight) {
-            [self.css setValue:@(50) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
+            [self.css setValue:@(50) forTag:IUCSSTagPixelHeight forWidth:IUCSSDefaultViewPort];
         }
         
         
@@ -168,7 +168,7 @@
     
     CGFloat width = (CGFloat)((CGFloat)100/(CGFloat)self.children.count);
     for(IUMenuItem *item in self.children){
-        [item.css setValue:@(width) forTag:IUCSSTagPercentWidth forWidth:IUCSSMaxViewPortWidth];
+        [item.css setValue:@(width) forTag:IUCSSTagPercentWidth forWidth:IUCSSDefaultViewPort];
         [item updateCSSForMaxViewPort];
     }
     

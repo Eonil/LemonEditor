@@ -39,16 +39,15 @@ static NSString * IUEventTagFrameHeight   = @"eqFrameHeight";
 ///////CSSTag
 #define IUCSSTag NSString*
 
-static NSString * IUCSSTagX = @"left";
-static NSString * IUCSSTagY = @"top";
+static NSString * IUCSSTagXUnitIsPercent   = @"xUnit";
+static NSString * IUCSSTagYUnitIsPercent   = @"yUnit";
+static NSString * IUCSSTagWidthUnitIsPercent   = @"wUnit";
+static NSString * IUCSSTagHeightUnitIsPercent   = @"hUnit";
 
-static NSString * IUCSSTagWidth = @"width";
-static NSString * IUCSSTagHeight = @"height";
-
-static NSString * IUCSSTagXUnit   = @"xUnit";
-static NSString * IUCSSTagYUnit   = @"yUnit";
-static NSString * IUCSSTagWidthUnit   = @"wUnit";
-static NSString * IUCSSTagHeightUnit   = @"hUnit";
+static NSString * IUCSSTagPixelX = @"left";
+static NSString * IUCSSTagPixelY = @"top";
+static NSString * IUCSSTagPixelWidth = @"width";
+static NSString * IUCSSTagPixelHeight = @"height";
 
 static NSString * IUCSSTagPercentX        = @"percentLeft";
 static NSString * IUCSSTagPercentY        = @"percentTop";
@@ -86,7 +85,7 @@ typedef enum{
     IUCSSBGHPostionRight,
 }IUCSSBGHPostion;
 
-static NSString * IUCSSTagBGEnableDigitPosition = @"enableDigitPosition";
+static NSString * IUCSSTagEnableBGCustomPosition = @"enableDigitPosition";
 static NSString * IUCSSTagBGXPosition = @"bgX";
 static NSString * IUCSSTagBGYPosition = @"bgY";
 
@@ -137,7 +136,7 @@ static NSString * IUCSSTagShadowHorizontal = @"shadowHorizontal";
 static NSString * IUCSSTagShadowSpread = @"shadowSpread";
 static NSString * IUCSSTagShadowBlur = @"shadowBlur";
 
-static NSString * IUCSSTagDisplayHidden = @"displayHidden";
+static NSString * IUCSSTagDisplayIsHidden = @"displayHidden";
 static NSString * IUCSSTagOpacity = @"opacity";
 
 //it should be used IN Editor Mode!!!

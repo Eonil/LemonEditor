@@ -21,9 +21,9 @@
         self.positionType = IUPositionTypeRelative;
         self.overflowType = IUOverflowTypeVisible;
         
-        [self.css setValue:[NSColor grayColor] forTag:IUCSSTagBGColor forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagFontColor forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:@(1) forTag:IUCSSTagWidthUnit forWidth:IUCSSMaxViewPortWidth];
+        [self.css setValue:[NSColor grayColor] forTag:IUCSSTagBGColor forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagFontColor forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:@(1) forTag:IUCSSTagWidthUnitIsPercent forWidth:IUCSSDefaultViewPort];
         
         self.bgActive = [NSColor blackColor];
         self.fontActive = [NSColor whiteColor];

@@ -192,12 +192,12 @@
     //not page class
     //page will be set report from javscript
     if([_sheet isKindOfClass:[IUClass class]]){
-        CGFloat currentHeight =  [[_sheet.css assembledTagDictionary][IUCSSTagHeight] floatValue];
+        CGFloat currentHeight =  [[_sheet.css assembledTagDictionary][IUCSSTagPixelHeight] floatValue];
         [(LMCanvasView *)self.view setHeightOfMainView:currentHeight];
     }
     else if([_sheet isKindOfClass:[IUBackground class]]){
         IUBackground *background = (IUBackground *)_sheet;
-        CGFloat currentHeight = [[background.header.css assembledTagDictionary][IUCSSTagHeight] floatValue];
+        CGFloat currentHeight = [[background.header.css assembledTagDictionary][IUCSSTagPixelHeight] floatValue];
         [(LMCanvasView *)self.view setHeightOfMainView:currentHeight];
     }
     
@@ -214,7 +214,8 @@
     _sheet = sheet;
     [_sheet setDelegate:self];
     
-    [[[self webView] mainFrame] loadHTMLString:sheet.editorSource baseURL:[NSURL fileURLWithPath:self.documentBasePath]];
+    NSString *editorSrc = [sheet.editorSource copy];
+    [[[self webView] mainFrame] loadHTMLString:editorSrc baseURL:[NSURL fileURLWithPath:self.documentBasePath]];
     
     
     [self updateSheetHeight];
@@ -548,7 +549,7 @@
 #pragma mark CSS
 
 -(void)IUClassIdentifier:(NSString *)identifier CSSRemovedforWidth:(NSInteger)width{
-    if(width == IUCSSMaxViewPortWidth){
+    if(width == IUCSSDefaultViewPort){
         //default setting
         [self removeCSSTextWithIDInDefault:identifier];
     }
@@ -577,7 +578,7 @@
 }
 
 
--(void)IUClassIdentifier:(NSString*)identifier CSSUpdated:(NSString*)css forWidth:(NSInteger)width{
+-(void)IUClassIdentifier:(NSString*)identifier CSSUpdated:(NSString*)css viewPort:(NSInteger)width{
     [JDLogUtil log:IULogSource key:@"css source" string:css];
     
     if(css.length == 0){
@@ -586,7 +587,7 @@
     }else{
         
         NSString *cssText = [NSString stringWithFormat:@"%@{%@}", identifier, css];
-        if(width == IUCSSMaxViewPortWidth){
+        if(width == IUCSSDefaultViewPort){
             //default setting
             [self setIUStyle:cssText withID:identifier];
         }
@@ -854,12 +855,12 @@
             
             [obj movePosition:NSMakePoint(guidePoint.x, guidePoint.y) withParentSize:parentSize];
             JDInfoLog(@"Point:(%.1f %.1f)", moveFrame.origin.x, moveFrame.origin.y);
-            [obj updateCSSForEditViewPort];
+            [obj updateCSS];
         }
         else{
          */
         [moveObj movePosition:NSMakePoint(totalPoint.x, totalPoint.y) withParentSize:parentSize];
-        [moveObj updateCSSForEditViewPort];
+        [moveObj updateCSS];
         
     }
 }
@@ -944,12 +945,12 @@
             guideSize = NSMakeSize(guideSize.width- currentFrame.size.width, guideSize.height - currentFrame.size.height);
             
             [obj increaseSize:NSMakeSize(guideSize.width, guideSize.height) withParentSize:parentSize];
-            [obj updateCSSForEditViewPort];
+            [obj updateCSS];
         }
         else{
          */
         [moveObj increaseSize:NSMakeSize(totalSize.width, totalSize.height) withParentSize:parentSize];
-        [moveObj updateCSSForEditViewPort];
+        [moveObj updateCSS];
         
         
         /*

@@ -25,7 +25,7 @@
 -(id)init{
     self = [super init];
     _cssFrameDict = [[NSMutableDictionary alloc] init];
-    self.editWidth = IUCSSMaxViewPortWidth;
+    self.editWidth = IUCSSDefaultViewPort;
     
     [self updateAssembledTagDictionary];
     return self;
@@ -38,7 +38,7 @@
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     _cssFrameDict = [aDecoder decodeObjectForKey:@"cssFrameDict"];
-    self.editWidth = IUCSSMaxViewPortWidth;
+    self.editWidth = IUCSSDefaultViewPort;
     
     [self updateAssembledTagDictionary];
     return self;
@@ -111,7 +111,7 @@
             }
             
             if ([tag isFrameTag] == NO) {
-                [self.delegate updateCSSForViewPortWidth:width];
+                [self.delegate updateCSS];
             }
         }
         
@@ -120,7 +120,7 @@
 
 - (void)copyMaxSizeToSize:(NSInteger)width{
     if(_cssFrameDict[@(width)] == nil){
-        NSMutableDictionary *cssDict = [_cssFrameDict[@(IUCSSMaxViewPortWidth)] mutableCopy];
+        NSMutableDictionary *cssDict = [_cssFrameDict[@(IUCSSDefaultViewPort)] mutableCopy];
         [_cssFrameDict setObject:cssDict forKey:@(width)];
     }
 }
@@ -132,7 +132,7 @@
         [cssDict removeObjectForKey:tag];
     }
     [self updateAssembledTagDictionary];
-    [self.delegate updateCSSForMaxViewPort];
+    [self.delegate updateCSS];
 }
 
 

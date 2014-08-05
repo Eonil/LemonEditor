@@ -100,26 +100,26 @@
                 else {
                     tagDictionary = [newBox.css tagDictionaryForWidth:[width integerValue]];
                 }
-                NSNumber *x = [tagDictionary valueForKey:IUCSSTagX];
+                NSNumber *x = [tagDictionary valueForKey:IUCSSTagPixelX];
                 
                 if (x) {
                     if (pasteTargetIsParent) {
                         NSNumber *newX = [NSNumber numberWithInteger:([x integerValue] + 10)];
-                        [newBox.css setValue:newX forTag:IUCSSTagX forWidth:[width integerValue]];
+                        [newBox.css setValue:newX forTag:IUCSSTagPixelX forWidth:[width integerValue]];
                     }
                     else {
-                        [newBox.css setValue:@(10) forTag:IUCSSTagX forWidth:[width integerValue]];
+                        [newBox.css setValue:@(10) forTag:IUCSSTagPixelX forWidth:[width integerValue]];
                     }
                 }
                 
-                NSNumber *y = [tagDictionary valueForKey:IUCSSTagY];
+                NSNumber *y = [tagDictionary valueForKey:IUCSSTagPixelY];
                 if (y) {
                     if (pasteTargetIsParent) {
                         NSNumber *newY = [NSNumber numberWithInteger:([y integerValue] + 10)];
-                        [newBox.css setValue:newY forTag:IUCSSTagY forWidth:[width integerValue]];
+                        [newBox.css setValue:newY forTag:IUCSSTagPixelY forWidth:[width integerValue]];
                     }
                     else {
-                        [newBox.css setValue:@(10) forTag:IUCSSTagY forWidth:[width integerValue]];
+                        [newBox.css setValue:@(10) forTag:IUCSSTagPixelY forWidth:[width integerValue]];
                     }
                 }
                 

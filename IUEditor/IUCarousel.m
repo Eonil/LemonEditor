@@ -20,9 +20,9 @@
         [[self undoManager] disableUndoRegistration];
 
         self.count = 3;
-        [self.css setValue:@(500) forTag:IUCSSTagWidth forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:@(300) forTag:IUCSSTagHeight forWidth:IUCSSMaxViewPortWidth];
-        [self.css setValue:[NSColor clearColor] forTag:IUCSSTagBGColor forWidth:IUCSSMaxViewPortWidth];
+        [self.css setValue:@(500) forTag:IUCSSTagPixelWidth forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:@(300) forTag:IUCSSTagPixelHeight forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:[NSColor clearColor] forTag:IUCSSTagBGColor forWidth:IUCSSDefaultViewPort];
         _selectColor = [NSColor blackColor];
         _deselectColor = [NSColor grayColor];
         _rightArrowImage = @"arrow_right.png";
@@ -147,11 +147,11 @@
     IUBox *selectedChild = [set anyObject];
     for(IUCarouselItem *item in self.children){
         if([item isEqualTo:selectedChild]){
-            [item.css setValue:@(YES) forTag:IUCSSTagEditorDisplay forWidth:IUCSSMaxViewPortWidth];
+            [item.css setValue:@(YES) forTag:IUCSSTagEditorDisplay forWidth:IUCSSDefaultViewPort];
             item.isActive = YES;
         }
         else{
-            [item.css setValue:@(NO) forTag:IUCSSTagEditorDisplay forWidth:IUCSSMaxViewPortWidth];
+            [item.css setValue:@(NO) forTag:IUCSSTagEditorDisplay forWidth:IUCSSDefaultViewPort];
             item.isActive = NO;
         }
     }
@@ -266,7 +266,7 @@
     
     _disableArrowControl = disableArrowControl;
     [self updateHTML];
-    [self updateCSSForEditViewPort];
+    [self updateCSS];
 }
 
 - (void)setLeftArrowImage:(NSString *)leftArrowImage{

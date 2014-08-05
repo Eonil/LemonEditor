@@ -8,6 +8,8 @@
 
 #import "IUCompiler.h"
 #import "IUProtocols.h"
+#import "IUCSSCompiler.h"
+
 
 #import "NSString+JDExtension.h"
 #import "IUSheet.h"
@@ -40,6 +42,8 @@
 #import "IUMenuItem.h"
 #import "IUTweetButton.h"
 
+#import "IUCSSCompiler.h"
+
 #if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
 #import "IUText.h"
 #endif
@@ -48,6 +52,7 @@
 #import "WPArticle.h"
 
 @implementation IUCompiler{
+    IUCSSCompiler *cssCompiler;
 }
 
 -(id)init{
@@ -1215,7 +1220,7 @@
     if (iu.xPosMove) {
         [retString appendFormat:@" xPosMove='%.1f'", iu.xPosMove];
     }
-    id value = [iu.css tagDictionaryForWidth:IUCSSMaxViewPortWidth][IUCSSTagImage];
+    id value = [iu.css tagDictionaryForWidth:IUCSSDefaultViewPort][IUCSSTagImage];
     if([value isDjangoVariable] && _rule == IUCompileRuleDjango){
         [retString appendFormat:@" style='background-image:url(%@)'", value];
     }
@@ -1386,6 +1391,15 @@
 
 #pragma mark - cssSource
 
+- (void)setResourceManager:(IUResourceManager *)resourceManager{
+    _resourceManager = resourceManager;
+    cssCompiler = [[IUCSSCompiler alloc] initWithResourceManager:self.resourceManager];
+}
+
+
+- (IUCSSCode*)cssCodeForIU:(IUBox*)iu{
+    return [cssCompiler cssCodeForIU:iu];
+}
 
 -(JDCode *)cssSource:(IUSheet *)sheet cssSizeArray:(NSArray *)cssSizeArray isEdit:(BOOL)isEdit{
     
@@ -1403,17 +1417,19 @@
         [code increaseIndentLevelForEdit];
     }
 
+
+    IUTarget target = isEdit ? IUTargetEditor : IUTargetOutput;
+    NSDictionary *cssDict = [[cssCompiler cssCodeForIU:sheet] stringTagDictionaryWithTarget:target viewPort:IUCSSDefaultViewPort];
     
-    NSDictionary *cssDict = [self cssSourceForIU:sheet width:IUCSSMaxViewPortWidth isEdit:isEdit];
     for (NSString *identifier in cssDict) {
         [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
     }
     NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
     
     for (IUBox *obj in districtChildren) {
-        NSDictionary *cssDict = [self cssSourceForIU:obj width:IUCSSMaxViewPortWidth isEdit:isEdit];
-        for (NSString *identifier in cssDict) {
-            [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
+            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] stringTagDictionaryWithTarget:target viewPort:IUCSSDefaultViewPort];
+            for (NSString *identifier in cssDict) {
+                [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
         }
     }
     if(isEdit){
@@ -1482,7 +1498,6 @@
             [code addCodeLine:@"}"];
         }
     }
-    
     return code;
 }
 
@@ -1501,21 +1516,12 @@
     for(NSString *identifier in iu.cssIdentifierArray){
         NSDictionary *cssContentDict = [self CSSContentWithIdentifier:identifier ofIU:iu width:width isEdit:isEdit];
         if(cssContentDict.count > 0){
-            NSString *cssString = [self CSSCodeFromDictionary:cssContentDict];
+            NSString *cssString = [cssContentDict CSSCode];
             [dict setObject:cssString forKey:identifier];
         }
     }
     
     return dict;
-}
-
-
-- (NSString *)CSSCodeFromDictionary:(NSDictionary *)dictionary{
-    NSMutableString *code = [NSMutableString string];
-    for (NSString *key in dictionary) {
-        [code appendFormat:@"%@:%@; ", key, dictionary[key]];
-    }
-    return code;
 }
 
 
@@ -1533,7 +1539,7 @@
     
     [cssDict addEntriesFromDictionary:[self cssStringDictionaryWithIdentifier:identifier ofIU:iu width:width isEdit:isEdit]];
 
-    if(width != IUCSSMaxViewPortWidth){
+    if(width != IUCSSDefaultViewPort){
         [cssDict removeObjectForKey:@"position"];
         [cssDict removeObjectForKey:@"overflow"];
         [cssDict removeObjectForKey:@"z-index"];
@@ -1569,7 +1575,7 @@
 
         }
         else if([identifier isEqualToString:[pageLinkSet.htmlID.cssClass stringByAppendingString:pageLinkSetButtonLiCSSPostfix]]){
-            CGFloat height = [iu.css.assembledTagDictionary[IUCSSTagHeight] floatValue];
+            CGFloat height = [iu.css.assembledTagDictionary[IUCSSTagPixelHeight] floatValue];
             [dict putTag:@"display" string:@"block"];
             [dict putTag:@"width" floatValue:height ignoreZero:YES unit:IUCSSUnitPixel];
             [dict putTag:@"height" floatValue:height ignoreZero:YES unit:IUCSSUnitPixel];
@@ -1586,7 +1592,7 @@
     else if([iu isKindOfClass:[IUMenuBar class]]){
         IUMenuBar *menuBar = (IUMenuBar *)iu;
         if(width < 640){
-            int height = [[menuBar.css tagDictionaryForWidth:width][IUCSSTagHeight] intValue];
+            int height = [[menuBar.css tagDictionaryForWidth:width][IUCSSTagPixelHeight] intValue];
             if([identifier isEqualToString:menuBar.mobileButtonIdentifier]){
                 [dict putTag:@"line-height" intValue:height ignoreZero:YES unit:IUCSSUnitPixel];
             }
@@ -1621,7 +1627,7 @@
             if(value){
                 [dict putTag:@"color" color:value ignoreClearColor:NO];
             }
-            value = [menuItem.parent.css tagDictionaryForWidth:width][IUCSSTagHeight];
+            value = [menuItem.parent.css tagDictionaryForWidth:width][IUCSSTagPixelHeight];
             if(value){
                 [dict putTag:@"line-height" intValue:[value intValue] ignoreZero:YES unit:IUCSSUnitPixel];
             }
@@ -1644,7 +1650,7 @@
                     }
                 }
             }
-            value = [menuItem.parent.css tagDictionaryForWidth:width][IUCSSTagHeight];
+            value = [menuItem.parent.css tagDictionaryForWidth:width][IUCSSTagPixelHeight];
             if(value){
                 int top = ([value intValue] - 10)/2;
                 [dict putTag:@"top" intValue:top ignoreZero:YES unit:IUCSSUnitPixel];
@@ -1688,7 +1694,7 @@
         }
         else if([identifier isEqualToString:carousel.pagerWrapperID]){
             if(carousel.pagerPosition){
-                NSInteger currentWidth = [iu.css.assembledTagDictionary[IUCSSTagWidth] integerValue];
+                NSInteger currentWidth = [iu.css.assembledTagDictionary[IUCSSTagPixelWidth] integerValue];
 
                 if(carousel.pagerPosition < 50){
                     [dict putTag:@"text-align" string:@"left"];
@@ -1868,14 +1874,14 @@
         }
         
         if (obj.hasX) {
-            BOOL enablePercent =[cssTagDict[IUCSSTagXUnit] boolValue];
+            BOOL enablePercent =[cssTagDict[IUCSSTagXUnitIsPercent] boolValue];
             IUCSSUnit unit =  [self unitWithBool:enablePercent];
             
             if(enablePercent){
                 value = cssTagDict[IUCSSTagPercentX];
             }
             else{
-                value = cssTagDict[IUCSSTagX];
+                value = cssTagDict[IUCSSTagPixelX];
             }
             if(value){
                 switch (obj.positionType) {
@@ -1898,14 +1904,14 @@
             }
         }
         if (obj.hasY) {
-            BOOL enablePercent =[cssTagDict[IUCSSTagYUnit] boolValue];
+            BOOL enablePercent =[cssTagDict[IUCSSTagYUnitIsPercent] boolValue];
             IUCSSUnit unit = [self unitWithBool:enablePercent];
             
             if(enablePercent){
                 value = cssTagDict[IUCSSTagPercentY];
             }
             else{
-                value = cssTagDict[IUCSSTagY];
+                value = cssTagDict[IUCSSTagPixelY];
             }
             
             if(value){
@@ -1927,14 +1933,14 @@
         if (obj.hasWidth) {
             if ([obj isKindOfClass:[IUHeader class]] == NO) {
                 
-                BOOL enablePercent =[cssTagDict[IUCSSTagWidthUnit] boolValue];
+                BOOL enablePercent =[cssTagDict[IUCSSTagWidthUnitIsPercent] boolValue];
                 IUCSSUnit unit = [self unitWithBool:enablePercent];
                 
                 if(enablePercent){
                     value = cssTagDict[IUCSSTagPercentWidth];
                 }
                 else{
-                    value = cssTagDict[IUCSSTagWidth];
+                    value = cssTagDict[IUCSSTagPixelWidth];
                 }
                 if (value) {
                     
@@ -1945,14 +1951,14 @@
         
         if (obj.hasHeight) {
             
-            BOOL enablePercent =[cssTagDict[IUCSSTagHeightUnit] boolValue];
+            BOOL enablePercent =[cssTagDict[IUCSSTagHeightUnitIsPercent] boolValue];
             IUCSSUnit unit = [self unitWithBool:enablePercent];
             
             if(enablePercent){
                 value = cssTagDict[IUCSSTagPercentHeight];
             }
             else{
-                value = cssTagDict[IUCSSTagHeight];
+                value = cssTagDict[IUCSSTagPixelHeight];
             }
             if (value) {
                 if ([obj isKindOfClass:[IUHeader class]]) {
@@ -1973,7 +1979,7 @@
         
         
 #pragma mark background-image and color
-        value = cssTagDict[IUCSSTagDisplayHidden];
+        value = cssTagDict[IUCSSTagDisplayIsHidden];
         if(value && [value boolValue]){
             [dict putTag:@"display" string:@"none"];
         }
@@ -2019,7 +2025,7 @@
                 break;
         }
         
-        BOOL digitBGPosition = [cssTagDict[IUCSSTagBGEnableDigitPosition] boolValue];
+        BOOL digitBGPosition = [cssTagDict[IUCSSTagEnableBGCustomPosition] boolValue];
         if(digitBGPosition){
             id bgValue = cssTagDict[IUCSSTagBGXPosition];
             [dict putTag:@"background-position-x" intValue:[bgValue intValue] ignoreZero:YES unit:IUCSSUnitPixel];
