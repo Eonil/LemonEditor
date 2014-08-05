@@ -47,7 +47,7 @@
         currentFontSize = 12;
         self.fontDefaultSizes = @[@(6), @(8), @(9), @(10), @(11), @(12),
                                   @(14), @(18), @(21), @(24), @(30), @(36), @(48), @(60), @(72)];
-        self.fontDefaultLetterSpacing = @[@(0), @(-0.1), @(-0.2), @(0.1), @(0.2), @(0.5), @(1.0)];
+        self.fontDefaultLetterSpacing = @[@(0), @(-2.0), @(-1.0), @(0.5), @(1.0), @(2.0)];
         [self loadView];
     }
     return self;
