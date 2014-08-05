@@ -125,7 +125,7 @@
     }
     
     for(IUBox *box in _controller.selectedObjects){
-        if ([box shouldCompileFontInfo]) {
+        if ([box shouldCompileFontInfo] == NO) {
             isTextType = NO;
             break;
         }
