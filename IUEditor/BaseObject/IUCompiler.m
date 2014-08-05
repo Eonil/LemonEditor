@@ -1419,7 +1419,7 @@
 
 
     IUTarget target = isEdit ? IUTargetEditor : IUTargetOutput;
-    NSDictionary *cssDict = [[cssCompiler cssCodeForIU:sheet] stringTagDictionaryWithTarget:target viewport:IUCSSDefaultViewPort];
+    NSDictionary *cssDict = [[cssCompiler cssCodeForIU:sheet] tagDictionaryWithIdentifierForTarget:target viewport:IUCSSDefaultViewPort];
     
     for (NSString *identifier in cssDict) {
         [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
@@ -1427,7 +1427,7 @@
     NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
     
     for (IUBox *obj in districtChildren) {
-            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] stringTagDictionaryWithTarget:target viewport:IUCSSDefaultViewPort];
+            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] tagDictionaryWithIdentifierForTarget:target viewport:IUCSSDefaultViewPort];
             for (NSString *identifier in cssDict) {
                 [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
         }

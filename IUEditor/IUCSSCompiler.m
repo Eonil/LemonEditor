@@ -112,6 +112,9 @@ typedef enum _IUUnit{
  */
 
 - (void)insertTag:(NSString*)tag color:(NSColor*)color{
+    if (color == nil) {
+        color = [NSColor blackColor];
+    }
     if (_currentTarget & IUTargetEditor) {
         NSMutableDictionary *tagDict = [self tagDictionaryWithTarget:IUTargetEditor];
         if (color.colorSpace != [NSColorSpace deviceRGBColorSpace]) {
@@ -200,7 +203,7 @@ typedef enum _IUUnit{
 }
 
 
-- (NSDictionary*)stringTagDictionaryWithTarget:(IUTarget)unit viewport:(int)viewport{
+- (NSDictionary*)tagDictionaryWithIdentifierForTarget:(IUTarget)unit viewport:(int)viewport{
     NSMutableDictionary *returnDict = [NSMutableDictionary dictionary];
     NSMutableDictionary *sourceDictWithViewPort = (unit == IUTargetEditor) ? _editorCSSDictWithViewPort : _outputCSSDictWithViewPort;
     NSMutableDictionary *sourceDictWithIdentifier = sourceDictWithViewPort[@(viewport)];
@@ -274,6 +277,7 @@ typedef enum _IUUnit{
         if ([_iu shouldCompileFontInfo]) {
             [self updateCSSFontCode:code asIUBox:_iu viewport:viewport];
         }
+        [self updateCSSRadiousAndBorderCode:code asIUBox:_iu viewport:viewport];
         
         [code setInsertIdentifier:_iu.cssHoverClass];
         [self updateCSSHoverCode:code asIUBox:_iu viewport:viewport];
@@ -364,6 +368,63 @@ typedef enum _IUUnit{
             [code insertTag:@"line-height" floatFromNumber:cssTagDict[IUCSSTagLineHeight]];
             //if pgtextview, set 1.3
         }
+    }
+}
+
+- (void)updateCSSRadiousAndBorderCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
+    NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
+
+
+    if (cssTagDict[IUCSSTagBorderTopWidth]) {
+        [code insertTag:@"border-top-width" floatFromNumber:cssTagDict[IUCSSTagBorderTopWidth] unit:IUUnitPixel];
+        [code insertTag:@"border-top-color" color:cssTagDict[IUCSSTagBorderTopColor]];
+    }
+    if (cssTagDict[IUCSSTagBorderLeftWidth]) {
+        [code insertTag:@"border-left-width" floatFromNumber:cssTagDict[IUCSSTagBorderLeftWidth] unit:IUUnitPixel];
+        [code insertTag:@"border-left-color" color:cssTagDict[IUCSSTagBorderLeftColor]];
+    }
+    if (cssTagDict[IUCSSTagBorderRightWidth]) {
+        [code insertTag:@"border-right-width" floatFromNumber:cssTagDict[IUCSSTagBorderRightWidth] unit:IUUnitPixel];
+        [code insertTag:@"border-right-color" color:cssTagDict[IUCSSTagBorderRightColor]];
+    }
+    if (cssTagDict[IUCSSTagBorderBottomWidth]) {
+        [code insertTag:@"border-bottom-width" floatFromNumber:cssTagDict[IUCSSTagBorderBottomWidth] unit:IUUnitPixel];
+        [code insertTag:@"border-bottom-color" color:cssTagDict[IUCSSTagBorderBottomColor]];
+    }
+
+    if (cssTagDict[IUCSSTagBorderRadiusTopLeft]) {
+        [code insertTag:@"border-top-left-radius" floatFromNumber:cssTagDict[IUCSSTagBorderRadiusTopLeft] unit:IUUnitPixel];
+    }
+    if (cssTagDict[IUCSSTagBorderRadiusTopRight]) {
+        [code insertTag:@"border-top-right-radius" floatFromNumber:cssTagDict[IUCSSTagBorderRadiusTopRight] unit:IUUnitPixel];
+    }
+    if (cssTagDict[IUCSSTagBorderRadiusBottomLeft]) {
+        [code insertTag:@"border-bottom-left-radius" floatFromNumber:cssTagDict[IUCSSTagBorderRadiusBottomLeft] unit:IUUnitPixel];
+    }
+    if (cssTagDict[IUCSSTagBorderRadiusBottomRight]) {
+        [code insertTag:@"border-bottom-right-radius" floatFromNumber:cssTagDict[IUCSSTagBorderRadiusBottomRight] unit:IUUnitPixel];
+    }
+
+    NSInteger hOff = [cssTagDict[IUCSSTagShadowHorizontal] integerValue];
+    NSInteger vOff = [cssTagDict[IUCSSTagShadowVertical] integerValue];
+    NSInteger blur = [cssTagDict[IUCSSTagShadowBlur] integerValue];
+    NSInteger spread = [cssTagDict[IUCSSTagShadowSpread] integerValue];
+    NSColor *color = cssTagDict[IUCSSTagShadowColor];
+
+    if (hOff || vOff || blur || spread){
+        if (color == nil) {
+            color = [NSColor blackColor];
+        }
+        [code insertTag:@"-moz-box-shadow" string:[NSString stringWithFormat:@"%ldpx %ldpx %ldpx %ldpx %@", hOff, vOff, blur, spread, [color rgbString]]];
+        [code insertTag:@"-webkit-box-shadow" string:[NSString stringWithFormat:@"%ldpx %ldpx %ldpx %ldpx %@", hOff, vOff, blur, spread, [color rgbString]]];
+        [code insertTag:@"box-shadow" string:[NSString stringWithFormat:@"%ldpx %ldpx %ldpx %ldpx %@", hOff, vOff, blur, spread, [color rgbString]]];
+        //for IE5.5-7
+        [code insertTag:@"filter" string:[NSString stringWithFormat:@"progid:DXImageTransform.Microsoft.Shadow(Strength=%ld, Direction=135, Color='%@')",spread, [color rgbString]]];
+        //            [code insertTag:@"filter" string:[NSString stringWithFormat:@"progid:DXImageTransform.Microsoft.Blur(pixelradius=%ld)",blur]];
+        
+        //for IE 8
+        [code insertTag:@"-ms-filter" string:[NSString stringWithFormat:@"\"progid:DXImageTransform.Microsoft.Shadow(Strength=%ld, Direction=135, Color='%@')",spread, [color rgbString]]];
+        //          [code insertTag:@"-ms-filter" string:[NSString stringWithFormat:@"\"progid:DXImageTransform.Microsoft.Blur(pixelradius=%ld)\"",blur]];
     }
 }
 
