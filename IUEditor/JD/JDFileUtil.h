@@ -35,7 +35,9 @@
 
 -(BOOL) appendToFile:(NSString*)path content:(NSString*)content;
 
+-(NSError*)overwriteBundleItem:(NSString *)filename toDirectory:(NSString *)directoryPath;
 -(NSError*)copyBundleItem:(NSString *)filename toDirectory:(NSString *)directoryPath;
+
 - (BOOL) unzip:(NSString*)filePath toDirectory:(NSString*)path createDirectory:(BOOL)createDirectory;
 - (BOOL) unzipResource:(NSString*)resource toDirectory:(NSString*)path createDirectory:(BOOL)createDirectory;
 @end

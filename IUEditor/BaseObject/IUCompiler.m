@@ -284,6 +284,42 @@
     return imgSrc;
 }
 
+- (JDCode *)javascriptHeaderForProject:(IUProject *)project isEdit:(BOOL)isEdit{
+    JDCode *code = [[JDCode alloc] init];
+    if(isEdit){
+        for(NSString *filename in project.defaultEditorJSArray){
+            NSString *jsPath = [[NSBundle mainBundle] pathForResource:[filename stringByDeletingPathExtension] ofType:[filename pathExtension]];
+            [code addCodeWithFormat:@"<script type=\"text/javascript\" src=\"%@\"></script>", jsPath];
+        }
+     
+    }
+    else{
+        for(NSString *filename in project.defaultOutputJSArray){
+            [code addCodeWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@\"></script>", filename];
+        }
+    }
+    return code;
+}
+
+- (JDCode *)cssHeaderForSheet:(IUSheet *)sheet isEdit:(BOOL)isEdit{
+    IUProject *project = sheet.project;
+    JDCode *code = [[JDCode alloc] init];
+    if(isEdit){
+        for(NSString *filename in project.defaultEditorCSSArray){
+            NSString *cssPath = [[NSBundle mainBundle] pathForResource:[filename stringByDeletingPathExtension] ofType:[filename pathExtension]];
+            [code addCodeWithFormat:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"%@\">", cssPath];
+        }
+        
+    }
+    else{
+        for(NSString *filename in project.defaultOutputCSSArray){
+            [code addCodeWithFormat:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/css/%@\">", filename];
+        }
+        [code addCodeWithFormat:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/css/%@.css\">", sheet.name];
+
+    }
+    return code;
+}
 
 
 #pragma mark - output body source
@@ -327,19 +363,11 @@
         JDCode *webFontCode = [self webfontImportSourceForOutput:(IUPage *)sheet];
         [sourceCode replaceCodeString:@"<!--WEBFONT_Insert-->" toCode:webFontCode];
 
+        JDCode *jsCode = [self javascriptHeaderForProject:sheet.project isEdit:NO];
+        [sourceCode replaceCodeString:@"<!--JAVASCRIPT_Insert-->" toCode:jsCode];
         
-        //remove iueditor.js to make outputSource
-        [sourceCode removeBlock:@"IUEditor.JS"];
         
-        //insert event.js
-        NSString *eventJs = @"<script type=\"text/javascript\" src=\"resource/js/iuevent.js\"></script>";
-        [sourceCode replaceCodeString:@"<!-- IUEvent.JS -->" toCodeString:eventJs];
-        
-        NSString *initJS = @"<script type=\"text/javascript\" src=\"resource/js/iuinit.js\"></script>";
-        [sourceCode replaceCodeString:@"<!-- IUInit.JS -->" toCodeString:initJS];
-        
-        JDCode *iuCSS = [[JDCode alloc] initWithCodeString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/css/iu.css\">"];
-        [iuCSS addCodeLineWithFormat:[NSString stringWithFormat:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/css/%@.css\">", sheet.name]];
+        JDCode *iuCSS = [self cssHeaderForSheet:sheet isEdit:NO];
         [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];
         
         [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCodeString:@""];
@@ -771,8 +799,12 @@
     JDCode *webFontCode = [self webfontImportSourceForEdit];
     [sourceCode replaceCodeString:@"<!--WEBFONT_Insert-->" toCode:webFontCode];
     
-    NSString *iuCSS = @"<link rel=\"stylesheet\" type=\"text/css\" href=\"resource/css/iueditor.css\">";
-    [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCodeString:iuCSS];
+    JDCode *jsCode = [self javascriptHeaderForProject:document.project isEdit:YES];
+    [sourceCode replaceCodeString:@"<!--JAVASCRIPT_Insert-->" toCode:jsCode];
+    
+    
+    JDCode *iuCSS = [self cssHeaderForSheet:document isEdit:YES];
+    [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];
     
     JDCode *cssCode = [self cssSource:document cssSizeArray:mqSizeArray isEdit:YES];
     [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCode:cssCode];

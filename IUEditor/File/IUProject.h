@@ -94,6 +94,14 @@ static NSString *IUClassGroupName = @"class";
 
 - (void)initializeResource;
 
+/**
+ css, js filename array
+ */
+- (NSArray *)defaultEditorCSSArray;
+- (NSArray *)defaultOutputCSSArray;
+- (NSArray *)defaultEditorJSArray;
+- (NSArray *)defaultOutputJSArray;
+
 //save project
 - (BOOL)save;
 

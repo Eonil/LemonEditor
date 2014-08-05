@@ -158,6 +158,21 @@ static JDFileUtil *sharedJDFileUtill;
     return YES;
 }
 
+-(NSError*)overwriteBundleItem:(NSString *)filename toDirectory:(NSString *)directoryPath{
+    NSError *result;
+    
+    NSString *resourceFilePath =[[NSBundle mainBundle] pathForResource:[filename stringByDeletingPathExtension] ofType:[filename pathExtension]];
+    NSString *newFilePath      =[directoryPath stringByAppendingFormat:@"/%@",filename];
+    if([[NSFileManager defaultManager] fileExistsAtPath:newFilePath]){
+        [[NSFileManager defaultManager] removeItemAtPath:newFilePath error:&result];
+    }
+    [[NSFileManager defaultManager] copyItemAtPath:resourceFilePath toPath:newFilePath error:&result];
+    if (result) {
+        JDErrorLog(@"%@", [result description]);
+    }
+    return result;
+}
+
 -(NSError*)copyBundleItem:(NSString *)filename toDirectory:(NSString *)directoryPath{
     NSError *result;
     

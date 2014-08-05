@@ -87,8 +87,8 @@
             _backgroundGroup.name = IUBackgroundGroupName;
         }
         
-        //TODO: initailizeResource 무조건 new로 만듦, css, js파일들이 안정화가 될때까지
-        [self initializeCSSJSResource];
+        //TODO:  css,js 파일은 내부에서그냥카피함. 따로 나중에 추가기능을 allow할때까지는 resource group으로 관리 안함.
+        //[self initializeCSSJSResource];
 
         [_resourceManager setResourceGroup:_resourceGroup];
         [_identifierManager registerIUs:self.allDocuments];
@@ -386,6 +386,48 @@
         return NO;
 }
 
+
+- (BOOL)copyCSSJSResourceToBuildPath:(NSString *)buildPath{
+    NSError *error;
+    
+    //css
+    NSString *resourceCSSPath = [buildPath stringByAppendingPathComponent:@"css"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:resourceCSSPath] == NO) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:resourceCSSPath withIntermediateDirectories:YES attributes:nil error:&error];
+    }
+    
+    [[NSFileManager defaultManager] createDirectoryAtPath:resourceCSSPath withIntermediateDirectories:YES attributes:nil error:&error];
+    for(NSString *filename in [self defaultOutputCSSArray]){
+        [[JDFileUtil util] overwriteBundleItem:filename toDirectory:resourceCSSPath];
+    }
+
+    
+    //js
+    NSString *resourceJSPath = [buildPath stringByAppendingPathComponent:@"js"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:resourceJSPath] == NO) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:resourceJSPath withIntermediateDirectories:YES attributes:nil error:&error];
+    }
+    
+    for(NSString *filename in [self defaultEditorJSArray]){
+        [[JDFileUtil util] overwriteBundleItem:filename toDirectory:resourceJSPath];
+    }
+    
+    //copy js for IE
+    NSString *ieJSPath = [resourceJSPath stringByAppendingPathComponent:@"ie"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:ieJSPath] == NO) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:ieJSPath withIntermediateDirectories:YES attributes:nil error:&error];
+    }
+    for(NSString *filename in [self defaultOutputIEJSArray]){
+        [[JDFileUtil util] overwriteBundleItem:filename toDirectory:ieJSPath];
+    }
+    
+    
+    if(error){
+        return NO;
+    }
+    return YES;
+}
+
 - (BOOL)build:(NSError**)error{
     /*
      Note :
@@ -404,9 +446,10 @@
     [[NSFileManager defaultManager] setDelegate:self];
     [[NSFileManager defaultManager] copyItemAtPath:_resourceGroup.absolutePath toPath:buildResourcePath error:error];
     [[NSFileManager defaultManager] setDelegate:nil];
+    
+    [self copyCSSJSResourceToBuildPath:buildResourcePath];
+    
     NSString *resourceCSSPath = [buildResourcePath stringByAppendingPathComponent:@"css"];
-
-
 
     IUEventVariable *eventVariable = [[IUEventVariable alloc] init];
     JDCode *initializeJSSource = [[JDCode alloc] init];
@@ -474,11 +517,7 @@
         NSAssert(0, @"write fail");
     }
     
-    //copy js for IE
-    NSString *ieJSPath = [resourceJSPath stringByAppendingPathComponent:@"ie"];
-    [[NSFileManager defaultManager] createDirectoryAtPath:ieJSPath withIntermediateDirectories:YES attributes:nil error:error];
-    [[JDFileUtil util] copyBundleItem:@"jquery.backgroundSize.js" toDirectory:ieJSPath];
-    [[JDFileUtil util] copyBundleItem:@"respond.min.js" toDirectory:ieJSPath];
+   
     
     [JDUIUtil hudAlert:@"Build Success" second:2];
     return YES;
@@ -516,6 +555,36 @@
     return _compiler;
 }
 
+
+/** default css array
+ */
+
+- (NSArray *)defaultEditorCSSArray{
+    return @[@"reset.css", @"iueditor.css"];
+}
+
+- (NSArray *)defaultOutputCSSArray{
+    return @[@"reset.css", @"iu.css"];
+}
+
+/** default js array
+ */
+- (NSArray *)defaultEditorJSArray{
+    return @[@"iueditor.js", @"iuframe.js", @"iu.js", @"iucarousel.js"];
+}
+
+- (NSArray *)defaultOutputJSArray{
+    return @[@"iuframe.js", @"iu.js", @"iucarousel.js", @"iuevent.js", @"iuinit.js"];
+}
+- (NSArray *)defaultOutputIEJSArray{
+    return @[@"jquery.backgroundSize.js", @"respond.min.js"];
+}
+
+
+
+
+//TODO:  css,js 파일은 내부에서그냥카피함. 따로 나중에 추가기능을 allow할때까지는 resource group으로 관리 안함.
+//현재는 불리지 않음.
 - (void)initializeCSSJSResource{
     IUResourceGroup *JSGroup = [[IUResourceGroup alloc] init];
     JSGroup.name = IUJSResourceGroupName;
@@ -583,7 +652,8 @@
     NSString *sampleVideoPath = [[NSBundle mainBundle] pathForResource:@"iueditor" ofType:@"mp4"];
     [videoGroup addResourceFileWithContentOfPath:sampleVideoPath];
     
-    [self initializeCSSJSResource];
+    //TODO:  css,js 파일은 내부에서그냥카피함. 따로 나중에 추가기능을 allow할때까지는 resource group으로 관리 안함.
+    //[self initializeCSSJSResource];
 }
 
 #if 0
