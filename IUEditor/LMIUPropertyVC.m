@@ -32,6 +32,7 @@
 #import "LMPropertyWPMenuVC.h"
 #import "LMPropertyIUMenuBarVC.h"
 #import "LMPropertyIUMenuItemVC.h"
+#import "LMPropertyIUTweetButtonVC.h"
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 
@@ -69,6 +70,7 @@
     
     LMPropertyIUMenuBarVC *propertyIUMenuBarVC;
     LMPropertyIUMenuItemVC *propertyIUMenuItemVC;
+    LMPropertyIUTweetButtonVC *propertyIUTweetButtonVC;
     
     //pg property
     LMPropertyIUMailLinkVC  *propertyIUMailLinkVC;
@@ -135,6 +137,8 @@
         
         propertyIUMenuBarVC = [[LMPropertyIUMenuBarVC alloc] initWithNibName:[LMPropertyIUMenuBarVC class].className bundle:nil];
         propertyIUMenuItemVC = [[LMPropertyIUMenuItemVC alloc] initWithNibName:[LMPropertyIUMenuItemVC class].className bundle:nil];
+        
+        propertyIUTweetButtonVC = [[LMPropertyIUTweetButtonVC alloc] initWithNibName:[LMPropertyIUTweetButtonVC class].className bundle:nil];
 
         //pg
         propertyPGTextFieldVC = [[LMPropertyIUTextFieldVC alloc] initWithNibName:[LMPropertyIUTextFieldVC class].className bundle:nil];
@@ -186,6 +190,7 @@
     
     [propertyIUMenuBarVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     [propertyIUMenuItemVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+    [propertyIUTweetButtonVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     
     //pg
     [propertyPGTextViewVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
@@ -281,13 +286,10 @@
         self.propertyVArray = @[propertyPGSubmitButtonVC.view];
         doubleClickFocusVC = propertyPGSubmitButtonVC;
     }
-#pragma mark IU - Complex
-    else if ([classString isEqualToString:@"IUMovie"]) {
-        self.propertyVArray = @[propertyIUMovieVC.view];
-    }
     else if ([classString isEqualToString:@"PGPageLinkSet"]) {
         self.propertyVArray = @[propertyPGPageLinkSetVC.view, inspectorLinkVC.view];
     }
+#pragma mark IU - Complex
     else if ([classString isEqualToString:@"IUWebMovie"]) {
         self.propertyVArray = @[propertyIUWebMovieVC.view, propertyIUHTMLVC.view];
     }
@@ -312,7 +314,13 @@
     else if ([classString isEqualToString:@"IUMenuItem"]){
         self.propertyVArray = @[propertyIUMenuItemVC.view, inspectorLinkVC.view];
     }
+    else if ([classString isEqualToString:@"IUTweetButton"]){
+        self.propertyVArray = @[propertyIUTweetButtonVC.view];
+    }
 #pragma mark IU-Simple
+    else if ([classString isEqualToString:@"IUMovie"]) {
+        self.propertyVArray = @[propertyIUMovieVC.view];
+    }
     else if ([classString isEqualToString:@"IUImage"]){
         self.propertyVArray = [NSMutableArray arrayWithArray:@[inspectorAltTextVC.view, inspectorLinkVC.view, propertyPGType2VC.view]];
     }

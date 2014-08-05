@@ -266,6 +266,8 @@
 		26FC5DAB196F8489004B4DB4 /* panel_bottom_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26FC5DA7196F8489004B4DB4 /* panel_bottom_on@2x.png */; };
 		26FE6F91191C6D8E0003E187 /* shoveling.png in Resources */ = {isa = PBXBuildFile; fileRef = 26FE6F8F191C6D8E0003E187 /* shoveling.png */; };
 		26FE6F92191C6D8E0003E187 /* shoveling@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26FE6F90191C6D8E0003E187 /* shoveling@2x.png */; };
+		3D095C801990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D095C7E1990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.m */; };
+		3D095C811990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D095C7F1990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.xib */; };
 		3D0D480918FFAF24000A5B53 /* LMTopToolbarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D480718FFAF24000A5B53 /* LMTopToolbarVC.m */; };
 		3D0D480A18FFAF24000A5B53 /* LMTopToolbarVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D0D480818FFAF24000A5B53 /* LMTopToolbarVC.xib */; };
 		3D0D481318FFDC96000A5B53 /* LMFileTabItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D0D481118FFDC96000A5B53 /* LMFileTabItemVC.m */; };
@@ -299,6 +301,10 @@
 		3D4EB00B1967FB8A00535E37 /* agency.iu.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D4EB00A1967FB8A00535E37 /* agency.iu.zip */; };
 		3D54D64B18ED5D2E00B5FEC2 /* ResizeNE-SW.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3D54D64918ED5D2E00B5FEC2 /* ResizeNE-SW.tiff */; };
 		3D54D64C18ED5D2E00B5FEC2 /* ResizeNW-SE.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3D54D64A18ED5D2E00B5FEC2 /* ResizeNW-SE.tiff */; };
+		3D5B5AF31990B8B900EF6F12 /* IUTweetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5B5AF21990B8B900EF6F12 /* IUTweetButton.m */; };
+		3D5B5AF71990DDDC00EF6F12 /* ttwidgetHorizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D5B5AF41990DDDC00EF6F12 /* ttwidgetHorizontal.png */; };
+		3D5B5AF81990DDDC00EF6F12 /* ttwidgetNone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D5B5AF51990DDDC00EF6F12 /* ttwidgetNone.png */; };
+		3D5B5AF91990DDDC00EF6F12 /* ttwidgetVertical.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D5B5AF61990DDDC00EF6F12 /* ttwidgetVertical.png */; };
 		3D748C7C19207B7A005665A3 /* iueditor.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 3D748C7A19207B7A005665A3 /* iueditor.iconset */; };
 		3D748C81192095A1005665A3 /* LMPropertyIUPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D748C7F192095A1005665A3 /* LMPropertyIUPageVC.m */; };
 		3D748C82192095A1005665A3 /* LMPropertyIUPageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D748C80192095A1005665A3 /* LMPropertyIUPageVC.xib */; };
@@ -1103,6 +1109,9 @@
 		26FC5DA7196F8489004B4DB4 /* panel_bottom_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "panel_bottom_on@2x.png"; sourceTree = "<group>"; };
 		26FE6F8F191C6D8E0003E187 /* shoveling.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoveling.png; sourceTree = "<group>"; };
 		26FE6F90191C6D8E0003E187 /* shoveling@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoveling@2x.png"; sourceTree = "<group>"; };
+		3D095C7D1990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyIUTweetButtonVC.h; sourceTree = "<group>"; };
+		3D095C7E1990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyIUTweetButtonVC.m; sourceTree = "<group>"; };
+		3D095C7F1990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyIUTweetButtonVC.xib; sourceTree = "<group>"; };
 		3D0D480618FFAF24000A5B53 /* LMTopToolbarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMTopToolbarVC.h; sourceTree = "<group>"; };
 		3D0D480718FFAF24000A5B53 /* LMTopToolbarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTopToolbarVC.m; sourceTree = "<group>"; };
 		3D0D480818FFAF24000A5B53 /* LMTopToolbarVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMTopToolbarVC.xib; sourceTree = "<group>"; };
@@ -1147,6 +1156,11 @@
 		3D4EB00A1967FB8A00535E37 /* agency.iu.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = agency.iu.zip; sourceTree = "<group>"; };
 		3D54D64918ED5D2E00B5FEC2 /* ResizeNE-SW.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "ResizeNE-SW.tiff"; sourceTree = "<group>"; };
 		3D54D64A18ED5D2E00B5FEC2 /* ResizeNW-SE.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "ResizeNW-SE.tiff"; sourceTree = "<group>"; };
+		3D5B5AF11990B8B900EF6F12 /* IUTweetButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUTweetButton.h; path = IU/IUTweetButton.h; sourceTree = "<group>"; };
+		3D5B5AF21990B8B900EF6F12 /* IUTweetButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUTweetButton.m; path = IU/IUTweetButton.m; sourceTree = "<group>"; };
+		3D5B5AF41990DDDC00EF6F12 /* ttwidgetHorizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ttwidgetHorizontal.png; sourceTree = "<group>"; };
+		3D5B5AF51990DDDC00EF6F12 /* ttwidgetNone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ttwidgetNone.png; sourceTree = "<group>"; };
+		3D5B5AF61990DDDC00EF6F12 /* ttwidgetVertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ttwidgetVertical.png; sourceTree = "<group>"; };
 		3D748C7919207B7A005665A3 /* iueditor.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iueditor.icns; sourceTree = "<group>"; };
 		3D748C7A19207B7A005665A3 /* iueditor.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = iueditor.iconset; sourceTree = "<group>"; };
 		3D748C7E192095A1005665A3 /* LMPropertyIUPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUPageVC.h; path = IU/LMPropertyIUPageVC.h; sourceTree = "<group>"; };
@@ -2931,6 +2945,9 @@
 		3DED273D19078917001A1D67 /* canvasImage */ = {
 			isa = PBXGroup;
 			children = (
+				3D5B5AF41990DDDC00EF6F12 /* ttwidgetHorizontal.png */,
+				3D5B5AF51990DDDC00EF6F12 /* ttwidgetNone.png */,
+				3D5B5AF61990DDDC00EF6F12 /* ttwidgetVertical.png */,
 				3DED274E1907C4D0001A1D67 /* FBSampleImage.png */,
 				3DED273F1907898A001A1D67 /* video_bg.png */,
 				3DED27401907898A001A1D67 /* video_play.png */,
@@ -3013,6 +3030,8 @@
 				3DF8029C18FE3D6000913505 /* IUWebMovie.m */,
 				3DED274B1907C140001A1D67 /* IUFBLike.h */,
 				3DED274C1907C140001A1D67 /* IUFBLike.m */,
+				3D5B5AF11990B8B900EF6F12 /* IUTweetButton.h */,
+				3D5B5AF21990B8B900EF6F12 /* IUTweetButton.m */,
 			);
 			name = IUHTMLGroup;
 			sourceTree = "<group>";
@@ -3127,6 +3146,9 @@
 				3D19E439198A104300A50D35 /* LMPropertyIUMenuItemVC.h */,
 				3D19E43A198A104300A50D35 /* LMPropertyIUMenuItemVC.m */,
 				3D19E43B198A104300A50D35 /* LMPropertyIUMenuItemVC.xib */,
+				3D095C7D1990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.h */,
+				3D095C7E1990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.m */,
+				3D095C7F1990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.xib */,
 			);
 			name = ComplexGroup;
 			sourceTree = "<group>";
@@ -4080,6 +4102,7 @@
 				267CB193190F93370079E565 /* tab_appearance_off.png in Resources */,
 				6979FC0818ED34E20060C3B4 /* LMPropertyFrameVC.xib in Resources */,
 				698BEA9B19664CBD0019C1C3 /* record_stop.png in Resources */,
+				3D5B5AF91990DDDC00EF6F12 /* ttwidgetVertical.png in Resources */,
 				2656EDFE19791BFB0066E23F /* tab_wp_off.png in Resources */,
 				06855601198A63430073FA83 /* famous_people_elton.png in Resources */,
 				2628C9221919C8C800D9D8CD /* tab_secondary_on.png in Resources */,
@@ -4092,6 +4115,7 @@
 				CBA8780F1964084700075294 /* IUBox.rtf in Resources */,
 				3DF8046118FF75CF00913505 /* LMPropertyBGColorVC.xib in Resources */,
 				265BC577190FA9B600A1758F /* controller_comb.png in Resources */,
+				3D5B5AF71990DDDC00EF6F12 /* ttwidgetHorizontal.png in Resources */,
 				3DA6C66819768843004D6587 /* gallery_preview_mobile02.png in Resources */,
 				3DED26821900D329001A1D67 /* stack_twitter.png in Resources */,
 				2628C91C1919C8C800D9D8CD /* tab_primary_off.png in Resources */,
@@ -4276,6 +4300,7 @@
 				06855608198A63430073FA83 /* JicJac_Chair.png in Resources */,
 				69347439198C0F84009E4472 /* heroku_push.sh in Resources */,
 				267CB1A0190F93370079E565 /* tab_event_on@2x.png in Resources */,
+				3D5B5AF81990DDDC00EF6F12 /* ttwidgetNone.png in Resources */,
 				3DED26881900D329001A1D67 /* stack_html.png in Resources */,
 				2628C937191A361800D9D8CD /* tool_submit@2x.png in Resources */,
 				06855635198A63430073FA83 /* shopin.png in Resources */,
@@ -4350,6 +4375,7 @@
 				3DED26F219010BB0001A1D67 /* LMPropertyIUImportVC.xib in Resources */,
 				CBA8780E1964084700075294 /* ghost.rtf in Resources */,
 				692C4DC91967D10300EAB2E7 /* RunningAProject.pages in Resources */,
+				3D095C811990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.xib in Resources */,
 				3DF8043A18FE62FC00913505 /* tool_movie@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4477,6 +4503,7 @@
 				69CFCAB218E95A0C00E3048A /* LMResourceVC.m in Sources */,
 				69757B1518D95BBC0095CBAC /* NSTextField+DragAndDrop.m in Sources */,
 				3DED273A1904F271001A1D67 /* IUImageUtil.m in Sources */,
+				3D095C801990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.m in Sources */,
 				69C5760B18D6FE020016F050 /* IUClass.m in Sources */,
 				3DA416BD1935ABB400559028 /* LMFontController.m in Sources */,
 				3D748C81192095A1005665A3 /* LMPropertyIUPageVC.m in Sources */,
@@ -4487,6 +4514,7 @@
 				694A9865196D197900C1D630 /* JDFormatter.m in Sources */,
 				690A826B190A25D500DDBA86 /* IUDjangoProject.m in Sources */,
 				3DA6F30E1963B810004DF0AA /* LMHelpVideoPopoverVC.m in Sources */,
+				3D5B5AF31990B8B900EF6F12 /* IUTweetButton.m in Sources */,
 				CB9BD6381914DC62002C9369 /* LMStartNewDjangoVC.m in Sources */,
 				690A825D190A047300DDBA86 /* LMPropertyIUTextFieldVC.m in Sources */,
 				6967425318F7D077008B7111 /* IUIdentifierManager.m in Sources */,

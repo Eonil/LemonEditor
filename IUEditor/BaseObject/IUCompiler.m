@@ -38,6 +38,7 @@
 #import "IUProject.h"
 #import "IUMenuBar.h"
 #import "IUMenuItem.h"
+#import "IUTweetButton.h"
 
 #if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
 #import "IUText.h"
@@ -146,7 +147,16 @@
     //for google analytics
     if(page.googleCode && page.googleCode.length != 0){
         [code addCodeLine:page.googleCode];
-          }
+    }
+    
+    //js for tweet
+    for(IUBox *child in page.allChildren){
+        if([child isKindOfClass:[IUTweetButton class]]){
+            [code addCodeLine:@"<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>"];
+            break;
+        }
+    }
+    
 
 
     return code;
@@ -1040,6 +1050,31 @@
         [code addCodeLine:editorHTML];
         
         [code addCodeLine:@"</div>"];
+    }
+#pragma mark IUTweetButton
+    else if([iu isKindOfClass:[IUTweetButton class]]){
+        IUTweetButton *tweet = (IUTweetButton *)iu;
+        [code addCodeLineWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:YES]];
+        
+        NSString *imageName;
+        switch (tweet.countType) {
+            case IUTweetButtonCountTypeVertical:
+                imageName = @"ttwidgetVertical";
+                break;
+            case IUTweetButtonCountTypeHorizontal:
+                imageName = @"ttwidgetHorizontal";
+                break;
+            case IUTweetButtonCountTypeNone:
+                imageName = @"ttwidgetNone";
+
+        }
+        
+        NSString *imagePath = [[NSBundle mainBundle] pathForImageResource:imageName];
+        NSString *innerHTML = [NSString stringWithFormat:@"<img src=\"%@\" style=\"width:100%%; height:100%%\"></imbc>", imagePath];
+        
+        [code addCodeLine:innerHTML];
+        [code addCodeLine:@"</div>"];
+
     }
 #pragma mark IUHTML
     else if([iu isKindOfClass:[IUHTML class]]){
