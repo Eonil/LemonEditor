@@ -63,5 +63,8 @@
     [self updateJS];
 }
 
+- (BOOL)shouldCompileFontInfo{
+    return YES;
+}
 
 @end
