@@ -1220,7 +1220,7 @@
     if (iu.xPosMove) {
         [retString appendFormat:@" xPosMove='%.1f'", iu.xPosMove];
     }
-    id value = [iu.css tagDictionaryForWidth:IUCSSDefaultViewPort][IUCSSTagImage];
+    id value = [iu.css tagDictionaryForViewport:IUCSSDefaultViewPort][IUCSSTagImage];
     if([value isDjangoVariable] && _rule == IUCompileRuleDjango){
         [retString appendFormat:@" style='background-image:url(%@)'", value];
     }
@@ -1419,7 +1419,7 @@
 
 
     IUTarget target = isEdit ? IUTargetEditor : IUTargetOutput;
-    NSDictionary *cssDict = [[cssCompiler cssCodeForIU:sheet] stringTagDictionaryWithTarget:target viewPort:IUCSSDefaultViewPort];
+    NSDictionary *cssDict = [[cssCompiler cssCodeForIU:sheet] stringTagDictionaryWithTarget:target viewport:IUCSSDefaultViewPort];
     
     for (NSString *identifier in cssDict) {
         [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
@@ -1427,7 +1427,7 @@
     NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
     
     for (IUBox *obj in districtChildren) {
-            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] stringTagDictionaryWithTarget:target viewPort:IUCSSDefaultViewPort];
+            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] stringTagDictionaryWithTarget:target viewport:IUCSSDefaultViewPort];
             for (NSString *identifier in cssDict) {
                 [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
         }
@@ -1531,13 +1531,13 @@
     NSMutableDictionary *cssDict = [NSMutableDictionary dictionary];
     
     if([identifier isEqualToString:[iu.htmlID cssClass]]){
-        cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForWidth:width] ofClass:iu isHover:NO isEdit:isEdit] mutableCopy];
+        cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForViewport:width] ofClass:iu isHover:NO isEdit:isEdit] mutableCopy];
     }
     else if([identifier isEqualToString:[[iu.htmlID cssClass] cssHoverClass]]){
-        cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForWidth:width] ofClass:iu isHover:YES isEdit:isEdit] mutableCopy];
+        cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForViewport:width] ofClass:iu isHover:YES isEdit:isEdit] mutableCopy];
     }
     
-    [cssDict addEntriesFromDictionary:[self cssStringDictionaryWithIdentifier:identifier ofIU:iu width:width isEdit:isEdit]];
+//    [cssDict addEntriesFromDictionary:[self cssStringDictionaryWithIdentifier:identifier ofIU:iu width:width isEdit:isEdit]];
 
     if(width != IUCSSDefaultViewPort){
         [cssDict removeObjectForKey:@"position"];
@@ -1554,233 +1554,6 @@
  @breif this method makes property css dictionary
  */
 #pragma mark - property css dictionary
-
--(IUCSSStringDictionary*)cssStringDictionaryWithIdentifier:(NSString *)identifier ofIU:(IUBox*)iu width:(NSInteger)width isEdit:(BOOL)isEdit{
-    IUCSSStringDictionary *dict = [IUCSSStringDictionary dictionary];
-    
-#pragma mark PGPageLinkSet
-    if([iu isKindOfClass:[PGPageLinkSet class]]){
-        
-        PGPageLinkSet *pageLinkSet = (PGPageLinkSet *)iu;
-        if([identifier isEqualToString:[pageLinkSet.htmlID.cssClass stringByAppendingString:pageLinkSetButtonCSSPostfix]]){
-            switch (pageLinkSet.pageLinkAlign) {
-                case IUAlignLeft: break;
-                case IUAlignRight:
-                    [dict putTag:@"float" string:@"right"];
-                case IUAlignCenter:
-                    [dict putTag:@"margin" string:@"auto"];
-                default:
-                    break;
-            }
-
-        }
-        else if([identifier isEqualToString:[pageLinkSet.htmlID.cssClass stringByAppendingString:pageLinkSetButtonLiCSSPostfix]]){
-            CGFloat height = [iu.css.assembledTagDictionary[IUCSSTagPixelHeight] floatValue];
-            [dict putTag:@"display" string:@"block"];
-            [dict putTag:@"width" floatValue:height ignoreZero:YES unit:IUCSSUnitPixel];
-            [dict putTag:@"height" floatValue:height ignoreZero:YES unit:IUCSSUnitPixel];
-            [dict putTag:@"margin-left" floatValue:pageLinkSet.buttonMargin ignoreZero:YES unit:IUCSSUnitPixel];
-            [dict putTag:@"margin-right" floatValue:pageLinkSet.buttonMargin ignoreZero:YES unit:IUCSSUnitPixel];
-            [dict putTag:@"line-height" floatValue:height ignoreZero:YES unit:IUCSSUnitPixel];
-            [dict putTag:@"background-color" color:pageLinkSet.defaultButtonBGColor ignoreClearColor:NO];
-        }
-        else if([identifier isEqualToString:[pageLinkSet.htmlID.cssClass stringByAppendingString:pageLinkSetButtonSelectedLiCSSPostfix]]){
-             [dict putTag:@"background-color" color:pageLinkSet.selectedButtonBGColor ignoreClearColor:NO];
-        }
-    }
-#pragma mark IUMenuBar
-    else if([iu isKindOfClass:[IUMenuBar class]]){
-        IUMenuBar *menuBar = (IUMenuBar *)iu;
-        if(width < 640){
-            int height = [[menuBar.css tagDictionaryForWidth:width][IUCSSTagPixelHeight] intValue];
-            if([identifier isEqualToString:menuBar.mobileButtonIdentifier]){
-                [dict putTag:@"line-height" intValue:height ignoreZero:YES unit:IUCSSUnitPixel];
-            }
-            else if([identifier isEqualToString:menuBar.topButtonIdentifier]){
-                int top = (height -10)/2;
-                [dict putTag:@"top" intValue:top ignoreZero:YES unit:IUCSSUnitPixel];
-            }
-            else if([identifier isEqualToString:menuBar.bottomButtonIdentifier]){
-                int top =(height -10)/2 +10;
-                [dict putTag:@"top" intValue:top ignoreZero:YES unit:IUCSSUnitPixel];
-            }
-            else if([identifier isEqualToString:menuBar.editorDisplayIdentifier] && isEdit){
-                if(menuBar.isOpened){
-                    [dict putTag:@"display" string:@"block"];
-                }
-                else{
-                    [dict putTag:@"display" string:@"none"];
-                }
-            }
-        }
-        
-    }
-#pragma mark IUMenuItem{
-    else if([iu isKindOfClass:[IUMenuItem class]]){
-        IUMenuItem *menuItem = (IUMenuItem *)iu;
-        if([identifier isEqualToString:menuItem.itemIdentifier]){
-            id value = [menuItem.css tagDictionaryForWidth:width][IUCSSTagBGColor];
-            if(value){
-                [dict putTag:@"background-color" color:value ignoreClearColor:NO];
-            }
-            value = [menuItem.css tagDictionaryForWidth:width][IUCSSTagFontColor];
-            if(value){
-                [dict putTag:@"color" color:value ignoreClearColor:NO];
-            }
-            value = [menuItem.parent.css tagDictionaryForWidth:width][IUCSSTagPixelHeight];
-            if(value){
-                [dict putTag:@"line-height" intValue:[value intValue] ignoreZero:YES unit:IUCSSUnitPixel];
-            }
-            
-        }
-        else if([identifier isEqualToString:menuItem.closureIdentifier]){
-            id value = [menuItem.css tagDictionaryForWidth:width][IUCSSTagFontColor];
-            if(value){
-                NSString *color = [(NSColor *)value rgbString];
-                if(menuItem.depth == 1){
-                    [dict putTag:@"border-top-color" string:color];
-                }
-                else if(menuItem.depth ==2){
-                    if(width > 640){
-                        [dict putTag:@"border-left-color" string:color];
-                    }
-                    else{
-                        [dict putTag:@"border-left-color" string:@"transparent"];
-                        [dict putTag:@"border-top-color" string:color];
-                    }
-                }
-            }
-            value = [menuItem.parent.css tagDictionaryForWidth:width][IUCSSTagPixelHeight];
-            if(value){
-                int top = ([value intValue] - 10)/2;
-                [dict putTag:@"top" intValue:top ignoreZero:YES unit:IUCSSUnitPixel];
-
-            }
-
-        }
-        else if([identifier isEqualToString:menuItem.hoverItemIdentifier] ||
-                [identifier isEqualToString:menuItem.activeItemIdentifier]){
-            if(menuItem.bgActive){
-                [dict putTag:@"background-color" color:menuItem.bgActive ignoreClearColor:NO];
-            }
-            if(menuItem.fontActive){
-                [dict putTag:@"color" color:menuItem.fontActive ignoreClearColor:NO];
-            }
-        }
-        else if([identifier isEqualToString:menuItem.editorDisplayIdentifier] && isEdit){
-            if(width  > 640){
-                if(menuItem.isOpened){
-                    [dict putTag:@"display" string:@"block"];
-                }
-                else{
-                    [dict putTag:@"display" string:@"none"];
-                }
-            }
-            else{
-                [dict putTag:@"display" string:@"block"];
-            }
-        }
-    }
-#pragma mark IUCarousel
-    else if([iu isKindOfClass:[IUCarousel class]]){
-        IUCarousel *carousel = (IUCarousel *)iu;
-        if([identifier isEqualToString:carousel.pagerID]){
-            [dict putTag:@"background-color" color:carousel.deselectColor ignoreClearColor:NO];
-        }
-        else if([identifier isEqualToString:[carousel.pagerID cssHoverClass]]
-                || [identifier isEqualToString:[carousel.pagerID cssActiveClass]]){
-            [dict putTag:@"background-color" color:carousel.selectColor ignoreClearColor:NO];
-
-        }
-        else if([identifier isEqualToString:carousel.pagerWrapperID]){
-            if(carousel.pagerPosition){
-                NSInteger currentWidth = [iu.css.assembledTagDictionary[IUCSSTagPixelWidth] integerValue];
-
-                if(carousel.pagerPosition < 50){
-                    [dict putTag:@"text-align" string:@"left"];
-                    int left = (int)((currentWidth) * ((CGFloat)carousel.pagerPosition/100));
-                    [dict putTag:@"left" intValue:left ignoreZero:YES unit:IUCSSUnitPixel];
-                }
-                else if(carousel.pagerPosition == 50){
-                    [dict putTag:@"text-align" string:@"center"];
-                }
-                else if(carousel.pagerPosition < 100){
-                    [dict putTag:@"text-align" string:@"center"];
-                    int left = (int)((currentWidth) * ((CGFloat)(carousel.pagerPosition-50)/100));
-                    [dict putTag:@"left" intValue:left ignoreZero:YES unit:IUCSSUnitPixel];
-                    
-                }
-                else if(carousel.pagerPosition == 100){
-                    int right = (int)((currentWidth) * ((CGFloat)(100-carousel.pagerPosition)/100));
-                    [dict putTag:@"text-align" string:@"right"];
-                    [dict putTag:@"right" intValue:right ignoreZero:YES unit:IUCSSUnitPixel];
-                }
-            }
-            
-        }
-        else if([identifier isEqualToString:carousel.prevID]
-                || [identifier isEqualToString:carousel.nextID]){
-            
-            NSString *imageName;
-            if([identifier isEqualToString:carousel.prevID]){
-                imageName = carousel.leftArrowImage;
-                [dict putTag:@"left" intValue:carousel.leftX ignoreZero:YES unit:IUCSSUnitPixel];
-                [dict putTag:@"top" intValue:carousel.leftY ignoreZero:YES unit:IUCSSUnitPixel];
-
-            }
-            else if([identifier isEqualToString:carousel.nextID]){
-                imageName = carousel.rightArrowImage;
-                [dict putTag:@"right" intValue:carousel.rightX ignoreZero:NO unit:IUCSSUnitPixel];
-                [dict putTag:@"top" intValue:carousel.rightY ignoreZero:YES unit:IUCSSUnitPixel];
-
-
-            }
-            NSImage *arrowImage;
-            
-            NSString *imgSrc = [[self imagePathWithImageName:imageName isEdit:isEdit] CSSURLString];
-            if(imgSrc){
-                [dict putTag:@"background" string:imgSrc];
-            }
-            
-            if ([imageName isHTTPURL]) {
-                arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
-            }
-            else{
-                IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
-                NSString *imageAbsolutePath = [file absolutePath];
-                arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
-                
-            }
-            [dict putTag:@"height" floatValue:arrowImage.size.height ignoreZero:YES unit:IUCSSUnitPixel];
-            [dict putTag:@"width" floatValue:arrowImage.size.width ignoreZero:YES unit:IUCSSUnitPixel];
-            
-            }
-        
-    }
-    #pragma mark IUBox
-    else if([iu isKindOfClass:[IUBox class]]){
-        if(_rule == IUCompileRuleDjango && isEdit == NO && iu.pgContentVariable){
-            NSDictionary *cssDict = [iu.css tagDictionaryForWidth:width];
-            NSInteger line =  [cssDict[IUCSSTagEllipsis] integerValue];
-            if([identifier isEqualToString:[[iu.htmlID cssClass] stringByAppendingString:@">p"]])
-            if(line > 0){
-                if(line > 1){
-                    [dict putTag:@"display" string:@"-webkit-box"];
-                }
-                else if(line == 1){
-                    [dict putTag:@"white-space" string:@"nowrap"];
-                }
-                [dict putTag:@"overflow" string:@"hidden"];
-                [dict putTag:@"text-overflow" string:@"ellipsis"];
-                [dict putTag:@"-webkit-line-clamp" intValue:(int)line ignoreZero:YES unit:IUCSSUnitNone];
-                [dict putTag:@"-webkit-box-orient" string:@"vertical"];
-                [dict putTag:@"height" intValue:100 ignoreZero:NO unit:IUCSSUnitPercent];
-            }
-        }
-    }
-    
-    return dict;
-}
 
 
 
@@ -1809,7 +1582,7 @@
             value = cssTagDict[IUCSSTagHoverBGColor];
             if(value){
                 NSColor *color = value;
-                [dict putTag:@"background-color"  string:[color cssBGString]];
+                [dict putTag:@"background-color"  string:[color cssBGColorString]];
             }
         }
         
@@ -1990,7 +1763,7 @@
         value = cssTagDict[IUCSSTagBGColor];
         if(value){
             NSColor *color = value;
-            [dict putTag:@"background-color" string:[color cssBGString]];
+            [dict putTag:@"background-color" string:[color cssBGColorString]];
         }
         
         value = cssTagDict[IUCSSTagOpacity];

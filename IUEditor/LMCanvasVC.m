@@ -578,7 +578,7 @@
 }
 
 
--(void)IUClassIdentifier:(NSString*)identifier CSSUpdated:(NSString*)css viewPort:(NSInteger)width{
+-(void)IUClassIdentifier:(NSString*)identifier CSSUpdated:(NSString*)css viewport:(NSInteger)width{
     [JDLogUtil log:IULogSource key:@"css source" string:css];
     
     if(css.length == 0){

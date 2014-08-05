@@ -18,7 +18,7 @@
 }
 
 
--(NSArray*)allEditWidth{
+-(NSArray*)allViewports{
     return [self.cssFrameDict allKeys];
 }
 
@@ -86,7 +86,7 @@
 
 //insert tag
 //use css frame dict, and update affecting tag dictionary
--(void)setValue:(id)value forTag:(IUCSSTag)tag forWidth:(NSInteger)width{
+-(void)setValue:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width{
     if ([_delegate CSSShouldChangeValue:value forTag:tag forWidth:width]){
         NSMutableDictionary *cssDict = _cssFrameDict[@(width)];
         
@@ -94,7 +94,7 @@
         if(currentValue == nil ||  [currentValue isNotEqualTo:value]){
             
             if([self isUndoTag:tag]){
-                [[[self.delegate undoManager] prepareWithInvocationTarget:self] setValue:currentValue forTag:tag forWidth:width];
+                [[[self.delegate undoManager] prepareWithInvocationTarget:self] setValue:currentValue forTag:tag forViewport:width];
             }
             
             if (cssDict == nil) {
@@ -136,7 +136,7 @@
 }
 
 
--(NSDictionary*)tagDictionaryForWidth:(NSInteger)width{
+-(NSDictionary*)tagDictionaryForViewport:(NSInteger)width{
     return _cssFrameDict[@(width)];
 }
 
@@ -163,14 +163,10 @@
     [self updateAssembledTagDictionary];
 }
 
--(void)removeTagDictionaryForWidth:(NSInteger)width{
+-(void)removeTagDictionaryForViewport:(NSInteger)width{
     if([_cssFrameDict objectForKey:@(width)]){
         [_cssFrameDict removeObjectForKey:@(width)];
     }
-}
-
--(NSMutableDictionary*)tagDictionaryForEditWidth{
-    return _cssFrameDict[@(_editWidth)];
 }
 
 -(NSMutableDictionary*)assembledTagDictionary{
@@ -178,13 +174,13 @@
 }
 
 -(void)setValue:(id)value forTag:(IUCSSTag)tag{
-    [self setValue:value forTag:tag forWidth:_editWidth];
+    [self setValue:value forTag:tag forViewport:_editWidth];
 }
 
 -(void)setValue:(id)value forKeyPath:(NSString *)keyPath{
     if ([keyPath containsString:@"assembledTagDictionary."]) {
         NSString *tag = [keyPath substringFromIndex:23];
-        [self setValue:value forTag:tag forWidth:_editWidth];
+        [self setValue:value forTag:tag forViewport:_editWidth];
         return;
     }
     else {

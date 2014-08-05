@@ -26,15 +26,15 @@
 
 //set tag, or delete tag
 -(void)setValue:(id)value forTag:(IUCSSTag)tag;
--(void)setValue:(id)value forTag:(IUCSSTag)tag forWidth:(NSInteger)width;
+-(void)setValue:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width;
 
 //remove tag of all tag dictionay in width
 -(void)eradicateTag:(IUCSSTag)type;
 
 //get css tag dictionary for specific width
--(void)removeTagDictionaryForWidth:(NSInteger)width;
--(NSDictionary*)tagDictionaryForWidth:(NSInteger)width;
--(NSArray*)allEditWidth;
+-(void)removeTagDictionaryForViewport:(NSInteger)width;
+-(NSDictionary*)tagDictionaryForViewport:(NSInteger)width;
+-(NSArray*)allViewports;
 
 /**
  @brief : copy max-size cssDictionary to specific width dictionary;
@@ -43,5 +43,4 @@
 
 //observable.
 @property (readonly) NSMutableDictionary *assembledTagDictionary;
-@property (readonly) NSMutableDictionary *tagDictionaryForEditWidth;
 @end

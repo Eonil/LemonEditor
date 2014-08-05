@@ -119,10 +119,10 @@
         
         _overflowType = IUOverflowTypeHidden;
         
-        [_css setValue:@(0) forTag:IUCSSTagXUnitIsPercent forWidth:IUCSSDefaultViewPort];
-        [_css setValue:@(0) forTag:IUCSSTagYUnitIsPercent forWidth:IUCSSDefaultViewPort];
-        [_css setValue:@(0) forTag:IUCSSTagWidthUnitIsPercent forWidth:IUCSSDefaultViewPort];
-        [_css setValue:@(0) forTag:IUCSSTagHeightUnitIsPercent forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagXUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagYUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagHeightUnitIsPercent forViewport:IUCSSDefaultViewPort];
         
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
         _lineHeightAuto = YES;
@@ -130,34 +130,34 @@
         
         
         if (self.hasWidth) {
-            [_css setValue:@(100) forTag:IUCSSTagPixelWidth forWidth:IUCSSDefaultViewPort];
+            [_css setValue:@(100) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
         }
         if (self.hasHeight) {
-            [_css setValue:@(60) forTag:IUCSSTagPixelHeight forWidth:IUCSSDefaultViewPort];
+            [_css setValue:@(60) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
         }
         
         //background
-        [_css setValue:[NSColor randomColor] forTag:IUCSSTagBGColor forWidth:IUCSSDefaultViewPort];
-        [_css setValue:@(IUBGSizeTypeAuto) forTag:IUCSSTagBGSize forWidth:IUCSSDefaultViewPort];
-        [_css setValue:@(0) forTag:IUCSSTagBGXPosition forWidth:IUCSSDefaultViewPort];
-        [_css setValue:@(0) forTag:IUCSSTagBGYPosition forWidth:IUCSSDefaultViewPort];
+        [_css setValue:[NSColor randomColor] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(IUBGSizeTypeAuto) forTag:IUCSSTagBGSize forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagBGXPosition forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagBGYPosition forViewport:IUCSSDefaultViewPort];
         
         //border
-        [_css setValue:@(0) forTag:IUCSSTagBorderTopWidth forWidth:IUCSSDefaultViewPort];
-        [_css setValue:@(0) forTag:IUCSSTagBorderLeftWidth forWidth:IUCSSDefaultViewPort];
-        [_css setValue:@(0) forTag:IUCSSTagBorderRightWidth forWidth:IUCSSDefaultViewPort];
-        [_css setValue:@(0) forTag:IUCSSTagBorderBottomWidth forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagBorderTopWidth forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagBorderLeftWidth forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagBorderRightWidth forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(0) forTag:IUCSSTagBorderBottomWidth forViewport:IUCSSDefaultViewPort];
         
-        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderTopColor forWidth:IUCSSDefaultViewPort];
-        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderLeftColor forWidth:IUCSSDefaultViewPort];
-        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderRightColor forWidth:IUCSSDefaultViewPort];
-        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderBottomColor forWidth:IUCSSDefaultViewPort];
+        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderTopColor forViewport:IUCSSDefaultViewPort];
+        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderLeftColor forViewport:IUCSSDefaultViewPort];
+        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderRightColor forViewport:IUCSSDefaultViewPort];
+        [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderBottomColor forViewport:IUCSSDefaultViewPort];
         
         //font-type
-        [_css setValue:@"Auto" forTag:IUCSSTagLineHeight forWidth:IUCSSDefaultViewPort];
-        [_css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forWidth:IUCSSDefaultViewPort];
-        [_css setValue:@(12) forTag:IUCSSTagFontSize forWidth:IUCSSDefaultViewPort];
-        [_css setValue:@"Helvetica" forTag:IUCSSTagFontName forWidth:IUCSSDefaultViewPort];
+        [_css setValue:@"Auto" forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(12) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@"Helvetica" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
         
         changedCSSWidths = [NSMutableSet set];
         
@@ -359,11 +359,11 @@
     [self willChangeValueForKey:@"imageName"];
 
 
-    NSDictionary *defaultTagDictionary = [_css tagDictionaryForWidth:IUCSSDefaultViewPort];
+    NSDictionary *defaultTagDictionary = [_css tagDictionaryForViewport:IUCSSDefaultViewPort];
     if (defaultTagDictionary) {
-        [_css setValue:imageName forTag:IUCSSTagImage forWidth:_css.editWidth];
+        [_css setValue:imageName forTag:IUCSSTagImage forViewport:_css.editWidth];
     }
-    [_css setValue:imageName forTag:IUCSSTagImage forWidth:IUCSSDefaultViewPort];
+    [_css setValue:imageName forTag:IUCSSTagImage forViewport:IUCSSDefaultViewPort];
     
      [self didChangeValueForKey:@"imageName"];
 }
@@ -419,7 +419,7 @@
 
 - (void)removeMQSize:(NSNotification *)notification{
     NSInteger size = [[notification.userInfo objectForKey:IUNotificationMQSize] integerValue];
-    [_css removeTagDictionaryForWidth:size];
+    [_css removeTagDictionaryForViewport:size];
 
 }
 
@@ -477,7 +477,7 @@
 -(void)CSSUpdatedForWidth:(NSInteger)width withIdentifier:(NSString *)identifer{
     if(self.delegate){
         NSString *css = [self cssForWidth:width withIdentifier:identifer];
-        [self.delegate IUClassIdentifier:identifer CSSUpdated:css viewPort:width];
+        [self.delegate IUClassIdentifier:identifer CSSUpdated:css viewport:width];
     }
 }
 /**
@@ -514,10 +514,10 @@
 - (void)updateCSS{
     if (self.delegate) {
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
-        for (NSNumber *viewPort in cssCode.allViewPorts) {
-            NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithTarget:IUTargetEditor viewPort:[viewPort intValue]];
+        for (NSNumber *viewport in cssCode.allViewPorts) {
+            NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithTarget:IUTargetEditor viewport:[viewport intValue]];
             for (NSString *identifier in dictionaryWithIdentifier) {
-                [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier] viewPort:[viewPort intValue]];
+                [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier] viewport:[viewport intValue]];
             }
         }
     }
@@ -1050,9 +1050,9 @@
     return [@"." stringByAppendingString:self.htmlID];
 }
 - (NSString*)cssHoverClass{
-    return [NSString stringWithFormat:@".%@ :hover", self.htmlID];
+    return [NSString stringWithFormat:@".%@:hover", self.htmlID];
 }
 - (NSString*)cssActiveClass{
-    return [NSString stringWithFormat:@".%@ :active", self.htmlID];
+    return [NSString stringWithFormat:@".%@:active", self.htmlID];
 }
 @end

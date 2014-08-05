@@ -25,11 +25,11 @@ function resizeCollection(){
 		var responsive = $(this).attr('responsive');
 		responsiveArray = eval(responsive);
 		count = $(this).attr('defaultItemCount');
-		viewPortWidth = $(window).width();
+		viewportWidth = $(window).width();
 		for (var index in responsiveArray){
 			dict = responsiveArray[index];
 			width = dict.width;
-			if (viewPortWidth<width){
+			if (viewportWidth<width){
 				count = dict.count;
 			}
 		}

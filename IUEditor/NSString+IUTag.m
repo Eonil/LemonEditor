@@ -43,11 +43,11 @@
 }
 
 - (NSString*)cssHoverClass{
-    return [NSString stringWithFormat:@"%@:hover", self];
+    return [NSString stringWithFormat:@".%@:hover", self];
 }
 
 - (NSString*)cssActiveClass{
-    return [NSString stringWithFormat:@"%@.active", self];
+    return [NSString stringWithFormat:@".%@.active", self];
 }
 
 @end

@@ -132,7 +132,7 @@
 
 -(NSDictionary*)textCSSAttributesForWidth:(NSInteger)width textIdentifier:(NSString *)identifier{
     IUCSS *css = [_textController.cssDict objectForKey:identifier];
-    return [css tagDictionaryForWidth:(int)width];
+    return [css tagDictionaryForViewport:(int)width];
 }
 - (void)updateCSS{
     [super updateCSS];

@@ -115,12 +115,4 @@
 
 #pragma mark - css
 
-- (NSArray *)cssIdentifierArray{
-    NSMutableArray *cssIdentifiers = [[super cssIdentifierArray] mutableCopy];
-    [cssIdentifiers addObject:[self.htmlID.cssClass stringByAppendingString:pageLinkSetButtonCSSPostfix]];
-    [cssIdentifiers addObject:[self.htmlID.cssClass stringByAppendingString:pageLinkSetButtonLiCSSPostfix]];
-    [cssIdentifiers addObject:[self.htmlID.cssClass stringByAppendingString:pageLinkSetButtonSelectedLiCSSPostfix]];
-    return cssIdentifiers;
-}
-
 @end

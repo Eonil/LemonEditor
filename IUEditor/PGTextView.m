@@ -20,10 +20,10 @@
         _placeholder = @"placeholder";
         _inputValue = @"Sample Text";
         self.lineHeightAuto = NO;
-        [self.css setValue:@(130) forTag:IUCSSTagPixelWidth forWidth:IUCSSDefaultViewPort];
-        [self.css setValue:@(50) forTag:IUCSSTagPixelHeight forWidth:IUCSSDefaultViewPort];
-        [self.css setValue:@"1.3" forTag:IUCSSTagLineHeight forWidth:IUCSSDefaultViewPort];
-        [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:@(130) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(50) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@"1.3" forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
         [[self undoManager] enableUndoRegistration];
 
         

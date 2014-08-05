@@ -15,7 +15,7 @@
 @protocol IUSourceDelegate <NSObject>
 @required
 
--(void)IUClassIdentifier:(NSString *)identifier CSSUpdated:(NSString*)css viewPort:(NSInteger)width;
+-(void)IUClassIdentifier:(NSString *)identifier CSSUpdated:(NSString*)css viewport:(NSInteger)width;
 -(void)IUClassIdentifier:(NSString *)identifier CSSRemovedforWidth:(NSInteger)width;
 -(void)removeAllCSSWithIdentifier:(NSString *)identifier;
 

@@ -25,9 +25,9 @@
         _fbSource = @"<iframe src=\"//www.facebook.com/plugins/like.php?href=__FB_LINK_ADDRESS__+&amp;width&amp;layout=standard&amp;action=like&amp;show_faces=__SHOW_FACE__&amp;share=true&amp;colorscheme=__COLOR_SCHEME__&amp;\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; height:__HEIGHT__px\" allowTransparency=\"true\"></iframe>";
         _showFriendsFace = YES;
         _colorscheme = IUFBLikeColorLight;
-        [self.css setValue:@(80) forTag:IUCSSTagPixelHeight forWidth:IUCSSDefaultViewPort];
-        [self.css setValue:@(320) forTag:IUCSSTagPixelWidth forWidth:IUCSSDefaultViewPort];
-        [self.css setValue:nil forTag:IUCSSTagBGColor forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:@(80) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(320) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:nil forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
         
         [[self undoManager] enableUndoRegistration];
 
@@ -76,10 +76,10 @@
 - (void)IUFBSourceContextDidChange:(NSDictionary *)change{
     NSString *showFaces;
     if(self.showFriendsFace){
-        [self.css setValue:@(80) forTag:IUCSSTagPixelHeight forWidth:self.css.editWidth];
+        [self.css setValue:@(80) forTag:IUCSSTagPixelHeight forViewport:self.css.editWidth];
         showFaces = @"true";
     }else{
-        [self.css setValue:@(45) forTag:IUCSSTagPixelHeight forWidth:self.css.editWidth];
+        [self.css setValue:@(45) forTag:IUCSSTagPixelHeight forViewport:self.css.editWidth];
         showFaces = @"false";
     }
     

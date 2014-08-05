@@ -43,7 +43,7 @@
     if(self){
         [self.undoManager disableUndoRegistration];
         
-        [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagBGColor forWidth:IUCSSDefaultViewPort];
+        [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
         
         [self.css eradicateTag:IUCSSTagPixelX];
         [self.css eradicateTag:IUCSSTagPixelY];

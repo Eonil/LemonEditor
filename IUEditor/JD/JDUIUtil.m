@@ -913,7 +913,7 @@ static NSWindowController *hudWC;
     return nil;
 }
 
-- (NSString *)cssBGString{
+- (NSString *)cssBGColorString{
     if([self isTransparency]){
         return @"transparent";
     }

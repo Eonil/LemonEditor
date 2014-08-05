@@ -43,7 +43,7 @@
 
         _firstItem = [[IUItem alloc] initWithProject:project options:options];
         _secondItem = [[IUItem alloc] initWithProject:project options:options];
-        [_secondItem.css setValue:@(NO) forTag:IUCSSTagEditorDisplay forWidth:IUCSSDefaultViewPort];
+        [_secondItem.css setValue:@(NO) forTag:IUCSSTagEditorDisplay forViewport:IUCSSDefaultViewPort];
         
         [self addIU:_firstItem error:nil];
         [self addIU:_secondItem error:nil];
@@ -110,12 +110,12 @@
 - (void)setCurrentEdit:(NSInteger)currentEdit{
     _currentEdit = currentEdit;
     if (currentEdit == 0) {
-        [_firstItem.css setValue:@(YES) forTag:IUCSSTagEditorDisplay forWidth:IUCSSDefaultViewPort];
-        [_secondItem.css setValue:@(NO) forTag:IUCSSTagEditorDisplay forWidth:IUCSSDefaultViewPort];
+        [_firstItem.css setValue:@(YES) forTag:IUCSSTagEditorDisplay forViewport:IUCSSDefaultViewPort];
+        [_secondItem.css setValue:@(NO) forTag:IUCSSTagEditorDisplay forViewport:IUCSSDefaultViewPort];
     }
     else {
-        [_firstItem.css setValue:@(NO) forTag:IUCSSTagEditorDisplay forWidth:IUCSSDefaultViewPort];
-        [_secondItem.css setValue:@(YES) forTag:IUCSSTagEditorDisplay forWidth:IUCSSDefaultViewPort];
+        [_firstItem.css setValue:@(NO) forTag:IUCSSTagEditorDisplay forViewport:IUCSSDefaultViewPort];
+        [_secondItem.css setValue:@(YES) forTag:IUCSSTagEditorDisplay forViewport:IUCSSDefaultViewPort];
     }
 }
 

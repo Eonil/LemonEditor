@@ -23,8 +23,8 @@
     WPArticle *article = [[WPArticle alloc] initWithProject:project options:options];
     [self addIU:article error:nil];
     
-    [self.css setValue:@(400) forTag:IUCSSTagPixelWidth forWidth:IUCSSDefaultViewPort];
-    [self.css setValue:@(600) forTag:IUCSSTagPixelHeight forWidth:IUCSSDefaultViewPort];
+    [self.css setValue:@(400) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(600) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
     return self;
 }
 
