@@ -713,8 +713,9 @@
 }
 
 - (NSString *)linkHeaderString:(IUBox *)iu{
-    NSString *linkStr;
     
+    //find link url
+    NSString *linkStr;
     if([iu.link isKindOfClass:[NSString class]]){
         linkStr = iu.link;
     }
@@ -740,6 +741,9 @@
             }
         }
     }
+    
+    
+    //make a tag
     NSString *str;
     if(iu.linkTarget){
         str = [NSString stringWithFormat:@"<a href='%@' target='_blank'>", linkURL];
@@ -748,7 +752,7 @@
         str = [NSString stringWithFormat:@"<a href='%@'>", linkURL];
     }
     
-    return linkStr;
+    return str;
 }
 
 
