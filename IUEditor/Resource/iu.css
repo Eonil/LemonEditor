@@ -18,6 +18,7 @@ a{
 .IUHeader{
     width:100%;
     overflow:visible;
+    z-index:10;
 }
 
 .IUPageContent{
