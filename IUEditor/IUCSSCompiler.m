@@ -16,6 +16,7 @@
 #import "IUMenuBar.h"
 #import "IUMenuItem.h"
 #import "IUCarousel.h"
+#import "PGTextView.h"
 
 typedef enum _IUUnit{
     IUUnitNone,
@@ -41,6 +42,7 @@ typedef enum _IUUnit{
 
 
 - (NSString*)valueForTag:(NSString*)tag identifier:(NSString*)identifier largerThanViewport:(int)viewport target:(IUTarget)target;
+- (NSString*)valueForTag:(NSString*)tag identifier:(NSString*)identifier viewport:(int)viewport target:(IUTarget)target;
 
 /**
  insert css tag to receiver
@@ -55,7 +57,6 @@ typedef enum _IUUnit{
 - (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber unit:(IUUnit)unit;
 - (void)insertTag:(NSString*)tag integer:(int)number unit:(IUUnit)unit;
 - (void)removeTag:(NSString*)tag identifier:(NSString*)identifier;
-
 @end
 
 @implementation IUCSSCode
@@ -243,6 +244,7 @@ typedef enum _IUUnit{
     }
 }
 
+
 - (void)updateViewports{
     NSArray *widthsOne = [[_editorCSSDictWithViewPort allKeys] sortedArrayUsingSelector:@selector(compare:)];
     NSArray *widthsTwo = [[_outputCSSDictWithViewPort allKeys] sortedArrayUsingSelector:@selector(compare:)];
@@ -258,7 +260,7 @@ typedef enum _IUUnit{
 }
 
 
-- (NSDictionary*)tagDictionaryWithIdentifierForTarget:(IUTarget)target viewport:(int)viewport{
+- (NSDictionary*)stringTagDictionaryWithIdentifierForTarget:(IUTarget)target viewport:(int)viewport{
     NSMutableDictionary *returnDict = [NSMutableDictionary dictionary];
     NSDictionary *sourceDictWithViewPort = (target == IUTargetEditor) ? _editorCSSDictWithViewPort : _outputCSSDictWithViewPort;
     NSDictionary *sourceDictWithIdentifier = sourceDictWithViewPort[@(viewport)];
@@ -286,6 +288,17 @@ typedef enum _IUUnit{
     }
     
     return returnDict;
+}
+
+- (NSString*)valueForTag:(NSString *)tag identifier:(NSString *)identifier viewport:(int)viewport target:(IUTarget)target{
+    NSAssert(target != IUTargetBoth, @"target cannot be both");
+    if (target == IUTargetOutput) {
+        return _outputCSSDictWithViewPort[@(viewport)][identifier][tag];
+    }
+    else if (target == IUTargetEditor){
+        return _editorCSSDictWithViewPort[@(viewport)][identifier][tag];
+    }
+    else return nil;
 }
 
 - (void)removeTag:(NSString*)tag identifier:(NSString*)identifier{
@@ -441,8 +454,6 @@ typedef enum _IUUnit{
     if (cssTagDict[IUCSSTagLineHeight]) {
         if ([cssTagDict[IUCSSTagLineHeight] isEqualToString:@"Auto"] == NO) {
             [code insertTag:@"line-height" floatFromNumber:cssTagDict[IUCSSTagLineHeight]];
-            //if pgtextview, set 1.3
-            //???  코드 안넣은 이유는??
         }
     }
 }
@@ -1046,7 +1057,29 @@ typedef enum _IUUnit{
     
     [code insertTag:@"height" floatFromNumber:@(arrowImage.size.height) unit:IUCSSUnitPixel];
     [code insertTag:@"width" floatFromNumber:@(arrowImage.size.width) unit:IUCSSUnitPixel];
-    
 }
+
+#if 0
+/* This code is unnaccessary becaouse PGTextView default is "1.3", not "Auto" */
+- (void)updateCSSCode:(IUCSSCode*)code asPGTextView:(PGTextView*)pgTextView{
+    [code setInsertingIdentifier:pgTextView.cssClass];
+    
+    for (NSNumber *viewport in [pgTextView.css allViewports]) {
+        /* width can vary to data */
+        NSString *editorLineHeight = [code valueForTag:IUCSSTagLineHeight identifier:pgTextView.cssClass viewport:[viewport intValue] target:IUTargetEditor];
+        if ([editorLineHeight isEqualToString:@"Auto"]) {
+            [code setInsertingTarget:IUTargetEditor];
+            [code setInsertingViewPort:[viewport intValue]];
+            [code insertTag:IUCSSTagLineHeight string:@"1.3"];
+        }
+        NSString *outputLineHeight = [code valueForTag:IUCSSTagLineHeight identifier:pgTextView.cssClass viewport:[viewport intValue] target:IUTargetEditor];
+        if ([outputLineHeight isEqualToString:@"Auto"]) {
+            [code setInsertingTarget:IUTargetEditor];
+            [code setInsertingViewPort:[viewport intValue]];
+            [code insertTag:IUCSSTagLineHeight string:@"1.3"];
+        }
+    }
+}
+#endif
 
 @end

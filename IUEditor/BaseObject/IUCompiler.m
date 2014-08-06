@@ -1419,7 +1419,7 @@
 
 
     IUTarget target = isEdit ? IUTargetEditor : IUTargetOutput;
-    NSDictionary *cssDict = [[cssCompiler cssCodeForIU:sheet] tagDictionaryWithIdentifierForTarget:target viewport:IUCSSDefaultViewPort];
+    NSDictionary *cssDict = [[cssCompiler cssCodeForIU:sheet] stringTagDictionaryWithIdentifierForTarget:target viewport:IUCSSDefaultViewPort];
     
     for (NSString *identifier in cssDict) {
         [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
@@ -1427,7 +1427,7 @@
     NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
     
     for (IUBox *obj in districtChildren) {
-            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] tagDictionaryWithIdentifierForTarget:target viewport:IUCSSDefaultViewPort];
+            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] stringTagDictionaryWithIdentifierForTarget:target viewport:IUCSSDefaultViewPort];
             for (NSString *identifier in cssDict) {
                 [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
         }
@@ -1472,7 +1472,7 @@
         }
         [code increaseIndentLevelForEdit];
         
-        NSDictionary *cssDict =  [[cssCompiler cssCodeForIU:sheet] tagDictionaryWithIdentifierForTarget:target viewport:size];
+        NSDictionary *cssDict =  [[cssCompiler cssCodeForIU:sheet] stringTagDictionaryWithIdentifierForTarget:target viewport:size];
         for (NSString *identifier in cssDict) {
             if ([[cssDict[identifier] stringByTrim]length]) {
                 [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
@@ -1482,7 +1482,7 @@
         NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
         
         for (IUBox *obj in districtChildren) {
-            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] tagDictionaryWithIdentifierForTarget:target viewport:size];
+            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] stringTagDictionaryWithIdentifierForTarget:target viewport:size];
             for (NSString *identifier in cssDict) {
                 if ([[cssDict[identifier] stringByTrim]length]) {
                     [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
