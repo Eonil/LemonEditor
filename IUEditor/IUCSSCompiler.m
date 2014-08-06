@@ -72,7 +72,7 @@ typedef enum _IUUnit{
 }
 
 - (void)setInsertingIdentifier:(NSString *)identifier{
-    _currentIdentifiers = @[identifier];
+    _currentIdentifiers = @[[identifier copy]];
 }
 
 - (void)setInsertingIdentifiers:(NSArray *)identifiers{
