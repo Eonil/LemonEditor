@@ -545,13 +545,13 @@ typedef enum _IUUnit{
         
         if ([cssTagDict[IUCSSTagEnableBGCustomPosition] boolValue]) {
             /* custom bg position */
-            [code insertTag:@"background-position-x" floatFromNumber:cssTagDict[IUCSSTagBGYPosition] unit:IUUnitPixel];
+            [code insertTag:@"background-position-x" floatFromNumber:cssTagDict[IUCSSTagBGXPosition] unit:IUUnitPixel];
             [code insertTag:@"background-position-y" floatFromNumber:cssTagDict[IUCSSTagBGYPosition] unit:IUUnitPixel];
         }
         else {
             IUCSSBGVPostion vPosition = [cssTagDict[IUCSSTagBGVPosition] intValue];
             IUCSSBGHPostion hPosition = [cssTagDict[IUCSSTagBGHPosition] intValue];
-            if (vPosition != IUCSSBGVPostionTop && hPosition != IUCSSBGHPostionLeft) {
+            if (vPosition != IUCSSBGVPostionTop || hPosition != IUCSSBGHPostionLeft) {
                 NSString *vPositionString, *hPositionString;
                 switch (vPosition) {
                     case IUCSSBGVPostionTop: vPositionString = @"top"; break;
