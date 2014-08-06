@@ -560,11 +560,9 @@ typedef enum _IUUnit{
     /* insert position */
     switch (_iu.positionType) {
         case IUPositionTypeAbsolute:{
-            [code insertTag:@"position" string:@"absolute"];
             topTag = @"top"; leftTag = @"left"; break;
         }
         case IUPositionTypeAbsoluteCenter:{
-            [code insertTag:@"position" string:@"absolute"];
             topTag = @"top"; break;
         }
         case IUPositionTypeRelative:{

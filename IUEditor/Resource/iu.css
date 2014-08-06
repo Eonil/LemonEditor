@@ -1,4 +1,5 @@
 .IUBox{
+    position:absolute;
     display:block;
     border-style:solid;
     overflow:hidden;
