@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -17,28 +17,30 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="400" height="150"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="400" height="150"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" id="IM3-vt-JhD">
+                    <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="IM3-vt-JhD">
                         <rect key="frame" x="20" y="46" width="360" height="80"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <view key="contentView">
                             <rect key="frame" x="1" y="1" width="358" height="78"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textField verticalHuggingPriority="750" id="Qzo-EO-hzG">
-                                    <rect key="frame" x="115" y="17" width="200" height="19"/>
+                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qzo-EO-hzG">
+                                    <rect key="frame" x="107" y="17" width="200" height="19"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="200" id="xxX-hx-fTF"/>
+                                    </constraints>
                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="iBJ-9h-yIk">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <comboBox verticalHuggingPriority="750" id="ADd-k9-qIx">
-                                    <rect key="frame" x="115" y="41" width="203" height="22"/>
+                                <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ADd-k9-qIx">
+                                    <rect key="frame" x="107" y="41" width="203" height="22"/>
                                     <comboBoxCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="E8h-Nm-hI0">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -50,16 +52,16 @@
                                         </objectValues>
                                     </comboBoxCell>
                                 </comboBox>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="ymj-Yc-k0r">
-                                    <rect key="frame" x="62" y="46" width="48" height="14"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ymj-Yc-k0r">
+                                    <rect key="frame" x="54" y="46" width="48" height="14"/>
                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Favicon" id="tUe-Rg-hvQ">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="BIT-5w-XZZ">
-                                    <rect key="frame" x="61" y="19" width="48" height="14"/>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BIT-5w-XZZ">
+                                    <rect key="frame" x="54" y="19" width="48" height="14"/>
                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Author" id="cjd-2u-H7p">
                                         <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -68,19 +70,43 @@
                                 </textField>
                             </subviews>
                         </view>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="1y2-FT-PuD"/>
+                            <constraint firstItem="Qzo-EO-hzG" firstAttribute="top" secondItem="ADd-k9-qIx" secondAttribute="bottom" constant="9" id="2jF-c8-LTu"/>
+                            <constraint firstItem="Qzo-EO-hzG" firstAttribute="leading" secondItem="BIT-5w-XZZ" secondAttribute="trailing" constant="7" id="BNm-1v-Qoq"/>
+                            <constraint firstItem="Qzo-EO-hzG" firstAttribute="trailing" secondItem="ADd-k9-qIx" secondAttribute="trailing" id="G35-HW-HTi"/>
+                            <constraint firstItem="ymj-Yc-k0r" firstAttribute="leading" secondItem="BIT-5w-XZZ" secondAttribute="leading" id="HQj-A5-GUm"/>
+                            <constraint firstItem="ymj-Yc-k0r" firstAttribute="centerY" secondItem="ADd-k9-qIx" secondAttribute="centerY" id="LQd-iw-WdW"/>
+                            <constraint firstItem="Qzo-EO-hzG" firstAttribute="baseline" secondItem="BIT-5w-XZZ" secondAttribute="baseline" id="Lt2-9B-fQR"/>
+                            <constraint firstAttribute="width" constant="360" id="TIQ-eA-0ub"/>
+                            <constraint firstAttribute="bottom" secondItem="Qzo-EO-hzG" secondAttribute="bottom" constant="18" id="XBi-Os-Kuw"/>
+                            <constraint firstItem="ADd-k9-qIx" firstAttribute="leading" secondItem="Qzo-EO-hzG" secondAttribute="leading" id="eqE-Sj-jWM"/>
+                            <constraint firstAttribute="trailing" secondItem="Qzo-EO-hzG" secondAttribute="trailing" constant="52" id="sc9-CI-yza"/>
+                            <constraint firstItem="ymj-Yc-k0r" firstAttribute="leading" secondItem="IM3-vt-JhD" secondAttribute="leading" constant="57" id="ya4-4s-4Fx"/>
+                            <constraint firstItem="BIT-5w-XZZ" firstAttribute="trailing" secondItem="ymj-Yc-k0r" secondAttribute="trailing" id="yeQ-v8-eq4"/>
+                            <constraint firstItem="ADd-k9-qIx" firstAttribute="leading" secondItem="ymj-Yc-k0r" secondAttribute="trailing" constant="7" id="yph-5v-JTT"/>
+                        </constraints>
                         <color key="borderColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </box>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="6NJ-FS-tNx">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6NJ-FS-tNx">
                         <rect key="frame" x="30" y="118" width="110" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="110" id="6lv-7R-ncP"/>
+                            <constraint firstAttribute="height" constant="17" id="X2w-xJ-qbx"/>
+                        </constraints>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Project Property" drawsBackground="YES" id="zAV-Ui-a1G">
                             <font key="font" metaFont="smallSystemBold"/>
                             <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" red="0.92941182851791382" green="0.92941182851791382" blue="0.92941182851791382" alpha="1" colorSpace="deviceRGB"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" id="KXb-sY-o7g">
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KXb-sY-o7g">
                         <rect key="frame" x="145" y="15" width="110" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="110" id="4dY-Ky-JfD"/>
+                            <constraint firstAttribute="height" constant="18" id="YSt-R7-3Tf"/>
+                        </constraints>
                         <buttonCell key="cell" type="roundRect" title="ok" bezelStyle="roundedRect" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xrJ-O0-G0P">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="cellTitle"/>
@@ -90,8 +116,18 @@
                         </connections>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="KXb-sY-o7g" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="145" id="2nC-lz-VHo"/>
+                    <constraint firstItem="IM3-vt-JhD" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="4Ft-jj-aBJ"/>
+                    <constraint firstAttribute="trailing" secondItem="IM3-vt-JhD" secondAttribute="trailing" constant="20" id="4md-d2-GtO"/>
+                    <constraint firstItem="6NJ-FS-tNx" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="30" id="J8V-8M-b57"/>
+                    <constraint firstItem="6NJ-FS-tNx" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="15" id="P9q-eh-xB5"/>
+                    <constraint firstItem="IM3-vt-JhD" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="24" id="Suy-cp-klQ"/>
+                    <constraint firstAttribute="bottom" secondItem="KXb-sY-o7g" secondAttribute="bottom" constant="16" id="W7D-eh-JbR"/>
+                    <constraint firstAttribute="trailing" secondItem="KXb-sY-o7g" secondAttribute="trailing" constant="145" id="edW-gB-Pef"/>
+                </constraints>
             </view>
-            <point key="canvasLocation" x="-61" y="162.5"/>
+            <point key="canvasLocation" x="-61" y="162"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="PWd-WT-Oxe"/>
     </objects>
