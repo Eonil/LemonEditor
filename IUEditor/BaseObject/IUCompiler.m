@@ -1472,7 +1472,7 @@
         }
         [code increaseIndentLevelForEdit];
         
-        NSMutableDictionary *cssDict = [[self cssSourceForIU:sheet width:size isEdit:isEdit] mutableCopy];
+        NSDictionary *cssDict =  [[cssCompiler cssCodeForIU:sheet] tagDictionaryWithIdentifierForTarget:target viewport:size];
         for (NSString *identifier in cssDict) {
             if ([[cssDict[identifier] stringByTrim]length]) {
                 [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
@@ -1482,7 +1482,7 @@
         NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
         
         for (IUBox *obj in districtChildren) {
-            NSDictionary *cssDict = [self cssSourceForIU:obj width:size isEdit:isEdit];
+            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] tagDictionaryWithIdentifierForTarget:target viewport:size];
             for (NSString *identifier in cssDict) {
                 if ([[cssDict[identifier] stringByTrim]length]) {
                     [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];

@@ -327,10 +327,12 @@
     
     IUBox *iu = [self.controller IUBoxByIdentifier:identifier];
     if([iu isKindOfClass:[IUItem class]]){
-        IUBox *parentIU = iu.parent;
-        if([self.controller.selectedIdentifiers containsString:parentIU.htmlID] == NO &&
-           [self.controller.selectedIdentifiers containsString:identifier] == NO){
-            selectedID = parentIU.htmlID;
+        if( [((IUItem *)iu) shouldSelectParentFirst]){
+            IUBox *parentIU = iu.parent;
+            if([self.controller.selectedIdentifiers containsString:parentIU.htmlID] == NO &&
+               [self.controller.selectedIdentifiers containsString:identifier] == NO){
+                selectedID = parentIU.htmlID;
+            }
         }
     }
     

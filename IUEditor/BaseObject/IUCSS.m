@@ -19,7 +19,8 @@
 
 
 -(NSArray*)allViewports{
-    return [self.cssFrameDict allKeys];
+    NSSortDescriptor* sortOrder = [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: NO];
+    return [[self.cssFrameDict allKeys] sortedArrayUsingDescriptors:@[sortOrder]];
 }
 
 -(id)init{

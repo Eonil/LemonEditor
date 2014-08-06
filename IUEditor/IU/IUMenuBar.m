@@ -190,6 +190,17 @@
     }
     [[self.undoManager prepareWithInvocationTarget:self] setMobileTitle:_mobileTitle];
     _mobileTitle = mobileTitle;
+    [self updateHTML];
+}
+
+- (void)setMobileTitleColor:(NSColor *)mobileTitleColor{
+    if([_mobileTitleColor isEqualTo:mobileTitleColor]){
+        return;
+    }
+    [[self.undoManager prepareWithInvocationTarget:self] setMobileTitleColor:_mobileTitleColor];
+    _mobileTitleColor = mobileTitleColor;
+    
+    [self updateCSSWithIdentifier:self.mobileButtonIdentifier];
 }
 
 - (void)setIconColor:(NSColor *)iconColor{
@@ -198,6 +209,8 @@
     }
     [[self.undoManager prepareWithInvocationTarget:self] setIconColor:_iconColor];
     _iconColor = iconColor;
+    [self updateCSSWithIdentifier:self.topButtonIdentifier];
+    [self updateCSSWithIdentifier:self.bottomButtonIdentifier];
 }
 
 #pragma mark - changeXXX

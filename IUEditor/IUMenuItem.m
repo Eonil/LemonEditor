@@ -205,11 +205,11 @@
     return [[self.htmlID cssClass] stringByAppendingString:@" > a"];
 }
 - (NSString *)hoverItemIdentifier{
-    return [[[self.htmlID cssClass] cssHoverClass] stringByAppendingString:@" > a"];
+    return [[self.htmlID cssHoverClass] stringByAppendingString:@" > a"];
 }
 
 - (NSString *)activeItemIdentifier{
-    return [[[self.htmlID cssClass] cssActiveClass] stringByAppendingString:@" > a"];
+    return [[self.htmlID cssActiveClass] stringByAppendingString:@" > a"];
 }
 - (NSString *)closureIdentifier{
     if(self.children.count > 0){
@@ -218,9 +218,22 @@
     return nil;
 }
 
+- (NSString *)closureHoverIdentifier{
+    if(self.children.count > 0){
+        return [[self.htmlID cssHoverClass] stringByAppendingString:@" > div.closure"];
+    }
+    return nil;
+}
+- (NSString *)closureActiveIdentifier{
+    if(self.children.count > 0){
+        return [[self.htmlID cssActiveClass] stringByAppendingString:@" > div.closure"];
+    }
+    return nil;
+}
+
 - (NSArray *)cssIdentifierArray{
     if(self.children.count > 0){
-        return @[[self.htmlID cssClass], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier], [self closureIdentifier], [self editorDisplayIdentifier]];
+        return @[[self.htmlID cssClass], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier], [self closureIdentifier], [self closureHoverIdentifier], [self closureActiveIdentifier], [self editorDisplayIdentifier]];
     }
     else{
         return @[[self.htmlID cssClass], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier]];
@@ -231,6 +244,9 @@
 - (void)cssForItemColor{
     [self updateCSSWithIdentifier:[self hoverItemIdentifier]];
     [self updateCSSWithIdentifier:[self activeItemIdentifier]];
+    [self updateCSSWithIdentifier:[self closureIdentifier]];
+    [self updateCSSWithIdentifier:[self closureHoverIdentifier]];
+    [self updateCSSWithIdentifier:[self closureActiveIdentifier]];
 }
 
 
@@ -261,6 +277,12 @@
     return NO;
 }
 - (BOOL)shouldRemoveIUByUserInput{
+    return NO;
+}
+- (BOOL)shouldSelectParentFirst{
+    if([self depth]==1){
+        return YES;
+    }
     return NO;
 }
 

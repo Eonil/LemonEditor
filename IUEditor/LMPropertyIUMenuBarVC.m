@@ -43,7 +43,7 @@
     [_mobileTitleTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"mobileTitle"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
     [_mobileTitleColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"mobileTitleColor"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_mobileIconColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"mobileTitleColor"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_mobileIconColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"iconColor"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
     
 

@@ -9,6 +9,7 @@
 #import "IUCSSCompiler.h"
 #import "LMFontController.h"
 #import "IUCSS.h"
+#import "IUProject.h"
 
 #import "IUHeader.h"
 #import "PGPageLinkSet.h"
@@ -714,8 +715,8 @@ typedef enum _IUUnit{
     
     [code setInsertingIdentifier:[pageLinkSet.cssClass stringByAppendingString:@" > div > ul > a > li"]];
     [code insertTag:@"display" string:@"block"];
-    [code insertTag:@"margin-left" floatFromNumber:@(pageLinkSet.buttonMargin) unit:IUCSSUnitPixel];
-    [code insertTag:@"margin-right" floatFromNumber:@(pageLinkSet.buttonMargin) unit:IUCSSUnitPixel];
+    [code insertTag:@"margin-left" floatFromNumber:@(pageLinkSet.buttonMargin) unit:IUUnitPixel];
+    [code insertTag:@"margin-right" floatFromNumber:@(pageLinkSet.buttonMargin) unit:IUUnitPixel];
     [code insertTag:@"background-color" color:pageLinkSet.defaultButtonBGColor];
     
     for (NSNumber *viewPort in [pageLinkSet.css allViewports]) {
@@ -731,105 +732,167 @@ typedef enum _IUUnit{
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUMenuBar:(IUMenuBar*)menuBar{
     
-    /*
-     IUMenuBar *menuBar = (IUMenuBar *)iu;
-     if(width < 640){
-     int height = [[menuBar.css tagDictionaryForViewport:width][IUCSSTagPixelHeight] intValue];
-     if([identifier isEqualToString:menuBar.mobileButtonIdentifier]){
-     [dict putTag:@"line-height" intValue:height ignoreZero:YES unit:IUCSSUnitPixel];
-     }
-     else if([identifier isEqualToString:menuBar.topButtonIdentifier]){
-     int top = (height -10)/2;
-     [dict putTag:@"top" intValue:top ignoreZero:YES unit:IUCSSUnitPixel];
-     }
-     else if([identifier isEqualToString:menuBar.bottomButtonIdentifier]){
-     int top =(height -10)/2 +10;
-     [dict putTag:@"top" intValue:top ignoreZero:YES unit:IUCSSUnitPixel];
-     }
-     else if([identifier isEqualToString:menuBar.editorDisplayIdentifier] && isEdit){
-     if(menuBar.isOpened){
-     [dict putTag:@"display" string:@"block"];
-     }
-     else{
-     [dict putTag:@"display" string:@"none"];
-     }
-     }
-     }
-    */
-}
+    NSArray *editWidths = [menuBar.css allViewports];
 
-- (void)updateCSSCode:(IUCSSCode*)code asIUMenuItem:(IUMenuItem*)menuItem{
-
-    NSArray *editWidths = [menuItem.css allViewports];
-    
+    int maxHeight;
     for (NSNumber *viewportNumber in editWidths) {
         int viewport = [viewportNumber intValue];
-    }
-    [code setInsertingIdentifier:menuItem.itemIdentifier];
-    /*
-
-        id value = [menuItem.css tagDictionaryForViewport:width][IUCSSTagBGColor];
-        if(value){
-            [dict putTag:@"background-color" color:value ignoreClearColor:NO];
+        
+        int height;
+        if([[menuBar.css tagDictionaryForViewport:viewport] objectForKey:IUCSSTagPixelHeight]){
+            height = [[menuBar.css tagDictionaryForViewport:viewport][IUCSSTagPixelHeight] intValue];
+            maxHeight = height;
         }
-        value = [menuItem.css tagDictionaryForViewport:width][IUCSSTagFontColor];
-        if(value){
-            [dict putTag:@"color" color:value ignoreClearColor:NO];
-        }
-        value = [menuItem.parent.css tagDictionaryForViewport:width][IUCSSTagPixelHeight];
-        if(value){
-            [dict putTag:@"line-height" intValue:[value intValue] ignoreZero:YES unit:IUCSSUnitPixel];
+        else{
+            height = maxHeight;
         }
         
-    }
-    else if([identifier isEqualToString:menuItem.closureIdentifier]){
-        id value = [menuItem.css tagDictionaryForViewport:width][IUCSSTagFontColor];
-        if(value){
-            NSString *color = [(NSColor *)value rgbString];
-            if(menuItem.depth == 1){
-                [dict putTag:@"border-top-color" string:color];
+        if(viewport < 640){
+            
+            
+            if(height > 10){
+                //mobile
+                [code setInsertingIdentifier:menuBar.mobileButtonIdentifier];
+                [code insertTag:@"line-height" integer:height unit:IUUnitPixel];
+                [code insertTag:@"color" color:menuBar.mobileTitleColor];
+                
+                
+                //mobile-menu
+                [code setInsertingIdentifier:menuBar.topButtonIdentifier];
+                int top = (height -10)/2;
+                [code insertTag:@"top" integer:top unit:IUUnitPixel];
+                [code insertTag:@"border-color" color:menuBar.iconColor];
+                
+                [code setInsertingIdentifier:menuBar.bottomButtonIdentifier];
+                top =(height -10)/2 +10;
+                [code insertTag:@"top" integer:top unit:IUUnitPixel];
+                [code insertTag:@"border-color" color:menuBar.iconColor];
             }
-            else if(menuItem.depth ==2){
-                if(width > 640){
-                    [dict putTag:@"border-left-color" string:color];
-                }
-                else{
-                    [dict putTag:@"border-left-color" string:@"transparent"];
-                    [dict putTag:@"border-top-color" string:color];
-                }
+            
+            //editormode
+            [code setInsertingIdentifier:menuBar.editorDisplayIdentifier];
+            [code setInsertingTarget:IUTargetEditor];
+            
+            if(menuBar.isOpened){
+                [code insertTag:@"display" string:@"block"];
             }
-        }
-        value = [menuItem.parent.css tagDictionaryForViewport:width][IUCSSTagPixelHeight];
-        if(value){
-            int top = ([value intValue] - 10)/2;
-            [dict putTag:@"top" intValue:top ignoreZero:YES unit:IUCSSUnitPixel];
+            else{
+                [code insertTag:@"display" string:@"none"];
+            }
             
         }
         
     }
-    else if([identifier isEqualToString:menuItem.hoverItemIdentifier] ||
-            [identifier isEqualToString:menuItem.activeItemIdentifier]){
-        if(menuItem.bgActive){
-            [dict putTag:@"background-color" color:menuItem.bgActive ignoreClearColor:NO];
+
+    
+}
+
+- (void)updateCSSCode:(IUCSSCode*)code asIUMenuItem:(IUMenuItem*)menuItem{
+
+    NSArray *editWidths = menuItem.project.mqSizes;
+    
+    for (NSNumber *viewportNumber in editWidths) {
+        int viewport = [viewportNumber intValue];
+        
+        //item identifier
+        [code setInsertingIdentifier:menuItem.itemIdentifier];
+        [code setInsertingTarget:IUTargetBoth];
+        
+        id value = [menuItem.css tagDictionaryForViewport:viewport][IUCSSTagBGColor];
+        if(value){
+            [code insertTag:@"background-color" color:value];
         }
-        if(menuItem.fontActive){
-            [dict putTag:@"color" color:menuItem.fontActive ignoreClearColor:NO];
+        value = [menuItem.css tagDictionaryForViewport:viewport][IUCSSTagFontColor];
+        if(value){
+            [code insertTag:@"color" color:value];
         }
-    }
-    else if([identifier isEqualToString:menuItem.editorDisplayIdentifier] && isEdit){
-        if(width  > 640){
-            if(menuItem.isOpened){
-                [dict putTag:@"display" string:@"block"];
+        value = [menuItem.parent.css tagDictionaryForViewport:viewport][IUCSSTagPixelHeight];
+        if(value){
+            [code insertTag:@"line-height" intFromNumber:value unit:IUUnitPixel];
+        }
+        
+        //clousre
+        if(menuItem.closureIdentifier){
+            [code setInsertingIdentifier:menuItem.closureIdentifier];
+            
+            value = [menuItem.css tagDictionaryForViewport:viewport][IUCSSTagFontColor];
+            
+            if(value){
+                NSString *color = [[(NSColor *)value rgbString] stringByAppendingString:@" !important"];
+                if(menuItem.depth == 1){
+                    [code insertTag:@"border-top-color" string:color];
+                }
+                else if(menuItem.depth ==2){
+                    if(viewport > 640){
+                        [code insertTag:@"border-left-color" string:color];
+                    }
+                    else{
+                        [code insertTag:@"border-left-color" string:@"transparent"];
+                        [code insertTag:@"border-top-color" string:color];
+                    }
+                }
+            }
+            value = [menuItem.parent.css tagDictionaryForViewport:viewport][IUCSSTagPixelHeight];
+            if(value){
+                int top = ([value intValue] - 10)/2;
+                [code insertTag:@"top" integer:top unit:IUUnitPixel];
+                
+            }
+        }
+        
+        //clousre active, hover
+        if(menuItem.closureHoverIdentifier){
+            [code setInsertingIdentifiers:@[menuItem.closureActiveIdentifier, menuItem.closureHoverIdentifier]];
+            NSString *color = [[menuItem.fontActive rgbString] stringByAppendingString:@" !important"];
+            if(menuItem.depth == 1){
+                [code insertTag:@"border-top-color" string:color];
+            }
+            else if(menuItem.depth ==2){
+                if(viewport > 640){
+                    [code insertTag:@"border-left-color" string:color];
+                }
+                else{
+                    [code insertTag:@"border-left-color" string:@"transparent"];
+                    [code insertTag:@"border-top-color" string:color];
+                }
+            }
+            
+        }
+        
+        
+        //editor mode
+        if(menuItem.editorDisplayIdentifier){
+            [code setInsertingIdentifier:menuItem.editorDisplayIdentifier];
+            [code setInsertingTarget:IUTargetEditor];
+            
+            if(viewport > 640){
+                if(menuItem.isOpened){
+                    [code insertTag:@"display" string:@"block"];
+                }
+                else{
+                    [code insertTag:@"display" string:@"none"];
+                }
             }
             else{
-                [dict putTag:@"display" string:@"none"];
+                [code insertTag:@"display" string:@"block"];
             }
         }
-        else{
-            [dict putTag:@"display" string:@"block"];
-        }
+
     }
-     */
+    
+    //hover, active
+    [code setInsertingIdentifiers:@[menuItem.hoverItemIdentifier, menuItem.activeItemIdentifier]];
+    [code setInsertingTarget:IUTargetBoth];
+
+    if(menuItem.bgActive){
+        [code insertTag:@"background-color" color:menuItem.bgActive];
+    }
+    if(menuItem.fontActive){
+        [code insertTag:@"color" color:menuItem.fontActive];
+    }
+    
+   
+    
 
 }
 

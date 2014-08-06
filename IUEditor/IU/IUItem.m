@@ -40,4 +40,8 @@
     return NO;
 }
 
+- (BOOL)shouldSelectParentFirst{
+    return YES;
+}
+
 @end
