@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMHerokuWC">
@@ -26,18 +26,16 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="826" height="660"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="826" height="660"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="IQf-Tp-Kzs">
                         <rect key="frame" x="12" y="31" width="444" height="191"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D2U-OX-CbS">
                                 <rect key="frame" x="12" y="154" width="108" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Heroku App Info" id="BTr-F0-o0u">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -46,11 +44,9 @@
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="4RZ-AM-ZV0">
                                 <rect key="frame" x="14" y="15" width="446" height="131"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bul-yT-U1C">
                                         <rect key="frame" x="7" y="105" width="120" height="14"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="116" id="mNV-uW-rYQ"/>
                                         </constraints>
@@ -62,7 +58,6 @@
                                     </textField>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tyO-zj-qbk">
                                         <rect key="frame" x="163" y="105" width="96" height="19"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="kkG-DY-jHE"/>
                                         </constraints>
@@ -74,7 +69,6 @@
                                     </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wbW-BQ-KLO">
                                         <rect key="frame" x="283" y="99" width="129" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" title="Create App" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4hN-po-I0z">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
@@ -85,7 +79,6 @@
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zCu-xP-p6U">
                                         <rect key="frame" x="7" y="83" width="91" height="14"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Heroku Message" id="EDb-L9-l3S">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -94,7 +87,6 @@
                                     </textField>
                                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZN-lW-HYU">
                                         <rect key="frame" x="114" y="7" width="332" height="70"/>
-                                        <autoresizingMask key="autoresizingMask"/>
                                         <clipView key="contentView" id="l4i-wg-7kQ">
                                             <rect key="frame" x="1" y="1" width="315" height="68"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -103,10 +95,10 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="315" height="68"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <size key="minSize" width="315" height="68"/>
+                                                    <size key="minSize" width="330" height="68"/>
                                                     <size key="maxSize" width="463" height="10000000"/>
                                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <size key="minSize" width="315" height="68"/>
+                                                    <size key="minSize" width="330" height="68"/>
                                                     <size key="maxSize" width="463" height="10000000"/>
                                                 </textView>
                                             </subviews>
@@ -123,7 +115,6 @@
                                     </scrollView>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vbL-KX-dre">
                                         <rect key="frame" x="274" y="77" width="129" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" title="Visit" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nE9-YB-nGa">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
@@ -135,7 +126,6 @@
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AXb-ks-UfO">
                                         <rect key="frame" x="171" y="85" width="102" height="14"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="98" id="NDT-CO-uZd"/>
                                         </constraints>
@@ -183,11 +173,9 @@
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="jdS-0c-ijs">
                         <rect key="frame" x="430" y="225" width="444" height="117"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8EJ-CD-an8">
                                 <rect key="frame" x="12" y="53" width="18" height="14"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="14" id="ZkH-YJ-xnX"/>
                                 </constraints>
@@ -199,7 +187,6 @@
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wHH-Wg-6SH">
                                 <rect key="frame" x="173" y="53" width="98" height="14"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="94" id="Gsu-PW-Wte"/>
                                 </constraints>
@@ -214,7 +201,6 @@
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7kd-1r-gN0">
                                 <rect key="frame" x="173" y="-18" width="253" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Multiline Label" id="Oe9-sH-6el">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -226,7 +212,6 @@
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hJi-uH-hwY">
                                 <rect key="frame" x="12" y="80" width="187" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Heroku Login State : Logined" id="TTO-wj-Qku">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -250,11 +235,9 @@
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="qk0-6S-21C">
                         <rect key="frame" x="37" y="508" width="347" height="112"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T5E-CT-NPg">
                                 <rect key="frame" x="18" y="75" width="182" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Heroku install : not installed" id="3ei-5J-XEu">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -263,7 +246,6 @@
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4k6-Oh-Rke">
                                 <rect key="frame" x="85" y="19" width="176" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Visit Heroku CLI page" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nJZ-gq-2la">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -284,7 +266,6 @@
                     </customView>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="69v-cv-OTA">
                         <rect key="frame" x="302" y="-3" width="93" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="81" id="80Q-aa-00t"/>
                         </constraints>
@@ -298,7 +279,6 @@
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qbX-ng-M9c">
                         <rect key="frame" x="18" y="628" width="136" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Heroku Management" id="fiz-8W-61W">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -307,7 +287,6 @@
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4U5-fy-W8Q">
                         <rect key="frame" x="173" y="-4" width="93" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="81" id="bPj-Rw-yPV"/>
                         </constraints>
@@ -324,18 +303,15 @@ Gw
                     </button>
                     <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Vfk-nr-v1c">
                         <rect key="frame" x="12" y="617" width="372" height="5"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
                     </box>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="nGg-EU-DcJ">
                         <rect key="frame" x="12" y="217" width="444" height="125"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wbC-zl-SC5">
                                 <rect key="frame" x="12" y="61" width="18" height="14"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="14" id="nla-l7-Bfc"/>
                                 </constraints>
@@ -347,7 +323,6 @@ Gw
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oBu-do-ySE">
                                 <rect key="frame" x="170" y="50" width="96" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="96" id="gjo-LK-AJV"/>
                                 </constraints>
@@ -366,7 +341,6 @@ Gw
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IbU-0G-FMX">
                                 <rect key="frame" x="12" y="24" width="62" height="14"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="hNy-Zo-EgG"/>
                                 </constraints>
@@ -378,7 +352,6 @@ Gw
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MFi-6a-knH">
                                 <rect key="frame" x="170" y="22" width="96" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="IzM-gq-vvx">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -394,7 +367,6 @@ Gw
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G21-NP-wx3">
                                 <rect key="frame" x="300" y="44" width="129" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Login" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vWK-IO-sdG">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -405,7 +377,6 @@ Gw
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ges-xq-SHC">
                                 <rect key="frame" x="303" y="19" width="150" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Multiline Label" id="jMG-cC-km0">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -417,7 +388,6 @@ Gw
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MSx-GU-DRn">
                                 <rect key="frame" x="12" y="88" width="217" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Heroku Login State :  Not Logined" id="vZz-GB-XH6">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -450,11 +420,9 @@ Gw
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="erb-IH-bmM">
                         <rect key="frame" x="27" y="364" width="455" height="136"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yhv-cO-yIK">
                                 <rect key="frame" x="10" y="86" width="56" height="14"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="52" id="9Sf-ZE-1N2"/>
                                 </constraints>
@@ -466,7 +434,6 @@ Gw
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XQr-fR-JYU">
                                 <rect key="frame" x="156" y="10" width="129" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="119" id="gGH-Hk-eb4"/>
                                 </constraints>
@@ -480,7 +447,6 @@ Gw
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nhf-v5-dXh">
                                 <rect key="frame" x="19" y="108" width="51" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Git Info" id="mBo-65-7QJ">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -489,7 +455,6 @@ Gw
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ea3-Ww-RHY">
                                 <rect key="frame" x="11" y="47" width="56" height="14"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="52" id="keF-rO-LPw"/>
                                 </constraints>
@@ -501,7 +466,6 @@ Gw
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zjs-jR-JA3">
                                 <rect key="frame" x="166" y="47" width="187" height="14"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="183" id="3zH-25-xvq"/>
                                 </constraints>
@@ -516,7 +480,6 @@ Gw
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Li-zu-GVe">
                                 <rect key="frame" x="166" y="64" width="247" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="243" id="RBA-7u-P88"/>
                                 </constraints>
