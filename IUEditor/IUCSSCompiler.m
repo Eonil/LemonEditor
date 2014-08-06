@@ -623,6 +623,7 @@ typedef enum _IUUnit{
         }
         case IUPositionTypeFixed:{
             [code insertTag:@"position" string:@"fixed"];
+            [code insertTag:@"z-index" string:@"10"];
             topTag = @"top"; leftTag = @"left"; break;
             break;
         }
