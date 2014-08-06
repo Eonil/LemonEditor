@@ -26,7 +26,7 @@ typedef enum _IUUnit{
 @interface IUCSSCode() {
     IUTarget _currentTarget;
     int _currentViewPort;
-    NSString *_currentIdentifier;
+    NSArray *_currentIdentifiers;
     NSMutableDictionary *_editorCSSDictWithViewPort; // data = key:width
     NSMutableDictionary *_outputCSSDictWithViewPort; // data = key:width
 }
@@ -34,6 +34,7 @@ typedef enum _IUUnit{
 - (void)setInsertTarget:(IUTarget)target;
 - (void)setInsertViewPort:(int)viewport;
 - (void)setInsertIdentifier:(NSString *)identifier;
+- (void)setInsertIdentifiers:(NSArray *)identifiers;
 
 /**
  insert css tag to receiver
@@ -71,7 +72,11 @@ typedef enum _IUUnit{
 }
 
 - (void)setInsertIdentifier:(NSString *)identifier{
-    _currentIdentifier = identifier;
+    _currentIdentifiers = @[identifier];
+}
+
+- (void)setInsertIdentifiers:(NSArray *)identifiers{
+    _currentIdentifiers = [[NSArray alloc] initWithArray:identifiers copyItems:YES];
 }
 
 - (NSMutableDictionary*)tagDictionaryWithTarget:(IUTarget)target viewport:(int)viewport identifier:(NSString*)identifier{
@@ -87,9 +92,13 @@ typedef enum _IUUnit{
     }
 }
 
+/*
 - (NSMutableDictionary*)tagDictionaryWithTarget:(IUTarget)target{
     if (target == IUTargetBoth) {
         NSAssert(0, @"Cannot be IUTarget Both");
+    }
+    if (_currentIdentifier == nil) {
+        NSAssert(0, @"Cannot be current identifier nil");
     }
     NSMutableDictionary *cssDictWithViewPort = (target == IUTargetEditor) ?_editorCSSDictWithViewPort : _outputCSSDictWithViewPort;
     
@@ -105,6 +114,7 @@ typedef enum _IUUnit{
     }
     return tagDictionary;
 }
+ */
 
 
 
@@ -116,36 +126,47 @@ typedef enum _IUUnit{
     if (color == nil) {
         color = [NSColor blackColor];
     }
-    if (_currentTarget & IUTargetEditor) {
-        NSMutableDictionary *tagDict = [self tagDictionaryWithTarget:IUTargetEditor];
-        if (color.colorSpace != [NSColorSpace deviceRGBColorSpace]) {
-            color = [color colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
-        }
-        tagDict[tag] = [color rgbString];
+    if (color.colorSpace != [NSColorSpace deviceRGBColorSpace]) {
+        color = [color colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
     }
-    if (_currentTarget & IUTargetOutput) {
-        NSMutableDictionary *tagDict = [self tagDictionaryWithTarget:IUTargetOutput];
-        if (color.colorSpace != [NSColorSpace deviceRGBColorSpace]) {
-            color = [color colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
-        }
-        tagDict[tag] = [color rgbString];
-    }
+    [self insertTag:tag string:[color rgbString]];
 }
 
 - (void)insertTag:(NSString*)tag string:(NSString*)stringValue{
-    if (_currentTarget & IUTargetEditor) {
-        NSMutableDictionary *tagDict = [self tagDictionaryWithTarget:IUTargetEditor];
-        tagDict[tag] = [stringValue copy];
-    }
-    if (_currentTarget & IUTargetOutput) {
-        NSMutableDictionary *tagDict = [self tagDictionaryWithTarget:IUTargetOutput];
-        tagDict[tag] = [stringValue copy];
-    }
+    [self insertTag:tag string:stringValue target:_currentTarget];
 }
 
 - (void)insertTag:(NSString*)tag string:(NSString*)stringValue target:(IUTarget)target{
-    NSMutableDictionary *tagDict = [self tagDictionaryWithTarget:target];
-    tagDict[tag] = [stringValue copy];
+    if (target & IUTargetEditor ) {
+        NSMutableDictionary *cssDictWithIdentifier = _editorCSSDictWithViewPort[@(_currentViewPort)];
+        if (cssDictWithIdentifier == nil) { //does not have view port, so make new one
+            cssDictWithIdentifier = [NSMutableDictionary dictionary];
+            _editorCSSDictWithViewPort[@(_currentViewPort)] = cssDictWithIdentifier;
+        }
+        for (NSString *identifier in _currentIdentifiers) {
+            NSMutableDictionary *tagDictionary = cssDictWithIdentifier[identifier];
+            if (tagDictionary == nil) {
+                tagDictionary = [NSMutableDictionary dictionary];
+                cssDictWithIdentifier[identifier] = tagDictionary;
+            }
+            tagDictionary[tag] = [stringValue copy];
+        }
+    }
+    if (target & IUTargetOutput ) {
+        NSMutableDictionary *cssDictWithIdentifier = _outputCSSDictWithViewPort[@(_currentViewPort)];
+        if (cssDictWithIdentifier == nil) { //does not have view port, so make new one
+            cssDictWithIdentifier = [NSMutableDictionary dictionary];
+            _outputCSSDictWithViewPort[@(_currentViewPort)] = cssDictWithIdentifier;
+        }
+        for (NSString *identifier in _currentIdentifiers) {
+            NSMutableDictionary *tagDictionary = cssDictWithIdentifier[identifier];
+            if (tagDictionary == nil) {
+                tagDictionary = [NSMutableDictionary dictionary];
+                cssDictWithIdentifier[identifier] = tagDictionary;
+            }
+            tagDictionary[tag] = [stringValue copy];
+        }
+    }
 }
 
 - (void)insertTag:(NSString*)tag floatFromNumber:(NSNumber*)floatNumber{
@@ -159,15 +180,8 @@ typedef enum _IUUnit{
         case IUUnitPixel: unitString = @"px"; break;
         case IUUnitNone: unitString = @""; break;
     }
-
-    if (_currentTarget & IUTargetEditor) {
-        NSMutableDictionary *editorDict = [self tagDictionaryWithTarget:IUTargetEditor];
-        editorDict[tag] = [NSString stringWithFormat:@"%.2f%@", [floatNumber floatValue] , unitString];
-    }
-    if (_currentTarget & IUTargetOutput) {
-        NSMutableDictionary *outputDict = [self tagDictionaryWithTarget:IUTargetOutput];
-        outputDict[tag] = [NSString stringWithFormat:@"%.2f%@", [floatNumber floatValue], unitString];
-    }
+    NSString *stringValue = [NSString stringWithFormat:@"%.2f%@", [floatNumber floatValue] , unitString];
+    [self insertTag:tag string:stringValue];
 }
 
 - (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber{
@@ -185,15 +199,8 @@ typedef enum _IUUnit{
         case IUUnitPixel: unitString = @"px"; break;
         case IUUnitNone: unitString = @""; break;
     }
-    
-    if (_currentTarget & IUTargetEditor) {
-        NSMutableDictionary *tagDict = [self tagDictionaryWithTarget:IUTargetEditor];
-        tagDict[tag] = [NSString stringWithFormat:@"%d%@", number , unitString];
-    }
-    if (_currentTarget & IUTargetOutput) {
-        NSMutableDictionary *tagDict = [self tagDictionaryWithTarget:IUTargetOutput];
-        tagDict[tag] = [NSString stringWithFormat:@"%d%@", number, unitString];
-    }
+    NSString *stringValue = [NSString stringWithFormat:@"%d%@", number , unitString];
+    [self insertTag:tag string:stringValue];
 }
 
 
