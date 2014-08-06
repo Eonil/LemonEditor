@@ -30,6 +30,7 @@ typedef enum _IUUnit{
     NSArray *_currentIdentifiers;
     NSMutableDictionary *_editorCSSDictWithViewPort; // data = key:width
     NSMutableDictionary *_outputCSSDictWithViewPort; // data = key:width
+    NSArray *allViewports;
 }
 
 - (void)setInsertingTarget:(IUTarget)target;
@@ -37,6 +38,10 @@ typedef enum _IUUnit{
 - (int)insertingViewPort;
 - (void)setInsertingIdentifier:(NSString *)identifier;
 - (void)setInsertingIdentifiers:(NSArray *)identifiers;
+
+
+- (NSString*)valueForTag:(NSString*)tag identifier:(NSString*)identifier largerThanViewport:(int)viewport target:(IUTarget)target;
+
 /**
  insert css tag to receiver
  */
@@ -98,31 +103,6 @@ typedef enum _IUUnit{
     }
 }
 
-/*
-- (NSMutableDictionary*)tagDictionaryWithTarget:(IUTarget)target{
-    if (target == IUTargetBoth) {
-        NSAssert(0, @"Cannot be IUTarget Both");
-    }
-    if (_currentIdentifier == nil) {
-        NSAssert(0, @"Cannot be current identifier nil");
-    }
-    NSMutableDictionary *cssDictWithViewPort = (target == IUTargetEditor) ?_editorCSSDictWithViewPort : _outputCSSDictWithViewPort;
-    
-    NSMutableDictionary *cssDictWithIdentifier = cssDictWithViewPort[@(_currentViewPort)];
-    if (cssDictWithIdentifier == nil) {
-        cssDictWithIdentifier = [NSMutableDictionary dictionary];
-        cssDictWithViewPort[@(_currentViewPort)] = cssDictWithIdentifier;
-    }
-    NSMutableDictionary *tagDictionary = cssDictWithIdentifier[_currentIdentifier];
-    if (tagDictionary == nil) {
-        tagDictionary = [NSMutableDictionary dictionary];
-        cssDictWithIdentifier[_currentIdentifier] = tagDictionary;
-    }
-    return tagDictionary;
-}
- */
-
-
 
 /**
  insert css tag to receiver
@@ -147,8 +127,10 @@ typedef enum _IUUnit{
     if (target & IUTargetEditor ) {
         NSMutableDictionary *cssDictWithIdentifier = _editorCSSDictWithViewPort[@(_currentViewPort)];
         if (cssDictWithIdentifier == nil) { //does not have view port, so make new one
-            cssDictWithIdentifier = [NSMutableDictionary dictionary];
-            _editorCSSDictWithViewPort[@(_currentViewPort)] = cssDictWithIdentifier;
+            _editorCSSDictWithViewPort[@(_currentViewPort)] = [NSMutableDictionary dictionary];
+            _outputCSSDictWithViewPort[@(_currentViewPort)] = [NSMutableDictionary dictionary];
+            cssDictWithIdentifier = _editorCSSDictWithViewPort[@(_currentViewPort)];
+            [self updateViewports];
         }
         for (NSString *identifier in _currentIdentifiers) {
             NSMutableDictionary *tagDictionary = cssDictWithIdentifier[identifier];
@@ -162,8 +144,10 @@ typedef enum _IUUnit{
     if (target & IUTargetOutput ) {
         NSMutableDictionary *cssDictWithIdentifier = _outputCSSDictWithViewPort[@(_currentViewPort)];
         if (cssDictWithIdentifier == nil) { //does not have view port, so make new one
-            cssDictWithIdentifier = [NSMutableDictionary dictionary];
-            _outputCSSDictWithViewPort[@(_currentViewPort)] = cssDictWithIdentifier;
+            _editorCSSDictWithViewPort[@(_currentViewPort)] = [NSMutableDictionary dictionary];
+            _outputCSSDictWithViewPort[@(_currentViewPort)] = [NSMutableDictionary dictionary];
+            cssDictWithIdentifier = _outputCSSDictWithViewPort[@(_currentViewPort)];
+            [self updateViewports];
         }
         for (NSString *identifier in _currentIdentifiers) {
             NSMutableDictionary *tagDictionary = cssDictWithIdentifier[identifier];
@@ -214,25 +198,93 @@ typedef enum _IUUnit{
     [self insertTag:tag string:stringValue];
 }
 
+- (NSString*)valueForTag:(NSString*)tag identifier:(NSString*)identifier largerThanViewport:(int)viewport target:(IUTarget)target{
+    
+    NSString* valueForOutput = nil;
+    NSString* valueForEditor = nil;
+    if (_currentTarget == IUTargetEditor) {
+        for (NSNumber *currentViewport in self.allViewports) {
+            if ([currentViewport intValue] <= viewport) {
+                break;
+            }
+            if (_editorCSSDictWithViewPort[currentViewport][identifier][tag]) {
+                valueForEditor = _editorCSSDictWithViewPort[@(IUCSSDefaultViewPort)][identifier][tag];
+            }
+        }
+        return valueForEditor;
+    }
+    else if (_currentTarget == IUTargetOutput) {
+        for (NSNumber *currentViewport in self.allViewports) {
+            if ([currentViewport intValue] <= viewport) {
+                break;
+            }
+            if (_outputCSSDictWithViewPort[currentViewport][identifier][tag]) {
+                valueForOutput = _outputCSSDictWithViewPort[@(IUCSSDefaultViewPort)][identifier][tag];
+            }
+        }
+        return valueForOutput;
+    }
+    else {
+        for (NSNumber *currentViewport in self.allViewports) {
+            if ([currentViewport intValue] <= viewport) {
+                break;
+            }
+            if (_outputCSSDictWithViewPort[currentViewport][identifier][tag]) {
+                valueForOutput = _outputCSSDictWithViewPort[@(IUCSSDefaultViewPort)][identifier][tag];
+            }
+            if (_editorCSSDictWithViewPort[currentViewport][identifier][tag]) {
+                valueForEditor = _editorCSSDictWithViewPort[@(IUCSSDefaultViewPort)][identifier][tag];
+            }
+        }
+        if ([valueForEditor isEqualToString:valueForOutput]) {
+            return valueForEditor;
+        }
+        return nil;
+    }
+}
 
-- (NSArray*)allViewPorts{
-    NSArray *widthsOne = [_editorCSSDictWithViewPort allKeys];
-    NSArray *widthsTwo = [_outputCSSDictWithViewPort allKeys];
+- (void)updateViewports{
+    NSArray *widthsOne = [[_editorCSSDictWithViewPort allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    NSArray *widthsTwo = [[_outputCSSDictWithViewPort allKeys] sortedArrayUsingSelector:@selector(compare:)];
     if ([widthsOne isEqualToArray:widthsTwo]) {
-        return widthsOne;
+        allViewports = [widthsOne reversedArray];
+        return;
     }
     NSAssert (0, @"Two widths should be equal");
-    return nil;
+}
+
+- (NSArray*)allViewports{
+    return allViewports;
 }
 
 
-- (NSDictionary*)tagDictionaryWithIdentifierForTarget:(IUTarget)unit viewport:(int)viewport{
+- (NSDictionary*)tagDictionaryWithIdentifierForTarget:(IUTarget)target viewport:(int)viewport{
     NSMutableDictionary *returnDict = [NSMutableDictionary dictionary];
-    NSMutableDictionary *sourceDictWithViewPort = (unit == IUTargetEditor) ? _editorCSSDictWithViewPort : _outputCSSDictWithViewPort;
-    NSMutableDictionary *sourceDictWithIdentifier = sourceDictWithViewPort[@(viewport)];
+    NSDictionary *sourceDictWithViewPort = (target == IUTargetEditor) ? _editorCSSDictWithViewPort : _outputCSSDictWithViewPort;
+    NSDictionary *sourceDictWithIdentifier = sourceDictWithViewPort[@(viewport)];
+
+    
     for (NSString *identifier in sourceDictWithIdentifier) {
-        [returnDict setObject:[[sourceDictWithIdentifier objectForKey:identifier] CSSCode] forKey:identifier];
+        NSDictionary *tagDict = sourceDictWithIdentifier[identifier];
+        NSMutableDictionary *tagDictForReturn = [NSMutableDictionary dictionary];
+        for (NSString *tag in tagDict) {
+            NSString *value = tagDict[tag];
+            NSString *upperSideValue = [self valueForTag:tag identifier:identifier largerThanViewport:viewport target:target];
+            if ([value isEqualToString:upperSideValue] == NO) {
+                tagDictForReturn[tag] = value;
+            }
+//            else if ([tag isE])
+        }
+        if (viewport == IUCSSDefaultViewPort && target == IUTargetOutput) {
+            NSArray *keys = [tagDictForReturn allKeysForObject:@"rgb(0,0,0)"];
+            [tagDictForReturn removeObjectsForKeys:keys];
+            keys = [tagDictForReturn allKeysForObject:@"0.00px"];
+            [tagDictForReturn removeObjectsForKeys:keys];
+        }
+        NSString *cssCode = [[tagDictForReturn CSSCode] stringByReplacingOccurrencesOfString:@".00px" withString:@"px"];
+        [returnDict setObject:cssCode forKey:identifier];
     }
+    
     return returnDict;
 }
 
@@ -454,19 +506,22 @@ typedef enum _IUUnit{
 
 - (void)updateCSSApperanceCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
-    /* pointer */
-    if (_iu.link) {
-        [code insertTag:@"cursor" string:@"pointer"];
-    }
     
-    /* overflow */
-    switch (_iu.overflowType) {
-        case IUOverflowTypeHidden: break; //default is hidden
-        case IUOverflowTypeVisible:{
-            [code insertTag:@"overflow" string:@"visible"]; break;
+    if (viewport == IUCSSDefaultViewPort) {
+        /* pointer */
+        if (_iu.link) {
+            [code insertTag:@"cursor" string:@"pointer"];
         }
-        case IUOverflowTypeScroll:{
-            [code insertTag:@"overflow" string:@"scroll"]; break;
+        
+        /* overflow */
+        switch (_iu.overflowType) {
+            case IUOverflowTypeHidden: break; //default is hidden
+            case IUOverflowTypeVisible:{
+                [code insertTag:@"overflow" string:@"visible"]; break;
+            }
+            case IUOverflowTypeScroll:{
+                [code insertTag:@"overflow" string:@"scroll"]; break;
+            }
         }
     }
     
@@ -475,9 +530,11 @@ typedef enum _IUUnit{
     if (value && [value boolValue]) {
         [code insertTag:@"display" string:@"none"];
     }
+    /*
     else{
         [code insertTag:@"display" string:@"inherit"];
     }
+     */
     value = cssTagDict[IUCSSTagEditorDisplay];
     if (value && [value boolValue] == NO) {
         [code insertTag:@"display" string:@"none" target:IUTargetEditor];
@@ -573,8 +630,8 @@ typedef enum _IUUnit{
         }
         
         /* bg repeat */
-        if ([cssTagDict[IUCSSTagBGRepeat] boolValue] == NO) {
-            [code insertTag:@"background-repeat" string:@"no-repeat"];
+        if ([cssTagDict[IUCSSTagBGRepeat] boolValue] == YES) {
+            [code insertTag:@"background-repeat" string:@"repeat"];
         }
     }
 }

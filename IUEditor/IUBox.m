@@ -483,7 +483,7 @@
 - (void)updateCSS{
     if (self.delegate) {
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
-        for (NSNumber *viewport in cssCode.allViewPorts) {
+        for (NSNumber *viewport in cssCode.allViewports) {
             NSDictionary *dictionaryWithIdentifier = [cssCode tagDictionaryWithIdentifierForTarget:IUTargetEditor viewport:[viewport intValue]];
             for (NSString *identifier in dictionaryWithIdentifier) {
                 [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier] viewport:[viewport intValue]];
@@ -495,7 +495,7 @@
 - (void)updateCSSWithIdentifier:(NSString *)identifier{
     if (self.delegate) {
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
-        for (NSNumber *viewport in cssCode.allViewPorts) {
+        for (NSNumber *viewport in cssCode.allViewports) {
             NSDictionary *dictionaryWithIdentifier = [cssCode tagDictionaryWithIdentifierForTarget:IUTargetEditor viewport:[viewport intValue]];
             [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier] viewport:[viewport intValue]];
             
