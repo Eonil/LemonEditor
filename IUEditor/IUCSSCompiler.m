@@ -560,9 +560,11 @@ typedef enum _IUUnit{
     /* insert position */
     switch (_iu.positionType) {
         case IUPositionTypeAbsolute:{
+            [code insertTag:@"position" string:@"absolute"];
             topTag = @"top"; leftTag = @"left"; break;
         }
         case IUPositionTypeAbsoluteCenter:{
+            [code insertTag:@"position" string:@"absolute"];
             topTag = @"top"; break;
         }
         case IUPositionTypeRelative:{
@@ -726,6 +728,11 @@ typedef enum _IUUnit{
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUMenuItem:(IUMenuItem*)menuItem{
 
+    NSArray *editWidths = [menuItem.css allViewports];
+    
+    for (NSNumber *viewportNumber in editWidths) {
+        int viewport = [viewportNumber intValue];
+    }
     [code setInsertingIdentifier:menuItem.itemIdentifier];
     /*
 
