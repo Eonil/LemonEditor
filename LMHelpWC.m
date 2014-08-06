@@ -101,7 +101,7 @@ static LMHelpWC *gHelpWC = nil;
 
 - (void)showHelpDocumentWithKey:(NSString *)key{
    // NSString *currentKey = [_pdfListDictController.selectedObjects[0] key];
-    //FIXME: selection tableView
+    //TODO: selection tableView - manual is not pdf -> html
     
 /*    if([key isEqualToString:currentKey] == NO){
         NSDictionary *dict = [NSDictionary dictionaryWithObject:_pdfListDictionary[key] forKey:key];

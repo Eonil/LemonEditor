@@ -70,7 +70,7 @@
     else if(videoPath){
         NSString *videoFileName = [videoPath lastPathComponent];
         NSInteger index = [_fileNameComboBox indexOfItemWithObjectValue:videoFileName];
-        if(index >= 0){
+        if(index >= 0 && index < [_fileNameComboBox numberOfItems]){
             [_fileNameComboBox selectItemAtIndex:index];
         }
         else{
@@ -95,7 +95,6 @@
     }
 }
 - (void)updateVideoFileName:(NSString *)videoFileName{
-    //FIXME: check video file name if not accurate
     
     gettingInfo = YES;
     if(videoFileName.length == 0){
@@ -161,6 +160,7 @@
 -(NSImage *)thumbnailOfVideo:(NSURL *)url{
     
     AVURLAsset *asset=[[AVURLAsset alloc] initWithURL:url options:nil];
+    
     AVAssetImageGenerator *generator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
     generator.appliesPreferredTrackTransform=TRUE;
     CMTime thumbTime = CMTimeMakeWithSeconds(0,30);
@@ -171,11 +171,12 @@
     if(halfWayImage != NULL){
         thumbImg =[[NSImage alloc] initWithCGImage:halfWayImage size:NSZeroSize];
         CGImageRelease(halfWayImage);
+        return thumbImg;
+        
     }
     
     
-    
-    return thumbImg;
+    return nil;
     
 }
 

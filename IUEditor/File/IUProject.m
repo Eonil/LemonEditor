@@ -54,17 +54,6 @@
         _compiler.resourceManager = _resourceManager;
         
         _mqSizes = [[aDecoder decodeObjectForKey:@"mqSizes"] mutableCopy];
-        
-        //FIXME: duplicate 안들어가게 size 수정할것 
-        NSArray *copy = [_mqSizes copy];
-        NSInteger index = [copy count] - 1;
-        for (id object in [copy reverseObjectEnumerator]) {
-            if ([_mqSizes indexOfObject:object inRange:NSMakeRange(0, index)] != NSNotFound) {
-                [_mqSizes removeObjectAtIndex:index];
-            }
-            index--;
-        }
-        
         _buildPath = [aDecoder decodeObjectForKey:@"_buildPath"];
         _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _backgroundGroup = [aDecoder decodeObjectForKey:@"_backgroundGroup"];

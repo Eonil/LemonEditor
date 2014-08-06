@@ -189,7 +189,7 @@
 - (void)addFrame:(NSInteger)width{
     NSNumber *widthNumber = [NSNumber numberWithInteger:width];
     if([_sizeArray containsObject:widthNumber]){
-        JDWarnLog(@"already exist width");
+        JDFatalLog(@"It is something wrong");
         return ;
     }
     
@@ -277,6 +277,13 @@
 
 - (IBAction)addSizeOKBtn:(id)sender {
     NSInteger newWidth = [self.addFrameSizeField integerValue];
+    
+    NSNumber *widthNumber = [NSNumber numberWithInteger:newWidth];
+    if([_sizeArray containsObject:widthNumber]){
+        [JDUIUtil hudAlert:@"Already Same Width, Here" second:2];
+        return ;
+    }
+    
     [self addFrame:newWidth];
     [self.addFramePopover close];
 
