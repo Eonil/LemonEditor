@@ -372,6 +372,7 @@ typedef enum _IUUnit{
         if ([cssTagDict[IUCSSTagLineHeight] isEqualToString:@"Auto"] == NO) {
             [code insertTag:@"line-height" floatFromNumber:cssTagDict[IUCSSTagLineHeight]];
             //if pgtextview, set 1.3
+            //???  코드 안넣은 이유는??
         }
     }
 }
@@ -683,6 +684,7 @@ typedef enum _IUUnit{
 }
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUMenuBar:(IUMenuBar*)menuBar{
+    
     /*
      IUMenuBar *menuBar = (IUMenuBar *)iu;
      if(width < 640){
@@ -710,10 +712,11 @@ typedef enum _IUUnit{
     */
 }
 
-- (void)updateCSSCode:(IUCSSCode*)code asIUMenuItem:(IUMenuItem*)menuBar{
-#if 0
-    IUMenuItem *menuItem = (IUMenuItem *)iu;
-    if([identifier isEqualToString:menuItem.itemIdentifier]){
+- (void)updateCSSCode:(IUCSSCode*)code asIUMenuItem:(IUMenuItem*)menuItem{
+
+    [code setInsertIdentifier:menuItem.itemIdentifier];
+    /*
+
         id value = [menuItem.css tagDictionaryForViewport:width][IUCSSTagBGColor];
         if(value){
             [dict putTag:@"background-color" color:value ignoreClearColor:NO];
@@ -775,7 +778,8 @@ typedef enum _IUUnit{
             [dict putTag:@"display" string:@"block"];
         }
     }
-#endif
+     */
+
 }
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUCarousel:(IUCarousel*)carousel{

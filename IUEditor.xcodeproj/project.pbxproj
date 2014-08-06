@@ -1597,8 +1597,8 @@
 		6953852D18ED6EC800CC42E5 /* IUController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUController.m; sourceTree = "<group>"; };
 		6954812618D7640A00CA02F1 /* IUPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUPage.h; path = BaseObject/IUPage.h; sourceTree = "<group>"; };
 		6954812718D7640A00CA02F1 /* IUPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUPage.m; path = BaseObject/IUPage.m; sourceTree = "<group>"; };
-		69604767198FE56400605FA2 /* IUCSSCompiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUCSSCompiler.h; sourceTree = "<group>"; };
-		69604768198FE56400605FA2 /* IUCSSCompiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUCSSCompiler.m; sourceTree = "<group>"; };
+		69604767198FE56400605FA2 /* IUCSSCompiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUCSSCompiler.h; path = ../IUCSSCompiler.h; sourceTree = "<group>"; };
+		69604768198FE56400605FA2 /* IUCSSCompiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUCSSCompiler.m; path = ../IUCSSCompiler.m; sourceTree = "<group>"; };
 		6967425118F7D077008B7111 /* IUIdentifierManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUIdentifierManager.h; sourceTree = "<group>"; };
 		6967425218F7D077008B7111 /* IUIdentifierManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUIdentifierManager.m; sourceTree = "<group>"; };
 		696D1C9918E5366400B4AB16 /* webTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = webTemplate.html; sourceTree = "<group>"; };
@@ -3306,8 +3306,6 @@
 				6967425218F7D077008B7111 /* IUIdentifierManager.m */,
 				3D1BACC719330240004C554F /* IUText.h */,
 				3D1BACC819330240004C554F /* IUText.m */,
-				69604767198FE56400605FA2 /* IUCSSCompiler.h */,
-				69604768198FE56400605FA2 /* IUCSSCompiler.m */,
 			);
 			name = IU;
 			sourceTree = "<group>";
@@ -3516,6 +3514,8 @@
 			children = (
 				69C5760018D6FE020016F050 /* IUCSS.h */,
 				69C5760118D6FE020016F050 /* IUCSS.m */,
+				69604767198FE56400605FA2 /* IUCSSCompiler.h */,
+				69604768198FE56400605FA2 /* IUCSSCompiler.m */,
 				69ABB14818D733ED0065D584 /* IUCompiler.h */,
 				69ABB14918D733ED0065D584 /* IUCompiler.m */,
 				69D5B68F18F247C100E9FB11 /* LMCompilerResourceSource.h */,

@@ -11,7 +11,6 @@
 @protocol IUCSSDelegate
 @required
 - (void)updateCSS;
-- (void)updateCSSForViewPortWidth:(NSInteger)width;
 - (BOOL)CSSShouldChangeValue:(id)value forTag:(IUCSSTag)tag forWidth:(NSInteger)width;
 - (NSUndoManager *)undoManager;
 @end
