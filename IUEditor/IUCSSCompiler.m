@@ -487,6 +487,33 @@ typedef enum _IUUnit{
     if (cssTagDict[IUCSSTagBGColor]) {
         [code insertTag:@"background-color" color:cssTagDict[IUCSSTagBGColor]];
     }
+    
+    BOOL enableGraident = [cssTagDict[IUCSSTagBGGradient] boolValue];
+    if(cssTagDict[IUCSSTagBGGradient] && enableGraident){
+        NSColor *bgColor1 = cssTagDict[IUCSSTagBGGradientStartColor];
+        NSColor *bgColor2 = cssTagDict[IUCSSTagBGGradientEndColor];
+        
+        if(enableGraident){
+            if(bgColor2 == nil){
+                bgColor2 = [NSColor rgbColorRed:0 green:0 blue:0 alpha:1];
+            }
+            if(bgColor1 == nil){
+                bgColor1 = [NSColor rgbColorRed:0 green:0 blue:0 alpha:1];
+            }
+            [code insertTag:@"background-color" color:bgColor1];
+            
+            
+            NSString *webKitStr = [NSString stringWithFormat:@"-webkit-gradient(linear, left top, left bottom, color-stop(0.05, %@), color-stop(1, %@));", bgColor1.rgbString, bgColor2.rgbString];
+            NSString *mozStr = [NSString stringWithFormat:@"	background:-moz-linear-gradient( center top, %@ 5%%, %@ 100%% );", bgColor1.rgbString, bgColor2.rgbString];
+            NSString *ieStr = [NSString stringWithFormat:@"filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='%@', endColorstr='%@', GradientType=0)", bgColor1.rgbStringWithTransparent, bgColor2.rgbStringWithTransparent];
+            NSString *gradientStr = [webKitStr stringByAppendingFormat:@"%@ %@", mozStr, ieStr];
+            
+            [code insertTag:@"background" string:gradientStr];
+            
+        }
+        
+    }
+    
     if (cssTagDict[IUCSSTagImage]) {
         NSString *imgSrc = [[self imagePathWithImageName:cssTagDict[IUCSSTagImage] target:IUTargetEditor] CSSURLString];
         [code insertTag:@"background-image" string:imgSrc target:IUTargetEditor];
