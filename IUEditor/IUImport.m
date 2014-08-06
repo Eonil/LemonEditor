@@ -71,7 +71,7 @@
     [self updateHTML];
     if (self.delegate) {
         for (IUBox *iu in [prototypeClass.allChildren arrayByAddingObject:prototypeClass]) {
-            [iu updateCSSForMaxViewPort];
+            [iu updateCSS];
         }
     }
     [self didChangeValueForKey:@"children"];

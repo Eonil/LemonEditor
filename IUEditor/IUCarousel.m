@@ -242,17 +242,13 @@
     [[self.undoManager prepareWithInvocationTarget:self] setPagerPosition:_pagerPosition];
     
     _pagerPosition = pagerPosition;
-    if (self.delegate) {
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:self.pagerWrapperID];
-    }
+    [self updateCSSWithIdentifier:self.pagerWrapperID];
 }
 
 - (void)cssForItemColor{
-    if (self.delegate) {
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:self.pagerID];
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self.pagerID cssHoverClass]];
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self.pagerID cssActiveClass]];
-    }
+    [self updateCSSWithIdentifier:self.pagerID];
+    [self updateCSSWithIdentifier:[self.pagerID cssHoverClass]];
+    [self updateCSSWithIdentifier:[self.pagerID cssActiveClass]];
 }
 
 #pragma mark - arrow
@@ -349,10 +345,8 @@
         arrowID = self.nextID;
     }
     
-    if (self.delegate) {
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:arrowID];
-        
-    }
+    
+    [self updateCSSWithIdentifier:arrowID];
 }
 
 #pragma mark - property for undo

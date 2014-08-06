@@ -381,10 +381,6 @@
 }
 
 
--(void)CSSUpdatedForWidth:(NSInteger)width isHover:(BOOL)isHover{
-    
-}
-
 -(void)setEditWidth:(NSInteger)width{
     for(NSString *identifier in _cssDict.allKeys){
         IUCSS *css = [_cssDict objectForKey:identifier];

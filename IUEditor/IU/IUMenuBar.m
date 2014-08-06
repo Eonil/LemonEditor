@@ -95,7 +95,7 @@
             _isOpened = NO;
         }
         
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self editorDisplayIdentifier]];
+        [self updateCSSWithIdentifier:[self editorDisplayIdentifier]];
         
     }
     
@@ -106,9 +106,9 @@
     
     if(self.css.editWidth <= 640){
         //mobile에서만 사용하는 button들
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self mobileButtonIdentifier]];
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self topButtonIdentifier]];
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self topButtonIdentifier]];
+        [self updateCSSWithIdentifier:[self mobileButtonIdentifier]];
+        [self updateCSSWithIdentifier:[self topButtonIdentifier]];
+        [self updateCSSWithIdentifier:[self bottomButtonIdentifier]];
     }
 }
 #pragma mark - css identifier
@@ -169,7 +169,7 @@
     CGFloat width = (CGFloat)((CGFloat)100/(CGFloat)self.children.count);
     for(IUMenuItem *item in self.children){
         [item.css setValue:@(width) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
-        [item updateCSSForMaxViewPort];
+        [item updateCSS];
     }
     
     [self updateHTML];

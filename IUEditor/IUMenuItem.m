@@ -92,7 +92,7 @@
             _isOpened = NO;
         }
         
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self editorDisplayIdentifier]];
+        [self updateCSSWithIdentifier:[self editorDisplayIdentifier]];
 
     }
     
@@ -102,9 +102,10 @@
 - (void)heightContextDidChange:(NSDictionary *)dictionary{
     JDInfoLog(@"haha");
     if(self.depth==1){
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self itemIdentifier]];
+        
+        [self updateCSSWithIdentifier:[self editorDisplayIdentifier]];
         if(self.children.count >0){
-            [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self closureIdentifier]];
+            [self updateCSSWithIdentifier:[self closureIdentifier]];
         }
 
     }
@@ -228,10 +229,8 @@
 
 
 - (void)cssForItemColor{
-    if(self.delegate){
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self hoverItemIdentifier]];
-        [self CSSUpdatedForWidth:self.css.editWidth withIdentifier:[self activeItemIdentifier]];
-    }
+    [self updateCSSWithIdentifier:[self hoverItemIdentifier]];
+    [self updateCSSWithIdentifier:[self activeItemIdentifier]];
 }
 
 

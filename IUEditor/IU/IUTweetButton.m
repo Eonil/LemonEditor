@@ -165,7 +165,7 @@
     [self.css setValue:@(currentSize.height) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
     [self.css setValue:@(currentSize.width) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
 
-    [self updateCSSForMaxViewPort];
+    [self updateCSS];
     
 }
 

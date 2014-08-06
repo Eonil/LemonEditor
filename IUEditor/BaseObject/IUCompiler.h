@@ -41,7 +41,6 @@ typedef enum _IUCompileRule{
 - (JDCode * )editorHTML:(IUBox*)iu;
 
 //editor string
-- (NSString *)CSSCodeFromDictionary:(NSDictionary *)dictionary;
 - (NSDictionary *)CSSContentWithIdentifier:(NSString *)identifier ofIU:(IUBox *)iu width:(NSInteger)width isEdit:(BOOL)isEdit;
 
 #pragma mark manage JS source

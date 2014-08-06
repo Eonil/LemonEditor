@@ -46,6 +46,7 @@ typedef enum _IUUnit{
 - (void)insertTag:(NSString*)tag floatFromNumber:(NSNumber*)floatNumber unit:(IUUnit)unit;
 - (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber;
 - (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber unit:(IUUnit)unit;
+- (void)insertTag:(NSString*)tag integer:(int)number unit:(IUUnit)unit;
 - (void)removeTag:(NSString*)tag identifier:(NSString*)identifier;
 
 @end
@@ -174,6 +175,10 @@ typedef enum _IUUnit{
 }
 
 - (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber unit:(IUUnit)unit{
+    [self insertTag:tag integer:[intNumber intValue] unit:unit];
+}
+
+- (void)insertTag:(NSString*)tag integer:(int)number unit:(IUUnit)unit{
     NSString *unitString;
     switch (unit) {
         case IUUnitPercent: unitString = @"%"; break;
@@ -183,11 +188,11 @@ typedef enum _IUUnit{
     
     if (_currentTarget & IUTargetEditor) {
         NSMutableDictionary *tagDict = [self tagDictionaryWithTarget:IUTargetEditor];
-        tagDict[tag] = [NSString stringWithFormat:@"%d%@", [intNumber intValue] , unitString];
+        tagDict[tag] = [NSString stringWithFormat:@"%d%@", number , unitString];
     }
     if (_currentTarget & IUTargetOutput) {
         NSMutableDictionary *tagDict = [self tagDictionaryWithTarget:IUTargetOutput];
-        tagDict[tag] = [NSString stringWithFormat:@"%d%@", [intNumber intValue], unitString];
+        tagDict[tag] = [NSString stringWithFormat:@"%d%@", number, unitString];
     }
 }
 
@@ -240,7 +245,7 @@ typedef enum _IUUnit{
 }
 
 
-- (IUCSSCode*)cssCodeForIU:(IUBox*)iu{
+- (IUCSSCode*)cssCodeForIU:(IUBox*)iu {
     IUCSSCode *code = [[IUCSSCode alloc] init];
 
     NSArray *classPedigree = [[iu class] classPedigreeTo:[IUBox class]].reversedArray;
@@ -258,7 +263,7 @@ typedef enum _IUUnit{
 }
 
 
-- (void)updateCSSCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu{
+- (void)updateCSSCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu {
     NSArray *editWidths = [_iu.css allViewports];
 
     for (NSNumber *viewportNumber in editWidths) {
@@ -273,7 +278,7 @@ typedef enum _IUUnit{
 
         /* update CSSCode */
         [self updateCSSPositionCode:code asIUBox:_iu viewport:viewport];
-        [self updateCSSApperanceCode:code asIUBox:_iu viewport:viewport];
+        [self updateCSSApperanceCode:code asIUBox:_iu viewport:viewport ];
         if ([_iu shouldCompileFontInfo]) {
             [self updateCSSFontCode:code asIUBox:_iu viewport:viewport];
         }
@@ -446,9 +451,19 @@ typedef enum _IUUnit{
         }
     }
     
-    if ([cssTagDict[IUCSSTagDisplayIsHidden] boolValue]) {
+    /* display */
+    id value = cssTagDict[IUCSSTagDisplayIsHidden];
+    if (value && [value boolValue]) {
         [code insertTag:@"display" string:@"none"];
     }
+    else{
+        [code insertTag:@"display" string:@"inherit"];
+    }
+    value = cssTagDict[IUCSSTagEditorDisplay];
+    if (value && [value boolValue] == NO) {
+        [code insertTag:@"display" string:@"none" target:IUTargetEditor];
+    }
+
     
     /* apperance */
     if (cssTagDict[IUCSSTagOpacity]) {
@@ -764,81 +779,99 @@ typedef enum _IUUnit{
 }
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUCarousel:(IUCarousel*)carousel{
-#if 0
-    IUCarousel *carousel = (IUCarousel *)iu;
-    if([identifier isEqualToString:carousel.pagerID]){
-        [dict putTag:@"background-color" color:carousel.deselectColor ignoreClearColor:NO];
+    
+    
+    [code setInsertIdentifier:carousel.pagerID];
+    [code insertTag:@"background-color" color:carousel.deselectColor];
+    
+    [code setInsertIdentifier:[carousel.pagerID cssHoverClass]];
+    [code insertTag:@"background-color" color:carousel.selectColor];
+    
+    
+    [code setInsertIdentifier:[carousel.pagerID cssActiveClass]];
+    [code insertTag:@"background-color" color:carousel.selectColor];
+    
+    
+    [code setInsertIdentifier:carousel.pagerWrapperID];
+    if(carousel.pagerPosition){
+        NSInteger currentWidth = [carousel.css.assembledTagDictionary[IUCSSTagPixelWidth] integerValue];
+        
+        if(carousel.pagerPosition < 50){
+            [code insertTag:@"text-align" string:@"left"];
+            int left = (int)((currentWidth) * ((CGFloat)carousel.pagerPosition/100));
+            [code insertTag:@"left" integer:left unit:IUUnitPixel];
+        }
+        else if(carousel.pagerPosition == 50){
+            [code insertTag:@"text-align" string:@"center"];
+        }
+        else if(carousel.pagerPosition < 100){
+            [code insertTag:@"text-align" string:@"center"];
+            int left = (int)((currentWidth) * ((CGFloat)(carousel.pagerPosition-50)/100));
+            [code insertTag:@"left" integer:left unit:IUUnitPixel];
+            
+        }
+        else if(carousel.pagerPosition == 100){
+            int right = (int)((currentWidth) * ((CGFloat)(100-carousel.pagerPosition)/100));
+            [code insertTag:@"text-align" string:@"right"];
+            [code insertTag:@"right" integer:right unit:IUUnitPixel];
+        }
     }
-    else if([identifier isEqualToString:[carousel.pagerID cssHoverClass]]
-            || [identifier isEqualToString:[carousel.pagerID cssActiveClass]]){
-        [dict putTag:@"background-color" color:carousel.selectColor ignoreClearColor:NO];
-        
+    
+    [code setInsertIdentifier:carousel.prevID];
+    
+    NSString *imageName = carousel.leftArrowImage;
+        [code insertTag:@"left" integer:carousel.leftX unit:IUUnitPixel];
+        [code insertTag:@"top" integer:carousel.leftY unit:IUUnitPixel];
+    
+    NSString *imgSrc = [[self imagePathWithImageName:imageName target:IUTargetEditor] CSSURLString];
+    [code insertTag:@"background" string:imgSrc target:IUTargetEditor];
+    
+    NSString *outputImgSrc = [[self imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
+    [code insertTag:@"background" string:outputImgSrc target:IUTargetOutput];
+    
+
+    NSImage *arrowImage;
+    
+    if ([imageName isHTTPURL]) {
+        arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
     }
-    else if([identifier isEqualToString:carousel.pagerWrapperID]){
-        if(carousel.pagerPosition){
-            NSInteger currentWidth = [iu.css.assembledTagDictionary[IUCSSTagPixelWidth] integerValue];
-            
-            if(carousel.pagerPosition < 50){
-                [dict putTag:@"text-align" string:@"left"];
-                int left = (int)((currentWidth) * ((CGFloat)carousel.pagerPosition/100));
-                [dict putTag:@"left" intValue:left ignoreZero:YES unit:IUCSSUnitPixel];
-            }
-            else if(carousel.pagerPosition == 50){
-                [dict putTag:@"text-align" string:@"center"];
-            }
-            else if(carousel.pagerPosition < 100){
-                [dict putTag:@"text-align" string:@"center"];
-                int left = (int)((currentWidth) * ((CGFloat)(carousel.pagerPosition-50)/100));
-                [dict putTag:@"left" intValue:left ignoreZero:YES unit:IUCSSUnitPixel];
-                
-            }
-            else if(carousel.pagerPosition == 100){
-                int right = (int)((currentWidth) * ((CGFloat)(100-carousel.pagerPosition)/100));
-                [dict putTag:@"text-align" string:@"right"];
-                [dict putTag:@"right" intValue:right ignoreZero:YES unit:IUCSSUnitPixel];
-            }
-        }
-        
-    }
-    else if([identifier isEqualToString:carousel.prevID]
-            || [identifier isEqualToString:carousel.nextID]){
-        
-        NSString *imageName;
-        if([identifier isEqualToString:carousel.prevID]){
-            imageName = carousel.leftArrowImage;
-            [dict putTag:@"left" intValue:carousel.leftX ignoreZero:YES unit:IUCSSUnitPixel];
-            [dict putTag:@"top" intValue:carousel.leftY ignoreZero:YES unit:IUCSSUnitPixel];
-            
-        }
-        else if([identifier isEqualToString:carousel.nextID]){
-            imageName = carousel.rightArrowImage;
-            [dict putTag:@"right" intValue:carousel.rightX ignoreZero:NO unit:IUCSSUnitPixel];
-            [dict putTag:@"top" intValue:carousel.rightY ignoreZero:YES unit:IUCSSUnitPixel];
-            
-            
-        }
-        NSImage *arrowImage;
-        
-        NSString *imgSrc = [[self imagePathWithImageName:imageName isEdit:isEdit] CSSURLString];
-        if(imgSrc){
-            [dict putTag:@"background" string:imgSrc];
-        }
-        
-        if ([imageName isHTTPURL]) {
-            arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
-        }
-        else{
-            IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
-            NSString *imageAbsolutePath = [file absolutePath];
-            arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
-            
-        }
-        [dict putTag:@"height" floatValue:arrowImage.size.height ignoreZero:YES unit:IUCSSUnitPixel];
-        [dict putTag:@"width" floatValue:arrowImage.size.width ignoreZero:YES unit:IUCSSUnitPixel];
+    else{
+        IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
+        NSString *imageAbsolutePath = [file absolutePath];
+        arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
         
     }
     
-#endif
+    [code insertTag:@"height" floatFromNumber:@(arrowImage.size.height) unit:IUCSSUnitPixel];
+    [code insertTag:@"width" floatFromNumber:@(arrowImage.size.width) unit:IUCSSUnitPixel];
+    
+    [code setInsertIdentifier:carousel.nextID];
+    
+    
+    imageName = carousel.rightArrowImage;
+    [code insertTag:@"right" integer:carousel.rightX unit:IUUnitPixel];
+    [code insertTag:@"top" integer:carousel.rightY unit:IUUnitPixel];
+    
+    imgSrc = [[self imagePathWithImageName:imageName target:IUTargetEditor] CSSURLString];
+    [code insertTag:@"background" string:imgSrc target:IUTargetEditor];
+    
+    outputImgSrc = [[self imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
+    [code insertTag:@"background" string:outputImgSrc target:IUTargetOutput];
+    
+    
+    if ([imageName isHTTPURL]) {
+        arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
+    }
+    else{
+        IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
+        NSString *imageAbsolutePath = [file absolutePath];
+        arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
+        
+    }
+    
+    [code insertTag:@"height" floatFromNumber:@(arrowImage.size.height) unit:IUCSSUnitPixel];
+    [code insertTag:@"width" floatFromNumber:@(arrowImage.size.width) unit:IUCSSUnitPixel];
+    
 }
 
 @end

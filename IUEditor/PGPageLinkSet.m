@@ -82,7 +82,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setSelectedButtonBGColor:_selectedButtonBGColor];
     
     _selectedButtonBGColor = selectedButtonBGColor;
-    [self updateCSSForMaxViewPort];
+    [self updateCSS];
 }
 
 - (void)setDefaultButtonBGColor:(NSColor *)defaultButtonBGColor{
@@ -94,7 +94,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setDefaultButtonBGColor:_defaultButtonBGColor];
     
     _defaultButtonBGColor = defaultButtonBGColor;
-    [self updateCSSForMaxViewPort];
+    [self updateCSS];
 }
 
 - (void)setButtonMargin:(float)buttonMargin{
@@ -104,7 +104,7 @@
         [[self.undoManager prepareWithInvocationTarget:self] setButtonMargin:_buttonMargin];
         
         _buttonMargin = buttonMargin;
-        [self updateCSSForMaxViewPort];
+        [self updateCSS];
     }
 }
 #pragma mark - shouldXXX

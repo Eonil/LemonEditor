@@ -25,6 +25,7 @@
 #import "JDGitUtil.h"
 #import "JDFileUtil.h"
 #import "NSString+IUTag.h"
+#import "NSArray+JDExtension.h"
 
 #import "IUDefinition.h"
 

@@ -465,21 +465,6 @@
 
 #pragma mark - css
 
--(NSString*)cssForWidth:(NSInteger)width withIdentifier:(NSString *)identifer{
-
-    NSDictionary *dict = [self.project.compiler CSSContentWithIdentifier:identifer ofIU:self width:width isEdit:YES];
-    NSString *code = [self.project.compiler CSSCodeFromDictionary:dict];
-
-    return code;
-}
-
-//delegate from IUCSS
--(void)CSSUpdatedForWidth:(NSInteger)width withIdentifier:(NSString *)identifer{
-    if(self.delegate){
-        NSString *css = [self cssForWidth:width withIdentifier:identifer];
-        [self.delegate IUClassIdentifier:identifer CSSUpdated:css viewport:width];
-    }
-}
 /**
  @brief use cssIdentifierArray when remove IU, All CSS Identifiers should be in it.
  
@@ -494,22 +479,6 @@
     return array;
 }
 
-- (void)updateCSSForMaxViewPort{
-    if (self.delegate) {
-        for(NSString *cssClass in [self cssIdentifierArray]){
-            [self CSSUpdatedForWidth:IUCSSDefaultViewPort withIdentifier:cssClass];
-            
-        }
-    }
-}
-
-- (void)updateCSSForViewPortWidth:(NSInteger)width{
-    if (self.delegate) {
-        for(NSString *cssClass in [self cssIdentifierArray]){
-            [self CSSUpdatedForWidth:width withIdentifier:cssClass];
-        }
-    }
-}
 
 - (void)updateCSS{
     if (self.delegate) {
@@ -519,6 +488,17 @@
             for (NSString *identifier in dictionaryWithIdentifier) {
                 [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier] viewport:[viewport intValue]];
             }
+        }
+    }
+}
+
+- (void)updateCSSWithIdentifier:(NSString *)identifier{
+    if (self.delegate) {
+        IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
+        for (NSNumber *viewport in cssCode.allViewPorts) {
+            NSDictionary *dictionaryWithIdentifier = [cssCode tagDictionaryWithIdentifierForTarget:IUTargetEditor viewport:[viewport intValue]];
+            [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier] viewport:[viewport intValue]];
+            
         }
     }
 }
