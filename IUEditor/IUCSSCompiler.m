@@ -135,6 +135,7 @@ typedef enum _IUUnit{
         color = [color colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
     }
     [self insertTag:tag string:[color rgbString]];
+
 }
 
 - (void)insertTag:(NSString*)tag string:(NSString*)stringValue{
@@ -489,7 +490,8 @@ typedef enum _IUUnit{
         [code insertTag:@"filter" string:[NSString stringWithFormat:@"alpha(opacity=%d)",[cssTagDict[IUCSSTagOpacity] intValue]] ];
     }
     if (cssTagDict[IUCSSTagBGColor]) {
-        [code insertTag:@"background-color" color:cssTagDict[IUCSSTagBGColor]];
+        [code insertTag:@"background-color" string:[cssTagDict[IUCSSTagBGColor] cssBGColorString]];
+
     }
     
     BOOL enableGraident = [cssTagDict[IUCSSTagBGGradient] boolValue];
