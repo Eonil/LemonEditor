@@ -346,10 +346,10 @@ typedef enum _IUUnit{
     if ([cssTagDict[IUCSSTagFontWeight] boolValue]) {
         [code insertTag:@"font-weight" string:@"bold"];
     }
-    if ([cssTagDict[IUCSSTagFontWeight] boolValue]) {
+    if ([cssTagDict[IUCSSTagFontStyle] boolValue]) {
         [code insertTag:@"font-style" string:@"italic"];
     }
-    if ([cssTagDict[IUCSSTagFontWeight] boolValue]) {
+    if ([cssTagDict[IUCSSTagTextDecoration] boolValue]) {
         [code insertTag:@"text-decoration" string:@"underline"];
     }
     if (cssTagDict[IUCSSTagTextAlign]) {
