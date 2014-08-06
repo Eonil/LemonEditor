@@ -179,18 +179,22 @@ typedef enum _IUUnit{
 }
 
 - (void)insertTag:(NSString*)tag floatFromNumber:(NSNumber*)floatNumber unit:(IUUnit)unit{
-    NSString *unitString;
-    switch (unit) {
-        case IUUnitPercent: unitString = @"%"; break;
-        case IUUnitPixel: unitString = @"px"; break;
-        case IUUnitNone: unitString = @""; break;
+    if(floatNumber){
+        NSString *unitString;
+        switch (unit) {
+            case IUUnitPercent: unitString = @"%"; break;
+            case IUUnitPixel: unitString = @"px"; break;
+            case IUUnitNone: unitString = @""; break;
+        }
+        NSString *stringValue = [NSString stringWithFormat:@"%.2f%@", [floatNumber floatValue] , unitString];
+        [self insertTag:tag string:stringValue];
     }
-    NSString *stringValue = [NSString stringWithFormat:@"%.2f%@", [floatNumber floatValue] , unitString];
-    [self insertTag:tag string:stringValue];
 }
 
 - (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber{
-    [self insertTag:tag intFromNumber:intNumber unit:IUUnitNone];
+    if(intNumber){
+        [self insertTag:tag intFromNumber:intNumber unit:IUUnitNone];
+    }
 }
 
 - (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber unit:(IUUnit)unit{
