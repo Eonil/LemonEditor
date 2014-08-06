@@ -1062,11 +1062,20 @@
                 imageName = @"ttwidgetVertical";
                 break;
             case IUTweetButtonCountTypeHorizontal:
-                imageName = @"ttwidgetHorizontal";
+                if(tweet.sizeType == IUTweetButtonSizeTypeLarge){
+                    imageName = @"ttwidgetLargeHorizontal";
+                }
+                else{
+                    imageName = @"ttwidgetHorizontal";
+                }
                 break;
             case IUTweetButtonCountTypeNone:
-                imageName = @"ttwidgetNone";
-
+                if(tweet.sizeType == IUTweetButtonSizeTypeLarge){
+                    imageName = @"ttwidgetLargeNone";
+                }
+                else{
+                    imageName = @"ttwidgetNone";
+                }
         }
         
         NSString *imagePath = [[NSBundle mainBundle] pathForImageResource:imageName];

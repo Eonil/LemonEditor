@@ -10,6 +10,7 @@
                 <outlet property="sizeMatrix" destination="5n6-Q5-tqM" id="rHO-0Z-L25"/>
                 <outlet property="tweetTextTF" destination="QuW-oV-wUY" id="ayA-h9-Kbq"/>
                 <outlet property="urlTF" destination="WBV-zZ-0nW" id="kJ3-dF-KF7"/>
+                <outlet property="verticalMenuItem" destination="jTX-Hb-JUV" id="oT5-xE-sfs"/>
                 <outlet property="view" destination="kmz-ig-IZq" id="Hrh-JF-ezt"/>
             </connections>
         </customObject>

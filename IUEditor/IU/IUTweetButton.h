@@ -27,4 +27,7 @@ typedef enum{
 @property (nonatomic) IUTweetButtonSizeType sizeType;
 
 
+//not supported large_size & vertical mode by twitter
+- (BOOL)enableLargeVertical;
+
 @end

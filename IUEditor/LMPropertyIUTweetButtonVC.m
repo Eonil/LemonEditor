@@ -14,6 +14,7 @@
 @property (weak) IBOutlet NSPopUpButton *countTypePopupButton;
 @property (weak) IBOutlet NSMatrix *sizeMatrix;
 @property (weak) IBOutlet NSTextField *tweetTextTF;
+@property (weak) IBOutlet NSMenuItem *verticalMenuItem;
 
 @end
 
@@ -30,10 +31,12 @@
 
 - (void)awakeFromNib{
     [_urlTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"urlToTweet"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_countTypePopupButton bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"countType"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_sizeMatrix bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"sizeType"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_tweetTextTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"tweetText"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+
     
-     [_tweetTextTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"tweetText"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_countTypePopupButton bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"countType"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_verticalMenuItem bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableLargeVertical"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
 
 }
 

@@ -122,6 +122,14 @@
     
 }
 
+- (BOOL)enableLargeVertical{
+    if(_sizeType == IUTweetButtonSizeTypeLarge){
+        return NO;
+    }
+
+    return YES;
+}
+
 - (void)updateSize{
     NSSize currentSize;
     if(_sizeType == IUTweetButtonSizeTypeMeidum){
