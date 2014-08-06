@@ -31,11 +31,11 @@ typedef enum _IUUnit{
     NSMutableDictionary *_outputCSSDictWithViewPort; // data = key:width
 }
 
-- (void)setInsertTarget:(IUTarget)target;
-- (void)setInsertViewPort:(int)viewport;
-- (void)setInsertIdentifier:(NSString *)identifier;
-- (void)setInsertIdentifiers:(NSArray *)identifiers;
-
+- (void)setInsertingTarget:(IUTarget)target;
+- (void)setInsertingViewPort:(int)viewport;
+- (int)insertingViewPort;
+- (void)setInsertingIdentifier:(NSString *)identifier;
+- (void)setInsertingIdentifiers:(NSArray *)identifiers;
 /**
  insert css tag to receiver
  */
@@ -63,21 +63,26 @@ typedef enum _IUUnit{
     return self;
 }
 
-- (void)setInsertTarget:(IUTarget)target{
+- (void)setInsertingTarget:(IUTarget)target{
     _currentTarget = target;
 }
 
-- (void)setInsertViewPort:(int)viewport{
+- (void)setInsertingViewPort:(int)viewport{
     _currentViewPort = viewport;
 }
 
-- (void)setInsertIdentifier:(NSString *)identifier{
+- (void)setInsertingIdentifier:(NSString *)identifier{
     _currentIdentifiers = @[identifier];
 }
 
-- (void)setInsertIdentifiers:(NSArray *)identifiers{
+- (void)setInsertingIdentifiers:(NSArray *)identifiers{
     _currentIdentifiers = [[NSArray alloc] initWithArray:identifiers copyItems:YES];
 }
+
+- (int)insertingViewPort{
+    return _currentViewPort;
+}
+
 
 - (NSMutableDictionary*)tagDictionaryWithTarget:(IUTarget)target viewport:(int)viewport identifier:(NSString*)identifier{
     if (target == IUTargetEditor) {
@@ -277,11 +282,11 @@ typedef enum _IUUnit{
         int viewport = [viewportNumber intValue];
         
         /* insert to editor and output, with default css identifier. */
-        [code setInsertIdentifier:_iu.cssClass];
-        [code setInsertTarget:IUTargetBoth];
+        [code setInsertingIdentifier:_iu.cssClass];
+        [code setInsertingTarget:IUTargetBoth];
 
         /* width can vary to data */
-        [code setInsertViewPort:viewport];
+        [code setInsertingViewPort:viewport];
 
         /* update CSSCode */
         [self updateCSSPositionCode:code asIUBox:_iu viewport:viewport];
@@ -291,7 +296,7 @@ typedef enum _IUUnit{
         }
         [self updateCSSRadiousAndBorderCode:code asIUBox:_iu viewport:viewport];
         
-        [code setInsertIdentifier:_iu.cssHoverClass];
+        [code setInsertingIdentifier:_iu.cssHoverClass];
         [self updateCSSHoverCode:code asIUBox:_iu viewport:viewport];
         
 #if 0
@@ -652,10 +657,10 @@ typedef enum _IUUnit{
 
 
 - (void)updateCSSCode:(IUCSSCode*)code asPGPageLinkSet:(PGPageLinkSet*)pageLinkSet{
-    [code setInsertTarget:IUTargetBoth];
-    [code setInsertViewPort:IUCSSDefaultViewPort];
+    [code setInsertingTarget:IUTargetBoth];
+    [code setInsertingViewPort:IUCSSDefaultViewPort];
     
-    [code setInsertIdentifier:[pageLinkSet.cssClass stringByAppendingString:@" > div"]];
+    [code setInsertingIdentifier:[pageLinkSet.cssClass stringByAppendingString:@" > div"]];
     switch (pageLinkSet.pageLinkAlign) {
         case IUAlignLeft: break;
         case IUAlignRight: [code insertTag:@"float" string:@"right"]; break;
@@ -663,17 +668,17 @@ typedef enum _IUUnit{
         default:NSAssert(0, @"Error");
     }
     
-    [code setInsertIdentifier:[pageLinkSet.cssClass stringByAppendingString:@" selected > div > ul > a > li"]];
+    [code setInsertingIdentifier:[pageLinkSet.cssClass stringByAppendingString:@" selected > div > ul > a > li"]];
     [code insertTag:@"background-color" color:pageLinkSet.selectedButtonBGColor];
     
     NSArray *editWidths = [pageLinkSet.css allViewports];
     for (NSNumber *viewportNumber in editWidths) {
-        [code setInsertViewPort:[viewportNumber intValue]];
+        [code setInsertingViewPort:[viewportNumber intValue]];
         
     }
 
     
-    [code setInsertIdentifier:[pageLinkSet.cssClass stringByAppendingString:@" > div > ul > a > li"]];
+    [code setInsertingIdentifier:[pageLinkSet.cssClass stringByAppendingString:@" > div > ul > a > li"]];
     [code insertTag:@"display" string:@"block"];
     [code insertTag:@"margin-left" floatFromNumber:@(pageLinkSet.buttonMargin) unit:IUCSSUnitPixel];
     [code insertTag:@"margin-right" floatFromNumber:@(pageLinkSet.buttonMargin) unit:IUCSSUnitPixel];
@@ -682,7 +687,7 @@ typedef enum _IUUnit{
     for (NSNumber *viewPort in [pageLinkSet.css allViewports]) {
         NSDictionary *tagDictionary = [pageLinkSet.css tagDictionaryForViewport:[viewPort intValue]];
         if ([tagDictionary objectForKey:IUCSSTagPixelY]) {
-            [code setInsertViewPort:[viewPort intValue]];
+            [code setInsertingViewPort:[viewPort intValue]];
             [code insertTag:@"height" floatFromNumber:tagDictionary[IUCSSTagPixelY] unit:IUUnitPixel];
             [code insertTag:@"width" floatFromNumber:tagDictionary[IUCSSTagPixelY] unit:IUUnitPixel];
             [code insertTag:@"line-height" floatFromNumber:tagDictionary[IUCSSTagPixelY] unit:IUUnitPixel];
@@ -721,7 +726,7 @@ typedef enum _IUUnit{
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUMenuItem:(IUMenuItem*)menuItem{
 
-    [code setInsertIdentifier:menuItem.itemIdentifier];
+    [code setInsertingIdentifier:menuItem.itemIdentifier];
     /*
 
         id value = [menuItem.css tagDictionaryForViewport:width][IUCSSTagBGColor];
@@ -792,18 +797,18 @@ typedef enum _IUUnit{
 - (void)updateCSSCode:(IUCSSCode*)code asIUCarousel:(IUCarousel*)carousel{
     
     
-    [code setInsertIdentifier:carousel.pagerID];
+    [code setInsertingIdentifier:carousel.pagerID];
     [code insertTag:@"background-color" color:carousel.deselectColor];
     
-    [code setInsertIdentifier:[carousel.pagerID cssHoverClass]];
+    [code setInsertingIdentifier:[carousel.pagerID cssHoverClass]];
     [code insertTag:@"background-color" color:carousel.selectColor];
     
     
-    [code setInsertIdentifier:[carousel.pagerID cssActiveClass]];
+    [code setInsertingIdentifier:[carousel.pagerID cssActiveClass]];
     [code insertTag:@"background-color" color:carousel.selectColor];
     
     
-    [code setInsertIdentifier:carousel.pagerWrapperID];
+    [code setInsertingIdentifier:carousel.pagerWrapperID];
     if(carousel.pagerPosition){
         NSInteger currentWidth = [carousel.css.assembledTagDictionary[IUCSSTagPixelWidth] integerValue];
         
@@ -828,7 +833,7 @@ typedef enum _IUUnit{
         }
     }
     
-    [code setInsertIdentifier:carousel.prevID];
+    [code setInsertingIdentifier:carousel.prevID];
     
     NSString *imageName = carousel.leftArrowImage;
         [code insertTag:@"left" integer:carousel.leftX unit:IUUnitPixel];
@@ -856,7 +861,7 @@ typedef enum _IUUnit{
     [code insertTag:@"height" floatFromNumber:@(arrowImage.size.height) unit:IUCSSUnitPixel];
     [code insertTag:@"width" floatFromNumber:@(arrowImage.size.width) unit:IUCSSUnitPixel];
     
-    [code setInsertIdentifier:carousel.nextID];
+    [code setInsertingIdentifier:carousel.nextID];
     
     
     imageName = carousel.rightArrowImage;
