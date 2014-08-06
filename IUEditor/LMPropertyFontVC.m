@@ -66,6 +66,7 @@
                       [_controller keyPathFromControllerToCSSTag:IUCSSTagFontStyle],
                       [_controller keyPathFromControllerToCSSTag:IUCSSTagTextDecoration],
                       [_controller keyPathFromControllerToCSSTag:IUCSSTagFontSize],
+                      [_controller keyPathFromControllerToProperty:@"shouldCompileFontInfo"],
                       @"controller.selectedObjects",
                       ];
     

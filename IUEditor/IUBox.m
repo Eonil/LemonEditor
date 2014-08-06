@@ -1012,9 +1012,25 @@
 #pragma mark -text
 
 - (void)setText:(NSString *)text{
+    if([_text isEqualToString:text]){
+        return;
+    }
+    BOOL isNeedUpdated = NO;
+    if(_text == nil || text == nil){
+        [self willChangeValueForKey:@"shouldCompileFontInfo"];
+        isNeedUpdated = YES;
+    }
     _text = text;
+    if(isNeedUpdated){
+        [self updateCSS];
+    }
     [self updateHTML];
     [self updateJS];
+    
+    if(isNeedUpdated){
+        [self didChangeValueForKey:@"shouldCompileFontInfo"];
+    }
+
 }
 
 - (void)setLineHeightAuto:(BOOL)lineHeightAuto{
