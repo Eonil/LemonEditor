@@ -9,7 +9,7 @@
 		<key>link</key>
 		<string></string>
 		<key>css</key>
-		<string>Arial</string>
+		<string>&apos;Arial&apos;, sans-serif</string>
 		<key>editable</key>
 		<false/>
 		<key>isLoadable</key>
@@ -22,7 +22,7 @@
 		<key>link</key>
 		<string></string>
 		<key>css</key>
-		<string>Helvetica</string>
+		<string>&apos;Helvetica&apos;, sans-serif</string>
 		<key>editable</key>
 		<false/>
 		<key>isLoadable</key>
@@ -35,7 +35,7 @@
 		<key>link</key>
 		<string></string>
 		<key>css</key>
-		<string>HelveticaNeue-Light</string>
+		<string>&apos;HelveticaNeue-Light&apos;, sans-serif</string>
 		<key>editable</key>
 		<false/>
 		<key>isLoadable</key>
