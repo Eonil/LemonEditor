@@ -649,23 +649,23 @@
         }
         case IUPositionTypeRelative:{
             [code insertTag:@"position" string:@"relative"];
-            topTag = @"margin-top"; leftTag = @"margin-left"; break;
+            topTag = @"top"; leftTag = @"left"; break;
             break;
         }
         case IUPositionTypeRelativeCenter:{
             [code insertTag:@"position" string:@"relative"];
-            topTag = @"margin-top"; break;
+            topTag = @"top"; break;
         }
         case IUPositionTypeFloatLeft:{
             [code insertTag:@"position" string:@"relative"];
             [code insertTag:@"float" string:@"left"];
-            topTag = @"margin-top"; break;
+            topTag = @"top"; break;
             break;
         }
         case IUPositionTypeFloatRight:{
             [code insertTag:@"position" string:@"relative"];
             [code insertTag:@"float" string:@"right"];
-            topTag = @"margin-top"; break;
+            topTag = @"top"; break;
             float xValueFloat = [xValue floatValue] * (-1);
             xValue = @(xValueFloat);
             break;
