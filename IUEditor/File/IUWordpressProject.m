@@ -41,12 +41,12 @@
     
     _buildPath = [[options objectForKey:IUProjectKeyBuildPath] relativePathFrom:self.path];
     if (_buildPath == nil) {
-        _buildPath = @"build";
+        _buildPath = @"~/Sites/wordpress/wp-content/themes/sample";
     }
     
     _buildResourcePath = [[options objectForKey:IUProjectKeyResourcePath] relativePathFrom:self.path];
     if (_buildResourcePath == nil) {
-        _buildResourcePath = @"build/resource";
+        _buildResourcePath = @"~/Sites/wordpress/wp-content/themes/sample/resource";
     }
     
     _pageGroup = [[IUSheetGroup alloc] init];
@@ -101,21 +101,15 @@
 }
 
 
-- (NSString*)buildPathForSheet:(IUSheet*)sheet{
-    NSString *buildPath = [self.directoryPath stringByAppendingPathComponent:self.buildPath];
-    if (sheet == nil) {
-        return buildPath;
-    }
-    else {
-        NSString *filePath = [[buildPath stringByAppendingPathComponent:sheet.name ] stringByAppendingPathExtension:@"php"];
-        return filePath;
-    }
+- (NSString*)absoluteBuildPathForSheet:(IUSheet *)sheet{
+    NSString *filePath = [[self.absoluteBuildPath stringByAppendingPathComponent:sheet.name ] stringByAppendingPathExtension:@"php"];
+    return filePath;
 }
 
 - (BOOL)build:(NSError *__autoreleasing *)error{
     BOOL result = [super build:error];
     if (result) {
-        NSString *path = [self buildPathForSheet:nil];
+        NSString *path = [self absoluteBuildPath];
         NSString *command = [NSString stringWithFormat:@"touch %@", [path stringByAppendingPathComponent:@"style.css"]];
         [JDShellUtil execute:command];
     }

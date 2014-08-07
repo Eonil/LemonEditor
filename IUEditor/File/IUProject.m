@@ -453,7 +453,8 @@
         NSString *htmlPath = [self absoluteBuildPathForSheet:sheet];
 
         //note : writeToFile: automatically overwrite
-        if ([outputHTML writeToFile:htmlPath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
+        NSError *myError;
+        if ([outputHTML writeToFile:htmlPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
             NSAssert(0, @"write fail");
         }
         //css
@@ -461,7 +462,7 @@
         NSString *cssPath = [[resourceCSSPath stringByAppendingPathComponent:sheet.name] stringByAppendingPathExtension:@"css"];
 
         //note : writeToFile: automatically overwrite
-        if ([outputCSS writeToFile:cssPath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
+        if ([outputCSS writeToFile:cssPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
             NSAssert(0, @"write fail");
         }
         

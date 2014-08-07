@@ -18,12 +18,7 @@
 #import "IUCarousel.h"
 #import "PGTextView.h"
 
-typedef enum _IUUnit{
-    IUUnitNone,
-    IUUnitPixel,
-    IUUnitPercent,
-} IUUnit;
-
+#import "WPMenu.h"
 
 @interface IUCSSCode() {
     IUTarget _currentTarget;
@@ -34,29 +29,6 @@ typedef enum _IUUnit{
     NSArray *allViewports;
 }
 
-- (void)setInsertingTarget:(IUTarget)target;
-- (void)setInsertingViewPort:(int)viewport;
-- (int)insertingViewPort;
-- (void)setInsertingIdentifier:(NSString *)identifier;
-- (void)setInsertingIdentifiers:(NSArray *)identifiers;
-
-
-- (NSString*)valueForTag:(NSString*)tag identifier:(NSString*)identifier largerThanViewport:(int)viewport target:(IUTarget)target;
-- (NSString*)valueForTag:(NSString*)tag identifier:(NSString*)identifier viewport:(int)viewport target:(IUTarget)target;
-
-/**
- insert css tag to receiver
- */
-
-- (void)insertTag:(NSString*)tag color:(NSColor*)colorValue;
-- (void)insertTag:(NSString*)tag string:(NSString*)stringValue;
-- (void)insertTag:(NSString*)tag string:(NSString*)stringValue target:(IUTarget)target;
-- (void)insertTag:(NSString*)tag floatFromNumber:(NSNumber*)floatNumber;
-- (void)insertTag:(NSString*)tag floatFromNumber:(NSNumber*)floatNumber unit:(IUUnit)unit;
-- (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber;
-- (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber unit:(IUUnit)unit;
-- (void)insertTag:(NSString*)tag integer:(int)number unit:(IUUnit)unit;
-- (void)removeTag:(NSString*)tag identifier:(NSString*)identifier;
 @end
 
 @implementation IUCSSCode
@@ -1081,5 +1053,39 @@ typedef enum _IUUnit{
     }
 }
 #endif
+
+- (void)updateCSSCode:(IUCSSCode*)code asWPMenu:(WPMenu*)wpmenu{
+    [code setInsertingTarget:IUTargetBoth];
+    [code setInsertingViewPort:IUCSSDefaultViewPort];
+    
+    if (wpmenu.fullWidthMenu) {
+        [code setInsertingIdentifier:[wpmenu.cssClass stringByAppendingString:@" > div > ul"]];
+        [code insertTag:@"display" string:@"table"];
+        [code insertTag:@"table-layout" string:@"fixed"];
+        [code insertTag:@"height" string:@"100%"];
+        [code insertTag:@"width" string:@"100%"];
+        
+        [code setInsertingIdentifier:[wpmenu.cssClass stringByAppendingString:@" > div > ul > li"]];
+        [code insertTag:@"display" string:@"table-cell"];
+        [code insertTag:@"height" string:@"100%"];
+        [code insertTag:@"text-align" string:@"center"];
+    }
+    
+    else {
+        [code setInsertingIdentifier:[wpmenu.cssClass stringByAppendingString:@" > div > ul > li"]];
+        [code insertTag:@"position" string:@"relative"];
+        [code insertTag:@"padding" string:@"0 16px"];
+        [code insertTag:@"height" string:@"100%"];
+        [code insertTag:@"float" string:@"left"];
+        
+        for (NSNumber *viewport in [code allViewports]) {
+            NSString *heightValue = [code valueForTag:IUCSSTagPixelWidth identifier:wpmenu.className viewport:[viewport intValue] target:IUTargetEditor];
+            //IUTarget Editor value is equal to IUTargetOutput.
+            if (heightValue) {
+                [code insertTag:@"line-height" string:heightValue];
+            }
+        }
+    }
+}
 
 @end

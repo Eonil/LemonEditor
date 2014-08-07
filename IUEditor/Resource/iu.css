@@ -248,3 +248,7 @@ a{
     }
     
 }
+
+.WPMenu > div {
+    height: 100%;
+}

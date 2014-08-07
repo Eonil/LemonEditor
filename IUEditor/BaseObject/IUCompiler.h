@@ -29,7 +29,7 @@ typedef enum _IUCompileRule{
 @interface IUCompiler : NSObject
 
 @property (weak, nonatomic) IUResourceManager *resourceManager;
-@property IUCompileRule    rule;
+@property (nonatomic) IUCompileRule    rule;
 
 //build source
 - (NSString *)outputCSSSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray;

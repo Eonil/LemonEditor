@@ -16,10 +16,12 @@ typedef enum _IUTarget{
     IUTargetBoth = 3,
 } IUTarget;
 
+
 @interface IUCSSCode : NSObject
 - (NSDictionary*)stringTagDictionaryWithIdentifierForTarget:(IUTarget)unit viewport:(int)viewport;
 - (NSArray*)allViewports;
 @end
+
 
 @interface IUCSSCompiler : NSObject
 - (id)initWithResourceManager:(IUResourceManager*)resourceManager;
@@ -27,3 +29,43 @@ typedef enum _IUTarget{
 
 @property IUCompileRule    rule;
 @end
+
+
+/**
+ Generator category for subclassing
+ */
+
+typedef enum _IUUnit{
+    IUUnitNone,
+    IUUnitPixel,
+    IUUnitPercent,
+} IUUnit;
+
+@interface IUCSSCode(Generator)
+
+- (void)setInsertingTarget:(IUTarget)target;
+- (void)setInsertingViewPort:(int)viewport;
+- (int)insertingViewPort;
+- (void)setInsertingIdentifier:(NSString *)identifier;
+- (void)setInsertingIdentifiers:(NSArray *)identifiers;
+
+
+- (NSString*)valueForTag:(NSString*)tag identifier:(NSString*)identifier largerThanViewport:(int)viewport target:(IUTarget)target;
+- (NSString*)valueForTag:(NSString*)tag identifier:(NSString*)identifier viewport:(int)viewport target:(IUTarget)target;
+
+/**
+ insert css tag to receiver
+ */
+
+- (void)insertTag:(NSString*)tag color:(NSColor*)colorValue;
+- (void)insertTag:(NSString*)tag string:(NSString*)stringValue;
+- (void)insertTag:(NSString*)tag string:(NSString*)stringValue target:(IUTarget)target;
+- (void)insertTag:(NSString*)tag floatFromNumber:(NSNumber*)floatNumber;
+- (void)insertTag:(NSString*)tag floatFromNumber:(NSNumber*)floatNumber unit:(IUUnit)unit;
+- (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber;
+- (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber unit:(IUUnit)unit;
+- (void)insertTag:(NSString*)tag integer:(int)number unit:(IUUnit)unit;
+- (void)removeTag:(NSString*)tag identifier:(NSString*)identifier;
+
+@end
+

@@ -617,6 +617,7 @@
 		690A8277190A2CC200DDBA86 /* new_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 690A8271190A2CC200DDBA86 /* new_default.png */; };
 		6919204718DCFC8200F8522B /* NSCoder+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6919204618DCFC8200F8522B /* NSCoder+JDExtension.m */; };
 		6919204A18DCFED000F8522B /* NSObject+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 6919204918DCFED000F8522B /* NSObject+JDExtension.m */; };
+		691EE6DE1992DB320080E23A /* IUCSSWPCompiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 691EE6DD1992DB320080E23A /* IUCSSWPCompiler.m */; };
 		691F91A91973C2EA00A4CFFF /* IUWordpressProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91A81973C2EA00A4CFFF /* IUWordpressProject.m */; };
 		691F91AD1973C5EF00A4CFFF /* WPSiteTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91AC1973C5EF00A4CFFF /* WPSiteTitle.m */; };
 		691F91B31973CD6800A4CFFF /* WPSiteDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91B21973CD6800A4CFFF /* WPSiteDescription.m */; };
@@ -1556,6 +1557,8 @@
 		6919204618DCFC8200F8522B /* NSCoder+JDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCoder+JDExtension.m"; path = "JD/NSCoder+JDExtension.m"; sourceTree = "<group>"; };
 		6919204818DCFED000F8522B /* NSObject+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JDExtension.h"; sourceTree = "<group>"; };
 		6919204918DCFED000F8522B /* NSObject+JDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JDExtension.m"; sourceTree = "<group>"; };
+		691EE6DC1992DB320080E23A /* IUCSSWPCompiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUCSSWPCompiler.h; sourceTree = "<group>"; };
+		691EE6DD1992DB320080E23A /* IUCSSWPCompiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUCSSWPCompiler.m; sourceTree = "<group>"; };
 		691F91A71973C2EA00A4CFFF /* IUWordpressProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUWordpressProject.h; sourceTree = "<group>"; };
 		691F91A81973C2EA00A4CFFF /* IUWordpressProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUWordpressProject.m; sourceTree = "<group>"; };
 		691F91AB1973C5EF00A4CFFF /* WPSiteTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPSiteTitle.h; sourceTree = "<group>"; };
@@ -3516,6 +3519,8 @@
 				69C5760118D6FE020016F050 /* IUCSS.m */,
 				69604767198FE56400605FA2 /* IUCSSCompiler.h */,
 				69604768198FE56400605FA2 /* IUCSSCompiler.m */,
+				691EE6DC1992DB320080E23A /* IUCSSWPCompiler.h */,
+				691EE6DD1992DB320080E23A /* IUCSSWPCompiler.m */,
 				69ABB14818D733ED0065D584 /* IUCompiler.h */,
 				69ABB14918D733ED0065D584 /* IUCompiler.m */,
 				69D5B68F18F247C100E9FB11 /* LMCompilerResourceSource.h */,
@@ -4472,6 +4477,7 @@
 				69757B0018D95BBC0095CBAC /* CALayer+JDExtension.m in Sources */,
 				69757B0718D95BBC0095CBAC /* JDHerokuUtil.m in Sources */,
 				69CFDF161963D48900341B07 /* LMTutorialManager.m in Sources */,
+				691EE6DE1992DB320080E23A /* IUCSSWPCompiler.m in Sources */,
 				6985CBA018E31558008DBF50 /* IUSheetGroup.m in Sources */,
 				3DB3ACFD18EC1F700046DFB7 /* LMCanvasVC.m in Sources */,
 				6979FC0718ED34E20060C3B4 /* LMPropertyFrameVC.m in Sources */,

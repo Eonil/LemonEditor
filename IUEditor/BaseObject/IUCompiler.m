@@ -9,7 +9,7 @@
 #import "IUCompiler.h"
 #import "IUProtocols.h"
 #import "IUCSSCompiler.h"
-
+#import "IUCSSWPCompiler.h"
 
 #import "NSString+JDExtension.h"
 #import "IUSheet.h"
@@ -1393,7 +1393,26 @@
 
 - (void)setResourceManager:(IUResourceManager *)resourceManager{
     _resourceManager = resourceManager;
-    cssCompiler = [[IUCSSCompiler alloc] initWithResourceManager:self.resourceManager];
+    if (resourceManager) {
+        if (self.rule == IUCompileRuleWordpress) {
+            cssCompiler = [[IUCSSWPCompiler alloc] initWithResourceManager:self.resourceManager];
+        }
+        else {
+            cssCompiler = [[IUCSSCompiler alloc] initWithResourceManager:self.resourceManager];
+        }
+    }
+}
+
+- (void)setRule:(IUCompileRule)rule{
+    _rule = rule;
+    if (_resourceManager) {
+        if (self.rule == IUCompileRuleWordpress) {
+            cssCompiler = [[IUCSSWPCompiler alloc] initWithResourceManager:self.resourceManager];
+        }
+        else {
+            cssCompiler = [[IUCSSCompiler alloc] initWithResourceManager:self.resourceManager];
+        }
+    }
 }
 
 
