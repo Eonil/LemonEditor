@@ -340,6 +340,7 @@
         [[self.undoManager prepareWithInvocationTarget:self] setLink:_link];
     }
     _link = link;
+    [self updateCSS];
 }
 
 -(void)setDivLink:(id)divLink{

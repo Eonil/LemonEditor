@@ -3,6 +3,7 @@
     display:block;
     border-style:solid;
     overflow:hidden;
+    cursor:default;
 }
 
 a{
