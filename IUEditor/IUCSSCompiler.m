@@ -559,68 +559,70 @@
         }
         
     }
-    
-    //REVIEW: image전체로 bg image tag 검사하면 안됨, media query 지원 못하게 됨.
-    if(cssTagDict[IUCSSTagImage]){
-        NSString *imgSrc = [[self imagePathWithImageName:cssTagDict[IUCSSTagImage] target:IUTargetEditor] CSSURLString];
-        [code insertTag:@"background-image" string:imgSrc target:IUTargetEditor];
-        NSString *outputImgSrc = [[self imagePathWithImageName:cssTagDict[IUCSSTagImage] target:IUTargetOutput] CSSURLString];
-        [code insertTag:@"background-image" string:outputImgSrc target:IUTargetOutput];
-    }
-    
-    /* bg size & position */
-    if(cssTagDict[IUCSSTagBGSize]){
-        IUBGSizeType bgSizeType = [cssTagDict[IUCSSTagBGSize] intValue];
-        switch (bgSizeType) {
-            case IUBGSizeTypeStretch:
-                [code insertTag:@"background-size" string:@"100% 100%"];
-                break;
-            case IUBGSizeTypeContain:
-                [code insertTag:@"background-size" string:@"contain"];
-                break;
-            case IUBGSizeTypeFull:
-                [code insertTag:@"background-attachment" string:@"fixed"];
-            case IUBGSizeTypeCover:
-                [code insertTag:@"background-size" string:@"cover"];
-                break;
-            case IUBGSizeTypeAuto:
-            default:
-                break;
-        }
-    }
-    
-    if ([cssTagDict[IUCSSTagEnableBGCustomPosition] boolValue]) {
-        /* custom bg position */
-        [code insertTag:@"background-position-x" floatFromNumber:cssTagDict[IUCSSTagBGXPosition] unit:IUUnitPixel];
-        [code insertTag:@"background-position-y" floatFromNumber:cssTagDict[IUCSSTagBGYPosition] unit:IUUnitPixel];
-    }
-    else {
-        IUCSSBGVPostion vPosition = [cssTagDict[IUCSSTagBGVPosition] intValue];
-        IUCSSBGHPostion hPosition = [cssTagDict[IUCSSTagBGHPosition] intValue];
-        if (vPosition != IUCSSBGVPostionTop || hPosition != IUCSSBGHPostionLeft) {
-            NSString *vPositionString, *hPositionString;
-            switch (vPosition) {
-                case IUCSSBGVPostionTop: vPositionString = @"top"; break;
-                case IUCSSBGVPostionCenter: vPositionString = @"center"; break;
-                case IUCSSBGVPostionBottom: vPositionString = @"bottom"; break;
-                default: NSAssert(0, @"Cannot be default");  break;
-            }
-            switch (hPosition) {
-                case IUCSSBGHPostionLeft: hPositionString = @"left"; break;
-                case IUCSSBGHPostionCenter: hPositionString = @"center"; break;
-                case IUCSSBGVPostionBottom: hPositionString = @"right"; break;
-                default: NSAssert(0, @"Cannot be default");  break;
-            }
-            [code insertTag:@"background-position" string:[NSString stringWithFormat:@"%@ %@", vPositionString, hPositionString]];
-        }
-    }
-    
-    /* bg repeat */
-    if ([cssTagDict[IUCSSTagBGRepeat] boolValue] == YES) {
-        [code insertTag:@"background-repeat" string:@"repeat"];
-    }
+    //REVIEW: gradient와 background가 상충함, 동시에 실행안되게.
     else{
-        [code insertTag:@"background-repeat" string:@"no-repeat"];
+        //REVIEW: image전체로 bg image tag 검사하면 안됨, media query 지원 못하게 됨.
+        if(cssTagDict[IUCSSTagImage]){
+            NSString *imgSrc = [[self imagePathWithImageName:cssTagDict[IUCSSTagImage] target:IUTargetEditor] CSSURLString];
+            [code insertTag:@"background-image" string:imgSrc target:IUTargetEditor];
+            NSString *outputImgSrc = [[self imagePathWithImageName:cssTagDict[IUCSSTagImage] target:IUTargetOutput] CSSURLString];
+            [code insertTag:@"background-image" string:outputImgSrc target:IUTargetOutput];
+        }
+        
+        /* bg size & position */
+        if(cssTagDict[IUCSSTagBGSize]){
+            IUBGSizeType bgSizeType = [cssTagDict[IUCSSTagBGSize] intValue];
+            switch (bgSizeType) {
+                case IUBGSizeTypeStretch:
+                    [code insertTag:@"background-size" string:@"100% 100%"];
+                    break;
+                case IUBGSizeTypeContain:
+                    [code insertTag:@"background-size" string:@"contain"];
+                    break;
+                case IUBGSizeTypeFull:
+                    [code insertTag:@"background-attachment" string:@"fixed"];
+                case IUBGSizeTypeCover:
+                    [code insertTag:@"background-size" string:@"cover"];
+                    break;
+                case IUBGSizeTypeAuto:
+                    default:
+                    break;
+            }
+        }
+        
+        if ([cssTagDict[IUCSSTagEnableBGCustomPosition] boolValue]) {
+            /* custom bg position */
+            [code insertTag:@"background-position-x" floatFromNumber:cssTagDict[IUCSSTagBGXPosition] unit:IUUnitPixel];
+            [code insertTag:@"background-position-y" floatFromNumber:cssTagDict[IUCSSTagBGYPosition] unit:IUUnitPixel];
+        }
+        else {
+            IUCSSBGVPostion vPosition = [cssTagDict[IUCSSTagBGVPosition] intValue];
+            IUCSSBGHPostion hPosition = [cssTagDict[IUCSSTagBGHPosition] intValue];
+            if (vPosition != IUCSSBGVPostionTop || hPosition != IUCSSBGHPostionLeft) {
+                NSString *vPositionString, *hPositionString;
+                switch (vPosition) {
+                    case IUCSSBGVPostionTop: vPositionString = @"top"; break;
+                    case IUCSSBGVPostionCenter: vPositionString = @"center"; break;
+                    case IUCSSBGVPostionBottom: vPositionString = @"bottom"; break;
+                        default: NSAssert(0, @"Cannot be default");  break;
+                }
+                switch (hPosition) {
+                    case IUCSSBGHPostionLeft: hPositionString = @"left"; break;
+                    case IUCSSBGHPostionCenter: hPositionString = @"center"; break;
+                    case IUCSSBGVPostionBottom: hPositionString = @"right"; break;
+                        default: NSAssert(0, @"Cannot be default");  break;
+                }
+                [code insertTag:@"background-position" string:[NSString stringWithFormat:@"%@ %@", vPositionString, hPositionString]];
+            }
+        }
+        
+        /* bg repeat */
+        if ([cssTagDict[IUCSSTagBGRepeat] boolValue] == YES) {
+            [code insertTag:@"background-repeat" string:@"repeat"];
+        }
+        else{
+            [code insertTag:@"background-repeat" string:@"no-repeat"];
+        }
     }
     
 }

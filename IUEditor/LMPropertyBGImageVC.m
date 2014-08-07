@@ -51,29 +51,40 @@
                                            dictionaryWithObjects:@[[NSNumber numberWithBool:NO], NSNegateBooleanTransformerName]
                                            forKeys:@[NSRaisesForNotApplicableKeysBindingOption, NSValueTransformerNameBindingOption]];
     
+    
 #pragma mark - image
     
     
     [_imageNameComboBox bind:NSContentBinding toObject:self withKeyPath:@"resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
     [_imageNameComboBox bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"imageName"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_imageNameComboBox bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    
+
+    
     _imageNameComboBox.delegate = self;
     
     [_fitButton bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagWidthUnitIsPercent] options:IUBindingNegationAndNotRaise];
     [_fitButton bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHeightUnitIsPercent] options:IUBindingNegationAndNotRaise];
     [_fitButton bind:@"enabled3" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"hasWidth"] options:IUBindingDictNotRaisesApplicable];
     [_fitButton bind:@"enabled4" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"hasHeight"] options:IUBindingDictNotRaisesApplicable];
-    
+    [_fitButton bind:@"enabled5" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+
     
     
 #pragma mark - size, repeat
     
     [_sizeSegementControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGSize] options:IUBindingDictNotRaisesApplicable];
     [_sizeSegementControl bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
+    [_sizeSegementControl bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+
+    
     
     [_repeatBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGRepeat] options:noRepeatBindingOption];
     
     [_repeatBtn bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
     [_repeatBtn bind:@"enabled2" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
+    [_repeatBtn bind:@"enabled3" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+
 
     
     
@@ -83,12 +94,17 @@
 #pragma mark - position
     
     [_positionHSegmentedControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGHPosition] options:IUBindingDictNotRaisesApplicable];
+
     [_positionVSegmentedControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGVPosition] options:IUBindingDictNotRaisesApplicable];
+
+    
     
     [_digitPositionBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagEnableBGCustomPosition] options:IUBindingDictNotRaisesApplicable];
-    
     [_digitPositionBtn bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
     [_digitPositionBtn bind:@"enabled2" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
+    [_digitPositionBtn bind:@"enabled3" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+
+    
     
     [_xPositionTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGXPosition] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_yPositionTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGYPosition] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
@@ -105,6 +121,10 @@
     
     [_positionHSegmentedControl bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     [_positionVSegmentedControl bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
+    [_positionHSegmentedControl bind:@"enabled4" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [_positionVSegmentedControl bind:@"enabled4" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+
+    
 
     //position TF
     [_xPositionTF bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
@@ -116,7 +136,9 @@
     [_xPositionTF bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     [_yPositionTF bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     
-    
+    [_xPositionTF bind:@"enabled4" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [_yPositionTF bind:@"enabled4" toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+
 
 
     
