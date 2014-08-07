@@ -616,6 +616,9 @@
         if ([cssTagDict[IUCSSTagBGRepeat] boolValue] == YES) {
             [code insertTag:@"background-repeat" string:@"repeat"];
         }
+        else{
+            [code insertTag:@"background-repeat" string:@"no-repeat"];
+        }
     }
 }
 
