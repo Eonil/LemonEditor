@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -69,19 +69,35 @@
                         </binding>
                     </connections>
                 </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="Yrq-Y7-D42">
+                    <rect key="frame" x="256" y="29" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Tst-Qx-WNu"/>
+                        <constraint firstAttribute="width" constant="20" id="mQd-on-82E"/>
+                    </constraints>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="help" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="STa-py-8ot">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="ZMQ-2w-fYu" firstAttribute="leading" secondItem="P6z-b3-baA" secondAttribute="leading" constant="22" id="1W1-5x-AGw"/>
                 <constraint firstItem="ZMQ-2w-fYu" firstAttribute="top" secondItem="1NX-Gy-dET" secondAttribute="bottom" constant="8" id="99u-TD-QFg"/>
+                <constraint firstItem="Yrq-Y7-D42" firstAttribute="leading" secondItem="ZMQ-2w-fYu" secondAttribute="trailing" constant="148" id="HFO-8w-JIf"/>
                 <constraint firstItem="1NX-Gy-dET" firstAttribute="leading" secondItem="P6z-b3-baA" secondAttribute="leading" constant="22" id="MaC-bS-5s1"/>
                 <constraint firstItem="QUd-Yf-k8w" firstAttribute="top" secondItem="ZMQ-2w-fYu" secondAttribute="bottom" constant="10" id="Sdp-Se-HnD"/>
                 <constraint firstItem="Z7Z-cr-JPe" firstAttribute="top" secondItem="ZMQ-2w-fYu" secondAttribute="bottom" constant="8" id="hXU-eH-L9n"/>
                 <constraint firstItem="1NX-Gy-dET" firstAttribute="top" secondItem="P6z-b3-baA" secondAttribute="top" constant="1" id="l9V-d8-Rxf"/>
                 <constraint firstItem="Z7Z-cr-JPe" firstAttribute="leading" secondItem="QUd-Yf-k8w" secondAttribute="trailing" constant="6" id="q8I-d4-wRa"/>
+                <constraint firstItem="Yrq-Y7-D42" firstAttribute="centerY" secondItem="ZMQ-2w-fYu" secondAttribute="centerY" id="x1p-c2-40c"/>
                 <constraint firstItem="QUd-Yf-k8w" firstAttribute="leading" secondItem="P6z-b3-baA" secondAttribute="leading" constant="34" id="xkP-Nc-5aW"/>
             </constraints>
-            <point key="canvasLocation" x="261" y="164"/>
+            <point key="canvasLocation" x="124" y="304"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="NRy-g2-2e7"/>
     </objects>
+    <resources>
+        <image name="help" width="18" height="18"/>
+    </resources>
 </document>
