@@ -40,8 +40,6 @@ typedef enum _IUCompileRule{
 - (NSString *)editorSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray;
 - (JDCode * )editorHTML:(IUBox*)iu;
 
-//editor string
-- (NSDictionary *)CSSContentWithIdentifier:(NSString *)identifier ofIU:(IUBox *)iu width:(NSInteger)width isEdit:(BOOL)isEdit;
 
 #pragma mark manage JS source
 -(NSString *)outputJSInitializeSource:(IUSheet *)document;

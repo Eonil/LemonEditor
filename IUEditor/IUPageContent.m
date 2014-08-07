@@ -17,7 +17,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
-    //FIXME: old file conversion - absolute포함되어있음
+    //REVIEW: old file conversion - absolute포함되어있음
     self.positionType = IUPositionTypeRelative;
 
     return self;
