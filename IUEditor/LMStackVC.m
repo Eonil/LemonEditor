@@ -16,6 +16,7 @@
 #import "IUPage.h"
 #import "IUClass.h"
 #import "IUHeader.h"
+#import "IUImport.h"
 
 @implementation LMStackOutlineView
 
@@ -218,10 +219,18 @@
         return NSDragOperationMove;
     }
     //newIU
-    //FIXME: page위로 갈때?? 접혀있을 때?? newParent가 nil이됨.
-    NSData *iuData = [pBoard dataForType:(id)kUTTypeIUType];
-    if(iuData){
-        return NSDragOperationNone;
+    if(item){
+        IUBox *newParent = [item representedObject];
+        
+        if([newParent shouldAddIUByUserInput] == NO){
+            return NSDragOperationNone;
+        }
+        else{
+            NSData *iuData = [pBoard dataForType:(id)kUTTypeIUType];
+            if(iuData){
+                return NSDragOperationMove;
+            }
+        }
     }
     
     return NSDragOperationNone;
@@ -265,10 +274,7 @@
         [_IUController rearrangeObjects];
         return YES;
     }
-    
-    return NO;
-    //FIXME: page위로 갈때?? 접혀있을 때?? newParent가 nil이됨.
-    
+        
     //type1) newIU
     NSData *iuData = [pBoard dataForType:(id)kUTTypeIUType];
     if(iuData){
@@ -280,24 +286,16 @@
             if(newIndex < 0){
                 newIndex = 0 ;
             }
-            if([newParent isKindOfClass:[IUPage class]]){
-                newParent = (IUBox *)((IUPage *)newParent).pageContent;
-            }
-            
-            int i=0;
-            while([newParent shouldAddIUByUserInput] == NO){
-                newParent = newParent.parent;
-                
-                //safe code;
-                if(i>10000){
-                    [JDUIUtil hudAlert:@"Can't find parent node, you try it, again" second:2];
-                    return NO;
-                }
-            }
-            
             [newParent insertIU:newIU atIndex:newIndex error:nil];
-            [_IUController rearrangeObjects];
-            [_IUController setSelectedObjectsByIdentifiers:@[newIU.htmlID]];
+            
+            BOOL parentIsInImport = [self isInImportIU:newParent];
+            if(parentIsInImport){
+                NSString *finalString = [NSString stringWithFormat:@"ImportedBy_%@_%@", newParent.htmlID, newIU.htmlID];
+                [_IUController trySetSelectedObjectsByIdentifiers:@[finalString]];
+            }
+            else{
+                [_IUController setSelectedObjectsByIdentifiers:@[newIU.htmlID]];
+            }
             
             [newIU confirmIdentifier];
 
@@ -307,6 +305,24 @@
     return NO;
     
 }
+- (BOOL)isInImportIU:(IUBox *)iu{
+    if([iu isKindOfClass:[IUPageContent class]] ||
+       [iu isKindOfClass:[IUHeader class]]){
+        return NO;
+    }
+    else{
+        if([iu isKindOfClass:[IUClass class]] && [iu.sheet isKindOfClass:[IUPage class]]){
+            return YES;
+        }
+        else if([iu isKindOfClass:[IUClass class]] && [iu.sheet isKindOfClass:[IUClass class]]){
+            return NO;
+        }
+        else{
+            return [self isInImportIU:iu.parent];
+        }
+    }
+}
+
 #pragma mark - copy & paste
 - (IBAction)copy:(id)sender{
     [_IUController copySelectedIUToPasteboard:self];
