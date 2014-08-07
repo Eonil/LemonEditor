@@ -510,6 +510,24 @@
     }];
 }
 
+- (IBAction)cleanBuild:(id)sender{
+    NSDirectoryEnumerator* en = [[NSFileManager defaultManager] enumeratorAtPath:_project.absoluteBuildPath];
+    BOOL res;
+    
+    NSString* file;
+    while (file = [en nextObject]) {
+        if ([[file lastPathComponent] characterAtIndex:0] == '.') {
+            //skip hidden file
+            continue;
+        }
+        NSError *err;
+        res = [[NSFileManager defaultManager] trashItemAtURL:[NSURL fileURLWithPath:[_project.absoluteBuildPath stringByAppendingPathComponent:file]] resultingItemURL:nil error:&err];
+        NSAssert(res, @"error");
+    }
+}
+
+
+
 - (IBAction)showHerokuWC:(id)sender{
     if (herokuWC == nil) {
         herokuWC = [[LMHerokuWC alloc] initWithWindowNibName:@"LMHerokuWC"];

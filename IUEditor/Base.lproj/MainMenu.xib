@@ -169,6 +169,12 @@
                                     <action selector="showHerokuWC:" target="-1" id="NxN-EL-8Ic"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Clean Build" id="1vp-OB-YEn">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="cleanBuild:" target="-1" id="TRd-ch-tei"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Convert As..." id="JHk-ME-u7H">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
