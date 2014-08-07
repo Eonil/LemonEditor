@@ -253,3 +253,12 @@ a{
 .WPMenu > div {
     height: 100%;
 }
+
+.WPMenu > div > ul {
+     height: 100%;
+}
+
+.WPMenu > div > ul > li{
+    height: 100%;
+    list-style-type: none;
+}

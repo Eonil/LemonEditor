@@ -1065,12 +1065,10 @@
         [code setInsertingIdentifier:[wpmenu.cssClass stringByAppendingString:@" > div > ul"]];
         [code insertTag:@"display" string:@"table"];
         [code insertTag:@"table-layout" string:@"fixed"];
-        [code insertTag:@"height" string:@"100%"];
         [code insertTag:@"width" string:@"100%"];
         
         [code setInsertingIdentifier:[wpmenu.cssClass stringByAppendingString:@" > div > ul > li"]];
         [code insertTag:@"display" string:@"table-cell"];
-        [code insertTag:@"height" string:@"100%"];
         [code insertTag:@"text-align" string:@"center"];
     }
     
@@ -1078,11 +1076,10 @@
         [code setInsertingIdentifier:[wpmenu.cssClass stringByAppendingString:@" > div > ul > li"]];
         [code insertTag:@"position" string:@"relative"];
         [code insertTag:@"padding" string:@"0 16px"];
-        [code insertTag:@"height" string:@"100%"];
         [code insertTag:@"float" string:@"left"];
         
         for (NSNumber *viewport in [code allViewports]) {
-            NSString *heightValue = [code valueForTag:IUCSSTagPixelWidth identifier:wpmenu.className viewport:[viewport intValue] target:IUTargetEditor];
+            NSString *heightValue = [code valueForTag:IUCSSTagPixelHeight identifier:wpmenu.cssClass viewport:[viewport intValue] target:IUTargetEditor];
             //IUTarget Editor value is equal to IUTargetOutput.
             if (heightValue) {
                 [code insertTag:@"line-height" string:heightValue];
