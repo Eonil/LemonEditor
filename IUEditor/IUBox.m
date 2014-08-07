@@ -605,7 +605,7 @@
     [iu updateHTML];
     [iu updateCSS];
 
-    for (IUBox *child in iu.children) {
+    for (IUBox *child in iu.allChildren) {
         [child updateCSS];
     }
 
