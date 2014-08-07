@@ -11,12 +11,20 @@
 
 @implementation WPArticleDate
 
+- (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
+    self = [super initWithProject:project options:options];
+    self.positionType = IUPositionTypeFloatRight;
+    return self;
+}
+
 -(NSString*)code{
     return @"<?php echo get_the_date(); ?>";
 }
+
 - (NSString*)sampleHTML{
-    return @"Publishing date will be here";
+    return @"Dec. 24. 2014.";
 }
+
 - (BOOL)shouldCompileFontInfo{
     return YES;
 }

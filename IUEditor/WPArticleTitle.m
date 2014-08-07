@@ -9,12 +9,18 @@
 #import "WPArticleTitle.h"
 
 @implementation WPArticleTitle
+- (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
+    self = [super initWithProject:project options:options];
+    self.positionType = IUPositionTypeFloatLeft;
+    return self;
+}
+
 -(NSString*)code{
     return @"<?php the_title(); ?>";
 }
 
 - (NSString*)sampleHTML{
-    return @"Article Title will be here";
+    return @"Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
 }
 
 - (BOOL)shouldCompileFontInfo{

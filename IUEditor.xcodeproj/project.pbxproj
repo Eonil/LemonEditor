@@ -644,6 +644,8 @@
 		693F247A1977929C00451500 /* LMPropertyWPMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */; };
 		693F24801977F67E00451500 /* JDSyncUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 693F247F1977F67E00451500 /* JDSyncUtil.m */; };
 		693F24821977F81400451500 /* JDUploadSCP.sh in Resources */ = {isa = PBXBuildFile; fileRef = 693F24811977F81400451500 /* JDUploadSCP.sh */; };
+		69450E431993EBB2000DBEC1 /* WPArticleBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 69450E421993EBB2000DBEC1 /* WPArticleBody.m */; };
+		69450E4519940BD3000DBEC1 /* loremipsum.txt in Resources */ = {isa = PBXBuildFile; fileRef = 69450E4419940BD3000DBEC1 /* loremipsum.txt */; };
 		694A985F196D13E000C1D630 /* JDNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A985E196D13E000C1D630 /* JDNetworkUtil.m */; };
 		694A9862196D184400C1D630 /* JDIntegerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9861196D184400C1D630 /* JDIntegerTextField.m */; };
 		694A9865196D197900C1D630 /* JDFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9864196D197900C1D630 /* JDFormatter.m */; };
@@ -1600,6 +1602,9 @@
 		693F247E1977F67E00451500 /* JDSyncUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDSyncUtil.h; sourceTree = "<group>"; };
 		693F247F1977F67E00451500 /* JDSyncUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDSyncUtil.m; sourceTree = "<group>"; };
 		693F24811977F81400451500 /* JDUploadSCP.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = JDUploadSCP.sh; sourceTree = "<group>"; };
+		69450E411993EBB2000DBEC1 /* WPArticleBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPArticleBody.h; sourceTree = "<group>"; };
+		69450E421993EBB2000DBEC1 /* WPArticleBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPArticleBody.m; sourceTree = "<group>"; };
+		69450E4419940BD3000DBEC1 /* loremipsum.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = loremipsum.txt; sourceTree = "<group>"; };
 		694A985D196D13E000C1D630 /* JDNetworkUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDNetworkUtil.h; path = ../JDNetworkUtil.h; sourceTree = "<group>"; };
 		694A985E196D13E000C1D630 /* JDNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDNetworkUtil.m; path = ../JDNetworkUtil.m; sourceTree = "<group>"; };
 		694A9860196D184400C1D630 /* JDIntegerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDIntegerTextField.h; sourceTree = "<group>"; };
@@ -3270,6 +3275,8 @@
 				69860E49197555E8001C3F7F /* WPArticleTitle.m */,
 				69860E4B197625C7001C3F7F /* WPArticleList.h */,
 				69860E4C197625C7001C3F7F /* WPArticleList.m */,
+				69450E411993EBB2000DBEC1 /* WPArticleBody.h */,
+				69450E421993EBB2000DBEC1 /* WPArticleBody.m */,
 				69860E51197666FE001C3F7F /* WPArticleDate.h */,
 				69860E52197666FE001C3F7F /* WPArticleDate.m */,
 				69860E5719766B1C001C3F7F /* WPMenu.h */,
@@ -3426,6 +3433,7 @@
 		69C5759E18D6F61E0016F050 = {
 			isa = PBXGroup;
 			children = (
+				69450E4419940BD3000DBEC1 /* loremipsum.txt */,
 				690D465A198E8F3200478EC9 /* IUProtocols.h */,
 				CBFBE67C192A07A300F03F76 /* SampleTemplate */,
 				690A409E18E170AC00095263 /* Resource */,
@@ -4186,6 +4194,7 @@
 				06855604198A63430073FA83 /* hendrix.png in Resources */,
 				2672A0A719120A650050043E /* stack_collection.png in Resources */,
 				3DA6C65719763594004D6587 /* arrow_left.png in Resources */,
+				69450E4519940BD3000DBEC1 /* loremipsum.txt in Resources */,
 				3DED265C1900D313001A1D67 /* view_list@2x.png in Resources */,
 				26EFF41E194AECB900317C3E /* auto_resize@2x.png in Resources */,
 				2628C932191A360200D9D8CD /* stack_submit.png in Resources */,
@@ -4552,6 +4561,7 @@
 				3D095C801990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.m in Sources */,
 				69C5760B18D6FE020016F050 /* IUClass.m in Sources */,
 				3DA416BD1935ABB400559028 /* LMFontController.m in Sources */,
+				69450E431993EBB2000DBEC1 /* WPArticleBody.m in Sources */,
 				3D748C81192095A1005665A3 /* LMPropertyIUPageVC.m in Sources */,
 				3DED271D1904ADD9001A1D67 /* LMEventVariableTrigger.m in Sources */,
 				694E3CE118FCFDA6005077B3 /* IUItem.m in Sources */,

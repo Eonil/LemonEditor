@@ -11,7 +11,7 @@
 @implementation WPSiteTitle
 
 - (NSString*)sampleHTML{
-    return @"Site title will be here.";
+    return @"Site Title";
 }
 
 - (NSString*)code{

@@ -640,6 +640,12 @@
     NSString *topTag;
     NSString *leftTag;
     /* insert position */
+    /* Note */
+    /* Cannot use'top' tag for relative position here.
+     If parent is relative postion and do not have height,
+     parent's height will be children's margintop + height.
+     */
+     
     switch (_iu.positionType) {
         case IUPositionTypeAbsolute:{
             topTag = @"top"; leftTag = @"left"; break;
@@ -649,23 +655,24 @@
         }
         case IUPositionTypeRelative:{
             [code insertTag:@"position" string:@"relative"];
-            topTag = @"top"; leftTag = @"left"; break;
+            topTag = @"margin-top"; leftTag = @"left"; break;
             break;
         }
         case IUPositionTypeRelativeCenter:{
             [code insertTag:@"position" string:@"relative"];
-            topTag = @"top"; break;
+            topTag = @"margin-top"; break;
         }
         case IUPositionTypeFloatLeft:{
             [code insertTag:@"position" string:@"relative"];
             [code insertTag:@"float" string:@"left"];
-            topTag = @"top"; break;
+            topTag = @"margin-top"; break;
             break;
         }
         case IUPositionTypeFloatRight:{
             [code insertTag:@"position" string:@"relative"];
             [code insertTag:@"float" string:@"right"];
-            topTag = @"top"; break;
+            topTag = @"margin-top";
+            leftTag = @"right";
             float xValueFloat = [xValue floatValue] * (-1);
             xValue = @(xValueFloat);
             break;

@@ -12,5 +12,5 @@
 
 @property (nonatomic) BOOL enableTitle;
 @property (nonatomic) BOOL enableDate;
-
+@property (nonatomic) BOOL enableBody;
 @end

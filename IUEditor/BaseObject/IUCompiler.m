@@ -452,6 +452,12 @@
     
     
 #endif
+    
+    if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol)]) {
+        IUBox <IUSampleHTMLProtocol> *sampleProtocolIU = (id)iu;
+        NSString *sampleHTML = [sampleProtocolIU sampleHTML];
+        [code addCodeLine:sampleHTML];
+    }
     if (iu.children.count) {
         for (IUBox *child in iu.children) {
             [code addCode:[self outputHTML:child]];
@@ -467,7 +473,7 @@
 -(JDCode *)outputHTML:(IUBox *)iu{
     JDCode *code = [[JDCode alloc] init];
 #pragma mark IUBox
-    if ([iu conformsToProtocol:@protocol(IUCodeProtocol)]) {
+    if ([iu conformsToProtocol:@protocol(IUCodeProtocol)] && self.rule != IUCompileRuleDefault ) {
         NSObject <IUCodeProtocol>* iuCode = (id)iu;
         [code addCodeWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:NO]];
         if ([iuCode respondsToSelector:@selector(prefixCode)]) {

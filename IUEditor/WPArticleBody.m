@@ -10,4 +10,27 @@
 
 @implementation WPArticleBody
 
+- (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
+    self = [super initWithProject:project options:options];
+    self.positionType = IUPositionTypeRelative;
+    [self.css eradicateTag:IUCSSTagPixelHeight];
+    
+    [self.css setValue:@(800) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+    return self;
+}
+
+- (NSString*)sampleHTML{
+    NSString *res = [[NSBundle mainBundle] pathForResource:@"loremipsum" ofType:@"txt"];
+    return [[NSString stringWithContentsOfFile:res encoding:NSUTF8StringEncoding error:nil] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
+}
+
+- (NSString*)code{
+    return @"<?php the_content(); ?>";
+}
+
+- (BOOL)shouldCompileFontInfo{
+    return YES;
+}
+
+
 @end

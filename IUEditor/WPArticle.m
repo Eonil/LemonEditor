@@ -9,11 +9,25 @@
 #import "WPArticle.h"
 #import "WPArticleTitle.h"
 #import "WPArticleDate.h"
+#import "WPArticleBody.h"
 
 #import "IUIdentifierManager.h"
 #import "IUProject.h"
 
 @implementation WPArticle{
+}
+
+- (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
+    self = [super initWithProject:project options:options];
+    self.positionType = IUPositionTypeRelative;
+    [self.css eradicateTag:IUCSSTagPixelHeight];
+    [self.css setValue:@(100) forTag:IUCSSTagPercentWidth];
+    [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent];
+    [self setEnableTitle:YES];
+    [self setEnableDate:YES];
+    [self setEnableBody:YES];
+    
+    return self;
 }
 
 - (void)setEnableTitle:(BOOL)enableTitle{
@@ -23,7 +37,6 @@
         WPArticleTitle *title = [[WPArticleTitle alloc] initWithProject:self.project options:nil];
         [self addIU:title error:nil];
         [self confirmIdentifier];
-        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureChangedIU object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureAdding, IUNotificationStructureChangedIU: title}];
     }
     else {
         for (IUBox *box in self.children) {
@@ -41,16 +54,31 @@
         WPArticleDate *date = [[WPArticleDate alloc] initWithProject:self.project options:nil];
         [self addIU:date error:nil];
         [self confirmIdentifier];
-        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureChangedIU object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureAdding, IUNotificationStructureChangedIU: date}];
     }
     else {
         for (IUBox *box in self.children) {
-            if ([box isKindOfClass:[WPArticleTitle class]]) {
+            if ([box isKindOfClass:[WPArticleDate class]]) {
                 [self removeIU:box];
             }
         }
     }
 }
+
+- (void)setEnableBody:(BOOL)enableBody{
+    _enableBody = enableBody;
+    if (enableBody) {
+        [self.project.identifierManager resetUnconfirmedIUs];
+        WPArticleBody *body = [[WPArticleBody alloc] initWithProject:self.project options:nil];
+        [self addIU:body error:nil];
+        [self confirmIdentifier];
+    }
+    else {
+        for (IUBox *box in self.children) {
+            if ([box isKindOfClass:[WPArticleBody class]]) {
+                [self removeIU:box];
+            }
+        }
+    }}
 
 
 @end

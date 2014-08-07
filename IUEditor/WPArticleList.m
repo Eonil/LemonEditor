@@ -20,11 +20,12 @@
 @implementation WPArticleList
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
+    self.positionType = IUPositionTypeRelative;
+    [self.css eradicateTag:IUCSSTagPixelHeight];
     WPArticle *article = [[WPArticle alloc] initWithProject:project options:options];
     [self addIU:article error:nil];
     
-    [self.css setValue:@(400) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
-    [self.css setValue:@(600) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(800) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
     return self;
 }
 
