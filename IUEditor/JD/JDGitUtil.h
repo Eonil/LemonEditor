@@ -26,7 +26,6 @@
 -(BOOL)addAll;
 -(BOOL)commit:(NSString*)commitMsg;
 -(void)push:(NSString*)remote branch:(NSString*)branch force:(BOOL)force;
--(void)pushHeroku:(BOOL)force;
 
 @property id <JDGitUtilDelegate> delegate;
 

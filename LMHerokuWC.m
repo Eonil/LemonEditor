@@ -229,7 +229,7 @@
     [gitUtil addAll];
     NSString *commitMessage = [JDDateTimeUtil stringForDate:[NSDate date] option:JDDateStringTimestampType];
     [gitUtil commit:commitMessage];
-    [gitUtil pushHeroku:YES];
+    [gitUtil push:@"heroku" branch:@"master" force:YES];
 }
 
 - (void)gitUtil:(JDGitUtil*)util pushMessageReceived:(NSString*)aMessage{
