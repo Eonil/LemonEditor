@@ -253,6 +253,11 @@
                 [iu.css eradicateTag:IUCSSTagPixelX];
                 [iu.css eradicateTag:IUCSSTagPixelY];
                 
+                //REVIEW: pagecontent의 children은 percent이면 안됨(height 무한루프빠짐)
+                if([newParent isKindOfClass:[IUPageContent class]]){
+                    [iu.css eradicateTag:IUCSSTagHeightUnitIsPercent];
+                }
+                
                 [newParent insertIU:iu atIndex:newIndex error:nil];
 
             }
