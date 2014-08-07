@@ -6,10 +6,10 @@
 //  Copyright (c) 2014년 JDLab. All rights reserved.
 //
 
-#import "LMPropertyIUcarouselVC.h"
+#import "LMPropertyIUCarouselVC.h"
 #import "JDOutlineCellView.h"
 
-@interface LMPropertyIUcarouselVC ()
+@interface LMPropertyIUCarouselVC ()
 
 //for outlineView
 @property (strong) IBOutlet JDOutlineCellView *carouselMainView;
@@ -47,7 +47,7 @@
 
 @end
 
-@implementation LMPropertyIUcarouselVC{
+@implementation LMPropertyIUCarouselVC{
     BOOL awaked;
 }
 

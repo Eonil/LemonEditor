@@ -13,7 +13,7 @@
 #import "LMInspectorLinkVC.h"
 #import "LMPropertyIUHTMLVC.h"
 #import "LMPropertyIUFBLikeVC.h"
-#import "LMPropertyIUcarouselVC.h"
+#import "LMPropertyIUCarouselVC.h"
 #import "LMPropertyIUMovieVC.h"
 #import "LMPropertyIUMailLinkVC.h"
 #import "LMPropertyIUTransitionVC.h"
@@ -57,7 +57,7 @@
     LMPropertyIUHTMLVC  *propertyIUHTMLVC;
     LMPropertyIUMovieVC *propertyIUMovieVC;
     LMPropertyIUFBLikeVC *propertyIUFBLikeVC;
-    LMPropertyIUcarouselVC *propertyIUCarouselVC;
+    LMPropertyIUCarouselVC *propertyIUCarouselVC;
     
     LMPropertyIUTransitionVC *propertyIUTransitionVC;
     LMPropertyIUWebMovieVC  *propertyIUWebMovieVC;
@@ -127,7 +127,7 @@
         
         propertyIUMovieVC = [[LMPropertyIUMovieVC alloc] initWithNibName:[LMPropertyIUMovieVC class].className bundle:nil];
         propertyIUFBLikeVC = [[LMPropertyIUFBLikeVC alloc] initWithNibName:[LMPropertyIUFBLikeVC class].className bundle:nil];
-        propertyIUCarouselVC = [[LMPropertyIUcarouselVC alloc] initWithNibName:[LMPropertyIUcarouselVC class].className bundle:nil];
+        propertyIUCarouselVC = [[LMPropertyIUCarouselVC alloc] initWithNibName:[LMPropertyIUCarouselVC class].className bundle:nil];
         
         propertyIUTransitionVC = [[LMPropertyIUTransitionVC alloc] initWithNibName:[LMPropertyIUTransitionVC class].className bundle:nil];
         propertyIUWebMovieVC = [[LMPropertyIUWebMovieVC alloc] initWithNibName:[LMPropertyIUWebMovieVC class].className bundle:nil];

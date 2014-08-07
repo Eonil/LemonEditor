@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="LMPropertyIUcarouselVC">
+        <customObject id="-2" userLabel="File's Owner" customClass="LMPropertyIUCarouselVC">
             <connections>
                 <outlet property="arrowControlMatrix" destination="iaq-Oz-8I3" id="GtC-rk-7DM"/>
                 <outlet property="arrowView" destination="1Sj-an-FcE" id="cBP-Hd-Dct"/>
@@ -185,6 +185,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <box autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="zzf-y3-hlo">
+                                <rect key="frame" x="0.0" y="-2" width="1" height="4"/>
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <font key="titleFont" metaFont="system"/>

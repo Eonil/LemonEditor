@@ -11,7 +11,7 @@
 #import "IUResourceManager.h"
 
 
-@interface LMPropertyIUcarouselVC : NSViewController <NSOutlineViewDataSource, NSOutlineViewDelegate>
+@interface LMPropertyIUCarouselVC : NSViewController <NSOutlineViewDataSource, NSOutlineViewDelegate>
 
 @property (nonatomic) IUController      *controller;
 @property (nonatomic) IUResourceManager     *resourceManager;
