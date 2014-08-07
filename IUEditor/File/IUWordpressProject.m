@@ -38,7 +38,7 @@
     
     self.name = [options objectForKey:IUProjectKeyAppName];
     self.path = [options objectForKey:IUProjectKeyProjectPath];
-    
+/*
     _buildPath = [[options objectForKey:IUProjectKeyBuildPath] relativePathFrom:self.path];
     if (_buildPath == nil) {
         _buildPath = @"~/Sites/wordpress/wp-content/themes/sample";
@@ -48,7 +48,12 @@
     if (_buildResourcePath == nil) {
         _buildResourcePath = @"~/Sites/wordpress/wp-content/themes/sample/resource";
     }
-    
+ */
+
+    // for development temp
+    _buildPath = @"~/Sites/wordpress/wp-content/themes/sample";
+    _buildResourcePath = @"~/Sites/wordpress/wp-content/themes/sample/resource";
+
     _pageGroup = [[IUSheetGroup alloc] init];
     _pageGroup.name = IUPageGroupName;
     _pageGroup.project = self;
@@ -102,7 +107,8 @@
 
 
 - (NSString*)absoluteBuildPathForSheet:(IUSheet *)sheet{
-    NSString *filePath = [[self.absoluteBuildPath stringByAppendingPathComponent:sheet.name ] stringByAppendingPathExtension:@"php"];
+    NSString *extension = (self.compiler.rule == IUCompileRuleWordpress) ? @"php" : @"html";
+    NSString *filePath = [[self.absoluteBuildPath stringByAppendingPathComponent:sheet.name ] stringByAppendingPathExtension:extension];
     return filePath;
 }
 
