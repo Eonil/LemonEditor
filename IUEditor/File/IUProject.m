@@ -279,7 +279,8 @@
 }
 
 - (NSArray*)mqSizes{
-    return _mqSizes;
+    NSSortDescriptor* sortOrder = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending: NO];
+    return [_mqSizes sortedArrayUsingDescriptors:@[sortOrder]];
 }
 
 #pragma mark - compile

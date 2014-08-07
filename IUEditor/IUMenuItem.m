@@ -24,7 +24,10 @@
         [self.css setValue:[NSColor grayColor] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
         [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagFontColor forViewport:IUCSSDefaultViewPort];
         [self.css setValue:@(1) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:nil forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
         
+        self.lineHeightAuto = false;
+
         self.bgActive = [NSColor blackColor];
         self.fontActive = [NSColor whiteColor];
 
@@ -66,7 +69,14 @@
 - (void)connectWithEditor{
     [super connectWithEditor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectionChanged:) name:IUNotificationSelectionDidChange object:nil];
-    [self addObserver:self forKeyPath:@"parent.css.assembledTagDictionary.height" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"height"];
+    NSMutableString *parentDepth = [NSMutableString string];
+    
+    for (int i=0; i<[self depth]; i++){
+        [parentDepth appendString:@"parent."];
+    }
+    
+    [parentDepth appendString:@"css.assembledTagDictionary.height"];
+    [self addObserver:self forKeyPath:parentDepth options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"height"];
 
 
 }
@@ -75,6 +85,14 @@
     if([self isConnectedWithEditor]){
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         [self removeObserver:self forKeyPath:@"parent.css.assembledTagDictionary.height"];
+        NSMutableString *parentDepth = [NSMutableString string];
+        for (int i=0; i<[self depth]; i++){
+            [parentDepth appendString:@"parent."];
+        }
+        
+        [parentDepth appendString:@"css.assembledTagDictionary.height"];
+        
+        [self removeObserver:self forKeyPath:parentDepth];
     }
 }
 
@@ -100,15 +118,7 @@
 
 
 - (void)heightContextDidChange:(NSDictionary *)dictionary{
-    JDInfoLog(@"haha");
-    if(self.depth==1){
-        
-        [self updateCSSWithIdentifier:[self editorDisplayIdentifier]];
-        if(self.children.count >0){
-            [self updateCSSWithIdentifier:[self closureIdentifier]];
-        }
-
-    }
+    [self updateCSS];
 }
 
 
@@ -265,6 +275,9 @@
     return YES;
 }
 - (BOOL)canChangeWidthByUserInput{
+    return NO;
+}
+- (BOOL)canChangeHeightByUserInput{
     return NO;
 }
 - (BOOL)canChangePositionType{

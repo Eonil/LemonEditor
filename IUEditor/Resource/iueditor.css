@@ -164,13 +164,9 @@ a{
 }
 
 /* menuItem : depth - 1*/
-.IUMenuBar > ul{
-    height:100%;
-}
 
 .IUMenuBar > ul > li{
     float:left;
-    height:100%;
 }
 
 .IUMenuBar >ul > li > div.closure{
@@ -183,11 +179,7 @@ a{
 
 /* menuItem : depth - 2*/
 .IUMenuBar > ul > li > ul > li{
-    width:250px;
-    height:50px;
-}
-.IUMenuBar > ul > li > ul > li > a{
-    line-height:50px;
+    width:100%;
 }
 
 .IUMenuBar > ul > li > ul > li > div.closure{
@@ -202,16 +194,13 @@ a{
 /* menuItem : depth -3 */
 .IUMenuBar ul ul > li > ul{
     position:absolute;
-    left: 250px;
+    left: 100%;
     top: 0;
     opacity: 1;
+    width:100%;
 }
 .IUMenuBar > ul > li > ul > li > ul > li{
-    width:250px;
-    height:50px;
-}
-.IUMenuBar > ul > li > ul > li > ul > li > a{
-    line-height:50px;
+    width:100%;
 }
 
 /* MenuBar mobile version */
@@ -251,7 +240,6 @@ a{
     .IUMenuBar > ul > li{
         float:none;
         width:100%;
-        height:initial;
     }
     .IUMenuBar > ul > li > a{
         text-align:left;
@@ -260,7 +248,6 @@ a{
     /* menuItem : depth - 2*/
     .IUMenuBar > ul > li > ul > li{
         width:100%;
-        height:initial;
     }
     .IUMenuBar > ul > li > ul > li > a{
         text-align:left;
@@ -283,7 +270,6 @@ a{
     
     .IUMenuBar > ul > li > ul > li > ul > li{
         width:100%;
-        height:initial;
     }
     .IUMenuBar > ul > li > ul > li > ul > li >a {
         text-align:left;

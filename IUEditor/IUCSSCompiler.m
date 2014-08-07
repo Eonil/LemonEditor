@@ -780,6 +780,7 @@
     int maxHeight;
     for (NSNumber *viewportNumber in editWidths) {
         int viewport = [viewportNumber intValue];
+        [code setInsertingViewPort:viewport];
         
         int height;
         if([[menuBar.css tagDictionaryForViewport:viewport] objectForKey:IUCSSTagPixelHeight]){
@@ -832,16 +833,48 @@
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUMenuItem:(IUMenuItem*)menuItem{
 
-    NSArray *editWidths = menuItem.project.mqSizes;
+    NSMutableArray *editWidths = [menuItem.project.mqSizes mutableCopy];
+    [editWidths replaceObjectAtIndex:0 withObject:@(IUCSSDefaultViewPort)];
+    int maxHeight;
     
     for (NSNumber *viewportNumber in editWidths) {
         int viewport = [viewportNumber intValue];
+        [code setInsertingViewPort:viewport];
         
+        //css identifier
+        [code setInsertingIdentifier:[menuItem.htmlID cssClass]];
+        [code setInsertingTarget:IUTargetBoth];
+        
+        
+        //set height for depth
+        id value;
+        if(menuItem.depth == 1){
+            value = [menuItem.parent.css tagDictionaryForViewport:viewport][IUCSSTagPixelHeight];
+        }
+        else if(menuItem.depth == 2){
+            value = [menuItem.parent.parent.css tagDictionaryForViewport:viewport][IUCSSTagPixelHeight];
+        }
+        else{
+            value = [menuItem.parent.parent.parent.css tagDictionaryForViewport:viewport][IUCSSTagPixelHeight];
+        }
+        
+        if(value){
+            maxHeight = [value intValue];
+        }
+        
+        int height;
+        if(menuItem.depth > 1){
+            height = maxHeight - 10;
+        }
+        else{
+            height = maxHeight;
+        }
+                
         //item identifier
         [code setInsertingIdentifier:menuItem.itemIdentifier];
         [code setInsertingTarget:IUTargetBoth];
         
-        id value = [menuItem.css tagDictionaryForViewport:viewport][IUCSSTagBGColor];
+        value = [menuItem.css tagDictionaryForViewport:viewport][IUCSSTagBGColor];
         if(value){
             [code insertTag:@"background-color" color:value];
         }
@@ -849,10 +882,8 @@
         if(value){
             [code insertTag:@"color" color:value];
         }
-        value = [menuItem.parent.css tagDictionaryForViewport:viewport][IUCSSTagPixelHeight];
-        if(value){
-            [code insertTag:@"line-height" intFromNumber:value unit:IUUnitPixel];
-        }
+        [code insertTag:@"line-height" integer:height unit:IUUnitPixel];
+
         
         //clousre
         if(menuItem.closureIdentifier){
@@ -870,17 +901,15 @@
                         [code insertTag:@"border-left-color" string:color];
                     }
                     else{
-                        [code insertTag:@"border-left-color" string:@"transparent"];
+                        [code insertTag:@"border-left-color" string:@"transparent !important"];
                         [code insertTag:@"border-top-color" string:color];
                     }
                 }
             }
-            value = [menuItem.parent.css tagDictionaryForViewport:viewport][IUCSSTagPixelHeight];
-            if(value){
-                int top = ([value intValue] - 10)/2;
-                [code insertTag:@"top" integer:top unit:IUUnitPixel];
+            int top = (maxHeight- 10)/2;
+            [code insertTag:@"top" integer:top unit:IUUnitPixel];
                 
-            }
+            
         }
         
         //clousre active, hover
@@ -895,7 +924,7 @@
                     [code insertTag:@"border-left-color" string:color];
                 }
                 else{
-                    [code insertTag:@"border-left-color" string:@"transparent"];
+                    [code insertTag:@"border-left-color" string:@"transparent !important"];
                     [code insertTag:@"border-top-color" string:color];
                 }
             }
