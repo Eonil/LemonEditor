@@ -1525,6 +1525,7 @@
 
 
 #pragma mark css default
+#if 0
 
 /**
  @breif This method makes whole css source
@@ -2056,6 +2057,7 @@
     return dict;
 
 }
+#endif
 
 
 #pragma mark - manage JS source
