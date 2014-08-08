@@ -1015,57 +1015,67 @@
     [code setInsertingIdentifier:carousel.prevID];
     
     NSString *imageName = carousel.leftArrowImage;
+    if(imageName){
         [code insertTag:@"left" integer:carousel.leftX unit:IUUnitPixel];
         [code insertTag:@"top" integer:carousel.leftY unit:IUUnitPixel];
-    
-    NSString *imgSrc = [[self imagePathWithImageName:imageName target:IUTargetEditor] CSSURLString];
-    [code insertTag:@"background" string:imgSrc target:IUTargetEditor];
-    
-    NSString *outputImgSrc = [[self imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
-    [code insertTag:@"background" string:outputImgSrc target:IUTargetOutput];
-    
-
-    NSImage *arrowImage;
-    
-    if ([imageName isHTTPURL]) {
-        arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
-    }
-    else{
-        IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
-        NSString *imageAbsolutePath = [file absolutePath];
-        arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
         
+        NSString *imgSrc = [[self imagePathWithImageName:imageName target:IUTargetEditor] CSSURLString];
+        
+        [code insertTag:@"background" string:imgSrc target:IUTargetEditor];
+        
+        NSString *outputImgSrc = [[self imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
+        [code insertTag:@"background" string:outputImgSrc target:IUTargetOutput];
+        
+        NSImage *arrowImage;
+        
+        if ([imageName isHTTPURL]) {
+            arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
+        }
+        else{
+            IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
+            NSString *imageAbsolutePath = [file absolutePath];
+            arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
+            
+        }
+        
+        if(arrowImage){
+            [code insertTag:@"height" floatFromNumber:@(arrowImage.size.height) unit:IUCSSUnitPixel];
+            [code insertTag:@"width" floatFromNumber:@(arrowImage.size.width) unit:IUCSSUnitPixel];
+        }
     }
-    
-    [code insertTag:@"height" floatFromNumber:@(arrowImage.size.height) unit:IUCSSUnitPixel];
-    [code insertTag:@"width" floatFromNumber:@(arrowImage.size.width) unit:IUCSSUnitPixel];
     
     [code setInsertingIdentifier:carousel.nextID];
     
     
     imageName = carousel.rightArrowImage;
-    [code insertTag:@"right" integer:carousel.rightX unit:IUUnitPixel];
-    [code insertTag:@"top" integer:carousel.rightY unit:IUUnitPixel];
-    
-    imgSrc = [[self imagePathWithImageName:imageName target:IUTargetEditor] CSSURLString];
-    [code insertTag:@"background" string:imgSrc target:IUTargetEditor];
-    
-    outputImgSrc = [[self imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
-    [code insertTag:@"background" string:outputImgSrc target:IUTargetOutput];
-    
-    
-    if ([imageName isHTTPURL]) {
-        arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
-    }
-    else{
-        IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
-        NSString *imageAbsolutePath = [file absolutePath];
-        arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
+    if(imageName){
+        [code insertTag:@"right" integer:carousel.rightX unit:IUUnitPixel];
+        [code insertTag:@"top" integer:carousel.rightY unit:IUUnitPixel];
         
+        NSString * imgSrc = [[self imagePathWithImageName:imageName target:IUTargetEditor] CSSURLString];
+        [code insertTag:@"background" string:imgSrc target:IUTargetEditor];
+        
+         NSString *outputImgSrc = [[self imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
+        [code insertTag:@"background" string:outputImgSrc target:IUTargetOutput];
+        
+        NSImage *arrowImage;
+
+        
+        if ([imageName isHTTPURL]) {
+            arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
+        }
+        else{
+            IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
+            NSString *imageAbsolutePath = [file absolutePath];
+            arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
+            
+        }
+        
+        if(arrowImage){
+            [code insertTag:@"height" floatFromNumber:@(arrowImage.size.height) unit:IUCSSUnitPixel];
+            [code insertTag:@"width" floatFromNumber:@(arrowImage.size.width) unit:IUCSSUnitPixel];
+        }
     }
-    
-    [code insertTag:@"height" floatFromNumber:@(arrowImage.size.height) unit:IUCSSUnitPixel];
-    [code insertTag:@"width" floatFromNumber:@(arrowImage.size.width) unit:IUCSSUnitPixel];
 }
 
 #if 0
