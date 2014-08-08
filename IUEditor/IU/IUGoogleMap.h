@@ -10,4 +10,12 @@
 
 @interface IUGoogleMap : IUBox
 
+@property (nonatomic) NSString *longitude, *latitude;
+@property (nonatomic) NSInteger zoomLevel;
+@property (nonatomic) BOOL mapControl, panControl, zoomControl, enableMarkerIcon;
+@property (nonatomic) NSString *markerIconName;
+@property (nonatomic) NSString *markerTitle;
+@property (nonatomic) NSColor *water, *road, *landscape, *poi;
+
+
 @end

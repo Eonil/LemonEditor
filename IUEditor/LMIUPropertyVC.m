@@ -33,6 +33,7 @@
 #import "LMPropertyIUMenuBarVC.h"
 #import "LMPropertyIUMenuItemVC.h"
 #import "LMPropertyIUTweetButtonVC.h"
+#import "LMPropertyIUGoogleMapVC.h"
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 
@@ -71,6 +72,8 @@
     LMPropertyIUMenuBarVC *propertyIUMenuBarVC;
     LMPropertyIUMenuItemVC *propertyIUMenuItemVC;
     LMPropertyIUTweetButtonVC *propertyIUTweetButtonVC;
+    
+    LMPropertyIUGoogleMapVC *propertyIUGoogleMapVC;
     
     //pg property
     LMPropertyIUMailLinkVC  *propertyIUMailLinkVC;
@@ -139,6 +142,7 @@
         propertyIUMenuItemVC = [[LMPropertyIUMenuItemVC alloc] initWithNibName:[LMPropertyIUMenuItemVC class].className bundle:nil];
         
         propertyIUTweetButtonVC = [[LMPropertyIUTweetButtonVC alloc] initWithNibName:[LMPropertyIUTweetButtonVC class].className bundle:nil];
+        propertyIUGoogleMapVC = [[LMPropertyIUGoogleMapVC alloc] initWithNibName:[LMPropertyIUGoogleMapVC class].className bundle:nil];
 
         //pg
         propertyPGTextFieldVC = [[LMPropertyIUTextFieldVC alloc] initWithNibName:[LMPropertyIUTextFieldVC class].className bundle:nil];
@@ -192,6 +196,8 @@
     [propertyIUMenuItemVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     [propertyIUTweetButtonVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     
+    [propertyIUGoogleMapVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+    
     //pg
     [propertyPGTextViewVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
     [propertyPGPageLinkSetVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
@@ -243,6 +249,7 @@
     _resourceManager = resourceManager;
     propertyIUCarouselVC.resourceManager = resourceManager;
     propertyIUMovieVC.resourceManager = resourceManager;
+    propertyIUGoogleMapVC.resourceManager = resourceManager;
 }
 - (BOOL)isAllSameIU{
     NSString *className = [[[self.controller selectedObjects] firstObject] className];
@@ -325,6 +332,9 @@
     }
     else if ([classString isEqualToString:@"IUTweetButton"]){
         self.propertyVArray = @[propertyIUTweetButtonVC.view];
+    }
+    else if([classString isEqualToString:@"IUGoogleMap"]) {
+        self.propertyVArray = @[propertyIUGoogleMapVC.view];
     }
 #pragma mark IU-Simple
     else if ([classString isEqualToString:@"IUMovie"]) {

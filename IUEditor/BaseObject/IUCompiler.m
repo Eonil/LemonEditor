@@ -41,6 +41,7 @@
 #import "IUMenuBar.h"
 #import "IUMenuItem.h"
 #import "IUTweetButton.h"
+#import "IUGoogleMap.h"
 
 #import "IUCSSCompiler.h"
 
@@ -1045,6 +1046,32 @@
         [code addCodeLine:@"</div>"];
         
     }
+#pragma mark IUGoogleMap
+    else if([iu isKindOfClass:[IUGoogleMap class]]){
+        IUGoogleMap *map = (IUGoogleMap *)iu;
+        [code addCodeLineWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:YES]];
+        NSMutableString *mapImagePath = [NSMutableString stringWithString:@"http://maps.googleapis.com/maps/api/staticmap?"];
+        if(map.currentApproximatePixelSize.width > 640 || map.currentApproximatePixelSize.height > 640){
+            [mapImagePath appendString:@"scale=2"];
+        }
+        [mapImagePath appendFormat:@"&center=%@,%@",map.latitude, map.longitude];
+        [mapImagePath appendFormat:@"&zoom=%ld", map.zoomLevel];
+        
+        [mapImagePath appendString:@"&size=640x640"];
+        if(map.enableMarkerIcon){
+            [mapImagePath appendFormat:@"&markers=size=tiny|%@,%@",map.latitude, map.longitude];
+        }
+        
+//        center=0,0&zoom=1&size=400x50&sensor=true_or_false"
+
+        [code addCodeLineWithFormat:@"<div style=\"width:100%%;height:100%%;background-image:url('%@');background-position:center; background-repeat:no-repeat;position:absolute;", mapImagePath];
+        if(map.currentApproximatePixelSize.width > 640 || map.currentApproximatePixelSize.height > 640){
+            [code addCodeLine:@"background-size:cover"];
+        }
+        [code addCodeLine:@"\"></div>"];
+         
+        [code addCodeLine:@"</div>"];
+    }
 #pragma mark IUFBLike
     else if([iu isKindOfClass:[IUFBLike class]]){
         
@@ -1171,7 +1198,7 @@
 
 - (NSString*)HTMLAttributes:(IUBox*)iu option:(NSDictionary*)option isEdit:(BOOL)isEdit{
     NSMutableString *retString = [NSMutableString string];
-    [retString appendFormat:@"id=%@", iu.htmlID];
+    [retString appendFormat:@"id=\"%@\"", iu.htmlID];
     
     NSArray *classPedigree = [[iu class] classPedigreeTo:[IUBox class]];
     NSMutableString *className = [NSMutableString string];
@@ -2060,22 +2087,68 @@
 #pragma mark - manage JS source
 
 -(NSString*)outputJSInitializeSource:(IUSheet *)document{
-    JDCode *jsSource = [self outputJSSource:document];
+    JDCode *jsSource = [self jsCode:document isEdit:NO];
     return [jsSource string];
 }
 
--(JDCode *)outputJSSource:(IUBox *)iu{
+-(JDCode *)jsCode:(IUBox *)iu isEdit:(BOOL)isEdit{
     JDCode *code = [[JDCode alloc] init];
    
     if([iu isKindOfClass:[IUCarousel class]]){
         [code addCodeLine:@"/* IUCarousel initialize */\n"];
         [code addCodeLineWithFormat:@"initCarousel('%@')", iu.htmlID];
+        for (IUBox *child in iu.children) {
+            [code addCode:[self jsCode:child isEdit:isEdit]];
+        }
     }
+    else if([iu isKindOfClass:[IUGoogleMap class]]){
+        IUGoogleMap *map = (IUGoogleMap *)iu;
+    
+        [code addCodeLine:@"/* IUGoogleMap initialize */\n"];
+        
+        //option
+        [code addCodeLineWithFormat:@"var %@_options = {", map.htmlID];
+        [code increaseIndentLevelForEdit];
+        [code addCodeLineWithFormat:@"center : new google.maps.LatLng(%@, %@),", map.latitude, map.longitude];
+        [code addCodeLineWithFormat:@"zoom : %ld,", map.zoomLevel];
+        if(map.zoomControl){
+            [code addCodeLine:@"scaleControl: true,"];
+        }
+        else{
+            [code addCodeLine:@"scaleControl: false,"];
+        }
+        if(map.panControl){
+            [code addCodeLine:@"panControl: true,"];
+        }
+        else{
+            [code addCodeLine:@"panControl: false,"];
+        }
+        
+        [code decreaseIndentLevelForEdit];
+        [code addCodeLine:@"};"];
+        
+        //map
+        [code addCodeLineWithFormat:@"var map_%@ = new google.maps.Map(document.getElementById('%@'), %@_options);", map.htmlID, map.htmlID, map.htmlID];
+        //marker
+        [code addCodeLineWithFormat:@"var marker_%@ = new google.maps.Marker({", map.htmlID];
+        [code increaseIndentLevelForEdit];
+        [code addCodeLineWithFormat:@"map: map_%@,", map.htmlID];
+        [code addCodeLineWithFormat:@"position: map_%@.getCenter()", map.htmlID];
+        [code decreaseIndentLevelForEdit];
+        [code addCodeLine:@"});"];
+        
+        //info window
+        if(map.markerTitle){
+            [code addCodeLineWithFormat:@"var infoWindow_%@ = new google.maps.InfoWindow();", map.htmlID];
+            [code addCodeLineWithFormat:@"infoWindow_%@.setContent(%@);", map.htmlID, map.markerTitle];
+            [code addCodeLineWithFormat:@"google.maps.event.addListner(marker_%@, 'click' function(){infoWindow_%@.open(map_%@, marker_%@);});", map.htmlID, map.htmlID, map.htmlID, map.htmlID];
+        }
+        
+    }
+    
     else if ([iu isKindOfClass:[IUBox class]]) {
-        if (iu.children.count) {
-            for (IUBox *child in iu.children) {
-                [code addCode:[self outputJSSource:child]];
-            }
+        for (IUBox *child in iu.children) {
+            [code addCode:[self jsCode:child isEdit:isEdit]];
         }
 
     }

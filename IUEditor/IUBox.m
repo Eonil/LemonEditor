@@ -415,12 +415,15 @@
     if(size == maxSize){
         [_css copyMaxSizeToSize:oldMaxSize];
     }
+    [_css setMaxWidth:maxSize];
     
 }
 
 - (void)removeMQSize:(NSNotification *)notification{
     NSInteger size = [[notification.userInfo objectForKey:IUNotificationMQSize] integerValue];
+    NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
     [_css removeTagDictionaryForViewport:size];
+    [_css setMaxWidth:maxSize];
 
 }
 
@@ -435,6 +438,7 @@
     else {
         [_css setEditWidth:selectedSize];
     }
+    [_css setMaxWidth:maxSize];
     
 }
 
@@ -934,6 +938,36 @@
         
     }
 }
+
+
+- (NSSize)currentApproximatePixelSize{
+
+    NSSize pixelSize;
+    NSInteger currentWidth;
+    if(_css.editWidth == IUCSSDefaultViewPort){
+        currentWidth = _css.maxWidth;
+    }
+    else{
+        currentWidth = _css.editWidth;
+    }
+    
+    if([self percentUnitAtCSSTag:IUCSSTagWidthUnitIsPercent]){
+        CGFloat pWidth = [self currentPercentSize].width;
+        pixelSize.width = (pWidth/100) * currentWidth;
+    }
+    else{
+        pixelSize.width = [self currentSize].width;
+    }
+    if( [self percentUnitAtCSSTag:IUCSSTagHeightUnitIsPercent]){
+        CGFloat pHeight = [self currentPercentSize].height;
+        pixelSize.height =(pHeight/100) * currentWidth;
+    }
+    else{
+        pixelSize.height = [self currentSize].height;
+    }
+    return pixelSize;
+}
+
 
 #pragma mark - position
 

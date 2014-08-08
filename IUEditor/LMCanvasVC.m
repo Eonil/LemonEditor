@@ -412,6 +412,9 @@
 - (id)callWebScriptMethod:(NSString *)function withArguments:(NSArray *)args{
     return [[self webView] callWebScriptMethod:function withArguments:args];
 }
+- (id)evaluateWebScript:(NSString *)script{
+    return [[self webView] evaluateWebScript:script];
+}
 
 - (NSPoint)distanceFromIU:(NSString *)parentName to:(NSString *)iuName{
     NSRect iuFrame = [[frameDict.dict objectForKey:iuName] rectValue];

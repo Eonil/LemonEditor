@@ -368,6 +368,10 @@
     return [[self windowScriptObject] callWebScriptMethod:function withArguments:args];
 }
 
+- (id)evaluateWebScript:(NSString *)script{
+    return [[self windowScriptObject] evaluateWebScript:script];
+}
+
 - (void)resizePageContent{
     [self stringByEvaluatingJavaScriptFromString:@"resizePageContentHeight()"];
 }

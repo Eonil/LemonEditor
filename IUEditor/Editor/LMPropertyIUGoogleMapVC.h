@@ -7,7 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "IUResourceManager.h"
+#import "IUController.h"
+
 
 @interface LMPropertyIUGoogleMapVC : NSViewController
+
+@property (nonatomic) IUController      *controller;
+@property (strong) IUResourceManager     *resourceManager;
+
 
 @end

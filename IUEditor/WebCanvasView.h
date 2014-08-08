@@ -24,7 +24,7 @@
 
 //call any javascript
 - (id)callWebScriptMethod:(NSString *)function withArguments:(NSArray *)args;
-
+- (id)evaluateWebScript:(NSString *)script;
 
 #pragma mark -
 

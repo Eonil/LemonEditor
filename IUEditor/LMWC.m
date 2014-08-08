@@ -349,11 +349,7 @@
             return;
         }
         
-        //load sizeView
-        for(NSNumber *number in _project.mqSizes){
-            NSInteger frameSize = [number integerValue];
-            [canvasVC addFrame:frameSize];
-        }
+     
                 
         //vc setting
         
@@ -378,6 +374,12 @@
         
         [_project connectWithEditor];
         [_project setIsConnectedWithEditor];
+        
+        //load sizeView
+        for(NSNumber *number in _project.mqSizes){
+            NSInteger frameSize = [number integerValue];
+            [canvasVC addFrame:frameSize];
+        }
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentDocument) name:IUNotificationMQSelected object:nil];
 

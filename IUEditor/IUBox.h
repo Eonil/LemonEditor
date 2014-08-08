@@ -38,6 +38,8 @@
  @param args javascirpt function argument, argument에 들어가는 것중에 dict, array는 string으로 보내서javascript내부에서 새로 var를 만들어서 사용
 */
 - (id)callWebScriptMethod:(NSString *)function withArguments:(NSArray *)args;
+- (id)evaluateWebScript:(NSString *)script;
+
 
 @end
 
@@ -181,6 +183,7 @@ typedef enum _IUOverflowType{
 - (void)endDragSession;
 - (void)movePosition:(NSPoint)point withParentSize:(NSSize)parentSize;
 - (void)increaseSize:(NSSize)size withParentSize:(NSSize)parentSize;
+- (NSSize)currentApproximatePixelSize;
 
 
 //Position

@@ -19,8 +19,8 @@
 
 @interface IUCSS : NSObject <NSCoding, NSCopying>
 
-@property (nonatomic) _binding_ NSInteger editWidth;
-@property (nonatomic) _binding_ NSInteger maxWidth;
+@property (nonatomic)  NSInteger editWidth;
+@property (nonatomic)  NSInteger maxWidth;
 @property (weak) id  <IUCSSDelegate> delegate;
 
 //set tag, or delete tag

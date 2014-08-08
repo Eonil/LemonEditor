@@ -322,6 +322,10 @@
 		3D9BC4051993A0E300451F55 /* IUGoogleMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9BC4041993A0E200451F55 /* IUGoogleMap.m */; };
 		3D9BC4091993A12900451F55 /* LMPropertyIUGoogleMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9BC4071993A12900451F55 /* LMPropertyIUGoogleMapVC.m */; };
 		3D9BC40A1993A12900451F55 /* LMPropertyIUGoogleMapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC4081993A12900451F55 /* LMPropertyIUGoogleMapVC.xib */; };
+		3D9BC40D1994AADA00451F55 /* tool_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC40B1994AADA00451F55 /* tool_map.png */; };
+		3D9BC40E1994AADA00451F55 /* tool_map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC40C1994AADA00451F55 /* tool_map@2x.png */; };
+		3D9BC4111994AAE400451F55 /* stack_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC40F1994AAE400451F55 /* stack_map.png */; };
+		3D9BC4121994AAE400451F55 /* stack_map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC4101994AAE400451F55 /* stack_map@2x.png */; };
 		3DA416B81935A6BE00559028 /* LMPreferenceFontVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */; };
 		3DA416B91935A6BE00559028 /* LMPreferenceFontVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */; };
 		3DA416BD1935ABB400559028 /* LMFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416BC1935ABB400559028 /* LMFontController.m */; };
@@ -1191,6 +1195,10 @@
 		3D9BC4061993A12900451F55 /* LMPropertyIUGoogleMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUGoogleMapVC.h; path = Editor/LMPropertyIUGoogleMapVC.h; sourceTree = "<group>"; };
 		3D9BC4071993A12900451F55 /* LMPropertyIUGoogleMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPropertyIUGoogleMapVC.m; path = Editor/LMPropertyIUGoogleMapVC.m; sourceTree = "<group>"; };
 		3D9BC4081993A12900451F55 /* LMPropertyIUGoogleMapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyIUGoogleMapVC.xib; path = Editor/LMPropertyIUGoogleMapVC.xib; sourceTree = "<group>"; };
+		3D9BC40B1994AADA00451F55 /* tool_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tool_map.png; sourceTree = "<group>"; };
+		3D9BC40C1994AADA00451F55 /* tool_map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tool_map@2x.png"; sourceTree = "<group>"; };
+		3D9BC40F1994AAE400451F55 /* stack_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stack_map.png; sourceTree = "<group>"; };
+		3D9BC4101994AAE400451F55 /* stack_map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_map@2x.png"; sourceTree = "<group>"; };
 		3DA416B51935A6BE00559028 /* LMPreferenceFontVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPreferenceFontVC.h; path = Editor/Preference/LMPreferenceFontVC.h; sourceTree = "<group>"; };
 		3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPreferenceFontVC.m; path = Editor/Preference/LMPreferenceFontVC.m; sourceTree = "<group>"; };
 		3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPreferenceFontVC.xib; path = Editor/Preference/LMPreferenceFontVC.xib; sourceTree = "<group>"; };
@@ -2655,6 +2663,8 @@
 		3DED26A21900D393001A1D67 /* stackImage */ = {
 			isa = PBXGroup;
 			children = (
+				3D9BC40F1994AAE400451F55 /* stack_map.png */,
+				3D9BC4101994AAE400451F55 /* stack_map@2x.png */,
 				2640BCBA19331936004A1E4B /* stack_text.png */,
 				2640BCBB19331936004A1E4B /* stack_text@2x.png */,
 				3D748C831921D1BD005665A3 /* stack_carousel_item.png */,
@@ -3201,6 +3211,8 @@
 		690A40A018E170B700095263 /* classImage */ = {
 			isa = PBXGroup;
 			children = (
+				3D9BC40B1994AADA00451F55 /* tool_map.png */,
+				3D9BC40C1994AADA00451F55 /* tool_map@2x.png */,
 				2640BCBE1933194B004A1E4B /* tool_text.png */,
 				2640BCBF1933194B004A1E4B /* tool_text@2x.png */,
 				26C85661192060E500118CA5 /* tool_page_nav.png */,
@@ -4003,6 +4015,7 @@
 				69B260E719594E4F007D905C /* font.png in Resources */,
 				69D15F7018E893170046FBB0 /* LMBottomToolbarVC.xib in Resources */,
 				69DE5CE319614D880050D020 /* LMNotiMessageWC.xib in Resources */,
+				3D9BC40E1994AADA00451F55 /* tool_map@2x.png in Resources */,
 				3DED26891900D329001A1D67 /* stack_navi@2x.png in Resources */,
 				58FF6B8F1946EA2B009A86F9 /* PGSubmitButtonVC.xib in Resources */,
 				692C4DCA1967D10300EAB2E7 /* RunningAProject.pdf in Resources */,
@@ -4308,8 +4321,10 @@
 				690A8275190A2CC200DDBA86 /* new_django.png in Resources */,
 				26CA36D7198760B70004D888 /* cs_thumbnail@2x.png in Resources */,
 				3DF8044418FE62FC00913505 /* tool_twitter@2x.png in Resources */,
+				3D9BC4121994AAE400451F55 /* stack_map@2x.png in Resources */,
 				3DF8041818FE62F200913505 /* send_mail@2x.png in Resources */,
 				CBA8781719643B4500075294 /* IUImport.rtf in Resources */,
+				3D9BC4111994AAE400451F55 /* stack_map.png in Resources */,
 				3DF8041C18FE62F200913505 /* export@2x.png in Resources */,
 				2641F441195A6CFA00DDF1C3 /* bg_fullsize@2x.png in Resources */,
 				0685563D198A63430073FA83 /* wireless_modem.png in Resources */,
@@ -4368,6 +4383,7 @@
 				3DA6F2FA19639E81004DF0AA /* LMHelpImagePopoverVC.xib in Resources */,
 				3DED274919078991001A1D67 /* clear_color.png in Resources */,
 				3DED26491900D2DE001A1D67 /* align_center@2x.png in Resources */,
+				3D9BC40D1994AADA00451F55 /* tool_map.png in Resources */,
 				69761BC418F04ECD00C4EDC6 /* LMPropertyBGImageVC.xib in Resources */,
 				06855630198A63430073FA83 /* morrison.png in Resources */,
 				0685563A198A63430073FA83 /* tom_wooden_bookcase_2.png in Resources */,

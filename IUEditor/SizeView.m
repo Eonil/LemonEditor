@@ -264,8 +264,10 @@
     //set maxWidth in case of removing maxWidth 
     [self setMaxWidth:isMaxChanged];
     
+
     //notification
-     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQRemoved object:self userInfo:@{IUNotificationMQSize:@(width)}];
+    InnerSizeBox *maxBox = (InnerSizeBox *)boxManageView.subviews[0];
+     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQRemoved object:self userInfo:@{IUNotificationMQSize:@(width), IUNotificationMQMaxSize:@(maxBox.frameWidth)}];
 
 }
 

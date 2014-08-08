@@ -234,6 +234,22 @@
 		<key>widgetClass</key>
 		<integer>1</integer>
 	</dict>
+    <dict>
+        <key>isWidget</key>
+        <true/>
+        <key>className</key>
+        <string>IUGoogleMap</string>
+        <key>classImage</key>
+        <string>tool_map</string>
+        <key>navImage</key>
+        <string>stack_map</string>
+        <key>shortDesc</key>
+        <string>Object for Google Map</string>
+        <key>longDesc</key>
+        <string></string>
+        <key>widgetClass</key>
+        <integer>1</integer>
+    </dict>
 	<dict>
 		<key>isWidget</key>
 		<true/>
