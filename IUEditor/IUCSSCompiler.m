@@ -902,11 +902,22 @@
                     [code insertTag:@"border-top-color" string:color];
                 }
                 else if(menuItem.depth ==2){
+                    IUMenuBar *menuBar = (IUMenuBar *)(menuItem.parent.parent);
                     if(viewport > 640){
-                        [code insertTag:@"border-left-color" string:color];
+                        if(menuBar.align == IUMenuBarAlignLeft){
+                            [code insertTag:@"border-left-color" string:color];
+                        }
+                        else if(menuBar.align == IUMenuBarAlignRight){
+                            [code insertTag:@"border-right-color" string:color];
+                        }
                     }
                     else{
-                        [code insertTag:@"border-left-color" string:@"transparent !important"];
+                        if(menuBar.align == IUMenuBarAlignLeft){
+                            [code insertTag:@"border-left-color" string:@"transparent !important"];
+                        }
+                        else if(menuBar.align == IUMenuBarAlignRight){
+                            [code insertTag:@"border-right-color" string:@"transparent !important"];
+                        }
                         [code insertTag:@"border-top-color" string:color];
                     }
                 }
@@ -925,11 +936,22 @@
                 [code insertTag:@"border-top-color" string:color];
             }
             else if(menuItem.depth ==2){
+                IUMenuBar *menuBar = (IUMenuBar *)(menuItem.parent.parent);
                 if(viewport > 640){
-                    [code insertTag:@"border-left-color" string:color];
+                    if(menuBar.align == IUMenuBarAlignLeft){
+                        [code insertTag:@"border-left-color" string:color];
+                    }
+                    else if(menuBar.align == IUMenuBarAlignRight){
+                        [code insertTag:@"border-right-color" string:color];
+                    }
                 }
                 else{
-                    [code insertTag:@"border-left-color" string:@"transparent !important"];
+                    if(menuBar.align == IUMenuBarAlignLeft){
+                        [code insertTag:@"border-left-color" string:@"transparent !important"];
+                    }
+                    else if(menuBar.align == IUMenuBarAlignRight){
+                        [code insertTag:@"border-right-color" string:@"transparent !important"];
+                    }
                     [code insertTag:@"border-top-color" string:color];
                 }
             }
@@ -957,6 +979,8 @@
 
     }
     
+    [code setInsertingViewPort:IUCSSDefaultViewPort];
+
     //hover, active
     [code setInsertingIdentifiers:@[menuItem.hoverItemIdentifier, menuItem.activeItemIdentifier]];
     [code setInsertingTarget:IUTargetBoth];
@@ -975,7 +999,7 @@
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUCarousel:(IUCarousel*)carousel{
     
-    
+    [code setInsertingViewPort:IUCSSDefaultViewPort];
     [code setInsertingIdentifier:carousel.pagerID];
     [code insertTag:@"background-color" color:carousel.deselectColor];
     

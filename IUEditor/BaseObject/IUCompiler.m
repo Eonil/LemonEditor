@@ -1196,10 +1196,7 @@
         
         if([iu isKindOfClass:[IUMenuBar class]]){
             IUMenuBar *menuBar = (IUMenuBar *)iu;
-            if(menuBar.align == IUAlignCenter){
-                [className appendString:@" align-center"];
-            }
-            else if(menuBar.align == IUAlignRight){
+            if(menuBar.align == IUMenuBarAlignRight){
                 [className appendString:@" align-right"];
             }
         }

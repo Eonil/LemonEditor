@@ -8,10 +8,15 @@
 
 #import "IUBox.h"
 
+typedef enum{
+    IUMenuBarAlignLeft,
+    IUMenuBarAlignRight,
+}IUMenuBarAlign;
+
 @interface IUMenuBar : IUBox
 
 //Menubar property
-@property (nonatomic) IUAlign align;
+@property (nonatomic) IUMenuBarAlign align;
 
 - (NSInteger)count;
 - (void)setCount:(NSInteger)count;

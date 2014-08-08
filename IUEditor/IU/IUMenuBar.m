@@ -18,7 +18,7 @@
         [[self undoManager] disableUndoRegistration];
         
         self.count = 3;
-        self.align = IUAlignLeft;
+        self.align = IUMenuBarAlignLeft;
         self.overflowType = IUOverflowTypeVisible;
         
         self.mobileTitle = @"MENU";
@@ -211,6 +211,19 @@
     _iconColor = iconColor;
     [self updateCSSWithIdentifier:self.topButtonIdentifier];
     [self updateCSSWithIdentifier:self.bottomButtonIdentifier];
+}
+
+- (void)setAlign:(IUMenuBarAlign)align{
+    if(_align == align){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setAlign:_align];
+    _align = align;
+    [self updateHTML];
+    for(IUMenuItem *item in self.allChildren){
+        [item updateCSS];
+    }
 }
 
 #pragma mark - changeXXX

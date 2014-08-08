@@ -152,6 +152,10 @@ a{
     opacity: 1;
     width:100%;
 }
+.IUMenuBar.align-right ul ul > li > ul{
+    left: initial;
+    right: 100%;
+}
 .IUMenuBar > ul > li > ul > li > ul > li{
     width:100%;
 }

@@ -147,14 +147,6 @@ a{
     height:100%;
     
 }
-.IUMenuItem > ul{
-    /*FIXME : display-on-off*/
-    display:none;
-}
-.IUMenuItem > ul.open{
-    display:block;
-}
-
 /* menu bar*/
 .IUMenuBar{
     overflow:visible;
@@ -191,6 +183,10 @@ a{
     top: 17px;
     right: 20px;
 }
+.IUMenuBar.align-right > ul > li > ul > li > div.closure{
+    left:20px;
+    right:initial;
+}
 
 /* menuItem : depth -3 */
 .IUMenuBar ul ul > li > ul{
@@ -199,6 +195,10 @@ a{
     top: 0;
     opacity: 1;
     width:100%;
+}
+.IUMenuBar.align-right ul ul > li > ul{
+    left: initial;
+    right: 100%;
 }
 .IUMenuBar > ul > li > ul > li > ul > li{
     width:100%;
