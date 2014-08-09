@@ -249,7 +249,7 @@
             }
 //            else if ([tag isE])
         }
-        if (viewport == IUCSSDefaultViewPort && target == IUTargetOutput) {
+        if (viewport == IUCSSDefaultViewPort) {
             NSArray *keys = [tagDictForReturn allKeysForObject:@"rgb(0,0,0)"];
             [tagDictForReturn removeObjectsForKeys:keys];
             keys = [tagDictForReturn allKeysForObject:@"0.00px"];
