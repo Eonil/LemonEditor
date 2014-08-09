@@ -105,6 +105,16 @@
     unconfirmed[obj.htmlID] = obj;
 }
 
+-(void)setIdentifierAndRegisterToTemp:(IUBox*)obj identifier:(NSString*)identifier{
+    if (confirmed[identifier] || unconfirmed[identifier]) {
+        NSAssert(0, @"identifier duplicated");
+        return;
+    }
+    obj.htmlID = identifier;
+    unconfirmed[obj.htmlID] = obj;
+}
+
+
 -(IUBox*)IUWithIdentifier:(NSString*)identifier{
     return [confirmed objectForKey:identifier];
 }

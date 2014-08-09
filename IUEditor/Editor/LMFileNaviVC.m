@@ -9,12 +9,13 @@
 #import "LMFileNaviVC.h"
 #import "IUSheetGroup.h"
 #import "IUResourceFile.h"
-#import "NSTreeController+JDExtension.h"
 #import "IUPage.h"
 #import "IUBackground.h"
 #import "IUClass.h"
 #import "LMWC.h"
 #import "IUProject.h"
+#import "IUWordpressProject.h"
+#import "LMWordpressCreateFileWC.h"
 
 @interface LMFileNaviVC ()
 @property (weak) IBOutlet NSOutlineView *outlineV;
@@ -26,6 +27,7 @@
     id      _lastClickedItem;
     NSArray *_draggingIndexPaths;
     IUSheet  *_draggingItem;
+    LMWordpressCreateFileWC *wpWC;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

@@ -12,10 +12,11 @@
 #import "WebCanvasView.h"
 #import "IUFrameDictionary.h"
 #import "IUController.h"
+#import "LMFileNaviVC.h"
 
 @class LMWindow;
 
-@interface LMWC : NSWindowController <NSWindowDelegate>
+@interface LMWC : NSWindowController <NSWindowDelegate, LMFileNaviDelegate>
 
 @property (nonatomic, weak) _binding_ IUSheet *selectedNode;
 @property (nonatomic, weak) _binding_ IUController   *IUController;

@@ -161,7 +161,12 @@
         
         changedCSSWidths = [NSMutableSet set];
         
-        [project.identifierManager setNewIdentifierAndRegisterToTemp:self withKey:nil];
+        if (options[IUFileName]) {
+            [project.identifierManager setIdentifierAndRegisterToTemp:self identifier:options[IUFileName]];
+        }
+        else {
+            [project.identifierManager setNewIdentifierAndRegisterToTemp:self withKey:nil];
+        }
         self.name = self.htmlID;
         [[self undoManager] enableUndoRegistration];
         

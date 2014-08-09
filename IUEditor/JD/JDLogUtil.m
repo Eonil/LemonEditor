@@ -230,11 +230,11 @@ static NSMutableDictionary *timeDict;
 +(void)timeLogEnd:(NSString*)name{
     NSDate *startDate = [timeDict objectForKey:name];
     NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:startDate];
-    if (interval > 0.1) {
+    if (interval > 0.001) {
         JDErrorLog(@"Time Log For %@: %.4f", name, interval);
     }
     else {
-        JDTraceLog(@"Time Log For %@: %.4f", name, interval);
+        JDErrorLog(@"Time Log For %@: %.4f", name, interval);
     }
 }
 

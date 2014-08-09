@@ -12,12 +12,15 @@
 #import "IUSheetController.h"
 #import "IUIdentifierManager.h"
 
+@protocol LMFileNaviDelegate
+@end
+
 @interface LMFileNaviVC : NSViewController <NSOutlineViewDelegate, NSMenuDelegate, NSControlTextEditingDelegate>
 
 @property (nonatomic, readonly, weak) id  selection;
 @property (strong, nonatomic) IBOutlet _binding_ IUSheetController *documentController;
 @property (nonatomic, weak) IUProject *project;
-
+@property (weak) id <LMFileNaviDelegate> delegate;
 
 -(void)selectFirstDocument;
 @end

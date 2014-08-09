@@ -8,8 +8,6 @@
 
 #import "IUController.h"
 #import "IUSheet.h"
-#import "NSTreeController+JDExtension.h"
-#import "NSIndexPath+JDExtension.h"
 #import "IUImport.h"
 #import "IUProject.h"
 #import "IUPage.h"

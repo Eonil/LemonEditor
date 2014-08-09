@@ -26,6 +26,8 @@
 #import "JDFileUtil.h"
 #import "NSString+IUTag.h"
 #import "NSArray+JDExtension.h"
+#import "NSTreeController+JDExtension.h"
+#import "NSIndexPath+JDExtension.h"
 
 #import "IUDefinition.h"
 

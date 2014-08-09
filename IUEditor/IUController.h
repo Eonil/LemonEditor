@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "IUBox.h"
-#import "NSTreeController+JDExtension.h"
 
 @class IUSheet;
 @class IUImport;

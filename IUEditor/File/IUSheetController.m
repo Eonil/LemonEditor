@@ -7,7 +7,6 @@
 //
 
 #import "IUSheetController.h"
-#import "NSTreeController+JDExtension.h"
 
 @implementation IUSheetController
 

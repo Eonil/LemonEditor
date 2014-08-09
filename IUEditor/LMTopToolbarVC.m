@@ -8,8 +8,6 @@
 
 #import "LMTopToolbarVC.h"
 #import "LMFileTabItemVC.h"
-#import "NSTreeController+JDExtension.h"
-
 
 @interface LMTopToolbarVC (){
     NSMutableArray  *openTabVCArray;

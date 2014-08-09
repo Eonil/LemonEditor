@@ -76,6 +76,17 @@ typedef enum _IUOverflowType{
     int IUEditorVersion;
 }
 
+/*
+ Following are options
+ */
+
+#define IUFileName @"FileName"
+/**
+ initialize IU with project
+ @param project project that will initizlie IU. Should not nil.
+ @param options NSDictionary of options. \n
+ IUFileName : define filename
+ */
 -(id)initWithProject:(IUProject*)project options:(NSDictionary*)options;
 - (void)connectWithEditor;
 

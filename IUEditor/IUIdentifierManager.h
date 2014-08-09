@@ -25,6 +25,7 @@
  @note This function does not assign html id of children. Call this function for each child.
  */
 -(void)setNewIdentifierAndRegisterToTemp:(IUBox*)obj withKey:(NSString*)keyString;
+-(void)setIdentifierAndRegisterToTemp:(IUBox*)obj identifier:(NSString*)identifier;
 -(void)resetUnconfirmedIUs;
 -(void)confirm;
 

@@ -19,11 +19,12 @@
 #import "IUResourceManager.h"
 #import "IUIdentifierManager.h"
 
+
 //connect VC
 #import "LMAppearanceVC.h"
 #import "LMResourceVC.h"
 #import "LMClipArtVC.h"
-#import "LMFileNaviVC.h"
+
 #import "LMStackVC.h"
 #import "LMWidgetLibraryVC.h"
 #import "LMCanvasVC.h"
