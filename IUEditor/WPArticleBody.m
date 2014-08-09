@@ -14,6 +14,8 @@
     self = [super initWithProject:project options:options];
     self.positionType = IUPositionTypeRelative;
     [self.css eradicateTag:IUCSSTagPixelHeight];
+    [self.css setValue:@"1.3" forTag:IUCSSTagLineHeight];
+    [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign];
     
     [self.css setValue:@(800) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
     return self;
