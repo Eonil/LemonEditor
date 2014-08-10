@@ -244,9 +244,14 @@
 
 #pragma mark - cell specivfic action (add, name editing)
 
-- (IBAction)pressAddBtn:(id)sender{
-    if([sender isKindOfClass:[NSButton class]]){
-        
+- (IBAction)performAddSheet:(id)sender{
+    if ([self.project isKindOfClass:[IUWordpressProject class]]) {
+        wpWC = [[LMWordpressCreateFileWC alloc] initWithWindowNibName:@"LMWordpressCreateFileWC"];
+        wpWC.project = (IUWordpressProject*) self.project;
+        wpWC.sheetController = self.documentController;
+        [self.view.window beginSheet:wpWC.window completionHandler:nil];
+    }
+    else {
         NSTableCellView *cellView = (NSTableCellView *)[sender superview];
         NSString *groupName =  cellView.textField.stringValue;
         IUSheet *newDoc;

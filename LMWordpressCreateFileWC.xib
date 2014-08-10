@@ -79,7 +79,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <binding destination="-2" name="value" keyPath="self.description" id="Uqv-99-7yo"/>
+                            <binding destination="-2" name="value" keyPath="self.fileDescription" id="cg7-tg-9Lf"/>
                         </connections>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sfq-hK-E2t">

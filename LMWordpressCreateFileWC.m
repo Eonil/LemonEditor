@@ -10,7 +10,7 @@
 
 @interface LMWordpressCreateFileWC ()
 @property (nonatomic) NSString* selectedFileName;
-@property NSString *description;
+@property NSString *fileDescription;
 @property NSString *pageInfoButtonTitle;
 @property BOOL canCreateFile;
 @end
@@ -38,7 +38,7 @@
     _selectedFileName = selectedFileName;
     NSString *commentFile = [[NSBundle mainBundle] pathForResource:@"wpPageInformation" ofType:@"plist"];
     NSDictionary *dict = [NSDictionary  dictionaryWithContentsOfFile:commentFile];
-    self.description = dict[selectedFileName][@"description"];
+    self.fileDescription = dict[selectedFileName][@"description"];
     self.pageInfoButtonTitle = [NSString stringWithFormat:@"More about %@", self.selectedFileName];
 
     //define can create file
