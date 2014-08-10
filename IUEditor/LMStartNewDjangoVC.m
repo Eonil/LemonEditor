@@ -49,7 +49,7 @@
     NSDictionary *options = @{   IUProjectKeyGit: @(NO),
                                  IUProjectKeyHeroku: @(NO),
                                  IUProjectKeyAppName : [_djangoProjectDir lastPathComponent],
-                                 IUProjectKeyProjectPath : [_djangoProjectDir stringByAppendingPathComponent:fileName],
+                                 IUProjectKeyIUFilePath : [_djangoProjectDir stringByAppendingPathComponent:fileName],
                                  IUProjectKeyType:@(IUProjectTypeDjango),
                                  IUProjectKeyResourcePath : _djangoResourceDir,
                                  IUProjectKeyBuildPath : _djangoTemplateDir

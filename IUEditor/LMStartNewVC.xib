@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -11,7 +11,7 @@
                 <outlet property="prevB" destination="eUJ-yz-hPD" id="pJD-JW-yU7"/>
                 <outlet property="typeDefaultB" destination="djW-nI-k7j" id="bbw-lM-bq0"/>
                 <outlet property="typeDjangoB" destination="WaC-1p-Quw" id="aWt-e3-Knd"/>
-                <outlet property="typePresentationB" destination="dcY-27-3P1" id="LTM-22-c6n"/>
+                <outlet property="typeWPB" destination="dcY-27-3P1" id="5lN-So-LwX"/>
                 <outlet property="view" destination="zvD-IO-alK" id="pAq-FC-CFT"/>
             </connections>
         </customObject>
@@ -81,7 +81,7 @@
                                     </box>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zn0-kf-rD0">
                                         <rect key="frame" x="304" y="107" width="92" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Presentation" id="JzU-rY-SBw">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="WordPress" id="JzU-rY-SBw">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -129,7 +129,7 @@
                                         <color key="borderColor" red="0.30980393290519714" green="0.55294120311737061" blue="0.90196084976196289" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="fillColor" red="0.93725496530532837" green="0.98431378602981567" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                         <connections>
-                                            <binding destination="-2" name="hidden" keyPath="self.typePresentationB.state" id="epL-eT-7xb">
+                                            <binding destination="-2" name="hidden" keyPath="self.typeWPB.state" id="yuy-t8-k4j">
                                                 <dictionary key="options">
                                                     <string key="NSValueTransformerName">NSNegateBoolean</string>
                                                 </dictionary>
@@ -164,7 +164,7 @@
                                     </button>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dcY-27-3P1" userLabel="Presentation">
                                         <rect key="frame" x="260" y="131" width="180" height="120"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="new_pt" imagePosition="overlaps" alignment="center" enabled="NO" imageScaling="proportionallyDown" inset="2" id="OPt-aH-6pp">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="wp" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="OPt-aH-6pp">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -182,14 +182,6 @@
                                             <action selector="pressProjectTypeB:" target="-2" id="CqP-yZ-iZu"/>
                                         </connections>
                                     </button>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VtK-Wh-qJp">
-                                        <rect key="frame" x="244" y="65" width="213" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Presentation will be available very soon" id="VN7-tm-nMm">
-                                            <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
                                 </subviews>
                             </view>
                             <color key="borderColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -211,12 +203,11 @@
                 <constraint firstAttribute="trailing" secondItem="FxQ-R5-TAh" secondAttribute="trailing" id="rcH-N1-uAp"/>
                 <constraint firstItem="FxQ-R5-TAh" firstAttribute="top" secondItem="zvD-IO-alK" secondAttribute="top" id="zx7-QX-Oer"/>
             </constraints>
-            <point key="canvasLocation" x="-929" y="54.5"/>
         </customView>
     </objects>
     <resources>
         <image name="new_default" width="54" height="66"/>
         <image name="new_django" width="54" height="66"/>
-        <image name="new_pt" width="70" height="64"/>
+        <image name="wp" width="225" height="225"/>
     </resources>
 </document>

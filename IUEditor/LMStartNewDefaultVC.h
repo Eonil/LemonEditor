@@ -11,10 +11,10 @@
 @class LMStartNewVC;
 
 @interface LMStartNewDefaultVC : NSViewController
-@property NSButton *nextB;
-@property NSButton *prevB;
+@property (weak) NSButton *nextB;
+@property (weak) NSButton *prevB;
 
 - (void)show;
-@property   LMStartNewVC    *parentVC;
+@property (weak)   LMStartNewVC    *parentVC;
 
 @end

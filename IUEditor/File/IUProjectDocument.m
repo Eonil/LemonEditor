@@ -91,7 +91,7 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
         NSString *filePath = [url relativePath];
         NSString *appName = [[url lastPathComponent] stringByDeletingPathExtension];
         
-        [projectDict setObject:filePath forKey:IUProjectKeyProjectPath];
+        [projectDict setObject:filePath forKey:IUProjectKeyIUFilePath];
         [projectDict setObject:appName forKey:IUProjectKeyAppName];
         
         NSError *error;

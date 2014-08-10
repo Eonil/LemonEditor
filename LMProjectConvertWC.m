@@ -80,7 +80,7 @@
     NSDictionary *options = @{   IUProjectKeyGit: @(NO),
                                  IUProjectKeyHeroku: @(NO),
                                  IUProjectKeyAppName : [_targetProjectDirectory lastPathComponent],
-                                 IUProjectKeyProjectPath : projectPath,
+                                 IUProjectKeyIUFilePath : projectPath,
                                  IUProjectKeyType:@(IUProjectTypeDjango),
                                  IUProjectKeyResourcePath : _resourceProjectDirectory,
                                  IUProjectKeyBuildPath : _buildProjectDirectory,

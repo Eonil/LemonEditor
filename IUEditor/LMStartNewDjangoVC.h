@@ -11,12 +11,12 @@
 @class LMStartNewVC;
 
 @interface LMStartNewDjangoVC : NSViewController
-@property NSButton *nextB;
-@property NSButton *prevB;
+@property (weak) NSButton *nextB;
+@property (weak) NSButton *prevB;
 
 
 //Dir 설정
-@property   LMStartNewVC    *parentVC;
+@property (weak)  LMStartNewVC    *parentVC;
 
 - (void)show;
 

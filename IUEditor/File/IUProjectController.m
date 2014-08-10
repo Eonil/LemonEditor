@@ -21,7 +21,7 @@
 - (IBAction)newWordpressDocument:(id)sender{
     NSString *url = [@"~/Sites/wordpress/sample.iu" stringByExpandingTildeInPath];
     
-    newDocumentOption = @{IUProjectKeyType: @(IUProjectTypeWordpress), IUProjectKeyProjectPath: url, IUProjectKeyAppName: @"sample"};
+    newDocumentOption = @{IUProjectKeyType: @(IUProjectTypeWordpress), IUProjectKeyIUFilePath: url, IUProjectKeyAppName: @"sample"};
     [super newDocument:sender];
 }
 
@@ -62,8 +62,8 @@
     if(document){
         //option으로 url이 넘어옴.
         NSURL *url;
-        if ([newDocumentOption objectForKey:IUProjectKeyProjectPath]) {
-            url = [NSURL fileURLWithPath:[newDocumentOption objectForKey:IUProjectKeyProjectPath]];
+        if ([newDocumentOption objectForKey:IUProjectKeyIUFilePath]) {
+            url = [NSURL fileURLWithPath:[newDocumentOption objectForKey:IUProjectKeyIUFilePath]];
         }
         else {
             url = [self fileURLForNewDocumentOfType:typeName];

@@ -34,10 +34,10 @@
     _identifierManager = [[IUIdentifierManager alloc] init];
     
     NSAssert(options[IUProjectKeyAppName], @"app Name");
-    NSAssert(options[IUProjectKeyProjectPath], @"path");
+    NSAssert(options[IUProjectKeyIUFilePath], @"path");
     
     self.name = [options objectForKey:IUProjectKeyAppName];
-    self.path = [options objectForKey:IUProjectKeyProjectPath];
+    self.path = [options objectForKey:IUProjectKeyIUFilePath];
 /*
     _buildPath = [[options objectForKey:IUProjectKeyBuildPath] relativePathFrom:self.path];
     if (_buildPath == nil) {
