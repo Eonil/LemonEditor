@@ -200,7 +200,7 @@
 }
 
 
--(BOOL)shouldRemoveIU{
+-(BOOL)shouldRemoveIUByUserInput{
     return NO;
 }
 

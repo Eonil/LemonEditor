@@ -40,7 +40,8 @@
     }
     return self;
 }
--(BOOL)shouldRemoveIU{
+
+-(BOOL)shouldRemoveIUByUserInput{
     return NO;
 }
 

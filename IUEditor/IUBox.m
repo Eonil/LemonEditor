@@ -549,9 +549,7 @@
 -(BOOL)shouldAddIUByUserInput{
     return YES;
 }
-- (BOOL)shouldRemoveIU{
-    return YES;
-}
+
 - (BOOL)shouldRemoveIUByUserInput{
     return YES;
 }
@@ -634,8 +632,6 @@
 
 
 -(BOOL)removeIU:(IUBox *)iu{
-    if([iu shouldRemoveIU]){
-        
         NSInteger index = [_m_children indexOfObject:iu];
         [[self.undoManager prepareWithInvocationTarget:self] insertIU:iu atIndex:index error:nil];
         
@@ -650,8 +646,6 @@
         }
 
         return YES;
-    }
-    return NO;
 }
 
 -(BOOL)changeIUIndex:(IUBox*)iu to:(NSUInteger)index error:(NSError**)error{
