@@ -38,21 +38,9 @@
     
     self.name = [options objectForKey:IUProjectKeyAppName];
     self.path = [options objectForKey:IUProjectKeyIUFilePath];
-/*
-    _buildPath = [[options objectForKey:IUProjectKeyBuildPath] relativePathFrom:self.path];
-    if (_buildPath == nil) {
-        _buildPath = @"~/Sites/wordpress/wp-content/themes/sample";
-    }
     
-    _buildResourcePath = [[options objectForKey:IUProjectKeyResourcePath] relativePathFrom:self.path];
-    if (_buildResourcePath == nil) {
-        _buildResourcePath = @"~/Sites/wordpress/wp-content/themes/sample/resource";
-    }
- */
-
-    // for development temp
-    _buildPath = @"~/Sites/wordpress/wp-content/themes/sample";
-    _buildResourcePath = @"~/Sites/wordpress/wp-content/themes/sample/resource";
+    _buildPath = @"$IUFileDirectory/$AppName";
+    _buildResourcePath = @"$IUFileDirectory/$AppName/resource";
 
     _pageGroup = [[IUSheetGroup alloc] init];
     _pageGroup.name = IUPageGroupName;
