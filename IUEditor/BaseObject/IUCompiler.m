@@ -382,6 +382,8 @@
         JDCode *jsCode = [self javascriptHeaderForProject:sheet.project isEdit:NO];
         [sourceCode replaceCodeString:@"<!--JAVASCRIPT_Insert-->" toCode:jsCode];
         
+        [sourceCode replaceCodeString:@"<!--JAVASCRIPT_Insert-->" toCodeString:@"<script src='http://code.jquery.com/jquery-1.10.2.js'></script>"];
+        [sourceCode replaceCodeString:@"<!--JAVASCRIPT_UI_Insert-->" toCodeString:@"<script src='http://code.jquery.com/ui/1.9.2/jquery-ui.js'></script>"];        
         
         JDCode *iuCSS = [self cssHeaderForSheet:sheet isEdit:NO];
         [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];
@@ -823,6 +825,14 @@
     
     JDCode *jsCode = [self javascriptHeaderForProject:document.project isEdit:YES];
     [sourceCode replaceCodeString:@"<!--JAVASCRIPT_Insert-->" toCode:jsCode];
+    
+    NSString *jqueryPath = [[NSBundle mainBundle] pathForResource:@"jquery-1.10.2" ofType:@"js"];
+    NSString *jqueryPathCode = [NSString stringWithFormat:@"<script src='%@'></script>", jqueryPath];
+    [sourceCode replaceCodeString:@"<!--JQUERY_Insert-->" toCodeString:jqueryPathCode];
+    
+    NSString *jqueryUIPath = [[NSBundle mainBundle] pathForResource:@"jquery-ui-1.9.2" ofType:@"js"];
+    NSString *jqueryUIPathCode = [NSString stringWithFormat:@"<script src='%@'></script>", jqueryUIPath];
+    [sourceCode replaceCodeString:@"<!--JQUERY_UI_Insert-->" toCodeString:jqueryUIPathCode];
     
     
     JDCode *iuCSS = [self cssHeaderForSheet:document isEdit:YES];
