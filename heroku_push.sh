@@ -2,14 +2,8 @@
 
 #call heroku auth
 set git [lindex $argv 0]
-set force [lindex $argv 1]
 
-if {$force == "force"} {
-    spawn $git push --force heroku master
-} else {
-    spawn $git push heroku master
-}
-
+spawn $git push --force heroku master
 
 expect {
     "(yes/no)?" {
@@ -17,3 +11,5 @@ expect {
         send -- "\r"
     }
 }
+
+expect EOF

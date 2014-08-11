@@ -27,6 +27,8 @@
 -(BOOL)commit:(NSString*)commitMsg;
 -(void)push:(NSString*)remote branch:(NSString*)branch force:(BOOL)force;
 
+- (void)herokuPush;
+
 @property id <JDGitUtilDelegate> delegate;
 
 @end

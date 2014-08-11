@@ -77,6 +77,14 @@
     [shellUtil execute:gitPath atDirectory:filePath arguments:arguments delegate:self];
 }
 
+- (void)herokuPush{
+    NSString *herokuPushScriptPath = [[NSBundle mainBundle] pathForResource:@"heroku_push" ofType:@"sh"];
+    NSString *gitPath = [[NSBundle mainBundle] pathForResource:@"git" ofType:@""];
+    
+    [shellUtil execute:herokuPushScriptPath atDirectory:filePath arguments:@[gitPath] delegate:self];
+}
+
+
 
 - (void)shellUtil:(JDShellUtil*)util standardOutputDataReceived:(NSData*)data{
     NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

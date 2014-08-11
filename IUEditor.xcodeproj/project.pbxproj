@@ -820,6 +820,7 @@
 		69FFB28C195041E500DA2783 /* LMPropertyProgrammingType1VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FFB287195041E500DA2783 /* LMPropertyProgrammingType1VC.xib */; };
 		69FFB28D195041E500DA2783 /* LMPropertyProgrammingType2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FFB289195041E500DA2783 /* LMPropertyProgrammingType2VC.m */; };
 		69FFB28E195041E500DA2783 /* LMPropertyProgrammingType2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FFB28A195041E500DA2783 /* LMPropertyProgrammingType2VC.xib */; };
+		9AFFAADA199979380056DF4E /* heroku_keysadd.sh in Resources */ = {isa = PBXBuildFile; fileRef = 9AFFAAD9199979380056DF4E /* heroku_keysadd.sh */; };
 		CB2AA9C61974D43200DA7CCD /* WPPageLinks.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9C51974D43200DA7CCD /* WPPageLinks.m */; };
 		CB2AA9C91975030A00DA7CCD /* WPArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9C81975030A00DA7CCD /* WPArticle.m */; };
 		CB2AA9D219751CA200DA7CCD /* LMPropertyWPArticleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2AA9D019751CA200DA7CCD /* LMPropertyWPArticleVC.m */; };
@@ -1901,6 +1902,7 @@
 		69FFB288195041E500DA2783 /* LMPropertyProgrammingType2VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyProgrammingType2VC.h; sourceTree = "<group>"; };
 		69FFB289195041E500DA2783 /* LMPropertyProgrammingType2VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyProgrammingType2VC.m; sourceTree = "<group>"; };
 		69FFB28A195041E500DA2783 /* LMPropertyProgrammingType2VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyProgrammingType2VC.xib; sourceTree = "<group>"; };
+		9AFFAAD9199979380056DF4E /* heroku_keysadd.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = heroku_keysadd.sh; sourceTree = "<group>"; };
 		CB2AA9C41974D43200DA7CCD /* WPPageLinks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPPageLinks.h; sourceTree = "<group>"; };
 		CB2AA9C51974D43200DA7CCD /* WPPageLinks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPPageLinks.m; sourceTree = "<group>"; };
 		CB2AA9C71975030A00DA7CCD /* WPArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPArticle.h; sourceTree = "<group>"; };
@@ -3339,6 +3341,7 @@
 		69347433198ADD9B009E4472 /* SyncUtil */ = {
 			isa = PBXGroup;
 			children = (
+				9AFFAAD9199979380056DF4E /* heroku_keysadd.sh */,
 				69347434198B6878009E4472 /* heroku_login.sh */,
 				69BE6A4E1987F55C00F84850 /* heroku_auth.sh */,
 				69347438198C0F84009E4472 /* heroku_push.sh */,
@@ -4097,6 +4100,7 @@
 				3DA416B91935A6BE00559028 /* LMPreferenceFontVC.xib in Resources */,
 				06855637198A63430073FA83 /* stool.png in Resources */,
 				3DED265D1900D313001A1D67 /* view_list.png in Resources */,
+				9AFFAADA199979380056DF4E /* heroku_keysadd.sh in Resources */,
 				262F50721946C06E003C1801 /* tab_off@2x.png in Resources */,
 				3DF803DA18FE62C900913505 /* panel_left.png in Resources */,
 				3DF8044718FE62FC00913505 /* tool_mail.png in Resources */,

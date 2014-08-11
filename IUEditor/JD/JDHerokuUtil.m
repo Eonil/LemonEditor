@@ -118,6 +118,10 @@
     NSError *err;
     [[NSFileManager defaultManager] copyItemAtPath:indexPhpPath toPath:indexPhpTargetPath error:&err];
     NSLog([err description], nil);
+    
+    /* Add Heroku key */
+    NSString *herokuKeyAddPath = [[NSBundle mainBundle] pathForResource:@"heroku_keysadd" ofType:@"sh"];
+    [JDShellUtil execute:herokuKeyAddPath];
 }
 
 + (NSString*)herokuAppNameAtPath:(NSString*)path{
