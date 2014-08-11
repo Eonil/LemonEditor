@@ -169,6 +169,8 @@ typedef enum _IUOverflowType{
  @note unregister identifier automatically.
  */
 -(BOOL)removeIU:(IUBox *)iu;
+-(BOOL)removeAllIU;
+
 -(BOOL)shouldRemoveIUByUserInput;
 -(BOOL)changeIUIndex:(IUBox*)iu to:(NSUInteger)index error:(NSError**)error;
 -(BOOL)addIUReference:(IUBox *)iu error:(NSError**)error;

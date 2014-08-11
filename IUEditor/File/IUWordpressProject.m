@@ -10,8 +10,9 @@
 #import "IUEventVariable.h"
 #import "JDShellUtil.h"
 
-#import "IUBackground.h"
+
 #import "IUPage.h"
+#import "IUBackground+WP.h"
 #import "IUClass.h"
 
 @implementation IUWordpressProject
@@ -55,8 +56,7 @@
     _classGroup.project = self;
     
     IUBackground *bg = [[IUBackground alloc] initWithProject:self options:nil];
-    bg.name = @"background";
-    bg.htmlID = @"background";
+    [bg WPInitialize];
     [self addSheet:bg toSheetGroup:_backgroundGroup];
     
     IUPage *index = [[IUPage alloc] initWithProject:self options:nil];

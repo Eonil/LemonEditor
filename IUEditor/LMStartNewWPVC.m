@@ -79,20 +79,6 @@
     self.themeCollectionDirectory = [url path];
 }
 
-
-- (IBAction)createTheme:(id)sender {
-    NSString *fileName = [self.themeCollectionDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.iu", self.themeName]];
-    NSDictionary *options = @{   IUProjectKeyGit: @(NO),
-                                 IUProjectKeyHeroku: @(NO),
-                                 IUProjectKeyAppName : self.themeName,
-                                 IUProjectKeyIUFilePath : fileName,
-                                 IUProjectKeyType:@(IUProjectTypeWordpress),
-                                 };
-    
-    [(IUProjectController*)[NSDocumentController sharedDocumentController] newDocument:nil withOption:options];
-    [self.view.window close];
-}
-
 - (void)show{
     NSAssert(_parentVC, @"");
     NSAssert(_nextB, @"");

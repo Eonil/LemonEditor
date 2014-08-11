@@ -632,6 +632,7 @@
 		692C4DC61966A22D00EAB2E7 /* tracingOverview.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 692C4DC51966A22D00EAB2E7 /* tracingOverview.pdf */; };
 		692C4DC91967D10300EAB2E7 /* RunningAProject.pages in Resources */ = {isa = PBXBuildFile; fileRef = 692C4DC71967D10300EAB2E7 /* RunningAProject.pages */; };
 		692C4DCA1967D10300EAB2E7 /* RunningAProject.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 692C4DC81967D10300EAB2E7 /* RunningAProject.pdf */; };
+		692CBE15199871FD00CAF1D1 /* IUPage+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 692CBE14199871FD00CAF1D1 /* IUPage+WP.m */; };
 		69317CB21947271F0065B6F4 /* LMHelpWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69317CB01947271F0065B6F4 /* LMHelpWC.m */; };
 		69317CB31947271F0065B6F4 /* LMHelpWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69317CB11947271F0065B6F4 /* LMHelpWC.xib */; };
 		69346623192B805000F82DAF /* LMCommandVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69346622192B805000F82DAF /* LMCommandVC.xib */; };
@@ -688,6 +689,7 @@
 		69761BCA18F168D700C4EDC6 /* IUResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69761BC918F168D700C4EDC6 /* IUResourceManager.m */; };
 		6979FC0718ED34E20060C3B4 /* LMPropertyFrameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6979FC0518ED34E20060C3B4 /* LMPropertyFrameVC.m */; };
 		6979FC0818ED34E20060C3B4 /* LMPropertyFrameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6979FC0618ED34E20060C3B4 /* LMPropertyFrameVC.xib */; };
+		697F99DB1998259500E86A2B /* IUBackground+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 697F99D91998259500E86A2B /* IUBackground+WP.m */; };
 		6983E71D18FFF54600D424B8 /* JDOutlineCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983E71C18FFF54600D424B8 /* JDOutlineCellView.m */; };
 		6985CBA018E31558008DBF50 /* IUSheetGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6985CB9F18E31558008DBF50 /* IUSheetGroup.m */; };
 		69860E4A197555E8001C3F7F /* WPArticleTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 69860E49197555E8001C3F7F /* WPArticleTitle.m */; };
@@ -1592,6 +1594,8 @@
 		692C4DC51966A22D00EAB2E7 /* tracingOverview.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = tracingOverview.pdf; sourceTree = "<group>"; };
 		692C4DC71967D10300EAB2E7 /* RunningAProject.pages */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RunningAProject.pages; sourceTree = "<group>"; };
 		692C4DC81967D10300EAB2E7 /* RunningAProject.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RunningAProject.pdf; sourceTree = "<group>"; };
+		692CBE13199871FD00CAF1D1 /* IUPage+WP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IUPage+WP.h"; sourceTree = "<group>"; };
+		692CBE14199871FD00CAF1D1 /* IUPage+WP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IUPage+WP.m"; sourceTree = "<group>"; };
 		69317CAF1947271F0065B6F4 /* LMHelpWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMHelpWC.h; sourceTree = "<group>"; };
 		69317CB01947271F0065B6F4 /* LMHelpWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMHelpWC.m; sourceTree = "<group>"; };
 		69317CB11947271F0065B6F4 /* LMHelpWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMHelpWC.xib; sourceTree = "<group>"; };
@@ -1688,6 +1692,8 @@
 		6979FC0418ED34E20060C3B4 /* LMPropertyFrameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyFrameVC.h; sourceTree = "<group>"; };
 		6979FC0518ED34E20060C3B4 /* LMPropertyFrameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyFrameVC.m; sourceTree = "<group>"; };
 		6979FC0618ED34E20060C3B4 /* LMPropertyFrameVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyFrameVC.xib; sourceTree = "<group>"; };
+		697F99D81998259500E86A2B /* IUBackground+WP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IUBackground+WP.h"; sourceTree = "<group>"; };
+		697F99D91998259500E86A2B /* IUBackground+WP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IUBackground+WP.m"; sourceTree = "<group>"; };
 		6983E71B18FFF54600D424B8 /* JDOutlineCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDOutlineCellView.h; path = JD/JDOutlineCellView.h; sourceTree = "<group>"; };
 		6983E71C18FFF54600D424B8 /* JDOutlineCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDOutlineCellView.m; path = JD/JDOutlineCellView.m; sourceTree = "<group>"; };
 		6985CB9E18E31558008DBF50 /* IUSheetGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUSheetGroup.h; sourceTree = "<group>"; };
@@ -3593,6 +3599,8 @@
 				690A826A190A25D500DDBA86 /* IUDjangoProject.m */,
 				691F91A71973C2EA00A4CFFF /* IUWordpressProject.h */,
 				691F91A81973C2EA00A4CFFF /* IUWordpressProject.m */,
+				697F99D81998259500E86A2B /* IUBackground+WP.h */,
+				697F99D91998259500E86A2B /* IUBackground+WP.m */,
 				6985CB9E18E31558008DBF50 /* IUSheetGroup.h */,
 				6985CB9F18E31558008DBF50 /* IUSheetGroup.m */,
 				69C5763E18D729830016F050 /* IUSheetController.h */,
@@ -3608,6 +3616,8 @@
 				3DD478801945850E00639AB5 /* IUProjectDocument.m */,
 				3D973F071946F45100FB893F /* IUProjectController.h */,
 				3D973F081946F45100FB893F /* IUProjectController.m */,
+				692CBE13199871FD00CAF1D1 /* IUPage+WP.h */,
+				692CBE14199871FD00CAF1D1 /* IUPage+WP.m */,
 			);
 			path = File;
 			sourceTree = "<group>";
@@ -4532,6 +4542,7 @@
 				69D79B3D19138FC60020608D /* LMStartNewDefaultVC.m in Sources */,
 				69B260EB1959502A007D905C /* LMPreferenceDjangoVC.m in Sources */,
 				69DE5CCE1961430E0050D020 /* LMNotiManager.m in Sources */,
+				692CBE15199871FD00CAF1D1 /* IUPage+WP.m in Sources */,
 				CBC65118197E8CA80012E4EF /* LMPropertyAnalyticsVC.m in Sources */,
 				69757B1418D95BBC0095CBAC /* NSMenu_JDExtension.m in Sources */,
 				69C4AA1A1908E82900CF75E7 /* IUSection.m in Sources */,
@@ -4631,6 +4642,7 @@
 				69757B0518D95BBC0095CBAC /* JDFileUtil.m in Sources */,
 				69BD0C85197D1B5800CB4815 /* IUServerInfo.m in Sources */,
 				69757B2218D95F420095CBAC /* NSString+JDExtension.m in Sources */,
+				697F99DB1998259500E86A2B /* IUBackground+WP.m in Sources */,
 				69757AC218D7EB680095CBAC /* IUBox.m in Sources */,
 				3DB3ACF618EC1E120046DFB7 /* LMCanvasView.m in Sources */,
 				3DED26F119010BB0001A1D67 /* LMPropertyIUImportVC.m in Sources */,

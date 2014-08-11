@@ -6,8 +6,10 @@
 //  Copyright (c) 2014년 JDLab. All rights reserved.
 //
 
-#import "IUHTML.h"
+#import "IUBox.h"
+#import "IUProtocols.h"
 
-@interface WPSiteDescription : IUHTML
+
+@interface WPSiteDescription : IUBox <IUSampleHTMLProtocol, IUCodeProtocol>
 
 @end

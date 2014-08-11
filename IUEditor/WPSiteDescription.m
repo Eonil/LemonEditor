@@ -12,8 +12,17 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
-    self.innerHTML = @"<? bloginfo('description'); ?>";
+    [self.css setValue:@(450) forTag:IUCSSTagPixelWidth];
+    [self.css setValue:@(40) forTag:IUCSSTagPixelHeight];
     return self;
+}
+
+- (NSString*)sampleHTML{
+    return @"This is Site Description. Contact j@jdlab.org for more information.";
+}
+
+- (NSString*)code{
+    return @"<?bloginfo('description')?>";
 }
 
 - (BOOL)shouldCompileFontInfo{

@@ -648,6 +648,26 @@
         return YES;
 }
 
+-(BOOL)removeAllIU{
+    NSArray *children = self.children;
+    for (IUBox *iu in children) {
+        NSInteger index = [_m_children indexOfObject:iu];
+        [[self.undoManager prepareWithInvocationTarget:self] insertIU:iu atIndex:index error:nil];
+        
+        //IURemoved 호출한 다음에 m_children을 호출해야함.
+        //border를 지울려면 controller 에 iu 정보 필요.
+        //--undo [self.project.identifierManager unregisterIUs:@[iu]];
+        [self.delegate IURemoved:iu.htmlID withParentID:iu.parent.htmlID];
+        [_m_children removeObject:iu];
+    }
+    
+    if (self.isConnectedWithEditor) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureChangeRemoving, IUNotificationStructureChangedIU: children}];
+    }
+    
+    return YES;
+}
+
 -(BOOL)changeIUIndex:(IUBox*)iu to:(NSUInteger)index error:(NSError**)error{
     NSInteger currentIndex = [_m_children indexOfObject:iu];
 
@@ -1009,6 +1029,11 @@
     BOOL isCurrentCenter = NO;
     BOOL isAfterCenter = NO;
     BOOL centerChanged = NO;
+    
+    if (_positionType == IUPositionTypeFloatRight || positionType == IUPositionTypeFloatRight) {
+        [self.css setValue:@(0) forTag:IUCSSTagPixelX];
+        [self.css setValue:@(0) forTag:IUCSSTagPercentX];
+    }
     
     if (_positionType == IUPositionTypeAbsoluteCenter || _positionType == IUPositionTypeRelativeCenter) {
         isCurrentCenter = YES;
