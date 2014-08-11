@@ -1191,8 +1191,8 @@
         //add prefix, <ImportedBy_[IUName]_ to all id html (including chilren)
         [code addCodeLineWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:YES]];
         JDCode *importCode = [self editorHTML:[(IUImport*)iu prototypeClass]];
-        NSString *idReplacementString = [NSString stringWithFormat:@" id=ImportedBy_%@_", iu.htmlID];
-        [importCode replaceCodeString:@" id=" toCodeString:idReplacementString];
+        NSString *idReplacementString = [NSString stringWithFormat:@" id=\"ImportedBy_%@_", iu.htmlID];
+        [importCode replaceCodeString:@" id=\"" toCodeString:idReplacementString];
         [code addCode:importCode];
         [code addCodeLine:@"</div>"];
     }

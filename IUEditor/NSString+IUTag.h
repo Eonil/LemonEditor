@@ -163,5 +163,8 @@ static NSString * IUCSSTagHoverTextColor  = @"hoverTextColor";
 - (NSString*)cssID;
 - (NSString*)cssClass;
 - (NSString*)cssHoverClass;
+- (NSString*)cssHover;
 - (NSString*)cssActiveClass;
+- (NSString*)cssActive;
+
 @end

@@ -3,10 +3,6 @@
 <plist version="1.0">
 <array>
 	<dict>
-		<key>manual</key>
-		<array>
-			<string>scrollingAnimation</string>
-		</array>
 		<key>isWidget</key>
 		<true/>
 		<key>className</key>
@@ -23,10 +19,6 @@
 		<integer>3</integer>
 	</dict>
 	<dict>
-		<key>manual</key>
-		<array>
-			<string>scrollingAnimation</string>
-		</array>
 		<key>isWidget</key>
 		<true/>
 		<key>className</key>
@@ -43,10 +35,6 @@
 		<integer>3</integer>
 	</dict>
 	<dict>
-		<key>manual</key>
-		<array>
-			<string>scrollingAnimation</string>
-		</array>
 		<key>isWidget</key>
 		<true/>
 		<key>className</key>
@@ -63,10 +51,6 @@
 		<integer>3</integer>
 	</dict>
 	<dict>
-		<key>manual</key>
-		<array>
-			<string>scrollingAnimation</string>
-		</array>
 		<key>isWidget</key>
 		<true/>
 		<key>className</key>
@@ -83,10 +67,6 @@
 		<integer>3</integer>
 	</dict>
 	<dict>
-		<key>manual</key>
-		<array>
-			<string>scrollingAnimation</string>
-		</array>
 		<key>isWidget</key>
 		<true/>
 		<key>className</key>
@@ -103,10 +83,6 @@
 		<integer>3</integer>
 	</dict>
 	<dict>
-		<key>manual</key>
-		<array>
-			<string>scrollingAnimation</string>
-		</array>
 		<key>isWidget</key>
 		<true/>
 		<key>className</key>
@@ -123,10 +99,6 @@
 		<integer>0</integer>
 	</dict>
 	<dict>
-		<key>manual</key>
-		<array>
-			<string>settingImage</string>
-		</array>
 		<key>isWidget</key>
 		<true/>
 		<key>className</key>

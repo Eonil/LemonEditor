@@ -45,9 +45,15 @@
 - (NSString*)cssHoverClass{
     return [NSString stringWithFormat:@".%@:hover", self];
 }
+- (NSString*)cssHover{
+    return [NSString stringWithFormat:@"%@:hover", self];
+}
 
 - (NSString*)cssActiveClass{
     return [NSString stringWithFormat:@".%@.active", self];
+}
+- (NSString*)cssActive{
+    return [NSString stringWithFormat:@"%@.active", self];
 }
 
 @end

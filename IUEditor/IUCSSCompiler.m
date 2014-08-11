@@ -406,8 +406,11 @@
 
 - (void)updateCSSFontCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
-    if (cssTagDict[IUCSSTagFontName]) {
-        [code insertTag:@"font-family" string:[[LMFontController sharedFontController] cssForFontName:cssTagDict[IUCSSTagFontName]]];
+    if (cssTagDict[IUCSSTagFontName] ) {
+        NSString *fontFamily = [[LMFontController sharedFontController] cssForFontName:cssTagDict[IUCSSTagFontName]];
+        if(fontFamily){
+            [code insertTag:@"font-family" string:fontFamily];
+        }
     }
     if (cssTagDict[IUCSSTagFontSize]) {
         [code insertTag:@"font-size" intFromNumber:cssTagDict[IUCSSTagFontSize] unit:IUUnitPixel];
@@ -577,9 +580,13 @@
         //REVIEW: image전체로 bg image tag 검사하면 안됨, media query 지원 못하게 됨.
         if(cssTagDict[IUCSSTagImage]){
             NSString *imgSrc = [[self imagePathWithImageName:cssTagDict[IUCSSTagImage] target:IUTargetEditor] CSSURLString];
-            [code insertTag:@"background-image" string:imgSrc target:IUTargetEditor];
+            if(imgSrc){
+                [code insertTag:@"background-image" string:imgSrc target:IUTargetEditor];
+            }
             NSString *outputImgSrc = [[self imagePathWithImageName:cssTagDict[IUCSSTagImage] target:IUTargetOutput] CSSURLString];
-            [code insertTag:@"background-image" string:outputImgSrc target:IUTargetOutput];
+            if(outputImgSrc){
+                [code insertTag:@"background-image" string:outputImgSrc target:IUTargetOutput];
+            }
         }
         
         /* bg size & position */
@@ -1023,11 +1030,11 @@
     [code setInsertingIdentifier:carousel.pagerID];
     [code insertTag:@"background-color" color:carousel.deselectColor];
     
-    [code setInsertingIdentifier:[carousel.pagerID cssHoverClass]];
+    [code setInsertingIdentifier:[carousel.pagerID cssHover]];
     [code insertTag:@"background-color" color:carousel.selectColor];
     
     
-    [code setInsertingIdentifier:[carousel.pagerID cssActiveClass]];
+    [code setInsertingIdentifier:[carousel.pagerID cssActive]];
     [code insertTag:@"background-color" color:carousel.selectColor];
     
     

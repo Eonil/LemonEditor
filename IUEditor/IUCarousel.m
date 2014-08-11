@@ -139,14 +139,14 @@
 }
 
 -(void)selectionChanged:(NSNotification*)noti{
-    NSMutableSet *set = [NSMutableSet setWithArray:self.children];
+    NSMutableSet *set = [NSMutableSet setWithArray:self.allChildren];
     [set intersectSet:[NSSet setWithArray:[noti userInfo][@"selectedObjects"]]];
     if ([set count] != 1) {
         return;
     }
     IUBox *selectedChild = [set anyObject];
     for(IUCarouselItem *item in self.children){
-        if([item isEqualTo:selectedChild]){
+        if([item isEqualTo:selectedChild] || [item.allChildren containsObject:selectedChild]){
             [item.css setValue:@(YES) forTag:IUCSSTagEditorDisplay forViewport:IUCSSDefaultViewPort];
             item.isActive = YES;
         }
@@ -154,9 +154,14 @@
             [item.css setValue:@(NO) forTag:IUCSSTagEditorDisplay forViewport:IUCSSDefaultViewPort];
             item.isActive = NO;
         }
+        [item updateHTML];
     }
     
     [self updateHTML];
+    [self updateCSSWithIdentifier:[self pagerID]];
+    [self updateCSSWithIdentifier:[self.pagerID cssHover]];
+    [self updateCSSWithIdentifier:[self.pagerID cssActive]];
+    [self updateJS];
 }
 
 - (NSInteger)count{
