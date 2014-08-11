@@ -66,7 +66,7 @@
     NSURL *targetURL = [url URLByAppendingPathComponent:item.fileName];
     NSString *targetPath = [targetURL path];
     if([[NSFileManager defaultManager] fileExistsAtPath:targetPath]){
-        [JDUIUtil hudAlert:@"There is already same IU Document, Choose another Dicrectory" second:2];
+        [JDUIUtil hudAlert:@"There is already same IU Document, Choose another directory" second:2];
         return;
     }
     
