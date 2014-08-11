@@ -326,6 +326,7 @@
 		3D9BC40E1994AADA00451F55 /* tool_map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC40C1994AADA00451F55 /* tool_map@2x.png */; };
 		3D9BC4111994AAE400451F55 /* stack_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC40F1994AAE400451F55 /* stack_map.png */; };
 		3D9BC4121994AAE400451F55 /* stack_map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC4101994AAE400451F55 /* stack_map@2x.png */; };
+		3D9BC41319988AD700451F55 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69C575BF18D6F61E0016F050 /* MainMenu.xib */; };
 		3DA416B81935A6BE00559028 /* LMPreferenceFontVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */; };
 		3DA416B91935A6BE00559028 /* LMPreferenceFontVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */; };
 		3DA416BD1935ABB400559028 /* LMFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416BC1935ABB400559028 /* LMFontController.m */; };
@@ -343,7 +344,6 @@
 		3DA6C670197689F1004D6587 /* gallery.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3DA6C66F197689F1004D6587 /* gallery.zip */; };
 		3DA6C67219768A3B004D6587 /* gallery_preview_mobile01.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DA6C67119768A3B004D6587 /* gallery_preview_mobile01.png */; };
 		3DA6CA85197CBA00004D6587 /* iueditor.css in Resources */ = {isa = PBXBuildFile; fileRef = 3DA6CA84197CBA00004D6587 /* iueditor.css */; };
-		3DA6CA86197E6580004D6587 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69C575BF18D6F61E0016F050 /* MainMenu.xib */; };
 		3DA6F2F919639E81004DF0AA /* LMHelpImagePopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA6F2F719639E81004DF0AA /* LMHelpImagePopoverVC.m */; };
 		3DA6F2FA19639E81004DF0AA /* LMHelpImagePopoverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA6F2F819639E81004DF0AA /* LMHelpImagePopoverVC.xib */; };
 		3DA6F2FE1963A676004DF0AA /* LMHelpTextPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA6F2FC1963A676004DF0AA /* LMHelpTextPopoverVC.m */; };
@@ -3866,10 +3866,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D9BC41319988AD700451F55 /* MainMenu.xib in Resources */,
 				3D19E4251987805E00A50D35 /* scp_download.sh in Resources */,
 				3D19E4261987805E00A50D35 /* scp_upload.sh in Resources */,
 				3DC4AAF2198224F40024170A /* iueditor.mp4 in Resources */,
-				3DA6CA86197E6580004D6587 /* MainMenu.xib in Resources */,
 				3DA6CA85197CBA00004D6587 /* iueditor.css in Resources */,
 				69D1001019970D32003F8772 /* InstallingWordpress.pdf in Resources */,
 				0685562D198A63430073FA83 /* karate_silhouette.svg in Resources */,
