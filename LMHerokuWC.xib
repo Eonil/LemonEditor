@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMHerokuWC">
@@ -17,6 +17,7 @@
                 <outlet property="herokuNotLoginedV" destination="nGg-EU-DcJ" id="vYc-EQ-9mq"/>
                 <outlet property="herokuTV" destination="2Wj-8d-swV" id="OYA-U7-muI"/>
                 <outlet property="herokuVisitB" destination="vbL-KX-dre" id="pEL-KV-972"/>
+                <outlet property="notBuiltV" destination="a5k-HN-mmZ" id="wlm-31-KH7"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -26,7 +27,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="826" height="660"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="826" height="660"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -95,10 +96,10 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="315" height="68"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <size key="minSize" width="330" height="68"/>
+                                                    <size key="minSize" width="315" height="68"/>
                                                     <size key="maxSize" width="463" height="10000000"/>
                                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <size key="minSize" width="330" height="68"/>
+                                                    <size key="minSize" width="315" height="68"/>
                                                     <size key="maxSize" width="463" height="10000000"/>
                                                 </textView>
                                             </subviews>
@@ -510,18 +511,38 @@ Gw
                             <constraint firstItem="Ea3-Ww-RHY" firstAttribute="leading" secondItem="erb-IH-bmM" secondAttribute="leading" constant="13" id="xWK-1a-Jmc"/>
                         </constraints>
                     </customView>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="a5k-HN-mmZ">
+                        <rect key="frame" x="392" y="498" width="444" height="117"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6oX-UG-uw7">
+                                <rect key="frame" x="12" y="80" width="307" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You should build before syncronize with Heroku" id="fyq-6B-tZJ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="6oX-UG-uw7" firstAttribute="leading" secondItem="a5k-HN-mmZ" secondAttribute="leading" constant="14" id="5EW-8e-cWB"/>
+                            <constraint firstItem="6oX-UG-uw7" firstAttribute="top" secondItem="a5k-HN-mmZ" secondAttribute="top" constant="20" symbolic="YES" id="Rrl-5k-yh7"/>
+                        </constraints>
+                    </customView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="erb-IH-bmM" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="27" id="0gX-8g-D6l"/>
                     <constraint firstAttribute="bottom" secondItem="4U5-fy-W8Q" secondAttribute="bottom" constant="3" id="3YN-LQ-fiv"/>
                     <constraint firstItem="jdS-0c-ijs" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="430" id="7jm-10-bkN"/>
                     <constraint firstItem="69v-cv-OTA" firstAttribute="leading" secondItem="4U5-fy-W8Q" secondAttribute="trailing" constant="48" id="7zS-ur-zbc"/>
+                    <constraint firstAttribute="trailing" secondItem="a5k-HN-mmZ" secondAttribute="trailing" constant="-10" id="91D-bx-pwh"/>
                     <constraint firstItem="Vfk-nr-v1c" firstAttribute="leading" secondItem="nGg-EU-DcJ" secondAttribute="leading" id="94p-jh-kiu"/>
                     <constraint firstAttribute="trailing" secondItem="jdS-0c-ijs" secondAttribute="trailing" constant="-48" id="CD5-b8-MyT"/>
                     <constraint firstItem="qbX-ng-M9c" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="CJC-uq-9E9"/>
+                    <constraint firstItem="a5k-HN-mmZ" firstAttribute="leading" secondItem="qk0-6S-21C" secondAttribute="trailing" constant="8" symbolic="YES" id="D7v-c4-T68"/>
                     <constraint firstItem="jdS-0c-ijs" firstAttribute="top" secondItem="nGg-EU-DcJ" secondAttribute="top" id="FH1-z4-Gad"/>
                     <constraint firstItem="4U5-fy-W8Q" firstAttribute="top" secondItem="IQf-Tp-Kzs" secondAttribute="bottom" constant="7" id="GfV-xd-nJg"/>
                     <constraint firstItem="qbX-ng-M9c" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="15" id="God-Ca-lOs"/>
+                    <constraint firstItem="a5k-HN-mmZ" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="45" id="MVu-1a-Q8t"/>
                     <constraint firstItem="4U5-fy-W8Q" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="179" id="OuQ-MP-iFK"/>
                     <constraint firstAttribute="trailing" secondItem="erb-IH-bmM" secondAttribute="trailing" constant="344" id="T1y-Mb-64N"/>
                     <constraint firstItem="IQf-Tp-Kzs" firstAttribute="leading" secondItem="nGg-EU-DcJ" secondAttribute="leading" id="Zvx-kF-XxE"/>
@@ -529,6 +550,7 @@ Gw
                     <constraint firstItem="Vfk-nr-v1c" firstAttribute="top" secondItem="qbX-ng-M9c" secondAttribute="bottom" constant="8" symbolic="YES" id="bWb-jU-OZG"/>
                     <constraint firstAttribute="trailing" secondItem="nGg-EU-DcJ" secondAttribute="trailing" constant="370" id="fE2-FF-QQM"/>
                     <constraint firstItem="qk0-6S-21C" firstAttribute="trailing" secondItem="Vfk-nr-v1c" secondAttribute="trailing" id="fmW-sF-VyK"/>
+                    <constraint firstAttribute="bottom" secondItem="a5k-HN-mmZ" secondAttribute="bottom" constant="498" id="j6H-If-qJu"/>
                     <constraint firstItem="Vfk-nr-v1c" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="12" id="n0M-nL-F2t"/>
                     <constraint firstItem="nGg-EU-DcJ" firstAttribute="trailing" secondItem="IQf-Tp-Kzs" secondAttribute="trailing" id="pJf-MO-qXy"/>
                     <constraint firstItem="erb-IH-bmM" firstAttribute="top" secondItem="qk0-6S-21C" secondAttribute="bottom" constant="8" symbolic="YES" id="qci-0z-k12"/>

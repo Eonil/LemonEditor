@@ -40,14 +40,13 @@
 @property NSString *herokuLoginLog;
 
 
-@property (strong) IBOutlet NSView *herokuNotInstalledV;
-@property (strong) IBOutlet NSView *gitInfoV;
-@property (strong) IBOutlet NSView *herokuNotLoginedV;
-@property (strong) IBOutlet NSView *herokuLoginedV;
-@property (strong) IBOutlet NSView *herokuAppInfoV;
-
-
-
+/* views */
+@property (weak) IBOutlet NSView *herokuNotInstalledV;
+@property (weak) IBOutlet NSView *gitInfoV;
+@property (weak) IBOutlet NSView *herokuNotLoginedV;
+@property (weak) IBOutlet NSView *herokuLoginedV;
+@property (weak) IBOutlet NSView *herokuAppInfoV;
+@property (weak) IBOutlet NSView *notBuiltV;
 
 @end
 
@@ -112,43 +111,50 @@
     [self.herokuNotLoginedV setHidden:YES];
     [self.herokuLoginedV setHidden:YES];
     [self.herokuAppInfoV setHidden:YES];
+    [self.notBuiltV setHidden:NO];
 
-    if (herokuInstalled == NO) {
-        //show
-        [self.herokuNotInstalledV setHidden:NO];
-    }
-    else {
-        [self.gitInfoV setHidden:NO];
-        [self.gitInitB setHidden:NO];
-
-        BOOL isGitRepo = [gitUtil isGitRepo];
-        if (isGitRepo) {
-            //hide git init button
-            [self.gitInitB setHidden:YES];
-
-            //show heroku login info
-            self.herokuID = [JDHerokuUtil loginID];
-
-            if (self.herokuID == NO) {
-                [self.herokuNotLoginedV setHidden:NO];
-            }
-            else {
-                [self.herokuLoginedV setHidden:NO];
-                [self.herokuAppInfoV setHidden:NO];
-                self.herokuAppName = [JDHerokuUtil herokuAppNameAtPath:self.gitRepoPath];
-                if (self.herokuAppName) {
-                    [self.herokuAppNameTF setHidden:YES];
-                    [self.herokuCreateB setHidden:YES];
-                    
-                    [self.herokuAppNameLabel setHidden:NO];
-                    [self.herokuVisitB setHidden:NO];
+    BOOL isDirectory;
+    BOOL fileExist = [[NSFileManager defaultManager] fileExistsAtPath:self.gitRepoPath isDirectory:&isDirectory];
+    if (isDirectory && fileExist) {
+        [self.notBuiltV setHidden:YES];
+        
+        if (herokuInstalled == NO) {
+            //show
+            [self.herokuNotInstalledV setHidden:NO];
+        }
+        else {
+            [self.gitInfoV setHidden:NO];
+            [self.gitInitB setHidden:NO];
+            
+            BOOL isGitRepo = [gitUtil isGitRepo];
+            if (isGitRepo) {
+                //hide git init button
+                [self.gitInitB setHidden:YES];
+                
+                //show heroku login info
+                self.herokuID = [JDHerokuUtil loginID];
+                
+                if (self.herokuID == NO) {
+                    [self.herokuNotLoginedV setHidden:NO];
                 }
                 else {
-                    [self.herokuAppNameTF setHidden:NO];
-                    [self.herokuCreateB setHidden:NO];
-                    
-                    [self.herokuAppNameLabel setHidden:YES];
-                    [self.herokuVisitB setHidden:YES];
+                    [self.herokuLoginedV setHidden:NO];
+                    [self.herokuAppInfoV setHidden:NO];
+                    self.herokuAppName = [JDHerokuUtil herokuAppNameAtPath:self.gitRepoPath];
+                    if (self.herokuAppName) {
+                        [self.herokuAppNameTF setHidden:YES];
+                        [self.herokuCreateB setHidden:YES];
+                        
+                        [self.herokuAppNameLabel setHidden:NO];
+                        [self.herokuVisitB setHidden:NO];
+                    }
+                    else {
+                        [self.herokuAppNameTF setHidden:NO];
+                        [self.herokuCreateB setHidden:NO];
+                        
+                        [self.herokuAppNameLabel setHidden:YES];
+                        [self.herokuVisitB setHidden:YES];
+                    }
                 }
             }
         }
