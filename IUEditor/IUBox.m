@@ -707,7 +707,11 @@
 -(BOOL)hasX{
     return YES;
 }
+
 -(BOOL)hasY{
+    if (self.positionType == IUPositionTypeAbsoluteBottom) {
+        return NO;
+    }
     return YES;
 }
 -(BOOL)hasWidth{
@@ -1033,9 +1037,19 @@
         [self.css setValue:@(0) forTag:IUCSSTagPixelX];
         [self.css setValue:@(0) forTag:IUCSSTagPercentX];
     }
-    _positionType = positionType;
-    [self updateCSS];
     
+    BOOL absoluteBottomFlag = _positionType == IUPositionTypeAbsoluteBottom || positionType == IUPositionTypeAbsoluteBottom;
+    if (absoluteBottomFlag) {
+        [self.css setValue:@(0) forTag:IUCSSTagPixelY];
+        [self.css setValue:@(0) forTag:IUCSSTagPercentY];
+        [self.css setValue:@(NO) forTag:IUCSSTagYUnitIsPercent];
+        [self willChangeValueForKey:@"hasY"];
+    }
+    _positionType = positionType;
+    if (absoluteBottomFlag) {
+        [self didChangeValueForKey:@"hasY"];
+    }
+    [self updateCSS];
 }
 
 - (void)setEnableCenter:(BOOL)enableCenter{
