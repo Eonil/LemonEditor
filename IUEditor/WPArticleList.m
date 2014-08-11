@@ -22,6 +22,10 @@
     self = [super initWithProject:project options:options];
     self.positionType = IUPositionTypeRelative;
     [self.css eradicateTag:IUCSSTagPixelHeight];
+    
+    [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagBGColor];
+    
+    
     WPArticle *article = [[WPArticle alloc] initWithProject:project options:options];
     [self addIU:article error:nil];
     

@@ -17,6 +17,35 @@
 @implementation WPArticle{
 }
 
+- (BOOL)canChangeWidthByUserInput{
+    return NO;
+}
+
+- (BOOL)canChangeXByUserInput{
+    return NO;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    @try {
+        _enableTitle = [aDecoder decodeBoolForKey:@"enableTitle"];
+        _enableBody = [aDecoder decodeBoolForKey:@"enableBody"];
+        _enableDate = [aDecoder decodeBoolForKey:@"enableDate"];
+    }
+    @catch (NSException *exception) {
+    }
+    @finally {
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeBool:_enableTitle forKey:@"enableTitle"];
+    [aCoder encodeBool:_enableBody forKey:@"enableBody"];
+    [aCoder encodeBool:_enableDate forKey:@"enableDate"];
+}
+
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     self.positionType = IUPositionTypeRelative;
