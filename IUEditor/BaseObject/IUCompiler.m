@@ -382,8 +382,9 @@
         JDCode *jsCode = [self javascriptHeaderForProject:sheet.project isEdit:NO];
         [sourceCode replaceCodeString:@"<!--JAVASCRIPT_Insert-->" toCode:jsCode];
         
-        [sourceCode replaceCodeString:@"<!--JAVASCRIPT_Insert-->" toCodeString:@"<script src='http://code.jquery.com/jquery-1.10.2.js'></script>"];
-        [sourceCode replaceCodeString:@"<!--JAVASCRIPT_UI_Insert-->" toCodeString:@"<script src='http://code.jquery.com/ui/1.9.2/jquery-ui.js'></script>"];        
+        
+        [sourceCode replaceCodeString:@"<!--JQUERY_Insert-->" toCodeString:@"<script src='http://code.jquery.com/jquery-1.10.2.js'></script>"];
+        [sourceCode replaceCodeString:@"<!--JQUERY_UI_Insert-->" toCodeString:@"<script src='http://code.jquery.com/ui/1.9.2/jquery-ui.js'></script>"];
         
         JDCode *iuCSS = [self cssHeaderForSheet:sheet isEdit:NO];
         [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];
