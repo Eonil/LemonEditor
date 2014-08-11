@@ -31,7 +31,8 @@
         [titleBox.css setValue:nil forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
         [titleBox.css setValue:@"Helvetica" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
         
-        titleBox.positionType = IUPositionTypeAbsoluteCenter;
+        titleBox.positionType = IUPositionTypeAbsolute;
+        titleBox.enableCenter = YES;
         titleBox.textType = IUTextTypeH1;
         titleBox.text = @"Header Area";
         

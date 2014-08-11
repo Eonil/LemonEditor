@@ -25,7 +25,8 @@
     [text404.css setValue:@(24) forKey:IUCSSTagFontSize];
     [text404.css setValue:@"1.3" forKey:IUCSSTagLineHeight];
     [text404.css setValue:@(100) forKey:IUCSSTagPixelY];
-    [text404 setPositionType:IUPositionTypeAbsoluteCenter];
+    [text404 setPositionType:IUPositionTypeAbsolute];
+    text404.enableCenter = YES;
     
     [self.project.identifierManager registerIUs:@[text404]];
 }

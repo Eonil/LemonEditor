@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMPropertyFrameVC">
             <connections>
+                <outlet property="centerBtn" destination="rla-hR-v6O" id="Ig6-pi-4cy"/>
                 <outlet property="contentV" destination="lqf-yQ-SWP" id="y7w-mo-EcP"/>
                 <outlet property="hStepper" destination="Mtu-cf-B1n" id="38F-c7-Nms"/>
                 <outlet property="hTF" destination="KEg-GU-M43" id="og4-MR-soJ"/>
@@ -394,32 +395,34 @@
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f6I-Kv-MOi">
-                                            <rect key="frame" x="76" y="5" width="158" height="19"/>
+                                        <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f6I-Kv-MOi">
+                                            <rect key="frame" x="76" y="5" width="119" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="158" id="XAQ-4Y-LCe"/>
                                                 <constraint firstAttribute="height" constant="18" id="qsV-r1-XUW"/>
                                             </constraints>
-                                            <popUpButtonCell key="cell" type="roundRect" bezelStyle="roundedRect" alignment="center" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6oa-q2-pjp">
+                                            <popUpButtonCell key="cell" type="roundRect" title="Absolute" bezelStyle="roundedRect" alignment="center" controlSize="small" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="Akm-Nb-6a5" id="6oa-q2-pjp">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system" size="10"/>
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <menu key="menu" id="QeU-sw-xnN">
                                                     <items>
                                                         <menuItem title="Absolute" id="Akm-Nb-6a5"/>
-                                                        <menuItem title="Absolute: Center" id="FIy-WO-wA4"/>
+                                                        <menuItem title="Absolute: Bottom" id="fHj-4m-CcC"/>
                                                         <menuItem title="Relative" id="uq0-LG-Hed"/>
-                                                        <menuItem title="Relative: Center" id="1S7-Tq-gVY"/>
-                                                        <menuItem title="Relative : Float left" id="NzN-Sw-wzB"/>
+                                                        <menuItem title="Relative: Float left" id="NzN-Sw-wzB"/>
                                                         <menuItem title="Relative: Float right" id="bkZ-oq-51W"/>
                                                         <menuItem title="Fixed" id="NoK-6d-B2O">
+                                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                                        </menuItem>
+                                                        <menuItem title="Fixed: Bottom" id="lIl-Uo-30f">
                                                             <modifierMask key="keyEquivalentModifierMask"/>
                                                         </menuItem>
                                                     </items>
                                                 </menu>
                                             </popUpButtonCell>
                                         </popUpButton>
-                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iLy-bj-p0C">
-                                            <rect key="frame" x="242" y="7" width="18" height="18"/>
+                                        <button horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLy-bj-p0C">
+                                            <rect key="frame" x="241" y="4" width="18" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="18" id="Ple-WW-yh9"/>
                                                 <constraint firstAttribute="height" constant="18" id="ubS-9P-sMj"/>
@@ -431,6 +434,17 @@
                                             <connections>
                                                 <action selector="helpMenu:" target="-2" id="UTQ-Jk-Oqq"/>
                                             </connections>
+                                        </button>
+                                        <button toolTip="Fit box size to image" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rla-hR-v6O">
+                                            <rect key="frame" x="212" y="4" width="19" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="8Zl-1N-nZA"/>
+                                                <constraint firstAttribute="width" constant="19" id="ZpB-Kc-jHW"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" title="c" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="te9-UZ-kqO">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
                                         </button>
                                     </subviews>
                                 </view>

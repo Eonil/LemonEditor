@@ -659,6 +659,7 @@
     
     NSString *topTag;
     NSString *leftTag;
+    bool enablebottom=NO;
     /* insert position */
     /* Note */
     /* Cannot use'top' tag for relative position here.
@@ -667,20 +668,27 @@
      */
      
     switch (_iu.positionType) {
-        case IUPositionTypeAbsolute:{
-            topTag = @"top"; leftTag = @"left"; break;
+        case IUPositionTypeAbsoluteBottom:{
+            enablebottom = YES;
+            if(_iu.enableCenter == NO){
+                leftTag = @"left";
+            }
+            break;
         }
-        case IUPositionTypeAbsoluteCenter:{
-            topTag = @"top"; break;
+        case IUPositionTypeAbsolute:{
+            topTag = @"top";
+            if(_iu.enableCenter == NO){
+                leftTag = @"left";
+            }
+            break;
         }
         case IUPositionTypeRelative:{
             [code insertTag:@"position" string:@"relative"];
-            topTag = @"margin-top"; leftTag = @"left"; break;
+            topTag = @"margin-top";
+            if(_iu.enableCenter == NO){
+                leftTag = @"left";
+            }
             break;
-        }
-        case IUPositionTypeRelativeCenter:{
-            [code insertTag:@"position" string:@"relative"];
-            topTag = @"margin-top"; break;
         }
         case IUPositionTypeFloatLeft:{
             [code insertTag:@"position" string:@"relative"];
@@ -697,11 +705,16 @@
             xValue = @(xValueFloat);
             break;
         }
+        case IUPositionTypeFixedBottom:{
+            enablebottom = YES;
+            [code insertTag:@"position" string:@"fixed"];
+            [code insertTag:@"z-index" string:@"10"];
+            leftTag = @"left"; break;
+        }
         case IUPositionTypeFixed:{
             [code insertTag:@"position" string:@"fixed"];
             [code insertTag:@"z-index" string:@"10"];
             topTag = @"top"; leftTag = @"left"; break;
-            break;
         }
         default:
             break;
@@ -712,7 +725,9 @@
     if (_iu.hasX && leftTag) {
         [code insertTag:leftTag floatFromNumber:xValue unit:xUnit];
     }
-    
+    if (enablebottom){
+        [code insertTag:@"bottom" integer:0 unit:IUCSSUnitPixel];
+    }
     if (_iu.hasWidth) {
         IUUnit wUnit = [cssTagDict[IUCSSTagWidthUnitIsPercent] boolValue] ? IUUnitPercent : IUUnitPixel;
         NSNumber *wValue = (wUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentWidth] : cssTagDict[IUCSSTagPixelWidth];

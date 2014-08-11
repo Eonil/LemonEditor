@@ -45,7 +45,8 @@
         [titleBox.css setValue:nil forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
         [titleBox.css setValue:@"Helvetica" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
 
-        titleBox.positionType = IUPositionTypeAbsoluteCenter;
+        titleBox.positionType = IUPositionTypeAbsolute;
+        titleBox.enableCenter = YES;
         titleBox.text = @"Content Area";
         
         [section addIU:titleBox error:nil];
@@ -60,7 +61,8 @@
         [contentBox.css setValue:nil forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
         [contentBox.css setValue:@"Helvetica" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
         
-        contentBox.positionType = IUPositionTypeAbsoluteCenter;
+        contentBox.positionType = IUPositionTypeAbsolute;
+        contentBox.enableCenter = YES;
         contentBox.text = @"Double-click to edit text\n\nThis box has absolute-center position.\nFor free movement, see the position at the right.";
         
         [section addIU:contentBox error:nil];

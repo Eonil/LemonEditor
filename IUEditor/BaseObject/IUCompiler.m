@@ -1251,8 +1251,7 @@
     if(isEdit && iu.shouldAddIUByUserInput) {
         [retString appendString:@" hasChildren"];
     }
-    
-    if (iu.positionType == IUPositionTypeAbsoluteCenter || iu.positionType == IUPositionTypeRelativeCenter) {
+    if(iu.enableCenter){
         [retString appendString:@" horizontalCenter='1'"];
     }
     if (iu.opacityMove) {

@@ -44,11 +44,14 @@
 @property (weak) IBOutlet NSButton *wUnitBtn;
 @property (weak) IBOutlet NSButton *hUnitBtn;
 
+@property (weak) IBOutlet NSButton *centerBtn;
+
 
 @property (weak) IBOutlet NSButton *helpMenu;
 @property (weak) IBOutlet NSPopUpButton *positionPopupBtn;
 
 @property (nonatomic) BOOL enablePercentH, enablePosition;
+
 
 - (IBAction)helpMenu:(id)sender;
 
@@ -122,6 +125,7 @@
     [_hUnitBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHeightUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
     
     [_positionPopupBtn bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"positionType"] options:IUBindingDictNotRaisesApplicable];
+    [_centerBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableCenter"] options:IUBindingDictNotRaisesApplicable];
     
 
     //enabled option 1

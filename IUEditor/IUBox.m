@@ -54,6 +54,8 @@
         @catch (NSException *exception) {
             _textType = IUTextTypeDefault;
         }
+        
+        
         _css = [aDecoder decodeObjectForKey:@"css"];
         _css.delegate = self;
         _event = [aDecoder decodeObjectForKey:@"event"];
@@ -719,7 +721,7 @@
 }
 
 - (BOOL)canChangeXByUserInput{
-    if (self.positionType == IUPositionTypeAbsoluteCenter || self.positionType == IUPositionTypeRelativeCenter) {
+    if(self.enableCenter){
         return NO;
     }
     return YES;
@@ -1020,35 +1022,29 @@
 #pragma mark - setting position
 
 - (void)setPositionType:(IUPositionType)positionType{
-    BOOL isCurrentCenter = NO;
-    BOOL isAfterCenter = NO;
-    BOOL centerChanged = NO;
+    
+    if(_positionType == positionType){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setPositionType:_positionType];
     
     if (_positionType == IUPositionTypeFloatRight || positionType == IUPositionTypeFloatRight) {
         [self.css setValue:@(0) forTag:IUCSSTagPixelX];
         [self.css setValue:@(0) forTag:IUCSSTagPercentX];
     }
-    
-    if (_positionType == IUPositionTypeAbsoluteCenter || _positionType == IUPositionTypeRelativeCenter) {
-        isCurrentCenter = YES;
-    }
-    
-    if (positionType == IUPositionTypeAbsoluteCenter || positionType == IUPositionTypeRelativeCenter) {
-        isAfterCenter = YES;
-    }
-    
-    if ( (isCurrentCenter == NO && isAfterCenter == YES ) || (isCurrentCenter == YES && isAfterCenter == NO ) ) {
-        centerChanged = YES;
-    }
-    if (centerChanged) {
-        [self willChangeValueForKey:@"canChangeXByUserInput"];
-    }
-    
     _positionType = positionType;
     [self updateCSS];
-    [self updateHTML];
-    [self updateJS];
-    if (centerChanged) {
+    
+}
+
+- (void)setEnableCenter:(BOOL)enableCenter{
+    if(_enableCenter != enableCenter){
+        [self willChangeValueForKey:@"canChangeXByUserInput"];
+        [[self.undoManager prepareWithInvocationTarget:self] setEnableCenter:_enableCenter];
+        _enableCenter = enableCenter;
+        [self updateHTML];
+        [self updateJS];
         [self didChangeValueForKey:@"canChangeXByUserInput"];
     }
 }

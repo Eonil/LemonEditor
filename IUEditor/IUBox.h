@@ -45,13 +45,14 @@
 
 typedef enum _IUPositionType{
     IUPositionTypeAbsolute,
-    IUPositionTypeAbsoluteCenter,
+    IUPositionTypeAbsoluteBottom,
     IUPositionTypeRelative,
-    IUPositionTypeRelativeCenter,
     IUPositionTypeFloatLeft,
     IUPositionTypeFloatRight,
     IUPositionTypeFixed,
+    IUPositionTypeFixedBottom,
 }IUPositionType;
+
 
 typedef enum{
     IUTextTypeDefault,
@@ -201,6 +202,7 @@ typedef enum _IUOverflowType{
 
 //Position
 @property (nonatomic) IUPositionType positionType;
+@property (nonatomic) BOOL enableCenter;
 - (BOOL)canChangePositionType;
 - (BOOL)canChangePositionAbsolute;
 - (BOOL)canChangePositionRelative;
