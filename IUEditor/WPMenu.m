@@ -57,6 +57,9 @@
     return [returnText copy];
 }
 
+-(BOOL)shouldCompileFontInfo{
+    return YES;
+}
 
 -(NSString*)code{
     return @"<? wp_nav_menu() ?>";

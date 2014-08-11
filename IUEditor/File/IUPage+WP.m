@@ -7,6 +7,7 @@
 //
 
 #import "IUPage+WP.h"
+#import "IUProject.h"
 
 @implementation IUPage (WP)
 
@@ -16,6 +17,17 @@
 
 -(void)WPInitializeAs404{
     [self removeAllIU];
+    IUBox *text404 = [[IUBox alloc] initWithProject:self.project options:nil];
+    text404.htmlID = @"text404";
+    text404.name = @"text404";
+    text404.text = @"Sorry, but the page you are looking for has not been found.\nTry checking the URL for errors, then hit the refresh button.";
+    [text404.css setValue:@"Raleway Dots" forKey:IUCSSTagFontName];
+    [text404.css setValue:@(24) forKey:IUCSSTagFontSize];
+    [text404.css setValue:@"1.3" forKey:IUCSSTagLineHeight];
+    [text404.css setValue:@(100) forKey:IUCSSTagPixelY];
+    [text404 setPositionType:IUPositionTypeAbsoluteCenter];
+    
+    [self.project.identifierManager registerIUs:@[text404]];
 }
 
 -(void)WPInitializeAsIndex{
