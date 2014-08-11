@@ -7,6 +7,7 @@
 //
 
 #import "LMPropertyIUGoogleMapVC.h"
+#import "IUGoogleMap.h"
 
 @interface LMPropertyIUGoogleMapVC ()
 
@@ -49,9 +50,6 @@
     
     [_longTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"longitude"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_latTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"latitude"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-//    [_longTF setPlaceholderString:@"127.039018"];
-//    [_latTF setPlaceholderString:@"37.497290"];
-    
     
     [_zoomLevelTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"zoomLevel"] options:IUBindingDictNumberAndNotRaisesApplicable];
     [_zoomLevelStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"zoomLevel"] options:IUBindingDictNumberAndNotRaisesApplicable];
@@ -61,10 +59,13 @@
     [_zoomControlBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"zoomControl"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
     [_enableMarkerBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableMarkerIcon"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    
+    //marker Icon
     [_markerIconComboBox bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableMarkerIcon"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
-    
     [_markTitleTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"markerTitle"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_markerIconComboBox bind:NSContentBinding toObject:self withKeyPath:@"resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
+    [_markerIconComboBox bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"markerIconName"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+
     
     
     //style
@@ -72,10 +73,23 @@
     [_roadColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"road"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_landscapeColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"landscape"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_poiColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"poi"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+ 
+}
 
+#pragma mark - combobox
 
-    
-    
+- (void)controlTextDidChange:(NSNotification *)obj{
+    for (IUGoogleMap *map in self.controller.selectedObjects) {
+        id value = [_markerIconComboBox stringValue];
+        [map setMarkerIconName:value];
+    }
+}
+
+- (void)comboBoxSelectionDidChange:(NSNotification *)notification{
+    for (IUGoogleMap *map in self.controller.selectedObjects) {
+        id value = [_markerIconComboBox objectValueOfSelectedItem];
+        [map setMarkerIconName:value];
+    }
 }
 
 @end

@@ -1064,19 +1064,30 @@
         [mapImagePath appendFormat:@"&zoom=%ld", map.zoomLevel];
         
         [mapImagePath appendString:@"&size=640x640"];
+        //marker
         if(map.enableMarkerIcon){
             [mapImagePath appendFormat:@"&markers=size=tiny|%@,%@",map.latitude, map.longitude];
         }
-        
-//        center=0,0&zoom=1&size=400x50&sensor=true_or_false"
-
+        //color
+        //not supported in editor mode
         [code addCodeLineWithFormat:@"<div style=\"width:100%%;height:100%%;background-image:url('%@');background-position:center; background-repeat:no-repeat;position:absolute;", mapImagePath];
         if(map.currentApproximatePixelSize.width > 640 || map.currentApproximatePixelSize.height > 640){
             [code addCodeLine:@"background-size:cover"];
         }
-        [code addCodeLine:@"\"></div>"];
-         
-        [code addCodeLine:@"</div>"];
+        [code addCodeLine:@"\">"];
+        
+        //controller
+        //pan
+        if(map.panControl){
+            NSString *imagePath = [[NSBundle mainBundle] pathForImageResource:@"map_position.png"];
+            [code addCodeLineWithFormat:@"<img src=\"%@\" style=\"position:relative; margin-top:20px;left:20px;display:block\"></img>", imagePath];
+        }
+        //zoom
+        if(map.zoomControl){
+            NSString *imagePath = [[NSBundle mainBundle] pathForImageResource:@"map_zoom.png"];
+            [code addCodeLineWithFormat:@"<img src=\"%@\" style=\"position:relative; margin-top:20px;left:35px;display:block;\"></img>", imagePath];
+        }
+        [code addCodeLine:@"</div></div>"];
     }
 #pragma mark IUFBLike
     else if([iu isKindOfClass:[IUFBLike class]]){
@@ -1545,545 +1556,6 @@
 }
 
 
-
-
-
-#pragma mark css default
-#if 0
-
-/**
- @breif This method makes whole css source
- */
--(NSDictionary*)cssSourceForIU:(IUBox*)iu width:(int)width isEdit:(BOOL)isEdit{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    
-    for(NSString *identifier in iu.cssIdentifierArray){
-        NSDictionary *cssContentDict = [self CSSContentWithIdentifier:identifier ofIU:iu width:width isEdit:isEdit];
-        if(cssContentDict.count > 0){
-            NSString *cssString = [cssContentDict CSSCode];
-            [dict setObject:cssString forKey:identifier];
-        }
-    }
-    
-    return dict;
-}
-
-
-- (NSDictionary *)CSSContentWithIdentifier:(NSString *)identifier ofIU:(IUBox *)iu width:(NSInteger)width isEdit:(BOOL)isEdit{
-    //convert css tag dictionry or property css to css string dictionary
-    
-    NSMutableDictionary *cssDict = [NSMutableDictionary dictionary];
-    
-    if([identifier isEqualToString:[iu.htmlID cssClass]]){
-        cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForViewport:width] ofClass:iu isHover:NO isEdit:isEdit] mutableCopy];
-    }
-    else if([identifier isEqualToString:[[iu.htmlID cssClass] cssHoverClass]]){
-        cssDict = [[self cssStringDictionaryWithCSSTagDictionary:[iu.css tagDictionaryForViewport:width] ofClass:iu isHover:YES isEdit:isEdit] mutableCopy];
-    }
-    
-//    [cssDict addEntriesFromDictionary:[self cssStringDictionaryWithIdentifier:identifier ofIU:iu width:width isEdit:isEdit]];
-
-    if(width != IUCSSDefaultViewPort){
-        [cssDict removeObjectForKey:@"position"];
-        [cssDict removeObjectForKey:@"overflow"];
-        [cssDict removeObjectForKey:@"z-index"];
-        [cssDict removeObjectForKey:@"float"];
-    }
-    
-    return cssDict;
-    
-}
-
-/**
- @breif this method makes property css dictionary
- */
-#pragma mark - property css dictionary
-
-
-
-/**
- @breif This method makes default css dictionary (1st property)
-*/
--(IUCSSStringDictionary*)cssStringDictionaryWithCSSTagDictionary:(NSDictionary*)cssTagDict ofClass:(IUBox*)obj isHover:(BOOL)isHover isEdit:(BOOL)isEdit{
-    IUCSSStringDictionary *dict = [IUCSSStringDictionary dictionary];
-    id value;
-    
-#pragma mark - 
-#pragma mark mouseHover CSS
-    if (isHover){
-        if ([cssTagDict[IUCSSTagHoverBGImagePositionEnable] boolValue]) {
-            value = cssTagDict[IUCSSTagHoverBGImageX];
-            if (value) {
-                [dict putTag:@"background-position-x" floatValue:[value floatValue] ignoreZero:NO unit:IUCSSUnitPixel];
-            }
-            value = cssTagDict[IUCSSTagHoverBGImageY];
-            if (value) {
-                [dict putTag:@"background-position-y" floatValue:[value floatValue] ignoreZero:NO unit:IUCSSUnitPixel];
-            }
-        }
-        
-        if ([cssTagDict[IUCSSTagHoverBGColorEnable] boolValue]){
-            value = cssTagDict[IUCSSTagHoverBGColor];
-            if(value){
-                NSColor *color = value;
-                [dict putTag:@"background-color"  string:[color cssBGColorString]];
-            }
-        }
-        
-        if ([cssTagDict[IUCSSTagHoverTextColorEnable] boolValue]){
-            value = cssTagDict[IUCSSTagHoverTextColor];
-            if(value){
-                [dict putTag:@"color" color:value ignoreClearColor:YES];
-            }
-        }
-    }
-#pragma mark -
-#pragma mark normal CSS
-    else {
-        
-        if(obj.link){
-            [dict putTag:@"cursor" string:@"pointer"];
-        }
-        
-        switch (obj.positionType) {
-            case IUPositionTypeAbsolute:
-            case IUPositionTypeAbsoluteCenter:
-                [dict putTag:@"position" string:@"absolute"];
-                break;
-            case IUPositionTypeRelative:
-            case IUPositionTypeRelativeCenter:
-                [dict putTag:@"position" string:@"relative"];
-                break;
-            case IUPositionTypeFloatLeft:
-                [dict putTag:@"position" string:@"relative"];
-                [dict putTag:@"float" string:@"left"];
-                break;
-            case IUPositionTypeFloatRight:
-                [dict putTag:@"position" string:@"relative"];
-                [dict putTag:@"float" string:@"right"];
-                break;
-            case IUPositionTypeFixed:
-                [dict putTag:@"position" string:@"fixed"];
-                break;
-                
-            default:
-                break;
-        }
-        switch (obj.overflowType) {
-            case IUOverflowTypeHidden:
-                [dict putTag:@"overflow" string:@"hidden"];
-                break;
-            case IUOverflowTypeVisible:
-                [dict putTag:@"overflow" string:@"visible"];
-                break;
-            case IUOverflowTypeScroll:
-                [dict putTag:@"overflow" string:@"scroll"];
-                break;
-                
-            default:
-                break;
-        }
-        if ( [obj isKindOfClass:[IUHeader class]]) {
-            [dict putTag:@"z-index" string:@"10"];
-        }
-        if ([obj isKindOfClass:[IUPageContent class]] || [obj isKindOfClass:[IUHeader class]]) {
-            [dict putTag:@"position" string:@"relative"];
-        }
-        
-        if (obj.hasX) {
-            BOOL enablePercent =[cssTagDict[IUCSSTagXUnitIsPercent] boolValue];
-            IUCSSUnit unit =  [self unitWithBool:enablePercent];
-            
-            if(enablePercent){
-                value = cssTagDict[IUCSSTagPercentX];
-            }
-            else{
-                value = cssTagDict[IUCSSTagPixelX];
-            }
-            if(value){
-                switch (obj.positionType) {
-                    case IUPositionTypeAbsolute:
-                        [dict putTag:@"left" floatValue:[value floatValue] ignoreZero:NO unit:unit];
-                        break;
-                    case IUPositionTypeRelative:
-                    case IUPositionTypeFloatLeft:
-                        [dict putTag:@"margin-left" floatValue:[value floatValue] ignoreZero:NO unit:unit];
-                        break;
-                    case IUPositionTypeFloatRight:
-                        [dict putTag:@"margin-right" floatValue:[value floatValue] * (-1) ignoreZero:NO unit:unit];
-                        break;
-                    case IUPositionTypeFixed:
-                        [dict putTag:@"left" floatValue:[value floatValue] ignoreZero:NO unit:unit];
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        if (obj.hasY) {
-            BOOL enablePercent =[cssTagDict[IUCSSTagYUnitIsPercent] boolValue];
-            IUCSSUnit unit = [self unitWithBool:enablePercent];
-            
-            if(enablePercent){
-                value = cssTagDict[IUCSSTagPercentY];
-            }
-            else{
-                value = cssTagDict[IUCSSTagPixelY];
-            }
-            
-            if(value){
-                switch (obj.positionType) {
-                    case IUPositionTypeAbsolute:
-                    case IUPositionTypeAbsoluteCenter:
-                        [dict putTag:@"top" floatValue:[value floatValue] ignoreZero:NO unit:unit];
-                        break;
-                    case IUPositionTypeFixed:
-                        [dict putTag:@"top" floatValue:[value floatValue] ignoreZero:NO unit:unit];
-                        break;
-                    default:
-                        [dict putTag:@"margin-top" floatValue:[value floatValue] ignoreZero:NO unit:unit];
-
-                        break;
-                }
-            }
-        }
-        if (obj.hasWidth) {
-            if ([obj isKindOfClass:[IUHeader class]] == NO) {
-                
-                BOOL enablePercent =[cssTagDict[IUCSSTagWidthUnitIsPercent] boolValue];
-                IUCSSUnit unit = [self unitWithBool:enablePercent];
-                
-                if(enablePercent){
-                    value = cssTagDict[IUCSSTagPercentWidth];
-                }
-                else{
-                    value = cssTagDict[IUCSSTagPixelWidth];
-                }
-                if (value) {
-                    
-                    [dict putTag:@"width" floatValue:[value floatValue] ignoreZero:NO unit:unit];
-                }
-            }
-        }
-        
-        if (obj.hasHeight) {
-            
-            BOOL enablePercent =[cssTagDict[IUCSSTagHeightUnitIsPercent] boolValue];
-            IUCSSUnit unit = [self unitWithBool:enablePercent];
-            
-            if(enablePercent){
-                value = cssTagDict[IUCSSTagPercentHeight];
-            }
-            else{
-                value = cssTagDict[IUCSSTagPixelHeight];
-            }
-            if (value) {
-                if ([obj isKindOfClass:[IUHeader class]]) {
-                    
-                }
-                [dict putTag:@"height" floatValue:[value floatValue] ignoreZero:NO unit:unit];
-            }
-            
-        }
-        if(isEdit){
-            //it should be used IN Editor Mode!!!
-            //Usage : Transition, carousel hidden
-            value = cssTagDict[IUCSSTagEditorDisplay];
-            if (value && [value boolValue] == NO) {
-                [dict putTag:@"display" string:@"none"];
-            }
-        }
-        
-        
-#pragma mark background-image and color
-        value = cssTagDict[IUCSSTagDisplayIsHidden];
-        if(value && [value boolValue]){
-            [dict putTag:@"display" string:@"none"];
-        }
-        else{
-            [dict putTag:@"display" string:@"inherit"];
-        }
-        
-        value = cssTagDict[IUCSSTagBGColor];
-        if(value){
-            NSColor *color = value;
-            [dict putTag:@"background-color" string:[color cssBGColorString]];
-        }
-        
-        value = cssTagDict[IUCSSTagOpacity];
-        if(value){
-            [dict putTag:@"opacity" floatValue:[value floatValue]/100 ignoreZero:NO unit:IUCSSUnitNone];
-            [dict putTag:@"filter" string:[NSString stringWithFormat:@"alpha(opacity=%d)", [value intValue]]];
-        }
-        
-        value = cssTagDict[IUCSSTagImage];
-        if(value){
-            
-            if([value isDjangoVariable] == NO){
-                NSString *imgSrc = [[self imagePathWithImageName:value isEdit:isEdit] CSSURLString];
-                [dict putTag:@"background-image" string:imgSrc];
-            }
-        }
-        
-        IUBGSizeType bgSizeType = [cssTagDict[IUCSSTagBGSize] intValue];
-        switch (bgSizeType) {
-            case IUBGSizeTypeStretch:
-                [dict putTag:@"background-size" string:@"100% 100%"];
-                break;
-            case IUBGSizeTypeContain:
-                [dict putTag:@"background-size" string:@"contain"];
-                break;
-            case IUBGSizeTypeFull:
-                [dict putTag:@"background-attachment" string:@"fixed"];
-            case IUBGSizeTypeCover:
-                [dict putTag:@"background-size" string:@"cover"];
-                break;
-            default:
-                break;
-        }
-        
-        BOOL digitBGPosition = [cssTagDict[IUCSSTagEnableBGCustomPosition] boolValue];
-        if(digitBGPosition){
-            id bgValue = cssTagDict[IUCSSTagBGXPosition];
-            [dict putTag:@"background-position-x" intValue:[bgValue intValue] ignoreZero:YES unit:IUCSSUnitPixel];
-            
-            bgValue = cssTagDict[IUCSSTagBGYPosition];
-            [dict putTag:@"background-position-y" intValue:[bgValue intValue] ignoreZero:YES unit:IUCSSUnitPixel];
-        }
-        else{
-            NSString *vString, *hString;
-            IUCSSBGVPostion vPosition = [cssTagDict[IUCSSTagBGVPosition] intValue];
-            switch (vPosition) {
-                case IUCSSBGVPostionTop:
-                    vString = @"top";
-                    break;
-                case IUCSSBGVPostionCenter:
-                    vString = @"center";
-                    break;
-                case IUCSSBGVPostionBottom:
-                    vString = @"bottom";
-                    break;
-                default:
-                    break;
-            }
-            
-            IUCSSBGHPostion hPosition = [cssTagDict[IUCSSTagBGHPosition] intValue];
-            switch (hPosition) {
-                case IUCSSBGHPostionLeft:
-                    hString = @"left";
-                    break;
-                case IUCSSBGHPostionCenter:
-                    hString = @"center";
-                    break;
-                case IUCSSBGHPostionRight:
-                    hString= @"right";
-                    break;
-                default:
-                    break;
-            }
-            [dict putTag:@"background-position" string:[NSString stringWithFormat:@"%@ %@", vString, hString]];
-            
-        }
-        
-        id bgValue = cssTagDict[IUCSSTagBGRepeat];
-        BOOL repeat = [bgValue boolValue];
-        if(repeat){
-            [dict putTag:@"background-repeat" string:@"repeat"];
-        }
-        else{
-            [dict putTag:@"background-repeat" string:@"no-repeat"];
-        }
-        
-        BOOL enableGraident = [cssTagDict[IUCSSTagBGGradient] boolValue];
-        if(cssTagDict[IUCSSTagBGGradient] && enableGraident){
-            NSColor *bgColor1 = cssTagDict[IUCSSTagBGGradientStartColor];
-            NSColor *bgColor2 = cssTagDict[IUCSSTagBGGradientEndColor];
-            
-            if(enableGraident){
-                if(bgColor2 == nil){
-                    bgColor2 = [NSColor rgbColorRed:0 green:0 blue:0 alpha:1];
-                }
-                if(bgColor1 == nil){
-                    bgColor1 = [NSColor rgbColorRed:0 green:0 blue:0 alpha:1];
-                }
-                [dict putTag:@"background-color" color:bgColor1 ignoreClearColor:YES];
-                
-                
-                NSString *webKitStr = [NSString stringWithFormat:@"-webkit-gradient(linear, left top, left bottom, color-stop(0.05, %@), color-stop(1, %@));", bgColor1.rgbString, bgColor2.rgbString];
-                NSString *mozStr = [NSString stringWithFormat:@"	background:-moz-linear-gradient( center top, %@ 5%%, %@ 100%% );", bgColor1.rgbString, bgColor2.rgbString];
-                NSString *ieStr = [NSString stringWithFormat:@"filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='%@', endColorstr='%@', GradientType=0)", bgColor1.rgbStringWithTransparent, bgColor2.rgbStringWithTransparent];
-                NSString *gradientStr = [webKitStr stringByAppendingFormat:@"%@ %@", mozStr, ieStr];
-                
-                [dict putTag:@"background" string:gradientStr];
-                
-            }
-            
-        }
-     
-        
-#pragma mark CSS - Border
-        value = cssTagDict[IUCSSTagBorderLeftWidth];
-        if (value) {
-            [dict putTag:@"border-left-width" intValue:[value intValue] ignoreZero:NO unit:IUCSSUnitPixel];
-            NSColor *color = cssTagDict[IUCSSTagBorderLeftColor];
-            [dict putTag:@"border-left-color" color:color ignoreClearColor:NO];
-        }
-        value = cssTagDict[IUCSSTagBorderRightWidth];
-        if (value) {
-            [dict putTag:@"border-right-width" intValue:[value intValue] ignoreZero:NO unit:IUCSSUnitPixel];
-            NSColor *color = cssTagDict[IUCSSTagBorderRightColor];
-            [dict putTag:@"border-right-color" color:color ignoreClearColor:NO];
-        }
-        
-        value = cssTagDict[IUCSSTagBorderBottomWidth];
-        if (value) {
-            [dict putTag:@"border-bottom-width" intValue:[value intValue] ignoreZero:NO unit:IUCSSUnitPixel];
-            NSColor *color = cssTagDict[IUCSSTagBorderBottomColor];
-            [dict putTag:@"border-bottom-color" color:color ignoreClearColor:NO];
-        }
-        
-        value = cssTagDict[IUCSSTagBorderTopWidth];
-        if (value) {
-            [dict putTag:@"border-top-width" intValue:[value intValue] ignoreZero:NO unit:IUCSSUnitPixel];
-            NSColor *color = cssTagDict[IUCSSTagBorderTopColor];
-            [dict putTag:@"border-top-color" color:color ignoreClearColor:NO];
-        }
-        
-
-        
-        value = cssTagDict[IUCSSTagBorderRadiusTopLeft];
-        if(value){
-            [dict putTag:@"border-top-left-radius" intValue:[value intValue] ignoreZero:NO unit:IUCSSUnitPixel];}
-        value = cssTagDict[IUCSSTagBorderRadiusTopRight];
-        if(value){
-            [dict putTag:@"border-top-right-radius" intValue:[value intValue] ignoreZero:NO unit:IUCSSUnitPixel];}
-        value = cssTagDict[IUCSSTagBorderRadiusBottomLeft];
-        if(value){
-            [dict putTag:@"border-bottom-left-radius" intValue:[value intValue] ignoreZero:NO unit:IUCSSUnitPixel];}
-        value = cssTagDict[IUCSSTagBorderRadiusBottomRight];
-        if(value){
-            [dict putTag:@"border-bottom-right-radius" intValue:[value intValue] ignoreZero:NO unit:IUCSSUnitPixel];}
-        
-        NSInteger hOff = [cssTagDict[IUCSSTagShadowHorizontal] integerValue];
-        NSInteger vOff = [cssTagDict[IUCSSTagShadowVertical] integerValue];
-        NSInteger blur = [cssTagDict[IUCSSTagShadowBlur] integerValue];
-        NSInteger spread = [cssTagDict[IUCSSTagShadowSpread] integerValue];
-        NSColor *color = cssTagDict[IUCSSTagShadowColor];
-        if (color == nil){
-            color = [NSColor blackColor];
-        }
-        if (hOff || vOff || blur || spread){
-             [dict putTag:@"-moz-box-shadow" string:[NSString stringWithFormat:@"%ldpx %ldpx %ldpx %ldpx %@", hOff, vOff, blur, spread, [color rgbString]]];
-             [dict putTag:@"-webkit-box-shadow" string:[NSString stringWithFormat:@"%ldpx %ldpx %ldpx %ldpx %@", hOff, vOff, blur, spread, [color rgbString]]];
-             [dict putTag:@"box-shadow" string:[NSString stringWithFormat:@"%ldpx %ldpx %ldpx %ldpx %@", hOff, vOff, blur, spread, [color rgbString]]];
-            //for IE5.5-7
-            [dict putTag:@"filter" string:[NSString stringWithFormat:@"progid:DXImageTransform.Microsoft.Shadow(Strength=%ld, Direction=135, Color='%@')",spread, [color rgbString]]];
-//            [dict putTag:@"filter" string:[NSString stringWithFormat:@"progid:DXImageTransform.Microsoft.Blur(pixelradius=%ld)",blur]];
-
-            //for IE 8
-            [dict putTag:@"-ms-filter" string:[NSString stringWithFormat:@"\"progid:DXImageTransform.Microsoft.Shadow(Strength=%ld, Direction=135, Color='%@')",spread, [color rgbString]]];
-  //          [dict putTag:@"-ms-filter" string:[NSString stringWithFormat:@"\"progid:DXImageTransform.Microsoft.Blur(pixelradius=%ld)\"",blur]];
-
-
-        }
-        
-        if(
-#pragma mark - Text CSS
-#if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
-           [obj isKindOfClass:[IUText class]]||
-#else
-           [obj shouldCompileFontInfo]
-#endif
-
-           )
-        {
-            value = cssTagDict[IUCSSTagFontName];
-            if(value){
-                NSString *font=cssTagDict[IUCSSTagFontName];
-                [dict putTag:@"font-family" string:[[LMFontController sharedFontController] cssForFontName:font]];
-            }
-            value = cssTagDict[IUCSSTagFontSize];
-            if(value){
-                [dict putTag:@"font-size" intValue:[value intValue] ignoreZero:YES unit:IUCSSUnitPixel];}
-            value = cssTagDict[IUCSSTagFontColor];
-            if(value){
-                NSColor *color=cssTagDict[IUCSSTagFontColor];
-                [dict putTag:@"color" color:color ignoreClearColor:YES];
-            }
-            
-            value = cssTagDict[IUCSSTagTextLetterSpacing];
-            if(value){
-                [dict putTag:@"letter-spacing" floatValue:[value floatValue] ignoreZero:YES unit:IUCSSUnitPixel];
-            }
-            
-            value = cssTagDict[IUCSSTagLineHeight];
-            if(value){
-                
-                if([value isEqualToString:@"Auto"]== YES)
-                {
-                    if ([obj isKindOfClass:[PGTextView class]]){
-                        [dict putTag:@"line-height" floatValue:1.3 ignoreZero:YES unit:IUCSSUnitNone];
-
-                    }
-                }
-               else{
-                    [dict putTag:@"line-height" floatValue:[value floatValue] ignoreZero:YES unit:IUCSSUnitNone];
-                }
-            }
-            
-            BOOL boolValue =[cssTagDict[IUCSSTagFontWeight] boolValue];
-            if(boolValue){
-                [dict putTag:@"font-weight" string:@"bold"];
-            }
-            boolValue = [cssTagDict[IUCSSTagFontStyle] boolValue];
-            if(boolValue){
-                [dict putTag:@"font-style" string:@"italic"];
-            }
-            boolValue = [cssTagDict[IUCSSTagTextDecoration] boolValue];
-            if(boolValue){
-                [dict putTag:@"text-decoration" string:@"underline"];
-            }
-            
-            id value = cssTagDict[IUCSSTagTextAlign];
-            if (value) {
-                NSInteger align = [value integerValue];
-                NSString *alignText;
-                switch (align) {
-                    case IUAlignLeft:
-                        alignText = @"left";
-                        break;
-                    case IUAlignCenter:
-                        alignText = @"center";
-                        break;
-                    case IUAlignRight:
-                        alignText = @"right";
-                        break;
-                    case IUAlignJustify:
-                        alignText = @"justify";
-                        break;
-                    default:
-                        JDErrorLog(@"no align type");
-                }
-                [dict putTag:@"text-align" string:alignText];
-            }
-            
-
-        }
-        /*
-        else{
-            [dict putTag:@"line-height" string:@"initial"];
-        }
-         */
-
-
-    }
-    //end of else (not hover)
-    return dict;
-
-}
-#endif
-
-
 #pragma mark - manage JS source
 
 -(NSString*)outputJSInitializeSource:(IUSheet *)document{
@@ -2093,8 +1565,9 @@
 
 -(JDCode *)jsCode:(IUBox *)iu isEdit:(BOOL)isEdit{
     JDCode *code = [[JDCode alloc] init];
-   
+    [code increaseIndentLevelForEdit];
     if([iu isKindOfClass:[IUCarousel class]]){
+        [code addCodeLine:@"\n"];
         [code addCodeLine:@"/* IUCarousel initialize */\n"];
         [code addCodeLineWithFormat:@"initCarousel('%@')", iu.htmlID];
         for (IUBox *child in iu.children) {
@@ -2103,8 +1576,28 @@
     }
     else if([iu isKindOfClass:[IUGoogleMap class]]){
         IUGoogleMap *map = (IUGoogleMap *)iu;
-    
+        [code addCodeLine:@"\n"];
         [code addCodeLine:@"/* IUGoogleMap initialize */\n"];
+        
+        //style option
+        [code addCodeLineWithFormat:@"var %@_styles = [", map.htmlID];
+        [code increaseIndentLevelForEdit];
+        if(map.water){
+            [code addCodeLineWithFormat:@"{featureType:\"water\", stylers:[{color:\"%@\"}]},",[map.water rgbStringWithTransparent]];
+        }
+        if(map.road){
+            [code addCodeLineWithFormat:@"{featureType:\"road\", stylers:[{color:\"%@\"}]},",[map.road rgbStringWithTransparent]];
+        }
+        if(map.landscape){
+            [code addCodeLineWithFormat:@"{featureType:\"landscape\", stylers:[{color:\"%@\"}]},",[map.landscape rgbStringWithTransparent]];
+        }
+        if(map.poi){
+            [code addCodeLineWithFormat:@"{featureType:\"poi\", stylers:[{color:\"%@\"}]},",[map.poi rgbStringWithTransparent]];
+        }
+
+        [code decreaseIndentLevelForEdit];
+        [code addCodeLine:@"];"];
+        
         
         //option
         [code addCodeLineWithFormat:@"var %@_options = {", map.htmlID];
@@ -2112,36 +1605,48 @@
         [code addCodeLineWithFormat:@"center : new google.maps.LatLng(%@, %@),", map.latitude, map.longitude];
         [code addCodeLineWithFormat:@"zoom : %ld,", map.zoomLevel];
         if(map.zoomControl){
-            [code addCodeLine:@"scaleControl: true,"];
+            [code addCodeLine:@"zoomControl: true,"];
         }
         else{
-            [code addCodeLine:@"scaleControl: false,"];
+            [code addCodeLine:@"zoomControl: false,"];
+
         }
         if(map.panControl){
             [code addCodeLine:@"panControl: true,"];
         }
         else{
             [code addCodeLine:@"panControl: false,"];
+
         }
+        [code addCodeLine:@"mapTypeControl: false,"];
+        [code addCodeLine:@"streetViewControl: false,"];
+        [code addCodeLineWithFormat:@"styles: %@_styles", map.htmlID];
         
         [code decreaseIndentLevelForEdit];
         [code addCodeLine:@"};"];
         
+        
+        
         //map
         [code addCodeLineWithFormat:@"var map_%@ = new google.maps.Map(document.getElementById('%@'), %@_options);", map.htmlID, map.htmlID, map.htmlID];
+        
         //marker
         [code addCodeLineWithFormat:@"var marker_%@ = new google.maps.Marker({", map.htmlID];
         [code increaseIndentLevelForEdit];
         [code addCodeLineWithFormat:@"map: map_%@,", map.htmlID];
-        [code addCodeLineWithFormat:@"position: map_%@.getCenter()", map.htmlID];
+        [code addCodeLineWithFormat:@"position: map_%@.getCenter(),", map.htmlID];
+        if(map.markerIconName){
+            NSString *imgSrc = [self imagePathWithImageName:map.markerIconName isEdit:NO];
+            [code addCodeLineWithFormat:@"icon: '%@'", imgSrc];
+        }
         [code decreaseIndentLevelForEdit];
         [code addCodeLine:@"});"];
         
         //info window
         if(map.markerTitle){
             [code addCodeLineWithFormat:@"var infoWindow_%@ = new google.maps.InfoWindow();", map.htmlID];
-            [code addCodeLineWithFormat:@"infoWindow_%@.setContent(%@);", map.htmlID, map.markerTitle];
-            [code addCodeLineWithFormat:@"google.maps.event.addListner(marker_%@, 'click' function(){infoWindow_%@.open(map_%@, marker_%@);});", map.htmlID, map.htmlID, map.htmlID, map.htmlID];
+            [code addCodeLineWithFormat:@"infoWindow_%@.setContent('%@');", map.htmlID, map.markerTitle];
+            [code addCodeLineWithFormat:@"google.maps.event.addListener(marker_%@, 'click', function() { infoWindow_%@.open(map_%@, marker_%@); });", map.htmlID, map.htmlID, map.htmlID, map.htmlID];
         }
         
     }
@@ -2152,7 +1657,7 @@
         }
 
     }
-    
+    [code decreaseIndentLevelForEdit];
     return code;
 }
 

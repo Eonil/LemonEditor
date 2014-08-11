@@ -11,7 +11,7 @@
 #import "IUController.h"
 
 
-@interface LMPropertyIUGoogleMapVC : NSViewController
+@interface LMPropertyIUGoogleMapVC : NSViewController <NSComboBoxDelegate>
 
 @property (nonatomic) IUController      *controller;
 @property (strong) IUResourceManager     *resourceManager;

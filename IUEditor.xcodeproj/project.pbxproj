@@ -327,6 +327,8 @@
 		3D9BC4111994AAE400451F55 /* stack_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC40F1994AAE400451F55 /* stack_map.png */; };
 		3D9BC4121994AAE400451F55 /* stack_map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC4101994AAE400451F55 /* stack_map@2x.png */; };
 		3D9BC41319988AD700451F55 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69C575BF18D6F61E0016F050 /* MainMenu.xib */; };
+		3D9BC41619989AB900451F55 /* map_position.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC41419989AB900451F55 /* map_position.png */; };
+		3D9BC41719989AB900451F55 /* map_zoom.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC41519989AB900451F55 /* map_zoom.png */; };
 		3DA416B81935A6BE00559028 /* LMPreferenceFontVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */; };
 		3DA416B91935A6BE00559028 /* LMPreferenceFontVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */; };
 		3DA416BD1935ABB400559028 /* LMFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416BC1935ABB400559028 /* LMFontController.m */; };
@@ -1209,6 +1211,8 @@
 		3D9BC40C1994AADA00451F55 /* tool_map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tool_map@2x.png"; sourceTree = "<group>"; };
 		3D9BC40F1994AAE400451F55 /* stack_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stack_map.png; sourceTree = "<group>"; };
 		3D9BC4101994AAE400451F55 /* stack_map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_map@2x.png"; sourceTree = "<group>"; };
+		3D9BC41419989AB900451F55 /* map_position.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_position.png; sourceTree = "<group>"; };
+		3D9BC41519989AB900451F55 /* map_zoom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_zoom.png; sourceTree = "<group>"; };
 		3DA416B51935A6BE00559028 /* LMPreferenceFontVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPreferenceFontVC.h; path = Editor/Preference/LMPreferenceFontVC.h; sourceTree = "<group>"; };
 		3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPreferenceFontVC.m; path = Editor/Preference/LMPreferenceFontVC.m; sourceTree = "<group>"; };
 		3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPreferenceFontVC.xib; path = Editor/Preference/LMPreferenceFontVC.xib; sourceTree = "<group>"; };
@@ -3003,6 +3007,8 @@
 		3DED273D19078917001A1D67 /* canvasImage */ = {
 			isa = PBXGroup;
 			children = (
+				3D9BC41419989AB900451F55 /* map_position.png */,
+				3D9BC41519989AB900451F55 /* map_zoom.png */,
 				3D5B5B001991C9DC00EF6F12 /* ttwidgetLargeHorizontal.png */,
 				3D5B5AFE1991C9D700EF6F12 /* ttwidgetHorizontal.png */,
 				3D5B5AFB1991C8B100EF6F12 /* ttwidgetLargeNone.png */,
@@ -4265,6 +4271,7 @@
 				3DED27521908C393001A1D67 /* clear_color_border.png in Resources */,
 				3DF8044B18FE62FC00913505 /* tool_view.png in Resources */,
 				263284691963E519006CDB7D /* agency_preview.png in Resources */,
+				3D9BC41719989AB900451F55 /* map_zoom.png in Resources */,
 				3DF803E018FE62C900913505 /* align_center.png in Resources */,
 				CBA878031963D3CF00075294 /* Tutorial04_en.png in Resources */,
 				CBC65119197E8CA80012E4EF /* LMPropertyAnalyticsVC.xib in Resources */,
@@ -4454,6 +4461,7 @@
 				068555C3198A56740073FA83 /* erlandh_Lounge_Chair_Red.png in Resources */,
 				69346623192B805000F82DAF /* LMCommandVC.xib in Resources */,
 				26FC5DA9196F8489004B4DB4 /* panel_bottom_off@2x.png in Resources */,
+				3D9BC41619989AB900451F55 /* map_position.png in Resources */,
 				068555C1198A56740073FA83 /* Charlie_Chaplin-The_Kid.png in Resources */,
 				06855622198A63430073FA83 /* johnny_automatic_multiple_files.png in Resources */,
 				69B45C3E1986BBC90087FDFD /* LMServerWC.xib in Resources */,

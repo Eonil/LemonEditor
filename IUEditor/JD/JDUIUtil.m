@@ -811,29 +811,16 @@ static NSWindowController *hudWC;
 @implementation NSColor(JDExtension)
 
 - (BOOL)isTransparency{
-    CGFloat alphaFloatValue;
-    NSColor *convertedColor=[self colorUsingColorSpaceName:NSDeviceRGBColorSpace];
-    if(convertedColor)
-    {
-        // Get the red, green, and blue components of the color
-        [convertedColor getRed:nil green:nil blue:nil alpha:&alphaFloatValue];
-        if(alphaFloatValue == 0 ){
-            return YES;
-        }
+    if([self alphaComponent]==0){
+        return YES;
+
     }
     return NO;
 }
 
 -(BOOL)isAlpha{
-    CGFloat alphaFloatValue;
-    NSColor *convertedColor=[self colorUsingColorSpaceName:NSDeviceRGBColorSpace];
-    if(convertedColor)
-    {
-        // Get the red, green, and blue components of the color
-        [convertedColor getRed:nil green:nil blue:nil alpha:&alphaFloatValue];
-        if(alphaFloatValue < 1 ){
-            return YES;
-        }
+    if([self alphaComponent] < 1){
+        return YES;
     }
     return NO;
 }
@@ -861,6 +848,30 @@ static NSWindowController *hudWC;
         
         // Concatenate the red, green, and blue components' hex strings together with a "#"
         return [NSString stringWithFormat:@"rgb(%d,%d,%d)", redIntValue, greenIntValue, blueIntValue];
+    }
+    return nil;
+}
+
+-(NSString *)hueHexString{
+    CGFloat redFloatValue, greenFloatValue, blueFloatValue, alphaFloatValue;
+    int redIntValue, greenIntValue, blueIntValue, alphaIntValue;
+    
+    //Convert the NSColor to the RGB color space before we can access its components
+    NSColor *convertedColor=[self colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+    
+    if(convertedColor)
+    {
+        // Get the red, green, and blue components of the color
+        [convertedColor getRed:&redFloatValue green:&greenFloatValue blue:&blueFloatValue alpha:&alphaFloatValue];
+        
+        // Convert the components to numbers (unsigned decimal integer) between 0 and 255
+        redIntValue=redFloatValue*0xff;
+        greenIntValue=greenFloatValue*0xff;
+        blueIntValue=blueFloatValue*0xff;
+        alphaIntValue = alphaFloatValue*0xff;
+        
+        // Concatenate the red, green, and blue, alpha components' hex strings
+        return [NSString stringWithFormat:@"%02X%02X%02X", redIntValue, greenIntValue, blueIntValue];
     }
     return nil;
 }

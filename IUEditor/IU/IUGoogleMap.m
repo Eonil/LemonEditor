@@ -14,6 +14,22 @@
 
 #pragma mark - Initialize
 
+- (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
+    self = [super initWithProject:project options:options];
+    if(self){
+        self.zoomLevel = 14;
+        self.latitude = @"37.790896";
+        self.longitude = @"-122.401502";
+        self.enableMarkerIcon = YES;
+        self.markerTitle = @"JDLab @ RocketSpace";
+        
+        [self.css setValue:@(400) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(400) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
+        
+    }
+    return self;
+}
+
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self =  [super initWithCoder:aDecoder];
     [self.undoManager disableUndoRegistration];
@@ -40,7 +56,6 @@
     map.longitude = _longitude;
     map.latitude = _latitude;
     map.zoomLevel = _zoomLevel;
-    map.mapControl = _mapControl;
     map.panControl = _panControl;
     map.zoomControl = _zoomControl;
     map.enableMarkerIcon = _enableMarkerIcon;
@@ -80,14 +95,6 @@
     if(_zoomLevel != zoomLevel){
         [[self.undoManager prepareWithInvocationTarget:self] setZoomLevel:_zoomLevel];
         _zoomLevel = zoomLevel;
-    }
-    [self updateHTML];
-}
-
-- (void)setMapControl:(BOOL)mapControl{
-    if(_mapControl != mapControl){
-        [[self.undoManager prepareWithInvocationTarget:self] setMapControl:_mapControl];
-        _mapControl = mapControl;
     }
     [self updateHTML];
 }
