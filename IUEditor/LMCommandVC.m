@@ -62,12 +62,14 @@
     }
     NSAssert(docController.project, @"Should have docController.project for KVO issue");
     _docController = docController;
-    [_compilerB bind:NSSelectedIndexBinding toObject:self withKeyPath:@"docController.project.compiler.rule" options:nil];
     [self addObserver:self forKeyPath:@"docController.project.runnable" options:NSKeyValueObservingOptionInitial context:nil];
-    [self changeCompilerRule:nil];
 #ifndef DEBUG
     [_recordingB setHidden:YES];
 #endif
+}
+
+- (void)awakeFromNib{
+    [_compilerB bind:NSSelectedIndexBinding toObject:self withKeyPath:@"docController.project.compiler.rule" options:nil];
 }
 
 -(void)dealloc{

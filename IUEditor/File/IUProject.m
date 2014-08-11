@@ -239,9 +239,30 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMQSize:) name:IUNotificationMQAdded object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMQSize:) name:IUNotificationMQRemoved object:nil];
     
+    IUProjectType type = [self ProjectTypeForString:[self className]];
+    IUCompileRule rule;
+    switch (type) {
+        case IUProjectTypeDefault:
+        case IUProjectTypePresentation:
+            rule = IUCompileRuleDefault;
+            break;
+        case IUProjectTypeDjango:
+            rule = IUCompileRuleDjango;
+            break;
+        case IUProjectTypeWordpress:
+            rule = IUCompileRuleDjango;
+            break;
+        default:
+            assert(0);
+            break;
+    }
+    
+    [self setCompileRule:rule];
+    
     for (IUSheet *sheet in self.allDocuments) {
         [sheet connectWithEditor];
     }
+    
 }
 
 - (void)setIsConnectedWithEditor{
@@ -327,6 +348,27 @@
             break;
     }
     return projectName;
+}
+- (IUProjectType)ProjectTypeForString:(NSString *)projectName{
+    IUProjectType type;
+    if([projectName isEqualToString:@"IUProject"]){
+        type = IUProjectTypeDefault;
+    }
+    else if([projectName isEqualToString:@"IUDjangoProject"]){
+        type = IUProjectTypeDjango;
+    }
+    else if([projectName isEqualToString:@"IUPresentationProject"]){
+        type = IUProjectTypePresentation;
+    }
+    
+    else if([projectName isEqualToString:@"IUWordpressProject"]){
+        type = IUProjectTypeWordpress;
+    }
+    else{
+        assert(0);
+    }
+    
+    return type;
 }
 
 - (NSString*)directoryPath{
