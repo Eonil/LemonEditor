@@ -286,8 +286,10 @@
                 }
             }
             else if (theEvent.type == NSRightMouseDown){
+                /* currently, right mouse button down is disable
                 NSString *currentIUID = [self.webView IUAtPoint:convertedPoint];
                 [((LMCanvasVC *)self.delegate) performRightClick:currentIUID withEvent:theEvent];
+                 */
             }
         }
         if (theEvent.type == NSLeftMouseDragged && isMouseDown){
