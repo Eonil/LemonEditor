@@ -26,8 +26,6 @@
         [self.css setValue:@(1) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
         [self.css setValue:nil forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
         
-        self.lineHeightAuto = false;
-
         self.bgActive = [NSColor blackColor];
         self.fontActive = [NSColor whiteColor];
 

@@ -424,9 +424,7 @@
         [code insertTag:@"text-align" string:alignText];
     }
     if (cssTagDict[IUCSSTagLineHeight]) {
-        if ([cssTagDict[IUCSSTagLineHeight] isEqualToString:@"Auto"] == NO) {
-            [code insertTag:@"line-height" floatFromNumber:cssTagDict[IUCSSTagLineHeight]];
-        }
+        [code insertTag:@"line-height" floatFromNumber:cssTagDict[IUCSSTagLineHeight]];
     }
 }
 
@@ -1108,29 +1106,6 @@
         }
     }
 }
-
-#if 0
-/* This code is unnaccessary becaouse PGTextView default is "1.3", not "Auto" */
-- (void)updateCSSCode:(IUCSSCode*)code asPGTextView:(PGTextView*)pgTextView{
-    [code setInsertingIdentifier:pgTextView.cssClass];
-    
-    for (NSNumber *viewport in [pgTextView.css allViewports]) {
-        /* width can vary to data */
-        NSString *editorLineHeight = [code valueForTag:IUCSSTagLineHeight identifier:pgTextView.cssClass viewport:[viewport intValue] target:IUTargetEditor];
-        if ([editorLineHeight isEqualToString:@"Auto"]) {
-            [code setInsertingTarget:IUTargetEditor];
-            [code setInsertingViewPort:[viewport intValue]];
-            [code insertTag:IUCSSTagLineHeight string:@"1.3"];
-        }
-        NSString *outputLineHeight = [code valueForTag:IUCSSTagLineHeight identifier:pgTextView.cssClass viewport:[viewport intValue] target:IUTargetEditor];
-        if ([outputLineHeight isEqualToString:@"Auto"]) {
-            [code setInsertingTarget:IUTargetEditor];
-            [code setInsertingViewPort:[viewport intValue]];
-            [code insertTag:IUCSSTagLineHeight string:@"1.3"];
-        }
-    }
-}
-#endif
 
 - (void)updateCSSCode:(IUCSSCode*)code asWPMenu:(WPMenu*)wpmenu{
     [code setInsertingTarget:IUTargetBoth];

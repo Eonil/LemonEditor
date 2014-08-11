@@ -351,14 +351,9 @@
     [self stringByEvaluatingJavaScriptFromString:@"reframeCenter()"];
 }
 
-- (void)updateTextAutoHeight{
-    [self callWebScriptMethod:@"setTextAutoHeight" withArguments:nil];
-}
-
 
 - (void)runJSAfterRefreshCSS{
     [self reframeCenter];
-    [self updateTextAutoHeight];
     [self updateFrameDict];
 }
 

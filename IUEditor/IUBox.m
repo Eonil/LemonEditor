@@ -124,11 +124,6 @@
         [_css setValue:@(0) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
         [_css setValue:@(0) forTag:IUCSSTagHeightUnitIsPercent forViewport:IUCSSDefaultViewPort];
         
-#if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
-        _lineHeightAuto = YES;
-#endif
-        
-        
         if (self.hasWidth) {
             [_css setValue:@(100) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
         }
@@ -154,7 +149,7 @@
         [_css setValue:[NSColor rgbColorRed:0 green:0 blue:0 alpha:1] forTag:IUCSSTagBorderBottomColor forViewport:IUCSSDefaultViewPort];
         
         //font-type
-        [_css setValue:@"Auto" forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(1.0) forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
         [_css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
         [_css setValue:@(12) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
         [_css setValue:@"Helvetica" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
@@ -214,7 +209,6 @@
         NSArray *children = [self.children deepCopy];
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
         box.text = [_text copy];
-        box.lineHeightAuto  = _lineHeightAuto;
 #endif
         
         box.overflowType = _overflowType;
@@ -1092,10 +1086,12 @@
 
 }
 
-- (void)setLineHeightAuto:(BOOL)lineHeightAuto{
-    _lineHeightAuto = lineHeightAuto;
-    [self updateHTML];
-    [self updateJS];
+- (void)updateLineHeightAuto{
+    if(self.delegate){
+        CGFloat lineheight = [[self.delegate callWebScriptMethod:@"getTextAutoHeight" withArguments:@[self.htmlID]] floatValue];
+        [_css setValue:@(lineheight) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagLineHeight]];
+
+    }
 }
 
 

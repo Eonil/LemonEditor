@@ -56,8 +56,6 @@
 
 - (void)setController:(IUController *)controller{
     _controller = controller;
-    
-    [_lineHeightB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagLineHeight] options:IUBindingDictNotRaisesApplicable];
     [_textAlignB bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagTextAlign] options:IUBindingDictNotRaisesApplicable];
     
     //observing for undo
@@ -66,6 +64,7 @@
                       [_controller keyPathFromControllerToCSSTag:IUCSSTagFontStyle],
                       [_controller keyPathFromControllerToCSSTag:IUCSSTagTextDecoration],
                       [_controller keyPathFromControllerToCSSTag:IUCSSTagFontSize],
+                      [_controller keyPathFromControllerToCSSTag:IUCSSTagLineHeight],
                       [_controller keyPathFromControllerToProperty:@"shouldCompileFontInfo"],
                       @"controller.selectedObjects",
                       ];
@@ -277,6 +276,18 @@
             [_letterSpacingComboBox setStringValue:[NSString stringWithFormat:@"%.1f", letterSpacing]];
         }
         
+        //set fontHeight
+        if([self valueForTag:IUCSSTagLineHeight] == NSMultipleValuesMarker){
+            NSString *placeholder = [NSString stringWithValueMarker:NSMultipleValuesMarker];
+            [[_lineHeightB cell] setPlaceholderString:placeholder];
+            [_lineHeightB setStringValue:@""];
+        }
+        else{
+            CGFloat lineheight = [[self valueForTag:IUCSSTagLineHeight] floatValue];
+            [[_lineHeightB cell] setPlaceholderString:@""];
+            [_lineHeightB setStringValue:[NSString stringWithFormat:@"%.1f", lineheight]];
+        }
+        
         //enable font type box
         [_fontB setEnabled:YES];
         [_fontSizeComboBox setEnabled:YES];
@@ -333,7 +344,7 @@
         [self updateLetterSpacing:spacing];
     }
     else if([currentComboBox isEqualTo:_lineHeightB]){
-        [self updateLineHeight:[_lineHeightB objectValueOfSelectedItem]];
+        [self updateLineHeight:[[_lineHeightB objectValueOfSelectedItem] floatValue]];
     }
 }
 
@@ -351,24 +362,18 @@
     [self setValue:@(sapcing) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagTextLetterSpacing]];
 
 }
-
-- (void)updateLineHeight:(NSString *)lineHeightStr{
-    
-    //???: selection repondstoselector not working. why?
-    //    if([_controller.selection respondsToSelector:@selector(setLineHeightAuto:)]){
-
+- (IBAction)updateAutoLineHeight:(id)sender {
     //replace to selectedobject
     for(IUBox *box in _controller.selectedObjects){
-        if([box respondsToSelector:@selector(setLineHeightAuto:)]){
-            
-            if([lineHeightStr isEqualToString:@"Auto"]){
-                [box setLineHeightAuto:YES];
-            }
-            else{
-                [box setLineHeightAuto:NO];
-            }
-        }
+         if([box respondsToSelector:@selector(updateLineHeightAuto)]){
+             [box updateLineHeightAuto];
+         }
     }
+    
+}
+
+- (void)updateLineHeight:(CGFloat)lineHeightStr{
+    [self setValue:@(lineHeightStr) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagLineHeight]];
 }
 
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
@@ -390,7 +395,7 @@
         [self updateLetterSpacing:letterSpacing];
     }
     else if([control isEqualTo:_lineHeightB]){
-        [self updateLineHeight:[fieldEditor string]];
+        [self updateLineHeight:[[fieldEditor string] floatValue]];
     }
     return YES;
 }

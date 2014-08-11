@@ -1255,13 +1255,7 @@
         [retString appendFormat:@" style='background-image:url(%@)'", value];
     }
     
-#if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
-    if([iu shouldCompileFontInfo]){
-        if(iu.lineHeightAuto){
-            [retString appendString:@" autoLineHeight='1'"];
-        }
-    }
-#else
+#if CURRENT_TEXT_VERSION > TEXT_SELECTION_VERSION
 #pragma mark IUText
     if( [iu isKindOfClass:[IUText class]] ){
         if(((IUText *)iu).lineHeightAuto){

@@ -533,14 +533,6 @@
 
     }
     
-    //TODO : REMOVE FOLLOWING CODE
-#if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
-    IUBox *iu = [_controller IUBoxByIdentifier:identifier];
-    else if([iu isKindOfClass:[IUText class]]){
-        [(IUText *)iu updateAutoHeight];
-    }
-#endif
-    
 //    JDDebugLog(@"%@:%@", identifier, html);
 
 }

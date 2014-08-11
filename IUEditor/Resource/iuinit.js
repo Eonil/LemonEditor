@@ -86,7 +86,6 @@ $(document).ready(function(){
 	resizeCollection();
 	reframeCenter();
 	resizePageLinkSet();
-    setTextAutoHeight();
             
     console.log("ready : iuinit");
 });

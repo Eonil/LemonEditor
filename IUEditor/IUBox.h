@@ -113,7 +113,6 @@ typedef enum _IUOverflowType{
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 @property (nonatomic) NSString *text;
-@property (nonatomic) BOOL lineHeightAuto;
 
 #endif
 //undoManager
@@ -136,6 +135,7 @@ typedef enum _IUOverflowType{
 - (NSArray *)cssIdentifierArray;
 - (void)updateCSS;
 - (void)updateCSSWithIdentifier:(NSString *)identifier;
+- (void)updateLineHeightAuto;
 
 //HTML
 -(NSString*)html;

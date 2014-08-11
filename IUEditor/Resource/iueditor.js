@@ -184,6 +184,23 @@ function getImageWidth(imageSrc){
     return imageWidth;
 }
 
+function getTextAutoHeight(identifier){
+    
+    var iu = $('#'+identifier);
+    
+    var brCount = $("br", iu).length;
+    if($(iu.lastChild).is("br") == false){
+        brCount++;
+    }
+    var height = iu.height();
+    var lineheight = height/brCount;
+    var fontSize = parseFloat(iu.css('font-size'));
+    
+    
+    return lineheight/fontSize;
+}
+
+
 $(window).resize(function(){
             getIUUpdatedFrameThread();
 });
@@ -194,7 +211,6 @@ $(document).ready(function(){
             resizeCollection();
             reframeCenter();
             resizePageLinkSet();
-            setTextAutoHeight();
             getIUUpdatedFrameThread();
             
             console.log("endof : iueditor.js");

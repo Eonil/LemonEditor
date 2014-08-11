@@ -81,13 +81,6 @@
 - (void)updateNewLine:(NSRange)range htmlNode:(DOMHTMLElement *)node{
     [_textController selectTextRange:range htmlNode:node];
     [self updateCSS];
-    [self updateAutoHeight];
-}
-
-- (void)updateAutoHeight{
-    if(self.delegate){
-        [self.delegate callWebScriptMethod:@"setTextAutoHeight" withArguments:nil];
-    }
 }
 
 
@@ -103,12 +96,10 @@
 
 - (void)updateHTML{
     [super updateHTML];
-    [self updateAutoHeight];
 }
 
 - (void)updateTextHTML{
     [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.parent.htmlID];
-    [self updateAutoHeight];
 }
 
 - (void)updateTextCSS:(IUCSS *)textCSS identifier:(NSString *)identifier{
@@ -136,7 +127,6 @@
 }
 - (void)updateCSS{
     [super updateCSS];
-    [self updateAutoHeight];
 }
 
 - (NSString*)identifierForTextController{

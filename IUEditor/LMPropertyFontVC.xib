@@ -124,17 +124,16 @@
                                 <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                             </colorWell>
                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T6Q-UK-fkM">
-                                <rect key="frame" x="182" y="58" width="81" height="22"/>
+                                <rect key="frame" x="182" y="58" width="58" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="aEn-3J-rg3"/>
-                                    <constraint firstAttribute="width" constant="78" id="i0K-cP-1yt"/>
+                                    <constraint firstAttribute="width" constant="55" id="i0K-cP-1yt"/>
                                 </constraints>
-                                <comboBoxCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" title="Auto" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="woc-yV-A3J" userLabel="Combo Box Cell - Automobile">
+                                <comboBoxCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" title="1.0" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="woc-yV-A3J" userLabel="Combo Box Cell - Automobile">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <objectValues>
-                                        <string>Auto</string>
                                         <string>1.0</string>
                                         <string>1.3</string>
                                         <string>1.5</string>
@@ -235,14 +234,30 @@
                                     <outlet property="formatter" destination="2Xc-jP-M6t" id="Hcl-rX-xEo"/>
                                 </connections>
                             </comboBox>
+                            <button toolTip="Fit box size to image" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hEa-YS-8cD">
+                                <rect key="frame" x="245" y="61" width="19" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="SVn-Gv-BP2"/>
+                                    <constraint firstAttribute="width" constant="19" id="WRF-Vv-LLM"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="auto_resize" imagePosition="overlaps" alignment="center" controlSize="small" imageScaling="proportionallyDown" inset="2" id="9Ht-Kr-FoK">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="updateAutoLineHeight:" target="-2" id="HGp-oS-eD0"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <constraints>
                         <constraint firstItem="FLi-Cj-znY" firstAttribute="top" secondItem="ZNa-jN-U2r" secondAttribute="bottom" constant="8" id="4Eo-Ur-HJh"/>
                         <constraint firstItem="ZNa-jN-U2r" firstAttribute="leading" secondItem="E1V-BP-x9X" secondAttribute="trailing" constant="2" id="6R4-yU-DJ2"/>
+                        <constraint firstItem="hEa-YS-8cD" firstAttribute="top" secondItem="T6Q-UK-fkM" secondAttribute="top" id="7Dh-VD-1o9"/>
                         <constraint firstItem="Fux-uA-5kK" firstAttribute="leading" secondItem="wwI-vY-XSo" secondAttribute="leading" constant="5" id="CNt-cy-GpK"/>
                         <constraint firstItem="ijX-xs-4Bj" firstAttribute="leading" secondItem="wwI-vY-XSo" secondAttribute="leading" constant="6" id="Ef6-Ap-ais"/>
                         <constraint firstItem="EF9-cy-hVF" firstAttribute="leading" secondItem="ijX-xs-4Bj" secondAttribute="trailing" constant="10" id="GYL-Qs-e9b"/>
+                        <constraint firstItem="hEa-YS-8cD" firstAttribute="leading" secondItem="T6Q-UK-fkM" secondAttribute="trailing" constant="8" id="Go2-8z-1Mc"/>
                         <constraint firstItem="ijX-xs-4Bj" firstAttribute="top" secondItem="wwI-vY-XSo" secondAttribute="top" constant="4" id="HMS-Jf-osI"/>
                         <constraint firstItem="T6Q-UK-fkM" firstAttribute="leading" secondItem="ZNa-jN-U2r" secondAttribute="trailing" constant="8" id="Hbh-Or-mPy"/>
                         <constraint firstItem="uve-V4-Xm0" firstAttribute="top" secondItem="T6Q-UK-fkM" secondAttribute="bottom" constant="8" id="Krj-S2-jJa"/>
@@ -317,5 +332,6 @@
         <image name="align_full" width="10" height="7"/>
         <image name="align_left" width="10" height="7"/>
         <image name="align_right" width="10" height="7"/>
+        <image name="auto_resize" width="19" height="18"/>
     </resources>
 </document>
