@@ -127,7 +127,10 @@
     if (height == self.mainView.frame.size.height) {
         return;
     }
-    [self.mainView setHeight:height];    
+    if(height > 50000){
+        height = 50000;
+    }
+    [self.mainView setHeight:height];
     [self.webView resizePageContent];
     [[self webView] updateFrameDict];
 }

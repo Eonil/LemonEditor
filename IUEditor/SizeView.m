@@ -280,6 +280,11 @@
 - (IBAction)addSizeOKBtn:(id)sender {
     NSInteger newWidth = [self.addFrameSizeField integerValue];
     
+    if(newWidth > 30000){
+        [JDUIUtil hudAlert:@"It's too large, we support up to 30000px!" second:2];
+        return ;
+    }
+    
     NSNumber *widthNumber = [NSNumber numberWithInteger:newWidth];
     if([_sizeArray containsObject:widthNumber]){
         [JDUIUtil hudAlert:@"Already Same Width, Here" second:2];
