@@ -138,10 +138,19 @@
             
             NSRect newframe = [pLayer diffPointAndSizeWithType:selectedPointType withDiffPoint:diffPoint];
             NSRect totalFrame = [pLayer diffPointAndSizeWithType:selectedPointType withDiffPoint:totalPoint];
+            
+            if (selectedPointType == IUPointLayerPositionUp || selectedPointType == IUPointLayerPositionDown) {
+                newframe.size.width = CGFLOAT_INVALID;
+                totalFrame.size.width = CGFLOAT_INVALID;
+            }
+            else if (selectedPointType == IUPointLayerPositionLeftMiddle || selectedPointType == IUPointLayerPositionRightMiddle){
+                newframe.size.height = CGFLOAT_INVALID;
+                totalFrame.size.height = CGFLOAT_INVALID;
+            }
+            
             [((LMCanvasVC *)(self.delegate)) extendIUToDiffSize:newframe.size totalDiffSize:totalFrame.size];
             [((LMCanvasVC *)(self.delegate)) moveIUToDiffPoint:newframe.origin totalDiffPoint:totalFrame.origin];
         }
-        
         
         //reset cursor
         [[self window] invalidateCursorRectsForView:self];

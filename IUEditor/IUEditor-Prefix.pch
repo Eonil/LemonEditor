@@ -101,5 +101,6 @@
 
 #define IUEmail @"mailto:iu@jdlab.org?subject=[IUEditor]&body="
 
+#define CGFLOAT_INVALID CGFLOAT_MIN
 
 #endif

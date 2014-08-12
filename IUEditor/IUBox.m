@@ -937,7 +937,7 @@
 }
 
 - (void)increaseSize:(NSSize)size withParentSize:(NSSize)parentSize{
-    if([self hasWidth] && [self canChangeWidthByUserInput]){
+    if([self hasWidth] && [self canChangeWidthByUserInput] && size.width != CGFLOAT_INVALID){
         NSInteger currentWidth = originalSize.width;
         currentWidth += size.width;
         [_css setValue:@(currentWidth) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelWidth]];
@@ -950,7 +950,7 @@
         
      
     }
-    if([self hasHeight] && [self canChangeHeightByUserInput]){
+    if([self hasHeight] && [self canChangeHeightByUserInput]  && size.height != CGFLOAT_INVALID){
         NSInteger currentHeight = originalSize.height;
         currentHeight += size.height;
         [_css setValue:@(currentHeight) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelHeight]];
