@@ -1011,11 +1011,20 @@
     return YES;
 }
 
-- (BOOL)canChangePositionAbsoluteCenter{
+- (BOOL)canChangePositionAbsoluteBottom{
+    return YES;
+}
+- (BOOL)canChangePositionFixed{
+    return YES;
+}
+- (BOOL)canChangePositionFixedBottom{
     return YES;
 }
 
-- (BOOL)canChangePositionRelativeCenter{
+- (BOOL)canChangeCenter{
+    if(_positionType == IUPositionTypeFloatLeft || _positionType == IUPositionTypeFloatRight){
+        return NO;
+    }
     return YES;
 }
 
@@ -1033,10 +1042,18 @@
     
     [[self.undoManager prepareWithInvocationTarget:self] setPositionType:_positionType];
     
-    if (_positionType == IUPositionTypeFloatRight || positionType == IUPositionTypeFloatRight) {
-        [self.css setValue:@(0) forTag:IUCSSTagPixelX];
-        [self.css setValue:@(0) forTag:IUCSSTagPercentX];
+    BOOL disableCenterFlag = NO;
+    if (positionType == IUPositionTypeFloatLeft || positionType == IUPositionTypeFloatRight) {
+        if(positionType == IUPositionTypeFloatRight){
+            [self.css setValue:@(0) forTag:IUCSSTagPixelX];
+            [self.css setValue:@(0) forTag:IUCSSTagPercentX];
+        }
+        self.enableCenter = NO;
+        disableCenterFlag = YES;
+        [self willChangeValueForKey:@"canChangeCenter"];
+
     }
+    
     
     BOOL absoluteBottomFlag = _positionType == IUPositionTypeAbsoluteBottom || positionType == IUPositionTypeAbsoluteBottom;
     if (absoluteBottomFlag) {
@@ -1048,6 +1065,10 @@
     _positionType = positionType;
     if (absoluteBottomFlag) {
         [self didChangeValueForKey:@"hasY"];
+    }
+    if (disableCenterFlag){
+        [self didChangeValueForKey:@"canChangeCenter"];
+
     }
     [self updateCSS];
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -441,7 +441,7 @@
                                                 <constraint firstAttribute="height" constant="18" id="8Zl-1N-nZA"/>
                                                 <constraint firstAttribute="width" constant="19" id="ZpB-Kc-jHW"/>
                                             </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="center_on" imagePosition="overlaps" alignment="center" alternateImage="center_off" imageScaling="proportionallyDown" inset="2" id="te9-UZ-kqO">
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="center_off" imagePosition="only" alignment="center" alternateImage="center_on" imageScaling="proportionallyDown" inset="2" id="te9-UZ-kqO">
                                                 <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>

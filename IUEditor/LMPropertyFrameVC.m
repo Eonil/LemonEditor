@@ -156,6 +156,9 @@
 
     
     [_positionPopupBtn bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"canChangePositionType"] options:IUBindingDictNotRaisesApplicable];
+    [_centerBtn bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"canChangeCenter"] options:IUBindingDictNotRaisesApplicable];
+
+    
     //enabled option 2
     
     [_xTF bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"canChangeXByUserInput"] options:IUBindingDictNotRaisesApplicable];

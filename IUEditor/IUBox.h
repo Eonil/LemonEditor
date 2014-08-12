@@ -208,9 +208,10 @@ typedef enum _IUOverflowType{
 - (BOOL)canChangePositionRelative;
 - (BOOL)canChangePositionFloatLeft;
 - (BOOL)canChangePositionFloatRight;
-- (BOOL)canChangePositionAbsoluteCenter;
-- (BOOL)canChangePositionRelativeCenter;
-
+- (BOOL)canChangePositionAbsoluteBottom;
+- (BOOL)canChangePositionFixed;
+- (BOOL)canChangePositionFixedBottom;
+- (BOOL)canChangeCenter;
 
 
 //Property
