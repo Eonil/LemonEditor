@@ -18,7 +18,9 @@
 
 @end
 
-@implementation LMEventScrollAnimationVC
+@implementation LMEventScrollAnimationVC{
+    NSArray *observingPaths;
+}
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,13 +40,14 @@
     
     [_opacityMoveTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"] options:numberBindingOption];
     [_xPosMoveTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"xPosMove"] options:numberBindingOption];
-    [self addObserver:self forKeyPaths:@[[_controller keyPathFromControllerToProperty:@"opacityMove"],
-                                         [_controller keyPathFromControllerToProperty:@"positionType"]]
-              options:0 context:nil];
+    
+    observingPaths =@[[_controller keyPathFromControllerToProperty:@"opacityMove"],
+                      [_controller keyPathFromControllerToProperty:@"positionType"]];
+    [self addObserver:self forKeyPaths:observingPaths options:0 context:nil];
 }
 
 - (void)dealloc{
-    [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"]];
+    [self removeObserver:self forKeyPaths:observingPaths];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
