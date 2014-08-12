@@ -1053,8 +1053,11 @@
     }
     
     BOOL disableCenterFlag = NO;
-    if (positionType == IUPositionTypeFloatLeft || positionType == IUPositionTypeFloatRight) {
-        self.enableCenter = NO;
+    if (positionType == IUPositionTypeFloatLeft || positionType == IUPositionTypeFloatRight
+        || _positionType == IUPositionTypeFloatLeft || _positionType == IUPositionTypeFloatRight) {
+        if(positionType == IUPositionTypeFloatLeft || positionType == IUPositionTypeFloatRight){
+            self.enableCenter = NO;
+        }
         disableCenterFlag = YES;
         [self willChangeValueForKey:@"canChangeCenter"];
 
