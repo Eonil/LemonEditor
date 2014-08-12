@@ -30,6 +30,8 @@
     [self addIU:article error:nil];
     
     [self.css setValue:@(800) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:[NSColor colorWithRed:220.f/256.f green:220.f/256.f blue:220.f/245.f alpha:1] forTag:IUCSSTagBGColor];
+
     return self;
 }
 

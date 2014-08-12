@@ -52,6 +52,7 @@
     [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css setValue:@(100) forTag:IUCSSTagPercentWidth];
     [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent];
+    [self.css setValue:[NSColor colorWithWhite:200.f/256.f alpha:1] forTag:IUCSSTagBGColor];
     [self setEnableTitle:YES];
     [self setEnableDate:YES];
     [self setEnableBody:YES];
