@@ -1076,6 +1076,14 @@
         [self didChangeValueForKey:@"canChangeCenter"];
 
     }
+    
+    if(_positionType == IUPositionTypeRelative ||
+       _positionType == IUPositionTypeFloatLeft ||
+       _positionType == IUPositionTypeFloatRight){
+        //html order
+        [self.parent updateHTML];
+    }
+    
     [self updateCSS];
 }
 
