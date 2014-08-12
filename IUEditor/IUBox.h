@@ -122,6 +122,7 @@ typedef enum _IUOverflowType{
 
 //Event
 @property (readonly) IUEvent *event;
+
 //scroll event
 @property (nonatomic) float opacityMove;
 @property (nonatomic) float xPosMove;
@@ -136,7 +137,6 @@ typedef enum _IUOverflowType{
 - (NSArray *)cssIdentifierArray;
 - (void)updateCSS;
 - (void)updateCSSWithIdentifier:(NSString *)identifier;
-- (void)updateLineHeightAuto;
 
 //HTML
 -(NSString*)html;
@@ -215,13 +215,10 @@ typedef enum _IUOverflowType{
 
 
 //Property
-
 - (BOOL)canCopy;
-
-
 - (BOOL)canChangeOverflow;
 @property (nonatomic) IUOverflowType overflowType;
-
+@property (nonatomic) BOOL lineHeightAuto;
 
 - (void)setImageName:(NSString *)imageName;
 - (NSString *)imageName;

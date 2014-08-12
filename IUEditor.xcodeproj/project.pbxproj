@@ -332,10 +332,10 @@
 		3D9BC41719989AB900451F55 /* map_zoom.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC41519989AB900451F55 /* map_zoom.png */; };
 		3D9BC4191998C55000451F55 /* CookingSchool.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC4181998C55000451F55 /* CookingSchool.zip */; };
 		3D9BC41B1998C55900451F55 /* Resume.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC41A1998C55900451F55 /* Resume.zip */; };
-		3D9BC4251998C58500451F55 /* iueditor.iu.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC4241998C58500451F55 /* iueditor.iu.zip */; };
 		3D9BC4291998C59600451F55 /* gallery.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC4281998C59600451F55 /* gallery.zip */; };
 		3D9BC42D1998C7EC00451F55 /* Event.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC42C1998C7EC00451F55 /* Event.zip */; };
 		3D9BC42F1998DB3A00451F55 /* agency.iu.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC42E1998DB3A00451F55 /* agency.iu.zip */; };
+		3D9BC4311999F19700451F55 /* iueditor.iu.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC4301999F19700451F55 /* iueditor.iu.zip */; };
 		3DA416B81935A6BE00559028 /* LMPreferenceFontVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */; };
 		3DA416B91935A6BE00559028 /* LMPreferenceFontVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */; };
 		3DA416BD1935ABB400559028 /* LMFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416BC1935ABB400559028 /* LMFontController.m */; };
@@ -1223,10 +1223,10 @@
 		3D9BC41519989AB900451F55 /* map_zoom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_zoom.png; sourceTree = "<group>"; };
 		3D9BC4181998C55000451F55 /* CookingSchool.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = CookingSchool.zip; sourceTree = "<group>"; };
 		3D9BC41A1998C55900451F55 /* Resume.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Resume.zip; sourceTree = "<group>"; };
-		3D9BC4241998C58500451F55 /* iueditor.iu.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = iueditor.iu.zip; sourceTree = "<group>"; };
 		3D9BC4281998C59600451F55 /* gallery.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = gallery.zip; sourceTree = "<group>"; };
 		3D9BC42C1998C7EC00451F55 /* Event.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Event.zip; sourceTree = "<group>"; };
 		3D9BC42E1998DB3A00451F55 /* agency.iu.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = agency.iu.zip; sourceTree = "<group>"; };
+		3D9BC4301999F19700451F55 /* iueditor.iu.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = iueditor.iu.zip; sourceTree = "<group>"; };
 		3DA416B51935A6BE00559028 /* LMPreferenceFontVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPreferenceFontVC.h; path = Editor/Preference/LMPreferenceFontVC.h; sourceTree = "<group>"; };
 		3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPreferenceFontVC.m; path = Editor/Preference/LMPreferenceFontVC.m; sourceTree = "<group>"; };
 		3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPreferenceFontVC.xib; path = Editor/Preference/LMPreferenceFontVC.xib; sourceTree = "<group>"; };
@@ -2642,7 +2642,7 @@
 		3DBD7C1B19610CD0003E386C /* IUEditor */ = {
 			isa = PBXGroup;
 			children = (
-				3D9BC4241998C58500451F55 /* iueditor.iu.zip */,
+				3D9BC4301999F19700451F55 /* iueditor.iu.zip */,
 				3DBD7C2919612FEC003E386C /* iueditor_preview.png */,
 				3DE2022D1966AFE000976EBC /* iueditor_preview_mobile.png */,
 				3DBD7C2A19612FEC003E386C /* iueditor_thumbnail.png */,
@@ -4208,6 +4208,7 @@
 				3DED26811900D329001A1D67 /* stack_twitter@2x.png in Resources */,
 				3DF803ED18FE62C900913505 /* next.png in Resources */,
 				690A8274190A2CC200DDBA86 /* new_pt.png in Resources */,
+				3D9BC4311999F19700451F55 /* iueditor.iu.zip in Resources */,
 				69D79B3919138CDC0020608D /* LMStartTemplateVC.xib in Resources */,
 				06855629198A63430073FA83 /* johnny_automatic_vertical_filing_cabinets.png in Resources */,
 				0685561B198A63430073FA83 /* johnny_automatic_John_Masefield.png in Resources */,
@@ -4477,7 +4478,6 @@
 				3DED26491900D2DE001A1D67 /* align_center@2x.png in Resources */,
 				3D9BC40D1994AADA00451F55 /* tool_map.png in Resources */,
 				69761BC418F04ECD00C4EDC6 /* LMPropertyBGImageVC.xib in Resources */,
-				3D9BC4251998C58500451F55 /* iueditor.iu.zip in Resources */,
 				06855630198A63430073FA83 /* morrison.png in Resources */,
 				0685563A198A63430073FA83 /* tom_wooden_bookcase_2.png in Resources */,
 				3D14AE051953D06600E7C2E4 /* LMPropertyTextVC.xib in Resources */,

@@ -26,6 +26,8 @@
 @property (weak) IBOutlet NSComboBox *lineHeightB;
 @property (weak) IBOutlet NSComboBox *letterSpacingComboBox;
 
+@property (weak) IBOutlet NSButton *autoHeightBtn;
+
 @property (weak) LMFontController *fontController;
 @property (strong) IBOutlet NSDictionaryController *fontListDC;
 
@@ -57,6 +59,7 @@
 - (void)setController:(IUController *)controller{
     _controller = controller;
     [_textAlignB bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagTextAlign] options:IUBindingDictNotRaisesApplicable];
+    [_autoHeightBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"lineHeightAuto"] options:IUBindingDictNotRaisesApplicable];
     
     //observing for undo
     observingList = @[[_controller keyPathFromControllerToCSSTag:IUCSSTagFontName],
@@ -361,15 +364,6 @@
 - (void)updateLetterSpacing:(CGFloat)sapcing{
     [self setValue:@(sapcing) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagTextLetterSpacing]];
 
-}
-- (IBAction)updateAutoLineHeight:(id)sender {
-    //replace to selectedobject
-    for(IUBox *box in _controller.selectedObjects){
-         if([box respondsToSelector:@selector(updateLineHeightAuto)]){
-             [box updateLineHeightAuto];
-         }
-    }
-    
 }
 
 - (void)updateLineHeight:(CGFloat)lineHeightStr{

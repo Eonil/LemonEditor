@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMPropertyFontVC">
             <connections>
+                <outlet property="autoHeightBtn" destination="hEa-YS-8cD" id="mbM-TR-vK7"/>
                 <outlet property="fontB" destination="Yle-zg-jre" id="3NT-fU-1xD"/>
                 <outlet property="fontColorWell" destination="EF9-cy-hVF" id="LtQ-n0-TiY"/>
                 <outlet property="fontListDC" destination="HyI-eC-WGG" id="aDA-tm-S9h"/>
@@ -171,12 +172,9 @@
                                     <constraint firstAttribute="height" constant="18" id="Rhd-KQ-mbX"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" title="Auto Height" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9Ht-Kr-FoK">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" metaFont="system" size="10"/>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="updateAutoLineHeight:" target="-2" id="HGp-oS-eD0"/>
-                                </connections>
                             </button>
                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cw0-rI-yGQ">
                                 <rect key="frame" x="182" y="58" width="80" height="22"/>

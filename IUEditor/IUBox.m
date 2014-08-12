@@ -184,6 +184,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMQSize:) name:IUNotificationMQAdded object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMQSize:) name:IUNotificationMQRemoved object:nil];
+    
+    [self addObserver:self forKeyPath:@"css.assembledTagDictionary.height" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"height"];
+
     for (IUBox *box in self.children) {
         [box connectWithEditor];
     }
@@ -195,6 +198,8 @@
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self removeObserver:self forKeyPath:@"css.assembledTagDictionary.height"];
+
 }
 
 
@@ -1118,11 +1123,25 @@
 
 }
 
-- (void)updateLineHeightAuto{
-    if(self.delegate){
+- (void)setLineHeightAuto:(BOOL)lineHeightAuto{
+    if(lineHeightAuto != _lineHeightAuto){
+        [[self.undoManager prepareWithInvocationTarget:self] setLineHeightAuto:_lineHeightAuto];
+        _lineHeightAuto = lineHeightAuto;
+        [self updateLineHeight];
+    }
+}
+
+- (void)updateLineHeight{
+    if(self.delegate && _lineHeightAuto){
         CGFloat lineheight = [[self.delegate callWebScriptMethod:@"getTextAutoHeight" withArguments:@[self.htmlID]] floatValue];
         [_css setValue:@(lineheight) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagLineHeight]];
+        
+    }
+}
 
+- (void)heightContextDidChange:(NSDictionary *)dictionary{
+    if(_lineHeightAuto == true){
+        [self updateLineHeight];
     }
 }
 
