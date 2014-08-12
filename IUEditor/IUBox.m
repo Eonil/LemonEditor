@@ -1042,12 +1042,13 @@
     
     [[self.undoManager prepareWithInvocationTarget:self] setPositionType:_positionType];
     
+    if (_positionType == IUPositionTypeFloatRight || positionType == IUPositionTypeFloatRight){
+        [self.css setValue:@(0) forTag:IUCSSTagPixelX];
+        [self.css setValue:@(0) forTag:IUCSSTagPercentX];
+    }
+    
     BOOL disableCenterFlag = NO;
     if (positionType == IUPositionTypeFloatLeft || positionType == IUPositionTypeFloatRight) {
-        if(positionType == IUPositionTypeFloatRight){
-            [self.css setValue:@(0) forTag:IUCSSTagPixelX];
-            [self.css setValue:@(0) forTag:IUCSSTagPercentX];
-        }
         self.enableCenter = NO;
         disableCenterFlag = YES;
         [self willChangeValueForKey:@"canChangeCenter"];
