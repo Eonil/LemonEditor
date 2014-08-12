@@ -693,7 +693,7 @@
         case IUPositionTypeFloatLeft:{
             [code insertTag:@"position" string:@"relative"];
             [code insertTag:@"float" string:@"left"];
-            topTag = @"margin-top"; break;
+            topTag = @"margin-top"; leftTag = @"left"; break;
             break;
         }
         case IUPositionTypeFloatRight:{
