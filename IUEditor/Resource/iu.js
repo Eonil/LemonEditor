@@ -157,7 +157,16 @@ $(window).scroll(function(){
 					left = startLeft + xMove;
 				}
 			}
-			$(this).css('left', left+'px');
+            var position = $(this).css('float');
+            if(position =='left'){
+                $(this).css('margin-left', left+'px');
+            }
+            else if(position =='right'){
+                $(this).css('margin-right', left+'px');
+            }
+            else{
+                $(this).css('left', left+'px');
+            }
 		});
 	
 	}

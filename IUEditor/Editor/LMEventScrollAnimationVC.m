@@ -19,7 +19,6 @@
 @end
 
 @implementation LMEventScrollAnimationVC{
-    NSArray *observingPaths;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -40,14 +39,11 @@
     
     [_opacityMoveTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"] options:numberBindingOption];
     [_xPosMoveTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"xPosMove"] options:numberBindingOption];
-    
-    observingPaths =@[[_controller keyPathFromControllerToProperty:@"opacityMove"],
-                      [_controller keyPathFromControllerToProperty:@"positionType"]];
-    [self addObserver:self forKeyPaths:observingPaths options:0 context:nil];
+        [self addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"] options:0 context:nil];
 }
 
 - (void)dealloc{
-    [self removeObserver:self forKeyPaths:observingPaths];
+    [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"]];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -64,20 +60,6 @@
             }
         }
     }
-    else if([[keyPath pathExtension] isEqualToString:@"positionType"]){
-        IUPositionType type = [[self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"positionType"]] intValue];
-        if(type == IUPositionTypeFloatLeft || type == IUPositionTypeFloatRight){
-            [_opacityMoveTF setEditable:NO];
-            [_opacityMoveTF setEnabled:NO];
-            [_xPosMoveTF setEnabled:NO];
-        }
-        else{
-            [_opacityMoveTF setEditable:YES];
-            [_opacityMoveTF setEnabled:YES];
-            [_xPosMoveTF setEnabled:YES];
-        }
-    }
-    
 }
 
 

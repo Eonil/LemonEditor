@@ -1711,8 +1711,8 @@
 		697F99D91998259500E86A2B /* IUBackground+WP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IUBackground+WP.m"; sourceTree = "<group>"; };
 		6983E71B18FFF54600D424B8 /* JDOutlineCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDOutlineCellView.h; path = JD/JDOutlineCellView.h; sourceTree = "<group>"; };
 		6983E71C18FFF54600D424B8 /* JDOutlineCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDOutlineCellView.m; path = JD/JDOutlineCellView.m; sourceTree = "<group>"; };
-		698503E8199953A500576DBF /* jquery-1.10.2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-1.10.2.js"; sourceTree = "<group>"; };
-		698503E9199953A500576DBF /* jquery-ui-1.9.2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-ui-1.9.2.js"; sourceTree = "<group>"; };
+		698503E8199953A500576DBF /* jquery-1.10.2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "jquery-1.10.2.js"; path = "../../jquery-1.10.2.js"; sourceTree = "<group>"; };
+		698503E9199953A500576DBF /* jquery-ui-1.9.2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "jquery-ui-1.9.2.js"; path = "../../jquery-ui-1.9.2.js"; sourceTree = "<group>"; };
 		6985CB9E18E31558008DBF50 /* IUSheetGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUSheetGroup.h; sourceTree = "<group>"; };
 		6985CB9F18E31558008DBF50 /* IUSheetGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUSheetGroup.m; sourceTree = "<group>"; };
 		69860E48197555E8001C3F7F /* WPArticleTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPArticleTitle.h; sourceTree = "<group>"; };
@@ -3053,6 +3053,8 @@
 		3DED275D190E388F001A1D67 /* JS */ = {
 			isa = PBXGroup;
 			children = (
+				698503E8199953A500576DBF /* jquery-1.10.2.js */,
+				698503E9199953A500576DBF /* jquery-ui-1.9.2.js */,
 				3D19E42119874A7400A50D35 /* ie8 */,
 				3DED2768190E3956001A1D67 /* plugins */,
 				3DA6C652197536C6004D6587 /* iucarousel.js */,
@@ -3484,8 +3486,6 @@
 		69C5759E18D6F61E0016F050 = {
 			isa = PBXGroup;
 			children = (
-				698503E8199953A500576DBF /* jquery-1.10.2.js */,
-				698503E9199953A500576DBF /* jquery-ui-1.9.2.js */,
 				690D465A198E8F3200478EC9 /* IUProtocols.h */,
 				69D100111997124F003F8772 /* wordpress.zip */,
 				CBFBE67C192A07A300F03F76 /* SampleTemplate */,
