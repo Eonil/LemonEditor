@@ -134,38 +134,38 @@ $(window).scroll(function(){
 			}
 		});
 		$('[xPosMove]').each(function(){
-			startLeft = parseFloat($(this).attr('startLeft')); 
-			xMove = parseFloat($(this).attr('xPosMove')); 
+			var start = parseFloat($(this).attr('start'));
+			var xMove = parseFloat($(this).attr('xPosMove'));
 			y = $(window).height()/1.5;
 			x = (scrollY- $(this).offset().top+screenH);
 		
-			var left = (startLeft) +  xMove/y* x;
+			var current = (start) +  xMove/y* x;
 		
 			if (xMove > 0){
-				if (left < startLeft){
-					left = startLeft;
+				if (current < start){
+					current = start;
 				}
-				else if ( left > startLeft + xMove ){
-					left = startLeft + xMove;
+				else if ( current > start + xMove ){
+					current = start + xMove;
 				}
 			}
 			else {
-				if (left > startLeft){
-					left = startLeft;
+				if (current > start){
+					current = start;
 				}
-				else if ( left < startLeft + xMove ){
-					left = startLeft + xMove;
+				else if ( current < start + xMove ){
+					current = start + xMove;
 				}
 			}
             var position = $(this).css('float');
             if(position =='left'){
-                $(this).css('margin-left', left+'px');
+                $(this).css('margin-left', current+'px');
             }
             else if(position =='right'){
-                $(this).css('margin-right', left+'px');
+                $(this).css('margin-right', current+'px');
             }
             else{
-                $(this).css('left', left+'px');
+                $(this).css('left', current+'px');
             }
 		});
 	

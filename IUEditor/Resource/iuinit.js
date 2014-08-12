@@ -29,11 +29,22 @@ $(document).ready(function(){
 	if(isMobile()==false){
 		$('[xPosMove]').each(function(){
 			var xPosMove = $(this).attr('xPosMove');
-			if ($(this).css('position') == 'absolute'){
-				var startLeft = parseFloat($(this).css('left')) - xPosMove;
-				$(this).css('left', startLeft + 'px');
-				$(this).attr('startLeft', startLeft);
+            var start;
+            
+			if ($(this).css('float') == 'left'){
+                start = parseFloat($(this).css('margin-left')) - xPosMove;
+                $(this).css('margin-left', start + 'px');
+            }
+            else if($(this).css('float') == 'right'){
+               start = parseFloat($(this).css('margin-right')) - xPosMove;
+               $(this).css('margin-right', start + 'px');
+            }
+            else{
+				start = parseFloat($(this).css('left')) - xPosMove;
+				$(this).css('left', start + 'px');
 			};
+            $(this).attr('start', start);
+
 		});
 	}
                   
