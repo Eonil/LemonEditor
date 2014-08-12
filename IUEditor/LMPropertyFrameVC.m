@@ -288,7 +288,6 @@
    
     if (value == nil || value == NSNoSelectionMarker || value == NSMultipleValuesMarker || value == NSNotApplicableMarker){
         if(value){
-            
             //placehoder setting
             NSString *placeholder = [NSString stringWithValueMarker:value];
             [[textfield cell] setPlaceholderString:placeholder];
@@ -380,7 +379,7 @@
     for (IUBox *iu in _controller.selectedObjects) {
         [iu startDragSession];
     }
-    if ([value isEqualToString:@"-"]) {
+    if (value == nil || ((NSString *)value).length==0 || [value isEqualToString:@"-"]) {
         for (IUBox *box in _controller.selectedObjects) {
             [box.css eradicateTag:tag];
         }
