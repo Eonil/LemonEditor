@@ -88,6 +88,23 @@
 //insert tag
 //use css frame dict, and update affecting tag dictionary
 -(void)setValue:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width{
+    
+    [self setValueWithoutUpdateCSS:value forTag:tag forViewport:width];
+    
+    if ([_delegate CSSShouldChangeValue:value forTag:tag forWidth:width]){
+        NSMutableDictionary *cssDict = _cssFrameDict[@(width)];
+        
+        id currentValue = [cssDict objectForKey:tag];
+        if(currentValue == nil ||  [currentValue isNotEqualTo:value]){
+            
+            if ([tag isFrameTag] == NO) {
+                [self.delegate updateCSS];
+            }
+        }
+    }
+}
+
+-(void)setValueWithoutUpdateCSS:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width{
     if ([_delegate CSSShouldChangeValue:value forTag:tag forWidth:width]){
         NSMutableDictionary *cssDict = _cssFrameDict[@(width)];
         
@@ -111,13 +128,11 @@
                 [_assembledTagDictionaryForEditWidth setObject:value forKey:tag];
             }
             
-            if ([tag isFrameTag] == NO) {
-                [self.delegate updateCSS];
-            }
         }
         
     }
 }
+
 
 - (void)copyMaxSizeToSize:(NSInteger)width{
     if(_cssFrameDict[@(width)] == nil){
@@ -176,6 +191,10 @@
 
 -(void)setValue:(id)value forTag:(IUCSSTag)tag{
     [self setValue:value forTag:tag forViewport:_editWidth];
+}
+-(void)setValueWithoutUpdateCSS:(id)value forTag:(NSString *)tag{
+    [self setValueWithoutUpdateCSS:value forTag:tag forViewport:_editWidth];
+
 }
 
 -(void)setValue:(id)value forKeyPath:(NSString *)keyPath{

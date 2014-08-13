@@ -27,6 +27,10 @@
 -(void)setValue:(id)value forTag:(IUCSSTag)tag;
 -(void)setValue:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width;
 
+-(void)setValueWithoutUpdateCSS:(id)value forTag:(IUCSSTag)tag;
+-(void)setValueWithoutUpdateCSS:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width;
+
+
 //remove tag of all tag dictionay in width
 -(void)eradicateTag:(IUCSSTag)type;
 

@@ -491,6 +491,12 @@
 
 
 - (void)updateCSS{
+    
+    if(self.delegate && _lineHeightAuto && self.shouldCompileFontInfo){
+        CGFloat lineheight = [[self.delegate callWebScriptMethod:@"getTextAutoHeight" withArguments:@[self.htmlID]] floatValue];
+        [_css setValueWithoutUpdateCSS:@(lineheight) forTag:IUCSSTagLineHeight];
+    }
+    
     if (self.delegate) {
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
         for (NSNumber *viewport in cssCode.allViewports) {
@@ -500,7 +506,6 @@
             }
         }
     }
-    [self updateLineHeight];
 }
 
 - (void)updateCSSWithIdentifier:(NSString *)identifier{
@@ -512,7 +517,6 @@
             
         }
     }
-    [self updateLineHeight];
 }
 
 //delegation
@@ -1123,12 +1127,9 @@
         isNeedUpdated = YES;
     }
     _text = text;
-    if(isNeedUpdated){
-        [self updateCSS];
-    }
     [self updateHTML];
     [self updateJS];
-    [self updateLineHeight];
+    [self updateCSS];
     
     if(isNeedUpdated){
         [self didChangeValueForKey:@"shouldCompileFontInfo"];
@@ -1140,18 +1141,9 @@
     if(lineHeightAuto != _lineHeightAuto){
         [[self.undoManager prepareWithInvocationTarget:self] setLineHeightAuto:_lineHeightAuto];
         _lineHeightAuto = lineHeightAuto;
-        [self updateLineHeight];
+        [self updateCSS];
     }
 }
-
-- (void)updateLineHeight{
-    if(self.delegate && _lineHeightAuto && self.shouldCompileFontInfo){
-        CGFloat lineheight = [[self.delegate callWebScriptMethod:@"getTextAutoHeight" withArguments:@[self.htmlID]] floatValue];
-        [_css setValue:@(lineheight) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagLineHeight]];
-        
-    }
-}
-
 
 #endif
 
