@@ -138,6 +138,7 @@ a{
     height:initial;
     overflow:visible;
     display:inline-block;
+    z-index:10;
 }
 
 .IUMenuItem > a{
