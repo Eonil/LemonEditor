@@ -1129,6 +1129,10 @@
         isNeedUpdated = YES;
     }
     _text = text;
+    
+    if(_text.length > 300){
+        [self setLineHeightAuto:NO];
+    }
     [self updateHTML];
     [self updateJS];
     [self updateCSS];
@@ -1140,6 +1144,9 @@
 }
 
 - (void)setLineHeightAuto:(BOOL)lineHeightAuto{
+    if( _text && _text.length > 300){
+        lineHeightAuto = false;
+    }
     if(lineHeightAuto != _lineHeightAuto){
         [[self.undoManager prepareWithInvocationTarget:self] setLineHeightAuto:_lineHeightAuto];
         _lineHeightAuto = lineHeightAuto;

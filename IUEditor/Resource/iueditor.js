@@ -120,12 +120,19 @@ function resizePageContentHeightEditor(){
                                             if (newValue > minHeight){
                                             minHeight = newValue;
                                             }});
+        
+        
+        var headerHeight = $('.IUHeader').height();
+
+        if(minHeight+headerHeight > 50000){
+            minHeight = 50000-headerHeight;
+        }
         $('.IUPageContent').css('min-height', minHeight+'px');
         $('.IUPageContent').css('height', minHeight+'px');
         console.log('pagecontentminheight :' + minHeight);
         
-        var pageHeight=minHeight;
-		pageHeight += $('.IUHeader').height();
+        var pageHeight = minHeight+headerHeight;
+        
         if (typeof console.resizePageContentHeightFinished != 'undefined'){
             console.resizePageContentHeightFinished(pageHeight);
         }
