@@ -17,6 +17,7 @@
 
 //connect to VC
 @property (nonatomic) BOOL eventautoplay;
+@property (nonatomic) NSString *movieLink, *movieID;
 @property (nonatomic) NSString *webMovieSource;
 
 @end

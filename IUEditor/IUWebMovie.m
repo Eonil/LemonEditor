@@ -74,6 +74,23 @@
     _eventautoplay = eventautoplay;
 }
 
+- (void)setMovieLink:(NSString *)movieLink{
+    _thumbnail = NO;
+    _movieID = [movieLink lastPathComponent];
+
+    
+    //vimeo
+    if([movieLink containsString:@"vimeo"]){
+        //http://vimeo.com/channels/staffpicks/79426902
+
+    }
+    else if([movieLink containsString:@"youtu.be"]){
+        //http://youtu.be/Z0uknBJc8NI
+        _movieID = [movieLink lastPathComponent];
+        
+    }
+}
+
 
 - (void)setWebMovieSource:(NSString *)aWebMovieSource{
     _webMovieSource = aWebMovieSource;
