@@ -63,10 +63,15 @@
 - (void)setEnableTitle:(BOOL)enableTitle{
     _enableTitle = enableTitle;
     if (enableTitle) {
-        [self.project.identifierManager resetUnconfirmedIUs];
+        if (self.isConnectedWithEditor) {
+            [self.project.identifierManager resetUnconfirmedIUs];
+        }
+
         WPArticleTitle *title = [[WPArticleTitle alloc] initWithProject:self.project options:nil];
         [self addIU:title error:nil];
-        [self confirmIdentifier];
+        if (self.isConnectedWithEditor) {
+            [title confirmIdentifier];
+        }
     }
     else {
         for (IUBox *box in self.children) {
@@ -80,10 +85,14 @@
 - (void)setEnableDate:(BOOL)enableDate{
     _enableDate = enableDate;
     if (enableDate) {
-        [self.project.identifierManager resetUnconfirmedIUs];
+        if (self.isConnectedWithEditor) {
+            [self.project.identifierManager resetUnconfirmedIUs];
+        }
         WPArticleDate *date = [[WPArticleDate alloc] initWithProject:self.project options:nil];
         [self addIU:date error:nil];
-        [self confirmIdentifier];
+        if (self.isConnectedWithEditor) {
+            [date confirmIdentifier];
+        }
     }
     else {
         for (IUBox *box in self.children) {
@@ -97,10 +106,14 @@
 - (void)setEnableBody:(BOOL)enableBody{
     _enableBody = enableBody;
     if (enableBody) {
-        [self.project.identifierManager resetUnconfirmedIUs];
+        if (self.isConnectedWithEditor) {
+            [self.project.identifierManager resetUnconfirmedIUs];
+        }
         WPArticleBody *body = [[WPArticleBody alloc] initWithProject:self.project options:nil];
         [self addIU:body error:nil];
-        [self confirmIdentifier];
+        if (self.isConnectedWithEditor) {
+            [self.project.identifierManager confirm];
+        }
     }
     else {
         for (IUBox *box in self.children) {

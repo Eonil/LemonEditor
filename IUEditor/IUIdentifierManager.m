@@ -39,10 +39,13 @@
 }
 
 -(void)confirm{
-    for (id key in unconfirmed) {
+    NSArray *keys = [unconfirmed allKeys];
+    for (id key in keys) {
         confirmed[key] = unconfirmed[key];
+        [unconfirmed removeObjectForKey:key];
     }
 }
+
 
 -(void)registerIUs:(NSArray*)IUs{
     for (IUBox *iu in IUs) {
