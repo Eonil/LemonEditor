@@ -212,7 +212,7 @@
     
     _controlType = controlType;
     [self updateHTML];
-    [self cssForItemColor];
+    [self updateCSSForItemColor];
 }
 
 - (void)setSelectColor:(NSColor *)selectColor{
@@ -224,7 +224,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setSelectColor:_selectColor];
     
     _selectColor = selectColor;
-    [self cssForItemColor];
+    [self updateCSSForItemColor];
 }
 - (void)setDeselectColor:(NSColor *)deselectColor{
     
@@ -235,7 +235,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setDeselectColor:_deselectColor];
     
     _deselectColor = deselectColor;
-    [self cssForItemColor];
+    [self updateCSSForItemColor];
 }
 
 - (void)setPagerPosition:(NSInteger)pagerPosition{
@@ -250,7 +250,7 @@
     [self updateCSSWithIdentifier:self.pagerWrapperID];
 }
 
-- (void)cssForItemColor{
+- (void)updateCSSForItemColor{
     [self updateCSSWithIdentifier:self.pagerID];
     [self updateCSSWithIdentifier:[self.pagerID cssHoverClass]];
     [self updateCSSWithIdentifier:[self.pagerID cssActiveClass]];
