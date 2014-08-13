@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -19,11 +19,11 @@
         <customObject id="-3" userLabel="Application"/>
         <userDefaultsController representsSharedInstance="YES" id="ykX-I0-pY2"/>
         <customView id="zvD-IO-alK" userLabel="newProjectView">
-            <rect key="frame" x="0.0" y="0.0" width="702" height="395"/>
+            <rect key="frame" x="0.0" y="0.0" width="712" height="395"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B3M-bf-Sf0">
-                    <rect key="frame" x="592" y="8" width="100" height="19"/>
+                    <rect key="frame" x="602" y="8" width="100" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="3bd-sP-H0f"/>
                         <constraint firstAttribute="height" constant="18" id="aGs-IU-mCg"/>
@@ -34,7 +34,7 @@
                     </buttonCell>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eUJ-yz-hPD">
-                    <rect key="frame" x="484" y="8" width="100" height="19"/>
+                    <rect key="frame" x="494" y="8" width="100" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="6q4-vG-x3h"/>
                         <constraint firstAttribute="height" constant="18" id="adQ-In-3ue"/>
@@ -45,12 +45,12 @@
                     </buttonCell>
                 </button>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="FxQ-R5-TAh">
-                    <rect key="frame" x="0.0" y="34" width="702" height="361"/>
+                    <rect key="frame" x="0.0" y="34" width="712" height="361"/>
                     <subviews>
                         <box autoresizesSubviews="NO" fixedFrame="YES" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="nbW-rj-Guk" userLabel="NewProjectType">
-                            <rect key="frame" x="0.0" y="1" width="702" height="360"/>
+                            <rect key="frame" x="0.0" y="1" width="712" height="360"/>
                             <view key="contentView">
-                                <rect key="frame" x="1" y="1" width="700" height="358"/>
+                                <rect key="frame" x="1" y="1" width="710" height="358"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <box autoresizesSubviews="NO" fixedFrame="YES" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="rF0-Dm-yGu">
@@ -76,7 +76,7 @@
                                             <rect key="frame" x="1" y="1" width="178" height="118"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
-                                        <color key="borderColor" white="0.80000000000000004" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="borderColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="fillColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </box>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zn0-kf-rD0">
@@ -164,7 +164,7 @@
                                     </button>
                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dcY-27-3P1" userLabel="Presentation">
                                         <rect key="frame" x="260" y="131" width="180" height="120"/>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="wp" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="OPt-aH-6pp">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="new_wp" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="OPt-aH-6pp">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -189,7 +189,7 @@
                         </box>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="width" constant="702" id="OFz-OJ-Z8f"/>
+                        <constraint firstAttribute="width" constant="712" id="OFz-OJ-Z8f"/>
                         <constraint firstAttribute="height" constant="361" id="agp-Wh-OC7"/>
                     </constraints>
                 </customView>
@@ -208,6 +208,6 @@
     <resources>
         <image name="new_default" width="54" height="66"/>
         <image name="new_django" width="54" height="66"/>
-        <image name="wp" width="225" height="225"/>
+        <image name="new_wp" width="54" height="66"/>
     </resources>
 </document>

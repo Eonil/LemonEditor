@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMStartNewDjangoVC">
@@ -12,17 +12,17 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
         <customView id="WFi-IS-cyr">
-            <rect key="frame" x="0.0" y="0.0" width="700" height="360"/>
+            <rect key="frame" x="0.0" y="0.0" width="712" height="360"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <box autoresizesSubviews="NO" title="Setup Enviroments" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="a3P-9i-p5m">
-                    <rect key="frame" x="0.0" y="0.0" width="700" height="360"/>
+                <box autoresizesSubviews="NO" title="Setup Enviroments" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="a3P-9i-p5m">
+                    <rect key="frame" x="0.0" y="1" width="712" height="360"/>
                     <view key="contentView">
-                        <rect key="frame" x="0.0" y="0.0" width="700" height="360"/>
+                        <rect key="frame" x="1" y="1" width="710" height="358"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yhl-Yh-QHk">
-                                <rect key="frame" x="480" y="223" width="160" height="28"/>
+                                <rect key="frame" x="479" y="222" width="160" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="6QK-qo-L8h"/>
                                     <constraint firstAttribute="width" constant="150" id="ubO-Cu-FPk"/>
@@ -36,7 +36,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YH5-Zo-jgW">
-                                <rect key="frame" x="75" y="186" width="217" height="14"/>
+                                <rect key="frame" x="74" y="185" width="217" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="4DQ-TN-TCs"/>
                                     <constraint firstAttribute="width" constant="213" id="bcZ-bA-gYv"/>
@@ -48,7 +48,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="L9h-QQ-usy">
-                                <rect key="frame" x="75" y="118" width="232" height="14"/>
+                                <rect key="frame" x="74" y="117" width="232" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="XpA-7h-pA2"/>
                                     <constraint firstAttribute="width" constant="228" id="cU9-SK-hWP"/>
@@ -60,7 +60,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y8e-0S-coH">
-                                <rect key="frame" x="77" y="91" width="400" height="19"/>
+                                <rect key="frame" x="76" y="90" width="400" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="400" id="3zW-Oc-LuR"/>
                                     <constraint firstAttribute="height" constant="19" id="Js3-FP-13Z"/>
@@ -75,7 +75,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g05-Nd-4kk">
-                                <rect key="frame" x="75" y="254" width="179" height="14"/>
+                                <rect key="frame" x="74" y="253" width="179" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="N8v-sM-nOg"/>
                                     <constraint firstAttribute="width" constant="175" id="U64-UH-bSY"/>
@@ -87,7 +87,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bPO-ZL-YFx">
-                                <rect key="frame" x="480" y="86" width="160" height="28"/>
+                                <rect key="frame" x="479" y="85" width="160" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="0he-Fp-P2D"/>
                                     <constraint firstAttribute="width" constant="150" id="8Ei-kf-mDC"/>
@@ -101,7 +101,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="l6C-Hp-eah">
-                                <rect key="frame" x="480" y="153" width="160" height="28"/>
+                                <rect key="frame" x="479" y="152" width="160" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="Yrz-NC-Viz"/>
                                     <constraint firstAttribute="height" constant="18" id="gEZ-Tj-ldp"/>
@@ -115,7 +115,7 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Skl-eY-g4t">
-                                <rect key="frame" x="77" y="228" width="400" height="19"/>
+                                <rect key="frame" x="76" y="227" width="400" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="5d1-MR-JNv"/>
                                     <constraint firstAttribute="width" constant="400" id="8zU-Ms-syv"/>
@@ -130,7 +130,7 @@
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="38o-uA-RvF">
-                                <rect key="frame" x="77" y="158" width="400" height="19"/>
+                                <rect key="frame" x="76" y="157" width="400" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="0hZ-iA-Q7B"/>
                                     <constraint firstAttribute="width" constant="400" id="b2P-p9-VI5"/>
@@ -164,7 +164,7 @@
                         <constraint firstItem="g05-Nd-4kk" firstAttribute="leading" secondItem="a3P-9i-p5m" secondAttribute="leading" constant="77" id="oAh-1k-pQK"/>
                         <constraint firstItem="bPO-ZL-YFx" firstAttribute="leading" secondItem="y8e-0S-coH" secondAttribute="trailing" constant="8" id="peu-Ls-0sE"/>
                         <constraint firstItem="Yhl-Yh-QHk" firstAttribute="leading" secondItem="Skl-eY-g4t" secondAttribute="trailing" constant="8" id="qZl-Dq-cE7"/>
-                        <constraint firstAttribute="width" constant="700" id="quS-MI-BNf"/>
+                        <constraint firstAttribute="width" constant="712" id="quS-MI-BNf"/>
                         <constraint firstItem="38o-uA-RvF" firstAttribute="top" secondItem="YH5-Zo-jgW" secondAttribute="bottom" constant="9" id="uOl-wG-NY9"/>
                         <constraint firstItem="Skl-eY-g4t" firstAttribute="leading" secondItem="a3P-9i-p5m" secondAttribute="leading" constant="77" id="wVX-Z8-FqT"/>
                     </constraints>
@@ -175,9 +175,9 @@
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="a3P-9i-p5m" secondAttribute="trailing" id="aXY-Sh-NcT"/>
-                <constraint firstAttribute="bottom" secondItem="a3P-9i-p5m" secondAttribute="bottom" id="uWi-BT-9tH"/>
+                <constraint firstAttribute="bottom" secondItem="a3P-9i-p5m" secondAttribute="bottom" constant="1" id="uWi-BT-9tH"/>
                 <constraint firstItem="a3P-9i-p5m" firstAttribute="leading" secondItem="WFi-IS-cyr" secondAttribute="leading" id="wHS-dD-uID"/>
-                <constraint firstItem="a3P-9i-p5m" firstAttribute="top" secondItem="WFi-IS-cyr" secondAttribute="top" id="xkn-MF-X2K"/>
+                <constraint firstItem="a3P-9i-p5m" firstAttribute="top" secondItem="WFi-IS-cyr" secondAttribute="top" constant="-1" id="xkn-MF-X2K"/>
             </constraints>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="d71-KB-H5b"/>

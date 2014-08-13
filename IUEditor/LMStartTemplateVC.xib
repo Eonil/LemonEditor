@@ -119,11 +119,11 @@
             <point key="canvasLocation" x="-431" y="29"/>
         </box>
         <customView id="3bo-U3-a47" userLabel="templateView">
-            <rect key="frame" x="0.0" y="0.0" width="702" height="395"/>
+            <rect key="frame" x="0.0" y="0.0" width="712" height="395"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tVM-o5-qK4">
-                    <rect key="frame" x="592" y="8" width="100" height="19"/>
+                    <rect key="frame" x="602" y="8" width="100" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="Oxy-Fq-5eb"/>
                         <constraint firstAttribute="width" constant="100" id="XEQ-DW-81f"/>
@@ -137,13 +137,13 @@
                     </connections>
                 </button>
                 <box autoresizesSubviews="NO" transparent="YES" borderWidth="0.0" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="YFy-Ms-VIK">
-                    <rect key="frame" x="0.0" y="35" width="702" height="360"/>
+                    <rect key="frame" x="0.0" y="35" width="712" height="360"/>
                     <view key="contentView">
-                        <rect key="frame" x="0.0" y="0.0" width="702" height="360"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="360"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gst-df-sDO" userLabel="recentV">
-                                <rect key="frame" x="0.0" y="0.0" width="702" height="360"/>
+                                <rect key="frame" x="0.0" y="0.0" width="712" height="360"/>
                                 <clipView key="contentView" id="nAg-Ht-UGI">
                                     <rect key="frame" x="1" y="1" width="798" height="358"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
