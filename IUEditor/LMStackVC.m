@@ -183,7 +183,7 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pboard{
     for (NSTreeNode *node in items) {
         IUBox *iu = node.representedObject;
-        if ([iu isKindOfClass:[IUItem class]] || [iu isKindOfClass:[IUSheet class]] || [iu isKindOfClass:[IUPageContent class]]) {
+        if ([iu canMoveToOtherParent] == NO) {
             return NO;
         }
     }

@@ -117,6 +117,8 @@
     return NO;
 }
 
-
+- (BOOL)canMoveToOtherParent{
+    return NO;
+}
 
 @end

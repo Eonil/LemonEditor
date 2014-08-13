@@ -11,6 +11,7 @@
 @interface LMPropertyWPArticleVC ()
 @property (weak) IBOutlet NSButton *titleB;
 @property (weak) IBOutlet NSButton *dateB;
+@property (weak) IBOutlet NSButton *bodyB;
 
 @end
 
@@ -28,6 +29,8 @@
 - (void)awakeFromNib{
     [_titleB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableTitle"] options:IUBindingDictNotRaisesApplicable];
     [_dateB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableDate"] options:IUBindingDictNotRaisesApplicable];
+    [_bodyB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableBody"] options:IUBindingDictNotRaisesApplicable];
+
     /*
     [_dateB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableDate"] options:IUBindingDictNotRaisesApplicable];
     [_timeB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableTime"] options:IUBindingDictNotRaisesApplicable];

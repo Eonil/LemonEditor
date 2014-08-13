@@ -34,5 +34,8 @@
     return YES;
 }
 
+- (BOOL)canCopy{
+    return NO;
+}
 
 @end

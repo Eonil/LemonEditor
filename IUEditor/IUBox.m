@@ -1145,13 +1145,11 @@
 }
 
 - (void)updateLineHeight{
-    /*
     if(self.delegate && _lineHeightAuto && self.shouldCompileFontInfo){
         CGFloat lineheight = [[self.delegate callWebScriptMethod:@"getTextAutoHeight" withArguments:@[self.htmlID]] floatValue];
         [_css setValue:@(lineheight) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagLineHeight]];
         
     }
-     */
 }
 
 
@@ -1165,5 +1163,10 @@
 }
 - (NSString*)cssActiveClass{
     return [NSString stringWithFormat:@".%@:active", self.htmlID];
+}
+
+
+- (BOOL)canMoveToOtherParent{
+    return YES;
 }
 @end

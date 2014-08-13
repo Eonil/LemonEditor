@@ -44,4 +44,8 @@
     return YES;
 }
 
+- (BOOL)canMoveToOtherParent{
+    return NO;
+}
+
 @end

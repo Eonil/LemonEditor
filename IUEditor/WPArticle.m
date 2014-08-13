@@ -108,7 +108,13 @@
                 [self removeIU:box];
             }
         }
-    }}
+    }
+}
+
+- (BOOL)canMoveToOtherParent{
+    return NO;
+}
+
 
 
 @end

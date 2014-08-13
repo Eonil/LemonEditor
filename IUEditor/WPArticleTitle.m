@@ -12,6 +12,7 @@
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     self.positionType = IUPositionTypeFloatLeft;
+    [self.css setValue:nil forTag:IUCSSTagBGColor];
     return self;
 }
 
@@ -20,11 +21,19 @@
 }
 
 - (NSString*)sampleHTML{
-    return @"Lorem ipsum dolor sit amet, consectetur adipisicing elit.";
+    return @"Here comes title of article. Elcitra fo eltit semoc ereh.";
 }
 
 - (BOOL)shouldCompileFontInfo{
     return YES;
+}
+
+- (BOOL)canMoveToOtherParent{
+    return NO;
+}
+
+- (BOOL)canCopy{
+    return NO;
 }
 
 @end
