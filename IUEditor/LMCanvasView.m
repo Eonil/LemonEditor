@@ -124,7 +124,7 @@
 }
 
 - (void)setHeightOfMainView:(CGFloat)height{
-    if (height == self.mainView.frame.size.height) {
+    if (abs(height -self.mainView.frame.size.height) < 1) {
         return;
     }
     if(height > 50000){

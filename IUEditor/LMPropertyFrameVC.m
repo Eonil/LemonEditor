@@ -50,7 +50,7 @@
 @property (weak) IBOutlet NSButton *helpMenu;
 @property (weak) IBOutlet NSPopUpButton *positionPopupBtn;
 
-@property (nonatomic) BOOL enablePercentH, enablePosition;
+@property (nonatomic) BOOL enableVerticalPercent, enablePosition;
 
 
 - (IBAction)helpMenu:(id)sender;
@@ -66,7 +66,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _enablePercentH = YES;
+        _enableVerticalPercent = YES;
         _enablePosition = YES;
         [self loadView];
     }
@@ -201,7 +201,8 @@
     [_xStepper bind:@"enabled3" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"center"] options:bindingOption];
     [_pxStepper bind:@"enabled3" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"center"] options:bindingOption];
 
-    [_hUnitBtn bind:@"enabled3" toObject:self withKeyPath:@"enablePercentH" options:IUBindingDictNotRaisesApplicable];
+    [_yUnitBtn bind:@"enabled3" toObject:self withKeyPath:@"enableVerticalPercent" options:IUBindingDictNotRaisesApplicable];
+    [_hUnitBtn bind:@"enabled3" toObject:self withKeyPath:@"enableVerticalPercent" options:IUBindingDictNotRaisesApplicable];
 }
 
 - (void)dealloc{
@@ -278,7 +279,7 @@
         }
     }
 
-    self.enablePercentH = !isPageContentChildren;
+    self.enableVerticalPercent = !isPageContentChildren;
 }
 
 - (void)setValueForTag:(IUCSSTag)tag toTextfield:(NSTextField*)textfield toStepper:(NSStepper *)stepper{
