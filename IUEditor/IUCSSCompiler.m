@@ -237,7 +237,6 @@
     NSDictionary *sourceDictWithViewPort = (target == IUTargetEditor) ? _editorCSSDictWithViewPort : _outputCSSDictWithViewPort;
     NSDictionary *sourceDictWithIdentifier = sourceDictWithViewPort[@(viewport)];
 
-    
     for (NSString *identifier in sourceDictWithIdentifier) {
         NSDictionary *tagDict = sourceDictWithIdentifier[identifier];
         NSMutableDictionary *tagDictForReturn = [NSMutableDictionary dictionary];
@@ -266,10 +265,6 @@
             [tagDictForReturn removeObjectForKey:@"border-right-color"];
         }
 
-        if (viewport == IUCSSDefaultViewPort) {
-            NSArray *keys = [tagDictForReturn allKeysForObject:@"0.00px"];
-            [tagDictForReturn removeObjectsForKeys:keys];
-        }
         NSString *cssCode = [[tagDictForReturn CSSCode] stringByReplacingOccurrencesOfString:@".00px" withString:@"px"];
         [returnDict setObject:cssCode forKey:identifier];
     }
