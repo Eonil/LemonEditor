@@ -298,26 +298,40 @@
     if([self.view hasSubview:control]){
         IUSheet *sheet = (IUSheet *)self.selection;
         NSString *modifiedName = fieldEditor.string;
+        if ([sheet.name isEqualToString:modifiedName]){
+            return YES;
+        }
         
         if([modifiedName stringByTrim].length == 0){
+            IUBox *currentBox = (IUBox *)self.selection;
+            [control setStringValue:currentBox.name];
+
             [JDUIUtil hudAlert:@"Name should not be empty" second:2];
             return NO;
         }
         
         if([definedIdentifers containsString:modifiedName]
            || [definedPrefixIdentifiers containsPrefix:modifiedName]){
+            IUBox *currentBox = (IUBox *)self.selection;
+            [control setStringValue:currentBox.name];
+
             [JDUIUtil hudAlert:@"This name is a program keyword" second:2];
             return NO;
         }
         
         NSCharacterSet *characterSet = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
         if([modifiedName rangeOfCharacterFromSet:characterSet].location != NSNotFound){
+            IUBox *currentBox = (IUBox *)self.selection;
+            [control setStringValue:currentBox.name];
             [JDUIUtil hudAlert:@"Name should be alphabet or digit" second:2];
             return NO;
         }
         
         IUBox *box = [_project.identifierManager IUWithIdentifier:modifiedName];
         if (box != nil) {
+            IUBox *currentBox = (IUBox *)self.selection;
+            [control setStringValue:currentBox.name];
+
             [JDUIUtil hudAlert:@"IU with same name exists" second:1];
             return NO;
         }

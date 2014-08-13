@@ -378,26 +378,41 @@
     NSAssert(_sheet.project.identifierManager, @"");
     
     if([self.view hasSubview:control]){ 
-        
+        /* note */
+        /* when return NO, set stringvalue as IU's name.
+         If just return 'NO', next esc button will make field empty */
+
         IUBox *currentBox = (IUBox *)_IUController.selection;
+        NSString *modifiedName = [control stringValue];
+        if ([currentBox.name isEqualToString:modifiedName]) {
+            return YES;
+        }
+
         if([currentBox isKindOfClass:[IUHeader class]]){
             [JDUIUtil hudAlert:@"Header should not be changed" second:1];
+            IUBox *currentBox = (IUBox *)_IUController.selectedObjects[0];
+            [control setStringValue:currentBox.name];
             return NO;
         }
-        NSString *modifiedName = [control stringValue];
         
         if([modifiedName stringByTrim].length == 0){
             [JDUIUtil hudAlert:@"Name should not be empty" second:1];
+            IUBox *currentBox = (IUBox *)_IUController.selectedObjects[0];
+            [control setStringValue:currentBox.name];
             return NO;
         }
         if([definedIdentifers containsString:modifiedName]
            || [definedPrefixIdentifiers containsPrefix:modifiedName]){
             [JDUIUtil hudAlert:@"This name is a program keyword" second:1];
+            IUBox *currentBox = (IUBox *)_IUController.selectedObjects[0];
+            [control setStringValue:currentBox.name];
             return NO;
         }
         NSCharacterSet *characterSet = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
         if([modifiedName rangeOfCharacterFromSet:characterSet].location != NSNotFound){
             [JDUIUtil hudAlert:@"Name should be alphabet or digit" second:1];
+            IUBox *currentBox = (IUBox *)_IUController.selectedObjects[0];
+            [control setStringValue:currentBox.name];
             return NO;
         }
         
