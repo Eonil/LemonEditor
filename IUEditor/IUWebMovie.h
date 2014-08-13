@@ -8,17 +8,30 @@
 
 #import "IUHTML.h"
 
+typedef enum{
+    IUWebMoviePlayTypeNone,
+    IUWebMoviePlayTypeAutoplay,
+    IUWebMoviePlayTypeJSAutoplay,
+}IUWebMoviePlayType;
+
+typedef enum{
+    IUWebMovieTypeYoutube,
+    IUWebMovieTypeVimeo,
+    IUWebMovieTypeUnknown,
+    
+}IUWebMovieType;
+
 @interface IUWebMovie : IUHTML
 
 @property BOOL      thumbnail;
-@property NSString *type;
 @property NSString *thumbnailID;
 @property  NSString *thumbnailPath;
 
 //connect to VC
-@property (nonatomic) BOOL eventautoplay, autoplay;
 
 @property (nonatomic) NSString *movieLink, *movieID;
-@property (nonatomic) NSString *webMovieSource;
+@property (nonatomic) IUWebMovieType movieType;
+@property (nonatomic) IUWebMoviePlayType playType;
+@property (nonatomic) BOOL enableLoop;
 
 @end

@@ -21,9 +21,17 @@
     if(self){
         [self.undoManager disableUndoRegistration];
 
-        _thumbnail = NO;
-        _type = @"webMovie";
-        self.webMovieSource = @"<iframe width=\"560\" height=\"315\" src=\"//www.youtube.com/embed/9bZkp7q19f0?list=PLEC422D53B7588DC7\" frameborder=\"0\" allowfullscreen></iframe>";
+        _thumbnail = YES;
+        _movieType = IUWebMovieTypeVimeo;
+        _movieLink = @"http://vimeo.com/101677733";
+        _playType = IUWebMoviePlayTypeNone;
+        _enableLoop = YES;
+        _thumbnailID = @"101677733";
+        _thumbnailPath = @"http://i.vimeocdn.com/video/483513294_640.jpg";
+        
+        [self.css setValue:@(700) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(400) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
+
         
         [self.undoManager enableUndoRegistration];
     }
@@ -35,8 +43,6 @@
         [self.undoManager disableUndoRegistration];
 
         [aDecoder decodeToObject:self withProperties:[[IUWebMovie class] properties]];
-        //call thumbnail data
-        self.webMovieSource = _webMovieSource;
         
         [self.undoManager enableUndoRegistration];
     }
@@ -52,168 +58,155 @@
     [self.undoManager disableUndoRegistration];
     
     webMovie.thumbnail = self.thumbnail;
-    webMovie.type = [_type copy];
     webMovie.thumbnailID = [_thumbnailID copy];
     webMovie.thumbnailPath = [_thumbnailPath copy];
-    webMovie.webMovieSource = [_webMovieSource copy];
+    
+    webMovie.movieType = _movieType;
+    webMovie.playType = _playType;
+    webMovie.enableLoop = _enableLoop;
+    webMovie.movieLink = [_movieLink copy];
+    webMovie.movieID = [_movieID copy];
     
     [self.undoManager enableUndoRegistration];
     return webMovie;
 }
 
+- (void)connectWithEditor{
+    [super connectWithEditor];
+    [self updateWebMovieSource];
+}
+
+#pragma mark - should setting
 - (BOOL)shouldAddIUByUserInput{
     return NO;
 }
 
-- (void)setEventautoplay:(BOOL)eventautoplay{
-    if(_eventautoplay == eventautoplay){
-        return;
-    }
-    
-    [[self.undoManager prepareWithInvocationTarget:self] setEventautoplay:_eventautoplay];
-    _eventautoplay = eventautoplay;
-}
+
+#pragma mark - property
 
 - (void)setMovieLink:(NSString *)movieLink{
-    NSMutableString *movieCode = [NSMutableString string];
-    
-    _thumbnail = NO;
-
-    
-    
-    //vimeo
-    if([movieLink containsString:@"vimeo"]){
-        //http://vimeo.com/channels/staffpicks/79426902
-        _movieID = [[movieLink lastPathComponent] substringWithRange:NSMakeRange(0, 8)];
-        
-        
-        
-
+    if([_movieLink isEqualToString:movieLink]){
+        return;
     }
-    else if([movieLink containsString:@"youtu.be"]){
-        //http://youtu.be/Z0uknBJc8NI
-        //http://youtu.be/EM06XSULpgc?list=RDEM06XSULpgc
-        /*
-         <iframe id="ytplayer" type="text/html" width="640" height="390"
-         src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"
-         frameborder="0"/>
-         
-         */
-        _movieID = [[movieLink lastPathComponent] substringWithRange:NSMakeRange(0, 11)];
-        [movieCode appendFormat:@"<iframe id='%@_youtube type=\"text/html\" ", self.htmlID];
-        
+    [[self.undoManager prepareWithInvocationTarget:self] setMovieLink:_movieLink];
+    _movieLink = movieLink;
+    if(self.isConnectedWithEditor){
+        [self updateWebMovieSource];
     }
-    [movieCode appendString:@"width=\"100%%\" height=\"100%%\">"];
-    [movieCode appendString:@"</iframe>"];
-    
 }
 
+- (void)setPlayType:(IUWebMoviePlayType)playType{
+    if(playType != _playType){
+        [[self.undoManager prepareWithInvocationTarget:self] setPlayType:_playType];
+        _playType = playType;
+    }
+}
 
-- (void)setWebMovieSource:(NSString *)aWebMovieSource{
-    _webMovieSource = aWebMovieSource;
-    _thumbnail = NO;
+- (void)setEnableLoop:(BOOL)enableLoop{
+    if(_enableLoop != enableLoop){
+        [[self.undoManager prepareWithInvocationTarget:self] setEnableLoop:_enableLoop];
+        _enableLoop = enableLoop;
+    }
+}
+
+#pragma mark - webmovie
+- (void)updateWebMovieSource{
+    NSMutableString *movieCode = [NSMutableString string];
+    NSMutableString *attribute = [NSMutableString string];
     
-    if(aWebMovieSource == nil || aWebMovieSource.length ==0 ){
+    //vimeo
+    if([_movieLink containsString:@"vimeo"]){
+        //http://vimeo.com/channels/staffpicks/79426902
+        //<iframe src="//player.vimeo.com/video/VIDEO_ID" width="WIDTH" height="HEIGHT" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+        _movieID = [[_movieLink lastPathComponent] substringWithRange:NSMakeRange(0, 9)];
+        
+        
+        [movieCode appendFormat:@"<iframe src=\"http://player.vimeo.com/video/%@?api=1&player_id=%@_vimeo", _movieID, self.htmlID];
+        [attribute appendString:@" webkitallowfullscreen mozallowfullscreen"];
+
+        _movieType = IUWebMovieTypeVimeo;
+    }
+    else if([_movieLink containsString:@"youtu.be"]){
+        //http://youtu.be/Z0uknBJc8NI
+        //http://youtu.be/EM06XSULpgc?list=RDEM06XSULpgc
+        //<iframe width="560" height="315" src="//www.youtube.com/embed/Sl-BDzmORX0?list=RDHCzBybJtuKWjA" frameborder="0" allowfullscreen></iframe>
+        _movieID = [[_movieLink lastPathComponent] substringWithRange:NSMakeRange(0, 11)];
+        
+        [movieCode appendString:@"<object width=\"100%\" height=\"100%\">"];
+        
+        [movieCode appendFormat:@"<param name=\"movie\" value=\"https://youtube.googleapis.com/%@?version=2&fs=1\"</param>", [_movieLink lastPathComponent]];
+        [movieCode appendString:@"<param name=\"allowFullScreen\" value=\"true\"></param>"];
+        [movieCode appendString:@"<param name=\"allowScriptAccess\" value=\"always\"></param>"];
+        
+        
+        [movieCode appendFormat:@"<embed id='%@_youtube'", self.htmlID];
+        [movieCode appendFormat:@" src=\"http://www.youtube.com/v/%@?version=3&enablejsapi=1", [_movieLink lastPathComponent]];
+        if([[_movieLink lastPathComponent] containsString:@"list"]){
+            [movieCode appendString:@"&listType=playlist"];
+        }
+        [movieCode appendFormat:@"&autohide=1&playerapiid=%@_youtube", self.htmlID];
+        _movieType = IUWebMovieTypeYoutube;
+
+    }
+    else{
+        _movieType = IUWebMovieTypeUnknown;
         self.innerHTML = @"";
         return;
     }
     
-    //width, height => 100%, innerHTML에 적용
-    NSString *changeSource = aWebMovieSource;
-    
-    if ([changeSource containsString:@"src=\"//"]) {
-        changeSource= [changeSource stringByReplacingOccurrencesOfString:@"src=\"//" withString:@"src=\"http://"];
+    if(_playType == IUWebMoviePlayTypeAutoplay){
+        [movieCode appendString:@"&autoplay=1"];
+    }
+    if(_enableLoop){
+        [movieCode appendString:@"&loop=1"];
     }
     
-    if([changeSource containsString:@"height"]){
-        NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:@"height=\"([0-9]*)\""
-                                                                             options:NSRegularExpressionCaseInsensitive error:nil];
-        
-        changeSource = [regex stringByReplacingMatchesInString:changeSource
-                                                          options:0
-                                                            range:NSMakeRange(0, [changeSource length])
-                                                     withTemplate:[NSString stringWithFormat:@"height=100%%"]];
-    }
+    [movieCode appendString:@"\""];
     
-    if([changeSource containsString:@"width"]){
-        NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:@"width=\"([0-9]*)\""
-                                                                             options:NSRegularExpressionCaseInsensitive error:nil];
-        
-        changeSource = [regex stringByReplacingMatchesInString:changeSource
-                                                          options:0
-                                                            range:NSMakeRange(0, [changeSource length])
-                                                     withTemplate:[NSString stringWithFormat:@"width=100%%"]];
-    }
+    [movieCode appendString:attribute];
+    [movieCode appendString:@" allowfullscreen frameborder=\"0\" width=\"100%\" height=\"100%\" "];
     
-    NSMutableString *appendSource= [NSMutableString stringWithString:changeSource];
-    NSString *videoID;
-    NSRange optionRange = [changeSource rangeOfString:@"?"];
+    if(_movieType == IUWebMovieTypeVimeo){
+        [movieCode appendString:@"></iframe>"];
+    }
+    else if(_movieType == IUWebMovieTypeYoutube){
+        [movieCode appendString:@"type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\""];
+        [movieCode appendString:@"></embed>"];
+        [movieCode appendString:@"</object>"];
 
-    //use api
-    if([changeSource containsString:@"youtube"]){
-        _type = @"youtube";
-        videoID = [NSString stringWithFormat:@"%@_%@", self.htmlID, _type];
-        NSString *option = [NSString stringWithFormat:@"version=3&enablejsapi=1&"];
-        if(optionRange.length == 0){
-            NSRange range = [appendSource rangeOfString:@"/embed/"];
-            NSInteger start = range.length+range.location +11;
-            [appendSource insertString:[NSString stringWithFormat:@"?%@", option] atIndex:start];
-        }
-        else{
-            [appendSource insertString:option atIndex:optionRange.location + optionRange.length];
-        }
-    }
-    else if([changeSource containsString:@"vimeo"]){
-        _type = @"vimeo";
-        videoID = [NSString stringWithFormat:@"%@_%@", self.htmlID, _type];
-        NSString *option = [NSString stringWithFormat:@"api=1&player_id=%@&", videoID];
-        if(optionRange.length == 0){
-            NSRange range = [appendSource rangeOfString:@"/video/"];
-            NSInteger start = range.length+range.location +8;
-            [appendSource insertString:[NSString stringWithFormat:@"?%@", option] atIndex:start];
-        }
-        else{
-            [appendSource insertString:option atIndex:optionRange.location + optionRange.length];
-        }
-        
     }
     
-    NSRange iframeRange = [appendSource rangeOfString:@"<iframe"];
-    if(iframeRange.length >0 && videoID){
-        [appendSource insertString:[NSString stringWithFormat:@" id='%@'", videoID] atIndex:iframeRange.location+iframeRange.length];
-    }
-
-    
-    [self thumbnailOfWebMovieSource:_webMovieSource];
-    self.innerHTML = appendSource;
+    [self updateThumbnailOfWebMovie];
+    self.innerHTML = movieCode;
 }
 
--(void)thumbnailOfWebMovieSource:(NSString *)webMovieSource{
-    
-    if ([webMovieSource containsString:@"youtube"]){
-        NSRange range = [self.webMovieSource rangeOfString:@"/embed/"];
-        NSInteger start = range.length+range.location;
-        NSString *idStr = [self.webMovieSource substringWithRange:NSMakeRange(start, 11)];
-        if([_thumbnailID isEqualToString:idStr]){
-            _thumbnail = YES;
-            return;
+
+-(void)updateThumbnailOfWebMovie{
+    if([_thumbnailID isEqualToString:_movieID] && _thumbnail){
+        return;
+    }
+    else{
+        _thumbnail = NO;
+    }
+
+    if (_movieType == IUWebMovieTypeYoutube){
+        _thumbnailID = _movieID;
+        //http://stackoverflow.com/questions/2068344/how-do-i-get-a-youtube-video-thumbnail-from-the-youtube-api
+        NSString *youtubePath = [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/sdddefault.jpg", _movieID];
+        NSInteger width = [[self.delegate callWebScriptMethod:@"getImageWidth" withArguments:@[youtubePath]] integerValue];
+        if(width < 130 ){
+            youtubePath = [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/0.jpg", _movieID];
         }
-        _thumbnailID = idStr;
-        _thumbnailPath = [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/sddefault.jpg", idStr ];
+        
+        _thumbnailPath = youtubePath;
         _thumbnail = YES;
         
     }
     // 2. vimeo
-    else if ([webMovieSource containsString:@"vimeo"]){
-        NSRange range = [self.webMovieSource rangeOfString:@"/video/"];
-        NSInteger start = range.length+range.location;
-        NSString *idStr = [self.webMovieSource substringWithRange:NSMakeRange(start, 8)];
-        if([_thumbnailID isEqualToString:idStr]){
-            _thumbnail = YES;
-            return;
-        }
-        _thumbnailID = idStr;
-        NSURL *filePath =[NSURL URLWithString:[NSString stringWithFormat:@"http://www.vimeo.com/api/v2/video/%@.json", idStr]];
+    else if (_movieType == IUWebMovieTypeVimeo){
+        _thumbnailID = _movieID;
+        NSURL *filePath =[NSURL URLWithString:[NSString stringWithFormat:@"http://www.vimeo.com/api/v2/video/%@.json", _movieID]];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) , ^{
             NSData* data = [NSData dataWithContentsOfURL:
@@ -222,10 +215,6 @@
                                    withObject:data waitUntilDone:YES];
         });
         
-        /* vimeo example src
-         *
-         <iframe src="//player.vimeo.com/video/87939713?title=0&amp;byline=0&amp;portrait=0&amp;color=afd9cd" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/87939713">Happy Camper - The Daily Drumbeat</a> from <a href="http://vimeo.com/jobjorismarieke">Job, Joris &amp; Marieke</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-         */
     }
 }
 
@@ -246,37 +235,90 @@
     _thumbnailPath = [vimeoDict objectForKey:@"thumbnail_large"]; //2
     _thumbnail = YES;
     
-    [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.parent.htmlID];
-    
+    [self updateHTML];
     
 }
 
+
 /*
- *
- add for scroll event
- ㅇ
- $(document).scroll(function(){
- var vimeo = $('#vimeo_94631360');
- var height = $(this).scrollTop();
- var vimeo_location =  vimeo.offset().top;
- var vimeo_height = vimeo.outerHeight();
- if(height>=vimeo_location-200){
- froogaloop.api('play');
+ - (void)setWebMovieSource:(NSString *)aWebMovieSource{
+ _webMovieSource = aWebMovieSource;
+ _thumbnail = NO;
+ 
+ if(aWebMovieSource == nil || aWebMovieSource.length ==0 ){
+ self.innerHTML = @"";
+ return;
+ }
+ 
+ //width, height => 100%, innerHTML에 적용
+ NSString *changeSource = aWebMovieSource;
+ 
+ if ([changeSource containsString:@"src=\"//"]) {
+ changeSource= [changeSource stringByReplacingOccurrencesOfString:@"src=\"//" withString:@"src=\"http://"];
+ }
+ 
+ if([changeSource containsString:@"height"]){
+ NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:@"height=\"([0-9]*)\""
+ options:NSRegularExpressionCaseInsensitive error:nil];
+ 
+ changeSource = [regex stringByReplacingMatchesInString:changeSource
+ options:0
+ range:NSMakeRange(0, [changeSource length])
+ withTemplate:[NSString stringWithFormat:@"height=100%%"]];
+ }
+ 
+ if([changeSource containsString:@"width"]){
+ NSRegularExpression *regex=[NSRegularExpression regularExpressionWithPattern:@"width=\"([0-9]*)\""
+ options:NSRegularExpressionCaseInsensitive error:nil];
+ 
+ changeSource = [regex stringByReplacingMatchesInString:changeSource
+ options:0
+ range:NSMakeRange(0, [changeSource length])
+ withTemplate:[NSString stringWithFormat:@"width=100%%"]];
+ }
+ 
+ NSMutableString *appendSource= [NSMutableString stringWithString:changeSource];
+ NSString *videoID;
+ NSRange optionRange = [changeSource rangeOfString:@"?"];
+ 
+ //use api
+ if([changeSource containsString:@"youtube"]){
+ _type = @"youtube";
+ videoID = [NSString stringWithFormat:@"%@_%@", self.htmlID, _type];
+ NSString *option = [NSString stringWithFormat:@"version=3&enablejsapi=1&"];
+ if(optionRange.length == 0){
+ NSRange range = [appendSource rangeOfString:@"/embed/"];
+ NSInteger start = range.length+range.location +11;
+ [appendSource insertString:[NSString stringWithFormat:@"?%@", option] atIndex:start];
  }
  else{
- froogaloop.api('pause');
+ [appendSource insertString:option atIndex:optionRange.location + optionRange.length];
  }
- if(height>=vimeo_location+100){
- froogaloop.api('pause');
  }
- });
+ else if([changeSource containsString:@"vimeo"]){
+ _type = @"vimeo";
+ videoID = [NSString stringWithFormat:@"%@_%@", self.htmlID, _type];
+ NSString *option = [NSString stringWithFormat:@"api=1&player_id=%@&", videoID];
+ if(optionRange.length == 0){
+ NSRange range = [appendSource rangeOfString:@"/video/"];
+ NSInteger start = range.length+range.location +8;
+ [appendSource insertString:[NSString stringWithFormat:@"?%@", option] atIndex:start];
+ }
+ else{
+ [appendSource insertString:option atIndex:optionRange.location + optionRange.length];
+ }
  
- $(document).ready(function(){
- console.log('ready : iuevent.js')
+ }
  
- var vimeo = $('#vimeo_94631360');
- froogaloop = $f(vimeo[0].id);
+ NSRange iframeRange = [appendSource rangeOfString:@"<iframe"];
+ if(iframeRange.length >0 && videoID){
+ [appendSource insertString:[NSString stringWithFormat:@" id='%@'", videoID] atIndex:iframeRange.location+iframeRange.length];
+ }
  
+ 
+ [self thumbnailOfWebMovieSource:_webMovieSource];
+ self.innerHTML = appendSource;
+ }
  */
 
 @end

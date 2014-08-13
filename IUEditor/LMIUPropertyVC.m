@@ -307,7 +307,7 @@
     }
 #pragma mark IU - Complex
     else if ([classString isEqualToString:@"IUWebMovie"]) {
-        self.propertyVArray = @[propertyIUWebMovieVC.view, propertyIUHTMLVC.view];
+        self.propertyVArray = @[propertyIUWebMovieVC.view];
     }
     else if ([classString isEqualToString:@"IUImport"]) {
         self.propertyVArray = @[propertyIUImportVC.view, propertyPGType2VC.view];

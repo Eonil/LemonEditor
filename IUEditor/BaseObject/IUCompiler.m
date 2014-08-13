@@ -1307,10 +1307,15 @@
 #pragma mark IUWebMovie
     else if([iu isKindOfClass:[IUWebMovie class]]){
         IUWebMovie *iuWebMovie = (IUWebMovie *)iu;
-        if(iuWebMovie.eventautoplay){
+        if(iuWebMovie.playType == IUWebMoviePlayTypeJSAutoplay){
             [retString appendString:@" eventAutoplay='1'"];
             [retString appendFormat:@" videoid='%@'", iuWebMovie.thumbnailID];
-            [retString appendFormat:@" videotype='%@'", iuWebMovie.type];
+            if(iuWebMovie.movieType == IUWebMovieTypeYoutube){
+                [retString appendString:@" videotype='youtube'"];
+            }
+            else if (iuWebMovie.movieType == IUWebMovieTypeVimeo){
+                [retString appendString:@" videotype='vimeo'"];
+            }
         }
     }
 #pragma mark IUMovie

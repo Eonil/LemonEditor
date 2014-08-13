@@ -10,9 +10,9 @@
 
 @interface LMPropertyIUWebMovieVC ()
 
-@property (unsafe_unretained) IBOutlet NSTextView *webMovieSourceTextV;
-@property (weak) IBOutlet NSButton *autoplayBtn;
-
+@property (weak) IBOutlet NSTextField *webMovieSourceTF;
+@property (weak) IBOutlet NSMatrix *autoplayMatrix;
+@property (weak) IBOutlet NSButton *loopButton;
 
 @end
 
@@ -28,12 +28,10 @@
 }
 
 - (void)awakeFromNib{
-    NSDictionary *bindingOption = [NSDictionary
-                                   dictionaryWithObjects:@[[NSNumber numberWithBool:NO], [NSNumber numberWithBool:YES]]
-                                   forKeys:@[NSRaisesForNotApplicableKeysBindingOption, NSContinuouslyUpdatesValueBindingOption]];
     
-     [_webMovieSourceTextV bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"webMovieSource"]  options:bindingOption];
-     [_autoplayBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"eventautoplay"]  options:bindingOption];
+     [_webMovieSourceTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"movieLink"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_autoplayMatrix bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"playType"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+     [_loopButton bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableLoop"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
 
 }
 

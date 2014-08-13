@@ -71,9 +71,10 @@ $(document).ready(function(){
     console.log('iu.js')
 });
 
-function onYouTubePlayerReady(playerId){
-	console.log("playerId : "+playerId);
+function onYouTubePlayerReady(playerid){
+	console.log("youtube:"+playerid);
 }
+
 
 function onWebMovieAutoPlay(){
 	//autoplay when appear
@@ -91,18 +92,22 @@ function onWebMovieAutoPlay(){
 				vimeo.api('play');
 			
 			}
-			/*
-			else if(type=='video'){
-			$(this).load();
-			$(this).play();
+			else if(type=='youtube'){
+				var id = $(this).attr('id')+'_youtube';
+			 	var youtube = document.getElementById(id);
+				youtube.playVideo();
 			}
-			*/
 		}
 		else{
 			//stop
 			if(type=='vimeo'){
 				var vimeo = $f($(this).children()[0]);
 				vimeo.api('pause');
+			}
+			else if(type=='youtube'){
+				var id = $(this).attr('id')+'_youtube';
+			 	var youtube = document.getElementById(id);
+				youtube.pauseVideo();
 			}
 		
 		
