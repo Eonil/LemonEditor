@@ -41,18 +41,6 @@
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="erb-IH-bmM">
                                     <rect key="frame" x="0.0" y="350" width="540" height="110"/>
                                     <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nhf-v5-dXh">
-                                            <rect key="frame" x="30" y="80" width="60" height="17"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="a1d-hq-gCg"/>
-                                                <constraint firstAttribute="height" constant="17" id="y3l-yI-mbU"/>
-                                            </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Git Info" drawsBackground="YES" id="mBo-65-7QJ">
-                                                <font key="font" metaFont="smallSystemBold"/>
-                                                <color key="textColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="backgroundColor" red="0.92941182851791382" green="0.92941182851791382" blue="0.92941182851791382" alpha="1" colorSpace="deviceRGB"/>
-                                            </textFieldCell>
-                                        </textField>
                                         <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="yDb-ke-wEu">
                                             <rect key="frame" x="20" y="20" width="500" height="70"/>
                                             <view key="contentView">
@@ -147,6 +135,18 @@
                                             <color key="borderColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nhf-v5-dXh">
+                                            <rect key="frame" x="30" y="80" width="60" height="17"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="a1d-hq-gCg"/>
+                                                <constraint firstAttribute="height" constant="17" id="y3l-yI-mbU"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Git Info" drawsBackground="YES" id="mBo-65-7QJ">
+                                                <font key="font" metaFont="smallSystemBold"/>
+                                                <color key="textColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.92941182851791382" green="0.92941182851791382" blue="0.92941182851791382" alpha="1" colorSpace="deviceRGB"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="110" id="awq-CS-i3t"/>
@@ -283,10 +283,10 @@
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <size key="minSize" width="498" height="68"/>
-                                                                <size key="maxSize" width="498" height="10000000"/>
+                                                                <size key="maxSize" width="500" height="10000000"/>
                                                                 <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <size key="minSize" width="498" height="68"/>
-                                                                <size key="maxSize" width="498" height="10000000"/>
+                                                                <size key="maxSize" width="500" height="10000000"/>
                                                             </textView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -367,13 +367,13 @@
                                     <rect key="frame" x="0.0" y="230" width="540" height="120"/>
                                     <subviews>
                                         <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="6Jm-er-FA3">
-                                            <rect key="frame" x="20" y="30" width="500" height="82"/>
+                                            <rect key="frame" x="20" y="30" width="500" height="70"/>
                                             <view key="contentView">
-                                                <rect key="frame" x="1" y="1" width="498" height="80"/>
+                                                <rect key="frame" x="1" y="1" width="498" height="68"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wHH-Wg-6SH">
-                                                        <rect key="frame" x="49" y="27" width="400" height="14"/>
+                                                        <rect key="frame" x="49" y="15" width="400" height="14"/>
                                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="kat-rU-9cc">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -424,7 +424,7 @@
                                         <constraint firstItem="7kd-1r-gN0" firstAttribute="leading" secondItem="jdS-0c-ijs" secondAttribute="leading" constant="37" id="T9y-iX-KLM"/>
                                         <constraint firstItem="6Jm-er-FA3" firstAttribute="leading" secondItem="jdS-0c-ijs" secondAttribute="leading" constant="20" id="XVy-zm-Giu"/>
                                         <constraint firstItem="hJi-uH-hwY" firstAttribute="leading" secondItem="jdS-0c-ijs" secondAttribute="leading" constant="30" id="gAX-NB-yMc"/>
-                                        <constraint firstItem="6Jm-er-FA3" firstAttribute="top" secondItem="jdS-0c-ijs" secondAttribute="top" constant="8" id="heO-Mv-JXp"/>
+                                        <constraint firstItem="6Jm-er-FA3" firstAttribute="top" secondItem="jdS-0c-ijs" secondAttribute="top" constant="20" id="heO-Mv-JXp"/>
                                         <constraint firstItem="hJi-uH-hwY" firstAttribute="top" secondItem="jdS-0c-ijs" secondAttribute="top" constant="14" id="jwS-uq-rt5"/>
                                         <constraint firstAttribute="bottom" secondItem="7kd-1r-gN0" secondAttribute="bottom" constant="6" id="pYt-zz-hjh"/>
                                         <constraint firstAttribute="centerX" secondItem="7kd-1r-gN0" secondAttribute="centerX" id="yFP-Gf-C4K"/>
