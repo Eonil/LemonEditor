@@ -75,20 +75,37 @@
 }
 
 - (void)setMovieLink:(NSString *)movieLink{
+    NSMutableString *movieCode = [NSMutableString string];
+    
     _thumbnail = NO;
-    _movieID = [movieLink lastPathComponent];
 
+    
     
     //vimeo
     if([movieLink containsString:@"vimeo"]){
         //http://vimeo.com/channels/staffpicks/79426902
+        _movieID = [[movieLink lastPathComponent] substringWithRange:NSMakeRange(0, 8)];
+        
+        
+        
 
     }
     else if([movieLink containsString:@"youtu.be"]){
         //http://youtu.be/Z0uknBJc8NI
-        _movieID = [movieLink lastPathComponent];
+        //http://youtu.be/EM06XSULpgc?list=RDEM06XSULpgc
+        /*
+         <iframe id="ytplayer" type="text/html" width="640" height="390"
+         src="http://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com"
+         frameborder="0"/>
+         
+         */
+        _movieID = [[movieLink lastPathComponent] substringWithRange:NSMakeRange(0, 11)];
+        [movieCode appendFormat:@"<iframe id='%@_youtube type=\"text/html\" ", self.htmlID];
         
     }
+    [movieCode appendString:@"width=\"100%%\" height=\"100%%\">"];
+    [movieCode appendString:@"</iframe>"];
+    
 }
 
 

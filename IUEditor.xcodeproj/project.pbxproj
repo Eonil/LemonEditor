@@ -314,6 +314,7 @@
 		3D748C82192095A1005665A3 /* LMPropertyIUPageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D748C80192095A1005665A3 /* LMPropertyIUPageVC.xib */; };
 		3D748C851921D1BD005665A3 /* stack_carousel_item.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D748C831921D1BD005665A3 /* stack_carousel_item.png */; };
 		3D748C861921D1BD005665A3 /* stack_carousel_item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D748C841921D1BD005665A3 /* stack_carousel_item@2x.png */; };
+		3D7F0BA6199B4F8D0062415D /* loremipsum.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3D7F0BA5199B4F8D0062415D /* loremipsum.txt */; };
 		3D825BC9195940E0001CC3C2 /* LMInspectorAltTextVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D825BC7195940E0001CC3C2 /* LMInspectorAltTextVC.m */; };
 		3D825BCA195940E0001CC3C2 /* LMInspectorAltTextVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D825BC8195940E0001CC3C2 /* LMInspectorAltTextVC.xib */; };
 		3D8D4B2A19179F910002C871 /* LMPropertyIUTextViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8D4B2819179F910002C871 /* LMPropertyIUTextViewVC.m */; };
@@ -1201,6 +1202,7 @@
 		3D748C80192095A1005665A3 /* LMPropertyIUPageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyIUPageVC.xib; path = IU/LMPropertyIUPageVC.xib; sourceTree = "<group>"; };
 		3D748C831921D1BD005665A3 /* stack_carousel_item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stack_carousel_item.png; sourceTree = "<group>"; };
 		3D748C841921D1BD005665A3 /* stack_carousel_item@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_carousel_item@2x.png"; sourceTree = "<group>"; };
+		3D7F0BA5199B4F8D0062415D /* loremipsum.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = loremipsum.txt; sourceTree = "<group>"; };
 		3D825BC6195940E0001CC3C2 /* LMInspectorAltTextVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMInspectorAltTextVC.h; path = Editor/LMInspectorAltTextVC.h; sourceTree = "<group>"; };
 		3D825BC7195940E0001CC3C2 /* LMInspectorAltTextVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMInspectorAltTextVC.m; path = Editor/LMInspectorAltTextVC.m; sourceTree = "<group>"; };
 		3D825BC8195940E0001CC3C2 /* LMInspectorAltTextVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMInspectorAltTextVC.xib; path = Editor/LMInspectorAltTextVC.xib; sourceTree = "<group>"; };
@@ -3486,6 +3488,7 @@
 		69C5759E18D6F61E0016F050 = {
 			isa = PBXGroup;
 			children = (
+				3D7F0BA5199B4F8D0062415D /* loremipsum.txt */,
 				690D465A198E8F3200478EC9 /* IUProtocols.h */,
 				69D100111997124F003F8772 /* wordpress.zip */,
 				CBFBE67C192A07A300F03F76 /* SampleTemplate */,
@@ -4488,6 +4491,7 @@
 				69346623192B805000F82DAF /* LMCommandVC.xib in Resources */,
 				26FC5DA9196F8489004B4DB4 /* panel_bottom_off@2x.png in Resources */,
 				3D9BC41619989AB900451F55 /* map_position.png in Resources */,
+				3D7F0BA6199B4F8D0062415D /* loremipsum.txt in Resources */,
 				068555C1198A56740073FA83 /* Charlie_Chaplin-The_Kid.png in Resources */,
 				06855622198A63430073FA83 /* johnny_automatic_multiple_files.png in Resources */,
 				69B45C3E1986BBC90087FDFD /* LMServerWC.xib in Resources */,

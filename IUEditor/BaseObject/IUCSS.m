@@ -88,9 +88,7 @@
 //insert tag
 //use css frame dict, and update affecting tag dictionary
 -(void)setValue:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width{
-    
-    [self setValueWithoutUpdateCSS:value forTag:tag forViewport:width];
-    
+    BOOL isNeedUpdate= NO;
     if ([_delegate CSSShouldChangeValue:value forTag:tag forWidth:width]){
         NSMutableDictionary *cssDict = _cssFrameDict[@(width)];
         
@@ -98,10 +96,18 @@
         if(currentValue == nil ||  [currentValue isNotEqualTo:value]){
             
             if ([tag isFrameTag] == NO) {
-                [self.delegate updateCSS];
+                isNeedUpdate = YES;
             }
         }
+
     }
+    
+    [self setValueWithoutUpdateCSS:value forTag:tag forViewport:width];
+    if(isNeedUpdate){
+        [self.delegate updateCSS];
+    }
+    
+    
 }
 
 -(void)setValueWithoutUpdateCSS:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width{

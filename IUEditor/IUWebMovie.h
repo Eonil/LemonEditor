@@ -16,7 +16,8 @@
 @property  NSString *thumbnailPath;
 
 //connect to VC
-@property (nonatomic) BOOL eventautoplay;
+@property (nonatomic) BOOL eventautoplay, autoplay;
+
 @property (nonatomic) NSString *movieLink, *movieID;
 @property (nonatomic) NSString *webMovieSource;
 
