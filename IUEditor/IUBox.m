@@ -359,19 +359,21 @@
  
     NSString *currentImage = _css.assembledTagDictionary[IUCSSTagImage];
     if([currentImage isEqualToString:imageName] == NO){
+        
         [[[self undoManager] prepareWithInvocationTarget:self] setImageName:_css.assembledTagDictionary[IUCSSTagImage]];
+        
+        
+        [self willChangeValueForKey:@"imageName"];
+        
+        
+        NSDictionary *defaultTagDictionary = [_css tagDictionaryForViewport:IUCSSDefaultViewPort];
+        if (defaultTagDictionary) {
+            [_css setValue:imageName forTag:IUCSSTagImage forViewport:_css.editWidth];
+        }
+        [_css setValue:imageName forTag:IUCSSTagImage forViewport:IUCSSDefaultViewPort];
+        
+        [self didChangeValueForKey:@"imageName"];
     }
-    
-    [self willChangeValueForKey:@"imageName"];
-
-
-    NSDictionary *defaultTagDictionary = [_css tagDictionaryForViewport:IUCSSDefaultViewPort];
-    if (defaultTagDictionary) {
-        [_css setValue:imageName forTag:IUCSSTagImage forViewport:_css.editWidth];
-    }
-    [_css setValue:imageName forTag:IUCSSTagImage forViewport:IUCSSDefaultViewPort];
-    
-     [self didChangeValueForKey:@"imageName"];
 }
 - (NSString *)imageName{
     return _css.assembledTagDictionary[IUCSSTagImage];

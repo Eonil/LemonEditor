@@ -369,6 +369,7 @@
 		3DA6F30F1963B810004DF0AA /* LMHelpVideoPopoverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA6F30D1963B810004DF0AA /* LMHelpVideoPopoverVC.xib */; };
 		3DA6F3121963BC6E004DF0AA /* LMCollectionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA6F3111963BC6E004DF0AA /* LMCollectionItemView.m */; };
 		3DA72903192B5ABC00203764 /* IUTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA72902192B5ABC00203764 /* IUTextController.m */; };
+		3DA77130199C8986001743B9 /* LMDefaultPropertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7712F199C8986001743B9 /* LMDefaultPropertyVC.m */; };
 		3DAEEDFD1938537700196A81 /* image_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAEEDFC1938537700196A81 /* image_default.png */; };
 		3DAEEE00193C3D2500196A81 /* iuinit.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DAEEDFE193C36E600196A81 /* iuinit.js */; };
 		3DB3ACC518EBEF180046DFB7 /* LMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACC418EBEF180046DFB7 /* LMWindow.m */; };
@@ -1276,6 +1277,8 @@
 		3DA6F3111963BC6E004DF0AA /* LMCollectionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMCollectionItemView.m; path = Editor/Widget/LMCollectionItemView.m; sourceTree = "<group>"; };
 		3DA72901192B5ABC00203764 /* IUTextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUTextController.h; sourceTree = "<group>"; };
 		3DA72902192B5ABC00203764 /* IUTextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUTextController.m; sourceTree = "<group>"; };
+		3DA7712E199C8986001743B9 /* LMDefaultPropertyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMDefaultPropertyVC.h; path = Editor/LMDefaultPropertyVC.h; sourceTree = "<group>"; };
+		3DA7712F199C8986001743B9 /* LMDefaultPropertyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMDefaultPropertyVC.m; path = Editor/LMDefaultPropertyVC.m; sourceTree = "<group>"; };
 		3DAEEDFC1938537700196A81 /* image_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_default.png; sourceTree = "<group>"; };
 		3DAEEDFE193C36E600196A81 /* iuinit.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = iuinit.js; sourceTree = "<group>"; };
 		3DB3ACC318EBEF180046DFB7 /* LMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWindow.h; sourceTree = "<group>"; };
@@ -3687,6 +3690,8 @@
 				69B4D7F8192B5155008429B3 /* LMCommandVC.h */,
 				69346622192B805000F82DAF /* LMCommandVC.xib */,
 				69B4D7F9192B5155008429B3 /* LMCommandVC.m */,
+				3DA7712E199C8986001743B9 /* LMDefaultPropertyVC.h */,
+				3DA7712F199C8986001743B9 /* LMDefaultPropertyVC.m */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -4684,6 +4689,7 @@
 				3DED271D1904ADD9001A1D67 /* LMEventVariableTrigger.m in Sources */,
 				694E3CE118FCFDA6005077B3 /* IUItem.m in Sources */,
 				3DA6F3121963BC6E004DF0AA /* LMCollectionItemView.m in Sources */,
+				3DA77130199C8986001743B9 /* LMDefaultPropertyVC.m in Sources */,
 				691F91B31973CD6800A4CFFF /* WPSiteDescription.m in Sources */,
 				694A9865196D197900C1D630 /* JDFormatter.m in Sources */,
 				690A826B190A25D500DDBA86 /* IUDjangoProject.m in Sources */,

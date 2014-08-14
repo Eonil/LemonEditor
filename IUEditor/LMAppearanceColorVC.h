@@ -7,11 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMAppearanceColorVC : NSViewController
+@interface LMAppearanceColorVC : LMDefaultPropertyVC
 
-@property (nonatomic, weak) IUController      *controller;
-@property (weak) id selection;
 
 @end

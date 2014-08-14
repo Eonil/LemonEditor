@@ -36,8 +36,12 @@ static NSString * IUEventTagFrameDuration = @"eqFrameDuration";
 static NSString * IUEventTagFrameWidth    = @"eqFrameWidth";
 static NSString * IUEventTagFrameHeight   = @"eqFrameHeight";
 
+//property
+#define IUPropertyTag NSString*
+
 ///////CSSTag
 #define IUCSSTag NSString*
+
 
 static NSString * IUCSSTagXUnitIsPercent   = @"xUnit";
 static NSString * IUCSSTagYUnitIsPercent   = @"yUnit";

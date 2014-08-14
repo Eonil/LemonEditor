@@ -39,17 +39,8 @@
     }
     return self;
 }
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-    }
-}
-
 - (void)setController:(IUController *)controller{
-    _controller = controller;
-    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
-
+    [super setController:controller];
     NSDictionary *bgEnableBindingOption = [NSDictionary
                                            dictionaryWithObjects:@[NSIsNotNilTransformerName]
                                            forKeys:@[NSValueTransformerNameBindingOption]];
@@ -60,100 +51,86 @@
     
     
 #pragma mark - image
-    
-    
-    [_imageNameComboBox bind:NSContentBinding toObject:self withKeyPath:@"resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
-    [_imageNameComboBox bind:NSValueBinding toObject:self withKeyPath:@"self.selection.imageName" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_imageNameComboBox bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
-    
-
-    
     _imageNameComboBox.delegate = self;
     
-    [_fitButton bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagWidthUnitIsPercent] options:IUBindingNegationAndNotRaise];
-    [_fitButton bind:@"enabled2" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagHeightUnitIsPercent] options:IUBindingNegationAndNotRaise];
-    [_fitButton bind:@"enabled3" toObject:self withKeyPath:@"self.selection.hasWidth" options:IUBindingDictNotRaisesApplicable];
-    [_fitButton bind:@"enabled4" toObject:self withKeyPath:@"self.selection.hasHeight" options:IUBindingDictNotRaisesApplicable];
-    [_fitButton bind:@"enabled5" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [_imageNameComboBox bind:NSContentBinding toObject:self withKeyPath:@"resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_imageNameComboBox bind:NSValueBinding property:@"imageName"];
+    [self outlet:_imageNameComboBox bind:NSEnabledBinding cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
 
     
+    [self outlet:_fitButton bind:NSEnabledBinding cssTag:IUCSSTagWidthUnitIsPercent options:IUBindingNegationAndNotRaise];
+    [self outlet:_fitButton bind:@"enabled2" cssTag:IUCSSTagHeightUnitIsPercent options:IUBindingNegationAndNotRaise];
+    [self outlet:_fitButton bind:@"enabled3" property:@"hasWidth"];
+    [self outlet:_fitButton bind:@"enabled4" property:@"hasHeight"];
+    [self outlet:_fitButton bind:@"enabled5" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
     
 #pragma mark - size, repeat
-    
-    [_sizeSegementControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGSize] options:IUBindingDictNotRaisesApplicable];
-    [_sizeSegementControl bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
-    [_sizeSegementControl bind:@"enabled2" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
 
+    [self outlet:_sizeSegementControl bind:NSSelectedIndexBinding cssTag:IUCSSTagBGSize];
+    [self outlet:_sizeSegementControl bind:NSEnabledBinding property:@"imageName" options:bgEnableBindingOption];
+    [self outlet:_sizeSegementControl bind:@"enabled2" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
     
     
-    [_repeatBtn bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGRepeat] options:noRepeatBindingOption];
-    
-    [_repeatBtn bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
+    [self outlet:_repeatBtn bind:NSValueBinding cssTag:IUCSSTagBGRepeat options:IUBindingNegationAndNotRaise];
+    [self outlet:_repeatBtn bind:NSEnabledBinding property:@"imageName" options:bgEnableBindingOption];
     [_repeatBtn bind:@"enabled2" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
-    [_repeatBtn bind:@"enabled3" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [self outlet:_repeatBtn bind:@"enabled3" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
 
-
+    [self addObserverForCSSTag:IUCSSTagBGSize options:0 context:@"size"];
     
-    
-    [self addObserver:self forKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGSize] options:0 context:@"size"];
 
     
 #pragma mark - position
     
-    [_positionHSegmentedControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGHPosition] options:IUBindingDictNotRaisesApplicable];
-
-    [_positionVSegmentedControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGVPosition] options:IUBindingDictNotRaisesApplicable];
-
     
-    
-    [_digitPositionBtn bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingDictNotRaisesApplicable];
-    [_digitPositionBtn bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
+    [self outlet:_positionHSegmentedControl bind:NSSelectedIndexBinding cssTag:IUCSSTagBGHPosition];
+    [self outlet:_positionVSegmentedControl bind:NSSelectedIndexBinding cssTag:IUCSSTagBGVPosition];
+
+    [self outlet:_digitPositionBtn bind:NSValueBinding cssTag:IUCSSTagEnableBGCustomPosition];
+    [self outlet:_digitPositionBtn bind:NSEnabledBinding property:@"imageName" options:bgEnableBindingOption];
     [_digitPositionBtn bind:@"enabled2" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
-    [_digitPositionBtn bind:@"enabled3" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [self outlet:_digitPositionBtn bind:@"enabled3" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
 
+    [self outlet:_xPositionTF bind:NSValueBinding cssTag:IUCSSTagBGXPosition];
+    [self outlet:_yPositionTF bind:NSValueBinding cssTag:IUCSSTagBGYPosition];
     
-    
-    [_xPositionTF bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGXPosition] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_yPositionTF bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGYPosition] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
-
     
 #pragma mark - enable position
     //position Segement 1
-    [_positionHSegmentedControl bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
-    [_positionVSegmentedControl bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
+    [self outlet:_positionHSegmentedControl bind:NSEnabledBinding property:@"imageName" options:bgEnableBindingOption];
+    [self outlet:_positionVSegmentedControl bind:NSEnabledBinding property:@"imageName" options:bgEnableBindingOption];
 
-    [_positionHSegmentedControl bind:@"enabled2" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingNegationAndNotRaise];
-    [_positionVSegmentedControl bind:@"enabled2" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingNegationAndNotRaise];
+    [self outlet:_positionHSegmentedControl bind:@"enabled2" cssTag:IUCSSTagEnableBGCustomPosition options:IUBindingNegationAndNotRaise];
+    [self outlet:_positionVSegmentedControl bind:@"enabled2" cssTag:IUCSSTagEnableBGCustomPosition options:IUBindingNegationAndNotRaise];
     
     [_positionHSegmentedControl bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     [_positionVSegmentedControl bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
-    [_positionHSegmentedControl bind:@"enabled4" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
-    [_positionVSegmentedControl bind:@"enabled4" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
-
     
+    
+    [self outlet:_positionHSegmentedControl bind:@"enabled4" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
+    [self outlet:_positionVSegmentedControl bind:@"enabled4" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
 
     //position TF
-    [_xPositionTF bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
-    [_yPositionTF bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
     
-    [_xPositionTF bind:@"enabled2" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingDictNotRaisesApplicable];
-    [_yPositionTF bind:@"enabled2" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_xPositionTF bind:NSEnabledBinding property:@"imageName" options:bgEnableBindingOption];
+    [self outlet:_yPositionTF bind:NSEnabledBinding property:@"imageName" options:bgEnableBindingOption];
+
+    [self outlet:_xPositionTF bind:@"enabled2" cssTag:IUCSSTagEnableBGCustomPosition];
+    [self outlet:_yPositionTF bind:@"enabled2" cssTag:IUCSSTagEnableBGCustomPosition];
     
     [_xPositionTF bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     [_yPositionTF bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     
-    [_xPositionTF bind:@"enabled4" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
-    [_yPositionTF bind:@"enabled4" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [self outlet:_xPositionTF bind:@"enabled4" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
+    [self outlet:_yPositionTF bind:@"enabled4" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
 
-
-
-    
 }
 
+
+
 - (void)dealloc{
-    if (_controller) {
-        [self removeObserver:self forKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGSize]];
+    if (self.controller) {
+        [self removeObserverForCSSTag:IUCSSTagBGSize];
     }
     [JDLogUtil log:IULogDealloc string:@"LMPropertyBGImage"];
 }
@@ -162,8 +139,8 @@
 -(void)sizeContextDidChange:(NSDictionary *)dictionary{
     IUBGSizeType selectedtype = (IUBGSizeType)[_sizeSegementControl selectedSegment];
     if(selectedtype == IUBGSizeTypeFull){
-        [self setValue:@(1) forKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGVPosition]];
-        [self setValue:@(1) forKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGHPosition]];
+        [self setValue:@(1) forCSSTag:IUCSSTagBGVPosition];
+        [self setValue:@(1) forCSSTag:IUCSSTagBGHPosition];
         self.fullSize = YES;
     }
     else{

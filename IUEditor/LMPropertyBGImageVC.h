@@ -7,14 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "LMDefaultPropertyVC.h"
 #import "IUResourceManager.h"
-#import "IUController.h"
 #import "JDOutlineCellView.h"
 
-@interface LMPropertyBGImageVC : NSViewController <NSComboBoxDelegate>
+@interface LMPropertyBGImageVC : LMDefaultPropertyVC <NSComboBoxDelegate>
 
-@property (nonatomic, weak) IUController      *controller;
 @property (weak) IUResourceManager     *resourceManager;
-@property (weak) id selection;
 
 @end

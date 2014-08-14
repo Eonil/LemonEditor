@@ -29,37 +29,31 @@
 }
 
 - (void)setController:(IUController *)controller{
-    _controller = controller;
-    [controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+    [super setController:controller];
+    
     [NSColor setIgnoresAlpha:NO];
 
-    [_bgColorWell bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagBGColor] options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_bgColorWell bind:NSValueBinding cssTag:IUCSSTagBGColor];
     
     //gradient
-    [_enableGradientBtn bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagBGGradient] options:IUBindingDictNotRaisesApplicable];
     
-    [_bgGradientStartColorWell bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagBGGradient] options:IUBindingDictNotRaisesApplicable];
-    [_bgGradientEndColorWell bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagBGGradient] options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_enableGradientBtn bind:NSValueBinding cssTag:IUCSSTagBGGradient];
+    [self outlet:_bgGradientStartColorWell bind:NSEnabledBinding cssTag:IUCSSTagBGGradient];
+    [self outlet:_bgGradientEndColorWell bind:NSEnabledBinding cssTag:IUCSSTagBGGradient];
+
+    [self outlet:_bgGradientStartColorWell bind:NSValueBinding cssTag:IUCSSTagBGGradientStartColor];
+    [self outlet:_bgGradientEndColorWell bind:NSValueBinding cssTag:IUCSSTagBGGradientEndColor];
     
-    [_bgGradientStartColorWell bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagBGGradientStartColor] options:IUBindingDictNotRaisesApplicable];
-    [_bgGradientEndColorWell bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagBGGradientEndColor] options:IUBindingDictNotRaisesApplicable];
-
-
-}
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    self.selection = _controller.selection;
 }
 
 - (void)makeClearColor:(id)sender{
-    [self setValue:[NSColor clearColor] forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagBGColor]];
+    [self setValue:[NSColor clearColor] forCSSTag:IUCSSTagBGColor];
 }
 - (IBAction)clickEnableGradient:(id)sender {
     if([_enableGradientBtn state]){
-        id currentColor = [self valueForKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagBGColor]];
-        [self setValue:currentColor forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagBGGradientStartColor]];
-        [self setValue:currentColor forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagBGGradientEndColor]];
-
+        id currentColor = [self valueForCSSTag:IUCSSTagBGColor];
+        [self setValue:currentColor forCSSTag:IUCSSTagBGGradientStartColor];
+        [self setValue:currentColor forCSSTag:IUCSSTagBGGradientEndColor];
     }
     else{
         [_bgGradientStartColorWell deactivate];
