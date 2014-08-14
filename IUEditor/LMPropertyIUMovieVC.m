@@ -45,7 +45,7 @@
     [self outlet:_altTextTF bind:NSValueBinding property:@"altText"];
     [self outlet:_controlBtn bind:NSValueBinding property:@"enableControl"];
     [self outlet:_loopBtn bind:NSValueBinding property:@"enableLoop"];
-    [self outlet:_autoplayBtn bind:NSValueBinding property:@"altText"];
+    [self outlet:_autoplayBtn bind:NSValueBinding property:@"enableAutoPlay"];
     [self outlet:_coverBtn bind:NSValueBinding property:@"cover"];
     [self outlet:_muteBtn bind:NSValueBinding property:@"enableMute"];
     

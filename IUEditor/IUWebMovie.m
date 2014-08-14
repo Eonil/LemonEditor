@@ -100,6 +100,7 @@
         [[self.undoManager prepareWithInvocationTarget:self] setPlayType:_playType];
         _playType = playType;
     }
+    [self updateWebMovieSource];
 }
 
 - (void)setEnableLoop:(BOOL)enableLoop{
@@ -107,6 +108,7 @@
         [[self.undoManager prepareWithInvocationTarget:self] setEnableLoop:_enableLoop];
         _enableLoop = enableLoop;
     }
+    [self updateWebMovieSource];
 }
 
 #pragma mark - webmovie

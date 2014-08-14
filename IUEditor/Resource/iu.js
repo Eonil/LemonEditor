@@ -63,7 +63,7 @@ function transitionAnimation(eventObject){
    		transitionAnimationOn(eventObject);
     }
    	else {
-   		transitionAnimationOff(eventOBject);
+   		transitionAnimationOff(eventObject);
    	}
 }
 

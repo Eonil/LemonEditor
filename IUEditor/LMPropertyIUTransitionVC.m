@@ -31,8 +31,8 @@
 - (void)awakeFromNib{
     
     [self outlet:_eventB bind:NSSelectedValueBinding property:@"eventType"];
-    [self outlet:_durationTF bind:NSSelectedValueBinding property:@"animation"];
-    [self outlet:_eventB bind:NSValueBinding property:@"animationDuration"];
+    [self outlet:_animationB bind:NSSelectedValueBinding property:@"animation"];
+    [self outlet:_durationTF bind:NSValueBinding property:@"duration" options:IUBindingDictNumberAndNotRaisesApplicable];
     
     _typeArray = [IUEvent visibleTypeArray];
     

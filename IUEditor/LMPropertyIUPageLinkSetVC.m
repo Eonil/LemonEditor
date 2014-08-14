@@ -33,7 +33,7 @@
     [self outlet:_marginTF bind:NSValueBinding property:@"buttonMargin"];
     [self outlet:_defaultColorWell bind:NSValueBinding property:@"defaultButtonBGColor"];
     [self outlet:_selectedColorWell bind:NSValueBinding property:@"selectedButtonBGColor"];
-    [self outlet:_alignSC bind:NSValueBinding property:@"pageLinkAlign"];
+    [self outlet:_alignSC bind:NSSelectedIndexBinding property:@"pageLinkAlign"];
     
 }
 
