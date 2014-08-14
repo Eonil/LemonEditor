@@ -1079,9 +1079,10 @@
         
         [mapImagePath appendString:@"&size=640x640"];
         //marker
-        if(map.enableMarkerIcon){
+        if(map.enableMarkerIcon && map.markerIconName==nil ){
             [mapImagePath appendFormat:@"&markers=size=tiny|%@,%@",map.latitude, map.longitude];
         }
+        
         //color
         //not supported in editor mode
         [code addCodeLineWithFormat:@"<div style=\"width:100%%;height:100%%;background-image:url('%@');background-position:center; background-repeat:no-repeat;position:absolute;", mapImagePath];
@@ -1100,6 +1101,16 @@
         if(map.zoomControl){
             NSString *imagePath = [[NSBundle mainBundle] pathForImageResource:@"map_zoom.png"];
             [code addCodeLineWithFormat:@"<img src=\"%@\" style=\"position:relative; margin-top:20px;left:35px;display:block;\"></img>", imagePath];
+        }
+        //marker icon
+        
+        if(map.markerIconName){
+            NSString *imagePath = [self imagePathWithImageName:map.markerIconName isEdit:YES];            
+            [code addCodeLineWithFormat:@"<div style=\"background-image:url('%@'); \
+             background-repeat:no-repeat; \
+             background-position:center; \
+             position:absolute;  width:100%%; height:100%%; \"></div>", imagePath];
+
         }
         [code addCodeLine:@"</div></div>"];
     }
