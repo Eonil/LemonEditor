@@ -26,10 +26,10 @@
 
 //value
 - (id)valueForCSSTag:(IUCSSTag)tag;
-- (id)valueForPropertyTag:(IUPropertyTag)property;
+- (id)valueForProperty:(IUPropertyTag)property;
 
 - (void)setValue:(id)value forCSSTag:(IUCSSTag)tag;
-- (void)setValue:(id)value forIUPropertyTag:(IUPropertyTag)property;
+- (void)setValue:(id)value forIUProperty:(IUPropertyTag)property;
 
 //oberserver
 - (void)addObserverForCSSTag:(IUCSSTag)tag options:(NSKeyValueObservingOptions)options context:(void *)context;

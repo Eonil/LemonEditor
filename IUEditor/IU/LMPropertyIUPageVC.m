@@ -31,36 +31,17 @@
     return self;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-        return;
-    }
-}
-
-
 
 -(void)setController:(IUController *)controller{
+    [super setController:controller];
     
-    _controller = controller;
-    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
-    
-    [_titleTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"title"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_keywordsTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"keywords"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
-    [_extraCodeTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"extraCode"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
-    [_metaImageTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"metaImage"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
 
-
-    NSDictionary *bindingOption = [NSDictionary
-                                   dictionaryWithObjects:@[[NSNumber numberWithBool:NO], [NSNumber numberWithBool:YES]]
-                                   forKeys:@[NSRaisesForNotApplicableKeysBindingOption, NSContinuouslyUpdatesValueBindingOption]];
-
+    [self outlet:_titleTF bind:NSValueBinding property:@"title"];
+    [self outlet:_keywordsTF bind:NSValueBinding property:@"keywords"];
+    [self outlet:_extraCodeTF bind:NSValueBinding property:@"extraCode"];
+    [self outlet:_metaImageTF bind:NSValueBinding property:@"metaImage"];
+    [self outlet:_descriptionTV bind:NSValueBinding property:@"desc"];
     
-    [_descriptionTV bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"desc"]  options:bindingOption];
-
-   
 }
 
 @end

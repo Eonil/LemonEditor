@@ -43,7 +43,7 @@
 
 - (void)dealloc{
     [JDLogUtil log:IULogDealloc string:@"LMInspectorLinkVC"];
-    [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"link"] ];
+    [self removeObserver:self forKeyPath:[self pathForProperty:@"link"]];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -51,9 +51,9 @@
 
 - (void)setProject:(IUProject*)project{
     _project = project;
-    [self updateLinkPopupButtonItems];
     
-    [_targetCheckButton bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"linkTarget"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [self updateLinkPopupButtonItems];
+    [self outlet:_targetCheckButton bind:NSValueBinding property:@"linkTarget"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(structureChanged:) name:IUNotificationStructureDidChange object:project];
 }
@@ -77,18 +77,12 @@
 }
 
 - (void)setController:(IUController *)controller{
-    NSAssert(_controller == nil, @"duplicated initialize" );
-    _controller = controller;
-    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
-    
-
-    [self addObserver:self forKeyPath:[controller keyPathFromControllerToProperty:@"link"] options:0 context:nil];
+    [super setController:controller];
+    [self addObserverForProperty:@"link" options:0 context:nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-    }
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     
     if([keyPath isEqualToString:@"selection"]
        || [[keyPath pathExtension] isEqualToString:@"link"]){
@@ -96,7 +90,7 @@
         [_divLinkPB setEnabled:NO];
         [_urlCheckButton setState:0];
 #pragma mark - set link
-        id value = [self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"link"]];
+        id value = [self valueForProperty:@"link"];
         
         if (value == NSNoSelectionMarker || value == nil) {
             [_pageLinkPopupButton selectItemWithTitle:@"None"];
@@ -124,7 +118,7 @@
         }
         [self updateLinkEnableState];
 #pragma mark - set div link
-        value = [self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"divLink"]];
+        value = [self valueForProperty:@"divLink"];
 
         if([value isKindOfClass:[IUBox class]]){
             [_divLinkPB selectItemWithTitle:((IUBox *)value).name];
@@ -155,13 +149,13 @@
 - (IBAction)clickLinkPopupButton:(id)sender {
     NSString *link = [[_pageLinkPopupButton selectedItem] title];
     if([link isEqualToString:@"None"]){
-        [self setValue:nil forKeyPath:[_controller keyPathFromControllerToProperty:@"link"]];
+        [self setValue:nil forIUProperty:@"link"];
         return;
     }
     if(_project){
         IUBox *box = [_project.identifierManager IUWithIdentifier:link];
         if(box){
-            [self setValue:box forKeyPath:[_controller keyPathFromControllerToProperty:@"link"]];
+            [self setValue:box forIUProperty:@"link"];
             [self updateDivLink:(IUPage *)box];
         }
         
@@ -175,10 +169,10 @@
     if([textField isEqualTo:_urlTF]){
         NSString *link = [_urlTF stringValue];
         if(link && link.length > 0){
-            [self setValue:link forKeyPath:[_controller keyPathFromControllerToProperty:@"link"]];
+            [self setValue:link forIUProperty:@"link"];
         }
         else if(link.length == 0){
-            [self setValue:nil forKeyPath:[_controller keyPathFromControllerToProperty:@"link"]];
+            [self setValue:nil forIUProperty:@"link"];
         }
     }
 }
@@ -202,13 +196,13 @@
 - (IBAction)clickDivLinkPopupBtn:(id)sender {
     
     if([[_divLinkPB selectedItem] isEqualTo:[_divLinkPB itemAtIndex:0]]){
-        [self setValue:nil forKeyPath:[_controller keyPathFromControllerToProperty:@"divLink"]];
+        [self setValue:nil forIUProperty:@"divLink"];
         return;
     }
     if(_project){
         IUBox *box = [sender selectedItem].representedObject;
         if(box){
-            [self setValue:box forKeyPath:[_controller keyPathFromControllerToProperty:@"divLink"]];
+            [self setValue:box forIUProperty:@"divLink"];
         }
     }
  

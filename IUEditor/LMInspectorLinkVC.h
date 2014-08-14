@@ -7,12 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMInspectorLinkVC : NSViewController <NSTextFieldDelegate>
+@interface LMInspectorLinkVC : LMDefaultPropertyVC <NSTextFieldDelegate>
 
-@property (weak) id selection;
-@property (nonatomic) IUController      *controller;
 - (void)setProject:(IUProject*)project;
 
 @end

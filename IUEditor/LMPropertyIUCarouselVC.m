@@ -59,63 +59,46 @@
     return self;
 }
 
-- (void)setController:(IUController *)controller{
-    _controller = controller;
-    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-        return;
-    }
-    else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-}
-
-
 
 -(void)awakeFromNib{
     //children
     NSDictionary *numberBindingOption = @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
     
-    [_countStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"count"] options:numberBindingOption];
-    [_countTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"count"] options:numberBindingOption];
+    [self outlet:_countStepper bind:NSValueBinding property:@"count" options:numberBindingOption];
+    [self outlet:_countTF bind:NSValueBinding property:@"count" options:numberBindingOption];
+    
 
     //auto setting
-    [_autoplayMatrix bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"autoplay"] options:IUBindingDictNotRaisesApplicable];
-    [_timeTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"timer"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_timeStpper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"timer"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
+    [self outlet:_autoplayMatrix bind:NSSelectedIndexBinding property:@"autoplay"];
+    [self outlet:_timeTF bind:NSValueBinding property:@"timer" options:numberBindingOption];
+    [self outlet:_timeStpper bind:NSValueBinding property:@"timer" options:numberBindingOption];
     
     //prev, next
-    [_arrowControlMatrix bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"disableArrowControl"] options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_arrowControlMatrix bind:NSSelectedIndexBinding property:@"disableArrowControl"];
+
     //image
     [_leftImageComboBox bind:NSContentBinding toObject:self withKeyPath:@"imageArray" options:IUBindingDictNotRaisesApplicable];
     [_rightImageComboBox bind:NSContentBinding toObject:self withKeyPath:@"imageArray" options:IUBindingDictNotRaisesApplicable];
-    [_leftImageComboBox bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"leftArrowImage"] options:IUBindingDictNotRaisesApplicable];
-    [_rightImageComboBox bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"rightArrowImage"] options:IUBindingDictNotRaisesApplicable];
-    
+    [self outlet:_leftImageComboBox bind:NSValueBinding property:@"leftArrowImage"];
+    [self outlet:_rightImageComboBox bind:NSValueBinding property:@"rightArrowImage"];
+   
     //position-left
-    [_leftImageXStpper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"leftX"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_leftImageXTF  bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"leftX"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_leftImageYStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"leftY"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_leftImageYTF  bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"leftY"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [self outlet:_leftImageXStpper bind:NSValueBinding property:@"leftX" options:numberBindingOption];
+    [self outlet:_leftImageXTF bind:NSValueBinding property:@"leftX" options:numberBindingOption];
+    [self outlet:_leftImageYStepper bind:NSValueBinding property:@"leftY" options:numberBindingOption];
+    [self outlet:_leftImageYTF bind:NSValueBinding property:@"leftY" options:numberBindingOption];
     
     //position-right
-    [_rightImageXStpper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"rightX"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_rightImageXTF  bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"rightX"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_rightImageYStpper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"rightY"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_rightImageYTF  bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"rightY"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
+    [self outlet:_rightImageXStpper bind:NSValueBinding property:@"rightX" options:numberBindingOption];
+    [self outlet:_rightImageXTF bind:NSValueBinding property:@"rightX" options:numberBindingOption];
+    [self outlet:_rightImageYStpper bind:NSValueBinding property:@"rightY" options:numberBindingOption];
+    [self outlet:_rightImageYTF bind:NSValueBinding property:@"rightY" options:numberBindingOption];
     
     //pager
-    [_controllerSegmentedControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"controlType"] options:IUBindingDictNotRaisesApplicable];
-    [_selectColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"selectColor"] options:IUBindingDictNotRaisesApplicable];
-    [_deselectColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"deselectColor"] options:IUBindingDictNotRaisesApplicable];
-    [_pagerPositionSlidr bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pagerPosition"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
+    [self outlet:_controllerSegmentedControl bind:NSSelectedIndexBinding property:@"controlType"];
+    [self outlet:_selectColor bind:NSValueBinding property:@"selectColor"];
+    [self outlet:_deselectColor bind:NSValueBinding property:@"deselectColor"];
+    [self outlet:_pagerPositionSlidr bind:NSValueBinding property:@"pagerPosition"];
     
     awaked = YES;
     [self addObserver:self forKeyPath:@"resourceManager.imageFiles" options:NSKeyValueObservingOptionInitial context:@"image"];

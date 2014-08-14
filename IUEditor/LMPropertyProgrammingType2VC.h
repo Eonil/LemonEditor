@@ -8,11 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMPropertyProgrammingType2VC : NSViewController
+@interface LMPropertyProgrammingType2VC : LMDefaultPropertyVC
 
-@property (nonatomic) IUController  *controller;
-@property (weak) id selection;
 
 @end

@@ -7,11 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMInspectorAltTextVC : NSViewController
-
-@property (nonatomic, weak) IUController      *controller;
-@property (weak) id selection;
+@interface LMInspectorAltTextVC : LMDefaultPropertyVC
 
 @end

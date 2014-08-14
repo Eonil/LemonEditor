@@ -7,14 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 #import "IUResourceManager.h"
 
-@interface LMPropertyIUMovieVC : NSViewController <NSComboBoxDelegate>
+@interface LMPropertyIUMovieVC : LMDefaultPropertyVC <NSComboBoxDelegate>
 
 @property (nonatomic, weak) IUResourceManager *resourceManager;
-@property (nonatomic, weak) IUController      *controller;
-@property (weak) id selection;
-
 
 @end

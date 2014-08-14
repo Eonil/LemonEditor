@@ -73,14 +73,14 @@
 - (id)valueForCSSTag:(IUCSSTag)tag{
     return [self valueForKeyPath:[self pathForCSSTag:tag]];
 }
-- (id)valueForPropertyTag:(IUPropertyTag)property{
+- (id)valueForProperty:(IUPropertyTag)property{
      return [self valueForKeyPath:[@"self.selection." stringByAppendingString:property]];
 }
 
 - (void)setValue:(id)value forCSSTag:(IUCSSTag)tag{
     [self setValue:value forKeyPath:[self pathForCSSTag:tag]];
 }
-- (void)setValue:(id)value forIUPropertyTag:(IUPropertyTag)property{
+- (void)setValue:(id)value forIUProperty:(IUPropertyTag)property{
     [self setValue:value forKeyPath:[@"self.selection." stringByAppendingString:property]];
 }
 

@@ -37,29 +37,18 @@
     return self;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-        return;
-    }
-    else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-}
-
-
 
 - (void)setController:(IUController *)controller{
-    _controller = controller;
-    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+    [super setController:controller];
     
-    [_altTextTF bind:@"value" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"altText"] options:@{NSContinuouslyUpdatesValueBindingOption: @(YES)}];
     [_fileNameComboBox bind:@"content" toObject:self withKeyPath:@"resourceManager.videoFiles" options:IUBindingDictNotRaisesApplicable];
-    [_controlBtn bind:@"value" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableControl"] options:IUBindingDictNotRaisesApplicable];
-    [_loopBtn bind:@"value" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableLoop"] options:IUBindingDictNotRaisesApplicable];
-    [_autoplayBtn bind:@"value" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableAutoPlay"] options:IUBindingDictNotRaisesApplicable];
-    [_coverBtn bind:@"value" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"cover"] options:IUBindingDictNotRaisesApplicable];
-    [_muteBtn bind:@"value" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableMute"] options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_altTextTF bind:NSValueBinding property:@"altText"];
+    [self outlet:_controlBtn bind:NSValueBinding property:@"enableControl"];
+    [self outlet:_loopBtn bind:NSValueBinding property:@"enableLoop"];
+    [self outlet:_autoplayBtn bind:NSValueBinding property:@"altText"];
+    [self outlet:_coverBtn bind:NSValueBinding property:@"cover"];
+    [self outlet:_muteBtn bind:NSValueBinding property:@"enableMute"];
+    
     
     _fileNameComboBox.delegate = self;
     
@@ -69,14 +58,14 @@
 }
 
 - (void)dealloc{
-    if (_controller) {
+    if (self.controller) {
         _fileNameComboBox.delegate = nil;
         [self removeObserver:self forKeyPath:@"controller.selectedObjects" context:@"selection"];
     }
 }
 
 - (void)selectionContextDidChange:(NSDictionary *)change{
-    id videoPath = [self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"videoPath"]];
+    id videoPath = [self valueForProperty:@"videoPath"];
     
     if(videoPath == nil || videoPath == NSNoSelectionMarker){
         [_fileNameComboBox setStringValue:@""];
@@ -112,8 +101,8 @@
     
     gettingInfo = YES;
     if(videoFileName.length == 0){
-        [self setValue:nil forKeyPath:[_controller keyPathFromControllerToProperty:@"posterPath"] ];
-        [self setValue:nil forKeyPath:[_controller keyPathFromControllerToProperty:@"videoPath"] ];
+        [self setValue:nil forIUProperty:@"posterPath"];
+        [self setValue:nil forIUProperty:@"videoPath"];
     }
     else if(videoFileName && videoFileName.length > 0
             && [JDFileUtil isMovieFileExtension:[videoFileName pathExtension]]){
@@ -122,19 +111,19 @@
         NSURL *moviefileURL;
         if ([videoFileName isHTTPURL]) {
             moviefileURL = [NSURL URLWithString:videoFileName];
-            [self setValue:moviefileURL.absoluteString forKeyPath:[_controller keyPathFromControllerToProperty:@"videoPath"] ];
+            [self setValue:moviefileURL.absoluteString forIUProperty:@"videoPath"];
         }
         else{
             IUResourceFile *videoFile = [self.resourceManager resourceFileWithName:videoFileName];
             if (videoFile == nil) {
-                [self setValue:nil forKeyPath:[_controller keyPathFromControllerToProperty:@"videoPath"] ];
+                
+                [self setValue:nil forIUProperty:@"videoPath"];
                 return;
             }
             moviefileURL = [NSURL fileURLWithPath:videoFile.absolutePath];
             
             NSString *relativePath = videoFile.relativePath;
-            [self setValue:relativePath forKeyPath:[_controller keyPathFromControllerToProperty:@"videoPath"] ];
-
+            [self setValue:relativePath forIUProperty:@"videoPath"];
         }
         NSImage *thumbnail = [self thumbnailOfVideo:moviefileURL];
         
@@ -142,8 +131,7 @@
             //save thumbnail
             NSString *videoname = [[videoFileName lastPathComponent] stringByDeletingPathExtension];
             NSString *thumbFileName = [[NSString alloc] initWithFormat:@"%@_thumbnail.png", videoname];
-            
-//            NSString *imageAbsolutePath = [NSString stringWithFormat:@"%@/", [self.resourceManager imageDirectory]];
+
             NSString *imageTmpAbsolutePath = NSTemporaryDirectory();
 
             thumbFileName = [IUImageUtil writeToFile:thumbnail filePath:imageTmpAbsolutePath fileName:thumbFileName checkFileName:NO];
@@ -159,11 +147,14 @@
                 thumbFile = [_resourceManager overwriteResourceWithContentOfPath:[imageTmpAbsolutePath stringByAppendingPathComponent:thumbFileName]];
                 
             }
-            [self setValue:thumbFile.relativePath forKeyPath:[_controller keyPathFromControllerToProperty:@"posterPath"] ];
+            
+            [self setValue:thumbFile.relativePath forIUProperty:@"posterPath"];
             
             
-            [self setValue:@(thumbnail.size.width) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagPixelWidth]];
-            [self setValue:@(thumbnail.size.height) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagPixelHeight]];
+            
+            
+            [self setValue:@(thumbnail.size.width) forCSSTag:IUCSSTagPixelWidth];
+            [self setValue:@(thumbnail.size.height) forCSSTag:IUCSSTagPixelHeight];
         }
         
     }

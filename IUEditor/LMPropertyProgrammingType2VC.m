@@ -30,31 +30,24 @@
     return self;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-        return;
-    }
-}
 
 - (void)setController:(IUController *)controller{
-    _controller = controller;
-    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
-    
-    [_visibleTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pgVisibleConditionVariable"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
-    [_contentTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pgContentVariable"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
-//    NSDictionary *enableBinding = @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
+    [super setController:controller];
 
-//    [_ellipsisTF bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pgContentVariable"] options:enableBinding];
-//    [_ellipsisTF bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"shouldCompileFontInfo"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
-//    [_ellipsisStepper bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pgContentVariable"] options:enableBinding];
-//    [_ellipsisStepper bind:@"enabled2" toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"shouldCompileFontInfo"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [self outlet:_visibleTF bind:NSValueBinding property:@"pgVisibleConditionVariable"];
+    [self outlet:_contentTF bind:NSValueBinding property:@"pgContentVariable"];
+
+    NSDictionary *enableBinding = @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
+    [self outlet:_ellipsisTF bind:NSEnabledBinding property:@"pgContentVariable" options:enableBinding];
+    [self outlet:_ellipsisTF bind:@"enabled2" property:@"pgContentVariable" options:enableBinding];
+
+    [self outlet:_ellipsisStepper bind:NSEnabledBinding property:@"pgContentVariable" options:enableBinding];
+    [self outlet:_ellipsisStepper bind:@"enabled2" property:@"pgContentVariable" options:enableBinding];
     
-    [_ellipsisTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagEllipsis] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_ellipsisStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagEllipsis] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [self outlet:_ellipsisTF bind:NSValueBinding cssTag:IUCSSTagEllipsis];
+    [self outlet:_ellipsisStepper bind:NSValueBinding cssTag:IUCSSTagEllipsis];
+    
 
 }
 

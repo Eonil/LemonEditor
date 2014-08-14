@@ -7,16 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 #import "IUResourceManager.h"
 
 
-@interface LMPropertyIUCarouselVC : NSViewController <NSOutlineViewDataSource, NSOutlineViewDelegate>
+@interface LMPropertyIUCarouselVC : LMDefaultPropertyVC <NSOutlineViewDataSource, NSOutlineViewDelegate>
 
-@property (nonatomic) IUController      *controller;
 @property (nonatomic) IUResourceManager     *resourceManager;
-@property (weak) id selection;
-
 @property (nonatomic) NSArray *imageArray;
 
 - (void)prepareDealloc;
