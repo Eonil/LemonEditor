@@ -7,9 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
-@interface LMPropertyShadowVC : NSViewController
+#import "LMDefaultPropertyVC.h"
 
-@property (weak, nonatomic) IUController  *controller;
-@property id selection;
+@interface LMPropertyShadowVC : LMDefaultPropertyVC
+
 @end

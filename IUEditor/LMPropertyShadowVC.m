@@ -34,31 +34,14 @@
     return self;
 }
 
-- (NSString*)CSSBindingPath:(IUCSSTag)tag{
-    return [@"self.selection.css.assembledTagDictionary." stringByAppendingString:tag];
-}
-
--(void)setController:(IUController *)controller{
-    _controller = controller;
-    [controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-        return;
-    }
-}
-
 -(void)awakeFromNib{
+    
+    [self outlet:_shadowColor bind:NSValueBinding cssTag:IUCSSTagShadowColor];
+    [self outlet:_shadowV bind:NSValueBinding cssTag:IUCSSTagShadowVertical];
+    [self outlet:_shadowH bind:NSValueBinding cssTag:IUCSSTagShadowHorizontal];
+    [self outlet:_shadowSprd bind:NSValueBinding cssTag:IUCSSTagShadowSpread];
+    [self outlet:_shadowBlr bind:NSValueBinding cssTag:IUCSSTagShadowBlur];
 
-    [_shadowColor bind:@"value" toObject:self withKeyPath:[self CSSBindingPath:IUCSSTagShadowColor] options:IUBindingDictNotRaisesApplicable];
-    
-    [_shadowV bind:@"value" toObject:self withKeyPath:[self CSSBindingPath:IUCSSTagShadowVertical] options:IUBindingDictNotRaisesApplicable];
-    [_shadowH bind:@"value" toObject:self withKeyPath:[self CSSBindingPath:IUCSSTagShadowHorizontal] options:IUBindingDictNotRaisesApplicable];
-    [_shadowSprd bind:@"value" toObject:self withKeyPath:[self CSSBindingPath:IUCSSTagShadowSpread] options:IUBindingDictNotRaisesApplicable];
-    [_shadowBlr bind:@"value" toObject:self withKeyPath:[self CSSBindingPath:IUCSSTagShadowBlur] options:IUBindingDictNotRaisesApplicable];
-    
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setRoundingMode:NSNumberFormatterRoundDown];
@@ -68,10 +51,13 @@
     [_shadowHText setFormatter:formatter];
     [_shadowSpreadText setFormatter:formatter];
     [_shadowBlurText setFormatter:formatter];
+    
+    NSDictionary *nullBindingOption = @{NSNullPlaceholderBindingOption: @(0), NSContinuouslyUpdatesValueBindingOption: @(YES)};
+    
+    [self outlet:_shadowVText bind:NSValueBinding cssTag:IUCSSTagShadowVertical options:nullBindingOption];
+    [self outlet:_shadowHText bind:NSValueBinding cssTag:IUCSSTagShadowHorizontal options:nullBindingOption];
+    [self outlet:_shadowSpreadText bind:NSValueBinding cssTag:IUCSSTagShadowSpread options:nullBindingOption];
+    [self outlet:_shadowBlurText bind:NSValueBinding cssTag:IUCSSTagShadowBlur options:nullBindingOption];
 
-    [_shadowVText bind:@"value" toObject:self withKeyPath:[self CSSBindingPath:IUCSSTagShadowVertical] options:@{NSNullPlaceholderBindingOption: @(0), NSContinuouslyUpdatesValueBindingOption: @(YES)}];
-    [_shadowHText bind:@"value" toObject:self withKeyPath:[self CSSBindingPath:IUCSSTagShadowHorizontal] options:@{NSNullPlaceholderBindingOption: @(0), NSContinuouslyUpdatesValueBindingOption: @(YES)}];
-    [_shadowSpreadText bind:@"value" toObject:self withKeyPath:[self CSSBindingPath:IUCSSTagShadowSpread] options:@{NSNullPlaceholderBindingOption: @(0), NSContinuouslyUpdatesValueBindingOption: @(YES)}];
-    [_shadowBlurText bind:@"value" toObject:self withKeyPath:[self CSSBindingPath:IUCSSTagShadowBlur] options:@{NSNullPlaceholderBindingOption: @(0), NSContinuouslyUpdatesValueBindingOption: @(YES)}];
 }
 @end
