@@ -36,20 +36,24 @@
                            NSRaisesForNotApplicableKeysBindingOption:@(NO),
                            NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
 
+    [self outlet:_opacityMoveTF bind:NSValueBinding property:@"opacityMove" options:numberBindingOption];
+    [self outlet:_xPosMoveTF bind:NSValueBinding property:@"xPosMove" options:numberBindingOption];
     
-    [_opacityMoveTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"] options:numberBindingOption];
-    [_xPosMoveTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"xPosMove"] options:numberBindingOption];
-        [self addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"] options:0 context:nil];
+    [self addObserverForProperty:@"opacityMove" options:0 context:nil];
 }
 
 - (void)dealloc{
-    [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"]];
+    [self removeObserver:self forKeyPath:[self pathForProperty:@"opacityMove"]];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    
     if([[keyPath pathExtension] isEqualToString:@"opacityMove"]){
-        id opacityMove = [self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"opacityMove"]];
-        NSArray *selectedObj = [_controller selectedObjects ];
+        id opacityMove = [self valueForKeyPath:[self.controller keyPathFromControllerToProperty:@"opacityMove"]];
+        
+        NSArray *selectedObj = [self.controller selectedObjects ];
         if ([opacityMove isKindOfClass:[NSNumber class]]) {
             if ([opacityMove floatValue] > 1) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

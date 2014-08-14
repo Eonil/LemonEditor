@@ -52,6 +52,9 @@
 - (void)outlet:(id)outlet bind:(NSString *)binding property:(IUPropertyTag)property{
     [outlet bind:binding toObject:self withKeyPath:[self pathForProperty:property] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
 }
+- (void)outlet:(id)outlet bind:(NSString *)binding eventTag:(IUEventTag)tag{
+    [outlet bind:binding toObject:self withKeyPath:[@"controller.selection.event." stringByAppendingString:tag] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+}
 
 - (void)outlet:(id)outlet bind:(NSString *)binding cssTag:(IUCSSTag)tag options:(NSDictionary *)options{
     [outlet bind:binding toObject:self withKeyPath:[self pathForCSSTag:tag] options:options];
@@ -60,6 +63,11 @@
 - (void)outlet:(id)outlet bind:(NSString *)binding property:(IUPropertyTag)property options:(NSDictionary *)options{
     [outlet bind:binding toObject:self withKeyPath:[self pathForProperty:property] options:options];
 }
+
+- (void)outlet:(id)outlet bind:(NSString *)binding eventTag:(IUEventTag)tag options:(NSDictionary *)options{
+    [outlet bind:binding toObject:self withKeyPath:[@"controller.selection.event." stringByAppendingString:tag] options:options];
+}
+
 
 #pragma mark - value
 - (id)valueForCSSTag:(IUCSSTag)tag{
@@ -81,10 +89,18 @@
 - (void)addObserverForCSSTag:(IUCSSTag)tag options:(NSKeyValueObservingOptions)options context:(void *)context{
     [self addObserver:self forKeyPath:[self pathForCSSTag:tag] options:options context:context];
 }
+- (void)addObserverForProperty:(IUPropertyTag)property options:(NSKeyValueObservingOptions)options context:(void *)context{
+    [self addObserver:self forKeyPath:[self pathForProperty:property] options:options context:context];
+
+}
 
 - (void)removeObserverForCSSTag:(IUCSSTag)tag{
     [self removeObserver:self forKeyPath:[self pathForCSSTag:tag]];
 
+}
+
+- (void)removeObserverForProperty:(NSString *)property{
+    [self removeObserver:self forKeyPath:[self pathForProperty:property]];
 }
 
 #pragma mark - keyPath

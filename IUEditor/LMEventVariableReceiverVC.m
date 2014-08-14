@@ -34,14 +34,14 @@
     
     NSDictionary *numberBindingOption = @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer", NSContinuouslyUpdatesValueBindingOption : @(YES)};
 
+    [self outlet:_equationTF bind:NSValueBinding eventTag:IUEventTagVisibleEquation];
+    [self outlet:_durationTF bind:NSValueBinding eventTag:IUEventTagVisibleDuration options:numberBindingOption];
+    [self outlet:_durationStepper bind:NSValueBinding eventTag:IUEventTagVisibleDuration options:numberBindingOption];
     
-    [_equationTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagVisibleEquation] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_durationTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagVisibleDuration] options:numberBindingOption];
-    [_durationStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagVisibleDuration] options:numberBindingOption];
     _typeArray = [IUEvent visibleTypeArray];
     [_visibleTypePopupBtn bind:NSContentBinding toObject:self withKeyPath:@"typeArray" options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_visibleTypePopupBtn bind:NSSelectedIndexBinding eventTag:IUEventTagVisibleType];
     
-    [_visibleTypePopupBtn bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagVisibleType] options:IUBindingDictNotRaisesApplicable];
 }
 
 - (IBAction)clickHelpButton:(NSButton *)sender {

@@ -18,10 +18,11 @@
 //binding
 - (void)outlet:(id)outlet bind:(NSString *)binding cssTag:(IUCSSTag)tag;
 - (void)outlet:(id)outlet bind:(NSString *)binding property:(IUPropertyTag)property;
-
+- (void)outlet:(id)outlet bind:(NSString *)binding eventTag:(IUEventTag)tag;
 
 - (void)outlet:(id)outlet bind:(NSString *)binding cssTag:(IUCSSTag)tag options:(NSDictionary *)options;
 - (void)outlet:(id)outlet bind:(NSString *)binding property:(IUPropertyTag)property options:(NSDictionary *)options;
+- (void)outlet:(id)outlet bind:(NSString *)binding eventTag:(IUEventTag)tag options:(NSDictionary *)options;
 
 //value
 - (id)valueForCSSTag:(IUCSSTag)tag;
@@ -32,7 +33,10 @@
 
 //oberserver
 - (void)addObserverForCSSTag:(IUCSSTag)tag options:(NSKeyValueObservingOptions)options context:(void *)context;
+- (void)addObserverForProperty:(IUPropertyTag)property options:(NSKeyValueObservingOptions)options context:(void *)context;
+
 - (void)removeObserverForCSSTag:(IUCSSTag)tag;
+- (void)removeObserverForProperty:(IUPropertyTag)property;
 
 
 //keyPath

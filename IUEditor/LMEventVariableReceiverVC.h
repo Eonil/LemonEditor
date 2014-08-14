@@ -7,10 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMEventVariableReceiverVC : NSViewController
-
-@property (nonatomic) IUController  *controller;
+@interface LMEventVariableReceiverVC : LMDefaultPropertyVC
 
 @end

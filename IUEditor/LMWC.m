@@ -140,7 +140,7 @@
         clipArtVC = [[LMClipArtVC alloc] initWithNibName:@"LMClipArtVC" bundle:nil];
         appearanceVC = [[LMAppearanceVC alloc] initWithNibName:@"LMAppearanceVC" bundle:nil];
         iuInspectorVC = [[LMIUPropertyVC alloc] initWithNibName:[LMIUPropertyVC class].className bundle:nil];
-//        eventVC = [[LMEventVC alloc] initWithNibName:@"LMEventVC" bundle:nil];
+        eventVC = [[LMEventVC alloc] initWithNibName:@"LMEventVC" bundle:nil];
         
         //bind
         [self bind:@"IUController" toObject:stackVC withKeyPath:@"IUController" options:nil];

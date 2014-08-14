@@ -7,11 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
 
-@interface LMEventScrollAnimationVC : NSViewController
+@interface LMEventScrollAnimationVC : LMDefaultPropertyVC
 
-@property (nonatomic) IUController  *controller;
 
 @end

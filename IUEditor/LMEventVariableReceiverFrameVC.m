@@ -33,13 +33,13 @@
 
     NSDictionary *numberBindingOption = @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer", NSContinuouslyUpdatesValueBindingOption : @(YES)};
     
-    [_equationTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagFrameEquation] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_durationTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagFrameDuration] options:numberBindingOption];
-    [_durationStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagFrameDuration] options:numberBindingOption];
-    
-    [_widthTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagFrameWidth] options:numberBindingOption];
-    [_heightTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagFrameHeight] options:numberBindingOption];
+    [self outlet:_equationTF bind:NSValueBinding eventTag:IUEventTagFrameEquation];
+    [self outlet:_durationTF bind:NSValueBinding eventTag:IUEventTagFrameDuration options:numberBindingOption];
+    [self outlet:_durationStepper bind:NSValueBinding eventTag:IUEventTagFrameDuration options:numberBindingOption];
 
+    [self outlet:_widthTF bind:NSValueBinding eventTag:IUEventTagFrameWidth options:numberBindingOption];
+    [self outlet:_heightTF bind:NSValueBinding eventTag:IUEventTagFrameHeight options:numberBindingOption];
+    
 }
 
 - (IBAction)clickHelpButton:(NSButton *)sender {

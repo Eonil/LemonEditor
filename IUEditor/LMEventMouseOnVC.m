@@ -74,7 +74,7 @@
     
 #pragma mark textColor
     [self outlet:_changeTextColorBtn bind:NSValueBinding cssTag:IUCSSTagHoverTextColorEnable];
-    [self outlet:_textColorWell bind:NSValueBinding cssTag:IUCSSTagHoverTextColor];   
+    [self outlet:_textColorWell bind:NSValueBinding cssTag:IUCSSTagHoverTextColor];
 }
 - (IBAction)clickHelpButton:(NSButton *)sender {
     LMHelpPopover *popover = [LMHelpPopover sharedHelpPopover];
