@@ -124,6 +124,11 @@ $(window).scroll(function(){
 	if(isMobile()==false){
 		
 		onWebMovieAutoPlay();
+                 
+        var scrollY = $(document).scrollTop();
+        var screenH = $(window).height();
+         
+                 
 		
 		//move horizontally
 		$('[opacitymove]').each(function(){
