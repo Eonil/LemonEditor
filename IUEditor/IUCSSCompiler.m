@@ -242,11 +242,18 @@
         NSMutableDictionary *tagDictForReturn = [NSMutableDictionary dictionary];
         for (NSString *tag in tagDict) {
             NSString *value = tagDict[tag];
-            NSString *upperSideValue = [self valueForTag:tag identifier:identifier largerThanViewport:viewport target:target];
-            if ([value isEqualToString:upperSideValue] == NO) {
+//Review:
+// style sheet가 min-max로 바뀌면서 defalut랑 다르면 무조건 들어가야함.
+//            NSString *upperSideValue = [self valueForTag:tag identifier:identifier largerThanViewport:viewport target:target];
+            if(viewport != IUCSSDefaultViewPort){
+                NSString *defaultValue = [self valueForTag:tag identifier:identifier viewport:IUCSSDefaultViewPort target:target];
+                if ([value isEqualToString:defaultValue] == NO) {
+                    tagDictForReturn[tag] = value;
+                }
+            }
+            else{
                 tagDictForReturn[tag] = value;
             }
-//            else if ([tag isE])
         }
         if ([tagDictForReturn[@"border-top-width"] isEqualToString:@"0.00px"]) {
             [tagDictForReturn removeObjectForKey:@"border-top-width"];

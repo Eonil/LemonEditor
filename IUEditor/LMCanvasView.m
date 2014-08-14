@@ -98,6 +98,8 @@
 */
 
 - (void)changeMQSelect:(NSNotification *)notification{
+    
+    
     NSInteger selectedSize = [[notification.userInfo valueForKey:IUNotificationMQSize] integerValue];
     NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
 
@@ -105,8 +107,7 @@
         [self.mainView subview:self.webView changeConstraintTrailing:(maxSize -selectedSize)];
     }
     
-    
-//    [[self webView] updateFrameDict];
+    [[self webView] updateFrameDict];
     
 }
 

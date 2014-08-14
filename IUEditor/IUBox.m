@@ -436,6 +436,9 @@
 
 
 - (void)changeMQSelect:(NSNotification *)notification{
+    
+    [self willChangeValueForKey:@"canChangeCenter"];
+
     NSInteger selectedSize = [[notification.userInfo valueForKey:IUNotificationMQSize] integerValue];
     NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
 
@@ -446,6 +449,8 @@
         [_css setEditWidth:selectedSize];
     }
     [_css setMaxWidth:maxSize];
+    
+    [self didChangeValueForKey:@"canChangeCenter"];
     
 }
 
@@ -1040,7 +1045,8 @@
 }
 
 - (BOOL)canChangeCenter{
-    if(_positionType == IUPositionTypeFloatLeft || _positionType == IUPositionTypeFloatRight){
+    if(_positionType == IUPositionTypeFloatLeft || _positionType == IUPositionTypeFloatRight
+       || _css.editWidth != IUCSSDefaultViewPort){
         return NO;
     }
     return YES;
