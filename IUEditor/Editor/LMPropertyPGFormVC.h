@@ -7,13 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 #import "LMIUPropertyVC.h"
 
-@interface LMPropertyPGFormVC : NSViewController <NSComboBoxDelegate, IUPropertyDoubleClickReceiver>
+@interface LMPropertyPGFormVC : LMDefaultPropertyVC <NSComboBoxDelegate, IUPropertyDoubleClickReceiver>
 
-@property (nonatomic) IUController      *controller;
-@property (weak) id selection;
 
 - (void)setProject:(IUProject*)project;
 

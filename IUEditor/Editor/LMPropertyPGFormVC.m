@@ -37,18 +37,14 @@
 }
 
 - (void)setController:(IUController *)controller{
-    _controller = controller;
-    
-    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
-    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"target"]
-              options:0 context:nil];
-    
+    [super setController:controller];
+    [self addObserverForProperty:@"target" options:0 context:nil];
 
 }
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self removeObserver:self forKeyPaths:@[@"controller.selectedObjects", [_controller keyPathFromControllerToProperty:@"target"]]];
+    [self removeObserverForProperty:@"target"];
 }
 
 - (void)performFocus:(NSNotification *)noti{
@@ -97,10 +93,10 @@
     if(_project){
         IUBox *box = [_project.identifierManager IUWithIdentifier:target];
         if(box){
-            [self setValue:box forKeyPath:[_controller keyPathFromControllerToProperty:@"target"]];
+            [self setValue:box forIUProperty:@"target"];
         }
         else{
-            [self setValue:target forKeyPath:[_controller keyPathFromControllerToProperty:@"target"]];
+            [self setValue:target forIUProperty:@"target"];
         }
     }
     
@@ -108,14 +104,13 @@
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-    }
+    
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     
     if([keyPath isEqualToString:@"selection"] || [[keyPath pathExtension] isEqualToString:@"target"]){
         
 #pragma mark - set target
-        id value = [self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"target"]];
+        id value = [self valueForProperty:@"target"];
         [[_submitPageComboBox cell] setPlaceholderString:@""];
         
         if (value == NSNoSelectionMarker || value == nil) {

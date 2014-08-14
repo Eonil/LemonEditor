@@ -266,6 +266,11 @@
 
 - (NSString *)imagePathWithImageName:(NSString *)imageName isEdit:(BOOL)isEdit{
     NSString *imgSrc;
+    
+    if(imageName == nil){
+        return nil;
+    }
+    
     if ([imageName isHTTPURL]) {
         return imageName;
     }

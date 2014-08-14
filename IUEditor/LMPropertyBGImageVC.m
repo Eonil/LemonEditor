@@ -71,7 +71,7 @@
     [self outlet:_sizeSegementControl bind:@"enabled2" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
     
     
-    [self outlet:_repeatBtn bind:NSValueBinding cssTag:IUCSSTagBGRepeat options:IUBindingNegationAndNotRaise];
+    [self outlet:_repeatBtn bind:NSValueBinding cssTag:IUCSSTagBGRepeat options:noRepeatBindingOption];
     [self outlet:_repeatBtn bind:NSEnabledBinding property:@"imageName" options:bgEnableBindingOption];
     [_repeatBtn bind:@"enabled2" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     [self outlet:_repeatBtn bind:@"enabled3" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];

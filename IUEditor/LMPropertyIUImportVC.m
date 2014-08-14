@@ -63,7 +63,7 @@
 
 - (IBAction)performPrototypeChange:(NSPopUpButton *)sender {
     IUClass *class = [[_project classSheets] objectWithKey:@"name" value:sender.selectedItem.title];
-    NSArray *selectedIUs = _controller.selectedObjects;
+    NSArray *selectedIUs = self.controller.selectedObjects;
     for (IUImport *iu in selectedIUs) {
         NSAssert([iu isKindOfClass:[IUImport class]], @"");
         iu.prototypeClass = class;

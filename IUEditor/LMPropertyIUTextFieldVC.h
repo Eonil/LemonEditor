@@ -7,12 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 #import "LMIUPropertyVC.h"
 
-@interface LMPropertyIUTextFieldVC : NSViewController <IUPropertyDoubleClickReceiver>
-
-@property (weak, nonatomic) IUController *controller;
-@property (weak) id selection;
+@interface LMPropertyIUTextFieldVC : LMDefaultPropertyVC <IUPropertyDoubleClickReceiver>
 
 @end

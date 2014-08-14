@@ -30,14 +30,12 @@
 
 - (void)comboBoxSelectionDidChange:(NSNotification *)notification{
     NSString *v = [[_menuCountCB selectedCell] stringValue];
-    NSString *keyPath = [self.controller keyPathFromControllerToProperty:@"itemCount"];
-    [self.controller setValue:v forKeyPath:keyPath];
+    [self setValue:v forIUProperty:@"itemCount"];
 }
 
 - (void)controlTextDidChange:(NSNotification *)obj{
     NSString *v = [_menuCountCB stringValue];
-    NSString *keyPath = [self.controller keyPathFromControllerToProperty:@"itemCount"];
-    [self.controller setValue:v forKeyPath:keyPath];
+    [self setValue:v forIUProperty:@"itemCount"];
 }
 
 @end

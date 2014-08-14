@@ -7,10 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMPropertyIUMailLinkVC : NSViewController
+@interface LMPropertyIUMailLinkVC : LMDefaultPropertyVC
 
-@property (nonatomic) IUController      *controller;
 
 @end

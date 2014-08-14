@@ -7,11 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 #import "LMIUPropertyVC.h"
 
-@interface LMPropertyWPArticleVC : NSViewController
+@interface LMPropertyWPArticleVC : LMDefaultPropertyVC
 
-@property (weak, nonatomic) IUController *controller;
 
 @end

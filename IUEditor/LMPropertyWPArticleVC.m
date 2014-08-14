@@ -27,9 +27,11 @@
 }
 
 - (void)awakeFromNib{
-    [_titleB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableTitle"] options:IUBindingDictNotRaisesApplicable];
-    [_dateB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableDate"] options:IUBindingDictNotRaisesApplicable];
-    [_bodyB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableBody"] options:IUBindingDictNotRaisesApplicable];
+    
+    [self outlet:_titleB bind:NSValueBinding property:@"enableTitle"];
+    [self outlet:_dateB bind:NSValueBinding property:@"enableDate"];
+    [self outlet:_bodyB bind:NSValueBinding property:@"enableBody"];
+    
 
     /*
     [_dateB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableDate"] options:IUBindingDictNotRaisesApplicable];

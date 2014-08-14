@@ -7,11 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
 
-@interface LMPropertyWebProgrammingVC : NSViewController
-
-@property (nonatomic) IUController      *controller;
+@interface LMPropertyWebProgrammingVC : LMDefaultPropertyVC
 
 @end

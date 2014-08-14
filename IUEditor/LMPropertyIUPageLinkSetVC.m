@@ -29,24 +29,18 @@
 }
 
 - (void)awakeFromNib{
-    NSDictionary *bindingOption = [NSDictionary
-                                   dictionaryWithObjects:@[[NSNumber numberWithBool:NO], [NSNumber numberWithBool:YES]]
-                                   forKeys:@[NSRaisesForNotApplicableKeysBindingOption, NSContinuouslyUpdatesValueBindingOption]];
-    [_pageCountTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pageCountVariable"]  options:bindingOption];
+    [self outlet:_pageCountTF bind:NSValueBinding property:@"pageCountVariable"];
+    [self outlet:_marginTF bind:NSValueBinding property:@"buttonMargin"];
+    [self outlet:_defaultColorWell bind:NSValueBinding property:@"defaultButtonBGColor"];
+    [self outlet:_selectedColorWell bind:NSValueBinding property:@"selectedButtonBGColor"];
+    [self outlet:_alignSC bind:NSValueBinding property:@"pageLinkAlign"];
     
-    [_marginTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"buttonMargin"]  options:bindingOption];
-    
-    [_defaultColorWell bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"defaultButtonBGColor"]  options:bindingOption];
-    
-    [_selectedColorWell bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"selectedButtonBGColor"]  options:bindingOption];
-
-    [_alignSC bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"pageLinkAlign"] options:bindingOption];
 }
 
 - (IBAction)clearDefaultColorPressed:(id)sender {
-    [self setValue:nil forKey:[_controller keyPathFromControllerToProperty:@"defaultButtonBGColor"]];
+    [self setValue:nil forIUProperty:@"defaultButtonBGColor"];
 }
 - (IBAction)clearSelectedColorPressed:(id)sender {
-    [self setValue:nil forKey:[_controller keyPathFromControllerToProperty:@"selectedButtonBGColor"]];
+    [self setValue:nil forIUProperty:@"selectedButtonBGColor"];
 }
 @end

@@ -7,9 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMPropertyWPMenuVC : NSViewController <NSComboBoxDelegate>
-@property (weak, nonatomic) IUController *controller;
+@interface LMPropertyWPMenuVC : LMDefaultPropertyVC <NSComboBoxDelegate>
+
 
 @end

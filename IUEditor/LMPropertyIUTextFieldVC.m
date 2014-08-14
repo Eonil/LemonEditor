@@ -28,28 +28,13 @@
 }
 
 - (void)awakeFromNib{
-    [_placeholderTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"placeholder"] options:IUBindingDictNotRaisesApplicable];
-    [_valueTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"inputValue"] options:IUBindingDictNotRaisesApplicable];
-    [_typeMatrix bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"type"] options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_placeholderTF bind:NSValueBinding property:@"placeholder"];
+    [self outlet:_valueTF bind:NSValueBinding property:@"inputValue"];
+    [self outlet:_typeMatrix bind:NSSelectedIndexBinding property:@"type"];    
 }
 
 - (void)performFocus:(NSNotification *)noti{
     [self.view.window makeFirstResponder:_valueTF];
-}
-
-- (void)setController:(IUController *)controller{
-    _controller = controller;
-    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-        return;
-    }
-    else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
 }
 
 @end

@@ -26,8 +26,8 @@
 }
 
 - (void)awakeFromNib{
-    [_placeholderTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"placeholder"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_valueTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"inputValue"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [self outlet:_placeholderTF bind:NSValueBinding property:@"placeholder"];
+    [self outlet:_valueTF bind:NSValueBinding property:@"inputValue"];    
 }
 
 - (void)performFocus:(NSNotification *)noti{

@@ -7,12 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMPropertyIUCollectionVC : NSViewController <NSTextFieldDelegate>
-
-@property (weak, nonatomic) IUController *controller;
-@property (weak) id selection;
+@interface LMPropertyIUCollectionVC : LMDefaultPropertyVC <NSTextFieldDelegate>
 
 
 @end

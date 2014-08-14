@@ -7,9 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
-@interface LMPropertyIUPageLinkSetVC : NSViewController
-
-@property (nonatomic) IUController      *controller;
+#import "LMDefaultPropertyVC.h"
+@interface LMPropertyIUPageLinkSetVC : LMDefaultPropertyVC
 
 @end

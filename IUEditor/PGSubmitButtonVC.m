@@ -26,8 +26,7 @@
 }
 
 - (void)awakeFromNib{
-    NSString *keyPath = [_controller keyPathFromControllerToProperty:@"label"];
-    [_labelTF bind:NSValueBinding toObject:self withKeyPath:keyPath options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [self outlet:_labelTF bind:NSValueBinding property:@"label"];
 }
 
 - (void)performFocus:(NSNotification *)noti{

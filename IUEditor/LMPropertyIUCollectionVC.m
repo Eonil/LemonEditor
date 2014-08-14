@@ -36,38 +36,32 @@
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    
     if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
         [self updateCount];
     }
     else if( [[keyPath pathExtension] isEqualToString:@"defaultItemCount"]){
         [self updateCount];
     }
-    else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
+
 }
 
 
 
 - (void)setController:(IUController *)controller{
-    _controller = controller;
-    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+    [super setController:controller];
     
+    [self outlet:_variableTF bind:NSValueBinding property:@"collectionVariable"];
 
-    [_variableTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"collectionVariable"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
-    
     //observing
-    [_controller addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"defaultItemCount"]
-              options:0 context:nil];
+    [self addObserverForProperty:@"defaultItemCount" options:0 context:nil];
     
 }
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_controller removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"defaultItemCount"]];
-    [_controller removeObserver:self forKeyPath:@"selection"];
+    [self removeObserverForProperty:@"defaultItemCount"];
 }
 
 - (void)setProject:(IUProject*)project{
@@ -84,8 +78,8 @@
 }
 
 - (void)updateCount{
-    
-    id value = [self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"defaultItemCount"]];
+    id value = [self valueForProperty:@"defaultItemCount"];
+
     if(value == NSMultipleValuesMarker || value == NSNotApplicableMarker || value == NSNoSelectionMarker){
         [_itemCountTF setStringValue:@""];
         [[_itemCountTF cell] setPlaceholderString:[NSString stringWithValueMarker:value]];
@@ -102,7 +96,7 @@
     }
     else{
         //responsiveSetting 검사후에 없으면 default로 넣음.
-        NSArray *responsiveSetting = [self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"responsiveSetting"]];
+        NSArray *responsiveSetting = [self valueForProperty:@"responsiveSetting"];
         
         for(NSDictionary *dict in responsiveSetting){
             NSInteger width = [[dict objectForKey:@"width"] integerValue];
@@ -151,10 +145,10 @@
 
 - (void)setItemCount:(NSInteger)count{
     if(selectedSize == maxSize){
-        [self setValue:@(count) forKeyPath:[_controller keyPathFromControllerToProperty:@"defaultItemCount"]];
+        [self setValue:@(count) forIUProperty:@"defaultItemCount"];
     }
     else{
-        NSMutableArray *responsiveSetting = [[self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"responsiveSetting"]] mutableCopy];
+        NSMutableArray *responsiveSetting = [[self valueForProperty:@"responsiveSetting"] mutableCopy];
 
         NSDictionary *selectedDict;
         for(NSDictionary *dict in responsiveSetting){
@@ -169,8 +163,7 @@
         }
         [responsiveSetting addObject:@{@"width":@(selectedSize), @"count":@(count)}];
         
-        [self setValue:responsiveSetting forKeyPath:[_controller keyPathFromControllerToProperty:@"responsiveSetting"]];
-
+        [self setValue:responsiveSetting forIUProperty:@"responsiveSetting"];
     }
     [self updateCount];
 }

@@ -7,11 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 #import "LMIUPropertyVC.h"
 
-@interface PGSubmitButtonVC : NSViewController <IUPropertyDoubleClickReceiver>
+@interface PGSubmitButtonVC : LMDefaultPropertyVC <IUPropertyDoubleClickReceiver>
 
-@property (nonatomic) IUController      *controller;
 
 @end
