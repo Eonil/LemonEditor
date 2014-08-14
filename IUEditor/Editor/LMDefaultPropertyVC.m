@@ -46,31 +46,31 @@
 
 #pragma mark - binding
 - (void)outlet:(id)outlet bind:(NSString *)binding cssTag:(IUCSSTag)tag{
-    [outlet bind:binding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:tag] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [outlet bind:binding toObject:self withKeyPath:[self pathForCSSTag:tag] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
 }
 
 - (void)outlet:(id)outlet bind:(NSString *)binding property:(IUPropertyTag)property{
-    [outlet bind:binding toObject:self withKeyPath:[@"self.selection." stringByAppendingString:property] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [outlet bind:binding toObject:self withKeyPath:[self pathForProperty:property] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
 }
 
 - (void)outlet:(id)outlet bind:(NSString *)binding cssTag:(IUCSSTag)tag options:(NSDictionary *)options{
-    [outlet bind:binding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:tag] options:options];
+    [outlet bind:binding toObject:self withKeyPath:[self pathForCSSTag:tag] options:options];
 }
 
 - (void)outlet:(id)outlet bind:(NSString *)binding property:(IUPropertyTag)property options:(NSDictionary *)options{
-    [outlet bind:binding toObject:self withKeyPath:[@"self.selection." stringByAppendingString:property] options:options];
+    [outlet bind:binding toObject:self withKeyPath:[self pathForProperty:property] options:options];
 }
 
 #pragma mark - value
 - (id)valueForCSSTag:(IUCSSTag)tag{
-    return [self valueForKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:tag]];
+    return [self valueForKeyPath:[self pathForCSSTag:tag]];
 }
 - (id)valueForPropertyTag:(IUPropertyTag)property{
      return [self valueForKeyPath:[@"self.selection." stringByAppendingString:property]];
 }
 
 - (void)setValue:(id)value forCSSTag:(IUCSSTag)tag{
-    [self setValue:value forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:tag]];
+    [self setValue:value forKeyPath:[self pathForCSSTag:tag]];
 }
 - (void)setValue:(id)value forIUPropertyTag:(IUPropertyTag)property{
     [self setValue:value forKeyPath:[@"self.selection." stringByAppendingString:property]];
@@ -79,13 +79,20 @@
 #pragma mark - observer
 
 - (void)addObserverForCSSTag:(IUCSSTag)tag options:(NSKeyValueObservingOptions)options context:(void *)context{
-    [self addObserver:self forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:tag] options:options context:context];
+    [self addObserver:self forKeyPath:[self pathForCSSTag:tag] options:options context:context];
 }
 
 - (void)removeObserverForCSSTag:(IUCSSTag)tag{
-    [self removeObserver:self forKeyPath:[@"self.selection.css.assembledTagDictionary" stringByAppendingPathExtension:tag]];
+    [self removeObserver:self forKeyPath:[self pathForCSSTag:tag]];
 
 }
 
+#pragma mark - keyPath
+- (NSString *)pathForCSSTag:(IUCSSTag)tag{
+    return [@"self.selection.css.assembledTagDictionary." stringByAppendingString:tag];
+}
+- (NSString *)pathForProperty:(IUPropertyTag)property{
+    return [@"self.selection." stringByAppendingString:property];
+}
 
 @end

@@ -75,147 +75,140 @@
 
 
 - (void)setController:(IUController *)controller{
-    _controller = controller;
-    [controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+    [super setController:controller];
+    
     //observing
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:nil];
-
-    [self addObserver:_controller forKeyPath:@"selectedObjects"
-              options:0 context:nil];
+    [self addObserver:self.controller forKeyPath:@"selectedObjects" options:0 context:nil];
 
 
     //binding
     NSDictionary *percentHiddeBindingOption = [NSDictionary
                                             dictionaryWithObjects:@[[NSNumber numberWithBool:NO], NSNegateBooleanTransformerName]
                                             forKeys:@[NSRaisesForNotApplicableKeysBindingOption, NSValueTransformerNameBindingOption]];
+    
+    [self addObserverForCSSTag:IUCSSTagPixelX options:0 context:nil];
+    [self addObserverForCSSTag:IUCSSTagPixelY options:0 context:nil];
+    [self addObserverForCSSTag:IUCSSTagPixelWidth options:0 context:nil];
+    [self addObserverForCSSTag:IUCSSTagPixelHeight options:0 context:nil];
+    [self addObserverForCSSTag:IUCSSTagPercentX options:0 context:nil];
+    [self addObserverForCSSTag:IUCSSTagPercentY options:0 context:nil];
+    [self addObserverForCSSTag:IUCSSTagPercentWidth options:0 context:nil];
+    [self addObserverForCSSTag:IUCSSTagPercentHeight options:0 context:nil];
+    
+    [self outlet:_xTF bind:NSHiddenBinding cssTag:IUCSSTagXUnitIsPercent];
+    [self outlet:_xStepper bind:NSHiddenBinding cssTag:IUCSSTagXUnitIsPercent];
+    [self outlet:_pxTF bind:NSHiddenBinding cssTag:IUCSSTagXUnitIsPercent options:percentHiddeBindingOption];
+    [self outlet:_pxStepper bind:NSHiddenBinding cssTag:IUCSSTagXUnitIsPercent options:percentHiddeBindingOption];
 
-    [self addObserver:self forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPixelX] options:0 context:nil];
-    [self addObserver:self forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPixelY] options:0 context:nil];
-    [self addObserver:self forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPixelWidth] options:0 context:nil];
-    [self addObserver:self forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPixelHeight] options:0 context:nil];
-    [self addObserver:self forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPercentX] options:0 context:nil];
-    [self addObserver:self forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPercentY] options:0 context:nil];
-    [self addObserver:self forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPercentWidth] options:0 context:nil];
-    [self addObserver:self forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPercentHeight] options:0 context:nil];
-    
-    [_xTF bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagXUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
-    [_xStepper bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagXUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
-    [_pxTF bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagXUnitIsPercent] options:percentHiddeBindingOption];
-    [_pxStepper bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagXUnitIsPercent] options:percentHiddeBindingOption];
-    
-    [_yTF bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagYUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
-    [_yStepper bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagYUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
-    [_pyTF bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagYUnitIsPercent] options:percentHiddeBindingOption];
-    [_pyStepper bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagYUnitIsPercent] options:percentHiddeBindingOption];
-    
-    [_wTF bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagWidthUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
-    [_wStepper bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagWidthUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
-    [_pwTF bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagWidthUnitIsPercent] options:percentHiddeBindingOption];
-    [_pwStepper bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagWidthUnitIsPercent] options:percentHiddeBindingOption];
-    
-    [_hTF bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagHeightUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
-    [_hStepper bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagHeightUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
-    [_phTF bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagHeightUnitIsPercent] options:percentHiddeBindingOption];
-    [_phStepper bind:NSHiddenBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagHeightUnitIsPercent] options:percentHiddeBindingOption];
+    [self outlet:_yTF bind:NSHiddenBinding cssTag:IUCSSTagYUnitIsPercent];
+    [self outlet:_yStepper bind:NSHiddenBinding cssTag:IUCSSTagYUnitIsPercent];
+    [self outlet:_pyTF bind:NSHiddenBinding cssTag:IUCSSTagYUnitIsPercent options:percentHiddeBindingOption];
+    [self outlet:_pyStepper bind:NSHiddenBinding cssTag:IUCSSTagYUnitIsPercent options:percentHiddeBindingOption];
 
-
+    [self outlet:_wTF bind:NSHiddenBinding cssTag:IUCSSTagWidthUnitIsPercent];
+    [self outlet:_wStepper bind:NSHiddenBinding cssTag:IUCSSTagWidthUnitIsPercent];
+    [self outlet:_pwTF bind:NSHiddenBinding cssTag:IUCSSTagWidthUnitIsPercent options:percentHiddeBindingOption];
+    [self outlet:_pwStepper bind:NSHiddenBinding cssTag:IUCSSTagWidthUnitIsPercent options:percentHiddeBindingOption];
     
-    [_xUnitBtn bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagXUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
-    [_yUnitBtn bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagYUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
-    [_wUnitBtn bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagWidthUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
-    [_hUnitBtn bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagHeightUnitIsPercent] options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_hTF bind:NSHiddenBinding cssTag:IUCSSTagHeightUnitIsPercent];
+    [self outlet:_hStepper bind:NSHiddenBinding cssTag:IUCSSTagHeightUnitIsPercent];
+    [self outlet:_phTF bind:NSHiddenBinding cssTag:IUCSSTagHeightUnitIsPercent options:percentHiddeBindingOption];
+    [self outlet:_phStepper bind:NSHiddenBinding cssTag:IUCSSTagHeightUnitIsPercent options:percentHiddeBindingOption];
     
-    [_positionPopupBtn bind:NSSelectedIndexBinding toObject:self withKeyPath:@"self.selection.positionType" options:IUBindingDictNotRaisesApplicable];
-    [_centerBtn bind:NSValueBinding toObject:self withKeyPath:@"self.selection.enableCenter" options:IUBindingDictNotRaisesApplicable];
     
+    [self outlet:_xUnitBtn bind:NSValueBinding cssTag:IUCSSTagXUnitIsPercent];
+    [self outlet:_yUnitBtn bind:NSValueBinding cssTag:IUCSSTagYUnitIsPercent];
+    [self outlet:_wUnitBtn bind:NSValueBinding cssTag:IUCSSTagWidthUnitIsPercent];
+    [self outlet:_hUnitBtn bind:NSValueBinding cssTag:IUCSSTagHeightUnitIsPercent];
+    
+    [self outlet:_positionPopupBtn bind:NSSelectedIndexBinding property:@"positionType"];
+    [self outlet:_centerBtn bind:NSValueBinding property:@"enableCenter"];
 
     //enabled option 1
-    [_xTF bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasX" options:IUBindingDictNotRaisesApplicable];
-    [_yTF bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasY" options:IUBindingDictNotRaisesApplicable];
-    [_wTF bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasWidth" options:IUBindingDictNotRaisesApplicable];
-    [_hTF bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasHeight" options:IUBindingDictNotRaisesApplicable];
-    
-    [_pxTF bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasX" options:IUBindingDictNotRaisesApplicable];
-    [_pyTF bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasY" options:IUBindingDictNotRaisesApplicable];
-    [_pwTF bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasWidth" options:IUBindingDictNotRaisesApplicable];
-    [_phTF bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasHeight" options:IUBindingDictNotRaisesApplicable];
-    
-    [_xUnitBtn bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasX" options:IUBindingDictNotRaisesApplicable];
-    [_yUnitBtn bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasY" options:IUBindingDictNotRaisesApplicable];
-    [_wUnitBtn bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasWidth" options:IUBindingDictNotRaisesApplicable];
-    [_hUnitBtn bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasHeight" options:IUBindingDictNotRaisesApplicable];
-    
-    [_xStepper bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasX" options:IUBindingDictNotRaisesApplicable];
-    [_yStepper bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasY" options:IUBindingDictNotRaisesApplicable];
-    [_wStepper bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasWidth" options:IUBindingDictNotRaisesApplicable];
-    [_hStepper bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasHeight" options:IUBindingDictNotRaisesApplicable];
-    
-    [_pxStepper bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasX" options:IUBindingDictNotRaisesApplicable];
-    [_pyStepper bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasY" options:IUBindingDictNotRaisesApplicable];
-    [_pwStepper bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasWidth" options:IUBindingDictNotRaisesApplicable];
-    [_phStepper bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.hasHeight" options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_xTF bind:NSEnabledBinding property:@"hasX"];
+    [self outlet:_yTF bind:NSEnabledBinding property:@"hasY"];
+    [self outlet:_wTF bind:NSEnabledBinding property:@"hasWidth"];
+    [self outlet:_hTF bind:NSEnabledBinding property:@"hasHeight"];
+
+    [self outlet:_pxTF bind:NSEnabledBinding property:@"hasX"];
+    [self outlet:_pyTF bind:NSEnabledBinding property:@"hasY"];
+    [self outlet:_pwTF bind:NSEnabledBinding property:@"hasWidth"];
+    [self outlet:_phTF bind:NSEnabledBinding property:@"hasHeight"];
+
+    [self outlet:_xUnitBtn bind:NSEnabledBinding property:@"hasX"];
+    [self outlet:_yUnitBtn bind:NSEnabledBinding property:@"hasY"];
+    [self outlet:_wUnitBtn bind:NSEnabledBinding property:@"hasWidth"];
+    [self outlet:_hUnitBtn bind:NSEnabledBinding property:@"hasHeight"];
+
+    [self outlet:_xStepper bind:NSEnabledBinding property:@"hasX"];
+    [self outlet:_yStepper bind:NSEnabledBinding property:@"hasY"];
+    [self outlet:_wStepper bind:NSEnabledBinding property:@"hasWidth"];
+    [self outlet:_hStepper bind:NSEnabledBinding property:@"hasHeight"];
+
+    [self outlet:_pxStepper bind:NSEnabledBinding property:@"hasX"];
+    [self outlet:_pyStepper bind:NSEnabledBinding property:@"hasY"];
+    [self outlet:_pwStepper bind:NSEnabledBinding property:@"hasWidth"];
+    [self outlet:_phStepper bind:NSEnabledBinding property:@"hasHeight"];
 
     
-    [_positionPopupBtn bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.canChangePositionType" options:IUBindingDictNotRaisesApplicable];
-    [_centerBtn bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.canChangeCenter" options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_positionPopupBtn bind:NSEnabledBinding property:@"canChangePositionType"];
+    [self outlet:_centerBtn bind:NSEnabledBinding property:@"canChangeCenter"];
 
     
     //enabled option 2
     
-    [_xTF bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeXByUserInput" options:IUBindingDictNotRaisesApplicable];
-    [_yTF bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeYByUserInput" options:IUBindingDictNotRaisesApplicable];
-    [_wTF bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeWidthByUserInput" options:IUBindingDictNotRaisesApplicable];
-    [_hTF bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeHeightByUserInput" options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_xTF bind:@"enabled2" property:@"canChangeXByUserInput"];
+    [self outlet:_yTF bind:@"enabled2" property:@"canChangeYByUserInput"];
+    [self outlet:_wTF bind:@"enabled2" property:@"canChangeWidthByUserInput"];
+    [self outlet:_hTF bind:@"enabled2" property:@"canChangeHeightByUserInput"];
     
-    [_pxTF bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeXByUserInput" options:IUBindingDictNotRaisesApplicable];
-    [_pyTF bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeYByUserInput" options:IUBindingDictNotRaisesApplicable];
-    [_pwTF bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeWidthByUserInput" options:IUBindingDictNotRaisesApplicable];
-    [_phTF bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeHeightByUserInput" options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_pxTF bind:@"enabled2" property:@"canChangeXByUserInput"];
+    [self outlet:_pyTF bind:@"enabled2" property:@"canChangeYByUserInput"];
+    [self outlet:_pwTF bind:@"enabled2" property:@"canChangeWidthByUserInput"];
+    [self outlet:_phTF bind:@"enabled2" property:@"canChangeHeightByUserInput"];
     
-    [_xUnitBtn bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeXByUserInput" options:IUBindingDictNotRaisesApplicable];
-    [_yUnitBtn bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeYByUserInput" options:IUBindingDictNotRaisesApplicable];
-    [_wUnitBtn bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeWidthByUserInput" options:IUBindingDictNotRaisesApplicable];
-    [_hUnitBtn bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeHeightByUserInput" options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_xUnitBtn bind:@"enabled2" property:@"canChangeXByUserInput"];
+    [self outlet:_yUnitBtn bind:@"enabled2" property:@"canChangeYByUserInput"];
+    [self outlet:_wUnitBtn bind:@"enabled2" property:@"canChangeWidthByUserInput"];
+    [self outlet:_hUnitBtn bind:@"enabled2" property:@"canChangeHeightByUserInput"];
     
-    [_xStepper bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeXByUserInput" options:IUBindingDictNotRaisesApplicable];
-    [_yStepper bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeYByUserInput"  options:IUBindingDictNotRaisesApplicable];
-    [_wStepper bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeWidthByUserInput"  options:IUBindingDictNotRaisesApplicable];
-    [_hStepper bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeHeightByUserInput"  options:IUBindingDictNotRaisesApplicable];
-
-    [_pxStepper bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeXByUserInput"  options:IUBindingDictNotRaisesApplicable];
-    [_pyStepper bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeYByUserInput"  options:IUBindingDictNotRaisesApplicable];
-    [_pwStepper bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeWidthByUserInput"  options:IUBindingDictNotRaisesApplicable];
-    [_phStepper bind:@"enabled2" toObject:self withKeyPath:@"self.selection.canChangeHeightByUserInput"  options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_xStepper bind:@"enabled2" property:@"canChangeXByUserInput"];
+    [self outlet:_yStepper bind:@"enabled2" property:@"canChangeYByUserInput"];
+    [self outlet:_wStepper bind:@"enabled2" property:@"canChangeWidthByUserInput"];
+    [self outlet:_hStepper bind:@"enabled2" property:@"canChangeHeightByUserInput"];
+    
+    [self outlet:_pxStepper bind:@"enabled2" property:@"canChangeXByUserInput"];
+    [self outlet:_pyStepper bind:@"enabled2" property:@"canChangeYByUserInput"];
+    [self outlet:_pwStepper bind:@"enabled2" property:@"canChangeWidthByUserInput"];
+    [self outlet:_phStepper bind:@"enabled2" property:@"canChangeHeightByUserInput"];
     
     [_positionPopupBtn bind:@"enabled2" toObject:self withKeyPath:@"enablePosition" options:IUBindingDictNotRaisesApplicable];
 
     
     
     //enabled option 3
-    NSDictionary *bindingOption = [NSDictionary
-                     dictionaryWithObjects:@[[NSNumber numberWithBool:NO], NSNegateBooleanTransformerName]
-                     forKeys:@[NSRaisesForNotApplicableKeysBindingOption, NSValueTransformerNameBindingOption]];
     
-    [_xTF bind:@"enabled3" toObject:self withKeyPath:@"self.selection.center"  options:bindingOption];
-    [_pxTF bind:@"enabled3" toObject:self withKeyPath:@"self.selection.center"  options:bindingOption];
-    [_xUnitBtn bind:@"enabled3" toObject:self withKeyPath:@"self.selection.center"  options:bindingOption];
-    [_xStepper bind:@"enabled3" toObject:self withKeyPath:@"self.selection.center"  options:bindingOption];
-    [_pxStepper bind:@"enabled3" toObject:self withKeyPath:@"self.selection.center"  options:bindingOption];
-
+    [self outlet:_xTF bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
+    [self outlet:_pxTF bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
+    [self outlet:_xUnitBtn bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
+    [self outlet:_xStepper bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
+    [self outlet:_pxStepper bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
+    
     [_yUnitBtn bind:@"enabled3" toObject:self withKeyPath:@"enableVerticalPercent" options:IUBindingDictNotRaisesApplicable];
     [_hUnitBtn bind:@"enabled3" toObject:self withKeyPath:@"enableVerticalPercent" options:IUBindingDictNotRaisesApplicable];
 }
 
 - (void)dealloc{
-    if (_controller) {
-        NSArray *removeObservers = @[[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPixelX],
-                                     [@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPixelY],
-                                     [@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPixelWidth],
-                                     [@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPixelHeight],
-                                     [@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPercentX],
-                                     [@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPercentY],
-                                     [@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPercentWidth],
-                                     [@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagPercentHeight],
+    if (self.controller) {
+        NSArray *removeObservers = @[[self pathForCSSTag:IUCSSTagPixelX],
+                                     [self pathForCSSTag:IUCSSTagPixelY],
+                                     [self pathForCSSTag:IUCSSTagPixelWidth],
+                                     [self pathForCSSTag:IUCSSTagPixelHeight],
+                                     [self pathForCSSTag:IUCSSTagPercentX],
+                                     [self pathForCSSTag:IUCSSTagPercentY],
+                                     [self pathForCSSTag:IUCSSTagPercentWidth],
+                                     [self pathForCSSTag:IUCSSTagPercentHeight],
                                      @"controller.selectedObjects"];
         
         [self removeObserver:self forKeyPaths:removeObservers];
@@ -239,10 +232,8 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-        return;
-    }
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    
     if ([[keyPath pathExtension] isSameTag:IUCSSTagPixelX]) {
         [self setValueForTag:IUCSSTagPixelX toTextfield:_xTF toStepper:_xStepper];
     }
@@ -270,15 +261,12 @@
     else if ([keyPath isEqualToString:@"controller.selectedObjects"]){
         [self checkForIUPageContent];
     }
-    else {
-        NSAssert(0, @"");
-    }
 }
 
 //FIXME: editor js modify
 - (void)checkForIUPageContent{
     BOOL isPageContentChildren = NO;
-    for (IUBox *iu in _controller.selectedObjects) {
+    for (IUBox *iu in self.controller.selectedObjects) {
         if([iu.parent isKindOfClass:[IUPageContent class]]){
             isPageContentChildren = YES;
             break;
@@ -289,7 +277,7 @@
 }
 
 - (void)setValueForTag:(IUCSSTag)tag toTextfield:(NSTextField*)textfield toStepper:(NSStepper *)stepper{
-    id value = [self valueForKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:tag]];
+    id value = [self valueForCSSTag:tag];
     //default setting
     [[textfield cell] setPlaceholderString:@""];
    
@@ -383,18 +371,18 @@
 }
 
 - (void)setCSSFrameValue:(id)value forTag:(IUCSSTag)tag{
-    for (IUBox *iu in _controller.selectedObjects) {
+    for (IUBox *iu in self.controller.selectedObjects) {
         [iu startDragSession];
     }
     if (value == nil || ((NSString *)value).length==0 || [value isEqualToString:@"-"]) {
-        for (IUBox *box in _controller.selectedObjects) {
+        for (IUBox *box in self.controller.selectedObjects) {
             [box.css eradicateTag:tag];
         }
     }
     else {
-        [self setValue:value forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:tag]];
+        [self setValue:value forCSSTag:tag];
     }
-    for (IUBox *iu in _controller.selectedObjects) {
+    for (IUBox *iu in self.controller.selectedObjects) {
         [iu endDragSession];
         [iu updateCSS];
     }

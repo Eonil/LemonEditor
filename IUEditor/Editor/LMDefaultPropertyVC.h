@@ -33,4 +33,9 @@
 //oberserver
 - (void)addObserverForCSSTag:(IUCSSTag)tag options:(NSKeyValueObservingOptions)options context:(void *)context;
 - (void)removeObserverForCSSTag:(IUCSSTag)tag;
+
+
+//keyPath
+- (NSString *)pathForCSSTag:(IUCSSTag)tag;
+- (NSString *)pathForProperty:(IUPropertyTag)property;
 @end
