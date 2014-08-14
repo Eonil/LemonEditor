@@ -12,6 +12,6 @@
 @interface LMInspectorAltTextVC : NSViewController
 
 @property (nonatomic, weak) IUController      *controller;
-
+@property (weak) id selection;
 
 @end

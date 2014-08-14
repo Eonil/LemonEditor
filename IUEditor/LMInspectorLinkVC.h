@@ -11,6 +11,7 @@
 
 @interface LMInspectorLinkVC : NSViewController <NSTextFieldDelegate>
 
+@property (weak) id selection;
 @property (nonatomic) IUController      *controller;
 - (void)setProject:(IUProject*)project;
 

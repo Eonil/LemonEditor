@@ -34,23 +34,40 @@
     return self;
 }
 
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"selection"]) {
+        self.selection = _controller.selection;
+        [self updateCount];
+    }
+    else if( [[keyPath pathExtension] isEqualToString:@"defaultItemCount"]){
+        [self updateCount];
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+
+
 - (void)setController:(IUController *)controller{
     _controller = controller;
+    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+    
+
     [_variableTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"collectionVariable"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
     
     //observing
-    [self addObserver:self forKeyPath:@"controller.selectedObjects"
-              options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];
-    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"defaultItemCount"]
+    [_controller addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"defaultItemCount"]
               options:0 context:nil];
     
 }
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"defaultItemCount"]];
-    [self removeObserver:self forKeyPath:@"controller.selectedObjects"];
+    [_controller removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"defaultItemCount"]];
+    [_controller removeObserver:self forKeyPath:@"selection"];
 }
 
 - (void)setProject:(IUProject*)project{
@@ -64,14 +81,6 @@
     maxSize = [[notification.userInfo objectForKey:IUNotificationMQMaxSize] integerValue];
  
     [self updateCount];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    
-    if([keyPath isEqualToString:@"controller.selectedObjects"]
-       || [[keyPath pathExtension] isEqualToString:@"defaultItemCount"]){
-        [self updateCount];
-    }
 }
 
 - (void)updateCount{

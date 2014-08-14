@@ -10,6 +10,6 @@
 #import "IUController.h"
 @interface LMPropertyShadowVC : NSViewController
 
-@property (weak) IUController  *controller;
+@property (weak, nonatomic) IUController  *controller;
 @property id selection;
 @end

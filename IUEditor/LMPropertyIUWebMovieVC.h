@@ -11,6 +11,8 @@
 
 @interface LMPropertyIUWebMovieVC : NSViewController
 
-@property (nonatomic) IUController      *controller;
+@property (nonatomic, weak) IUController      *controller;
+@property (weak) id selection;
+
 
 @end

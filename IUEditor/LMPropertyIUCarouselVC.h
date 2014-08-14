@@ -15,6 +15,7 @@
 
 @property (nonatomic) IUController      *controller;
 @property (nonatomic) IUResourceManager     *resourceManager;
+@property (weak) id selection;
 
 @property (nonatomic) NSArray *imageArray;
 

@@ -12,5 +12,7 @@
 @interface LMPropertyIUCollectionVC : NSViewController <NSTextFieldDelegate>
 
 @property (weak, nonatomic) IUController *controller;
+@property (weak) id selection;
+
 
 @end

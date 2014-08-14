@@ -39,15 +39,10 @@
 - (void)awakeFromNib{
     _urlTF.delegate = self;
     [_divLinkPB setEnabled:NO];
-    
-    
-    [self addObserver:self forKeyPath:@"controller.selectedObjects"
-              options:0 context:nil];
 }
 
 - (void)dealloc{
     [JDLogUtil log:IULogDealloc string:@"LMInspectorLinkVC"];
-    [self removeObserver:self forKeyPath:@"controller.selectedObjects"];
     [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"link"] ];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -84,12 +79,18 @@
 - (void)setController:(IUController *)controller{
     NSAssert(_controller == nil, @"duplicated initialize" );
     _controller = controller;
+    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+    
+
     [self addObserver:self forKeyPath:[controller keyPathFromControllerToProperty:@"link"] options:0 context:nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"selection"]) {
+        self.selection = _controller.selection;
+    }
     
-    if([keyPath isEqualToString:@"controller.selectedObjects"]
+    if([keyPath isEqualToString:@"selection"]
        || [[keyPath pathExtension] isEqualToString:@"link"]){
         
         [_divLinkPB setEnabled:NO];
@@ -196,6 +197,8 @@
     }
     
 }
+
+
 - (IBAction)clickDivLinkPopupBtn:(id)sender {
     
     if([[_divLinkPB selectedItem] isEqualTo:[_divLinkPB itemAtIndex:0]]){

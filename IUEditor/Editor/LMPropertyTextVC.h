@@ -12,6 +12,7 @@
 
 @interface LMPropertyTextVC : NSViewController <IUPropertyDoubleClickReceiver>
 
-@property (nonatomic) IUController      *controller;
+@property (nonatomic,weak) IUController      *controller;
+@property (weak) id selection;
 
 @end

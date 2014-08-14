@@ -48,6 +48,18 @@
     [_prototypeB addItemsWithTitles:[[_project classSheets] valueForKey:@"name"]];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"selection"]) {
+        self.selection = _controller.selection;
+        return;
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+
+
 - (void)setController:(IUController *)controller{
     _controller = controller;
     [self addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"prototypeClass"] options:0 context:nil];

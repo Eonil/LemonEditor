@@ -11,5 +11,8 @@
 #import "LMIUPropertyVC.h"
 
 @interface LMPropertyIUTextFieldVC : NSViewController <IUPropertyDoubleClickReceiver>
+
 @property (weak, nonatomic) IUController *controller;
+@property (weak) id selection;
+
 @end

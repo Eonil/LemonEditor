@@ -39,8 +39,10 @@
 - (void)setController:(IUController *)controller{
     _controller = controller;
     
-    [self addObserver:self forKeyPaths:@[@"controller.selectedObjects", [_controller keyPathFromControllerToProperty:@"target"]]
+    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"target"]
               options:0 context:nil];
+    
 
 }
 
@@ -106,9 +108,11 @@
 
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"selection"]) {
+        self.selection = _controller.selection;
+    }
     
-    if([keyPath isEqualToString:@"controller.selectedObjects"]
-       || [[keyPath pathExtension] isEqualToString:@"target"]){
+    if([keyPath isEqualToString:@"selection"] || [[keyPath pathExtension] isEqualToString:@"target"]){
         
 #pragma mark - set target
         id value = [self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"target"]];

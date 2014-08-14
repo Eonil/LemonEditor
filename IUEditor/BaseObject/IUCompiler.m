@@ -271,8 +271,10 @@
     }
     //clipart
     //path : clipart/arrow_right.png
+    //FIXME: 에러임!!!!!!! 이거 이거 패쓰커뮤ㅗ넌트 널이면 에러죽음
     else if([[imageName pathComponents][0] isEqualToString:@"clipArt"]){
         if(isEdit){
+            
             imgSrc = [[NSBundle mainBundle] pathForImageResource:[imageName lastPathComponent]];
         }
         else{

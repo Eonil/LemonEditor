@@ -31,9 +31,19 @@
     return self;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"selection"]) {
+        self.selection = _controller.selection;
+        return;
+    }
+}
+
+
+
 -(void)setController:(IUController *)controller{
     
     _controller = controller;
+    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
     
     [_titleTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"title"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_keywordsTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"keywords"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];

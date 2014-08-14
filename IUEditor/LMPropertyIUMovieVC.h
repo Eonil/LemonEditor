@@ -14,5 +14,7 @@
 
 @property (nonatomic, weak) IUResourceManager *resourceManager;
 @property (nonatomic, weak) IUController      *controller;
+@property (weak) id selection;
+
 
 @end

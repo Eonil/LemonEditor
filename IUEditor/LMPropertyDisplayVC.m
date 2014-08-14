@@ -31,18 +31,26 @@
 
 - (void)setController:(IUController *)controller{
     _controller = controller;
-    [_overflowPopupBtn bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"overflowType"] options:nil];
-    [_overflowPopupBtn bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"canChangeOverflow"] options:IUBindingDictNotRaisesApplicable];
-    
-    [_displayHideBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagDisplayIsHidden] options:IUBindingDictNotRaisesApplicable];
+    [controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+
+    [_overflowPopupBtn bind:NSSelectedIndexBinding toObject:self withKeyPath:@"self.selection.overflowType" options:IUBindingDictNotRaisesApplicable];
+    [_overflowPopupBtn bind:NSEnabledBinding toObject:self withKeyPath:@"self.selection.canChangeOverflow" options:IUBindingDictNotRaisesApplicable];
+    /*
+    [_displayHideBtn bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.canChangeOverflow." stringByAppendingString:IUCSSTagDisplayIsHidden] options:IUBindingDictNotRaisesApplicable];
     
     NSDictionary *numberBinding =  @{NSContinuouslyUpdatesValueBindingOption:@(YES),NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToHundredTransformer"};
     
-    [_opacityTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagOpacity] options:numberBinding];
-    [_opacitySlider bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagOpacity] options:numberBinding];
+    [_opacityTF bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.canChangeOverflow."  stringByAppendingString:IUCSSTagOpacity] options:numberBinding];
+    [_opacitySlider bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.canChangeOverflow."  stringByAppendingString:IUCSSTagOpacity] options:numberBinding];
+     */
     
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"selection"]) {
+        self.selection = _controller.selection;
+    }
+}
 
 
 

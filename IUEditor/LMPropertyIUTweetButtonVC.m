@@ -29,6 +29,11 @@
     return self;
 }
 
+- (void)setController:(IUController *)controller{
+    _controller = controller;
+    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+}
+
 - (void)awakeFromNib{
     [_urlTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"urlToTweet"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_sizeMatrix bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"sizeType"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
@@ -39,5 +44,17 @@
     [_verticalMenuItem bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableLargeVertical"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
 
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"selection"]) {
+        self.selection = _controller.selection;
+        return;
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
+
 
 @end

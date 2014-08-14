@@ -13,6 +13,7 @@
 @interface LMPropertyPGFormVC : NSViewController <NSComboBoxDelegate, IUPropertyDoubleClickReceiver>
 
 @property (nonatomic) IUController      *controller;
+@property (weak) id selection;
 
 - (void)setProject:(IUProject*)project;
 

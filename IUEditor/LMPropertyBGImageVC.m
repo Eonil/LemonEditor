@@ -41,7 +41,9 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    self.selection = _controller.selection;
+    if ([keyPath isEqualToString:@"selection"]) {
+        self.selection = _controller.selection;
+    }
 }
 
 - (void)setController:(IUController *)controller{
@@ -61,88 +63,88 @@
     
     
     [_imageNameComboBox bind:NSContentBinding toObject:self withKeyPath:@"resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
-    [_imageNameComboBox bind:NSValueBinding toObject:self withKeyPath:@"_selection.imageName" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_imageNameComboBox bind:NSEnabledBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [_imageNameComboBox bind:NSValueBinding toObject:self withKeyPath:@"self.selection.imageName" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_imageNameComboBox bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
     
 
     
     _imageNameComboBox.delegate = self;
     
-    [_fitButton bind:NSEnabledBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagWidthUnitIsPercent] options:IUBindingNegationAndNotRaise];
-    [_fitButton bind:@"enabled2" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagHeightUnitIsPercent] options:IUBindingNegationAndNotRaise];
-    [_fitButton bind:@"enabled3" toObject:self withKeyPath:@"_selection.hasWidth" options:IUBindingDictNotRaisesApplicable];
-    [_fitButton bind:@"enabled4" toObject:self withKeyPath:@"_selection.hasHeight" options:IUBindingDictNotRaisesApplicable];
-    [_fitButton bind:@"enabled5" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [_fitButton bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagWidthUnitIsPercent] options:IUBindingNegationAndNotRaise];
+    [_fitButton bind:@"enabled2" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagHeightUnitIsPercent] options:IUBindingNegationAndNotRaise];
+    [_fitButton bind:@"enabled3" toObject:self withKeyPath:@"self.selection.hasWidth" options:IUBindingDictNotRaisesApplicable];
+    [_fitButton bind:@"enabled4" toObject:self withKeyPath:@"self.selection.hasHeight" options:IUBindingDictNotRaisesApplicable];
+    [_fitButton bind:@"enabled5" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
 
     
     
 #pragma mark - size, repeat
     
-    [_sizeSegementControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGSize] options:IUBindingDictNotRaisesApplicable];
-    [_sizeSegementControl bind:NSEnabledBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
-    [_sizeSegementControl bind:@"enabled2" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [_sizeSegementControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGSize] options:IUBindingDictNotRaisesApplicable];
+    [_sizeSegementControl bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
+    [_sizeSegementControl bind:@"enabled2" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
 
     
     
-    [_repeatBtn bind:NSValueBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGRepeat] options:noRepeatBindingOption];
+    [_repeatBtn bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGRepeat] options:noRepeatBindingOption];
     
-    [_repeatBtn bind:NSEnabledBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
+    [_repeatBtn bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
     [_repeatBtn bind:@"enabled2" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
-    [_repeatBtn bind:@"enabled3" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [_repeatBtn bind:@"enabled3" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
 
 
     
     
-    [self addObserver:self forKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGSize] options:0 context:@"size"];
+    [self addObserver:self forKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGSize] options:0 context:@"size"];
 
     
 #pragma mark - position
     
-    [_positionHSegmentedControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGHPosition] options:IUBindingDictNotRaisesApplicable];
+    [_positionHSegmentedControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGHPosition] options:IUBindingDictNotRaisesApplicable];
 
-    [_positionVSegmentedControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGVPosition] options:IUBindingDictNotRaisesApplicable];
+    [_positionVSegmentedControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGVPosition] options:IUBindingDictNotRaisesApplicable];
 
     
     
-    [_digitPositionBtn bind:NSValueBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingDictNotRaisesApplicable];
-    [_digitPositionBtn bind:NSEnabledBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
+    [_digitPositionBtn bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingDictNotRaisesApplicable];
+    [_digitPositionBtn bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
     [_digitPositionBtn bind:@"enabled2" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
-    [_digitPositionBtn bind:@"enabled3" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [_digitPositionBtn bind:@"enabled3" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
 
     
     
-    [_xPositionTF bind:NSValueBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGXPosition] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_yPositionTF bind:NSValueBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGYPosition] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_xPositionTF bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGXPosition] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_yPositionTF bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGYPosition] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
 
     
 #pragma mark - enable position
     //position Segement 1
-    [_positionHSegmentedControl bind:NSEnabledBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
-    [_positionVSegmentedControl bind:NSEnabledBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
+    [_positionHSegmentedControl bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
+    [_positionVSegmentedControl bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
 
-    [_positionHSegmentedControl bind:@"enabled2" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingNegationAndNotRaise];
-    [_positionVSegmentedControl bind:@"enabled2" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingNegationAndNotRaise];
+    [_positionHSegmentedControl bind:@"enabled2" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingNegationAndNotRaise];
+    [_positionVSegmentedControl bind:@"enabled2" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingNegationAndNotRaise];
     
     [_positionHSegmentedControl bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     [_positionVSegmentedControl bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
-    [_positionHSegmentedControl bind:@"enabled4" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
-    [_positionVSegmentedControl bind:@"enabled4" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [_positionHSegmentedControl bind:@"enabled4" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [_positionVSegmentedControl bind:@"enabled4" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
 
     
 
     //position TF
-    [_xPositionTF bind:NSEnabledBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
-    [_yPositionTF bind:NSEnabledBinding toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
+    [_xPositionTF bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
+    [_yPositionTF bind:NSEnabledBinding toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagImage] options:bgEnableBindingOption];
     
-    [_xPositionTF bind:@"enabled2" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingDictNotRaisesApplicable];
-    [_yPositionTF bind:@"enabled2" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingDictNotRaisesApplicable];
+    [_xPositionTF bind:@"enabled2" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingDictNotRaisesApplicable];
+    [_yPositionTF bind:@"enabled2" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagEnableBGCustomPosition] options:IUBindingDictNotRaisesApplicable];
     
     [_xPositionTF bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     [_yPositionTF bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     
-    [_xPositionTF bind:@"enabled4" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
-    [_yPositionTF bind:@"enabled4" toObject:self withKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [_xPositionTF bind:@"enabled4" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
+    [_yPositionTF bind:@"enabled4" toObject:self withKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGGradient] options:IUBindingNegationAndNotRaise];
 
 
 
@@ -151,7 +153,7 @@
 
 - (void)dealloc{
     if (_controller) {
-        [self removeObserver:self forKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGSize]];
+        [self removeObserver:self forKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGSize]];
     }
     [JDLogUtil log:IULogDealloc string:@"LMPropertyBGImage"];
 }
@@ -160,8 +162,8 @@
 -(void)sizeContextDidChange:(NSDictionary *)dictionary{
     IUBGSizeType selectedtype = (IUBGSizeType)[_sizeSegementControl selectedSegment];
     if(selectedtype == IUBGSizeTypeFull){
-        [self setValue:@(1) forKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGVPosition]];
-        [self setValue:@(1) forKeyPath:[@"_selection.css" stringByAppendingString:IUCSSTagBGHPosition]];
+        [self setValue:@(1) forKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGVPosition]];
+        [self setValue:@(1) forKeyPath:[@"self.selection.css" stringByAppendingString:IUCSSTagBGHPosition]];
         self.fullSize = YES;
     }
     else{

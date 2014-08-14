@@ -39,6 +39,21 @@
     
 }
 
+- (void)setController:(IUController *)controller{
+    _controller = controller;
+    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"selection"]) {
+        self.selection = _controller.selection;
+        return;
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
 - (void)performFocus:(NSNotification *)noti{
     [self.view.window makeFirstResponder:_textView];
 }

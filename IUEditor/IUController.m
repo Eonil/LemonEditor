@@ -301,12 +301,12 @@
 
 
 -(NSString*)keyPathFromControllerToTextCSSProperty:(NSString *)property{
-    return [@"controller.selection.textController" stringByAppendingPathExtension:property];
+    return [@"self.selection.textController" stringByAppendingPathExtension:property];
 }
 
 
 -(NSString*)keyPathFromControllerToCSSTag:(IUCSSTag)tag{
-    return [@"controller.selection.css.assembledTagDictionary" stringByAppendingPathExtension:tag];
+    return [@"self.selection.css.assembledTagDictionary" stringByAppendingPathExtension:tag];
 }
 
 -(NSString*)keyPathFromControllerToEventTag:(IUEventTag)tag{
@@ -314,7 +314,7 @@
 }
 
 -(NSString*)keyPathFromControllerToProperty:(NSString*)property{
-    return [@"controller.selection" stringByAppendingPathExtension:property];
+    return [@"self.selection" stringByAppendingPathExtension:property];
 }
 
 -(IUImport*)importIUInSelectionChain{

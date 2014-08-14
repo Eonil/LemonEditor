@@ -26,7 +26,20 @@
     }
     return self;
 }
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"selection"]) {
+        self.selection = _controller.selection;
+        return;
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
 
+- (void)setController:(IUController *)controller{
+    _controller = controller;
+    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+}
 - (void)awakeFromNib{
     [_likePageTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"likePage"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_friendFaceBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"showFriendsFace"] options:IUBindingDictNotRaisesApplicable];

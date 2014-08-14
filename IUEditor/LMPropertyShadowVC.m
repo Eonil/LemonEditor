@@ -35,12 +35,19 @@
 }
 
 - (NSString*)CSSBindingPath:(IUCSSTag)tag{
-    return [@"controller.selection.css.assembledTagDictionary." stringByAppendingString:tag];
+    return [@"self.selection.css.assembledTagDictionary." stringByAppendingString:tag];
 }
 
 -(void)setController:(IUController *)controller{
     _controller = controller;
-    
+    [controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"selection"]) {
+        self.selection = _controller.selection;
+        return;
+    }
 }
 
 -(void)awakeFromNib{
