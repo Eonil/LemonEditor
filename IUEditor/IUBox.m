@@ -493,8 +493,10 @@
 - (void)updateCSS{
     
     if(self.delegate && _lineHeightAuto && self.shouldCompileFontInfo){
+        
         if(_css.assembledTagDictionary[IUCSSTagPixelHeight]){
-            CGFloat lineheight = [[self.delegate callWebScriptMethod:@"getTextAutoHeight" withArguments:@[self.htmlID]] floatValue];
+            
+            CGFloat lineheight = [[self.delegate callWebScriptMethod:@"getTextAutoHeight" withArguments:@[self.htmlID]] floatValue];            
             [_css setValueWithoutUpdateCSS:@(lineheight) forTag:IUCSSTagLineHeight];
         }
     }
