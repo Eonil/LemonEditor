@@ -267,7 +267,7 @@
 - (NSString *)imagePathWithImageName:(NSString *)imageName isEdit:(BOOL)isEdit{
     NSString *imgSrc;
     
-    if(imageName == nil){
+    if(imageName == nil || imageName.length==0){
         return nil;
     }
     

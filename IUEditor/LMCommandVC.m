@@ -109,8 +109,10 @@
         if (result == NO) {
             NSAssert(0, @"");
         }
-        //FIXME: iusheet열때만 열게 그렇지 않으면 index파일 오픈
         IUSheet *doc = [[_docController selectedObjects] firstObject];
+        if([doc isKindOfClass:[IUSheet class]] == NO){
+            doc = _docController.project.pageSheets.firstObject;
+        }
         if (rule == IUCompileRuleDefault) {
             NSString *firstPath = [project.absoluteBuildPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.html",[doc.name lowercaseString]]];
             [[NSWorkspace sharedWorkspace] openFile:firstPath];
