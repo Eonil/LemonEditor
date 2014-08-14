@@ -158,9 +158,7 @@
     }
     
     [self updateHTML];
-    [self updateCSSWithIdentifier:[self pagerID]];
-    [self updateCSSWithIdentifier:[self.pagerID cssHover]];
-    [self updateCSSWithIdentifier:[self.pagerID cssActive]];
+    [self updateCSSWithIdentifiers:@[[self pagerID], [self.pagerID cssHover], [self.pagerID cssActive]]];
     [self updateJS];
 }
 
@@ -247,13 +245,11 @@
     [[self.undoManager prepareWithInvocationTarget:self] setPagerPosition:_pagerPosition];
     
     _pagerPosition = pagerPosition;
-    [self updateCSSWithIdentifier:self.pagerWrapperID];
+    [self updateCSSWithIdentifiers:@[self.pagerWrapperID]];
 }
 
 - (void)updateCSSForItemColor{
-    [self updateCSSWithIdentifier:self.pagerID];
-    [self updateCSSWithIdentifier:[self.pagerID cssHoverClass]];
-    [self updateCSSWithIdentifier:[self.pagerID cssActiveClass]];
+    [self updateCSSWithIdentifiers:@[self.pagerID, [self.pagerID cssHover], [self.pagerID cssActive]]];
 }
 
 #pragma mark - arrow
@@ -351,7 +347,7 @@
     }
     
     
-    [self updateCSSWithIdentifier:arrowID];
+    [self updateCSSWithIdentifiers:@[arrowID]];
 }
 
 #pragma mark - property for undo

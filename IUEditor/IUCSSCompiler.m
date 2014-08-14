@@ -1037,19 +1037,16 @@
 - (void)updateCSSCode:(IUCSSCode*)code asIUCarousel:(IUCarousel*)carousel{
     
     [code setInsertingViewPort:IUCSSDefaultViewPort];
-    [code setInsertingIdentifier:carousel.pagerID];
     if(carousel.deselectColor){
+        [code setInsertingIdentifier:carousel.pagerID];
         [code insertTag:@"background-color" color:carousel.deselectColor];
     }
-    
-    [code setInsertingIdentifier:[carousel.pagerID cssHover]];
     if(carousel.selectColor){
+        [code setInsertingIdentifier:[carousel.pagerID cssHover]];
         [code insertTag:@"background-color" color:carousel.selectColor];
     }
-    
-    
-    [code setInsertingIdentifier:[carousel.pagerID cssActive]];
     if(carousel.selectColor){
+        [code setInsertingIdentifier:[carousel.pagerID cssActive]];
         [code insertTag:@"background-color" color:carousel.selectColor];
     }
     

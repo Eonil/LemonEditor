@@ -108,7 +108,7 @@
             _isOpened = NO;
         }
         
-        [self updateCSSWithIdentifier:[self editorDisplayIdentifier]];
+        [self updateCSSWithIdentifiers:@[[self editorDisplayIdentifier]]];
 
     }
     
@@ -188,7 +188,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setBgActive:_bgActive];
     _bgActive = bgActive;
 
-    [self cssForItemColor];
+    [self updateCSSForItemColor];
 }
 
 - (void)setFontActive:(NSColor *)fontActive{
@@ -198,7 +198,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setFontActive:_fontActive];
     _fontActive = fontActive;
     
-    [self cssForItemColor];
+    [self updateCSSForItemColor];
 }
 
 #pragma mark - css
@@ -249,12 +249,8 @@
 }
 
 
-- (void)cssForItemColor{
-    [self updateCSSWithIdentifier:[self hoverItemIdentifier]];
-    [self updateCSSWithIdentifier:[self activeItemIdentifier]];
-    [self updateCSSWithIdentifier:[self closureIdentifier]];
-    [self updateCSSWithIdentifier:[self closureHoverIdentifier]];
-    [self updateCSSWithIdentifier:[self closureActiveIdentifier]];
+- (void)updateCSSForItemColor{
+    [self updateCSSWithIdentifiers:@[[self hoverItemIdentifier], [self activeItemIdentifier],[self closureIdentifier], [self closureHoverIdentifier], [self closureActiveIdentifier]]];
 }
 
 

@@ -136,7 +136,7 @@ typedef enum _IUOverflowType{
 @property (readonly) IUCSS *css; //used by subclass
 - (NSArray *)cssIdentifierArray;
 - (void)updateCSS;
-- (void)updateCSSWithIdentifier:(NSString *)identifier;
+- (void)updateCSSWithIdentifiers:(NSArray *)identifiers;
 
 //HTML
 -(NSString*)html;

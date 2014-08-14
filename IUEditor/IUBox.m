@@ -514,12 +514,14 @@
     }
 }
 
-- (void)updateCSSWithIdentifier:(NSString *)identifier{
+- (void)updateCSSWithIdentifiers:(NSArray *)identifiers{
     if (self.delegate) {
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
         for (NSNumber *viewport in cssCode.allViewports) {
             NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForTarget:IUTargetEditor viewport:[viewport intValue]];
-            [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier] viewport:[viewport intValue]];
+            for(NSString *identifier in identifiers){
+                [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier] viewport:[viewport intValue]];
+            }
             
         }
     }

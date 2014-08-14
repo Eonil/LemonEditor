@@ -95,7 +95,7 @@
             _isOpened = NO;
         }
         
-        [self updateCSSWithIdentifier:[self editorDisplayIdentifier]];
+        [self updateCSSWithIdentifiers:@[[self editorDisplayIdentifier]]];
         
     }
     
@@ -106,9 +106,7 @@
     
     if(self.css.editWidth <= 640){
         //mobile에서만 사용하는 button들
-        [self updateCSSWithIdentifier:[self mobileButtonIdentifier]];
-        [self updateCSSWithIdentifier:[self topButtonIdentifier]];
-        [self updateCSSWithIdentifier:[self bottomButtonIdentifier]];
+        [self updateCSSWithIdentifiers:@[[self mobileButtonIdentifier], [self topButtonIdentifier], [self bottomButtonIdentifier]]];
     }
 }
 #pragma mark - css identifier
@@ -200,7 +198,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setMobileTitleColor:_mobileTitleColor];
     _mobileTitleColor = mobileTitleColor;
     
-    [self updateCSSWithIdentifier:self.mobileButtonIdentifier];
+    [self updateCSSWithIdentifiers:@[self.mobileButtonIdentifier]];
 }
 
 - (void)setIconColor:(NSColor *)iconColor{
@@ -209,8 +207,7 @@
     }
     [[self.undoManager prepareWithInvocationTarget:self] setIconColor:_iconColor];
     _iconColor = iconColor;
-    [self updateCSSWithIdentifier:self.topButtonIdentifier];
-    [self updateCSSWithIdentifier:self.bottomButtonIdentifier];
+    [self updateCSSWithIdentifiers:@[self.topButtonIdentifier, self.bottomButtonIdentifier]];
 }
 
 - (void)setAlign:(IUMenuBarAlign)align{
