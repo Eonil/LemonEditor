@@ -7,11 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMEventMouseOnVC : NSViewController
-
-@property (nonatomic) IUController  *controller;
-
+@interface LMEventMouseOnVC : LMDefaultPropertyVC
 
 @end

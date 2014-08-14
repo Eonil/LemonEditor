@@ -50,31 +50,31 @@
                                            forKeys:@[NSValueTransformerNameBindingOption]];
     
     NSDictionary *tfBindingOption = @{NSNullPlaceholderBindingOption: @(0), NSContinuouslyUpdatesValueBindingOption: @(YES)};
-    
-    [_changeBGImagePositionB bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagImage] options:bgEnableBindingOption];
-    [_changeBGImagePositionB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverBGImagePositionEnable] options:IUBindingDictNotRaisesApplicable];
-    
- 
-    [_bgXTF bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverBGImagePositionEnable] options:IUBindingDictNotRaisesApplicable];
-    [_bgXTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverBGImageX] options:tfBindingOption];
 
-    [_bgYTF bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverBGImagePositionEnable] options:IUBindingDictNotRaisesApplicable];
-    [_bgYTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverBGImageY] options:tfBindingOption];
+    [self outlet:_changeBGImagePositionB bind:NSEnabledBinding cssTag:IUCSSTagImage options:bgEnableBindingOption];
+    [self outlet:_changeBGImagePositionB bind:NSValueBinding cssTag:IUCSSTagHoverBGImagePositionEnable];
+
+    [self outlet:_bgXTF bind:NSEnabledBinding cssTag:IUCSSTagHoverBGImagePositionEnable];
+    [self outlet:_bgXTF bind:NSValueBinding cssTag:IUCSSTagHoverBGImageX options:tfBindingOption];
     
-    [_bgXStepper bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverBGImagePositionEnable] options:IUBindingDictNotRaisesApplicable];
-    [_bgXStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverBGImageX] options:@{NSNullPlaceholderBindingOption:@(0)}];
+    [self outlet:_bgXStepper bind:NSEnabledBinding cssTag:IUCSSTagHoverBGImagePositionEnable];
+    [self outlet:_bgXStepper bind:NSValueBinding cssTag:IUCSSTagHoverBGImageX options:tfBindingOption];
     
-    [_bgYStepper bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverBGImagePositionEnable] options:IUBindingDictNotRaisesApplicable];
-    [_bgYStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverBGImageY] options:@{NSNullPlaceholderBindingOption:@(0)}];
+    [self outlet:_bgYTF bind:NSEnabledBinding cssTag:IUCSSTagHoverBGImagePositionEnable];
+    [self outlet:_bgYTF bind:NSValueBinding cssTag:IUCSSTagHoverBGImageY options:tfBindingOption];
+
+    [self outlet:_bgYStepper bind:NSEnabledBinding cssTag:IUCSSTagHoverBGImagePositionEnable];
+    [self outlet:_bgYStepper bind:NSValueBinding cssTag:IUCSSTagHoverBGImageY options:tfBindingOption];
+
     
 #pragma mark bgColor
-    [_changeBGColorBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverBGColorEnable] options:IUBindingDictNotRaisesApplicable];
-    [_bgColorWell bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverBGColor] options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_changeBGColorBtn bind:NSValueBinding cssTag:IUCSSTagHoverBGColorEnable];
+    [self outlet:_bgColorWell bind:NSValueBinding cssTag:IUCSSTagHoverBGColor];
+    
     
 #pragma mark textColor
-    [_changeTextColorBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverTextColorEnable] options:IUBindingDictNotRaisesApplicable];
-    [_textColorWell bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagHoverTextColor] options:IUBindingDictNotRaisesApplicable];
-   
+    [self outlet:_changeTextColorBtn bind:NSValueBinding cssTag:IUCSSTagHoverTextColorEnable];
+    [self outlet:_textColorWell bind:NSValueBinding cssTag:IUCSSTagHoverTextColor];   
 }
 - (IBAction)clickHelpButton:(NSButton *)sender {
     LMHelpPopover *popover = [LMHelpPopover sharedHelpPopover];
