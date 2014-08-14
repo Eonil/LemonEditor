@@ -2,6 +2,7 @@
 
 #call heroku auth
 set git [lindex $argv 0]
+set timeout 60
 
 spawn $git push --force heroku master
 
@@ -10,6 +11,10 @@ expect {
         send -- "yes"
         send -- "\r"
     }
+    timeout{
+        exit
+    }
+    eof{
+        exit
+    }
 }
-
-expect EOF
