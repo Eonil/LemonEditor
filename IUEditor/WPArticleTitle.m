@@ -11,8 +11,15 @@
 @implementation WPArticleTitle
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
-    self.positionType = IUPositionTypeFloatLeft;
+    self.positionType = IUPositionTypeRelative;
     [self.css setValue:nil forTag:IUCSSTagBGColor];
+    self.lineHeightAuto = NO;
+    [self.css eradicateTag:IUCSSTagPixelHeight];
+    [self.css setValue:@(2.0) forTag:IUCSSTagLineHeight];
+    [self.css setValue:@(24) forTag:IUCSSTagFontSize];
+    [self.css setValue:@(700) forTag:IUCSSTagPixelWidth];
+
+    [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign];
     return self;
 }
 
@@ -33,6 +40,10 @@
 }
 
 - (BOOL)canCopy{
+    return NO;
+}
+
+- (BOOL)canRemoveIUByUserInput{
     return NO;
 }
 

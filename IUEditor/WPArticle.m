@@ -128,6 +128,10 @@
     return NO;
 }
 
+- (BOOL)canRemoveIUByUserInput{
+    return NO;
+}
+
 
 
 @end

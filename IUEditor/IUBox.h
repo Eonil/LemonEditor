@@ -180,7 +180,7 @@ typedef enum _IUOverflowType{
 -(BOOL)removeIU:(IUBox *)iu;
 -(BOOL)removeAllIU;
 
--(BOOL)shouldRemoveIUByUserInput;
+-(BOOL)canRemoveIUByUserInput;
 -(BOOL)changeIUIndex:(IUBox*)iu to:(NSUInteger)index error:(NSError**)error;
 -(BOOL)addIUReference:(IUBox *)iu error:(NSError**)error;
 

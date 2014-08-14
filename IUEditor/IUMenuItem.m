@@ -281,7 +281,7 @@
 - (BOOL)shouldAddIUByUserInput{
     return NO;
 }
-- (BOOL)shouldRemoveIUByUserInput{
+- (BOOL)canRemoveIUByUserInput{
     return NO;
 }
 - (BOOL)shouldSelectParentFirst{

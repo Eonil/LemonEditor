@@ -125,7 +125,7 @@
     unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
     if (key == NSDeleteCharacter) {
         for(IUBox *box in [self.IUController selectedObjects]){
-            if([box shouldRemoveIUByUserInput]){
+            if([box canRemoveIUByUserInput]){
                 [box.parent removeIU:box];
             }
         }

@@ -578,7 +578,7 @@
     return YES;
 }
 
-- (BOOL)shouldRemoveIUByUserInput{
+- (BOOL)canRemoveIUByUserInput{
     return YES;
 }
 

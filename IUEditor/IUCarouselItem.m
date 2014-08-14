@@ -40,7 +40,7 @@
 - (BOOL)shouldAddIUByUserInput{
     return YES;
 }
--(BOOL)shouldRemoveIUByUserInput{
+-(BOOL)canRemoveIUByUserInput{
     return NO;
 }
 

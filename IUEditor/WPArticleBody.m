@@ -14,10 +14,13 @@
     self = [super initWithProject:project options:options];
     self.positionType = IUPositionTypeRelative;
     [self.css eradicateTag:IUCSSTagPixelHeight];
-    [self.css setValue:@"1.3" forTag:IUCSSTagLineHeight];
+    [self.css setValue:@(2.0) forTag:IUCSSTagLineHeight];
     [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign];
+    [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent];
+    [self.css setValue:@(100) forTag:IUCSSTagPercentWidth];
+    [self.css setValue:@(15) forKey:IUCSSTagFontSize];
+    [self.css eradicateTag:IUCSSTagBGColor];
     
-    [self.css setValue:@(800) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
     return self;
 }
 
@@ -37,5 +40,10 @@
 - (BOOL)canCopy{
     return NO;
 }
+
+- (BOOL)canRemoveIUByUserInput{
+    return NO;
+}
+
 
 @end

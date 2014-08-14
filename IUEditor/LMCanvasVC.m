@@ -173,7 +173,7 @@
 
 - (void)removeSelectedIUs{
     for(IUBox *obj in self.controller.selectedObjects){
-        if([obj shouldRemoveIUByUserInput]){
+        if([obj canRemoveIUByUserInput]){
             [obj.parent removeIU:obj];
         }
     }
