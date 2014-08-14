@@ -7,11 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMPropertyFontVC : NSViewController <NSComboBoxDataSource, NSComboBoxDelegate, NSControlTextEditingDelegate>
-
-@property (weak, nonatomic) _binding_ IUController      *controller;
-@property (weak) id selection;
+@interface LMPropertyFontVC : LMDefaultPropertyVC <NSComboBoxDataSource, NSComboBoxDelegate, NSControlTextEditingDelegate>
 
 @end
