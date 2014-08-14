@@ -106,6 +106,8 @@
                                  IUProjectKeyIUFilePath : fileName,
                                  IUProjectKeyType:@(IUProjectTypeWordpress),
                                  };
+    //create theme collection dir
+    [[NSFileManager defaultManager] createDirectoryAtPath:_themeCollectionDirectory withIntermediateDirectories:YES attributes:nil error:nil];
     
     [(IUProjectController*)[NSDocumentController sharedDocumentController] newDocument:nil withOption:options];
     [self.view.window close];
