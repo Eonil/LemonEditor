@@ -7,11 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMPropertyBorderVC : NSViewController
-@property (weak, nonatomic) IUController      *controller;
-@property id selection;
-
+@interface LMPropertyBorderVC : LMDefaultPropertyVC
 
 @end
