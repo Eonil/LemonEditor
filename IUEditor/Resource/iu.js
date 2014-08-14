@@ -22,9 +22,10 @@ function isMobile(){
 }
 
 function transitionAnimationOn(eventObject){
-    var secondObj = $(this).find('.IUItem')[1];
-	var effect = $(this).attr('transitionanimation');
-    var duration = $(this).attr('transitionduration');
+	var transition = eventObject.currentTarget;
+    var secondObj = $(transition).find('.IUItem')[1];
+	var effect = $(transition).attr('transitionanimation');
+    var duration = $(transition).attr('transitionduration');
 
     if(duration <= 0){
         $(secondObj).show(effect, 1);
@@ -33,14 +34,15 @@ function transitionAnimationOn(eventObject){
         $(secondObj).show(effect, duration);
     }
 
-   	$(this).data('isSelected', 'false');
+   	$(transition).data('isSelected', 'false');
 }
 
 function transitionAnimationOff(eventObject){
-    var secondObj = $(this).find('.IUItem')[1];
-    var isEndAnimation = $($(this).children()[1]).hasClass('IUItem');
-    var effect = $(this).attr('transitionanimation');
-    var duration = $(this).attr('transitionduration');
+	var transition = eventObject.currentTarget;
+    var secondObj = $(transition).find('.IUItem')[1];
+    var isEndAnimation = $($(transition).children()[1]).hasClass('IUItem');
+    var effect = $(transition).attr('transitionanimation');
+    var duration = $(transition).attr('transitionduration');
     
     if(duration <= 0){
         $(secondObj).hide(effect, 1);
@@ -48,15 +50,17 @@ function transitionAnimationOff(eventObject){
     else{
         $(secondObj).hide(effect, duration);
     }
-    $(this).data('isSelected', 'true');
+    $(transition).data('isSelected', 'true');
 }
 
 function transitionAnimation(eventObject){
     if (typeof isEditor != 'undefined' && isEditor == true){
         return;
     }
-    var effect = $(this).attr('transitionanimation');
-    var isSelected= $(this).data('isSelected');
+	
+	var transition = eventObject.currentTarget;
+    var effect = $(transition).attr('transitionanimation');
+    var isSelected= $(transition).data('isSelected');
     
     
    	if (isSelected=='true'){

@@ -61,7 +61,7 @@
     [outlet bind:binding toObject:self withKeyPath:[self pathForProperty:property] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
 }
 - (void)outlet:(id)outlet bind:(NSString *)binding eventTag:(IUEventTag)tag{
-    [outlet bind:binding toObject:self withKeyPath:[@"controller.selection.event." stringByAppendingString:tag] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [outlet bind:binding toObject:self withKeyPath:[self pathForEventTag:tag] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
 }
 
 - (void)outlet:(id)outlet bind:(NSString *)binding cssTag:(IUCSSTag)tag options:(NSDictionary *)options{
@@ -73,7 +73,7 @@
 }
 
 - (void)outlet:(id)outlet bind:(NSString *)binding eventTag:(IUEventTag)tag options:(NSDictionary *)options{
-    [outlet bind:binding toObject:self withKeyPath:[@"controller.selection.event." stringByAppendingString:tag] options:options];
+    [outlet bind:binding toObject:self withKeyPath:[self pathForEventTag:tag] options:options];
 }
 
 
@@ -82,14 +82,14 @@
     return [self valueForKeyPath:[self pathForCSSTag:tag]];
 }
 - (id)valueForProperty:(IUPropertyTag)property{
-     return [self valueForKeyPath:[@"self.selection." stringByAppendingString:property]];
+     return [self valueForKeyPath:[self pathForProperty:property]];
 }
 
 - (void)setValue:(id)value forCSSTag:(IUCSSTag)tag{
     [self setValue:value forKeyPath:[self pathForCSSTag:tag]];
 }
 - (void)setValue:(id)value forIUProperty:(IUPropertyTag)property{
-    [self setValue:value forKeyPath:[@"self.selection." stringByAppendingString:property]];
+    [self setValue:value forKeyPath:[self pathForProperty:property]];
 }
 
 #pragma mark - observer
@@ -112,11 +112,15 @@
 }
 
 #pragma mark - keyPath
+//FIXME: self.selection not working
 - (NSString *)pathForCSSTag:(IUCSSTag)tag{
-    return [@"self.selection.css.assembledTagDictionary." stringByAppendingString:tag];
+    return [@"self.controller.selection.css.assembledTagDictionary." stringByAppendingString:tag];
 }
 - (NSString *)pathForProperty:(IUPropertyTag)property{
-    return [@"self.selection." stringByAppendingString:property];
+    return [@"self.controller.selection." stringByAppendingString:property];
+}
+- (NSString *)pathForEventTag:(IUEventTag)tag{
+    return [@"self.controller.selection.event." stringByAppendingString:tag];
 }
 
 @end
