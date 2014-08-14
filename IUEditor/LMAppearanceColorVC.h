@@ -9,9 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "IUController.h"
 
-@interface LMPropertyBGColorVC : NSViewController
+@interface LMAppearanceColorVC : NSViewController
 
 @property (nonatomic, weak) IUController      *controller;
-
+@property (weak) id selection;
 
 @end

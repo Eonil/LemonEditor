@@ -13,9 +13,8 @@
 
 @interface LMPropertyBGImageVC : NSViewController <NSComboBoxDelegate>
 
-@property (nonatomic) IUController      *controller;
-@property (strong) IUResourceManager     *resourceManager;
+@property (nonatomic, weak) IUController      *controller;
+@property (weak) IUResourceManager     *resourceManager;
+@property (weak) id selection;
 
-
-@property (weak) id content;
 @end

@@ -11,5 +11,5 @@
 @interface LMPropertyShadowVC : NSViewController
 
 @property (weak) IUController  *controller;
-
+@property id selection;
 @end

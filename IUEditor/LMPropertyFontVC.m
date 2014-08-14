@@ -55,19 +55,25 @@
     return self;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"selection"]) {
+        self.selection = _controller.selection;
+    }
+}
 
 - (void)setController:(IUController *)controller{
     _controller = controller;
-    [_textAlignB bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagTextAlign] options:IUBindingDictNotRaisesApplicable];
+    [controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
+    [_textAlignB bind:NSSelectedIndexBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagTextAlign] options:IUBindingDictNotRaisesApplicable];
     [_autoHeightBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"lineHeightAuto"] options:IUBindingDictNotRaisesApplicable];
     
     //observing for undo
-    observingList = @[[_controller keyPathFromControllerToCSSTag:IUCSSTagFontName],
-                      [_controller keyPathFromControllerToCSSTag:IUCSSTagFontWeight],
-                      [_controller keyPathFromControllerToCSSTag:IUCSSTagFontStyle],
-                      [_controller keyPathFromControllerToCSSTag:IUCSSTagTextDecoration],
-                      [_controller keyPathFromControllerToCSSTag:IUCSSTagFontSize],
-                      [_controller keyPathFromControllerToCSSTag:IUCSSTagLineHeight],
+    observingList = @[[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontName],
+                      [@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontWeight],
+                      [@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontStyle],
+                      [@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagTextDecoration],
+                      [@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontSize],
+                      [@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagLineHeight],
                       [_controller keyPathFromControllerToProperty:@"shouldCompileFontInfo"],
                       @"controller.selectedObjects",
                       ];
@@ -80,7 +86,7 @@
     [_fontB bind:NSContentBinding toObject:_fontListDC withKeyPath:@"arrangedObjects.key" options:IUBindingDictNotRaisesApplicable];
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
-    [_fontColorWell bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontColor] options:IUBindingDictNotRaisesApplicable];
+    [_fontColorWell bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontColor] options:IUBindingDictNotRaisesApplicable];
 #endif 
     
     //combobox delegate
@@ -165,9 +171,9 @@
     if([self isSelectedObjectText]){
         [_fontStyleB setEnabled:YES];
 
-        [_fontB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToTextCSSProperty:@"fontName"] options:IUBindingDictNotRaisesApplicable];
-        [_fontSizeComboBox bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToTextCSSProperty:@"fontSize"] options:IUBindingDictNotRaisesApplicable];
-        [_fontColorWell bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToTextCSSProperty:@"fontColor"] options:IUBindingDictNotRaisesApplicable];
+        [_fontB bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.textController." stringByAppendingString:@"fontName"] options:IUBindingDictNotRaisesApplicable];
+        [_fontSizeComboBox bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.textController." stringByAppendingString:@"fontSize"] options:IUBindingDictNotRaisesApplicable];
+        [_fontColorWell bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.textController." stringByAppendingString:@"fontColor"] options:IUBindingDictNotRaisesApplicable];
         
         
         if([[_controller selectedObjects] count] ==1 ){
@@ -186,9 +192,9 @@
         //not text - text field / text view
         [_fontStyleB setEnabled:NO];
 
-        [_fontB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontName] options:IUBindingDictNotRaisesApplicable];
-        [_fontSizeComboBox bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontSize] options:IUBindingDictNotRaisesApplicable];
-        [_fontColorWell bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontColor] options:IUBindingDictNotRaisesApplicable];
+        [_fontB bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontName] options:IUBindingDictNotRaisesApplicable];
+        [_fontSizeComboBox bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontSize] options:IUBindingDictNotRaisesApplicable];
+        [_fontColorWell bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontColor] options:IUBindingDictNotRaisesApplicable];
         
     }
 
@@ -198,13 +204,13 @@
     
     BOOL value;
     value = [sender isSelectedForSegment:0];
-    [self setValue:@(value) forKeyPath:[_controller keyPathFromControllerToTextCSSProperty:@"bold"]];
+    [self setValue:@(value) forKeyPath:[@"self.selection.textController." stringByAppendingString:@"bold"]];
     
     value = [sender isSelectedForSegment:1];
-    [self setValue:@(value) forKeyPath:[_controller keyPathFromControllerToTextCSSProperty:@"italic"]];
+    [self setValue:@(value) forKeyPath:[@"self.selection.textController." stringByAppendingString:@"italic"]];
     
     value = [sender isSelectedForSegment:2];
-    [self setValue:@(value) forKeyPath:[_controller keyPathFromControllerToTextCSSProperty:@"underline"]];
+    [self setValue:@(value) forKeyPath:[@"self.selection.textController." stringByAppendingString:@"underline"]];
     
 }
 
@@ -236,7 +242,7 @@
         NSString *iuFontName = [self valueForTag:IUCSSTagFontName];
         if(iuFontName == nil){
             iuFontName = currentFontName;
-            [self setValue:currentFontName forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontName]];
+            [self setValue:currentFontName forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontName]];
         }
         if(iuFontName == NSMultipleValuesMarker){
             NSString *placeholder = [NSString stringWithValueMarker:NSMultipleValuesMarker];
@@ -251,7 +257,7 @@
         
         //set Font size
         if([self valueForTag:IUCSSTagFontSize] == nil){
-            [self setValue:@(currentFontSize) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontSize]];
+            [self setValue:@(currentFontSize) forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontSize]];
         }
         
         else if([self valueForTag:IUCSSTagFontSize] == NSMultipleValuesMarker){
@@ -322,7 +328,7 @@
 
 - (id)valueForTag:(IUCSSTag)tag
 {
-    id value = [self valueForKeyPath:[_controller keyPathFromControllerToCSSTag:tag]];
+    id value = [self valueForKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:tag]];
     if(value == nil || value == NSNoSelectionMarker){
         return nil;
     }
@@ -353,21 +359,21 @@
 
 - (void)updateFontName:(NSString *)fontName{
     currentFontName = fontName;
-    [self setValue:currentFontName forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontName]];
+    [self setValue:currentFontName forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontName]];
 }
 
 - (void)updateFontSize:(NSInteger)fontSize{
     currentFontSize = fontSize;
-    [self setValue:@(currentFontSize) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontSize]];
+    [self setValue:@(currentFontSize) forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontSize]];
 }
 
 - (void)updateLetterSpacing:(CGFloat)sapcing{
-    [self setValue:@(sapcing) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagTextLetterSpacing]];
+    [self setValue:@(sapcing) forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagTextLetterSpacing]];
 
 }
 
 - (void)updateLineHeight:(CGFloat)lineHeightStr{
-    [self setValue:@(lineHeightStr) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagLineHeight]];
+    [self setValue:@(lineHeightStr) forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagLineHeight]];
 }
 
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
@@ -413,13 +419,13 @@
     
     BOOL value;
     value = [sender isSelectedForSegment:0];
-    [self setValue:@(value) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontWeight]];
+    [self setValue:@(value) forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontWeight]];
     
     value = [sender isSelectedForSegment:1];
-    [self setValue:@(value) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagFontStyle]];
+    [self setValue:@(value) forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontStyle]];
     
     value = [sender isSelectedForSegment:2];
-    [self setValue:@(value) forKeyPath:[_controller keyPathFromControllerToCSSTag:IUCSSTagTextDecoration]];
+    [self setValue:@(value) forKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagTextDecoration]];
     
 }
 

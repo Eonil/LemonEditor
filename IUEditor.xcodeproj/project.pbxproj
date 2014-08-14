@@ -604,8 +604,8 @@
 		3DF8045018FE62FC00913505 /* tool_transition@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF8043618FE62FC00913505 /* tool_transition@2x.png */; };
 		3DF8045818FE874400913505 /* LMAppearanceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8045618FE874400913505 /* LMAppearanceVC.m */; };
 		3DF8045918FE874400913505 /* LMAppearanceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DF8045718FE874400913505 /* LMAppearanceVC.xib */; };
-		3DF8046018FF75CF00913505 /* LMPropertyBGColorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8045E18FF75CF00913505 /* LMPropertyBGColorVC.m */; };
-		3DF8046118FF75CF00913505 /* LMPropertyBGColorVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DF8045F18FF75CF00913505 /* LMPropertyBGColorVC.xib */; };
+		3DF8046018FF75CF00913505 /* LMAppearanceColorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8045E18FF75CF00913505 /* LMAppearanceColorVC.m */; };
+		3DF8046118FF75CF00913505 /* LMAppearanceColorVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DF8045F18FF75CF00913505 /* LMAppearanceColorVC.xib */; };
 		3DF8046518FF784500913505 /* LMPropertyFontVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8046318FF784500913505 /* LMPropertyFontVC.m */; };
 		3DF8046618FF784500913505 /* LMPropertyFontVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DF8046418FF784500913505 /* LMPropertyFontVC.xib */; };
 		3DF8046A18FF790400913505 /* LMPropertyShadowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8046818FF790400913505 /* LMPropertyShadowVC.m */; };
@@ -700,8 +700,8 @@
 		69761BC318F04ECD00C4EDC6 /* LMPropertyBGImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69761BC118F04ECD00C4EDC6 /* LMPropertyBGImageVC.m */; };
 		69761BC418F04ECD00C4EDC6 /* LMPropertyBGImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69761BC218F04ECD00C4EDC6 /* LMPropertyBGImageVC.xib */; };
 		69761BCA18F168D700C4EDC6 /* IUResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69761BC918F168D700C4EDC6 /* IUResourceManager.m */; };
-		6979FC0718ED34E20060C3B4 /* LMPropertyFrameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6979FC0518ED34E20060C3B4 /* LMPropertyFrameVC.m */; };
-		6979FC0818ED34E20060C3B4 /* LMPropertyFrameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6979FC0618ED34E20060C3B4 /* LMPropertyFrameVC.xib */; };
+		6979FC0718ED34E20060C3B4 /* LMAppearanceFrameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6979FC0518ED34E20060C3B4 /* LMAppearanceFrameVC.m */; };
+		6979FC0818ED34E20060C3B4 /* LMAppearanceFrameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6979FC0618ED34E20060C3B4 /* LMAppearanceFrameVC.xib */; };
 		697F99DB1998259500E86A2B /* IUBackground+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 697F99D91998259500E86A2B /* IUBackground+WP.m */; };
 		6983E71D18FFF54600D424B8 /* JDOutlineCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6983E71C18FFF54600D424B8 /* JDOutlineCellView.m */; };
 		698503EA199953A500576DBF /* jquery-1.10.2.js in Resources */ = {isa = PBXBuildFile; fileRef = 698503E8199953A500576DBF /* jquery-1.10.2.js */; };
@@ -1563,9 +1563,9 @@
 		3DF8045518FE874400913505 /* LMAppearanceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMAppearanceVC.h; sourceTree = "<group>"; };
 		3DF8045618FE874400913505 /* LMAppearanceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMAppearanceVC.m; sourceTree = "<group>"; };
 		3DF8045718FE874400913505 /* LMAppearanceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMAppearanceVC.xib; sourceTree = "<group>"; };
-		3DF8045D18FF75CF00913505 /* LMPropertyBGColorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyBGColorVC.h; sourceTree = "<group>"; };
-		3DF8045E18FF75CF00913505 /* LMPropertyBGColorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyBGColorVC.m; sourceTree = "<group>"; };
-		3DF8045F18FF75CF00913505 /* LMPropertyBGColorVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyBGColorVC.xib; sourceTree = "<group>"; };
+		3DF8045D18FF75CF00913505 /* LMAppearanceColorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMAppearanceColorVC.h; sourceTree = "<group>"; };
+		3DF8045E18FF75CF00913505 /* LMAppearanceColorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMAppearanceColorVC.m; sourceTree = "<group>"; };
+		3DF8045F18FF75CF00913505 /* LMAppearanceColorVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMAppearanceColorVC.xib; sourceTree = "<group>"; };
 		3DF8046218FF784500913505 /* LMPropertyFontVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyFontVC.h; sourceTree = "<group>"; };
 		3DF8046318FF784500913505 /* LMPropertyFontVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyFontVC.m; sourceTree = "<group>"; };
 		3DF8046418FF784500913505 /* LMPropertyFontVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyFontVC.xib; sourceTree = "<group>"; };
@@ -1718,9 +1718,9 @@
 		69761BC218F04ECD00C4EDC6 /* LMPropertyBGImageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyBGImageVC.xib; sourceTree = "<group>"; };
 		69761BC818F168D700C4EDC6 /* IUResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUResourceManager.h; sourceTree = "<group>"; };
 		69761BC918F168D700C4EDC6 /* IUResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUResourceManager.m; sourceTree = "<group>"; };
-		6979FC0418ED34E20060C3B4 /* LMPropertyFrameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyFrameVC.h; sourceTree = "<group>"; };
-		6979FC0518ED34E20060C3B4 /* LMPropertyFrameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyFrameVC.m; sourceTree = "<group>"; };
-		6979FC0618ED34E20060C3B4 /* LMPropertyFrameVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyFrameVC.xib; sourceTree = "<group>"; };
+		6979FC0418ED34E20060C3B4 /* LMAppearanceFrameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMAppearanceFrameVC.h; sourceTree = "<group>"; };
+		6979FC0518ED34E20060C3B4 /* LMAppearanceFrameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMAppearanceFrameVC.m; sourceTree = "<group>"; };
+		6979FC0618ED34E20060C3B4 /* LMAppearanceFrameVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMAppearanceFrameVC.xib; sourceTree = "<group>"; };
 		697F99D81998259500E86A2B /* IUBackground+WP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IUBackground+WP.h"; sourceTree = "<group>"; };
 		697F99D91998259500E86A2B /* IUBackground+WP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IUBackground+WP.m"; sourceTree = "<group>"; };
 		6983E71B18FFF54600D424B8 /* JDOutlineCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDOutlineCellView.h; path = JD/JDOutlineCellView.h; sourceTree = "<group>"; };
@@ -2172,12 +2172,12 @@
 		3D4675F71929B9C10036C64C /* apperanceVC */ = {
 			isa = PBXGroup;
 			children = (
-				3DF8045D18FF75CF00913505 /* LMPropertyBGColorVC.h */,
-				3DF8045E18FF75CF00913505 /* LMPropertyBGColorVC.m */,
-				3DF8045F18FF75CF00913505 /* LMPropertyBGColorVC.xib */,
-				6979FC0418ED34E20060C3B4 /* LMPropertyFrameVC.h */,
-				6979FC0518ED34E20060C3B4 /* LMPropertyFrameVC.m */,
-				6979FC0618ED34E20060C3B4 /* LMPropertyFrameVC.xib */,
+				3DF8045D18FF75CF00913505 /* LMAppearanceColorVC.h */,
+				3DF8045E18FF75CF00913505 /* LMAppearanceColorVC.m */,
+				3DF8045F18FF75CF00913505 /* LMAppearanceColorVC.xib */,
+				6979FC0418ED34E20060C3B4 /* LMAppearanceFrameVC.h */,
+				6979FC0518ED34E20060C3B4 /* LMAppearanceFrameVC.m */,
+				6979FC0618ED34E20060C3B4 /* LMAppearanceFrameVC.xib */,
 				69761BC018F04ECD00C4EDC6 /* LMPropertyBGImageVC.h */,
 				69761BC118F04ECD00C4EDC6 /* LMPropertyBGImageVC.m */,
 				69761BC218F04ECD00C4EDC6 /* LMPropertyBGImageVC.xib */,
@@ -4253,7 +4253,7 @@
 				06855602198A63430073FA83 /* firetruck.png in Resources */,
 				069A0FE9195179D900476CFA /* LMPropertyDisplayVC.xib in Resources */,
 				267CB193190F93370079E565 /* tab_appearance_off.png in Resources */,
-				6979FC0818ED34E20060C3B4 /* LMPropertyFrameVC.xib in Resources */,
+				6979FC0818ED34E20060C3B4 /* LMAppearanceFrameVC.xib in Resources */,
 				698BEA9B19664CBD0019C1C3 /* record_stop.png in Resources */,
 				3D5B5AF91990DDDC00EF6F12 /* ttwidgetVertical.png in Resources */,
 				2656EDFE19791BFB0066E23F /* tab_wp_off.png in Resources */,
@@ -4265,7 +4265,7 @@
 				265FCC0D1953D3C000BD9068 /* tab2_on_02.png in Resources */,
 				CBA878001963D3CF00075294 /* Tutorial02_kr.png in Resources */,
 				CBA8780F1964084700075294 /* IUBox.rtf in Resources */,
-				3DF8046118FF75CF00913505 /* LMPropertyBGColorVC.xib in Resources */,
+				3DF8046118FF75CF00913505 /* LMAppearanceColorVC.xib in Resources */,
 				265BC577190FA9B600A1758F /* controller_comb.png in Resources */,
 				3DA6C66819768843004D6587 /* gallery_preview_mobile02.png in Resources */,
 				3DED26821900D329001A1D67 /* stack_twitter.png in Resources */,
@@ -4634,7 +4634,7 @@
 				691EE6DE1992DB320080E23A /* IUCSSWPCompiler.m in Sources */,
 				6985CBA018E31558008DBF50 /* IUSheetGroup.m in Sources */,
 				3DB3ACFD18EC1F700046DFB7 /* LMCanvasVC.m in Sources */,
-				6979FC0718ED34E20060C3B4 /* LMPropertyFrameVC.m in Sources */,
+				6979FC0718ED34E20060C3B4 /* LMAppearanceFrameVC.m in Sources */,
 				3D14886318F6AE5700E8EE4C /* LMCenterClipView.m in Sources */,
 				69D15F6F18E893170046FBB0 /* LMBottomToolbarVC.m in Sources */,
 				69FEF9501996D46600AEB283 /* WPArticleBody.m in Sources */,
@@ -4658,7 +4658,7 @@
 				CB9BD63D1914DE23002C9369 /* LMStartNewPresentationVC.m in Sources */,
 				69CFCAC018EA8D1700E3048A /* IUImage.m in Sources */,
 				69D79B3819138CDC0020608D /* LMStartTemplateVC.m in Sources */,
-				3DF8046018FF75CF00913505 /* LMPropertyBGColorVC.m in Sources */,
+				3DF8046018FF75CF00913505 /* LMAppearanceColorVC.m in Sources */,
 				3DB3ACCB18EBEF3D0046DFB7 /* SizeView.m in Sources */,
 				3DED274D1907C140001A1D67 /* IUFBLike.m in Sources */,
 				69860E4D197625C7001C3F7F /* WPArticleList.m in Sources */,

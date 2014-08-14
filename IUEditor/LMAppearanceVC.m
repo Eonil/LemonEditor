@@ -7,9 +7,9 @@
 //
 
 #import "LMAppearanceVC.h"
-#import "LMPropertyFrameVC.h"
+#import "LMAppearanceFrameVC.h"
 #import "LMPropertyBorderVC.h"
-#import "LMPropertyBGColorVC.h"
+#import "LMAppearanceColorVC.h"
 #import "LMPropertyFontVC.h"
 #import "LMPropertyShadowVC.h"
 #import "LMPropertyDisplayVC.h"
@@ -20,10 +20,10 @@
 @end
 
 @implementation LMAppearanceVC{
-    LMPropertyFrameVC    *propertyFrameVC;
+    LMAppearanceFrameVC    *appearanceFrameVC;
     LMPropertyBorderVC  *propertyBorderVC;
-    LMPropertyBGColorVC *propertyBGColorVC;
-    LMPropertyFontVC    *propertyFontVC;
+    LMAppearanceColorVC *appearanceColorVC;
+    LMPropertyFontVC    *appearanceFontVC;
     LMPropertyShadowVC  *propertyShadowVC;
     LMPropertyDisplayVC *propertyDisplayVC;
     LMPropertyBGImageVC *propertyBGImageVC;
@@ -41,11 +41,11 @@
 }
 - (void)prepareDealloc{
     /*
-    [propertyFrameVC unbind:@"controller"];
+    [appearanceFrameVC unbind:@"controller"];
     [propertyBGImageVC unbind:@"controller"];
     [propertyBGImageVC unbind:@"resourceManager"];
     [propertyBorderVC unbind:@"controller"];
-    [propertyBGColorVC unbind:@"controller"];
+    [appearanceColorVC unbind:@"controller"];
     [propertyFontVC unbind:@"controller"];
     [propertyShadowVC unbind:@"controller"];
     [propertyOverflowVC unbind:@"controller"];
@@ -57,8 +57,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         //init VC
-        propertyFrameVC = [[LMPropertyFrameVC alloc] initWithNibName:@"LMPropertyFrameVC" bundle:nil];
-        [propertyFrameVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+        appearanceFrameVC = [[LMAppearanceFrameVC alloc] initWithNibName:@"LMAppearanceFrameVC" bundle:nil];
+        [appearanceFrameVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
         
         propertyBGImageVC = [[LMPropertyBGImageVC alloc] initWithNibName:@"LMPropertyBGImageVC" bundle:nil];
         [propertyBGImageVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
@@ -67,11 +67,11 @@
         propertyBorderVC = [[LMPropertyBorderVC alloc] initWithNibName:@"LMPropertyBorderVC" bundle:nil];
         [propertyBorderVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
         
-        propertyBGColorVC = [[LMPropertyBGColorVC alloc] initWithNibName:@"LMPropertyBGColorVC" bundle:nil];
-        [propertyBGColorVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+        appearanceColorVC = [[LMAppearanceColorVC alloc] initWithNibName:@"LMAppearanceColorVC" bundle:nil];
+        [appearanceColorVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
         
-        propertyFontVC = [[LMPropertyFontVC alloc] initWithNibName:@"LMPropertyFontVC" bundle:nil];
-        [propertyFontVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
+        appearanceFontVC = [[LMPropertyFontVC alloc] initWithNibName:@"LMPropertyFontVC" bundle:nil];
+        [appearanceFontVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
 
         propertyShadowVC = [[LMPropertyShadowVC alloc] initWithNibName:@"LMPropertyShadowVC" bundle:nil];
         [propertyShadowVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
@@ -118,10 +118,10 @@
 - (void)awakeFromNib{
     //make array
     outlineVOrderArray = [NSMutableArray array];
-    [outlineVOrderArray addObject:propertyFrameVC.view];
-    [outlineVOrderArray addObject:propertyBGColorVC.view];
+    [outlineVOrderArray addObject:appearanceFrameVC.view];
+    [outlineVOrderArray addObject:appearanceColorVC.view];
     [outlineVOrderArray addObject:propertyBGImageVC.view];
-    [outlineVOrderArray addObject:propertyFontVC.view];
+    [outlineVOrderArray addObject:appearanceFontVC.view];
     [outlineVOrderArray addObject:propertyShadowVC.view];
     [outlineVOrderArray addObject:propertyBorderVC.view];
     [outlineVOrderArray addObject:propertyDisplayVC.view];
@@ -142,7 +142,7 @@
         return outlineVOrderArray.count;
     }
     else{
-        if([((JDOutlineCellView *)propertyFrameVC.view).titleV isEqualTo:item]){
+        if([((JDOutlineCellView *)appearanceFrameVC.view).titleV isEqualTo:item]){
             return 0;
         }
         else if([((JDOutlineCellView *)propertyDisplayVC.view).titleV isEqualTo:item]){
@@ -166,7 +166,7 @@
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item{
-    if([((JDOutlineCellView *)propertyFrameVC.view).titleV isEqualTo:item]){
+    if([((JDOutlineCellView *)appearanceFrameVC.view).titleV isEqualTo:item]){
             return NO;
     }
     else if([((JDOutlineCellView *)propertyDisplayVC.view).titleV isEqualTo:item]){

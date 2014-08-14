@@ -10,8 +10,9 @@
 #import "IUController.h"
 
 
-@interface LMPropertyFrameVC : NSViewController <NSTextFieldDelegate>
+@interface LMAppearanceFrameVC : NSViewController <NSTextFieldDelegate>
 
 @property (weak, nonatomic) IUController *controller;
+@property (weak) id selection;
 
 @end

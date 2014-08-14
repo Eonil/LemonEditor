@@ -101,15 +101,22 @@
 
 
 - (void)structureChanged:(NSNotification *)notification{
+    [JDLogUtil timeLogStart:@"StackVC"];
+    [JDLogUtil timeLogStart:@"StackVC-rearrange"];
+    
     [self.IUController rearrangeObjects];
+    [JDLogUtil timeLogEnd:@"StackVC-rearrange"];
+    
     if ([[notification.userInfo objectForKey:IUNotificationStructureChangeType] isEqualTo: IUNotificationStructureAdding]) {
         IUBox *newOne = [notification.userInfo objectForKey:IUNotificationStructureChangedIU];
-        [self.IUController rearrangeObjects];
         if (newOne) {
+            [JDLogUtil timeLogStart:@"StackVC-setSelected"];
             [self.IUController setSelectedObject:newOne];
+            [JDLogUtil timeLogEnd:@"StackVC-setSelected"];
         }
     }
-
+    [JDLogUtil timeLogEnd:@"StackVC"];
+    
     //we don't need this
     //[_outlineV reloadData];
 }

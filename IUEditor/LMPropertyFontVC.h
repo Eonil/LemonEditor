@@ -12,5 +12,6 @@
 @interface LMPropertyFontVC : NSViewController <NSComboBoxDataSource, NSComboBoxDelegate, NSControlTextEditingDelegate>
 
 @property (weak, nonatomic) _binding_ IUController      *controller;
+@property (weak) id selection;
 
 @end

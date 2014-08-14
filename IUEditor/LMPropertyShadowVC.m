@@ -38,6 +38,11 @@
     return [@"controller.selection.css.assembledTagDictionary." stringByAppendingString:tag];
 }
 
+-(void)setController:(IUController *)controller{
+    _controller = controller;
+    
+}
+
 -(void)awakeFromNib{
 
     [_shadowColor bind:@"value" toObject:self withKeyPath:[self CSSBindingPath:IUCSSTagShadowColor] options:IUBindingDictNotRaisesApplicable];

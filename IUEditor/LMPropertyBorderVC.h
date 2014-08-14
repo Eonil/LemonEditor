@@ -11,7 +11,7 @@
 
 @interface LMPropertyBorderVC : NSViewController
 @property (weak, nonatomic) IUController      *controller;
-
+@property id selection;
 
 
 @end
