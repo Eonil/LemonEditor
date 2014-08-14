@@ -148,7 +148,7 @@
                 totalFrame.size.height = CGFLOAT_INVALID;
             }
             
-            [((LMCanvasVC *)(self.delegate)) extendIUToDiffSize:newframe.size totalDiffSize:totalFrame.size];
+            [((LMCanvasVC *)(self.delegate)) extendIUToTotalDiffSize:totalFrame.size];
             [((LMCanvasVC *)(self.delegate)) moveIUToDiffPoint:newframe.origin totalDiffPoint:totalFrame.origin];
         }
         

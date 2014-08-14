@@ -74,7 +74,7 @@
 - (void)updateGridFrameDictionary:(NSMutableDictionary *)gridFrameDict;
 
 - (void)moveIUToDiffPoint:(NSPoint)point totalDiffPoint:(NSPoint)totalPoint;
-- (void)extendIUToDiffSize:(NSSize)size totalDiffSize:(NSSize)totalSize;
+- (void)extendIUToTotalDiffSize:(NSSize)totalSize;
 - (BOOL)checkExtendSelectedIU:(NSSize)size;
 - (void)startDragSession:(id)sender;
 - (void)endDragSession:(id)sender;

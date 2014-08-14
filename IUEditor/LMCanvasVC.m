@@ -909,8 +909,7 @@
     }
 }
 
-//FIXME: (승미)WHY THIS IS NOT DELETED ARGUMENT?
-- (void)extendIUToDiffSize:(NSSize)WHY_THIS_IS_NOT_DELETED totalDiffSize:(NSSize)totalSize{
+- (void)extendIUToTotalDiffSize:(NSSize)totalSize{
     //drag pointlayer
     for(IUBox *obj in self.controller.selectedObjects){
         IUBox *moveObj= obj;
