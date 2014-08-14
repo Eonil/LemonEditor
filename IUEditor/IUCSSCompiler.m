@@ -1038,14 +1038,20 @@
     
     [code setInsertingViewPort:IUCSSDefaultViewPort];
     [code setInsertingIdentifier:carousel.pagerID];
-    [code insertTag:@"background-color" color:carousel.deselectColor];
+    if(carousel.deselectColor){
+        [code insertTag:@"background-color" color:carousel.deselectColor];
+    }
     
     [code setInsertingIdentifier:[carousel.pagerID cssHover]];
-    [code insertTag:@"background-color" color:carousel.selectColor];
+    if(carousel.selectColor){
+        [code insertTag:@"background-color" color:carousel.selectColor];
+    }
     
     
     [code setInsertingIdentifier:[carousel.pagerID cssActive]];
-    [code insertTag:@"background-color" color:carousel.selectColor];
+    if(carousel.selectColor){
+        [code insertTag:@"background-color" color:carousel.selectColor];
+    }
     
     
     [code setInsertingIdentifier:carousel.pagerWrapperID];
@@ -1081,11 +1087,14 @@
         [code insertTag:@"top" integer:carousel.leftY unit:IUUnitPixel];
         
         NSString *imgSrc = [[self imagePathWithImageName:imageName target:IUTargetEditor] CSSURLString];
-        
-        [code insertTag:@"background" string:imgSrc target:IUTargetEditor];
+        if(imgSrc){
+            [code insertTag:@"background" string:imgSrc target:IUTargetEditor];
+        }
         
         NSString *outputImgSrc = [[self imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
-        [code insertTag:@"background" string:outputImgSrc target:IUTargetOutput];
+        if(outputImgSrc){
+            [code insertTag:@"background" string:outputImgSrc target:IUTargetOutput];
+        }
         
         NSImage *arrowImage;
         
@@ -1114,10 +1123,14 @@
         [code insertTag:@"top" integer:carousel.rightY unit:IUUnitPixel];
         
         NSString * imgSrc = [[self imagePathWithImageName:imageName target:IUTargetEditor] CSSURLString];
-        [code insertTag:@"background" string:imgSrc target:IUTargetEditor];
+        if(imgSrc){
+            [code insertTag:@"background" string:imgSrc target:IUTargetEditor];
+        }
         
          NSString *outputImgSrc = [[self imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
-        [code insertTag:@"background" string:outputImgSrc target:IUTargetOutput];
+        if(outputImgSrc){
+            [code insertTag:@"background" string:outputImgSrc target:IUTargetOutput];
+        }
         
         NSImage *arrowImage;
 
