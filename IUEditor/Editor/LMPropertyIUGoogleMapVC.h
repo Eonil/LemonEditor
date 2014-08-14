@@ -8,13 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import "IUResourceManager.h"
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
 
-@interface LMPropertyIUGoogleMapVC : NSViewController <NSComboBoxDelegate>
-
-@property (nonatomic) IUController      *controller;
-@property (strong) IUResourceManager     *resourceManager;
+@interface LMPropertyIUGoogleMapVC : LMDefaultPropertyVC <NSComboBoxDelegate>
 
 
 @end

@@ -46,34 +46,33 @@
 }
 
 - (void)awakeFromNib{
-
     
-    [_longTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"longitude"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_latTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"latitude"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    //location
+    [self outlet:_longTF bind:NSValueBinding property:@"longitude"];
+    [self outlet:_latTF bind:NSValueBinding property:@"latitude"];
     
-    [_zoomLevelTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"zoomLevel"] options:IUBindingDictNumberAndNotRaisesApplicable];
-    [_zoomLevelStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"zoomLevel"] options:IUBindingDictNumberAndNotRaisesApplicable];
+    [self outlet:_zoomLevelTF bind:NSValueBinding property:@"zoomLevel" options:IUBindingDictNumberAndNotRaisesApplicable];
+    [self outlet:_zoomLevelStepper bind:NSValueBinding property:@"zoomLevel" options:IUBindingDictNumberAndNotRaisesApplicable];
     
-    [_mapControlBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"mapControl"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_PanControlBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"panControl"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_zoomControlBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"zoomControl"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
-    [_enableMarkerBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableMarkerIcon"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    //control
+    [self outlet:_mapControlBtn bind:NSValueBinding property:@"mapControl"];
+    [self outlet:_PanControlBtn bind:NSValueBinding property:@"panControl"];
+    [self outlet:_zoomControlBtn bind:NSValueBinding property:@"zoomControl"];
     
     //marker Icon
-    [_markerIconComboBox bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableMarkerIcon"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_markTitleTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"markerTitle"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_markerIconComboBox bind:NSContentBinding toObject:self withKeyPath:@"resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
-    [_markerIconComboBox bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"markerIconName"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-
+    [self outlet:_enableMarkerBtn bind:NSValueBinding property:@"enableMarkerIcon"];
     
+    [self outlet:_markerIconComboBox bind:NSValueBinding property:@"enableMarkerIcon"];
+    [self outlet:_markTitleTF bind:NSValueBinding property:@"markerTitle"];
+    [_markerIconComboBox bind:NSContentBinding toObject:self withKeyPath:@"resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_markerIconComboBox bind:NSValueBinding property:@"markerIconName"];
     
     //style
-    [_waterColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"water"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_roadColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"road"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_landscapeColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"landscape"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_poiColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"poi"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
- 
+    [self outlet:_waterColor bind:NSValueBinding property:@"water"];
+    [self outlet:_roadColor bind:NSValueBinding property:@"road"];
+    [self outlet:_landscapeColor bind:NSValueBinding property:@"landscape"];
+    [self outlet:_poiColor bind:NSValueBinding property:@"poi"];
+     
 }
 
 #pragma mark - combobox

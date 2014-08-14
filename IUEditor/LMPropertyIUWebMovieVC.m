@@ -29,25 +29,11 @@
 
 - (void)awakeFromNib{
     
-     [_webMovieSourceTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"movieLink"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_autoplayMatrix bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"playType"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-     [_loopButton bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableLoop"]  options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [self outlet:_webMovieSourceTF bind:NSValueBinding property:@"movieLink"];
+    [self outlet:_autoplayMatrix bind:NSSelectedIndexBinding property:@"playType"];
+    [self outlet:_loopButton bind:NSValueBinding property:@"enableLoop"];
 
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-        return;
-    }
-    else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-}
-
-- (void)setController:(IUController *)controller{
-    _controller = controller;
-    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
-}
 
 @end

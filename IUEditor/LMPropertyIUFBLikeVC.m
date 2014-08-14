@@ -26,33 +26,20 @@
     }
     return self;
 }
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-        return;
-    }
-    else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-}
 
-- (void)setController:(IUController *)controller{
-    _controller = controller;
-    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
-}
 - (void)awakeFromNib{
-    [_likePageTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"likePage"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_friendFaceBtn bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"showFriendsFace"] options:IUBindingDictNotRaisesApplicable];
-
-    [_colorschemePopupBtn bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"colorscheme"] options:IUBindingDictNotRaisesApplicable];
+    
+    [self outlet:_likePageTF bind:NSValueBinding property:@"likePage"];
+    [self outlet:_friendFaceBtn bind:NSValueBinding property:@"showFriendsFace"];
+    [self outlet:_colorschemePopupBtn bind:NSSelectedIndexBinding property:@"colorscheme"];
 
     //enable
     NSDictionary *enableBindingOption = [NSDictionary
                                          dictionaryWithObjects:@[[NSNumber numberWithBool:NO], NSIsNotNilTransformerName]
                                            forKeys:@[NSRaisesForNotApplicableKeysBindingOption, NSValueTransformerNameBindingOption]];
 
-    [_friendFaceBtn bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"likePage"] options:enableBindingOption];
-    
+    [self outlet:_friendFaceBtn bind:NSEnabledBinding property:@"likePage" options:enableBindingOption];
+
 }
 
 @end

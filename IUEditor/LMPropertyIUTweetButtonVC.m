@@ -29,31 +29,15 @@
     return self;
 }
 
-- (void)setController:(IUController *)controller{
-    _controller = controller;
-    [_controller addObserver:self forKeyPath:@"selection" options:0 context:nil];
-}
-
 - (void)awakeFromNib{
-    [_urlTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"urlToTweet"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_sizeMatrix bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"sizeType"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_tweetTextTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"tweetText"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-
+    [self outlet:_urlTF bind:NSValueBinding property:@"urlToTweet"];
+    [self outlet:_sizeMatrix bind:NSSelectedIndexBinding property:@"sizeType"];
+    [self outlet:_tweetTextTF bind:NSValueBinding property:@"tweetText"];
     
-    [_countTypePopupButton bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"countType"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_verticalMenuItem bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableLargeVertical"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-
+    [self outlet:_countTypePopupButton bind:NSSelectedIndexBinding property:@"countType"];
+    [self outlet:_verticalMenuItem bind:NSEnabledBinding property:@"enableLargeVertical"];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-        return;
-    }
-    else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-}
 
 
 

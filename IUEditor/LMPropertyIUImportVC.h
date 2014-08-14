@@ -7,12 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMPropertyIUImportVC : NSViewController
+@interface LMPropertyIUImportVC : LMDefaultPropertyVC
 
-@property (nonatomic, weak) IUController      *controller;
-@property (weak) id selection;
 
 @property (weak) IUSheet *selectedClass;
 

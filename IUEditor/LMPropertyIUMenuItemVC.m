@@ -31,18 +31,18 @@
 
 - (void)awakeFromNib{
     
-    [_countStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"count"] options:IUBindingDictNumberAndNotRaisesApplicable];
-    [_countTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"count"] options:IUBindingDictNumberAndNotRaisesApplicable];
-    
-    [_countStepper bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"hasItemChildren"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_countTF bind:NSEnabledBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"hasItemChildren"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_countTF bind:NSEditableBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"hasItemChildren"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
+    [self outlet:_countStepper bind:NSValueBinding property:@"count" options:IUBindingDictNumberAndNotRaisesApplicable];
+    [self outlet:_countTF bind:NSValueBinding property:@"count" options:IUBindingDictNumberAndNotRaisesApplicable];
 
-    [_bgColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"bgActive"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_fontColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"fontActive"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [self outlet:_countStepper bind:NSEnabledBinding property:@"hasItemChildren"];
+    [self outlet:_countTF bind:NSEnabledBinding property:@"hasItemChildren"];
+    [self outlet:_countTF bind:NSEditableBinding property:@"hasItemChildren"];
+
+    [self outlet:_bgColor bind:NSValueBinding property:@"bgActive"];
+    [self outlet:_fontColor bind:NSValueBinding property:@"fontActive"];
     
-    [_titleTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"text"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [self outlet:_titleTF bind:NSValueBinding property:@"text"];
+
 }
 
 @end

@@ -32,20 +32,14 @@
 
 
 - (void)awakeFromNib{
+    
+    [self outlet:_countStepper bind:NSValueBinding property:@"count" options:IUBindingDictNumberAndNotRaisesApplicable];
+    [self outlet:_countTF bind:NSValueBinding property:@"count" options:IUBindingDictNumberAndNotRaisesApplicable];
 
-
-    [_countStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"count"] options:IUBindingDictNumberAndNotRaisesApplicable];
-    [_countTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"count"] options:IUBindingDictNumberAndNotRaisesApplicable];
-    
-    [_alignControl bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"align"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
-    
-    [_mobileTitleTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"mobileTitle"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
-    [_mobileTitleColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"mobileTitleColor"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_mobileIconColor bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"iconColor"] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
-    
+    [self outlet:_alignControl bind:NSSelectedIndexBinding property:@"align"];
+    [self outlet:_mobileTitleTF bind:NSValueBinding property:@"mobileTitle"];
+    [self outlet:_mobileTitleColor bind:NSValueBinding property:@"mobileTitleColor"];
+    [self outlet:_mobileIconColor bind:NSValueBinding property:@"iconColor"];
 
 }
 

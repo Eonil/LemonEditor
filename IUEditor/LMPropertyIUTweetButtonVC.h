@@ -7,11 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
-@interface LMPropertyIUTweetButtonVC : NSViewController
-
-@property (nonatomic, weak) IUController      *controller;
-@property (weak) id selection;
+@interface LMPropertyIUTweetButtonVC : LMDefaultPropertyVC
 
 @end

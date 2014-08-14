@@ -39,7 +39,6 @@
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeObserver:self forKeyPath:@"controller.selectedObjects" context:@"selection"];
-    [self removeObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"prototypeClass"]];
 }
 
 - (void)structureChanged:(NSNotification*)noti{
@@ -48,21 +47,10 @@
     [_prototypeB addItemsWithTitles:[[_project classSheets] valueForKey:@"name"]];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:@"selection"]) {
-        self.selection = _controller.selection;
-        return;
-    }
-    else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-}
-
 
 
 - (void)setController:(IUController *)controller{
-    _controller = controller;
-    [self addObserver:self forKeyPath:[_controller keyPathFromControllerToProperty:@"prototypeClass"] options:0 context:nil];
+    [super setController:controller];
 }
 
 
@@ -83,7 +71,7 @@
 }
 
 - (void)selectionContextDidChange:(NSDictionary *)change{
-    id protoType = [self valueForKeyPath:[_controller keyPathFromControllerToProperty:@"prototypeClass"]];
+    id protoType = [self valueForProperty:@"prototypeClass"];
     
     if(protoType == nil || protoType == NSNoSelectionMarker
        || protoType == NSMultipleValuesMarker || protoType == NSNotApplicableMarker){

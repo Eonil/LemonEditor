@@ -7,12 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
 
-@interface LMPropertyIUMenuBarVC : NSViewController
-
-@property (nonatomic) IUController      *controller;
+@interface LMPropertyIUMenuBarVC : LMDefaultPropertyVC
 
 
 @end
