@@ -373,7 +373,7 @@
     for (IUBox *iu in self.controller.selectedObjects) {
         [iu startDragSession];
     }
-    if (value == nil || ((NSString *)value).length==0 || [value isEqualToString:@"-"]) {
+    if (value == nil || [value isEqualToString:@"-"]) {
         for (IUBox *box in self.controller.selectedObjects) {
             [box.css eradicateTag:tag];
         }
