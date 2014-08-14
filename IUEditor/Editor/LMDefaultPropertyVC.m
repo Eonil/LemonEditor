@@ -112,7 +112,7 @@
 }
 
 #pragma mark - keyPath
-//FIXME: self.selection not working
+//FIXME: (JDYANG) self.selection not working
 - (NSString *)pathForCSSTag:(IUCSSTag)tag{
     return [@"self.controller.selection.css.assembledTagDictionary." stringByAppendingString:tag];
 }

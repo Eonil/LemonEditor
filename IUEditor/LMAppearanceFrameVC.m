@@ -79,7 +79,6 @@
     
     //observing
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:nil];
-    [self addObserver:self.controller forKeyPath:@"selectedObjects" options:0 context:nil];
 
 
     //binding
@@ -208,8 +207,8 @@
                                      [self pathForCSSTag:IUCSSTagPercentX],
                                      [self pathForCSSTag:IUCSSTagPercentY],
                                      [self pathForCSSTag:IUCSSTagPercentWidth],
-                                     [self pathForCSSTag:IUCSSTagPercentHeight],
-                                     @"controller.selectedObjects"];
+                                     [self pathForCSSTag:IUCSSTagPercentHeight]
+                                     ];
         
         [self removeObserver:self forKeyPaths:removeObservers];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
