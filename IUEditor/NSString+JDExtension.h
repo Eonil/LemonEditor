@@ -47,6 +47,7 @@
 - (NSArray*) RGXMatchAllStringsWithPatten:(NSString*)patten;
 - (NSString*) stringByTrim;
 - (NSRange)fullRange;
+
 @end
 
 @interface NSMutableString(JDExtension)

@@ -19,3 +19,8 @@
 - (NSString*)postfixCode;
 - (NSString*)code;
 @end
+
+@protocol IUWordpressCodeProtocol
+@optional
+- (NSString*)functionCode;
+@end

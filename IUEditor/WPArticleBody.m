@@ -18,15 +18,28 @@
     [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign];
     [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent];
     [self.css setValue:@(100) forTag:IUCSSTagPercentWidth];
-    [self.css setValue:@(15) forKey:IUCSSTagFontSize];
+    [self.css setValue:@(15) forTag:IUCSSTagFontSize];
     [self.css eradicateTag:IUCSSTagBGColor];
     
+    NSString *res = [[NSBundle mainBundle] pathForResource:@"loremipsum" ofType:@"txt"];
+    self.sampleHTML = [[NSString stringWithContentsOfFile:res encoding:NSUTF8StringEncoding error:nil] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
     return self;
 }
 
-- (NSString*)sampleHTML{
-    NSString *res = [[NSBundle mainBundle] pathForResource:@"loremipsum" ofType:@"txt"];
-    return [[NSString stringWithContentsOfFile:res encoding:NSUTF8StringEncoding error:nil] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
+- (void)setSampleHTML:(NSString *)sampleHTML{
+    _sampleHTML = sampleHTML;
+    [self updateHTML];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeFromObject:self withProperties:[WPArticleBody properties]];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    [aDecoder decodeToObject:self withProperties:[WPArticleBody properties]];
+    return self;
 }
 
 - (NSString*)code{

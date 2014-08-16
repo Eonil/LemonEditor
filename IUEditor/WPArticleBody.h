@@ -11,4 +11,6 @@
 
 @interface WPArticleBody : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
 
+@property (nonatomic) NSString *sampleHTML;
+
 @end

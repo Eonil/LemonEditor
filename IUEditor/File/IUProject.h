@@ -136,6 +136,9 @@ static NSString *IUClassGroupName = @"class";
 - (NSArray*)backgroundSheets;
 - (NSArray*)classSheets;
 
+/* get all IU in project */
+- (NSSet*)allIUs;
+
 - (BOOL)runnable;
 
 // return groups

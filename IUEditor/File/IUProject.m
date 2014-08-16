@@ -567,13 +567,13 @@
     NSAssert(0, @"write fail");
 }
 
--(NSArray*)allIUs{
-    NSMutableArray  *array = [NSMutableArray array];
+-(NSSet*)allIUs{
+    NSMutableSet  *set = [NSMutableSet set];
     for (IUSheet *sheet in self.allDocuments) {
-        [array addObject:sheet];
-        [array addObjectsFromArray:sheet.allChildren];
+        [set addObject:sheet];
+        [set addObjectsFromArray:sheet.allChildren];
     }
-    return array;
+    return [set copy];
 }
 
 - (NSArray *)childrenFiles{
@@ -739,6 +739,7 @@
     [array addObjectsFromArray:self.classSheets];
     return array;
 }
+
 - (NSArray*)pageSheets{
     NSAssert(_pageGroup, @"pg");
     return _pageGroup.childrenFiles;

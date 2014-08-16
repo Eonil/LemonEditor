@@ -15,6 +15,8 @@
 #import "IUBackground+WP.h"
 #import "IUClass.h"
 
+#import "WPWidgets.h"
+
 @implementation IUWordpressProject
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -106,6 +108,32 @@
         NSString *path = [self absoluteBuildPath];
         NSString *command = [NSString stringWithFormat:@"touch %@", [path stringByAppendingPathComponent:@"style.css"]];
         [JDShellUtil execute:command];
+        
+        /* build functions.php */
+        NSString *functionPath = [[NSBundle mainBundle] pathForResource:@"functions" ofType:@"php"];
+        NSMutableString *functionCode = [NSMutableString stringWithContentsOfFile:functionPath encoding:NSUTF8StringEncoding error:nil];
+        
+        NSArray *allIUs = [self.allIUs allObjects];
+        NSArray *wpMenus = [allIUs filteredArrayWithClass:[WPWidgets class]];
+        NSArray *wpNames = [wpMenus valueForKey:@"wordpressName"];
+        if ([wpNames count]) {
+            NSArray *wpNamesD = [[NSSet setWithArray:wpNames] allObjects];
+            NSMutableString *wpNameString = [NSMutableString string];
+            for (NSString *wpname in wpNamesD) {
+                [wpNameString appendString:[NSString stringWithFormat:@"'%@',", wpname]];
+            }
+            [functionCode replaceOccurrencesOfString:@"/*WIDGET_DISABLE_COMMENT" withString:@"" options:0 range:[functionCode fullRange]];
+            [functionCode replaceOccurrencesOfString:@"WIDGET_DISABLE_COMMENT*/" withString:@"" options:0 range:[functionCode fullRange]];
+            [functionCode replaceOccurrencesOfString:@"_IU_WIDGET_NAMES_" withString:wpNameString options:0 range:[functionCode fullRange]];
+        }
+        
+        NSString *functionCodeFilePath = [self.absoluteBuildPath stringByAppendingPathComponent:@"functions.php"];
+        
+        NSError *err;
+        [functionCode writeToFile:functionCodeFilePath atomically:YES encoding:NSUTF8StringEncoding error:&err];
+        if (err) {
+            [JDLogUtil alert:err.description];
+        }
     }
     return result;
 }

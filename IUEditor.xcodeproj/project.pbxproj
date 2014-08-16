@@ -653,6 +653,10 @@
 		692C4DC91967D10300EAB2E7 /* RunningAProject.pages in Resources */ = {isa = PBXBuildFile; fileRef = 692C4DC71967D10300EAB2E7 /* RunningAProject.pages */; };
 		692C4DCA1967D10300EAB2E7 /* RunningAProject.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 692C4DC81967D10300EAB2E7 /* RunningAProject.pdf */; };
 		692CBE15199871FD00CAF1D1 /* IUPage+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 692CBE14199871FD00CAF1D1 /* IUPage+WP.m */; };
+		692D98F9199D5A6E00A7E1C1 /* LMPropertySampleTextVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D98F7199D5A6E00A7E1C1 /* LMPropertySampleTextVC.m */; };
+		692D98FA199D5A6E00A7E1C1 /* LMPropertySampleTextVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692D98F8199D5A6E00A7E1C1 /* LMPropertySampleTextVC.xib */; };
+		692D98FC199D7B9A00A7E1C1 /* functions.php in Resources */ = {isa = PBXBuildFile; fileRef = 692D98FB199D7B9A00A7E1C1 /* functions.php */; };
+		692D9902199D807000A7E1C1 /* WPWidgets.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D9901199D807000A7E1C1 /* WPWidgets.m */; };
 		69317CB21947271F0065B6F4 /* LMHelpWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69317CB01947271F0065B6F4 /* LMHelpWC.m */; };
 		69317CB31947271F0065B6F4 /* LMHelpWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69317CB11947271F0065B6F4 /* LMHelpWC.xib */; };
 		69346623192B805000F82DAF /* LMCommandVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69346622192B805000F82DAF /* LMCommandVC.xib */; };
@@ -1640,6 +1644,12 @@
 		692C4DC81967D10300EAB2E7 /* RunningAProject.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = RunningAProject.pdf; sourceTree = "<group>"; };
 		692CBE13199871FD00CAF1D1 /* IUPage+WP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IUPage+WP.h"; sourceTree = "<group>"; };
 		692CBE14199871FD00CAF1D1 /* IUPage+WP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IUPage+WP.m"; sourceTree = "<group>"; };
+		692D98F6199D5A6E00A7E1C1 /* LMPropertySampleTextVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertySampleTextVC.h; sourceTree = "<group>"; };
+		692D98F7199D5A6E00A7E1C1 /* LMPropertySampleTextVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertySampleTextVC.m; sourceTree = "<group>"; };
+		692D98F8199D5A6E00A7E1C1 /* LMPropertySampleTextVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertySampleTextVC.xib; sourceTree = "<group>"; };
+		692D98FB199D7B9A00A7E1C1 /* functions.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; path = functions.php; sourceTree = "<group>"; };
+		692D9900199D807000A7E1C1 /* WPWidgets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPWidgets.h; sourceTree = "<group>"; };
+		692D9901199D807000A7E1C1 /* WPWidgets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPWidgets.m; sourceTree = "<group>"; };
 		69317CAF1947271F0065B6F4 /* LMHelpWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMHelpWC.h; sourceTree = "<group>"; };
 		69317CB01947271F0065B6F4 /* LMHelpWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMHelpWC.m; sourceTree = "<group>"; };
 		69317CB11947271F0065B6F4 /* LMHelpWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMHelpWC.xib; sourceTree = "<group>"; };
@@ -3360,6 +3370,7 @@
 		691F91AA1973C5D100A4CFFF /* WPGroup */ = {
 			isa = PBXGroup;
 			children = (
+				692D98FB199D7B9A00A7E1C1 /* functions.php */,
 				69FEF94E1996D46600AEB283 /* WPArticleBody.h */,
 				69FEF94F1996D46600AEB283 /* WPArticleBody.m */,
 				691F91AB1973C5EF00A4CFFF /* WPSiteTitle.h */,
@@ -3380,6 +3391,8 @@
 				69860E5819766B1C001C3F7F /* WPMenu.m */,
 				69860E5A19766B24001C3F7F /* WPMenuItem.h */,
 				69860E5B19766B24001C3F7F /* WPMenuItem.m */,
+				692D9900199D807000A7E1C1 /* WPWidgets.h */,
+				692D9901199D807000A7E1C1 /* WPWidgets.m */,
 			);
 			name = WPGroup;
 			sourceTree = "<group>";
@@ -3783,6 +3796,9 @@
 				CB2AA9CF19751CA200DA7CCD /* LMPropertyWPArticleVC.h */,
 				CB2AA9D019751CA200DA7CCD /* LMPropertyWPArticleVC.m */,
 				CB2AA9D119751CA200DA7CCD /* LMPropertyWPArticleVC.xib */,
+				692D98F6199D5A6E00A7E1C1 /* LMPropertySampleTextVC.h */,
+				692D98F7199D5A6E00A7E1C1 /* LMPropertySampleTextVC.m */,
+				692D98F8199D5A6E00A7E1C1 /* LMPropertySampleTextVC.xib */,
 				693F24761977929C00451500 /* LMPropertyWPMenuVC.h */,
 				693F24771977929C00451500 /* LMPropertyWPMenuVC.m */,
 				693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */,
@@ -4165,6 +4181,7 @@
 				692C4DCA1967D10300EAB2E7 /* RunningAProject.pdf in Resources */,
 				3D0D480A18FFAF24000A5B53 /* LMTopToolbarVC.xib in Resources */,
 				3DF803EA18FE62C900913505 /* ic_page.png in Resources */,
+				692D98FC199D7B9A00A7E1C1 /* functions.php in Resources */,
 				3DA416B91935A6BE00559028 /* LMPreferenceFontVC.xib in Resources */,
 				06855637198A63430073FA83 /* stool.png in Resources */,
 				3DED265D1900D313001A1D67 /* view_list.png in Resources */,
@@ -4382,6 +4399,7 @@
 				3DF8044118FE62FC00913505 /* tool_navi.png in Resources */,
 				3DED26621900D313001A1D67 /* align_right@2x.png in Resources */,
 				26CA36CE198760B70004D888 /* cs_mobile_02.png in Resources */,
+				692D98FA199D5A6E00A7E1C1 /* LMPropertySampleTextVC.xib in Resources */,
 				CBA87815196437DF00075294 /* IUHTML.rtf in Resources */,
 				3DC4AAED198200DF0024170A /* event_mobile_video.mp4 in Resources */,
 				262D4AB219481DA2006F5FBE /* tab_on_01.png in Resources */,
@@ -4725,9 +4743,11 @@
 				691F91B31973CD6800A4CFFF /* WPSiteDescription.m in Sources */,
 				694A9865196D197900C1D630 /* JDFormatter.m in Sources */,
 				690A826B190A25D500DDBA86 /* IUDjangoProject.m in Sources */,
+				692D9902199D807000A7E1C1 /* WPWidgets.m in Sources */,
 				3DA6F30E1963B810004DF0AA /* LMHelpVideoPopoverVC.m in Sources */,
 				3D5B5AF31990B8B900EF6F12 /* IUTweetButton.m in Sources */,
 				CB9BD6381914DC62002C9369 /* LMStartNewDjangoVC.m in Sources */,
+				692D98F9199D5A6E00A7E1C1 /* LMPropertySampleTextVC.m in Sources */,
 				690A825D190A047300DDBA86 /* LMPropertyIUTextFieldVC.m in Sources */,
 				6967425318F7D077008B7111 /* IUIdentifierManager.m in Sources */,
 				69761BCA18F168D700C4EDC6 /* IUResourceManager.m in Sources */,

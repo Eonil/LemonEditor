@@ -34,6 +34,8 @@
 #import "LMPropertyIUMenuItemVC.h"
 #import "LMPropertyIUTweetButtonVC.h"
 #import "LMPropertyIUGoogleMapVC.h"
+#import "LMPropertySampleTextVC.h"
+
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 
@@ -95,6 +97,7 @@
     LMPropertyTextVC *propertyTextVC;
 #endif
     
+    LMPropertySampleTextVC *pSampleTextVC;
 
 
     NSViewController <IUPropertyDoubleClickReceiver> *doubleClickFocusVC;
@@ -150,7 +153,7 @@
         propertyPGTextViewVC = [[LMPropertyIUTextViewVC alloc] initWithNibName:[LMPropertyIUTextViewVC class].className bundle:nil];
         
         propertyPGPageLinkSetVC = [[LMPropertyIUPageLinkSetVC alloc] initWithNibName:[LMPropertyIUPageLinkSetVC class].className bundle:nil];
-        propertyIUPageVC = [[LMPropertyIUPageVC alloc] initWithNibName:[LMPropertyIUPageVC class].className bundle:nil];
+//        propertyIUPageVC = [[LMPropertyIUPageVC alloc] initWithNibName:[LMPropertyIUPageVC class].className bundle:nil];
         propertyAnalyticsVC = [[LMPropertyAnalyticsVC alloc] initWithNibName:[LMPropertyAnalyticsVC class].className bundle:nil];
         propertyPGFormVC = [[LMPropertyPGFormVC alloc] initWithNibName:[LMPropertyPGFormVC class].className bundle:nil];
         
@@ -169,56 +172,13 @@
         propertyWPArticleVC = [[LMPropertyWPArticleVC alloc] initWithNibName:[LMPropertyWPArticleVC class].className bundle:nil];
         propertyWPMenuVC = [[LMPropertyWPMenuVC alloc] initWithNibName:[LMPropertyWPMenuVC class].className bundle:nil];
         
+        pSampleTextVC = [[LMPropertySampleTextVC alloc] initWithNibName:[LMPropertySampleTextVC class].className bundle:nil];
+        
         [self loadView];
     }
     return self;
 }
 
--(void)awakeFromNib{
-    [inspectorLinkVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [inspectorAltTextVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyIUHTMLVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    
-    [propertyIUMovieVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyIUFBLikeVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyIUCarouselVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    
-    [propertyIUTransitionVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyIUWebMovieVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-
-    [propertyIUImportVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    
-    [propertyIUMailLinkVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyPGTextFieldVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyIUCollectionVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    
-    [propertyIUMenuBarVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyIUMenuItemVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyIUTweetButtonVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    
-    [propertyIUGoogleMapVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    
-    //pg
-    [propertyPGTextViewVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyPGPageLinkSetVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyIUPageVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyAnalyticsVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    
-    [propertyPGFormVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyPGSubmitButtonVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyPGType1VC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyPGType2VC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-
-    [propertyWebProgramming bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-
-    //wp
-    [propertyWPArticleVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    [propertyWPMenuVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-    
-#if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
-    [propertyTextVC bind:@"controller" toObject:self withKeyPath:@"controller" options:nil];
-#endif
-}
 
 -(void)setProject:(IUProject *)project{
     _project = project;
@@ -238,6 +198,53 @@
 -(void)setController:(IUController *)controller{
     _controller = controller;
     [_controller addObserver:self forKeyPath:@"selectedObjects" options:0 context:nil];
+    
+    inspectorLinkVC.controller = controller;
+    inspectorAltTextVC.controller = controller;
+    propertyIUHTMLVC.controller = controller;
+    
+    propertyIUMovieVC.controller = controller;
+    propertyIUFBLikeVC.controller = controller;
+    propertyIUCarouselVC.controller = controller;
+    
+    propertyIUTransitionVC.controller = controller;
+    propertyIUWebMovieVC.controller = controller;
+    
+    propertyIUImportVC.controller = controller;
+    
+    propertyIUMailLinkVC.controller = controller;
+    propertyPGTextFieldVC.controller = controller;
+    propertyIUCollectionVC.controller = controller;
+
+    propertyIUMenuBarVC.controller = controller;
+    propertyIUMenuItemVC.controller = controller;
+    propertyIUTweetButtonVC.controller = controller;
+    
+    propertyIUTweetButtonVC.controller = controller;
+    propertyIUGoogleMapVC.controller = controller;
+    
+    propertyPGTextViewVC.controller = controller;
+    propertyPGPageLinkSetVC.controller = controller;
+    propertyIUPageVC.controller = controller;
+    propertyAnalyticsVC.controller = controller;
+    
+    propertyPGFormVC.controller = controller;
+    propertyPGSubmitButtonVC.controller = controller;
+    propertyIUPageVC.controller = controller;
+    propertyIUPageVC.controller = controller;
+    
+    propertyPGFormVC.controller = controller;
+    propertyPGSubmitButtonVC.controller = controller;
+    propertyPGType1VC.controller = controller;
+    propertyPGType2VC.controller = controller;
+    
+    propertyWebProgramming.controller = controller;
+    
+    propertyWPArticleVC.controller = controller;
+    propertyWPMenuVC.controller = controller;
+    pSampleTextVC.controller = controller;
+    
+    propertyTextVC.controller = controller;
 }
 
 -(void)dealloc{
@@ -287,7 +294,13 @@
     }
     
 #pragma mark PG
-    if ([classString isEqualToString:@"PGForm"]) {
+    if ([classString isEqualToString:@"WPArticleBody"]) {
+        self.propertyVArray = @[pSampleTextVC.view];
+    }
+
+    
+#pragma mark PG
+    else if ([classString isEqualToString:@"PGForm"]) {
         self.propertyVArray = @[propertyPGFormVC.view];
     }
     else if ([classString isEqualToString:@"PGTextView"]) {
@@ -344,7 +357,7 @@
         self.propertyVArray = [NSMutableArray arrayWithArray:@[inspectorAltTextVC.view, inspectorLinkVC.view, propertyPGType2VC.view]];
     }
     else if ([classString isEqualToString:@"IUPage"]){
-        self.propertyVArray = [NSMutableArray arrayWithArray:@[propertyIUPageVC.view, propertyAnalyticsVC.view]];
+//        self.propertyVArray = [NSMutableArray arrayWithArray:@[propertyIUPageVC.view, propertyAnalyticsVC.view]];
     }
     else if ([classString isEqualToString:@"IUBox"]){
         self.propertyVArray = [NSMutableArray arrayWithArray:@[propertyTextVC.view, inspectorLinkVC.view, propertyPGType2VC.view]];
