@@ -250,7 +250,13 @@
 
 
 - (void)updateCSSForItemColor{
-    [self updateCSSWithIdentifiers:@[[self hoverItemIdentifier], [self activeItemIdentifier],[self closureIdentifier], [self closureHoverIdentifier], [self closureActiveIdentifier]]];
+    if(self.children.count > 0){
+        [self updateCSSWithIdentifiers:@[[self hoverItemIdentifier], [self activeItemIdentifier],[self closureIdentifier], [self closureHoverIdentifier], [self closureActiveIdentifier]]];
+    }
+    else{
+        [self updateCSSWithIdentifiers:@[[self hoverItemIdentifier], [self activeItemIdentifier]]];
+        
+    }
 }
 
 
