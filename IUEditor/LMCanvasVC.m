@@ -494,6 +494,9 @@
     return selectNode;
     
 }
+- (DOMNodeList *)getHTMLElementsByClassname:(NSString *)classname{
+    return [self.DOMDoc getElementsByClassName:classname];
+}
 
 - (NSString *)tagWithHTML:(NSString *)html{
    NSString *incompleteTag = [html componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]][0];
@@ -959,36 +962,16 @@
 
 -(void)IURemoved:(NSString*)identifier withParentID:(NSString *)parentID{
     
-    
     //remove HTML
-    DOMHTMLElement *selectHTMLElement = [self getHTMLElementbyID:identifier];
-    DOMHTMLElement *middleElement = selectHTMLElement;
-    DOMHTMLElement *parentElement;
-    while(1){
-        parentElement = (DOMHTMLElement *)[middleElement parentElement];
-        
-        if([parentElement.idName isEqualToString:parentID]){
-            break;
-        }
-        else if([parentElement isKindOfClass:[DOMHTMLBodyElement class]]){
-            break;
-        }
-        else if(parentElement == nil){
-            break;
-        }
-        
-        middleElement = parentElement;
+    DOMNodeList *selectedList = [self getHTMLElementsByClassname:identifier];
+    int length = selectedList.length;
+    for(int i=0; i < length; i++){
+        DOMHTMLElement *selectHTMLElement = (DOMHTMLElement *)[selectedList item:0];
+        [selectHTMLElement.parentElement removeChild:selectHTMLElement];
     }
-    
-//    NSAssert(parentElement != nil);
-    
-    [parentElement removeChild:middleElement];
     
     [self deselectedAllIUs];
 
-    //remove layer
-    [[self gridView] removeLayerWithIUIdentifier:identifier];
-    [frameDict.dict removeObjectForKey:identifier];
     
     IUBox *iu = [_controller IUBoxByIdentifier:identifier];
     
@@ -999,23 +982,39 @@
         [self removeAllCSSWithIdentifier:identifier];
     }
 
-    //remove layer for children
-    if ([iu isKindOfClass:[IUImport class]]){
-        for(IUBox *child in iu.allChildren){
-            NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_%@",iu.htmlID, child.htmlID];
-            [[self gridView] removeLayerWithIUIdentifier:modifiedHTMLID];
-            [frameDict.dict removeObjectForKey:modifiedHTMLID];
+    //remove layer
+    if([iu.sheet isKindOfClass:[IUClass class]]){
+        for (IUBox *import in [(IUClass*)iu.sheet references]) {
             
+            NSMutableArray *allIU = [iu.allChildren mutableCopy];
+            [allIU addObject:iu];
+            
+            for(IUBox *box in allIU){
+                NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_%@",import.htmlID, box.htmlID];
+                [[self gridView] removeLayerWithIUIdentifier:modifiedHTMLID];
+                [frameDict.dict removeObjectForKey:modifiedHTMLID];
+            }
+            
+        }
+        
+        if([iu isKindOfClass:[IUImport class]]){
+            [[self gridView] removeLayerWithIUIdentifier:identifier];
+            [frameDict.dict removeObjectForKey:identifier];
         }
         
     }
     else{
-        for(IUBox *child in iu.allChildren){
+        
+        NSMutableArray *allIU = [iu.allChildren mutableCopy];
+        [allIU addObject:iu];
+
+        
+        for(IUBox *box in allIU){
             
-            [[self gridView] removeLayerWithIUIdentifier:child.htmlID];
-            [frameDict.dict removeObjectForKey:child.htmlID];
+            [[self gridView] removeLayerWithIUIdentifier:box.htmlID];
+            [frameDict.dict removeObjectForKey:box.htmlID];
             
-            NSArray *childIds= [child cssIdentifierArray];
+            NSArray *childIds= [box cssIdentifierArray];
             for (NSString *identifier in childIds){
                 [self removeAllCSSWithIdentifier:identifier];
             }

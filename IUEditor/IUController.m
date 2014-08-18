@@ -333,6 +333,7 @@
 }
 
 
+
 -(NSArray*)IUChainOfIndexPath:(NSIndexPath*)path{
     NSMutableArray *retArray = [NSMutableArray array];
     IUBox *currentObj = [[self content] firstObject];
