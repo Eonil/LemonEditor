@@ -179,7 +179,8 @@
     }
     _assembledTagDictionaryForEditWidth = newCollection;
      */
-    _assembledTagDictionaryForEditWidth = [_cssFrameDict[@(IUCSSDefaultViewPort)] mutableCopy];
+    _assembledTagDictionaryForEditWidth = [NSMutableDictionary dictionary];
+    [_assembledTagDictionaryForEditWidth addEntriesFromDictionary:_cssFrameDict[@(IUCSSDefaultViewPort)]];
     
     if(_editWidth != IUCSSDefaultViewPort){
          [_assembledTagDictionaryForEditWidth addEntriesFromDictionary:_cssFrameDict[@(_editWidth)]];

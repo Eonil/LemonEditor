@@ -1122,8 +1122,9 @@
 
 - (void)setOverflowType:(IUOverflowType)overflowType{
     _overflowType = overflowType;
-    [self updateCSS];
     [self updateHTML];
+    [self updateCSS];
+
 }
 
 
