@@ -23,7 +23,9 @@
 }
 
 - (void)awakeFromNib{
-    [self outlet:_sampleTextV bind:NSValueBinding property:@"sampleHTML"];
+    if (self.controller) {
+        [_sampleTextV bind:@"value" toObject:self withKeyPath:[self.controller keyPathFromControllerToProperty:@"sampleHTML"] options:IUBindingDictNotRaisesApplicable];
+    }
 }
 
 @end

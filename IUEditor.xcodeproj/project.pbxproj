@@ -621,6 +621,7 @@
 		3DFB86491961628800A20960 /* LMPropertyWebProgrammingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DFB86471961628800A20960 /* LMPropertyWebProgrammingVC.xib */; };
 		58FF6B8E1946EA2B009A86F9 /* PGSubmitButtonVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FF6B8C1946EA2B009A86F9 /* PGSubmitButtonVC.m */; };
 		58FF6B8F1946EA2B009A86F9 /* PGSubmitButtonVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58FF6B8D1946EA2B009A86F9 /* PGSubmitButtonVC.xib */; };
+		6905BE7A199FEE0400DF0B70 /* WPWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 6905BE79199FEE0400DF0B70 /* WPWidget.m */; };
 		6905FB521925F17300E4DBC3 /* JDCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 6905FB511925F17300E4DBC3 /* JDCode.m */; };
 		690A408E18E14A4E00095263 /* LMStackVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 690A408D18E14A4E00095263 /* LMStackVC.xib */; };
 		690A409518E1645B00095263 /* LMWidgetLibraryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 690A409318E1645B00095263 /* LMWidgetLibraryVC.m */; };
@@ -1597,6 +1598,8 @@
 		58FF6B8B1946EA2B009A86F9 /* PGSubmitButtonVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGSubmitButtonVC.h; sourceTree = "<group>"; };
 		58FF6B8C1946EA2B009A86F9 /* PGSubmitButtonVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGSubmitButtonVC.m; sourceTree = "<group>"; };
 		58FF6B8D1946EA2B009A86F9 /* PGSubmitButtonVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PGSubmitButtonVC.xib; sourceTree = "<group>"; };
+		6905BE78199FEE0400DF0B70 /* WPWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPWidget.h; sourceTree = "<group>"; };
+		6905BE79199FEE0400DF0B70 /* WPWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPWidget.m; sourceTree = "<group>"; };
 		6905FB501925F17300E4DBC3 /* JDCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDCode.h; path = JD/JDCode.h; sourceTree = "<group>"; };
 		6905FB511925F17300E4DBC3 /* JDCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDCode.m; path = JD/JDCode.m; sourceTree = "<group>"; };
 		690A408D18E14A4E00095263 /* LMStackVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMStackVC.xib; sourceTree = "<group>"; };
@@ -3393,6 +3396,8 @@
 				69860E5B19766B24001C3F7F /* WPMenuItem.m */,
 				692D9900199D807000A7E1C1 /* WPWidgets.h */,
 				692D9901199D807000A7E1C1 /* WPWidgets.m */,
+				6905BE78199FEE0400DF0B70 /* WPWidget.h */,
+				6905BE79199FEE0400DF0B70 /* WPWidget.m */,
 			);
 			name = WPGroup;
 			sourceTree = "<group>";
@@ -4787,6 +4792,7 @@
 				3DBD7C2419612107003E386C /* LMStartPreviewWC.m in Sources */,
 				3DED27131904AC8A001A1D67 /* LMEventVC.m in Sources */,
 				693849E41914D711005C0546 /* NSIndexPath+JDExtension.m in Sources */,
+				6905BE7A199FEE0400DF0B70 /* WPWidget.m in Sources */,
 				3DF8046A18FF790400913505 /* LMPropertyShadowVC.m in Sources */,
 				69C575BE18D6F61E0016F050 /* LMAppDelegate.m in Sources */,
 				690A409918E1665E00095263 /* LMGeneralObject.m in Sources */,

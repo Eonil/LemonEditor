@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 JDLab. All rights reserved.
 //
 
-#import "LMDefaultPropertyVC.h"
+#import "IUController.h"
 
 
-@interface LMPropertySampleTextVC : LMDefaultPropertyVC
+@interface LMPropertySampleTextVC : NSViewController
+@property (weak) IUController  *controller;
 
 @end
