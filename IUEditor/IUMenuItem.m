@@ -89,7 +89,7 @@
 
 -(void)selectionChanged:(NSNotification*)noti{
     
-    if(self.children.count > 0 && self.css.editWidth > 640){
+    if(self.children.count > 0 && self.css.editWidth > 650){
         NSMutableSet *set = [NSMutableSet setWithArray:[self.allChildren arrayByAddingObject:self]];
         [set intersectSet:[NSSet setWithArray:[noti userInfo][@"selectedObjects"]]];
         

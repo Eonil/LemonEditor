@@ -23,6 +23,7 @@
         
         self.mobileTitle = @"MENU";
         self.iconColor = [NSColor whiteColor];
+        [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
         
         if (self.hasWidth) {
             [self.css setValue:@(420) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
@@ -87,7 +88,7 @@
 }
 -(void)selectionChanged:(NSNotification*)noti{
     
-    if(self.children.count > 0 && self.css.editWidth <= 640){
+    if(self.children.count > 0 && self.css.editWidth <= 650){
         NSMutableSet *set = [NSMutableSet setWithArray:[self.allChildren arrayByAddingObject:self]];
         [set intersectSet:[NSSet setWithArray:[noti userInfo][@"selectedObjects"]]];
         
@@ -107,7 +108,7 @@
 - (void)heightContextDidChange:(NSDictionary *)dictionary{
     JDInfoLog(@"haha");
     
-    if(self.css.editWidth <= 640){
+    if(self.css.editWidth <= 650){
         //mobile에서만 사용하는 button들
         [self updateCSSWithIdentifiers:@[[self mobileButtonIdentifier], [self topButtonIdentifier], [self bottomButtonIdentifier]]];
     }
@@ -231,5 +232,7 @@
 - (BOOL)canChangeOverflow{
     return NO;
 }
-
+- (BOOL)shouldCompileFontInfo{
+    return YES;
+}
 @end

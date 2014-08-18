@@ -164,7 +164,7 @@ a{
 
 
 /* MenuBar mobile version */
-@media all and (max-width: 640px){
+@media all and (max-width: 650px){
     /* Mobile-menu*/
     .IUMenuBar > .mobile-button{
         width:100%;
