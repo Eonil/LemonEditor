@@ -165,20 +165,6 @@
 -(void)updateAssembledTagDictionary{
     [self willChangeValueForKey:@"assembledTagDictionary"];
     //REVIEW: style sheet는 default만 적용됨
-    /*
-    NSArray *widths = [_cssFrameDict allKeys];
-    NSSortDescriptor *desc = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:NO];
-    NSArray *sortedWidth = [widths sortedArrayUsingDescriptors:@[desc]];
-    
-    NSMutableDictionary *newCollection = [NSMutableDictionary dictionary];
-    for (id key in sortedWidth){
-        if ([key intValue] < _editWidth) {
-            break;
-        }
-        [newCollection overwrite: _cssFrameDict[key]];
-    }
-    _assembledTagDictionaryForEditWidth = newCollection;
-     */
     _assembledTagDictionaryForEditWidth = [NSMutableDictionary dictionary];
     [_assembledTagDictionaryForEditWidth addEntriesFromDictionary:_cssFrameDict[@(IUCSSDefaultViewPort)]];
     
@@ -186,7 +172,6 @@
          [_assembledTagDictionaryForEditWidth addEntriesFromDictionary:_cssFrameDict[@(_editWidth)]];
     }
     
-
     [self didChangeValueForKey:@"assembledTagDictionary"];
 }
 

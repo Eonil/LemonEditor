@@ -156,11 +156,9 @@
     }
     
     //js for tweet
-    for(IUBox *child in page.allChildren){
-        if([child isKindOfClass:[IUTweetButton class]]){
-            [code addCodeLine:@"<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>"];
-            break;
-        }
+    if([page containClass:[IUTweetButton class]]){
+        [code addCodeLine:@"<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>"];
+        
     }
     
 
@@ -1549,6 +1547,17 @@
             }
             else{
                 [code addCodeWithFormat:@"@media screen and (max-width:%dpx){" , largestWidth-1];
+                
+                if(size < IUMobileSize && sheet.allChildren ){
+                    if([sheet containClass:[IUMenuBar class]]){
+                        NSString *menubarMobileCSSPath = [[NSBundle mainBundle] pathForResource:@"menubarMobile" ofType:@"css"];
+                        NSString *menubarMobileCSS = [NSString stringWithContentsOfFile:menubarMobileCSSPath encoding:NSUTF8StringEncoding error:nil];
+                        [code increaseIndentLevelForEdit];
+                        [code addCodeLine:menubarMobileCSS];
+                        [code decreaseIndentLevelForEdit];
+                    }
+
+                }
                 
             }
             

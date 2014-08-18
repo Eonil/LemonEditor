@@ -689,48 +689,6 @@
     //[self initializeCSSJSResource];
 }
 
-#if 0
--(void)copyResourceForDebug{
-    /*
-    IUResourceGroup *JSGroup;
-    IUResourceGroup *CSSGroup;
-
-    for(IUResourceGroup *groupNode in self.resourceNode.children){
-        if([groupNode.name isEqualToString:@"JS"]){
-            JSGroup = groupNode;
-        }
-        if([groupNode.name isEqualToString:@"CSS"]){
-            CSSGroup = groupNode;
-        }
-    }
-
-    //Java Script resource copy
-    NSString *iuEditorJSPath = [[NSBundle mainBundle] pathForResource:@"iueditor" ofType:@"js"];
-    [self copyFile:iuEditorJSPath toPath:[JSGroup.absolutePath stringByAppendingPathComponent:@"iueditor.js"]];
-
-    NSString *iuFrameJSPath = [[NSBundle mainBundle] pathForResource:@"iuframe" ofType:@"js"];
-    [self copyFile:iuFrameJSPath toPath:[JSGroup.absolutePath stringByAppendingPathComponent:@"iuframe.js"]];
-    
-    NSString *iuJSPath = [[NSBundle mainBundle] pathForResource:@"iu" ofType:@"js"];
-    [self copyFile:iuJSPath toPath:[JSGroup.absolutePath stringByAppendingPathComponent:@"iu.js"]];
-    
-    NSString *carouselJSPath = [[NSBundle mainBundle] pathForResource:@"jquery.bxslider" ofType:@"js"];
-    [self copyFile:carouselJSPath toPath:[JSGroup.absolutePath stringByAppendingPathComponent:@"jquery.bxslider.js"]];
-
-    //css resource copy
-    NSString *IUCSSPath = [[NSBundle mainBundle] pathForResource:@"iu" ofType:@"css"];
-    [self copyFile:IUCSSPath toPath:[CSSGroup.absolutePath stringByAppendingPathComponent:@"iu.css"]];
-
-    NSString *resetCSSPath = [[NSBundle mainBundle] pathForResource:@"reset" ofType:@"css"];
-    [self copyFile:resetCSSPath toPath:[CSSGroup.absolutePath stringByAppendingPathComponent:@"reset.css"]];
-    
-    NSString *carouselCSSPath = [[NSBundle mainBundle] pathForResource:@"jquery.bxslider" ofType:@"css"];
-    [self copyFile:carouselCSSPath toPath:[CSSGroup.absolutePath stringByAppendingPathComponent:@"jquery.bxslider.css"]];
-
-     */
-}
-#endif
-
 
 - (NSArray*)allDocuments{
     NSMutableArray *array = [NSMutableArray array];

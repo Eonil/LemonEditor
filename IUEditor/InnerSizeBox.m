@@ -38,10 +38,10 @@
         [self addSubview:rightTF];
         
         imageView = [[SizeImageView alloc] initWithFrame:NSMakeRect(aWidth-20, 6, 15, 15)];
-        if(aWidth < 650){
+        if(aWidth < IUMobileSize){
             [imageView setImage:[NSImage imageNamed:@"width_mobile"]];
         }
-        else if(aWidth < 770){
+        else if(aWidth < IUTabletSize){
             [imageView setImage:[NSImage imageNamed:@"width_tablet"]];
         }
         else{

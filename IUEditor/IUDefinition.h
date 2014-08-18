@@ -14,6 +14,9 @@
 //for media-query default size(== maximum size는 default collection으로 분료)
 #define IUCSSDefaultViewPort 9999
 
+#define IUTabletSize 770
+#define IUMobileSize 650
+
 
 //for dragging (pasteboard)
 static NSString * kUTTypeIUType  =  @"kUTTypeIUType";

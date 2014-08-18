@@ -840,7 +840,7 @@
             height = maxHeight;
         }
         
-        if(viewport < 650){
+        if(viewport < IUMobileSize){
             
             
             if(height > 10){
@@ -947,7 +947,7 @@
                 }
                 else if(menuItem.depth ==2){
                     IUMenuBar *menuBar = (IUMenuBar *)(menuItem.parent.parent);
-                    if(viewport > 650){
+                    if(viewport > IUMobileSize){
                         if(menuBar.align == IUMenuBarAlignLeft){
                             [code insertTag:@"border-left-color" string:color];
                         }
@@ -981,7 +981,7 @@
             }
             else if(menuItem.depth ==2){
                 IUMenuBar *menuBar = (IUMenuBar *)(menuItem.parent.parent);
-                if(viewport > 650){
+                if(viewport > IUMobileSize){
                     if(menuBar.align == IUMenuBarAlignLeft){
                         [code insertTag:@"border-left-color" string:color];
                     }
@@ -1008,7 +1008,7 @@
             [code setInsertingIdentifier:menuItem.editorDisplayIdentifier];
             [code setInsertingTarget:IUTargetEditor];
             
-            if(viewport > 650){
+            if(viewport > IUMobileSize){
                 if(menuItem.isOpened){
                     [code insertTag:@"display" string:@"block"];
                 }

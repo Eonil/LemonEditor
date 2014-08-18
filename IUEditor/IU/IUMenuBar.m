@@ -88,7 +88,7 @@
 }
 -(void)selectionChanged:(NSNotification*)noti{
     
-    if(self.children.count > 0 && self.css.editWidth <= 650){
+    if(self.children.count > 0 && self.css.editWidth <= IUMobileSize){
         NSMutableSet *set = [NSMutableSet setWithArray:[self.allChildren arrayByAddingObject:self]];
         [set intersectSet:[NSSet setWithArray:[noti userInfo][@"selectedObjects"]]];
         
@@ -108,7 +108,7 @@
 - (void)heightContextDidChange:(NSDictionary *)dictionary{
     JDInfoLog(@"haha");
     
-    if(self.css.editWidth <= 650){
+    if(self.css.editWidth <= IUMobileSize){
         //mobile에서만 사용하는 button들
         [self updateCSSWithIdentifiers:@[[self mobileButtonIdentifier], [self topButtonIdentifier], [self bottomButtonIdentifier]]];
     }

@@ -30,6 +30,8 @@
 -(NSArray*)widthWithCSS;
 -(IUBox *)selectableIUAtPoint:(CGPoint)point;
 
+- (BOOL)containClass:(Class)class;
+
 @property (weak) IUSheetGroup *group;
 
 @end
