@@ -79,16 +79,16 @@
 
 -(void)logout{
     [self willChangeValueForKey:@"logging"];
-    _logging = NO;
+    _logging = YES;
     [self didChangeValueForKey:@"logging"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
         
-        NSInteger resultCode = [JDShellUtil execute:@"heroku" atDirectory:@"/" arguments:@[@"logout"] stdOut:nil stdErr:nil];
+        NSInteger resultCode = [JDShellUtil execute:@"heroku logout"];
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [self willChangeValueForKey:@"logging"];
-            _logging = YES;
+            _logging = NO;
             [self didChangeValueForKey:@"logging"];
-            [self.loginDelegate herokuUtil:self loginProcessFinishedWithResultCode:resultCode];
+            [self.loginDelegate herokuUtil:self logoutProcessFinishedWithResultCode:resultCode];
         });
     });
 }
