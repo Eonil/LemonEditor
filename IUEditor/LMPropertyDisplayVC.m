@@ -35,6 +35,9 @@
     [self outlet:_overflowPopupBtn bind:NSSelectedIndexBinding property:@"overflowType"];
     [self outlet:_overflowPopupBtn bind:NSEnabledBinding property:@"canChangeOverflow"];
     
+    [self outlet:_displayHideBtn bind:NSValueBinding cssTag:IUCSSTagDisplayIsHidden];
+    
+    
     NSDictionary *numberBinding =  @{NSContinuouslyUpdatesValueBindingOption:@(YES),NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToHundredTransformer"};
     [self outlet:_opacityTF bind:NSValueBinding cssTag:IUCSSTagOpacity options:numberBinding];
     [self outlet:_opacitySlider bind:NSValueBinding cssTag:IUCSSTagOpacity options:numberBinding];
