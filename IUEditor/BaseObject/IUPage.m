@@ -62,6 +62,26 @@
     return self;
 }
 
+- (void)connectWithEditor{
+    NSAssert(self.project, @"");
+    
+    [[self undoManager] disableUndoRegistration];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMQSize:) name:IUNotificationMQAdded object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMQSize:) name:IUNotificationMQRemoved object:nil];
+    
+    [_pageContent connectWithEditor];
+    [[self undoManager] enableUndoRegistration];
+}
+
+- (void)prepareDealloc{
+    if([self isConnectedWithEditor]){
+        [_pageContent prepareDealloc];
+    }
+}
+
 - (BOOL)hasHeight{
     return NO;
 }

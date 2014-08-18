@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -397,6 +397,9 @@
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystem"/>
                                                         </buttonCell>
+                                                        <connections>
+                                                            <action selector="logout:" target="-2" id="cz4-J7-HAc"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </view>
@@ -470,6 +473,10 @@
                                                     </textField>
                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oBu-do-ySE">
                                                         <rect key="frame" x="34" y="25" width="154" height="19"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="19" id="Jj2-vO-QUS"/>
+                                                            <constraint firstAttribute="width" constant="154" id="yck-Dh-fPa"/>
+                                                        </constraints>
                                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="uuo-RA-XBc">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -491,24 +498,6 @@
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
-                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MFi-6a-knH">
-                                                        <rect key="frame" x="251" y="25" width="154" height="19"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="154" id="3ID-6u-bcj"/>
-                                                        </constraints>
-                                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="IzM-gq-vvx">
-                                                            <font key="font" metaFont="smallSystem"/>
-                                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                        <connections>
-                                                            <binding destination="-2" name="value" keyPath="self.password" id="NG9-ns-pWw">
-                                                                <dictionary key="options">
-                                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                                </dictionary>
-                                                            </binding>
-                                                        </connections>
-                                                    </textField>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G21-NP-wx3">
                                                         <rect key="frame" x="408" y="19" width="80" height="28"/>
                                                         <constraints>
@@ -523,17 +512,34 @@
                                                             <action selector="login:" target="-2" id="h2z-2a-3GE"/>
                                                         </connections>
                                                     </button>
+                                                    <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LZ3-dW-tRa">
+                                                        <rect key="frame" x="251" y="25" width="154" height="19"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="19" id="2Tp-wh-0hf"/>
+                                                            <constraint firstAttribute="width" constant="154" id="NeQ-Ab-DXB"/>
+                                                        </constraints>
+                                                        <secureTextFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="fgt-vp-3HB">
+                                                            <font key="font" metaFont="smallSystem"/>
+                                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <allowedInputSourceLocales>
+                                                                <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                                            </allowedInputSourceLocales>
+                                                            <connections>
+                                                                <binding destination="-2" name="value" keyPath="self.password" id="bpw-kz-R9f"/>
+                                                            </connections>
+                                                        </secureTextFieldCell>
+                                                    </secureTextField>
                                                 </subviews>
                                             </view>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="wbC-zl-SC5" secondAttribute="centerY" id="113-m7-TbA"/>
-                                                <constraint firstItem="MFi-6a-knH" firstAttribute="leading" secondItem="IbU-0G-FMX" secondAttribute="trailing" constant="5" id="90q-5I-84k"/>
-                                                <constraint firstAttribute="trailing" secondItem="MFi-6a-knH" secondAttribute="trailing" constant="94" id="C3M-he-TjK"/>
-                                                <constraint firstItem="G21-NP-wx3" firstAttribute="leading" secondItem="MFi-6a-knH" secondAttribute="trailing" constant="8" symbolic="YES" id="EKG-c1-TEU"/>
                                                 <constraint firstAttribute="height" constant="70" id="EQi-6Z-Ikn"/>
                                                 <constraint firstItem="wbC-zl-SC5" firstAttribute="leading" secondItem="qlW-7k-OmM" secondAttribute="leading" constant="16" id="Hbc-4N-8fv"/>
+                                                <constraint firstItem="oBu-do-ySE" firstAttribute="centerY" secondItem="LZ3-dW-tRa" secondAttribute="centerY" id="Huz-ZN-FkF"/>
+                                                <constraint firstItem="G21-NP-wx3" firstAttribute="leading" secondItem="LZ3-dW-tRa" secondAttribute="trailing" constant="8" symbolic="YES" id="O2f-aB-EhH"/>
+                                                <constraint firstItem="LZ3-dW-tRa" firstAttribute="leading" secondItem="IbU-0G-FMX" secondAttribute="trailing" constant="5" id="Q0X-7y-vWS"/>
                                                 <constraint firstItem="oBu-do-ySE" firstAttribute="leading" secondItem="wbC-zl-SC5" secondAttribute="trailing" constant="5" id="SKD-V0-ara"/>
-                                                <constraint firstAttribute="centerY" secondItem="MFi-6a-knH" secondAttribute="centerY" id="Tlp-Dj-MdS"/>
                                                 <constraint firstItem="wbC-zl-SC5" firstAttribute="top" secondItem="qlW-7k-OmM" secondAttribute="top" constant="28" id="aar-RI-dZY"/>
                                                 <constraint firstItem="IbU-0G-FMX" firstAttribute="leading" secondItem="oBu-do-ySE" secondAttribute="trailing" constant="9" id="fJS-MQ-IqM"/>
                                                 <constraint firstAttribute="width" constant="500" id="gfj-VN-Mba"/>

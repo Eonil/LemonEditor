@@ -40,6 +40,28 @@
     return iu;
 }
 
+- (void)connectWithEditor{
+    
+    NSAssert(self.project, @"");
+    
+    
+    [[self undoManager] disableUndoRegistration];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMQSize:) name:IUNotificationMQAdded object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMQSize:) name:IUNotificationMQRemoved object:nil];
+    
+    
+    
+    [[self undoManager] enableUndoRegistration];
+    
+}
+
+- (void)prepareDealloc{
+    
+}
+
 - (void)setPrototypeClass:(IUClass *)prototypeClass{
     
     if([prototypeClass isEqualTo:_prototypeClass]){

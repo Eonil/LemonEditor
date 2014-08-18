@@ -197,6 +197,21 @@
     }
 }
 
+- (IBAction)logout:(id)sender {
+    herokuUtil.loginDelegate = self;
+    [herokuUtil logout];
+}
+
+-(void)herokuUtil:(JDHerokuUtil*)util logoutProcessFinishedWithResultCode:(NSInteger)resultCode{
+    if (resultCode == 1) {
+        //login failed
+        self.herokuLoginLog = @"Logout Failed";
+    }
+    else {
+        self.herokuLoginLog = @"Logout Success";
+        [self rearrangeView];
+    }
+}
 
 #pragma mark Heroku App Info
 

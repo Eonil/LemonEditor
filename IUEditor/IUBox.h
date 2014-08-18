@@ -94,6 +94,8 @@ typedef enum _IUOverflowType{
 - (BOOL)isConnectedWithEditor;
 - (void)setIsConnectedWithEditor;
 
+- (void)prepareDealloc;
+
 -(IUSheet *)sheet;
 
 
@@ -116,9 +118,15 @@ typedef enum _IUOverflowType{
 @property (nonatomic) NSString *text;
 
 #endif
+
 //undoManager
 - (NSUndoManager *)undoManager;
 
+
+//mediaquery
+- (void)addMQSize:(NSNotification *)notification;
+- (void)removeMQSize:(NSNotification *)notification;
+- (void)changeMQSelect:(NSNotification *)notification;
 
 //Event
 @property (readonly) IUEvent *event;

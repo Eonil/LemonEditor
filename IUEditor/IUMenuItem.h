@@ -26,7 +26,6 @@
 - (NSString *)closureHoverIdentifier;
 - (NSString *)closureActiveIdentifier;
 
-
 //editor mode- display
 @property BOOL isOpened;
 

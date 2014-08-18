@@ -77,6 +77,22 @@
     });
 }
 
+-(void)logout{
+    [self willChangeValueForKey:@"logging"];
+    _logging = NO;
+    [self didChangeValueForKey:@"logging"];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(void){
+        
+        NSInteger resultCode = [JDShellUtil execute:@"heroku" atDirectory:@"/" arguments:@[@"logout"] stdOut:nil stdErr:nil];
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            [self willChangeValueForKey:@"logging"];
+            _logging = YES;
+            [self didChangeValueForKey:@"logging"];
+            [self.loginDelegate herokuUtil:self loginProcessFinishedWithResultCode:resultCode];
+        });
+    });
+}
+
 -(BOOL)combineGitPath:(NSString*)path appName:(NSString*)appName{
     [JDShellUtil execute:@"/usr/bin/heroku" atDirectory:path arguments:@[@"git:remote", @"-a", appName] stdOut:nil stdErr:nil];
     return YES;
