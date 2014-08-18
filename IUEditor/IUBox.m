@@ -677,6 +677,8 @@
         if (self.isConnectedWithEditor) {
             [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureChangeRemoving, IUNotificationStructureChangedIU: iu}];
         }
+    
+        [self updateHTML];
 
         return YES;
 }
