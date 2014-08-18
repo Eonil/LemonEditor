@@ -67,14 +67,7 @@
 - (void)connectWithEditor{
     [super connectWithEditor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectionChanged:) name:IUNotificationSelectionDidChange object:nil];
-    NSMutableString *parentDepth = [NSMutableString string];
-    
-    for (int i=0; i<[self depth]; i++){
-        [parentDepth appendString:@"parent."];
-    }
-    
-    [parentDepth appendString:@"css.assembledTagDictionary.height"];
-    [self addObserver:self forKeyPath:parentDepth options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"height"];
+    [self addObserver:self forKeyPath:@"parent.css.assembledTagDictionary.height" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"height"];
 
 
 }
@@ -83,14 +76,6 @@
     if([self isConnectedWithEditor]){
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         [self removeObserver:self forKeyPath:@"parent.css.assembledTagDictionary.height"];
-        NSMutableString *parentDepth = [NSMutableString string];
-        for (int i=0; i<[self depth]; i++){
-            [parentDepth appendString:@"parent."];
-        }
-        
-        [parentDepth appendString:@"css.assembledTagDictionary.height"];
-        
-        [self removeObserver:self forKeyPath:parentDepth];
     }
 }
 
