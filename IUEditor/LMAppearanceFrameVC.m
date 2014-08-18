@@ -376,6 +376,10 @@
     if (value == nil || [value isEqualToString:@"-"]) {
         for (IUBox *box in self.controller.selectedObjects) {
             [box.css eradicateTag:tag];
+            
+            if([tag isEqualToString:IUCSSTagPixelHeight] || [tag isEqualToString:IUCSSTagPercentHeight]){
+                [self setValue:@(1.0) forCSSTag:IUCSSTagLineHeight];
+            }
         }
     }
     else {

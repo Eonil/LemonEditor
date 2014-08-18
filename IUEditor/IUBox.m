@@ -485,6 +485,11 @@
     if (self.delegate) {
         [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.parent.htmlID];
 
+        if([self.sheet isKindOfClass:[IUClass class]]){
+            for(IUBox *box in ((IUClass *)self.sheet).references){
+                [box updateHTML];
+            }
+        }
     }
 }
 

@@ -58,8 +58,10 @@
 - (void)setController:(IUController *)controller{
     [super setController:controller];
     
+    
     [self outlet:_textAlignB bind:NSSelectedIndexBinding cssTag:IUCSSTagTextAlign];
     [self outlet:_autoHeightBtn bind:NSValueBinding property:@"lineHeightAuto"];
+    [self outlet:_autoHeightBtn bind:NSEnabledBinding property:@"lineHeightAuto" options:IUBindingDictNumberAndNotRaisesApplicable];
     
     //observing for undo
     observingList = @[

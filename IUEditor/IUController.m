@@ -332,20 +332,6 @@
     return nil;
 }
 
--(IUImport*)importIUInIU:(id)iu{
-    NSIndexPath *firstPath = [[self indexPathOfObject:iu] indexPathByRemovingLastIndex];
-    if(firstPath){
-        NSArray *chain = [self IUChainOfIndexPath:firstPath];
-        
-        for (IUBox *box in chain) {
-            if ([box isKindOfClass:[IUImport class]]) {
-                return (IUImport *)box;
-            }
-        }
-    }
-    return nil;
-}
-
 
 -(NSArray*)IUChainOfIndexPath:(NSIndexPath*)path{
     NSMutableArray *retArray = [NSMutableArray array];

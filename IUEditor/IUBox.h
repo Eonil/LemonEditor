@@ -155,7 +155,6 @@ typedef enum _IUOverflowType{
 
 
 //children
-@property (readonly) NSMutableArray *referenceChildren;
 - (NSArray*)children;
 - (NSMutableArray*)allChildren;
 - (NSMutableArray *)allIdentifierChildren;

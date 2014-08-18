@@ -200,6 +200,9 @@ function getTextAutoHeight(identifier){
         brCount++;
     }
     var height = iu.height();
+    if(height==0){
+        return 1.0;
+    }
     var lineheight = height/brCount;
     var fontSize = parseFloat(iu.css('font-size'));
     var newLineHeight = lineheight/fontSize;

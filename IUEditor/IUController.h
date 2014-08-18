@@ -34,7 +34,7 @@
 -(NSString*)keyPathFromControllerToProperty:(NSString*)property;
 
 -(IUImport*)importIUInSelectionChain;
--(IUImport*)importIUInIU:(id)iu;
+
 
 -(void)copySelectedIUToPasteboard:(id)sender;
 -(void)pasteToSelectedIU:(id)sender;

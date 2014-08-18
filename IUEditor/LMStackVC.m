@@ -295,14 +295,8 @@
             }
             [newParent insertIU:newIU atIndex:newIndex error:nil];
             
-            BOOL parentIsInImport = [self isInImportIU:newParent];
-            if(parentIsInImport){
-                NSString *finalString = [NSString stringWithFormat:@"ImportedBy_%@_%@", newParent.htmlID, newIU.htmlID];
-                [_IUController trySetSelectedObjectsByIdentifiers:@[finalString]];
-            }
-            else{
-                [_IUController setSelectedObjectsByIdentifiers:@[newIU.htmlID]];
-            }
+            NSIndexPath *path = [[item indexPath] indexPathByAddingIndex:newIndex];
+            [_IUController setSelectionIndexPath:path];  
             
             [newIU confirmIdentifier];
 
@@ -311,23 +305,6 @@
     }
     return NO;
     
-}
-- (BOOL)isInImportIU:(IUBox *)iu{
-    if([iu isKindOfClass:[IUPageContent class]] ||
-       [iu isKindOfClass:[IUHeader class]]){
-        return NO;
-    }
-    else{
-        if([iu isKindOfClass:[IUClass class]] && [iu.sheet isKindOfClass:[IUPage class]]){
-            return YES;
-        }
-        else if([iu isKindOfClass:[IUClass class]] && [iu.sheet isKindOfClass:[IUClass class]]){
-            return NO;
-        }
-        else{
-            return [self isInImportIU:iu.parent];
-        }
-    }
 }
 
 #pragma mark - copy & paste

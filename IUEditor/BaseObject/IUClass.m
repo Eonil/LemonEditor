@@ -23,6 +23,14 @@
     self =  [super initWithCoder:aDecoder];
     if(self){
         _referenceImports = [[aDecoder decodeObjectForKey:@"referenceImport"] mutableCopy];
+        NSArray *copy = [_referenceImports copy];
+        NSInteger index = [copy count] - 1;
+        for (id object in [copy reverseObjectEnumerator]) {
+            if ([_referenceImports indexOfObject:object inRange:NSMakeRange(0, index)] != NSNotFound) {
+                [_referenceImports removeObjectAtIndex:index];
+            }
+            index--;
+        }
     }
     return self;
 }
@@ -41,7 +49,9 @@
 }
 
 - (void)addReference:(IUImport*)import{
-    [_referenceImports addObject:import];
+    if([_referenceImports containsObject:import] == NO){
+        [_referenceImports addObject:import];
+    }
 }
 - (void)removeReference:(IUImport*)import{
     [_referenceImports removeObject:import];
