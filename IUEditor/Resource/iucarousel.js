@@ -23,20 +23,21 @@ function initCarousel(carouselID){
 	$(lastObj).insertBefore($($(wrapper).children()[0]));
 		
 	//set position
-	var width = carousel.width() * (count+2);
-	$(wrapper).css('width', width+'px');
-    $(wrapper).css('height', carousel.height()+'px');
-		
+	var width = 100 * (count+2);
+	$(wrapper).css('width', width+'%');
+	$(wrapper).css('height','100%');
+	
+	var childrenWidth = 100 / (count+2);	
 	$(wrapper).children().each(function(){
-        $(this).css('width', carousel.width()+'px');
+		$(this).css('width', childrenWidth+'%');
 
 	});
 		
 	carousel.data('index', 1);
-	var left = carousel.width() * -1;
-	$(wrapper).css('left', left+'px');		
+	var left =  100 * -1;
+	$(wrapper).css('left', left+'%');		
 
-    //click binding
+	//click binding
 	carousel.find('.Prev').click(function(){
 		prevCarousel(carouselID);
 	});
@@ -51,19 +52,19 @@ function initCarousel(carouselID){
 		})
 	});
 	
-    //timer
+	//timer
 	var timer = carousel.attr('timer');
 	if(timer != undefined){
 		var time = parseInt(timer);
-        if(time < 4000){
-            time = 4000;
-        }
+		if(time < 4000){
+			time = 4000;
+		}
 		window.setInterval(function(){ 
 			nextCarousel(carouselID);
 		}, time);
 	}
     
-    activeCarousel(carouselID);
+	activeCarousel(carouselID);
 }
 
 function destroyCarousel(carouselID){
@@ -101,48 +102,52 @@ function moveCarousel(carouselID, toIndex){
 	var index = carousel.data('index');
 	
 	if(index==0){
-		var left = carousel.width() * -1 * (count-2);
-		$(wrapper).css('left', left+'px');
+		var left = 100 * -1 * (count-2);
+		$(wrapper).css('left', left+'%');
 	}
 	else if(index==count-1){
-		var left = carousel.width() * -1;
-		$(wrapper).css('left', left+'px');		
+		var left = 100 * -1;
+		$(wrapper).css('left', left+'%');		
 	}
 	
-	var firstLeft = carousel.width() * -1 * toIndex;
+	var firstLeft = 100 * -1 * toIndex;
 	carousel.data('index', toIndex);
     
-	$(wrapper).animate({'left': firstLeft+'px'}, 400);
-    activeCarousel(carouselID);
+	$(wrapper).animate({'left': firstLeft+'%'}, 400);
+	activeCarousel(carouselID);
 	
 }
 
 function activeCarousel(carouselID){
-    var carousel = $('#'+carouselID);
-    var wrapper = carousel.find('.wrapper');
-    var count = $(wrapper).children().length;
-    var index = carousel.data('index');
+	var carousel = $('#'+carouselID);
+	var wrapper = carousel.find('.wrapper');
+	var count = $(wrapper).children().length;
+	var index = carousel.data('index');
 
-    //select li class active
-    var selectIndex = index -1;
-    if(index == count-1){
-        selectIndex = 0;
-    }
-    else if(index == 0){
-        selectIndex = count-3;
-    }
-    carousel.find('.Pager').children().each(function(i){
-                            if(i == selectIndex){
-                                    $(this).addClass('active');
-                            }
-                            else{
-                                    $(this).removeClass('active');
-                            }
-    });
+	//select li class active
+	var selectIndex = index -1;
+	if(index == count-1){
+		selectIndex = 0;
+	}
+	else if(index == 0){
+		selectIndex = count-3;
+	}
+	carousel.find('.Pager').children().each(function(i){
+		if(i == selectIndex){
+			$(this).addClass('active');
+		}
+		else{
+			$(this).removeClass('active');
+		}
+	});
 
 }
 
+$(window).resize(function(){
+	
+});
+
 $(document).ready(function(){
-    console.log('iu.js')
+	console.log('iucarousel.js')
 });
 
