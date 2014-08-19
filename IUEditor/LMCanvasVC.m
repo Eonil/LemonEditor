@@ -247,7 +247,7 @@
     return [self.controller.selectedObjects count];
 }
 - (BOOL)containsIU:(NSString *)IUID{
-    if ([self.controller.selectedIdentifiers containsObject:IUID]){
+    if ([self.controller.selectedIdentifiersWithImportIdentifier containsObject:IUID]){
         return YES;
     }
     else {
