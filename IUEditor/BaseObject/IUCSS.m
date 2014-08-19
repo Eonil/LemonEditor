@@ -78,6 +78,9 @@
     if([tag isEqualToString:IUCSSTagImage]){
         return NO;
     }
+    else if([tag isFrameTag]){
+        return NO;
+    }
     
     return YES;
 }

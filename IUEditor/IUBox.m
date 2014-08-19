@@ -27,9 +27,14 @@
 
 @implementation IUBox{
     NSMutableSet *changedCSSWidths;
+    
+    //for undo
+    NSMutableDictionary *undoFrameDict;
+    
+    //for draggin precisely
     NSPoint originalPoint, originalPercentPoint;
     NSSize originalSize, originalPercentSize;
-    BOOL isChangeSize, isChangePosition;
+    
     __weak IUProject *_tempProject;
     BOOL    _isConnectedWithEditor;
 }
@@ -192,6 +197,7 @@
     for (IUBox *box in self.children) {
         [box connectWithEditor];
     }
+    
     
     [[self undoManager] enableUndoRegistration];
     
@@ -865,84 +871,96 @@
     return NSMakeSize(currentPWidth, currentPHeight);
 }
 - (void)startDragSession{
+    
+    undoFrameDict = [NSMutableDictionary dictionary];
+    
+    if(_css.assembledTagDictionary[IUCSSTagPixelX]){
+        undoFrameDict[IUCSSTagPixelX] = _css.assembledTagDictionary[IUCSSTagPixelX];
+    }
+    if(_css.assembledTagDictionary[IUCSSTagPixelY]){
+        undoFrameDict[IUCSSTagPixelY] = _css.assembledTagDictionary[IUCSSTagPixelY];
+    }
+    if(_css.assembledTagDictionary[IUCSSTagPixelWidth]){
+        undoFrameDict[IUCSSTagPixelWidth] = _css.assembledTagDictionary[IUCSSTagPixelWidth];
+    }
+    if(_css.assembledTagDictionary[IUCSSTagPixelHeight]){
+        undoFrameDict[IUCSSTagPixelHeight] = _css.assembledTagDictionary[IUCSSTagPixelHeight];
+    }
+
+    
+    if(_css.assembledTagDictionary[IUCSSTagPercentX]){
+        undoFrameDict[IUCSSTagPercentX] = _css.assembledTagDictionary[IUCSSTagPercentX];
+    }
+    if(_css.assembledTagDictionary[IUCSSTagPercentY]){
+        undoFrameDict[IUCSSTagPercentY] = _css.assembledTagDictionary[IUCSSTagPercentY];
+    }
+    if(_css.assembledTagDictionary[IUCSSTagPercentWidth]){
+        undoFrameDict[IUCSSTagPercentWidth] = _css.assembledTagDictionary[IUCSSTagPercentWidth];
+    }
+    if(_css.assembledTagDictionary[IUCSSTagPercentHeight]){
+        undoFrameDict[IUCSSTagPercentHeight] = _css.assembledTagDictionary[IUCSSTagPercentHeight];
+    }
+
     originalSize = [self currentSize];
     originalPercentSize = [self currentPercentSize];
     originalPoint = [self currentPosition];
     originalPercentPoint = [self currentPercentPosition];
-    isChangePosition = NO;
-    isChangeSize = NO;
+    
 }
 
 - (void)endDragSession{
     [[self undoManager] beginUndoGrouping];
-    if(isChangePosition){
-        [[[self undoManager] prepareWithInvocationTarget:self] undoPoisition:originalPoint];
-        [[[self undoManager] prepareWithInvocationTarget:self] undoPercentPosition:originalPercentPoint];
-    }
-    if(isChangeSize){
-        [[[self undoManager] prepareWithInvocationTarget:self] undoSize:originalSize];
-        [[[self undoManager] prepareWithInvocationTarget:self] undoPercentSize:originalPercentSize];
-    }
-    isChangePosition = NO;
-    isChangeSize = NO;
+    [[self.undoManager prepareWithInvocationTarget:self] undoFrameWithDictionary:undoFrameDict];
     [[self undoManager] endUndoGrouping];
 }
 
-- (void)undoPoisition:(NSPoint)point{
+- (void)undoFrameWithDictionary:(NSMutableDictionary *)dictionary{
+    NSMutableDictionary *currentFrameDict = [NSMutableDictionary dictionary];
     
-    [[[self undoManager] prepareWithInvocationTarget:self] undoPoisition:[self currentPosition]];
+    if(_css.assembledTagDictionary[IUCSSTagPixelX]){
+        currentFrameDict[IUCSSTagPixelX] = _css.assembledTagDictionary[IUCSSTagPixelX];
+    }
+    if(_css.assembledTagDictionary[IUCSSTagPixelY]){
+        currentFrameDict[IUCSSTagPixelY] = _css.assembledTagDictionary[IUCSSTagPixelY];
+    }
+    if(_css.assembledTagDictionary[IUCSSTagPixelWidth]){
+        currentFrameDict[IUCSSTagPixelWidth] = _css.assembledTagDictionary[IUCSSTagPixelWidth];
+    }
+    if(_css.assembledTagDictionary[IUCSSTagPixelHeight]){
+        currentFrameDict[IUCSSTagPixelHeight] = _css.assembledTagDictionary[IUCSSTagPixelHeight];
+    }
     
-    if([self hasX] && [self canChangeXByUserInput]){
-        [_css setValueWithoutUpdateCSS:@(point.x) forTag:IUCSSTagPixelX];
+    
+    if(_css.assembledTagDictionary[IUCSSTagPercentX]){
+        currentFrameDict[IUCSSTagPercentX] = _css.assembledTagDictionary[IUCSSTagPercentX];
     }
-    if([self hasY] && [self canChangeYByUserInput]){
-        [_css setValueWithoutUpdateCSS:@(point.x) forTag:IUCSSTagPixelY];
+    if(_css.assembledTagDictionary[IUCSSTagPercentY]){
+        currentFrameDict[IUCSSTagPercentY] = _css.assembledTagDictionary[IUCSSTagPercentY];
     }
+    if(_css.assembledTagDictionary[IUCSSTagPercentWidth]){
+        currentFrameDict[IUCSSTagPercentWidth] = _css.assembledTagDictionary[IUCSSTagPercentWidth];
+    }
+    if(_css.assembledTagDictionary[IUCSSTagPercentHeight]){
+        currentFrameDict[IUCSSTagPercentHeight] = _css.assembledTagDictionary[IUCSSTagPercentHeight];
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] undoFrameWithDictionary:currentFrameDict];
+    
+    [_css setValueWithoutUpdateCSS:dictionary[IUCSSTagPixelX] forTag:IUCSSTagPixelX];
+    [_css setValueWithoutUpdateCSS:dictionary[IUCSSTagPixelY] forTag:IUCSSTagPixelY];
+    [_css setValueWithoutUpdateCSS:dictionary[IUCSSTagPixelWidth] forTag:IUCSSTagPixelWidth];
+    [_css setValueWithoutUpdateCSS:dictionary[IUCSSTagPixelHeight] forTag:IUCSSTagPixelHeight];
+
+    [_css setValueWithoutUpdateCSS:dictionary[IUCSSTagPixelX] forTag:IUCSSTagPixelX];
+    [_css setValueWithoutUpdateCSS:dictionary[IUCSSTagPixelY] forTag:IUCSSTagPixelY];
+    [_css setValueWithoutUpdateCSS:dictionary[IUCSSTagPercentWidth] forTag:IUCSSTagPercentWidth];
+    [_css setValueWithoutUpdateCSS:dictionary[IUCSSTagPercentHeight] forTag:IUCSSTagPercentHeight];
+
+    
     [self updateCSS];
-}
-
-- (void)undoPercentPosition:(NSPoint)point{
-    
-    [[[self undoManager] prepareWithInvocationTarget:self] undoPercentPosition:[self currentPercentPosition]];
-    
-    if([self hasX] && [self canChangeXByUserInput]){
-        [_css setValueWithoutUpdateCSS:@(point.x) forTag:IUCSSTagPercentX];
-    }
-    if([self hasY] && [self canChangeYByUserInput]){
-        [_css setValueWithoutUpdateCSS:@(point.y) forTag:IUCSSTagPercentY];
-    }
-    [self updateCSS];
-}
-- (void)undoSize:(NSSize)size{
-    [[[self undoManager] prepareWithInvocationTarget:self] undoSize:[self currentSize]];
-
-    if([self hasWidth] && [self canChangeWidthByUserInput]){
-        [_css setValueWithoutUpdateCSS:@(size.width) forTag:IUCSSTagPixelWidth];
-    }
-    if([self hasHeight] && [self canChangeHeightByUserInput]){
-        [_css setValueWithoutUpdateCSS:@(size.height) forTag:IUCSSTagPixelHeight];
-
-    }
-    [self updateCSS];
-
-}
-- (void)undoPercentSize:(NSSize)size{
-    
-    [[[self undoManager] prepareWithInvocationTarget:self] undoPercentSize:[self currentPercentSize]];
-
-    
-    if([self hasWidth] && [self canChangeWidthByUserInput]){
-        [_css setValueWithoutUpdateCSS:@(size.width) forTag:IUCSSTagPercentWidth];
-    }
-    if([self hasHeight] && [self canChangeHeightByUserInput]){
-        [_css setValueWithoutUpdateCSS:@(size.height) forTag:IUCSSTagPercentHeight];
-    }
-    [self updateCSS];
-    
 }
 
 - (void)movePosition:(NSPoint)point withParentSize:(NSSize)parentSize{
-    isChangePosition = YES;
     //Set Pixel
     if([self hasX] && [self canChangeXByUserInput]){
         NSInteger currentX = originalPoint.x + point.x;
@@ -979,7 +997,6 @@
 }
 
 - (void)increaseSize:(NSSize)size withParentSize:(NSSize)parentSize{
-    isChangeSize = YES;
     if([self hasWidth] && [self canChangeWidthByUserInput] && size.width != CGFLOAT_INVALID){
         NSInteger currentWidth = originalSize.width;
         currentWidth += size.width;

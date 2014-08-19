@@ -370,15 +370,24 @@
 }
 
 - (void)setCSSFrameValue:(id)value forTag:(IUCSSTag)tag{
+    for (IUBox *iu in self.controller.selectedObjects) {
+        [iu startDragSession];
+    }
+
     id updateValue = value;
     if (value == nil || [value isEqualToString:@"-"]) {
         if([tag isEqualToString:IUCSSTagPixelHeight] || [tag isEqualToString:IUCSSTagPercentHeight]){
-            [self setValue:@(1.0) forCSSTag:IUCSSTagLineHeight];
+            [self setValueWithouUpdateCSS:@(1.0) forCSSTag:IUCSSTagLineHeight];
         }
         
         updateValue = nil;
     }
-    [self setValue:updateValue forCSSTag:tag];
+    [self setValueWithouUpdateCSS:updateValue forCSSTag:tag];
+    for (IUBox *iu in self.controller.selectedObjects) {
+        [iu endDragSession];
+        [iu updateCSS];
+    }
+
 }
 
 - (IBAction)helpMenu:(id)sender {
