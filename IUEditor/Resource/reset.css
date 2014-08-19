@@ -112,4 +112,5 @@ hr {
 
 input, select {
     vertical-align:middle;
+    border-style:none;
 }
