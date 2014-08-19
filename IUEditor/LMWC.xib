@@ -325,12 +325,29 @@
                     <constraint firstItem="6xJ-ed-1uG" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="xZF-qx-AO8"/>
                 </constraints>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="018B36C5-2B8D-4E4A-AE78-F1067ED1DA23" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="Pu1-Pr-Bdl">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="xti-wR-ocl"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="OTd-KK-BCM"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="WZz-Hu-sNh"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="O76-fK-Hoh"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="rlk-P1-2MX"/>
+                    <toolbarItem implicitItemIdentifier="73AB140F-A06D-4D23-9640-46017DFF0A1D" label="Build" paletteLabel="Build" tag="-1" image="export" id="c2Q-2v-jpB"/>
+                    <toolbarItem implicitItemIdentifier="9A6D3544-3D5B-4279-80AC-1C8B8E3CDE16" label="pause" paletteLabel="pause" tag="-1" image="pause" id="GTQ-E8-qW5"/>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="c2Q-2v-jpB"/>
+                    <toolbarItem reference="GTQ-E8-qW5"/>
+                </defaultToolbarItems>
+            </toolbar>
             <connections>
                 <outlet property="delegate" destination="-2" id="4"/>
             </connections>
         </window>
     </objects>
     <resources>
+        <image name="export" width="24" height="24"/>
+        <image name="pause" width="24" height="24"/>
         <image name="shoveling" width="380" height="340"/>
         <image name="tab_off" width="100" height="30"/>
         <image name="tab_on_01" width="100" height="30"/>
