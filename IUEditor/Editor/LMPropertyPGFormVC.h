@@ -12,7 +12,6 @@
 
 @interface LMPropertyPGFormVC : LMDefaultPropertyVC <NSComboBoxDelegate, IUPropertyDoubleClickReceiver>
 
-
 - (void)setProject:(IUProject*)project;
 
 @end

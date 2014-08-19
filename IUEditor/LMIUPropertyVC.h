@@ -25,6 +25,4 @@
 @property (nonatomic) IUController *controller;
 @property (nonatomic) IUResourceManager     *resourceManager;
 
-- (void)prepareDealloc;
-
 @end

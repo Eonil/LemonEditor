@@ -99,7 +99,6 @@
 
 - (void)changeMQSelect:(NSNotification *)notification{
     
-    
     NSInteger selectedSize = [[notification.userInfo valueForKey:IUNotificationMQSize] integerValue];
     NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
 
@@ -108,7 +107,6 @@
     }
     
     [[self webView] updateFrameDict];
-    
 }
 
 - (void)changeMQMaxSize:(NSNotification *)notification{

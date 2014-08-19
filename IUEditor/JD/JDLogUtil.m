@@ -234,7 +234,7 @@ static NSMutableDictionary *timeDict;
         JDErrorLog(@"Time Log For %@: %.4f", name, interval);
     }
     else {
-        JDErrorLog(@"Time Log For %@: %.4f", name, interval);
+        JDTraceLog(@"Time Log For %@: %.4f", name, interval);
     }
 }
 

@@ -129,9 +129,7 @@
 
 
 - (void)dealloc{
-    if (self.controller) {
-        [self removeObserverForCSSTag:IUCSSTagBGSize];
-    }
+    [self removeObserverForCSSTag:IUCSSTagBGSize];
     [JDLogUtil log:IULogDealloc string:@"LMPropertyBGImage"];
 }
 

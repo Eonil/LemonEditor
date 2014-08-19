@@ -77,8 +77,8 @@
     [self outlet:_arrowControlMatrix bind:NSSelectedIndexBinding property:@"disableArrowControl"];
 
     //image
-    [_leftImageComboBox bind:NSContentBinding toObject:self withKeyPath:@"imageArray" options:IUBindingDictNotRaisesApplicable];
-    [_rightImageComboBox bind:NSContentBinding toObject:self withKeyPath:@"imageArray" options:IUBindingDictNotRaisesApplicable];
+    [_leftImageComboBox bind:NSContentBinding toObject:self withKeyPath:@"resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
+    [_rightImageComboBox bind:NSContentBinding toObject:self withKeyPath:@"resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
     [self outlet:_leftImageComboBox bind:NSValueBinding property:@"leftArrowImage"];
     [self outlet:_rightImageComboBox bind:NSValueBinding property:@"rightArrowImage"];
    
@@ -100,25 +100,9 @@
     [self outlet:_deselectColor bind:NSValueBinding property:@"deselectColor"];
     [self outlet:_pagerPositionSlidr bind:NSValueBinding property:@"pagerPosition"];
     
-    awaked = YES;
-    [self addObserver:self forKeyPath:@"resourceManager.imageFiles" options:NSKeyValueObservingOptionInitial context:@"image"];
-
 }
 
-- (void)prepareDealloc{
-    if (awaked) {
-        [self removeObserver:self forKeyPath:@"resourceManager.imageFiles"];
-    }
-}
 
-- (void)dealloc{
-    
-}
-
-//default Image 때문에 imageArray 사용 , resourceManager를 바로 호출하면 안됨.
--(void)imageContextDidChange:(NSDictionary *)change{
-    self.imageArray = self.resourceManager.imageFiles;
-}
 
 #pragma mark outlineview
 

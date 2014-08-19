@@ -453,6 +453,10 @@
 
 - (void)changeMQSelect:(NSNotification *)notification{
     
+    NSString *logName= [NSString stringWithFormat:@"%@-mqselect", self.htmlID];
+    
+    [JDLogUtil timeLogStart:logName];
+    
     [self willChangeValueForKey:@"canChangeCenter"];
 
     NSInteger selectedSize = [[notification.userInfo valueForKey:IUNotificationMQSize] integerValue];
@@ -467,6 +471,8 @@
     [_css setMaxWidth:maxSize];
     
     [self didChangeValueForKey:@"canChangeCenter"];
+    
+    [JDLogUtil timeLogEnd:logName];
     
 }
 

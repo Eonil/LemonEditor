@@ -78,14 +78,13 @@
     
 }
 
-
-
 - (void)dealloc{
     if([self isConnectedWithEditor]){
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         [self removeObserver:self forKeyPath:@"css.assembledTagDictionary.height" context:@"height"];
     }
 }
+
 -(void)selectionChanged:(NSNotification*)noti{
     
     if(self.children.count > 0 && self.css.editWidth <= IUMobileSize){

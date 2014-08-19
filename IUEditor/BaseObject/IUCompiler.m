@@ -305,18 +305,42 @@
     return imgSrc;
 }
 
-- (JDCode *)javascriptHeaderForProject:(IUProject *)project isEdit:(BOOL)isEdit{
+- (JDCode *)javascriptHeaderForSheet:(IUSheet *)sheet isEdit:(BOOL)isEdit{
     JDCode *code = [[JDCode alloc] init];
     if(isEdit){
-        for(NSString *filename in project.defaultEditorJSArray){
+        
+        NSString *jqueryPath = [[NSBundle mainBundle] pathForResource:@"jquery-1.10.2" ofType:@"js"];
+        NSString *jqueryPathCode = [NSString stringWithFormat:@"<script src='%@'></script>", jqueryPath];
+        [code addCodeLine:jqueryPathCode];
+        
+        
+        NSString *jqueryUIPath = [[NSBundle mainBundle] pathForResource:@"jquery-ui-1.9.2" ofType:@"js"];
+        NSString *jqueryUIPathCode = [NSString stringWithFormat:@"<script src='%@'></script>", jqueryUIPath];
+        [code addCodeLine:jqueryUIPathCode];
+
+        
+        for(NSString *filename in sheet.project.defaultEditorJSArray){
             NSString *jsPath = [[NSBundle mainBundle] pathForResource:[filename stringByDeletingPathExtension] ofType:[filename pathExtension]];
             [code addCodeWithFormat:@"<script type=\"text/javascript\" src=\"%@\"></script>", jsPath];
         }
      
     }
     else{
-        for(NSString *filename in project.defaultOutputJSArray){
+        [code addCodeLine:@"<script src='http://code.jquery.com/jquery-1.10.2.js'></script>"];
+        [code addCodeLine:@"<script src='http://code.jquery.com/ui/1.9.2/jquery-ui.js'></script>"];
+
+        
+        for(NSString *filename in sheet.project.defaultOutputJSArray){
             [code addCodeWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@\"></script>", filename];
+        }
+        if([sheet containClass:[IUCarousel class]]){
+            [code addCodeLine:@"<script type=\"text/javascript\" src=\"resource/js/iucarousel.js\"></script>"];
+        }
+        if([sheet containClass:[IUGoogleMap class]]){
+            [code addCodeLine:@"<script src=\"http://maps.googleapis.com/maps/api/js?v=3.exp\"></script>"];
+        }
+        if([sheet containClass:[IUWebMovie class]]){
+            [code addCodeLine:@"<script src=\"http://f.vimeocdn.com/js/froogaloop2.min.js\"></script>"];
         }
     }
     return code;
@@ -384,12 +408,8 @@
         JDCode *webFontCode = [self webfontImportSourceForOutput:(IUPage *)sheet];
         [sourceCode replaceCodeString:@"<!--WEBFONT_Insert-->" toCode:webFontCode];
 
-        JDCode *jsCode = [self javascriptHeaderForProject:sheet.project isEdit:NO];
+        JDCode *jsCode = [self javascriptHeaderForSheet:sheet isEdit:NO];
         [sourceCode replaceCodeString:@"<!--JAVASCRIPT_Insert-->" toCode:jsCode];
-        
-        
-        [sourceCode replaceCodeString:@"<!--JQUERY_Insert-->" toCodeString:@"<script src='http://code.jquery.com/jquery-1.10.2.js'></script>"];
-        [sourceCode replaceCodeString:@"<!--JQUERY_UI_Insert-->" toCodeString:@"<script src='http://code.jquery.com/ui/1.9.2/jquery-ui.js'></script>"];
         
         JDCode *iuCSS = [self cssHeaderForSheet:sheet isEdit:NO];
         [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];
@@ -829,17 +849,9 @@
     JDCode *webFontCode = [self webfontImportSourceForEdit];
     [sourceCode replaceCodeString:@"<!--WEBFONT_Insert-->" toCode:webFontCode];
     
-    JDCode *jsCode = [self javascriptHeaderForProject:document.project isEdit:YES];
+    JDCode *jsCode = [self javascriptHeaderForSheet:document isEdit:YES];
     [sourceCode replaceCodeString:@"<!--JAVASCRIPT_Insert-->" toCode:jsCode];
-    
-    NSString *jqueryPath = [[NSBundle mainBundle] pathForResource:@"jquery-1.10.2" ofType:@"js"];
-    NSString *jqueryPathCode = [NSString stringWithFormat:@"<script src='%@'></script>", jqueryPath];
-    [sourceCode replaceCodeString:@"<!--JQUERY_Insert-->" toCodeString:jqueryPathCode];
-    
-    NSString *jqueryUIPath = [[NSBundle mainBundle] pathForResource:@"jquery-ui-1.9.2" ofType:@"js"];
-    NSString *jqueryUIPathCode = [NSString stringWithFormat:@"<script src='%@'></script>", jqueryUIPath];
-    [sourceCode replaceCodeString:@"<!--JQUERY_UI_Insert-->" toCodeString:jqueryUIPathCode];
-    
+        
     
     JDCode *iuCSS = [self cssHeaderForSheet:document isEdit:YES];
     [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];

@@ -104,6 +104,7 @@
     [JDLogUtil timeLogStart:@"StackVC"];
     [JDLogUtil timeLogStart:@"StackVC-rearrange"];
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self.IUController selector:@selector(rearrangeObjects) object:nil];
     [self.IUController rearrangeObjects];
     [JDLogUtil timeLogEnd:@"StackVC-rearrange"];
     

@@ -141,6 +141,7 @@
 }
 
 - (void)selectBox:(InnerSizeBox *)selectBox{
+    
     NSUInteger newSelectIndex = [boxManageView.subviews indexOfObject:selectBox];
     
     if(newSelectIndex != selectIndex){
@@ -154,9 +155,14 @@
         [self setColorBox:sizeBox];
         
     }
+    
+    [JDLogUtil timeLogStart:@"selectBox-noti"];
+
     //notification
     NSInteger maxSize = [[self sortedArray][0] integerValue];
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQSelected object:self userInfo:@{IUNotificationMQSize:@(selectedWidth), IUNotificationMQMaxSize:@(maxSize)}];
+    
+    [JDLogUtil timeLogEnd:@"selectBox-noti"];
     
 }
 

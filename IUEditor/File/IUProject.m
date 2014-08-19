@@ -607,7 +607,7 @@
 }
 
 - (NSArray *)defaultOutputJSArray{
-    return @[@"iuframe.js", @"iu.js", @"iucarousel.js", @"iuevent.js", @"iuinit.js"];
+    return @[@"iuframe.js", @"iu.js", @"iuevent.js", @"iuinit.js"];
 }
 - (NSArray *)defaultOutputIEJSArray{
     return @[@"jquery.backgroundSize.js", @"respond.min.js"];

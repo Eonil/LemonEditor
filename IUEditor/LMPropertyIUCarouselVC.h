@@ -16,6 +16,4 @@
 @property (nonatomic) IUResourceManager     *resourceManager;
 @property (nonatomic) NSArray *imageArray;
 
-- (void)prepareDealloc;
-
 @end

@@ -43,8 +43,8 @@
 }
 
 - (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeObserverForProperty:@"target"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)performFocus:(NSNotification *)noti{

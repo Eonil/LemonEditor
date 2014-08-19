@@ -199,20 +199,18 @@
 }
 
 - (void)dealloc{
-    if (self.controller) {
-        NSArray *removeObservers = @[[self pathForCSSTag:IUCSSTagPixelX],
-                                     [self pathForCSSTag:IUCSSTagPixelY],
-                                     [self pathForCSSTag:IUCSSTagPixelWidth],
-                                     [self pathForCSSTag:IUCSSTagPixelHeight],
-                                     [self pathForCSSTag:IUCSSTagPercentX],
-                                     [self pathForCSSTag:IUCSSTagPercentY],
-                                     [self pathForCSSTag:IUCSSTagPercentWidth],
-                                     [self pathForCSSTag:IUCSSTagPercentHeight]
-                                     ];
-        
-        [self removeObserver:self forKeyPaths:removeObservers];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil];
-    }
+    NSArray *removeObservers = @[[self pathForCSSTag:IUCSSTagPixelX],
+                                 [self pathForCSSTag:IUCSSTagPixelY],
+                                 [self pathForCSSTag:IUCSSTagPixelWidth],
+                                 [self pathForCSSTag:IUCSSTagPixelHeight],
+                                 [self pathForCSSTag:IUCSSTagPercentX],
+                                 [self pathForCSSTag:IUCSSTagPercentY],
+                                 [self pathForCSSTag:IUCSSTagPercentWidth],
+                                 [self pathForCSSTag:IUCSSTagPercentHeight]
+                                 ];
+    
+    [self removeObserver:self forKeyPaths:removeObservers];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil]; 
     [JDLogUtil log:IULogDealloc string:@"LMAppearanceFrameVC"];
 }
 

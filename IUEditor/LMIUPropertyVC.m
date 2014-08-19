@@ -209,12 +209,14 @@
     
     propertyIUTransitionVC.controller = controller;
     propertyIUWebMovieVC.controller = controller;
-    
     propertyIUImportVC.controller = controller;
     
     propertyIUMailLinkVC.controller = controller;
-    propertyPGTextFieldVC.controller = controller;
     propertyIUCollectionVC.controller = controller;
+    propertyIUPageVC.controller = controller;
+    
+    propertyAnalyticsVC.controller = controller;
+    
 
     propertyIUMenuBarVC.controller = controller;
     propertyIUMenuItemVC.controller = controller;
@@ -225,19 +227,12 @@
     
     propertyPGTextViewVC.controller = controller;
     propertyPGPageLinkSetVC.controller = controller;
-    propertyIUPageVC.controller = controller;
-    propertyAnalyticsVC.controller = controller;
-    
-    propertyPGFormVC.controller = controller;
-    propertyPGSubmitButtonVC.controller = controller;
-    propertyIUPageVC.controller = controller;
-    propertyIUPageVC.controller = controller;
+    propertyPGTextFieldVC.controller = controller;
     
     propertyPGFormVC.controller = controller;
     propertyPGSubmitButtonVC.controller = controller;
     propertyPGType1VC.controller = controller;
     propertyPGType2VC.controller = controller;
-    
     propertyWebProgramming.controller = controller;
     
     propertyWPArticleVC.controller = controller;
@@ -414,11 +409,6 @@
     }
     return [(NSView*)[self.propertyVArray objectAtIndex:row] frame].size.height;
 }
-
-- (void)prepareDealloc{
-    [propertyIUCarouselVC prepareDealloc];
-}
-
 
 
 @end
