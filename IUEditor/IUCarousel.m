@@ -158,7 +158,6 @@
     }
     
     [self updateHTML];
-    [self updateCSSWithIdentifiers:@[[self pagerID], [self.pagerID cssHover], [self.pagerID cssActive]]];
     [self updateJS];
 }
 

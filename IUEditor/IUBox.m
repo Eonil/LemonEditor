@@ -503,7 +503,14 @@
                 [box updateHTML];
             }
         }
+        
+        [self updateCSS];
+        for(IUBox *box in self.allChildren){
+            [box updateCSS];
+        }
     }
+    
+    
 }
 
 
