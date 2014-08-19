@@ -44,12 +44,22 @@
     
 }
 -(void)copySelectedIUToPasteboard:(id)sender{
-    pasteboard = [NSArray arrayWithArray:self.selectedObjects];
+    NSMutableArray *copied = [NSMutableArray array];
+    for(IUBox *box in self.selectedObjects){
+        if([box canCopy]){
+            [copied addObject:box];
+        }
+    }
+    pasteboard = copied;
 }
 
 -(void)pasteToSelectedIU:(id)sender{
     IUBox *pasteTarget;
     BOOL pasteTargetIsParent;
+    
+    if(pasteboard == nil || pasteboard.count ==0){
+        return;
+    }
     //copy할 때 현재 select가 된 object 를 저장했다가 paste에서도 똑같으면 parent에 copy
     if ([self.selectedObjects isEqualToArray:pasteboard] || _pasteRepeatCount) {
         //paste to parent
@@ -87,48 +97,47 @@
 
     for (IUBox *box in pasteboard) {
         NSError *err;
-        if([box canCopy]){
-            IUBox *newBox = [box copy];
-            newBox.name = newBox.htmlID;
+        IUBox *newBox = [box copy];
+        newBox.name = newBox.htmlID;
+        
+        for (NSNumber *width in newBox.css.allViewports) {
+            NSDictionary *tagDictionary;
+            if (_pasteRepeatCount){
+                tagDictionary = [_lastPastedIU.css tagDictionaryForViewport:[width integerValue]];
+            }
+            else {
+                tagDictionary = [newBox.css tagDictionaryForViewport:[width integerValue]];
+            }
+            NSNumber *x = [tagDictionary valueForKey:IUCSSTagPixelX];
             
-            for (NSNumber *width in newBox.css.allViewports) {
-                NSDictionary *tagDictionary;
-                if (_pasteRepeatCount){
-                    tagDictionary = [_lastPastedIU.css tagDictionaryForViewport:[width integerValue]];
+            if (x) {
+                if (pasteTargetIsParent) {
+                    NSNumber *newX = [NSNumber numberWithInteger:([x integerValue] + 10)];
+                    [newBox.css setValue:newX forTag:IUCSSTagPixelX forViewport:[width integerValue]];
                 }
                 else {
-                    tagDictionary = [newBox.css tagDictionaryForViewport:[width integerValue]];
+                    [newBox.css setValue:@(10) forTag:IUCSSTagPixelX forViewport:[width integerValue]];
                 }
-                NSNumber *x = [tagDictionary valueForKey:IUCSSTagPixelX];
-                
-                if (x) {
-                    if (pasteTargetIsParent) {
-                        NSNumber *newX = [NSNumber numberWithInteger:([x integerValue] + 10)];
-                        [newBox.css setValue:newX forTag:IUCSSTagPixelX forViewport:[width integerValue]];
-                    }
-                    else {
-                        [newBox.css setValue:@(10) forTag:IUCSSTagPixelX forViewport:[width integerValue]];
-                    }
-                }
-                
-                NSNumber *y = [tagDictionary valueForKey:IUCSSTagPixelY];
-                if (y) {
-                    if (pasteTargetIsParent) {
-                        NSNumber *newY = [NSNumber numberWithInteger:([y integerValue] + 10)];
-                        [newBox.css setValue:newY forTag:IUCSSTagPixelY forViewport:[width integerValue]];
-                    }
-                    else {
-                        [newBox.css setValue:@(10) forTag:IUCSSTagPixelY forViewport:[width integerValue]];
-                    }
-                }
-                
             }
-            BOOL result = [pasteTarget addIU:newBox error:&err];
-            _lastPastedIU = newBox;
-            [copiedArray addObject:newBox];
-            [self rearrangeObjects];
-            NSAssert(result, @"Add");
+            
+            NSNumber *y = [tagDictionary valueForKey:IUCSSTagPixelY];
+            if (y) {
+                if (pasteTargetIsParent) {
+                    NSNumber *newY = [NSNumber numberWithInteger:([y integerValue] + 10)];
+                    [newBox.css setValue:newY forTag:IUCSSTagPixelY forViewport:[width integerValue]];
+                }
+                else {
+                    [newBox.css setValue:@(10) forTag:IUCSSTagPixelY forViewport:[width integerValue]];
+                }
+            }
+            
         }
+        BOOL result = [pasteTarget addIU:newBox error:&err];
+        _lastPastedIU = newBox;
+        [copiedArray addObject:newBox];
+        [self rearrangeObjects];
+        NSAssert(result, @"Add");
+        
     }
     [self _setSelectedObjects:copiedArray];
     _pasteRepeatCount ++;
