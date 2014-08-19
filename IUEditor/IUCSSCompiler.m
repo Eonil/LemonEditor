@@ -649,12 +649,29 @@
     
 }
 
+/*
+ @breif:
+ find css value in viewport dictionary.
+ But, if not, find css value in default dictionary
+ */
+- (id)valueForIUBox:(IUBox *)iu CSSTag:(IUCSSTag)tag viewport:(int)viewport{
+    NSDictionary *cssTagDict = [iu.css tagDictionaryForViewport:viewport];
+    id value = cssTagDict[tag];
+    if(value == nil){
+        NSDictionary *defaultTagDict = [iu.css tagDictionaryForViewport:IUCSSDefaultViewPort];
+        value = defaultTagDict[tag];
+    }
+    
+    return value;
+}
+
 - (void)updateCSSPositionCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
 
     /*  X, Y, Width, Height */
-    IUUnit xUnit = [cssTagDict[IUCSSTagXUnitIsPercent] boolValue] ? IUUnitPercent : IUUnitPixel;
-    IUUnit yUnit = [cssTagDict[IUCSSTagYUnitIsPercent] boolValue] ? IUUnitPercent : IUUnitPixel;
+    
+    IUUnit xUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagXUnitIsPercent viewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+    IUUnit yUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagXUnitIsPercent viewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
     
     NSNumber *xValue = (xUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentX] : cssTagDict[IUCSSTagPixelX];
     NSNumber *yValue = (yUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentY] : cssTagDict[IUCSSTagPixelY];
@@ -731,13 +748,13 @@
         [code insertTag:@"bottom" integer:0 unit:IUCSSUnitPixel];
     }
     if (_iu.hasWidth) {
-        IUUnit wUnit = [cssTagDict[IUCSSTagWidthUnitIsPercent] boolValue] ? IUUnitPercent : IUUnitPixel;
+        IUUnit wUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagWidthUnitIsPercent viewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
         NSNumber *wValue = (wUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentWidth] : cssTagDict[IUCSSTagPixelWidth];
         [code insertTag:@"width" floatFromNumber:wValue unit:wUnit];
     }
     
     if (_iu.hasHeight) {
-        IUUnit hUnit = [cssTagDict[IUCSSTagHeightUnitIsPercent] boolValue] ? IUUnitPercent : IUUnitPixel;
+        IUUnit hUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagHeightUnitIsPercent viewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
         NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
         [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
     }
