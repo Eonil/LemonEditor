@@ -61,7 +61,7 @@
     
     [self outlet:_textAlignB bind:NSSelectedIndexBinding cssTag:IUCSSTagTextAlign];
     [self outlet:_autoHeightBtn bind:NSValueBinding property:@"lineHeightAuto"];
-    [self outlet:_autoHeightBtn bind:NSEnabledBinding property:@"lineHeightAuto" options:IUBindingDictNumberAndNotRaisesApplicable];
+    [self outlet:_autoHeightBtn bind:NSEnabledBinding cssTag:IUCSSTagPixelHeight options:IUBindingDictNumberAndNotRaisesApplicable];
     
     //observing for undo
     observingList = @[
@@ -357,6 +357,7 @@
 }
 
 - (void)updateLineHeight:(CGFloat)lineHeightStr{
+    [self setValue:@(NO) forIUProperty:@"lineHeightAuto"];
     [self setValue:@(lineHeightStr) forCSSTag:IUCSSTagLineHeight];
 }
 
