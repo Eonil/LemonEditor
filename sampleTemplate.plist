@@ -198,6 +198,38 @@
         <key>projectPackageFile</key>
         <string>webservice.zip</string>
     </dict>
+    <dict>
+        <key>feature</key>
+        <string>Responsive, Carousel, Transition, Navigation Bar</string>
+        <key>isReady</key>
+        <true/>
+        <key>thumbnail</key>
+        <string>pf_thumbnail</string>
+        <key>name</key>
+        <string>Portfolio</string>
+        <key>fileName</key>
+        <string>portfolio</string>
+        <key>type</key>
+        <real>0</real>
+        <key>desc</key>
+        <string>Portfolio sample page</string>
+        <key>pageSize</key>
+        <string>1280 / 960 / 768 / 320 (Support PC, Tablet, Mobile)</string>
+        <key>previewImages</key>
+        <array>
+            <string>pf_pc_01.png</string>
+            <string>pf_pc_02.png</string>
+            <string>pf_pc_03.png</string>
+            <string>pf_tablet_01.png</string>
+            <string>pf_tablet_02.png</string>
+            <string>pf_tablet_03.png</string>
+            <string>pf_mobile_01.png</string>
+            <string>pf_mobile_02.png</string>
+            <string>pf_mobile_03.png</string>
+        </array>
+        <key>projectPackageFile</key>
+        <string>webservice.zip</string>
+    </dict>
 
 </array>
 </plist>
