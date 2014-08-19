@@ -186,7 +186,7 @@
     for (IUBox *box in page.allChildren){
         
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
-        NSString *fontName = [box.css valueForKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagFontName]];
+        NSString *fontName = box.css.assembledTagDictionary[IUCSSTagFontName];
         if(fontName && fontName.length >0 && [fontNameArray containsString:fontName] == NO){
             [fontNameArray addObject:fontName];
         }

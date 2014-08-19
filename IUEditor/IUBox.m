@@ -29,6 +29,7 @@
     NSMutableSet *changedCSSWidths;
     NSPoint originalPoint, originalPercentPoint;
     NSSize originalSize, originalPercentSize;
+    BOOL isChangeSize, isChangePosition;
     __weak IUProject *_tempProject;
     BOOL    _isConnectedWithEditor;
 }
@@ -782,37 +783,36 @@
 #pragma mark setFrame
 
 - (void)setPosition:(NSPoint)position{
-    [_css setValue:@(position.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelX]];
-    [_css setValue:@(position.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelY]];
+    [_css setValueWithoutUpdateCSS:@(position.x) forTag:IUCSSTagPixelX];
+    [_css setValueWithoutUpdateCSS:@(position.y) forTag:IUCSSTagPixelY];
 }
 
 - (void)setPercentFrame:(NSRect)frame{
     CGFloat x = frame.origin.x;
-    CGFloat xExist =[[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentX] floatValue];
+    CGFloat xExist =[_css.assembledTagDictionary[IUCSSTagPercentX] floatValue];
     if (x != xExist) {
-        [_css setValue:@(frame.origin.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentX]];
+        [_css setValueWithoutUpdateCSS:@(frame.origin.x) forTag:IUCSSTagPercentX];
     }
-    if (frame.origin.x != [[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentY] floatValue]) {
-        [_css setValue:@(frame.origin.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentY]];
+    if (frame.origin.x != [_css.assembledTagDictionary[IUCSSTagPercentY] floatValue]) {
+        [_css setValueWithoutUpdateCSS:@(frame.origin.y) forTag:IUCSSTagPercentY];
     }
-    if (frame.origin.x != [[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentHeight] floatValue]) {
-        [_css setValue:@(frame.size.height) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentHeight]];
+    if (frame.origin.x != [_css.assembledTagDictionary[IUCSSTagPercentHeight] floatValue]) {
+        [_css setValueWithoutUpdateCSS:@(frame.size.height) forTag:IUCSSTagPercentHeight];
     }
-    if (frame.origin.x != [[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentWidth] floatValue]) {
-        [_css setValue:@(frame.size.width) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentWidth]];
+    if (frame.origin.x != [_css.assembledTagDictionary[IUCSSTagPercentWidth] floatValue]) {
+        [_css setValueWithoutUpdateCSS:@(frame.size.width) forTag:IUCSSTagPercentWidth];
     }
 }
 
 - (void)setPixelFrame:(NSRect)frame{
-    [_css setValue:@(frame.origin.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelX]];
-    [_css setValue:@(frame.origin.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelY]];
-    [_css setValue:@(frame.size.height) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelHeight]];
-    [_css setValue:@(frame.size.width) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelWidth]];
-    
+    [_css setValueWithoutUpdateCSS:@(frame.origin.x) forTag:IUCSSTagPixelX];
+    [_css setValueWithoutUpdateCSS:@(frame.origin.y) forTag:IUCSSTagPixelY];
+    [_css setValueWithoutUpdateCSS:@(frame.size.height) forTag:IUCSSTagPixelHeight];
+    [_css setValueWithoutUpdateCSS:@(frame.size.width) forTag:IUCSSTagPixelWidth];
 }
 
 -(BOOL)percentUnitAtCSSTag:(IUCSSTag)tag{
-    BOOL unit = [[_css valueForKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:tag]] boolValue];
+    BOOL unit = [_css.assembledTagDictionary[tag] boolValue];
     return unit;
 }
 
@@ -869,14 +869,22 @@
     originalPercentSize = [self currentPercentSize];
     originalPoint = [self currentPosition];
     originalPercentPoint = [self currentPercentPosition];
+    isChangePosition = NO;
+    isChangeSize = NO;
 }
 
 - (void)endDragSession{
     [[self undoManager] beginUndoGrouping];
-    [[[self undoManager] prepareWithInvocationTarget:self] undoPoisition:originalPoint];
-    [[[self undoManager] prepareWithInvocationTarget:self] undoPercentPosition:originalPercentPoint];
-    [[[self undoManager] prepareWithInvocationTarget:self] undoSize:originalSize];
-    [[[self undoManager] prepareWithInvocationTarget:self] undoPercentSize:originalPercentSize];
+    if(isChangePosition){
+        [[[self undoManager] prepareWithInvocationTarget:self] undoPoisition:originalPoint];
+        [[[self undoManager] prepareWithInvocationTarget:self] undoPercentPosition:originalPercentPoint];
+    }
+    if(isChangeSize){
+        [[[self undoManager] prepareWithInvocationTarget:self] undoSize:originalSize];
+        [[[self undoManager] prepareWithInvocationTarget:self] undoPercentSize:originalPercentSize];
+    }
+    isChangePosition = NO;
+    isChangeSize = NO;
     [[self undoManager] endUndoGrouping];
 }
 
@@ -885,10 +893,10 @@
     [[[self undoManager] prepareWithInvocationTarget:self] undoPoisition:[self currentPosition]];
     
     if([self hasX] && [self canChangeXByUserInput]){
-        [_css setValue:@(point.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelX]];
+        [_css setValueWithoutUpdateCSS:@(point.x) forTag:IUCSSTagPixelX];
     }
     if([self hasY] && [self canChangeYByUserInput]){
-        [_css setValue:@(point.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelY]];
+        [_css setValueWithoutUpdateCSS:@(point.x) forTag:IUCSSTagPixelY];
     }
     [self updateCSS];
 }
@@ -898,10 +906,10 @@
     [[[self undoManager] prepareWithInvocationTarget:self] undoPercentPosition:[self currentPercentPosition]];
     
     if([self hasX] && [self canChangeXByUserInput]){
-        [_css setValue:@(point.x) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentX]];
+        [_css setValueWithoutUpdateCSS:@(point.x) forTag:IUCSSTagPercentX];
     }
     if([self hasY] && [self canChangeYByUserInput]){
-        [_css setValue:@(point.y) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentY]];
+        [_css setValueWithoutUpdateCSS:@(point.y) forTag:IUCSSTagPercentY];
     }
     [self updateCSS];
 }
@@ -909,10 +917,11 @@
     [[[self undoManager] prepareWithInvocationTarget:self] undoSize:[self currentSize]];
 
     if([self hasWidth] && [self canChangeWidthByUserInput]){
-        [_css setValue:@(size.width) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelWidth]];
+        [_css setValueWithoutUpdateCSS:@(size.width) forTag:IUCSSTagPixelWidth];
     }
     if([self hasHeight] && [self canChangeHeightByUserInput]){
-        [_css setValue:@(size.height) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelHeight]];
+        [_css setValueWithoutUpdateCSS:@(size.height) forTag:IUCSSTagPixelHeight];
+
     }
     [self updateCSS];
 
@@ -923,22 +932,23 @@
 
     
     if([self hasWidth] && [self canChangeWidthByUserInput]){
-        [_css setValue:@(size.width) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentWidth]];
+        [_css setValueWithoutUpdateCSS:@(size.width) forTag:IUCSSTagPercentWidth];
     }
     if([self hasHeight] && [self canChangeHeightByUserInput]){
-        [_css setValue:@(size.height) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentHeight]];
+        [_css setValueWithoutUpdateCSS:@(size.height) forTag:IUCSSTagPercentHeight];
     }
     [self updateCSS];
     
 }
 
 - (void)movePosition:(NSPoint)point withParentSize:(NSSize)parentSize{
-    
+    isChangePosition = YES;
     //Set Pixel
     if([self hasX] && [self canChangeXByUserInput]){
         NSInteger currentX = originalPoint.x + point.x;
         
-        [_css setValue:@(currentX) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelX]];
+        [_css setValueWithoutUpdateCSS:@(currentX) forTag:IUCSSTagPixelX];
+
         //set Percent if enablePercent
         BOOL enablePercentX = [self percentUnitAtCSSTag:IUCSSTagXUnitIsPercent];
         if(enablePercentX){
@@ -946,16 +956,15 @@
             if(parentSize.width!=0){
                 percentX = (currentX / parentSize.width) * 100;
             }
-            [_css setValue:@(percentX) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentX]];
-            
+            [_css setValueWithoutUpdateCSS:@(percentX) forTag:IUCSSTagPercentX];
         }
     }
     
     if([self hasY] && [self canChangeYByUserInput]){
         
         NSInteger currentY = originalPoint.y + point.y;
-        [_css setValue:@(currentY) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelY]];
-        
+        [_css setValueWithoutUpdateCSS:@(currentY) forTag:IUCSSTagPixelY];
+
         
         BOOL enablePercentY = [self percentUnitAtCSSTag:IUCSSTagYUnitIsPercent];
         if(enablePercentY){
@@ -963,37 +972,36 @@
             if(parentSize.height!=0){
                 percentY = (currentY / parentSize.height) * 100;
             }
-            [_css setValue:@(percentY) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentY]];
+            [_css setValueWithoutUpdateCSS:@(percentY) forTag:IUCSSTagPercentY];
         }
     }
     
 }
 
 - (void)increaseSize:(NSSize)size withParentSize:(NSSize)parentSize{
+    isChangeSize = YES;
     if([self hasWidth] && [self canChangeWidthByUserInput] && size.width != CGFLOAT_INVALID){
         NSInteger currentWidth = originalSize.width;
         currentWidth += size.width;
-        [_css setValue:@(currentWidth) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelWidth]];
-        
+        [_css setValueWithoutUpdateCSS:@(currentWidth) forTag:IUCSSTagPixelWidth];
+
         CGFloat percentWidth = originalPercentSize.width;
         if(parentSize.width!=0){
             percentWidth += (size.width / parentSize.width) *100;
         }
-        [_css setValue:@(percentWidth) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentWidth]];
-        
+        [_css setValueWithoutUpdateCSS:@(percentWidth) forTag:IUCSSTagPercentWidth];
      
     }
     if([self hasHeight] && [self canChangeHeightByUserInput]  && size.height != CGFLOAT_INVALID){
         NSInteger currentHeight = originalSize.height;
         currentHeight += size.height;
-        [_css setValue:@(currentHeight) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPixelHeight]];
+        [_css setValueWithoutUpdateCSS:@(currentHeight) forTag:IUCSSTagPixelHeight];
         
         CGFloat percentHeight = originalPercentSize.height;
         if(parentSize.height!=0){
             percentHeight += (size.height / parentSize.height) *100;
         }
-        [_css setValue:@(percentHeight) forKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagPercentHeight]];
-        
+        [_css setValueWithoutUpdateCSS:@(percentHeight) forTag:IUCSSTagPercentHeight];        
     }
 }
 

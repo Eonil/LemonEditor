@@ -75,10 +75,7 @@
 - (BOOL)isUndoTag:(IUCSSTag)tag{
     
     //각각 property에서 undo 설정이 들어간 tag 들은 css에서 관리하지 않음.
-    if([tag isFrameTag]){
-        return NO;
-    }
-    else if([tag isEqualToString:IUCSSTagImage]){
+    if([tag isEqualToString:IUCSSTagImage]){
         return NO;
     }
     
@@ -88,25 +85,9 @@
 //insert tag
 //use css frame dict, and update affecting tag dictionary
 -(void)setValue:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width{
-    BOOL isNeedUpdate= NO;
-    if ([_delegate CSSShouldChangeValue:value forTag:tag forWidth:width]){
-        NSMutableDictionary *cssDict = _cssFrameDict[@(width)];
-        
-        id currentValue = [cssDict objectForKey:tag];
-        if(currentValue == nil ||  [currentValue isNotEqualTo:value]){
-            
-            if ([tag isFrameTag] == NO) {
-                isNeedUpdate = YES;
-            }
-        }
 
-    }
-    
     [self setValueWithoutUpdateCSS:value forTag:tag forViewport:width];
-    if(isNeedUpdate){
-        [self.delegate updateCSS];
-    }
-    
+    [self.delegate updateCSS];
     
 }
 
@@ -166,7 +147,6 @@
 }
 
 -(void)updateAssembledTagDictionary{
-    [self willChangeValueForKey:@"assembledTagDictionary"];
     //REVIEW: style sheet는 default만 적용됨
     _assembledTagDictionaryForEditWidth = [NSMutableDictionary dictionary];
     [_assembledTagDictionaryForEditWidth addEntriesFromDictionary:_cssFrameDict[@(IUCSSDefaultViewPort)]];
@@ -174,8 +154,6 @@
     if(_editWidth != IUCSSDefaultViewPort){
          [_assembledTagDictionaryForEditWidth addEntriesFromDictionary:_cssFrameDict[@(_editWidth)]];
     }
-    
-    [self didChangeValueForKey:@"assembledTagDictionary"];
 }
 
 -(void)setEditWidth:(NSInteger)editWidth{
@@ -205,6 +183,11 @@
     if ([keyPath containsString:@"assembledTagDictionary."]) {
         NSString *tag = [keyPath substringFromIndex:23];
         [self setValue:value forTag:tag forViewport:_editWidth];
+        return;
+    }
+    else if ([keyPath containsString:@"assembledTagDictionaryWOUpdateCSS."]) {
+        NSString *tag = [keyPath substringFromIndex:@"assembledTagDictionaryWOUpdateCSS.".length];
+        [self setValueWithoutUpdateCSS:value forTag:tag forViewport:_editWidth];
         return;
     }
     else {

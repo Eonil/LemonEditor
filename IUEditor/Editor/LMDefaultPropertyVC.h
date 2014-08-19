@@ -29,6 +29,7 @@
 - (id)valueForProperty:(IUPropertyTag)property;
 
 - (void)setValue:(id)value forCSSTag:(IUCSSTag)tag;
+- (void)setValueWithouUpdateCSS:(id)value forCSSTag:(IUCSSTag)tag;
 - (void)setValue:(id)value forIUProperty:(IUPropertyTag)property;
 
 //oberserver

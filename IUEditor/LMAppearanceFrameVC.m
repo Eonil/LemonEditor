@@ -370,9 +370,6 @@
 }
 
 - (void)setCSSFrameValue:(id)value forTag:(IUCSSTag)tag{
-    for (IUBox *iu in self.controller.selectedObjects) {
-        [iu startDragSession];
-    }
     id updateValue = value;
     if (value == nil || [value isEqualToString:@"-"]) {
         if([tag isEqualToString:IUCSSTagPixelHeight] || [tag isEqualToString:IUCSSTagPercentHeight]){
@@ -381,13 +378,7 @@
         
         updateValue = nil;
     }
-    
     [self setValue:updateValue forCSSTag:tag];
-    
-    for (IUBox *iu in self.controller.selectedObjects) {
-        [iu endDragSession];
-        [iu updateCSS];
-    }
 }
 
 - (IBAction)helpMenu:(id)sender {
