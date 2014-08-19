@@ -155,10 +155,11 @@
 -(void)updateAssembledTagDictionary{
     
     //REVIEW: style sheet는 default만 적용됨
-    [_assembledTagDictionaryForEditWidth removeAllObjects];
-    
     if(_cssFrameDict[@(IUCSSDefaultViewPort)]){
         [_assembledTagDictionaryForEditWidth setDictionary:_cssFrameDict[@(IUCSSDefaultViewPort)]];
+    }
+    else{
+        [_assembledTagDictionaryForEditWidth removeAllObjects];
     }
     
     if(_editWidth != IUCSSDefaultViewPort && _cssFrameDict[@(_editWidth)]){

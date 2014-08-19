@@ -34,6 +34,7 @@
 
 #pragma mark -
 #pragma mark call by webView
+- (void)didFinishLoadFrame;
 - (void)removeSelectedIUs;
 - (void)insertImage:(NSString *)name atIU:(NSString *)identifier;
 
@@ -65,6 +66,7 @@
 //load page
 - (void)setSheet:(IUSheet *)sheet;
 - (void)reloadSheet;
+
 
 #pragma mark -
 #pragma mark set IU

@@ -106,6 +106,8 @@
         [self.mainView subview:self.webView changeConstraintTrailing:(maxSize -selectedSize)];
     }
     
+    [self.delegate reloadSheet];
+    
     [[self webView] updateFrameDict];
 }
 

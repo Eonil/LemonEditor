@@ -471,7 +471,7 @@
     [_css setMaxWidth:maxSize];
     
     [self didChangeValueForKey:@"canChangeCenter"];
-    
+        
     [JDLogUtil timeLogEnd:logName];
     
 }
@@ -537,24 +537,20 @@
     
     if (self.delegate) {
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
-        for (NSNumber *viewport in cssCode.allViewports) {
-            NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForTarget:IUTargetEditor viewport:[viewport intValue]];
-            for (NSString *identifier in dictionaryWithIdentifier) {
-                [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier] viewport:[viewport intValue]];
-            }
+        NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editWidth];
+        for (NSString *identifier in dictionaryWithIdentifier) {
+            [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];
         }
     }
 }
 
 - (void)updateCSSWithIdentifiers:(NSArray *)identifiers{
+    
     if (self.delegate) {
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
-        for (NSNumber *viewport in cssCode.allViewports) {
-            NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForTarget:IUTargetEditor viewport:[viewport intValue]];
-            for(NSString *identifier in identifiers){
-                [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier] viewport:[viewport intValue]];
-            }
-            
+        NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editWidth];
+        for (NSString *identifier in dictionaryWithIdentifier) {
+            [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];
         }
     }
 }
@@ -964,6 +960,7 @@
 
     
     [self updateCSS];
+    [self updateJS];
 }
 
 - (void)movePosition:(NSPoint)point withParentSize:(NSSize)parentSize{

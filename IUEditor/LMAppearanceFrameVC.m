@@ -384,6 +384,7 @@
     for (IUBox *iu in self.controller.selectedObjects) {
         [iu endDragSession];
         [iu updateCSS];
+        [iu updateJS];
     }
 
 }

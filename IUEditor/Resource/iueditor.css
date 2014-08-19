@@ -240,7 +240,7 @@ a{
     /* menuItem : depth - 1*/
     .IUMenuBar > ul > li{
         float:none;
-        width:100%;
+        width:100% !important;
     }
     .IUMenuBar > ul > li > a{
         text-align:left;
@@ -270,7 +270,7 @@ a{
     }
     
     .IUMenuBar > ul > li > ul > li > ul > li{
-        width:100%;
+        width:100% !important;
     }
     .IUMenuBar > ul > li > ul > li > ul > li >a {
         text-align:left;

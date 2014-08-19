@@ -231,22 +231,81 @@
     return allViewports;
 }
 
-
-- (NSDictionary*)stringTagDictionaryWithIdentifierForTarget:(IUTarget)target viewport:(int)viewport{
+- (NSDictionary*)stringTagDictionaryWithIdentifierForEditorViewport:(int)viewport{
     NSMutableDictionary *returnDict = [NSMutableDictionary dictionary];
-    NSDictionary *sourceDictWithViewPort = (target == IUTargetEditor) ? _editorCSSDictWithViewPort : _outputCSSDictWithViewPort;
+    NSDictionary *sourceDictWithViewPort = _editorCSSDictWithViewPort;
+    NSDictionary *sourceDictWithIdentifier = sourceDictWithViewPort[@(IUCSSDefaultViewPort)];
+    
+    NSMutableSet *allKeys =  [NSMutableSet setWithArray:[sourceDictWithViewPort[@(IUCSSDefaultViewPort)] allKeys]];
+    [allKeys addObjectsFromArray:[sourceDictWithViewPort[@(viewport)] allKeys]];
+    
+    for (NSString *identifier in allKeys.allObjects) {
+        NSDictionary *tagDict = sourceDictWithIdentifier[identifier];
+        if(tagDict == nil){
+            tagDict = [sourceDictWithViewPort[@(viewport)] objectForKey:identifier];
+        }
+        NSMutableDictionary *tagDictForReturn = [NSMutableDictionary dictionary];
+        
+        //Review:defaultcss+editor css
+        for (NSString *tag in tagDict) {
+            NSString *value = tagDict[tag];
+            //Review:
+            // element에 style속성으로 지정하기 때문에 무조건 들어가야함.
+            tagDictForReturn[tag] = value;
+
+            if(viewport != IUCSSDefaultViewPort){
+                NSString *currentValue = [self valueForTag:tag identifier:identifier viewport:viewport target:IUTargetEditor];
+                if (currentValue && [value isEqualToString:currentValue] == NO) {
+                    tagDictForReturn[tag] = currentValue;
+                }
+            }
+        }
+        if ([tagDictForReturn[@"border-top-width"] isEqualToString:@"0.00px"]) {
+            [tagDictForReturn removeObjectForKey:@"border-top-width"];
+            [tagDictForReturn removeObjectForKey:@"border-top-color"];
+        }
+        if ([tagDictForReturn[@"border-bottom-width"] isEqualToString:@"0.00px"]) {
+            [tagDictForReturn removeObjectForKey:@"border-bottom-width"];
+            [tagDictForReturn removeObjectForKey:@"border-bottom-color"];
+        }
+        if ([tagDictForReturn[@"border-left-width"] isEqualToString:@"0.00px"]) {
+            [tagDictForReturn removeObjectForKey:@"border-left-width"];
+            [tagDictForReturn removeObjectForKey:@"border-left-color"];
+        }
+        if ([tagDictForReturn[@"border-right-width"] isEqualToString:@"0.00px"]) {
+            [tagDictForReturn removeObjectForKey:@"border-right-width"];
+            [tagDictForReturn removeObjectForKey:@"border-right-color"];
+        }
+        
+        
+        
+        
+        NSString *cssCode = [[tagDictForReturn CSSCode] stringByReplacingOccurrencesOfString:@".00px" withString:@"px"];
+        [returnDict setObject:cssCode forKey:identifier];
+    }
+    
+    
+    
+    return returnDict;
+}
+
+- (NSDictionary*)stringTagDictionaryWithIdentifierForOutputViewport:(int)viewport{
+
+    NSMutableDictionary *returnDict = [NSMutableDictionary dictionary];
+    NSDictionary *sourceDictWithViewPort = _outputCSSDictWithViewPort;
     NSDictionary *sourceDictWithIdentifier = sourceDictWithViewPort[@(viewport)];
+    
 
     for (NSString *identifier in sourceDictWithIdentifier) {
         NSDictionary *tagDict = sourceDictWithIdentifier[identifier];
         NSMutableDictionary *tagDictForReturn = [NSMutableDictionary dictionary];
+
         for (NSString *tag in tagDict) {
             NSString *value = tagDict[tag];
-//Review:
-// style sheet가 min-max로 바뀌면서 defalut랑 다르면 무조건 들어가야함.
-//            NSString *upperSideValue = [self valueForTag:tag identifier:identifier largerThanViewport:viewport target:target];
+            //Review:
+            // style sheet가 min-max로 바뀌면서 defalut랑 다르면 무조건 들어가야함.
             if(viewport != IUCSSDefaultViewPort){
-                NSString *defaultValue = [self valueForTag:tag identifier:identifier viewport:IUCSSDefaultViewPort target:target];
+                NSString *defaultValue = [self valueForTag:tag identifier:identifier viewport:IUCSSDefaultViewPort target:IUTargetOutput];
                 if ([value isEqualToString:defaultValue] == NO) {
                     tagDictForReturn[tag] = value;
                 }
@@ -271,6 +330,9 @@
             [tagDictForReturn removeObjectForKey:@"border-right-width"];
             [tagDictForReturn removeObjectForKey:@"border-right-color"];
         }
+        
+ 
+
 
         NSString *cssCode = [[tagDictForReturn CSSCode] stringByReplacingOccurrencesOfString:@".00px" withString:@"px"];
         [returnDict setObject:cssCode forKey:identifier];

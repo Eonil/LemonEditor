@@ -187,6 +187,13 @@
 #pragma mark -
 #pragma mark call by Document
 
+- (void)didFinishLoadFrame{
+    [_sheet updateCSS];
+    for(IUBox *box in _sheet.allChildren){
+        [box updateCSS];
+    }
+    [self runCSSJS];
+}
 
 - (void)updateSheetHeight{
     //not page class
@@ -216,8 +223,7 @@
     
     NSString *editorSrc = [sheet.editorSource copy];
     [[[self webView] mainFrame] loadHTMLString:editorSrc baseURL:[NSURL fileURLWithPath:self.documentBasePath]];
-    
-    
+        
     [self updateSheetHeight];
 }
 
@@ -498,6 +504,10 @@
     return [self.DOMDoc getElementsByClassName:classname];
 }
 
+- (DOMNodeList *)querySelectorAll:(NSString *)selector{
+    return [self.DOMDoc querySelectorAll:selector];
+}
+
 - (NSString *)tagWithHTML:(NSString *)html{
    NSString *incompleteTag = [html componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]][0];
     NSString *tag = [incompleteTag componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]][1];
@@ -548,19 +558,6 @@
 #pragma mark -
 #pragma mark CSS
 
--(void)IUClassIdentifier:(NSString *)identifier CSSRemovedforWidth:(NSInteger)width{
-    if(width == IUCSSDefaultViewPort){
-        //default setting
-        [self removeCSSTextWithIDInDefault:identifier];
-    }
-    else{
-        [self removeCSSTextWithID:identifier size:width];
-        
-    }
-    [self.webView setNeedsDisplay:YES];
-    
-}
-
 - (BOOL)isSheetHeightChanged:(NSString *)identifier{
     if([identifier isEqualToString:[_sheet.htmlID cssClass]]
        && [_sheet isKindOfClass:[IUClass class]]){
@@ -577,174 +574,19 @@
     return NO;
 }
 
-
--(void)IUClassIdentifier:(NSString*)identifier CSSUpdated:(NSString*)css viewport:(NSInteger)width{
-    [JDLogUtil log:IULogSource key:@"css source" string:css];
-    
-    if(css.length == 0){
-        //nothing to do
-        [self IUClassIdentifier:identifier CSSRemovedforWidth:width];
-    }else{
-        
-        NSString *cssText = [NSString stringWithFormat:@"%@{%@}", identifier, css];
-        if(width == IUCSSDefaultViewPort){
-            //default setting
-            [self setIUStyle:cssText withID:identifier];
-        }
-        else{
-            [self setIUStyle:cssText withID:identifier size:width];
-        }
+-(void)IUClassIdentifier:(NSString*)identifier CSSUpdated:(NSString*)css{
+    DOMNodeList *list = [self querySelectorAll:identifier];
+    int length= list.length;
+    for(int i=0; i<length; i++){
+        DOMHTMLElement *element = (DOMHTMLElement *)[list item:i];
+        DOMCSSStyleDeclaration *style = element.style;
+        style.cssText = css;
     }
     
     if([self isSheetHeightChanged:identifier]){
         //CLASS에서 WEBCANVASVIEW의 높이 변화를 위해서
         [self updateSheetHeight];
     }
-    
-}
-
-
-
-- (void)removeStyleSheet:(NSInteger)size{
-    DOMElement *cssNode = [[self DOMDoc] getElementById:[NSString stringWithFormat:@"style%ld", size]];
-    [cssNode.parentNode removeChild:cssNode];
-
-}
-
-- (id)makeNewStyleSheet:(NSInteger)size{
-    
-    DOMElement *newSheet = [[self DOMDoc] createElement:@"style"];
-    NSString *mediaName = [NSString stringWithFormat:@"screen and (max-width:%ldpx)", size];
-    [newSheet setAttribute:@"type" value:@"text/css"];
-    [newSheet setAttribute:@"media" value:mediaName];
-    [newSheet setAttribute:@"id" value:[NSString stringWithFormat:@"style%ld", size]];
-    [newSheet appendChild:[[self DOMDoc] createTextNode:@""]];
-    
-    DOMNode *headNode = [[[self DOMDoc] getElementsByTagName:@"head"] item:0];
-    NSInteger nextSize = [[self sizeView] nextSmallSize:size];
-    DOMElement *prevNode = [[self DOMDoc] getElementById:[NSString stringWithFormat:@"style%ld", nextSize]];
-
-    if(nextSize == 0
-       || prevNode == nil){
-        //case 1) default style and import style(reset.css, iu.css)
-        //case 2) add maximum size
-        //case 3) not yet report smaller size
-            [headNode appendChild:newSheet];
-    }
-    else{
-        //find next node
-        [headNode insertBefore:newSheet refChild:prevNode];
-    }
-
-    return newSheet;
-}
-
-- (void)setIUStyle:(NSString *)cssText withID:(NSString *)iuID{
-    DOMHTMLStyleElement *sheetElement = (DOMHTMLStyleElement *)[[self DOMDoc] getElementById:@"default"];
-    [self setCSSRuleInStyleSheet:sheetElement cssText:cssText withID:iuID];
-    
-}
-- (void)setIUStyle:(NSString *)cssText withID:(NSString *)iuID size:(NSInteger)size{
-    DOMHTMLStyleElement *sheetElement = (DOMHTMLStyleElement *)[[self DOMDoc] getElementById:[NSString stringWithFormat:@"style%ld", size]];
-    if(sheetElement == nil){
-        sheetElement = [self makeNewStyleSheet:size];
-    }
-    [self setCSSRuleInStyleSheet:sheetElement cssText:cssText withID:iuID];;
-}
-
-- (void)setCSSRuleInStyleSheet:(DOMHTMLStyleElement *)styleSheet cssText:(NSString *)cssText withID:(NSString *)iuID{
-
-    NSString *newCSSText = [self innerCSSText:styleSheet.innerHTML byAddingCSSText:cssText withID:iuID];
-    [styleSheet setInnerHTML:newCSSText];
-    [[self webView] runJSAfterRefreshCSS];
-}
-
-
--(NSString *)cssIDInCSSRule:(NSString *)cssrule{
-
-    NSString *css = [cssrule stringByTrim];
-    NSArray *cssItems = [css componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"{}"]];
-    
-    return [cssItems[0] stringByTrim];
-}
-
-- (NSString *)innerCSSText:(NSString *)innerCSSText byAddingCSSText:(NSString *)cssText withID:(NSString *)identifier
-{
-    NSMutableString *innerCSSHTML = [NSMutableString stringWithString:@"\n"];
-    NSString *trimmedInnerCSSHTML = [innerCSSText  stringByTrim];
-    NSArray *cssRuleList = [trimmedInnerCSSHTML componentsSeparatedByString:@"\n"];
-
-//    NSArray *cssRuleList = [trimmedInnerCSSHTML componentsSeparatedByCharactersInSet:
-  //                          [NSCharacterSet characterSetWithCharactersInString:@"."]];
-
-    for(NSString *rule in cssRuleList){
-        if(rule.length == 0){
-            continue;
-        }
-         NSString *ruleID = [self cssIDInCSSRule:rule];
-        NSString *modifyidentifier = [identifier stringByTrim];
-        if([ruleID isEqualToString:modifyidentifier] == NO){
-            [innerCSSHTML appendString:[NSString stringWithFormat:@"\t%@\n", [rule stringByTrim]]];
-        }
-    }
-    
-    [innerCSSHTML appendString:cssText];
-    [innerCSSHTML appendString:@"\n"];
-    
-    return innerCSSHTML;
-}
-
--(void)removeAllCSSWithIdentifier:(NSString *)identifier{
-    DOMNodeList *styleList = [[self DOMDoc] getElementsByTagName:@"style"];
-    //0 번째는 import sheet라서 건너뜀.
-    for(int i=0; i<styleList.length; i++){
-        DOMHTMLStyleElement *styleElement = (DOMHTMLStyleElement *)[styleList item:i];
-        [self removeCSSRuleInStyleSheet:styleElement withID:identifier];
-    }
-    
-}
-
-- (void)removeCSSTextWithIDInDefault:(NSString *)iuID{
-    DOMHTMLStyleElement *sheetElement = (DOMHTMLStyleElement *)[[self DOMDoc] getElementById:@"default"];
-    [self removeCSSRuleInStyleSheet:sheetElement withID:iuID];
-    
-}
-- (void)removeCSSTextWithID:(NSString *)iuID size:(NSInteger)size{
-    DOMHTMLStyleElement *sheetElement = (DOMHTMLStyleElement *)[[self DOMDoc] getElementById:[NSString stringWithFormat:@"style%ld", size]];
-    if(sheetElement == nil){
-        return;
-    }
-    [self removeCSSRuleInStyleSheet:sheetElement withID:iuID];;
-}
-
-- (void)removeCSSRuleInStyleSheet:(DOMHTMLStyleElement *)styleSheet withID:(NSString *)iuID{
-    
-    NSString *newCSSText = [self removeCSSText:styleSheet.innerHTML withID:iuID];
-    [styleSheet setInnerHTML:newCSSText];
-    
-    [[self webView] runJSAfterRefreshCSS];
-    
-}
-
-
-- (NSString *)removeCSSText:(NSString *)innerCSSText withID:(NSString *)identifier
-{
-    NSMutableString *innerCSSHTML = [NSMutableString stringWithString:@"\n"];
-    NSString *trimmedInnerCSSHTML = [innerCSSText  stringByTrim];
-    NSArray *cssRuleList = [trimmedInnerCSSHTML componentsSeparatedByString:@"\n"];
-    
-    for(NSString *rule in cssRuleList){
-        if(rule.length == 0){
-            continue;
-        }
-        NSString *ruleID = [self cssIDInCSSRule:rule];
-        NSString *modifiedIdentifier = [identifier stringByTrim];
-        if([ruleID isEqualToString:modifiedIdentifier] == NO){
-            [innerCSSHTML appendString:[NSString stringWithFormat:@"\t%@\n", [rule stringByTrim]]];
-        }
-    }
-    
-    return innerCSSHTML;
 }
 
 
@@ -863,6 +705,7 @@
         [moveObj updateCSS];
         
     }
+    [self runCSSJS];
 }
 
 - (BOOL)checkExtendSelectedIU:(NSSize)size{
@@ -957,6 +800,8 @@
          */
         
     }
+    
+    [self runCSSJS];
 }
 
 
@@ -966,17 +811,6 @@
     IUBox *iu = [_controller IUBoxByIdentifier:identifier];
     
     if(iu){
-    
-        //removeCSS
-        NSMutableArray *allIU = [iu.allChildren mutableCopy];
-        [allIU addObject:iu];
-        for(IUBox *box in allIU){
-            NSArray *cssIds = [box cssIdentifierArray];
-            for (NSString *identifier in cssIds){
-                [self removeAllCSSWithIdentifier:identifier];
-            }
-        }
-        
         //remove layer
         if([iu.sheet isKindOfClass:[IUClass class]]){
             for (IUBox *import in [(IUClass*)iu.sheet references]) {
@@ -1007,13 +841,7 @@
             for(IUBox *box in allIU){
                 
                 [[self gridView] removeLayerWithIUIdentifier:box.htmlID];
-                [frameDict.dict removeObjectForKey:box.htmlID];
-                
-                NSArray *childIds= [box cssIdentifierArray];
-                for (NSString *childIdentifier in childIds){
-                    [self removeAllCSSWithIdentifier:childIdentifier];
-                }
-                
+                [frameDict.dict removeObjectForKey:box.htmlID];                
             }
         }
     }

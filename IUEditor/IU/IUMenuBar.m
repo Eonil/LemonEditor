@@ -74,14 +74,14 @@
     [super connectWithEditor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectionChanged:) name:IUNotificationSelectionDidChange object:nil];
     
-    [self addObserver:self forKeyPath:@"css.assembledTagDictionary.height" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"height"];
+    [self.css.assembledTagDictionary addObserver:self forKeyPath:@"height" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];
     
 }
 
 - (void)dealloc{
     if([self isConnectedWithEditor]){
         [[NSNotificationCenter defaultCenter] removeObserver:self];
-        [self removeObserver:self forKeyPath:@"css.assembledTagDictionary.height" context:@"height"];
+        [self.css.assembledTagDictionary removeObserver:self forKeyPath:@"height" context:nil];
     }
 }
 
@@ -99,18 +99,17 @@
         }
         
         [self updateCSSWithIdentifiers:@[[self editorDisplayIdentifier]]];
-        
+
     }
     
 }
 
-- (void)heightContextDidChange:(NSDictionary *)dictionary{
-    JDInfoLog(@"haha");
-    
+- (void)heightDidChange:(NSDictionary *)dictionary{
     if(self.css.editWidth <= IUMobileSize){
         //mobile에서만 사용하는 button들
         [self updateCSSWithIdentifiers:@[[self mobileButtonIdentifier], [self topButtonIdentifier], [self bottomButtonIdentifier]]];
     }
+     
 }
 #pragma mark - css identifier
 

@@ -68,14 +68,14 @@
     [super connectWithEditor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectionChanged:) name:IUNotificationSelectionDidChange object:nil];
-    [self addObserver:self forKeyPath:@"parent.css.assembledTagDictionary.height" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"height"];
+    [self.parent.css.assembledTagDictionary addObserver:self forKeyPath:@"height" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"height"];
     
 
 }
 
 - (void)prepareDealloc{
     if([self isConnectedWithEditor]){
-        [self removeObserver:self forKeyPath:@"parent.css.assembledTagDictionary.height" context:@"height"];
+        [self.parent.css.assembledTagDictionary removeObserver:self forKeyPath:@"height" context:@"height"];
     }
 
 }
@@ -107,7 +107,7 @@
 }
 
 
-- (void)heightContextDidChange:(NSDictionary *)dictionary{
+- (void)heightDidChange:(NSDictionary *)dictionary{
     [self updateCSS];
 }
 
@@ -194,6 +194,7 @@
 }
 
 #pragma mark - css
+
 - (NSString *)editorDisplayIdentifier{
     if(self.children.count > 0){
         return [[self.htmlID cssClass] stringByAppendingString:@" > ul"];

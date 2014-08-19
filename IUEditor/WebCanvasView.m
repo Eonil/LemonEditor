@@ -134,6 +134,12 @@
     [self.VC endDragSession:self];
 }
 
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame{
+    
+    [self.VC didFinishLoadFrame];
+
+}
+
 
 #pragma mark -
 #pragma mark mouse operation

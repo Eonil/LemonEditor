@@ -370,7 +370,7 @@
 #pragma mark - output body source
 - (NSString *)outputCSSSource:(IUSheet*)sheet mqSizeArray:(NSArray *)mqSizeArray{
     //change css
-    JDCode *cssCode = [self cssSource:sheet cssSizeArray:mqSizeArray isEdit:NO];
+    JDCode *cssCode = [self cssSource:sheet cssSizeArray:mqSizeArray];
     
     if(_rule == IUCompileRuleDefault){
         [cssCode replaceCodeString:@"\"resource/" toCodeString:@"../"];
@@ -856,8 +856,8 @@
     JDCode *iuCSS = [self cssHeaderForSheet:document isEdit:YES];
     [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];
     
-    JDCode *cssCode = [self cssSource:document cssSizeArray:mqSizeArray isEdit:YES];
-    [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCode:cssCode];
+//    JDCode *cssCode = [self cssSource:document cssSizeArray:mqSizeArray isEdit:YES];
+// [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCode:cssCode];
     
     //change html
     JDCode *htmlCode = [self editorHTML:document];
@@ -1494,7 +1494,8 @@
     return [cssCompiler cssCodeForIU:iu];
 }
 
--(JDCode *)cssSource:(IUSheet *)sheet cssSizeArray:(NSArray *)cssSizeArray isEdit:(BOOL)isEdit{
+-(JDCode *)cssSource:(IUSheet *)sheet cssSizeArray:(NSArray *)cssSizeArray{
+    
     
     NSMutableArray *mqSizeArray = [cssSizeArray mutableCopy];
     //remove default size
@@ -1503,16 +1504,7 @@
 
     
     JDCode *code = [[JDCode alloc] init];
-    //    NSMutableString *css = [NSMutableString string];
-    //default-
-    if(isEdit){
-        [code addCodeLine:@"<style id=default>"];
-        [code increaseIndentLevelForEdit];
-    }
-
-
-    IUTarget target = isEdit ? IUTargetEditor : IUTargetOutput;
-    NSDictionary *cssDict = [[cssCompiler cssCodeForIU:sheet] stringTagDictionaryWithIdentifierForTarget:target viewport:IUCSSDefaultViewPort];
+    NSDictionary *cssDict = [[cssCompiler cssCodeForIU:sheet] stringTagDictionaryWithIdentifierForOutputViewport:IUCSSDefaultViewPort];
     
     for (NSString *identifier in cssDict) {
         [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
@@ -1520,14 +1512,10 @@
     NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
     
     for (IUBox *obj in districtChildren) {
-            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] stringTagDictionaryWithIdentifierForTarget:target viewport:IUCSSDefaultViewPort];
+            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] stringTagDictionaryWithIdentifierForOutputViewport:IUCSSDefaultViewPort];
             for (NSString *identifier in cssDict) {
                 [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
         }
-    }
-    if(isEdit){
-        [code decreaseIndentLevelForEdit];
-        [code addCodeLine:@"</style>"];
     }
     
     [code addNewLine];
@@ -1537,46 +1525,31 @@
     for(int count=0; count<mqSizeArray.count; count++){
         int size = [[mqSizeArray objectAtIndex:count] intValue];
         
-
-        
-        if(isEdit){
-            //edit는 stylesheet html tag로 들어감
-            //<style type="text/css" media="screen and (max-width:400px)" id="style400">
-            if(count < mqSizeArray.count-1){
-                [code addCodeWithFormat:@"<style type=\"text/css\" media ='screen and (min-width:%dpx) and (max-width:%dpx)' id='style%d'>" , size, largestWidth-1, size];
-                largestWidth = size;
-            }
-            else{
-                [code addCodeWithFormat:@"<style type=\"text/css\" media ='screen and (max-width:%dpx)' id='style%d'>" , largestWidth-1, size];
-                
-            }
+        //build는 css파일로 따로 뽑아줌
+        if(count < mqSizeArray.count-1){
+            [code addCodeWithFormat:@"@media screen and (min-width:%dpx) and (max-width:%dpx){" , size, largestWidth-1];
+            largestWidth = size;
         }
         else{
-            //build는 css파일로 따로 뽑아줌
-            if(count < mqSizeArray.count-1){
-                [code addCodeWithFormat:@"@media screen and (min-width:%dpx) and (max-width:%dpx){" , size, largestWidth-1];
-                largestWidth = size;
-            }
-            else{
-                [code addCodeWithFormat:@"@media screen and (max-width:%dpx){" , largestWidth-1];
-                
-                if(size < IUMobileSize && sheet.allChildren ){
-                    if([sheet containClass:[IUMenuBar class]]){
-                        NSString *menubarMobileCSSPath = [[NSBundle mainBundle] pathForResource:@"menubarMobile" ofType:@"css"];
-                        NSString *menubarMobileCSS = [NSString stringWithContentsOfFile:menubarMobileCSSPath encoding:NSUTF8StringEncoding error:nil];
-                        [code increaseIndentLevelForEdit];
-                        [code addCodeLine:menubarMobileCSS];
-                        [code decreaseIndentLevelForEdit];
-                    }
-
+            [code addCodeWithFormat:@"@media screen and (max-width:%dpx){" , largestWidth-1];
+            
+            if(size < IUMobileSize && sheet.allChildren ){
+                if([sheet containClass:[IUMenuBar class]]){
+                    NSString *menubarMobileCSSPath = [[NSBundle mainBundle] pathForResource:@"menubarMobile" ofType:@"css"];
+                    NSString *menubarMobileCSS = [NSString stringWithContentsOfFile:menubarMobileCSSPath encoding:NSUTF8StringEncoding error:nil];
+                    [code increaseIndentLevelForEdit];
+                    [code addCodeLine:menubarMobileCSS];
+                    [code decreaseIndentLevelForEdit];
                 }
                 
             }
             
         }
+        
+        
         [code increaseIndentLevelForEdit];
         
-        NSDictionary *cssDict =  [[cssCompiler cssCodeForIU:sheet] stringTagDictionaryWithIdentifierForTarget:target viewport:size];
+        NSDictionary *cssDict =  [[cssCompiler cssCodeForIU:sheet] stringTagDictionaryWithIdentifierForOutputViewport:size];
         for (NSString *identifier in cssDict) {
             if ([[cssDict[identifier] stringByTrim]length]) {
                 [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
@@ -1586,7 +1559,7 @@
         NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
         
         for (IUBox *obj in districtChildren) {
-            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] stringTagDictionaryWithIdentifierForTarget:target viewport:size];
+            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] stringTagDictionaryWithIdentifierForOutputViewport:size];
             for (NSString *identifier in cssDict) {
                 if ([[cssDict[identifier] stringByTrim]length]) {
                     [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
@@ -1594,13 +1567,8 @@
             }
         }
         [code decreaseIndentLevelForEdit];
+        [code addCodeLine:@"}"];
         
-        if(isEdit){
-            [code addCodeLine:@"</style>"];
-        }
-        else{
-            [code addCodeLine:@"}"];
-        }
     }
     return code;
 }

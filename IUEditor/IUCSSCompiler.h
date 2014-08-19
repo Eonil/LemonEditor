@@ -18,7 +18,8 @@ typedef enum _IUTarget{
 
 
 @interface IUCSSCode : NSObject
-- (NSDictionary*)stringTagDictionaryWithIdentifierForTarget:(IUTarget)unit viewport:(int)viewport;
+- (NSDictionary*)stringTagDictionaryWithIdentifierForEditorViewport:(int)viewport;
+- (NSDictionary*)stringTagDictionaryWithIdentifierForOutputViewport:(int)viewport;
 - (NSArray*)allViewports;
 @end
 
