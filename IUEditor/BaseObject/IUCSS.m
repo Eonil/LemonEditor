@@ -26,6 +26,8 @@
 -(id)init{
     self = [super init];
     _cssFrameDict = [[NSMutableDictionary alloc] init];
+    _assembledTagDictionaryForEditWidth = [NSMutableDictionary dictionary];
+
     self.editWidth = IUCSSDefaultViewPort;
     
     [self updateAssembledTagDictionary];
@@ -150,8 +152,9 @@
 }
 
 -(void)updateAssembledTagDictionary{
+
     //REVIEW: style sheet는 default만 적용됨
-    _assembledTagDictionaryForEditWidth = [NSMutableDictionary dictionary];
+    [_assembledTagDictionaryForEditWidth removeAllObjects];
     [_assembledTagDictionaryForEditWidth addEntriesFromDictionary:_cssFrameDict[@(IUCSSDefaultViewPort)]];
     
     if(_editWidth != IUCSSDefaultViewPort){
