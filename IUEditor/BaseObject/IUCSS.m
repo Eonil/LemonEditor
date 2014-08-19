@@ -153,8 +153,11 @@
         NSMutableDictionary *cssDict = _cssFrameDict[key];
         [cssDict removeObjectForKey:tag];
     }
-    [self updateAssembledTagDictionary];
-    [self.delegate updateCSS];
+    
+    if ([tag isFrameTag] == NO) {
+        [self updateAssembledTagDictionary];
+        [self.delegate updateCSS];
+    }
 }
 
 

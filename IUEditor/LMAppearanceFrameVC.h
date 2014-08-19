@@ -10,6 +10,6 @@
 #import "LMDefaultPropertyVC.h"
 
 
-@interface LMAppearanceFrameVC : LMDefaultPropertyVC <NSTextFieldDelegate>
+@interface LMAppearanceFrameVC : LMDefaultPropertyVC <NSControlTextEditingDelegate, NSTextFieldDelegate>
 
 @end

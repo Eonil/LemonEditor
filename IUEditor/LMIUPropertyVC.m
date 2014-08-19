@@ -153,7 +153,7 @@
         propertyPGTextViewVC = [[LMPropertyIUTextViewVC alloc] initWithNibName:[LMPropertyIUTextViewVC class].className bundle:nil];
         
         propertyPGPageLinkSetVC = [[LMPropertyIUPageLinkSetVC alloc] initWithNibName:[LMPropertyIUPageLinkSetVC class].className bundle:nil];
-//        propertyIUPageVC = [[LMPropertyIUPageVC alloc] initWithNibName:[LMPropertyIUPageVC class].className bundle:nil];
+        propertyIUPageVC = [[LMPropertyIUPageVC alloc] initWithNibName:[LMPropertyIUPageVC class].className bundle:nil];
         propertyAnalyticsVC = [[LMPropertyAnalyticsVC alloc] initWithNibName:[LMPropertyAnalyticsVC class].className bundle:nil];
         propertyPGFormVC = [[LMPropertyPGFormVC alloc] initWithNibName:[LMPropertyPGFormVC class].className bundle:nil];
         
@@ -357,7 +357,7 @@
         self.propertyVArray = [NSMutableArray arrayWithArray:@[inspectorAltTextVC.view, inspectorLinkVC.view, propertyPGType2VC.view]];
     }
     else if ([classString isEqualToString:@"IUPage"]){
-//        self.propertyVArray = [NSMutableArray arrayWithArray:@[propertyIUPageVC.view, propertyAnalyticsVC.view]];
+       self.propertyVArray = [NSMutableArray arrayWithArray:@[propertyIUPageVC.view, propertyAnalyticsVC.view]];
     }
     else if ([classString isEqualToString:@"IUBox"]){
         self.propertyVArray = [NSMutableArray arrayWithArray:@[propertyTextVC.view, inspectorLinkVC.view, propertyPGType2VC.view]];

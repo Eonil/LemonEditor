@@ -968,9 +968,13 @@
     if(iu){
     
         //removeCSS
-        NSArray *cssIds = [iu cssIdentifierArray];
-        for (NSString *identifier in cssIds){
-            [self removeAllCSSWithIdentifier:identifier];
+        NSMutableArray *allIU = [iu.allChildren mutableCopy];
+        [allIU addObject:iu];
+        for(IUBox *box in allIU){
+            NSArray *cssIds = [box cssIdentifierArray];
+            for (NSString *identifier in cssIds){
+                [self removeAllCSSWithIdentifier:identifier];
+            }
         }
         
         //remove layer

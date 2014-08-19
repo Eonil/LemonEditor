@@ -334,8 +334,8 @@
         tag = IUCSSTagPercentHeight;
     }
     
-    [self setCSSFrameValue:[control stringValue] forTag:tag];
-    
+    NSString *currentString = [control stringValue];
+    [self setCSSFrameValue:currentString forTag:tag];
     return YES;
 }
 - (IBAction)clickStepper:(id)sender {
@@ -373,18 +373,17 @@
     for (IUBox *iu in self.controller.selectedObjects) {
         [iu startDragSession];
     }
+    id updateValue = value;
     if (value == nil || [value isEqualToString:@"-"]) {
-        for (IUBox *box in self.controller.selectedObjects) {
-            [box.css eradicateTag:tag];
-            
-            if([tag isEqualToString:IUCSSTagPixelHeight] || [tag isEqualToString:IUCSSTagPercentHeight]){
-                [self setValue:@(1.0) forCSSTag:IUCSSTagLineHeight];
-            }
+        if([tag isEqualToString:IUCSSTagPixelHeight] || [tag isEqualToString:IUCSSTagPercentHeight]){
+            [self setValue:@(1.0) forCSSTag:IUCSSTagLineHeight];
         }
+        
+        updateValue = nil;
     }
-    else {
-        [self setValue:value forCSSTag:tag];
-    }
+    
+    [self setValue:updateValue forCSSTag:tag];
+    
     for (IUBox *iu in self.controller.selectedObjects) {
         [iu endDragSession];
         [iu updateCSS];
