@@ -549,6 +549,9 @@
             [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];
         }
     }
+    
+    //TODO: updateHTML, updateCSS, udpateJS 순서좀 정리하기
+    [self updateJS];
 }
 
 - (void)updateCSSWithIdentifiers:(NSArray *)identifiers{
