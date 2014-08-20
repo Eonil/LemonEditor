@@ -24,6 +24,7 @@ typedef enum _IUCompileRule{
     IUCompileRuleDefault,
     IUCompileRuleDjango,
     IUCompileRuleWordpress,
+    IUCompileRulePresentation,
 }IUCompileRule;
 
 @interface IUCompiler : NSObject

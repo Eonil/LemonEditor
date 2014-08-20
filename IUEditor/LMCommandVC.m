@@ -103,7 +103,7 @@
 - (IBAction)build:(id)sender {
     
     IUCompileRule rule = _docController.project.compiler.rule;
-    if (rule == IUCompileRuleDefault || rule == IUCompileRuleWordpress) {
+    if (rule == IUCompileRuleDefault || rule == IUCompileRuleWordpress || rule == IUCompileRulePresentation ) {
         IUProject *project = _docController.project;
         BOOL result = [project build:nil];
         if (result == NO) {
@@ -113,7 +113,7 @@
         if([doc isKindOfClass:[IUSheet class]] == NO){
             doc = _docController.project.pageSheets.firstObject;
         }
-        if (rule == IUCompileRuleDefault) {
+        if (rule == IUCompileRuleDefault || rule == IUCompileRulePresentation) {
             NSString *firstPath = [project.absoluteBuildPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.html",[doc.name lowercaseString]]];
             [[NSWorkspace sharedWorkspace] openFile:firstPath];
         }
@@ -152,6 +152,9 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [[NSWorkspace sharedWorkspace] openURL:url];
         });
+    }
+    else {
+        NSAssert(0, @"not coded");
     }
     
     //show tutorial if needed

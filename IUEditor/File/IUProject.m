@@ -493,6 +493,35 @@
         
         //html
         NSString *outputHTML = [sheet outputHTMLSource];
+        
+        // if compile mode is Presentation, add button
+        if (self.compiler.rule == IUCompileRulePresentation) {
+            if ([sheet isKindOfClass:[IUPage class]]) {
+                NSInteger indexOfSheet = [self.pageSheets indexOfObject:sheet];
+                NSString *prevSheetName = [sheet.name stringByAppendingString:@".html"];
+                NSString *nextSheetName = [sheet.name stringByAppendingString:@".html"];
+                if (indexOfSheet > 0) {
+                    prevSheetName = [[[self.pageSheets objectAtIndex:indexOfSheet-1] name] stringByAppendingString:@".html"];
+                }
+                if (indexOfSheet < [self.pageSheets count] -1 ) {
+                    nextSheetName = [[[self.pageSheets objectAtIndex:indexOfSheet+1] name] stringByAppendingString:@".html"];
+                }
+                
+                NSString *str = [[@"<script> document.addEventListener('keydown', function(event){ \
+                    if (event.keyCode == 34 || event.keyCode == 39) {\
+                        window.location.replace('IUPRESENTATION_NEXT_PAGE');\
+                    }\
+                    else if (event.keyCode == 33 || event.keyCode == 37) {\
+                        window.location.replace('IUPRESENTATION_PREV_PAGE');\
+                    }});\
+                    $(document).click(function() {\
+                        window.location.replace('IUPRESENTATION_NEXT_PAGE');\
+                    });\
+                    </script>" stringByReplacingOccurrencesOfString:@"IUPRESENTATION_NEXT_PAGE" withString:nextSheetName] stringByReplacingOccurrencesOfString:@"IUPRESENTATION_PREV_PAGE" withString:prevSheetName];
+                outputHTML = [outputHTML stringByAppendingString:str];
+            }
+        }
+        
         NSString *htmlPath = [self absoluteBuildPathForSheet:sheet];
 
         //note : writeToFile: automatically overwrite
