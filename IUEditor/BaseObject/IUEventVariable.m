@@ -268,7 +268,7 @@
                             [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, %ld);\n", frameID, duration*100];
                         }
                         else{
-                            [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height ,1});\n", frameID];
+                            [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height} ,1);\n", frameID];
                         }
                         [innerJS appendString:@"}"];
                         
