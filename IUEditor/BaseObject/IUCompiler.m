@@ -333,9 +333,7 @@
         for(NSString *filename in sheet.project.defaultOutputJSArray){
             [code addCodeWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@\"></script>", filename];
         }
-        if([sheet containClass:[IUCarousel class]]){
-            [code addCodeLine:@"<script type=\"text/javascript\" src=\"resource/js/iucarousel.js\"></script>"];
-        }
+        [code addCodeLine:@"<script type=\"text/javascript\" src=\"resource/js/iucarousel.js\"></script>"];
         if([sheet containClass:[IUGoogleMap class]]){
             [code addCodeLine:@"<script src=\"http://maps.googleapis.com/maps/api/js?v=3.exp\"></script>"];
         }
