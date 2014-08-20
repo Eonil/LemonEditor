@@ -467,6 +467,8 @@
         /* update CSSCode */
         [self updateCSSPositionCode:code asIUBox:_iu viewport:viewport];
         [self updateCSSApperanceCode:code asIUBox:_iu viewport:viewport ];
+        
+        [code setInsertingTarget:IUTargetBoth];
         if ([_iu shouldCompileFontInfo]) {
             [self updateCSSFontCode:code asIUBox:_iu viewport:viewport];
         }
@@ -701,6 +703,7 @@
             
             [code setInsertingTarget:IUTargetEditor];
             [code insertTag:@"background" string:webKitStr];
+            
             
         }
         
