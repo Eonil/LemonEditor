@@ -526,16 +526,26 @@
 
         //note : writeToFile: automatically overwrite
         NSError *myError;
+
+        //FIXME: PHP에서 CSS파일에 코드 지원 안됨!!!!
+        if (self.compiler.rule == IUCompileRuleWordpress) {
+            //css
+            NSString *outputCSS = [NSString stringWithFormat:@"<style>%@</style>",[sheet outputCSSSource]];
+            outputHTML = [outputHTML stringByReplacingOccurrencesOfString:@"<!--CSS_Replacement-->" withString:outputCSS];
+        }
         if ([outputHTML writeToFile:htmlPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
             NSAssert(0, @"write fail");
         }
         //css
-        NSString *outputCSS = [sheet outputCSSSource];
-        NSString *cssPath = [[resourceCSSPath stringByAppendingPathComponent:sheet.name] stringByAppendingPathExtension:@"css"];
-
-        //note : writeToFile: automatically overwrite
-        if ([outputCSS writeToFile:cssPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
-            NSAssert(0, @"write fail");
+        
+        if (self.compiler.rule != IUCompileRuleWordpress) {
+            NSString *outputCSS = [sheet outputCSSSource];
+            NSString *cssPath = [[resourceCSSPath stringByAppendingPathComponent:sheet.name] stringByAppendingPathExtension:@"css"];
+            
+            //note : writeToFile: automatically overwrite
+            if ([outputCSS writeToFile:cssPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
+                NSAssert(0, @"write fail");
+            }
         }
         
         //js

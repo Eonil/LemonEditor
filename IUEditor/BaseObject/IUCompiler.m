@@ -409,7 +409,7 @@
         JDCode *iuCSS = [self cssHeaderForSheet:sheet isEdit:NO];
         [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];
         
-        [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCodeString:@""];
+//        [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCodeString:@""];
         
         //change html
         JDCode *htmlCode = [self outputHTML:sheet];
