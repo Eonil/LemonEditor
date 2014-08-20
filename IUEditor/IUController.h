@@ -35,7 +35,6 @@
 
 -(IUImport*)importIUInSelectionChain;
 
-
 -(void)copySelectedIUToPasteboard:(id)sender;
 -(void)pasteToSelectedIU:(id)sender;
 
