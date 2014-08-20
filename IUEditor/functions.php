@@ -22,5 +22,5 @@
     add_action( 'widgets_init', 'iu_widgets_init' );
 
      WIDGET_DISABLE_COMMENT*/
+    register_nav_menu('default', 'default');
 ?>
-
