@@ -1237,6 +1237,7 @@
         [code addCodeLineWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:YES]];
         JDCode *importCode = [self editorHTML:[(IUImport*)iu prototypeClass]];
         NSString *idReplacementString = [NSString stringWithFormat:@" id=\"ImportedBy_%@_", iu.htmlID];
+        
         [importCode replaceCodeString:@" id=\"" toCodeString:idReplacementString];
         [code addCode:importCode];
         [code addCodeLine:@"</div>"];

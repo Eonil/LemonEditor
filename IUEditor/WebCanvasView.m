@@ -801,7 +801,7 @@
 
 - (DOMHTMLElement *)IUNodeAtCurrentNode:(DOMNode *)node{
     NSString *iuClass = ((DOMElement *)node).className;
-    if([iuClass containsString:@"IUBox"]){
+    if([iuClass containsString:@"IUBox"] && [iuClass containsString:@"collectioncopy"]==NO){
         return (DOMHTMLElement *)node;
     }
     else if ([node isKindOfClass:[DOMHTMLIFrameElement class]]){

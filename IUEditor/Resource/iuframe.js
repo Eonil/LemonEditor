@@ -33,8 +33,8 @@ function resizeCollection(){
 				count = dict.count;
 			}
 		}
-//		widthStr = 1/count *100 + '%';
-//		$(this).children().css('width', widthStr);
+		widthStr = 1/count *100 + '%';
+		$(this).children().css('width', widthStr);
 	});
 }
 

@@ -58,6 +58,16 @@
     }
     return iu;
 }
+#pragma mark - update
+
+- (void)updateHTML{
+    [super updateHTML];
+    if(self.delegate){
+        [self.delegate callWebScriptMethod:@"remakeCollection" withArguments:nil];
+    }
+}
+
+#pragma mark - property
 
 - (void)setResponsiveSupport:(BOOL)responsiveSupport{
     if(_responsiveSupport == responsiveSupport){
@@ -74,6 +84,8 @@
     }
     [[self.undoManager prepareWithInvocationTarget:self] setDefaultItemCount:_defaultItemCount];
     _defaultItemCount = defaultItemCount;
+    
+    [self updateHTML];
 }
 
 - (void)setCollectionVariable:(NSString *)collectionVariable{
@@ -87,5 +99,7 @@
 - (void)setResponsiveSetting:(NSArray *)responsiveSetting{
     [[self.undoManager prepareWithInvocationTarget:self] setResponsiveSetting:_responsiveSetting];
     _responsiveSetting = responsiveSetting;
+    
+    [self updateHTML];
 }
 @end
