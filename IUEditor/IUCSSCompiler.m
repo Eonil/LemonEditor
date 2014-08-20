@@ -611,7 +611,10 @@
         [code insertTag:@"-moz-box-shadow" string:[NSString stringWithFormat:@"%ldpx %ldpx %ldpx %ldpx %@", hOff, vOff, blur, spread, [color rgbString]]];
         [code insertTag:@"-webkit-box-shadow" string:[NSString stringWithFormat:@"%ldpx %ldpx %ldpx %ldpx %@", hOff, vOff, blur, spread, [color rgbString]]];
         [code insertTag:@"box-shadow" string:[NSString stringWithFormat:@"%ldpx %ldpx %ldpx %ldpx %@", hOff, vOff, blur, spread, [color rgbString]]];
+        
         //for IE5.5-7
+        [code setInsertingTarget:IUTargetOutput];
+        
         [code insertTag:@"filter" string:[NSString stringWithFormat:@"progid:DXImageTransform.Microsoft.Shadow(Strength=%ld, Direction=135, Color='%@')",spread, [color rgbString]]];
         //            [code insertTag:@"filter" string:[NSString stringWithFormat:@"progid:DXImageTransform.Microsoft.Blur(pixelradius=%ld)",blur]];
         
@@ -661,8 +664,11 @@
     if (cssTagDict[IUCSSTagOpacity]) {
         float opacity = [cssTagDict[IUCSSTagOpacity] floatValue]/100;
         [code insertTag:@"opacity" floatFromNumber:@(opacity)];
+        [code setInsertingTarget:IUTargetOutput];
         [code insertTag:@"filter" string:[NSString stringWithFormat:@"alpha(opacity=%d)",[cssTagDict[IUCSSTagOpacity] intValue]] ];
     }
+    
+    [code setInsertingTarget:IUTargetBoth];
     if (cssTagDict[IUCSSTagBGColor]) {
         [code insertTag:@"background-color" string:[cssTagDict[IUCSSTagBGColor] cssBGColorString]];
 
@@ -683,12 +689,17 @@
             [code insertTag:@"background-color" color:bgColor1];
             
             
+            
             NSString *webKitStr = [NSString stringWithFormat:@"-webkit-gradient(linear, left top, left bottom, color-stop(0.05, %@), color-stop(1, %@));", bgColor1.rgbString, bgColor2.rgbString];
             NSString *mozStr = [NSString stringWithFormat:@"	background:-moz-linear-gradient( center top, %@ 5%%, %@ 100%% );", bgColor1.rgbString, bgColor2.rgbString];
             NSString *ieStr = [NSString stringWithFormat:@"filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='%@', endColorstr='%@', GradientType=0)", bgColor1.rgbStringWithTransparent, bgColor2.rgbStringWithTransparent];
             NSString *gradientStr = [webKitStr stringByAppendingFormat:@"%@ %@", mozStr, ieStr];
             
+            [code setInsertingTarget:IUTargetOutput];
             [code insertTag:@"background" string:gradientStr];
+            
+            [code setInsertingTarget:IUTargetEditor];
+            [code insertTag:@"background" string:webKitStr];
             
         }
         
