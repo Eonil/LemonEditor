@@ -332,12 +332,101 @@
                     <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="WZz-Hu-sNh"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="O76-fK-Hoh"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="rlk-P1-2MX"/>
-                    <toolbarItem implicitItemIdentifier="73AB140F-A06D-4D23-9640-46017DFF0A1D" label="Build" paletteLabel="Build" tag="-1" image="export" id="c2Q-2v-jpB"/>
-                    <toolbarItem implicitItemIdentifier="9A6D3544-3D5B-4279-80AC-1C8B8E3CDE16" label="pause" paletteLabel="pause" tag="-1" image="pause" id="GTQ-E8-qW5"/>
+                    <toolbarItem implicitItemIdentifier="870A9C92-0A50-44D2-8425-F6969F68E6DB" label="" paletteLabel="" tag="-1" id="UhE-nB-agp">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="171" height="32"/>
+                        <size key="maxSize" width="281" height="32"/>
+                        <box key="view" autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="3cV-9o-ZJ9">
+                            <rect key="frame" x="0.0" y="14" width="281" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <view key="contentView">
+                                <rect key="frame" x="0.0" y="0.0" width="281" height="32"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zf1-5G-oMv">
+                                        <rect key="frame" x="41" y="5" width="24" height="24"/>
+                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="pause" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="JJE-MX-DjQ">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <box autoresizesSubviews="NO" horizontalHuggingPriority="750" fixedFrame="YES" alphaValue="0.29999999999999999" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="dGX-HD-4Rb">
+                                        <rect key="frame" x="76" y="7" width="5" height="18"/>
+                                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <font key="titleFont" metaFont="system"/>
+                                    </box>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pfT-fw-uNb">
+                                        <rect key="frame" x="92" y="7" width="67" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Build Type  :" id="LQa-gV-FvU">
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <color key="textColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <popUpButton fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xBE-jb-aG6">
+                                        <rect key="frame" x="159" y="9" width="79" height="17"/>
+                                        <popUpButtonCell key="cell" type="check" title="HTML" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" inset="2" id="vH8-6t-Jky">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <menu key="menu" title="OtherViews" id="0Ht-In-Vu7">
+                                                <items>
+                                                    <menuItem title="HTML" state="on" id="ryr-Mb-VmR"/>
+                                                    <menuItem title="Django" id="ceN-1A-2O2"/>
+                                                    <menuItem title="Wordpress" id="anf-Qy-Xpo"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                    </popUpButton>
+                                    <button toolTip="Build" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VZj-r0-BF1">
+                                        <rect key="frame" x="10" y="4" width="24" height="24"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="export" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Iuv-a8-Y9w">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                </subviews>
+                            </view>
+                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </box>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="FD138103-3790-49A7-BF4D-4A0E75872BB2" label="" paletteLabel="" tag="-1" id="zJ8-vt-eZO">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="171" height="32"/>
+                        <size key="maxSize" width="177" height="32"/>
+                        <box key="view" autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="bK7-5s-Km2">
+                            <rect key="frame" x="0.0" y="14" width="171" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <view key="contentView">
+                                <rect key="frame" x="0.0" y="0.0" width="171" height="32"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mLY-TX-1Mg">
+                                        <rect key="frame" x="103" y="5" width="24" height="24"/>
+                                        <buttonCell key="cell" type="smallSquare" title="s" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TJf-e7-Sza">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zoC-zb-imB">
+                                        <rect key="frame" x="137" y="5" width="24" height="24"/>
+                                        <buttonCell key="cell" type="smallSquare" title="s" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Dov-St-pBT">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                </subviews>
+                            </view>
+                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </box>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
-                    <toolbarItem reference="c2Q-2v-jpB"/>
-                    <toolbarItem reference="GTQ-E8-qW5"/>
+                    <toolbarItem reference="UhE-nB-agp"/>
+                    <toolbarItem reference="rlk-P1-2MX"/>
+                    <toolbarItem reference="zJ8-vt-eZO"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>
