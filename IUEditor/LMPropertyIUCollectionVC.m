@@ -13,7 +13,6 @@
 
 @property (weak) IBOutlet NSTextField *variableTF;
 
-@property (weak) IBOutlet NSPopUpButton *mqPopupButton;
 @property (weak) IBOutlet NSTextField *itemCountTF;
 @property (weak) IBOutlet NSStepper *itemCountStepper;
 
@@ -21,7 +20,7 @@
 
 @implementation LMPropertyIUCollectionVC{
     IUProject *_project;
-    NSInteger selectedSize, maxSize;
+    NSInteger selectedSize, maxSize, largeSize;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -29,7 +28,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self loadView];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectMQSize:) name:IUNotificationMQSelected object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectMQSize:) name:IUNotificationMQSelectedWithInfo object:nil];
     }
     return self;
 }
@@ -72,6 +71,7 @@
 
 - (void)selectMQSize:(NSNotification *)notification{
     selectedSize = [[notification.userInfo objectForKey:IUNotificationMQSize] integerValue];
+    largeSize = [[notification.userInfo objectForKey:IUNotificationMQLargerSize] integerValue];
     maxSize = [[notification.userInfo objectForKey:IUNotificationMQMaxSize] integerValue];
  
     [self updateCount];
@@ -100,7 +100,7 @@
         
         for(NSDictionary *dict in responsiveSetting){
             NSInteger width = [[dict objectForKey:@"width"] integerValue];
-            if(width == selectedSize){
+            if(width == largeSize-1){
                 selectedCount = [[dict objectForKey:@"count"] integerValue];
                 break;
             }
@@ -161,7 +161,7 @@
         if(selectedDict){
             [responsiveSetting removeObject:selectedDict];
         }
-        [responsiveSetting addObject:@{@"width":@(selectedSize), @"count":@(count)}];
+        [responsiveSetting addObject:@{@"width":@(largeSize-1), @"count":@(count)}];
         
         [self setValue:responsiveSetting forIUProperty:@"responsiveSetting"];
     }

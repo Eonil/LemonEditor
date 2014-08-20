@@ -161,7 +161,12 @@
 
     //notification
     NSInteger maxSize = [[self sortedArray][0] integerValue];
+    NSInteger largeSize = maxSize;
+    if(selectIndex != 0){
+        largeSize = [[self sortedArray][selectIndex -1] integerValue];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQSelected object:self userInfo:@{IUNotificationMQSize:@(selectedWidth), IUNotificationMQMaxSize:@(maxSize)}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQSelectedWithInfo object:self userInfo:@{IUNotificationMQSize:@(selectedWidth), IUNotificationMQMaxSize:@(maxSize), IUNotificationMQLargerSize:@(largeSize)} ];
     
     [self.delegate enableUpdateCSS];
     

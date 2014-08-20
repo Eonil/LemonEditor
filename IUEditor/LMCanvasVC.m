@@ -576,9 +576,16 @@
     return NO;
 }
 
-/* element line number */
+
+/*
+ @brief: get element line count by only selected iu
+ */
 -(NSInteger)countOfLineWithIdentifier:(NSString *)identifier{
-    DOMHTMLElement *element = [self getHTMLElementbyID:identifier];
+    NSString *modifiedHTMLID = identifier;
+    if (self.controller.importIUInSelectionChain){
+        modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_%@",self.controller.importIUInSelectionChain.htmlID, identifier];
+    }
+    DOMHTMLElement *element = [self getHTMLElementbyID:modifiedHTMLID];
     return element.childElementCount;
 }
 

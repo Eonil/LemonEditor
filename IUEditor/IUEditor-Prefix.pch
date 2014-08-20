@@ -78,9 +78,11 @@
 #define IUNotificationMQAdded @"MQAdded"
 #define IUNotificationMQRemoved @"MQRemoved"
 #define IUNotificationMQSelected @"MQSelected"
+#define IUNotificationMQSelectedWithInfo @"MQSelectedWithInfo"
 #define IUNotificationMQMaxChanged @"MQMaxChanged"
 #define IUNotificationMQSize @"MQSize"
 #define IUNotificationMQMaxSize @"MQMaxSize"
+#define IUNotificationMQLargerSize @"MQLargerSize"
 #define IUNotificationMQOldMaxSize @"MQOldMaxSize"
 
 
