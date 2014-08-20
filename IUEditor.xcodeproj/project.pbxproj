@@ -10,7 +10,6 @@
 		062EFBD819655238007ECFD0 /* IUCollection.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 062EFBD719655238007ECFD0 /* IUCollection.rtf */; };
 		062EFBDA1965543A007ECFD0 /* IUTransition.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 062EFBD91965543A007ECFD0 /* IUTransition.rtf */; };
 		062EFBDC196562DF007ECFD0 /* IUCarousel.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 062EFBDB196562DF007ECFD0 /* IUCarousel.rtf */; };
-		062EFBDE19663C43007ECFD0 /* positionProperty.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 062EFBDD19663C43007ECFD0 /* positionProperty.pdf */; };
 		068555BA198A56740073FA83 /* Abraham_Lincoln-1865.png in Resources */ = {isa = PBXBuildFile; fileRef = 068555B0198A56740073FA83 /* Abraham_Lincoln-1865.png */; };
 		068555BB198A56740073FA83 /* airplane.png in Resources */ = {isa = PBXBuildFile; fileRef = 068555B1198A56740073FA83 /* airplane.png */; };
 		068555BC198A56740073FA83 /* Anonymous_Einstein.png in Resources */ = {isa = PBXBuildFile; fileRef = 068555B2198A56740073FA83 /* Anonymous_Einstein.png */; };
@@ -83,6 +82,7 @@
 		0685563D198A63430073FA83 /* wireless_modem.png in Resources */ = {isa = PBXBuildFile; fileRef = 06855600198A63430073FA83 /* wireless_modem.png */; };
 		069A0FE8195179D900476CFA /* LMPropertyDisplayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 069A0FE6195179D800476CFA /* LMPropertyDisplayVC.m */; };
 		069A0FE9195179D900476CFA /* LMPropertyDisplayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 069A0FE7195179D900476CFA /* LMPropertyDisplayVC.xib */; };
+		06D5A9E319A4A1FA00EB45E5 /* positionProperty.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 06D5A9E219A4A1FA00EB45E5 /* positionProperty.pdf */; };
 		06EA0FF6197F7ABD0068C683 /* LMClipArtVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EA0FF4197F7ABD0068C683 /* LMClipArtVC.m */; };
 		06EA0FF7197F7ABD0068C683 /* LMClipArtVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06EA0FF5197F7ABD0068C683 /* LMClipArtVC.xib */; };
 		06EA0FF9197F86ED0068C683 /* clipArtList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 06EA0FF8197F86ED0068C683 /* clipArtList.plist */; };
@@ -913,7 +913,6 @@
 		062EFBD719655238007ECFD0 /* IUCollection.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = IUCollection.rtf; sourceTree = "<group>"; };
 		062EFBD91965543A007ECFD0 /* IUTransition.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = IUTransition.rtf; sourceTree = "<group>"; };
 		062EFBDB196562DF007ECFD0 /* IUCarousel.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = IUCarousel.rtf; sourceTree = "<group>"; };
-		062EFBDD19663C43007ECFD0 /* positionProperty.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = positionProperty.pdf; sourceTree = "<group>"; };
 		068555B0198A56740073FA83 /* Abraham_Lincoln-1865.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Abraham_Lincoln-1865.png"; sourceTree = "<group>"; };
 		068555B1198A56740073FA83 /* airplane.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplane.png; sourceTree = "<group>"; };
 		068555B2198A56740073FA83 /* Anonymous_Einstein.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Anonymous_Einstein.png; sourceTree = "<group>"; };
@@ -987,6 +986,7 @@
 		069A0FE5195179D800476CFA /* LMPropertyDisplayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyDisplayVC.h; sourceTree = "<group>"; };
 		069A0FE6195179D800476CFA /* LMPropertyDisplayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyDisplayVC.m; sourceTree = "<group>"; };
 		069A0FE7195179D900476CFA /* LMPropertyDisplayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyDisplayVC.xib; sourceTree = "<group>"; };
+		06D5A9E219A4A1FA00EB45E5 /* positionProperty.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = positionProperty.pdf; sourceTree = "<group>"; };
 		06EA0FF3197F7ABD0068C683 /* LMClipArtVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMClipArtVC.h; sourceTree = "<group>"; };
 		06EA0FF4197F7ABD0068C683 /* LMClipArtVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMClipArtVC.m; sourceTree = "<group>"; };
 		06EA0FF5197F7ABD0068C683 /* LMClipArtVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMClipArtVC.xib; sourceTree = "<group>"; };
@@ -3476,7 +3476,7 @@
 				69D1000D19970D00003F8772 /* InstallingWordpress.pages */,
 				69D1000F19970D32003F8772 /* InstallingWordpress.pdf */,
 				69FEC48D194845CA00483C11 /* scrollingAnimation.pdf */,
-				062EFBDD19663C43007ECFD0 /* positionProperty.pdf */,
+				06D5A9E219A4A1FA00EB45E5 /* positionProperty.pdf */,
 				692C4DC51966A22D00EAB2E7 /* tracingOverview.pdf */,
 				692C4DC71967D10300EAB2E7 /* RunningAProject.pages */,
 				692C4DC81967D10300EAB2E7 /* RunningAProject.pdf */,
@@ -4290,13 +4290,13 @@
 				CBA8781B1964401500075294 /* IUFBLike.rtf in Resources */,
 				69C575C318D6F61E0016F050 /* Images.xcassets in Resources */,
 				3DED26A91900F43F001A1D67 /* ic_css.png in Resources */,
-				062EFBDE19663C43007ECFD0 /* positionProperty.pdf in Resources */,
 				3DED277F190F85E0001A1D67 /* bg_contain.png in Resources */,
 				3DED26D21900FD75001A1D67 /* add_ghost_on.png in Resources */,
 				3D54D64C18ED5D2E00B5FEC2 /* ResizeNW-SE.tiff in Resources */,
 				26FE6F92191C6D8E0003E187 /* shoveling@2x.png in Resources */,
 				690A40A518E17C5700095263 /* widgetForDefault.plist in Resources */,
 				2628C92B191A313C00D9D8CD /* tool_form@2x.png in Resources */,
+				06D5A9E319A4A1FA00EB45E5 /* positionProperty.pdf in Resources */,
 				CB9BD6391914DC62002C9369 /* LMStartNewDjangoVC.xib in Resources */,
 				2641F452195A72FF00DDF1C3 /* bg_h_right.png in Resources */,
 				267CB1BA190F95750079E565 /* bg_center@2x.png in Resources */,
