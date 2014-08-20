@@ -209,7 +209,6 @@
     
     _controlType = controlType;
     [self updateHTML];
-    [self updateCSSForItemColor];
 }
 
 - (void)setSelectColor:(NSColor *)selectColor{
@@ -262,7 +261,6 @@
     
     _disableArrowControl = disableArrowControl;
     [self updateHTML];
-    [self updateCSS];
 }
 
 - (void)setLeftArrowImage:(NSString *)leftArrowImage{

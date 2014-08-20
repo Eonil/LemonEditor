@@ -220,9 +220,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setAlign:_align];
     _align = align;
     [self updateHTML];
-    for(IUMenuItem *item in self.allChildren){
-        [item updateCSS];
-    }
+
 }
 
 #pragma mark - changeXXX

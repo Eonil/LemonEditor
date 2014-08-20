@@ -15,6 +15,9 @@
 @protocol IUSourceDelegate <NSObject>
 @required
 
+-(void)enableUpdateCSS;
+-(void)disableUpdateCSS;
+-(BOOL)isUpdateCSSEnabled;
 -(void)IUClassIdentifier:(NSString *)identifier CSSUpdated:(NSString*)css;
 
 -(void)IUHTMLIdentifier:(NSString*)identifier textHTML:(NSString *)html withParentID:(NSString *)parentID nearestID:(NSString *)nID index:(NSUInteger)index;

@@ -453,10 +453,6 @@
 
 - (void)changeMQSelect:(NSNotification *)notification{
     
-    NSString *logName= [NSString stringWithFormat:@"%@-mqselect", self.htmlID];
-    
-    [JDLogUtil timeLogStart:logName];
-    
     [self willChangeValueForKey:@"canChangeCenter"];
 
     NSInteger selectedSize = [[notification.userInfo valueForKey:IUNotificationMQSize] integerValue];
@@ -472,7 +468,6 @@
     
     [self didChangeValueForKey:@"canChangeCenter"];
         
-    [JDLogUtil timeLogEnd:logName];
     
 }
 
@@ -532,21 +527,23 @@
 
 
 - (void)updateCSS{
-    
-    if(self.delegate && _lineHeightAuto && self.shouldCompileFontInfo){
-        
-        if(_css.assembledTagDictionary[IUCSSTagPixelHeight]){
-            
-            CGFloat lineheight = [[self.delegate callWebScriptMethod:@"getTextAutoHeight" withArguments:@[self.htmlID]] floatValue];            
-            [_css setValueWithoutUpdateCSS:@(lineheight) forTag:IUCSSTagLineHeight];
-        }
-    }
-    
     if (self.delegate) {
-        IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
-        NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editWidth];
-        for (NSString *identifier in dictionaryWithIdentifier) {
-            [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];
+        
+        if(_lineHeightAuto && self.shouldCompileFontInfo){
+            
+            if(_css.assembledTagDictionary[IUCSSTagPixelHeight]){
+                
+                CGFloat lineheight = [[self.delegate callWebScriptMethod:@"getTextAutoHeight" withArguments:@[self.htmlID]] floatValue];
+                [_css setValueWithoutUpdateCSS:@(lineheight) forTag:IUCSSTagLineHeight];
+            }
+        }
+        
+        if([self.delegate isUpdateCSSEnabled]){    
+            IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
+            NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editWidth];
+            for (NSString *identifier in dictionaryWithIdentifier) {
+                [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];
+            }
         }
     }
     
@@ -646,23 +643,12 @@
     
     if ([self.sheet isKindOfClass:[IUClass class]]) {
         for (IUBox *import in [(IUClass*)self.sheet references]) {
-            
             [import updateHTML];
-            [import updateCSS];
-            
-            for (IUBox *child in iu.children) {
-                [child updateCSS];
-            }
         }
     }
     
 
     [iu updateHTML];
-    [iu updateCSS];
-
-    for (IUBox *child in iu.allChildren) {
-        [child updateCSS];
-    }
 
     [self updateJS];
     [iu bind:@"identifierManager" toObject:self withKeyPath:@"identifierManager" options:nil];
@@ -1159,8 +1145,10 @@
         //html order
         [self.parent updateHTML];
     }
-    
-    [self updateCSS];
+    else{
+        [self updateCSS];
+    }
+
 }
 
 - (void)setEnableCenter:(BOOL)enableCenter{
@@ -1177,8 +1165,6 @@
 - (void)setOverflowType:(IUOverflowType)overflowType{
     _overflowType = overflowType;
     [self updateHTML];
-    [self updateCSS];
-
 }
 
 
@@ -1202,7 +1188,6 @@
     }
     [self updateHTML];
     [self updateJS];
-    [self updateCSS];
     
     if(isNeedUpdated){
         [self didChangeValueForKey:@"shouldCompileFontInfo"];

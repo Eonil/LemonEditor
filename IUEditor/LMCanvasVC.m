@@ -48,6 +48,7 @@
 @implementation LMCanvasVC{
     IUFrameDictionary *frameDict;
     LMHelpWC *helpWC;
+    int levelForUpdateCSS;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -56,6 +57,7 @@
     if (self) {
         frameDict = [[IUFrameDictionary alloc] init];;
         _maxFrameWidth = 0;
+        levelForUpdateCSS = 0;
     }
     return self;
 }
@@ -588,6 +590,27 @@
         [self updateSheetHeight];
     }
 }
+
+-(void)enableUpdateCSS{
+    levelForUpdateCSS++;
+}
+-(void)disableUpdateCSS{
+    levelForUpdateCSS--;
+    
+    if(levelForUpdateCSS > 0){
+        JDFatalLog(@"disableCSSUpdate is not pair, more than enableUpdate");
+        assert(0);
+    }
+}
+-(BOOL)isUpdateCSSEnabled{
+    if(levelForUpdateCSS==0){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
+
 
 
 #pragma mark -

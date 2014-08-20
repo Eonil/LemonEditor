@@ -29,10 +29,6 @@
 - (void)addFrame:(NSInteger)frameSize;
 
 #pragma mark -
-#pragma mark call by sizeView
-- (void)removeStyleSheet:(NSInteger)size;
-
-#pragma mark -
 #pragma mark call by webView
 - (void)didFinishLoadFrame;
 - (void)removeSelectedIUs;
