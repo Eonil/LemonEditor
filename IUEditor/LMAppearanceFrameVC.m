@@ -60,6 +60,7 @@
 
 @implementation LMAppearanceFrameVC{
     LMHelpWC *helpWC;
+    BOOL enableObservation;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -68,6 +69,7 @@
     if (self) {
         _enableVerticalPercent = YES;
         _enablePosition = YES;
+        enableObservation = YES;
         [self loadView];
     }
     return self;
@@ -231,32 +233,34 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     
-    if ([[keyPath pathExtension] isSameTag:IUCSSTagPixelX]) {
-        [self setValueForTag:IUCSSTagPixelX toTextfield:_xTF toStepper:_xStepper];
-    }
-    else if ([[keyPath pathExtension] isSameTag:IUCSSTagPixelY]) {
-        [self setValueForTag:IUCSSTagPixelY toTextfield:_yTF toStepper:_yStepper];
-    }
-    else if ([[keyPath pathExtension] isSameTag:IUCSSTagPixelWidth]) {
-        [self setValueForTag:IUCSSTagPixelWidth toTextfield:_wTF toStepper:_wStepper];
-    }
-    else if ([[keyPath pathExtension] isSameTag:IUCSSTagPixelHeight]) {
-        [self setValueForTag:IUCSSTagPixelHeight toTextfield:_hTF toStepper:_hStepper];
-    }
-    else if ([[keyPath pathExtension] isSameTag:IUCSSTagPercentX]) {
-        [self setValueForTag:IUCSSTagPercentX toTextfield:_pxTF toStepper:_pxStepper];
-    }
-    else if ([[keyPath pathExtension] isSameTag:IUCSSTagPercentY]) {
-        [self setValueForTag:IUCSSTagPercentY toTextfield:_pyTF toStepper:_pyStepper];
-    }
-    else if ([[keyPath pathExtension] isSameTag:IUCSSTagPercentWidth]) {
-        [self setValueForTag:IUCSSTagPercentWidth toTextfield:_pwTF toStepper:_pwStepper];
-    }
-    else if ([[keyPath pathExtension] isSameTag:IUCSSTagPercentHeight]) {
-        [self setValueForTag:IUCSSTagPercentHeight toTextfield:_phTF toStepper:_phStepper];
-    }
-    else if ([keyPath isEqualToString:@"controller.selectedObjects"]){
-        [self checkForIUPageContent];
+    if(enableObservation){
+        if ([[keyPath pathExtension] isSameTag:IUCSSTagPixelX]) {
+            [self setValueForTag:IUCSSTagPixelX toTextfield:_xTF toStepper:_xStepper];
+        }
+        else if ([[keyPath pathExtension] isSameTag:IUCSSTagPixelY]) {
+            [self setValueForTag:IUCSSTagPixelY toTextfield:_yTF toStepper:_yStepper];
+        }
+        else if ([[keyPath pathExtension] isSameTag:IUCSSTagPixelWidth]) {
+            [self setValueForTag:IUCSSTagPixelWidth toTextfield:_wTF toStepper:_wStepper];
+        }
+        else if ([[keyPath pathExtension] isSameTag:IUCSSTagPixelHeight]) {
+            [self setValueForTag:IUCSSTagPixelHeight toTextfield:_hTF toStepper:_hStepper];
+        }
+        else if ([[keyPath pathExtension] isSameTag:IUCSSTagPercentX]) {
+            [self setValueForTag:IUCSSTagPercentX toTextfield:_pxTF toStepper:_pxStepper];
+        }
+        else if ([[keyPath pathExtension] isSameTag:IUCSSTagPercentY]) {
+            [self setValueForTag:IUCSSTagPercentY toTextfield:_pyTF toStepper:_pyStepper];
+        }
+        else if ([[keyPath pathExtension] isSameTag:IUCSSTagPercentWidth]) {
+            [self setValueForTag:IUCSSTagPercentWidth toTextfield:_pwTF toStepper:_pwStepper];
+        }
+        else if ([[keyPath pathExtension] isSameTag:IUCSSTagPercentHeight]) {
+            [self setValueForTag:IUCSSTagPercentHeight toTextfield:_phTF toStepper:_phStepper];
+        }
+        else if ([keyPath isEqualToString:@"controller.selectedObjects"]){
+            [self checkForIUPageContent];
+        }
     }
 }
 
@@ -306,6 +310,7 @@
 }
 
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
+    enableObservation = NO;
     IUCSSTag tag;
     if (control == _xTF) {
         tag = IUCSSTagPixelX;
@@ -332,12 +337,13 @@
         tag = IUCSSTagPercentHeight;
     }
     
-    NSString *currentString = [control stringValue];
-    [self setCSSFrameValue:currentString forTag:tag];
+    [self setCSSFrameValue:[control stringValue] forTag:tag];
+    enableObservation = YES;
     return YES;
 }
 - (IBAction)clickStepper:(id)sender {
     IUCSSTag tag;
+    enableObservation = NO;
 
     if (sender == _xStepper) {
         tag = IUCSSTagPixelX;
@@ -365,6 +371,8 @@
     }
     
     [self setCSSFrameValue:[sender stringValue] forTag:tag];
+    enableObservation = YES;
+
 }
 
 - (void)setCSSFrameValue:(id)value forTag:(IUCSSTag)tag{
@@ -384,7 +392,6 @@
     for (IUBox *iu in self.controller.selectedObjects) {
         [iu endDragSession];
         [iu updateCSS];
-        [iu updateJS];
     }
 
 }
