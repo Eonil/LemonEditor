@@ -27,7 +27,7 @@
                         <subviews>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xvx-WQ-92o">
                                 <rect key="frame" x="52" y="15" width="79" height="22"/>
-                                <popUpButtonCell key="cell" type="recessed" title="HTML" bezelStyle="recessed" imagePosition="left" alignment="center" controlSize="small" lineBreakMode="truncatingTail" borderStyle="border" inset="2" selectedItem="8d2-ew-nqM" id="o8V-jw-X48">
+                                <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" imagePosition="left" alignment="center" controlSize="small" lineBreakMode="truncatingTail" borderStyle="border" inset="2" id="o8V-jw-X48">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
                                     <menu key="menu" title="OtherViews" id="q5y-LX-7eX">
