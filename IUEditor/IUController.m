@@ -110,24 +110,28 @@
             }
             NSNumber *x = [tagDictionary valueForKey:IUCSSTagPixelX];
             
-            if (x) {
-                if (pasteTargetIsParent) {
-                    NSNumber *newX = [NSNumber numberWithInteger:([x integerValue] + 10)];
-                    [newBox.css setValue:newX forTag:IUCSSTagPixelX forViewport:[width integerValue]];
-                }
-                else {
-                    [newBox.css setValue:@(10) forTag:IUCSSTagPixelX forViewport:[width integerValue]];
+            if (newBox.canChangeXByUserInput) {
+                if (x) {
+                    if (pasteTargetIsParent) {
+                        NSNumber *newX = [NSNumber numberWithInteger:([x integerValue] + 10)];
+                        [newBox.css setValue:newX forTag:IUCSSTagPixelX forViewport:[width integerValue]];
+                    }
+                    else {
+                        [newBox.css setValue:@(10) forTag:IUCSSTagPixelX forViewport:[width integerValue]];
+                    }
                 }
             }
             
-            NSNumber *y = [tagDictionary valueForKey:IUCSSTagPixelY];
-            if (y) {
-                if (pasteTargetIsParent) {
-                    NSNumber *newY = [NSNumber numberWithInteger:([y integerValue] + 10)];
-                    [newBox.css setValue:newY forTag:IUCSSTagPixelY forViewport:[width integerValue]];
-                }
-                else {
-                    [newBox.css setValue:@(10) forTag:IUCSSTagPixelY forViewport:[width integerValue]];
+            if (newBox.canChangeYByUserInput) {
+                NSNumber *y = [tagDictionary valueForKey:IUCSSTagPixelY];
+                if (y) {
+                    if (pasteTargetIsParent) {
+                        NSNumber *newY = [NSNumber numberWithInteger:([y integerValue] + 10)];
+                        [newBox.css setValue:newY forTag:IUCSSTagPixelY forViewport:[width integerValue]];
+                    }
+                    else {
+                        [newBox.css setValue:@(10) forTag:IUCSSTagPixelY forViewport:[width integerValue]];
+                    }
                 }
             }
             
