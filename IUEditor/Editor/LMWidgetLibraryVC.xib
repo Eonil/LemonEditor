@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -299,8 +299,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="260" height="31"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <button toolTip="Collection View" translatesAutoresizingMaskIntoConstraints="NO" id="BR5-iS-MYW" userLabel="iconBtn">
-                                                    <rect key="frame" x="229" y="2" width="29" height="28"/>
+                                                <button toolTip="Collection View" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BR5-iS-MYW" userLabel="iconBtn">
+                                                    <rect key="frame" x="229" y="3" width="29" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="28" id="Ee2-7e-Sig"/>
                                                         <constraint firstAttribute="width" constant="29" id="Psd-dz-SsW"/>
@@ -313,8 +313,8 @@
                                                         <action selector="clickPrimaryIcon:" target="-2" id="nE4-WR-pwU"/>
                                                     </connections>
                                                 </button>
-                                                <button toolTip="List View" translatesAutoresizingMaskIntoConstraints="NO" id="tsn-mg-JCz" userLabel="listBtn">
-                                                    <rect key="frame" x="203" y="2" width="27" height="28"/>
+                                                <button toolTip="List View" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tsn-mg-JCz" userLabel="listBtn">
+                                                    <rect key="frame" x="203" y="3" width="27" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="27" id="BgD-5s-jhO"/>
                                                         <constraint firstAttribute="height" constant="28" id="atl-Lz-QwE"/>

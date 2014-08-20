@@ -238,7 +238,7 @@ typedef enum _IUOverflowType{
 - (NSString*)cssClass;
 - (NSString*)cssHoverClass;
 - (NSString*)cssActiveClass;
-
+- (NSString*)cssClassStringForHTML;
 
 //can move to other parent?
 - (BOOL)canMoveToOtherParent;

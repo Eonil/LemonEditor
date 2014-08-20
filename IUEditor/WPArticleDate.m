@@ -30,7 +30,7 @@
     return @"<?php echo get_the_date(); ?>";
 }
 
-- (NSString*)sampleHTML{
+- (NSString*)sampleInnerHTML{
     return @"Dec. 24. 2014.";
 }
 

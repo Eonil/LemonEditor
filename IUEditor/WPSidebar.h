@@ -1,5 +1,5 @@
 //
-//  WPWidgets.h
+//  WPSidebar.h
 //  IUEditor
 //
 //  Created by jd on 8/14/14.
@@ -9,8 +9,9 @@
 #import "IUBox.h"
 #import "IUProtocols.h"
 
-@interface WPWidgets : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
+@interface WPSidebar : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
 
 @property (nonatomic) NSString *wordpressName;
+@property (nonatomic) NSInteger widgetCount;
 
 @end

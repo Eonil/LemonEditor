@@ -290,3 +290,7 @@ a{
     height: 100%;
     list-style-type: none;
 }
+
+.WPWidget {
+    position: relative;
+}

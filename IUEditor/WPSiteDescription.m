@@ -17,7 +17,7 @@
     return self;
 }
 
-- (NSString*)sampleHTML{
+- (NSString*)sampleInnerHTML{
     return @"This is Site Description. Contact j@jdlab.org for more information.";
 }
 

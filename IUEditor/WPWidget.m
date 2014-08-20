@@ -13,13 +13,32 @@
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if (self) {
-        self.title = @"Sample Widget Title";
-        self.lists = @"Lorem ipsum;Dolor sit amet;";
+        self.titleWidget = [[WPWidgetTitle alloc] initWithProject:project options:options];
+        [self addIU:self.titleWidget error:nil];
+        
+        self.bodyWidget = [[WPWidgetBody alloc] initWithProject:project options:options];
+        [self addIU:self.bodyWidget error:nil];
     }
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    [aDecoder decodeToObject:self withProperties:[WPWidget properties]];
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeFromObject:self withProperties:[WPWidget properties]];
+}
+
+
 - (BOOL)hasX{
+    return NO;
+}
+
+- (BOOL)hasY{
     return NO;
 }
 
@@ -31,17 +50,9 @@
     return NO;
 }
 
-- (NSString*)sampleText{
-    NSMutableString *ret =  [NSMutableString stringWithFormat:@"<div class='IU_WIDGET'>\
-                <h2 class='IU_WIDGET_TITLE'>%@</h2>\
-            <ul>", self.title];
-    
-    NSArray *list = [self.lists componentsSeparatedByString:@";"];
-    for (NSString *listItem in list) {
-        [ret appendFormat:@"<li class='cat-item cat-item-%ld'>%@</li>", [list indexOfObject:listItem], listItem];
-    }
-    [ret appendString:@"</ul></div>"];
-    return [ret copy];
+- (NSString*)sampleHTML{
+    NSString *ret =  [NSString stringWithFormat:@"<div id ='%@' class='%@'>%@%@</div>", self.htmlID, self.cssClassStringForHTML, self.titleWidget.sampleHTML, self.bodyWidget.sampleHTML];
+    return ret;
 }
 
 @end

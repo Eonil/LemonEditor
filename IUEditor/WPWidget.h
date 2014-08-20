@@ -7,8 +7,16 @@
 //
 
 #import "IUBox.h"
+#import "IUProtocols.h"
+
+#import "WPWidgetTitle.h"
+#import "WPWidgetBody.h"
+
 
 @interface WPWidget : IUBox
-@property NSString *title;
-@property NSString *lists;
+
+-(NSString*)sampleHTML;
+
+@property WPWidgetTitle *titleWidget;
+@property WPWidgetBody  *bodyWidget;
 @end

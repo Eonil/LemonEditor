@@ -15,7 +15,7 @@
 #import "IUBackground+WP.h"
 #import "IUClass.h"
 
-#import "WPWidgets.h"
+#import "WPSidebar.h"
 
 @implementation IUWordpressProject
 
@@ -114,7 +114,7 @@
         NSMutableString *functionCode = [NSMutableString stringWithContentsOfFile:functionPath encoding:NSUTF8StringEncoding error:nil];
         
         NSArray *allIUs = [self.allIUs allObjects];
-        NSArray *wpMenus = [allIUs filteredArrayWithClass:[WPWidgets class]];
+        NSArray *wpMenus = [allIUs filteredArrayWithClass:[WPSidebar class]];
         NSArray *wpNames = [wpMenus valueForKey:@"wordpressName"];
         if ([wpNames count]) {
             NSArray *wpNamesD = [[NSSet setWithArray:wpNames] allObjects];

@@ -32,7 +32,7 @@
     _itemCount = itemCount;
     [self updateHTML];
 }
-- (NSString*)sampleHTML{
+- (NSString*)sampleInnerHTML{
     NSMutableString *returnText = [NSMutableString stringWithString:@"<div class='menu-samplemenu-container'><ul id='menu-samplemenu'>\
                                    <li id='menu-item-01' class='menu-item'>JDLab blog</li>"];
     if (_itemCount > 1) {

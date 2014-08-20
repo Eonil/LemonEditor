@@ -510,9 +510,12 @@
         if ([iuCode respondsToSelector:@selector(code)]) {
             [code addCodeWithFormat:[iuCode code]];
         }
-        if (iu.children.count) {
-            for (IUBox *child in iu.children) {
-                [code addCode:[self outputHTML:child]];
+        if ([iuCode respondsToSelector:@selector(shouldCompileChildrenForOutput)] == NO ||
+            [iuCode shouldCompileChildrenForOutput] == YES ) {
+            if (iu.children.count) {
+                for (IUBox *child in iu.children) {
+                    [code addCode:[self outputHTML:child]];
+                }
             }
         }
         if ([iuCode respondsToSelector:@selector(postfixCode)]) {
@@ -921,8 +924,13 @@
     }
     else if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol) ]){
         IUBox <IUSampleHTMLProtocol> *sampleProtocolIU = (id)iu;
-        NSString *sampleHTML = [sampleProtocolIU sampleHTML];
-        [code addCodeLineWithFormat:@"<div %@ >%@</div>", [self HTMLAttributes:iu option:nil isEdit:YES], sampleHTML];
+        if ([sampleProtocolIU respondsToSelector:@selector(sampleInnerHTML)]) {
+            NSString *sampleInnerHTML = [sampleProtocolIU sampleInnerHTML];
+            [code addCodeLineWithFormat:@"<div %@ >%@</div>", [self HTMLAttributes:iu option:nil isEdit:YES], sampleInnerHTML];
+        }
+        if ([sampleProtocolIU respondsToSelector:@selector(sampleHTML)]) {
+            [code addCodeLine: sampleProtocolIU.sampleHTML];
+        }
     }
     
 #pragma mark IUMenuBar

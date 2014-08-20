@@ -6,13 +6,13 @@
 		<key>isWidget</key>
 		<true/>
 		<key>className</key>
-		<string>WPWidgets</string>
+		<string>WPSidebar</string>
 		<key>classImage</key>
 		<string>tool_view</string>
 		<key>navImage</key>
 		<string>stack_view</string>
 		<key>shortDesc</key>
-		<string>WPWidgets</string>
+		<string>WPSidebar</string>
 		<key>longDesc</key>
 		<string></string>
 		<key>widgetClass</key>

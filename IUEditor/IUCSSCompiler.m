@@ -20,6 +20,11 @@
 
 #import "WPMenu.h"
 
+#import "WPSidebar.h"
+#import "WPWidget.h"
+#import "WPWidgetTitle.h"
+#import "WPWidgetBody.h"
+
 @interface IUCSSCode() {
     IUTarget _currentTarget;
     int _currentViewPort;
@@ -60,6 +65,30 @@
 
 - (int)insertingViewPort{
     return _currentViewPort;
+}
+
+- (NSArray*)allIdentifiers{
+    NSMutableArray *returnIdentifiers = [NSMutableArray array];
+    NSArray *viewPortDatas = [_editorCSSDictWithViewPort allValues];
+    for (NSDictionary *dict in viewPortDatas) {
+        NSArray *identifierKeys = [dict allKeys];
+        for (NSString *identifier in identifierKeys) {
+            if ([returnIdentifiers containsObject:identifier] == NO) {
+                [returnIdentifiers addObject:identifier];
+            }
+        }
+    }
+
+    viewPortDatas = [_outputCSSDictWithViewPort allValues];
+    for (NSDictionary *dict in viewPortDatas) {
+        NSArray *identifierKeys = [dict allKeys];
+        for (NSString *identifier in identifierKeys) {
+            if ([returnIdentifiers containsObject:identifier] == NO) {
+                [returnIdentifiers addObject:identifier];
+            }
+        }
+    }
+    return [returnIdentifiers copy];
 }
 
 
@@ -362,6 +391,31 @@
         [tagDict removeObjectForKey:tag];
     }
 }
+
+- (void)renameIdentifier:(NSString*)fromIdentifier to:(NSString*)toIdentifier{
+    [_editorCSSDictWithViewPort enumerateKeysAndObjectsUsingBlock:^(id key, NSMutableDictionary* identifierDict, BOOL *stop) {
+        NSDictionary *copyDict = [identifierDict copy];
+        [copyDict enumerateKeysAndObjectsUsingBlock:^(NSString* identifier, id obj, BOOL *stop) {
+            if ([identifier isEqualToString:fromIdentifier]){
+                identifierDict[toIdentifier] = copyDict[identifier];
+                [identifierDict removeObjectForKey:identifier];
+                *stop = YES;
+            }
+        }];
+    }];
+    [_outputCSSDictWithViewPort enumerateKeysAndObjectsUsingBlock:^(id key, NSMutableDictionary* identifierDict, BOOL *stop) {
+        NSDictionary *copyDict = [identifierDict copy];
+        [copyDict enumerateKeysAndObjectsUsingBlock:^(NSString* identifier, id obj, BOOL *stop) {
+            if ([identifier isEqualToString:fromIdentifier]){
+                identifierDict[toIdentifier] = copyDict[identifier];
+                [identifierDict removeObjectForKey:identifier];
+                *stop = YES;
+            }
+        }];
+    }];
+
+}
+
 
 @end
 
@@ -710,6 +764,7 @@
     }
     
 }
+
 
 /*
  @breif:
@@ -1265,5 +1320,27 @@
         }
     }
 }
+
+
+- (void)updateCSSCode:(IUCSSCode*)code asWPWidgetBody:(WPWidgetBody*)_iu{
+    NSArray *identifiers = [code allIdentifiers];
+    WPSidebar *sidebar = (WPSidebar*)_iu.parent.parent;
+    
+    for (NSString *identifier in identifiers) {
+        NSString *newIdentifier = [identifier stringByReplacingOccurrencesOfString:_iu.htmlID withString:[NSString stringWithFormat:@"%@ > .WPWidget > ul" , sidebar.htmlID]];
+        [code renameIdentifier:identifier to:newIdentifier];
+    }
+}
+
+- (void)updateCSSCode:(IUCSSCode*)code asWPWidgetTitle:(WPWidgetTitle*)_iu{
+    NSArray *identifiers = [code allIdentifiers];
+    WPSidebar *sidebar = (WPSidebar*)_iu.parent.parent;
+    
+    for (NSString *identifier in identifiers) {
+        NSString *newIdentifier = [identifier stringByReplacingOccurrencesOfString:_iu.htmlID withString:[NSString stringWithFormat:@"%@ > .WPWidget > .WPWidgetTitle" , sidebar.htmlID]];
+        [code renameIdentifier:identifier to:newIdentifier];
+    }
+}
+
 
 @end

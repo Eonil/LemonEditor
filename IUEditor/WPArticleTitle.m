@@ -27,7 +27,7 @@
     return @"<?php the_title(); ?>";
 }
 
-- (NSString*)sampleHTML{
+- (NSString*)sampleInnerHTML{
     return @"Here comes title of article. Elcitra fo eltit semoc ereh.";
 }
 

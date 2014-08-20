@@ -21,6 +21,7 @@ typedef enum _IUTarget{
 - (NSDictionary*)stringTagDictionaryWithIdentifierForEditorViewport:(int)viewport;
 - (NSDictionary*)stringTagDictionaryWithIdentifierForOutputViewport:(int)viewport;
 - (NSArray*)allViewports;
+- (NSArray*)allIdentifiers;
 @end
 
 
@@ -49,7 +50,7 @@ typedef enum _IUUnit{
 - (int)insertingViewPort;
 - (void)setInsertingIdentifier:(NSString *)identifier;
 - (void)setInsertingIdentifiers:(NSArray *)identifiers;
-
+- (void)renameIdentifier:(NSString*)fromIdentifier to:(NSString*)toIdentifier;
 
 - (NSString*)valueForTag:(NSString*)tag identifier:(NSString*)identifier largerThanViewport:(int)viewport target:(IUTarget)target;
 - (NSString*)valueForTag:(NSString*)tag identifier:(NSString*)identifier viewport:(int)viewport target:(IUTarget)target;

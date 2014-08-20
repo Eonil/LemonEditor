@@ -18,7 +18,7 @@
     return self;
 }
 
-- (NSString*)sampleHTML{
+- (NSString*)sampleInnerHTML{
     return @"Site Title";
 }
 

@@ -1230,6 +1230,18 @@
     return [NSString stringWithFormat:@".%@:active", self.htmlID];
 }
 
+- (NSString*)cssClassStringForHTML{
+    NSArray *classPedigree = [[self class] classPedigreeTo:[IUBox class]];
+    NSMutableString *className = [NSMutableString string];
+    for (NSString *str in classPedigree) {
+        [className appendString:str];
+        [className appendString:@" "];
+    }
+    [className appendFormat:@" %@", self.htmlID];
+    return className;
+}
+
+
 
 - (BOOL)canMoveToOtherParent{
     return YES;

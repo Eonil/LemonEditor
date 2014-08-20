@@ -22,12 +22,18 @@
     [self.css eradicateTag:IUCSSTagBGColor];
     
     NSString *res = [[NSBundle mainBundle] pathForResource:@"loremipsum" ofType:@"txt"];
-    self.sampleHTML = [[NSString stringWithContentsOfFile:res encoding:NSUTF8StringEncoding error:nil] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
+    self.sampleText = [[NSString stringWithContentsOfFile:res encoding:NSUTF8StringEncoding error:nil] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
     return self;
 }
 
-- (void)setSampleHTML:(NSString *)sampleHTML{
-    _sampleHTML = sampleHTML;
+- (void)setSampleText:(NSString *)sampleText{
+    if ([sampleText length] == 0) {
+        NSString *res = [[NSBundle mainBundle] pathForResource:@"loremipsum" ofType:@"txt"];
+        _sampleText = [[NSString stringWithContentsOfFile:res encoding:NSUTF8StringEncoding error:nil] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
+    }
+    else {
+        _sampleText = sampleText;
+    }
     [self updateHTML];
 }
 

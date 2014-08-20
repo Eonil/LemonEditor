@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @protocol IUSampleHTMLProtocol
-@required
+/* An Object which conform IUSampleHTMLProtocol should have one of following functions */
+@optional
+- (NSString*)sampleInnerHTML;
 - (NSString*)sampleHTML;
 @end
 
@@ -18,6 +20,7 @@
 - (NSString*)prefixCode;
 - (NSString*)postfixCode;
 - (NSString*)code;
+- (BOOL)shouldCompileChildrenForOutput; // default : YES
 @end
 
 @protocol IUWordpressCodeProtocol
