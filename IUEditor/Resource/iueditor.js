@@ -191,30 +191,6 @@ function getImageWidth(imageSrc){
     return imageWidth;
 }
 
-function getTextAutoHeight(identifier){
-    
-    var iu = $('#'+identifier);
-    
-    var brCount = $("br", iu).length;
-    if($(iu.lastChild).is("br") == false){
-        brCount++;
-    }
-    var height = iu.height();
-    if(height==0){
-        return 1.0;
-    }
-    var lineheight = height/brCount;
-    var fontSize = parseFloat(iu.css('font-size'));
-    var newLineHeight = lineheight/fontSize;
-    
-    if(brCount > 3 && newLineHeight > 50){
-        newLineHeight = 50;
-    }
-    
-    return newLineHeight;
-}
-
-
 $(window).resize(function(){
             getIUUpdatedFrameThread();
 });

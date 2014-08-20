@@ -576,6 +576,12 @@
     return NO;
 }
 
+/* element line number */
+-(NSInteger)countOfLineWithIdentifier:(NSString *)identifier{
+    DOMHTMLElement *element = [self getHTMLElementbyID:identifier];
+    return element.childElementCount;
+}
+
 -(void)IUClassIdentifier:(NSString*)identifier CSSUpdated:(NSString*)css{
     DOMNodeList *list = [self querySelectorAll:identifier];
     int length= list.length;

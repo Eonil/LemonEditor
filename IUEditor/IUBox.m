@@ -533,7 +533,21 @@
             
             if(_css.assembledTagDictionary[IUCSSTagPixelHeight]){
                 
-                CGFloat lineheight = [[self.delegate callWebScriptMethod:@"getTextAutoHeight" withArguments:@[self.htmlID]] floatValue];
+                NSInteger brCount = [self.delegate countOfLineWithIdentifier:self.htmlID];
+                CGFloat height = [_css.assembledTagDictionary[IUCSSTagPixelHeight] floatValue];
+                CGFloat fontSize = [_css.assembledTagDictionary[IUCSSTagFontSize] floatValue];
+                CGFloat lineheight;
+                
+                if(height < 0.1 || height < fontSize || brCount <0.1 || fontSize <0.1){
+                    lineheight = 1.0;
+                }
+                else{
+                    lineheight = ((height/brCount)/fontSize);
+                }
+                
+                if(brCount > 3 && lineheight > 50){
+                    lineheight = 50;
+                }
                 [_css setValueWithoutUpdateCSS:@(lineheight) forTag:IUCSSTagLineHeight];
             }
         }

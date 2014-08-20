@@ -15,11 +15,15 @@
 @protocol IUSourceDelegate <NSObject>
 @required
 
+
+//css update
 -(void)enableUpdateCSS;
 -(void)disableUpdateCSS;
 -(BOOL)isUpdateCSSEnabled;
 -(void)IUClassIdentifier:(NSString *)identifier CSSUpdated:(NSString*)css;
 
+
+//html update
 -(void)IUHTMLIdentifier:(NSString*)identifier textHTML:(NSString *)html withParentID:(NSString *)parentID nearestID:(NSString *)nID index:(NSUInteger)index;
 -(void)IUHTMLIdentifier:(NSString *)identifier HTML:(NSString *)html withParentID:(NSString *)parentID;
 
@@ -32,7 +36,7 @@
 - (NSPoint)distanceFromIU:(NSString *)iuName to:(NSString *)parentName;
 - (NSSize)frameSize:(NSString *)identifier;
 - (void)changeIUPageHeight:(CGFloat)pageHeight;
-
+- (NSInteger)countOfLineWithIdentifier:(NSString *)identifier;
 - (void)runCSSJS;
 /**
  @brief call javascript function
