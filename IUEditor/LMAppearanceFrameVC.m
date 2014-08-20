@@ -279,21 +279,37 @@
 
 - (void)setValueForTag:(IUCSSTag)tag toTextfield:(NSTextField*)textfield toStepper:(NSStepper *)stepper{
     id value = [self valueForCSSTag:tag];
+   
+    [self setValue:value toStepper:stepper];
+    [self setValue:value toTextfield:textfield];
+    
+}
+
+- (void)setValue:(id)value toStepper:(NSStepper *)stepper{
+    if (value == nil || value == NSNoSelectionMarker || value == NSMultipleValuesMarker || value == NSNotApplicableMarker){
+        [stepper setEnabled:NO];
+    }
+    else{
+        [stepper setEnabled:YES];
+        [stepper setIntegerValue:[value integerValue]];
+    }
+}
+
+- (void)setValue:(id)value toTextfield:(NSTextField*)textfield{
     //default setting
     [[textfield cell] setPlaceholderString:@""];
-   
+
     if (value == nil || value == NSNoSelectionMarker || value == NSMultipleValuesMarker || value == NSNotApplicableMarker){
         if(value){
             //placehoder setting
             NSString *placeholder = [NSString stringWithValueMarker:value];
             [[textfield cell] setPlaceholderString:placeholder];
             [textfield setStringValue:@""];
-
+            
         }
         else{
             [textfield setStringValue:@"-"];
         }
-        [stepper setEnabled:NO];
     }
     else{
         if(value && [value isEqual:textfield.stringValue] == NO){
@@ -304,40 +320,49 @@
                 [textfield setStringValue:[value stringValue]];
             }
         }
-        [stepper setEnabled:YES];
-        [stepper setIntegerValue:[value integerValue]];
     }
 }
+
 
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
     enableObservation = NO;
     IUCSSTag tag;
+    NSStepper *stepper;
     if (control == _xTF) {
         tag = IUCSSTagPixelX;
+        stepper = _xStepper;
     }
     else if (control == _pxTF) {
         tag = IUCSSTagPercentX;
+        stepper = _pxStepper;
     }
     else if (control == _yTF) {
         tag = IUCSSTagPixelY;
+        stepper = _yStepper;
     }
     else if (control == _pyTF) {
         tag = IUCSSTagPercentY;
+        stepper = _pyStepper;
     }
     else if (control == _wTF) {
         tag = IUCSSTagPixelWidth;
+        stepper = _wStepper;
     }
     else if (control == _pwTF) {
         tag = IUCSSTagPercentWidth;
+        stepper = _pwStepper;
     }
     else if (control == _hTF) {
         tag = IUCSSTagPixelHeight;
+        stepper = _hStepper;
     }
     else if (control == _phTF) {
         tag = IUCSSTagPercentHeight;
+        stepper = _phStepper;
     }
     
     [self setCSSFrameValue:[control stringValue] forTag:tag];
+    [self setValue:[control stringValue] toStepper:stepper];
     enableObservation = YES;
     return YES;
 }
@@ -345,32 +370,42 @@
     IUCSSTag tag;
     enableObservation = NO;
 
+    NSTextField *textField;
     if (sender == _xStepper) {
         tag = IUCSSTagPixelX;
+        textField = _xTF;
     }
     else if (sender == _pxStepper) {
         tag = IUCSSTagPercentX;
+        textField = _pxTF;
     }
     else if (sender == _yStepper) {
         tag = IUCSSTagPixelY;
+        textField = _yTF;
     }
     else if (sender == _pyStepper) {
         tag = IUCSSTagPercentY;
+        textField = _pyTF;
     }
     else if (sender == _wStepper) {
         tag = IUCSSTagPixelWidth;
+        textField = _wTF;
     }
     else if (sender == _pwStepper) {
         tag = IUCSSTagPercentWidth;
+        textField = _pwTF;
     }
     else if (sender == _hStepper) {
         tag = IUCSSTagPixelHeight;
+        textField = _hTF;
     }
     else if (sender == _phStepper) {
         tag = IUCSSTagPercentHeight;
+        textField = _phTF;
     }
     
     [self setCSSFrameValue:[sender stringValue] forTag:tag];
+    [self setValue:[sender stringValue] toTextfield:textField];
     enableObservation = YES;
 
 }
