@@ -83,4 +83,9 @@
     [[self.undoManager prepareWithInvocationTarget:self] setCollectionVariable:_collectionVariable];
     _collectionVariable = collectionVariable;
 }
+
+- (void)setResponsiveSetting:(NSArray *)responsiveSetting{
+    [[self.undoManager prepareWithInvocationTarget:self] setResponsiveSetting:_responsiveSetting];
+    _responsiveSetting = responsiveSetting;
+}
 @end
