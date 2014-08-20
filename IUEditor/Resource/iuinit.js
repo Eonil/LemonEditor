@@ -78,7 +78,7 @@ $(document).ready(function(){
 	
 	$('.IUMenuBar a[href]').each(function() {
 		var url = window.location.pathname;
-		var urlRegExp = new RegExp(url.replace(/\/$/,'')); 
+        var urlRegExp = new RegExp(url == '/' ? window.location.origin + '/?$' : url.replace(/\/$/,''));
 		if(urlRegExp.test(this.href)){
 	      $(this).parent().addClass('active');
 	  	}
