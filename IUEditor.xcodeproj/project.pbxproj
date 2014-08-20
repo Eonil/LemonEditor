@@ -832,6 +832,7 @@
 		69D15F7318E898B10046FBB0 /* IUBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D15F7218E898B10046FBB0 /* IUBackground.m */; };
 		69D4EE6219654C2C00BAF8C1 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 69D4EE6119654C2C00BAF8C1 /* trash.png */; };
 		69D4EE6519654D9A00BAF8C1 /* LMDragAndDropButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D4EE6419654D9A00BAF8C1 /* LMDragAndDropButton.m */; };
+		69D5A94619A514BA00C24683 /* wpPageInformation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69D5A94519A514BA00C24683 /* wpPageInformation.plist */; };
 		69D79B2E19138CB90020608D /* LMStartNewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D79B2C19138CB80020608D /* LMStartNewVC.m */; };
 		69D79B2F19138CB90020608D /* LMStartNewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69D79B2D19138CB80020608D /* LMStartNewVC.xib */; };
 		69D79B3319138CC60020608D /* LMStartRecentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D79B3119138CC60020608D /* LMStartRecentVC.m */; };
@@ -1943,6 +1944,7 @@
 		69D4EE6119654C2C00BAF8C1 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		69D4EE6319654D9A00BAF8C1 /* LMDragAndDropButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMDragAndDropButton.h; sourceTree = "<group>"; };
 		69D4EE6419654D9A00BAF8C1 /* LMDragAndDropButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMDragAndDropButton.m; sourceTree = "<group>"; };
+		69D5A94519A514BA00C24683 /* wpPageInformation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = wpPageInformation.plist; sourceTree = "<group>"; };
 		69D5B68F18F247C100E9FB11 /* LMCompilerResourceSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMCompilerResourceSource.h; sourceTree = "<group>"; };
 		69D5B69018F2675C00E9FB11 /* IUCompilerResourceSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUCompilerResourceSource.h; sourceTree = "<group>"; };
 		69D79B2B19138CB80020608D /* LMStartNewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStartNewVC.h; sourceTree = "<group>"; };
@@ -3621,6 +3623,7 @@
 			isa = PBXGroup;
 			children = (
 				3D7F0BA5199B4F8D0062415D /* loremipsum.txt */,
+				69D5A94519A514BA00C24683 /* wpPageInformation.plist */,
 				690D465A198E8F3200478EC9 /* IUProtocols.h */,
 				69D100111997124F003F8772 /* wordpress.zip */,
 				CBFBE67C192A07A300F03F76 /* SampleTemplate */,
@@ -4638,6 +4641,7 @@
 				3DE2021A1966AF8D00976EBC /* agency_preview02.png in Resources */,
 				0685562C198A63430073FA83 /* karate_silhouette-2.svg in Resources */,
 				3DF803EB18FE62C900913505 /* stack_view.png in Resources */,
+				69D5A94619A514BA00C24683 /* wpPageInformation.plist in Resources */,
 				3DF8044018FE62FC00913505 /* tool_fblike@2x.png in Resources */,
 				269BABD81934509F0087703C /* documentIcon.icns in Resources */,
 				267CB1A4190F93370079E565 /* tab_library_on@2x.png in Resources */,
