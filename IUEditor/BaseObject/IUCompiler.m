@@ -372,7 +372,7 @@
     //change css
     JDCode *cssCode = [self cssSource:sheet cssSizeArray:mqSizeArray];
     
-    if(_rule == IUCompileRuleDefault){
+    if(_rule == IUCompileRuleDefault || _rule == IUCompileRulePresentation){
         [cssCode replaceCodeString:@"\"resource/" toCodeString:@"../"];
         [cssCode replaceCodeString:@"./resource/" toCodeString:@"../"];
         [cssCode replaceCodeString:@"('resource/" toCodeString:@"('../"];
