@@ -37,6 +37,10 @@
     [self updateHTML];
 }
 
+- (NSString*)sampleInnerHTML{
+    return [NSString stringWithFormat:@"<p>%@</p>", _sampleText];
+}
+
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [super encodeWithCoder:aCoder];
     [aCoder encodeFromObject:self withProperties:[WPArticleBody properties]];

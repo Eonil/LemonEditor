@@ -24,7 +24,7 @@
 
 - (void)awakeFromNib{
     if (self.controller) {
-        [_sampleTextV bind:@"value" toObject:self withKeyPath:[self.controller keyPathFromControllerToProperty:@"sampleHTML"] options:IUBindingDictNotRaisesApplicable];
+        [self outlet:self.sampleTextV bind:NSValueBinding property:@"sampleText"];
     }
 }
 

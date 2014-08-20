@@ -77,6 +77,10 @@
 
 - (IBAction)create:(id)sender{
     NSAssert(self.project && self.sheetController, @"not initialized");
+    NSString *fileName = self.selectedFileName;
+    if ([fileName isEqualToString:@"404"]) {
+        fileName = @"_404";
+    }
     IUPage *newSheet = [[IUPage alloc] initWithProject:self.project options:@{IUFileName: [self.selectedFileName stringByDeletingPathExtension]}];
     IUBackground *defaultBG = self.project.backgroundSheets[0];
     [newSheet setBackground:defaultBG];

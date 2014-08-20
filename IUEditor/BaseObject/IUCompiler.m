@@ -928,8 +928,11 @@
             NSString *sampleInnerHTML = [sampleProtocolIU sampleInnerHTML];
             [code addCodeLineWithFormat:@"<div %@ >%@</div>", [self HTMLAttributes:iu option:nil isEdit:YES], sampleInnerHTML];
         }
-        if ([sampleProtocolIU respondsToSelector:@selector(sampleHTML)]) {
+        else if ([sampleProtocolIU respondsToSelector:@selector(sampleHTML)]) {
             [code addCodeLine: sampleProtocolIU.sampleHTML];
+        }
+        else {
+            assert(0);
         }
     }
     

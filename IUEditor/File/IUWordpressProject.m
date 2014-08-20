@@ -13,6 +13,7 @@
 
 #import "IUPage.h"
 #import "IUBackground+WP.h"
+#import "IUPage+WP.h"
 #import "IUClass.h"
 
 #import "WPSidebar.h"
@@ -63,20 +64,23 @@
     
     IUPage *index = [[IUPage alloc] initWithProject:self options:nil];
     [index setBackground:bg];
+    [index WPInitializeAsIndex];
     index.name = @"index";
     index.htmlID = @"index";
     [self addSheet:index toSheetGroup:_pageGroup];
     
-    IUPage *page = [[IUPage alloc] initWithProject:self options:nil];
-    [page setBackground:bg];
-    page.name = @"page";
-    page.htmlID = @"page";
-    [self addSheet:page toSheetGroup:_pageGroup];
+    IUPage *home = [[IUPage alloc] initWithProject:self options:nil];
+    [home setBackground:bg];
+    [index WPInitializeAsHome];
+    home.name = @"home";
+    home.htmlID = @"home";
+    [self addSheet:home toSheetGroup:_pageGroup];
 
     IUPage *_404 = [[IUPage alloc] initWithProject:self options:nil];
     [_404 setBackground:bg];
-    _404.name = @"404";
-    _404.htmlID = @"404";
+    [index WPInitializeAs404];
+    _404.name = @"_404";
+    _404.htmlID = @"_404";
     [self addSheet:_404 toSheetGroup:_pageGroup];
     
 

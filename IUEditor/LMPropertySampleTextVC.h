@@ -7,9 +7,8 @@
 //
 
 #import "IUController.h"
+#import "LMDefaultPropertyVC.h"
 
 
-@interface LMPropertySampleTextVC : NSViewController
-@property (weak) IUController  *controller;
-
+@interface LMPropertySampleTextVC : LMDefaultPropertyVC
 @end
