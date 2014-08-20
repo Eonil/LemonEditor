@@ -319,8 +319,10 @@
             return NO;
         }
         
-        NSCharacterSet *characterSet = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
-        if([modifiedName rangeOfCharacterFromSet:characterSet].location != NSNotFound){
+        NSMutableCharacterSet *characterSet = [NSMutableCharacterSet characterSetWithCharactersInString:@"_"];
+        [characterSet formUnionWithCharacterSet:[NSCharacterSet alphanumericCharacterSet]];
+        NSCharacterSet *allowedSet = [characterSet invertedSet];
+        if([modifiedName rangeOfCharacterFromSet:allowedSet].location != NSNotFound){
             IUBox *currentBox = (IUBox *)self.selection;
             [control setStringValue:currentBox.name];
             [JDUIUtil hudAlert:@"Name should be alphabet or digit" second:2];
