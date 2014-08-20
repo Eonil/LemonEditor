@@ -270,24 +270,25 @@
     
     for (NSString *identifier in allKeys.allObjects) {
         NSDictionary *tagDict = sourceDictWithIdentifier[identifier];
-        if(tagDict == nil){
-            tagDict = [sourceDictWithViewPort[@(viewport)] objectForKey:identifier];
-        }
         NSMutableDictionary *tagDictForReturn = [NSMutableDictionary dictionary];
         
-        //Review:defaultcss+editor css
+        
+        //TODO: optimize;
+        //Review:defaultcss
         for (NSString *tag in tagDict) {
             NSString *value = tagDict[tag];
             //Review:
             // element에 style속성으로 지정하기 때문에 무조건 들어가야함.
             tagDictForReturn[tag] = value;
-
-            if(viewport != IUCSSDefaultViewPort){
-                NSString *currentValue = [self valueForTag:tag identifier:identifier viewport:viewport target:IUTargetEditor];
-                if (currentValue && [value isEqualToString:currentValue] == NO) {
-                    tagDictForReturn[tag] = currentValue;
-                }
-            }
+        }
+        
+        //viewport css
+        tagDict = [sourceDictWithViewPort[@(viewport)] objectForKey:identifier];
+        for (NSString *tag in tagDict) {
+            NSString *value = tagDict[tag];
+            //Review:
+            // element에 style속성으로 지정하기 때문에 무조건 들어가야함.
+            tagDictForReturn[tag] = value;
         }
         
         NSString *cssCode = [[tagDictForReturn CSSCode] stringByReplacingOccurrencesOfString:@".00px" withString:@"px"];

@@ -394,26 +394,26 @@
                     <toolbarItem implicitItemIdentifier="FD138103-3790-49A7-BF4D-4A0E75872BB2" label="" paletteLabel="" tag="-1" id="zJ8-vt-eZO">
                         <nil key="toolTip"/>
                         <size key="minSize" width="171" height="32"/>
-                        <size key="maxSize" width="177" height="32"/>
+                        <size key="maxSize" width="268" height="32"/>
                         <box key="view" autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="bK7-5s-Km2">
-                            <rect key="frame" x="0.0" y="14" width="171" height="32"/>
+                            <rect key="frame" x="0.0" y="14" width="268" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <view key="contentView">
-                                <rect key="frame" x="0.0" y="0.0" width="171" height="32"/>
+                                <rect key="frame" x="0.0" y="0.0" width="268" height="32"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mLY-TX-1Mg">
-                                        <rect key="frame" x="103" y="5" width="24" height="24"/>
-                                        <buttonCell key="cell" type="smallSquare" title="s" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TJf-e7-Sza">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zoC-zb-imB">
+                                        <rect key="frame" x="148" y="5" width="104" height="24"/>
+                                        <buttonCell key="cell" type="smallSquare" title="Sync with Heroku" bezelStyle="smallSquare" image="heroku" imagePosition="left" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Dov-St-pBT">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="miniSystem"/>
                                         </buttonCell>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zoC-zb-imB">
-                                        <rect key="frame" x="137" y="5" width="24" height="24"/>
-                                        <buttonCell key="cell" type="smallSquare" title="s" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Dov-St-pBT">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mLY-TX-1Mg">
+                                        <rect key="frame" x="30" y="3" width="104" height="29"/>
+                                        <buttonCell key="cell" type="square" title=" Upload to Server" bezelStyle="shadowlessSquare" image="upload" imagePosition="left" alignment="left" state="on" inset="2" id="TJf-e7-Sza">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="miniSystem"/>
                                         </buttonCell>
                                     </button>
                                 </subviews>
@@ -436,11 +436,13 @@
     </objects>
     <resources>
         <image name="export" width="24" height="24"/>
+        <image name="heroku" width="24" height="24"/>
         <image name="pause" width="24" height="24"/>
         <image name="shoveling" width="380" height="340"/>
         <image name="tab_off" width="100" height="30"/>
         <image name="tab_on_01" width="100" height="30"/>
         <image name="tab_on_02" width="100" height="30"/>
         <image name="tab_on_03" width="100" height="30"/>
+        <image name="upload" width="24" height="24"/>
     </resources>
 </document>
