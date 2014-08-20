@@ -584,7 +584,13 @@
     DOMNodeList *list = [self getHTMLElementsByClassname:identifier];
     if(list.length > 0){
         DOMHTMLElement *element = (DOMHTMLElement *)[list item:0];
-        return element.childElementCount;
+        DOMNodeList *brList  = [element getElementsByTagName:@"br"];
+        int count = brList.length;
+        DOMHTMLElement *lastElement = (DOMHTMLElement *)[element.childNodes item:element.childNodes.length-1];
+        if([lastElement isKindOfClass:[DOMHTMLBRElement class]]==NO){
+            count++;
+        }
+        return count;
     }
     return 0;
 }

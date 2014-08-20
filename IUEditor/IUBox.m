@@ -537,7 +537,7 @@
                 CGFloat height = [_css.assembledTagDictionary[IUCSSTagPixelHeight] floatValue];
                 CGFloat fontSize = [_css.assembledTagDictionary[IUCSSTagFontSize] floatValue];
                 CGFloat lineheight;
-                
+                                
                 if(height < 0.1 || height < fontSize || brCount <0.1 || fontSize <0.1){
                     lineheight = 1.0;
                 }
