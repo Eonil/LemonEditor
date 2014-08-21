@@ -49,6 +49,7 @@
     IUFrameDictionary *frameDict;
     LMHelpWC *helpWC;
     int levelForUpdateCSS;
+    BOOL isCSSLoading;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -190,11 +191,16 @@
 #pragma mark call by Document
 
 - (void)didFinishLoadFrame{
+    
+    isCSSLoading = YES;
+    
     [_sheet updateCSS];
     for(IUBox *box in _sheet.allChildren){
         [box updateCSS];
     }
     [self runCSSJS];
+    
+    isCSSLoading = NO;
 }
 
 - (void)updateSheetHeight{
@@ -607,6 +613,12 @@
     if([self isSheetHeightChanged:identifier]){
         //CLASS에서 WEBCANVASVIEW의 높이 변화를 위해서
         [self updateSheetHeight];
+    }
+    
+    /*first document loading*/
+    if(isCSSLoading==NO){
+        [self runCSSJS];
+        
     }
 }
 
