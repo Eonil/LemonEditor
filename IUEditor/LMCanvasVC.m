@@ -518,7 +518,8 @@
 }
 
 - (NSString *)tagWithHTML:(NSString *)html{
-    NSArray *separatedHTML = [html componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *subHTML = [html substringFromIndex:[html rangeOfString:@"<"].location];
+    NSArray *separatedHTML = [subHTML componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if ([separatedHTML count]) {
         NSString *incompleteTag = separatedHTML[0];
         NSArray *tags = [incompleteTag componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
