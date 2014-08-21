@@ -494,7 +494,7 @@
         //html
         NSString *outputHTML = [sheet outputHTMLSource];
         
-        // if compile mode is Presentation, add button
+        //if compile mode is Presentation, add button
         if (self.compiler.rule == IUCompileRulePresentation) {
             if ([sheet isKindOfClass:[IUPage class]]) {
                 NSInteger indexOfSheet = [self.pageSheets indexOfObject:sheet];
@@ -526,18 +526,11 @@
 
         //note : writeToFile: automatically overwrite
         NSError *myError;
-
-        //FIXME: PHP에서 CSS파일에 코드 지원 안됨!!!!
-        if (self.compiler.rule == IUCompileRuleWordpress) {
-            //css
-            NSString *outputCSS = [NSString stringWithFormat:@"<style>%@</style>",[sheet outputCSSSource]];
-            outputHTML = [outputHTML stringByReplacingOccurrencesOfString:@"<!--CSS_Replacement-->" withString:outputCSS];
-        }
         if ([outputHTML writeToFile:htmlPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
             NSAssert(0, @"write fail");
         }
-        //css
         
+        //css
         if (self.compiler.rule != IUCompileRuleWordpress) {
             NSString *outputCSS = [sheet outputCSSSource];
             NSString *cssPath = [[resourceCSSPath stringByAppendingPathComponent:sheet.name] stringByAppendingPathExtension:@"css"];

@@ -409,7 +409,14 @@
         JDCode *iuCSS = [self cssHeaderForSheet:sheet isEdit:NO];
         [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];
         
-        [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCodeString:@""];
+        if(_rule == IUCompileRuleWordpress){
+            NSString *cssString = [self outputCSSSource:sheet mqSizeArray:sheet.project.mqSizes];
+            [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCodeString:cssString];
+        }
+        else{
+            [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCodeString:@""];
+
+        }
         
         //change html
         JDCode *htmlCode = [self outputHTML:sheet];
@@ -1508,8 +1515,14 @@
     NSInteger largestWidth = [[mqSizeArray objectAtIndex:0] integerValue];
     [mqSizeArray removeObjectAtIndex:0];
 
-    
     JDCode *code = [[JDCode alloc] init];
+    
+    //make default css code
+    if(_rule == IUCompileRuleWordpress){
+        [code addCodeLine:@"<style id=default>"];
+        [code increaseIndentLevelForEdit];
+    }
+    
     NSDictionary *cssDict = [[cssCompiler cssCodeForIU:sheet] stringTagDictionaryWithIdentifierForOutputViewport:IUCSSDefaultViewPort];
     
     for (NSString *identifier in cssDict) {
@@ -1524,6 +1537,11 @@
         }
     }
     
+    if(_rule == IUCompileRuleWordpress){
+        [code decreaseIndentLevelForEdit];
+        [code addCodeLine:@"</style>"];
+    }
+    
     [code addNewLine];
     
 #pragma mark extract MQ css
@@ -1531,27 +1549,41 @@
     for(int count=0; count<mqSizeArray.count; count++){
         int size = [[mqSizeArray objectAtIndex:count] intValue];
         
-        //build는 css파일로 따로 뽑아줌
-        if(count < mqSizeArray.count-1){
-            [code addCodeWithFormat:@"@media screen and (min-width:%dpx) and (max-width:%dpx){" , size, largestWidth-1];
-            largestWidth = size;
+        //REVIEW: word press rule은 header에 붙임, 나머지는 .css파일로 따로 뽑아냄.
+        if(_rule == IUCompileRuleWordpress){
+            //<style type="text/css" media="screen and (max-width:400px)" id="style400">
+            if(count < mqSizeArray.count-1){
+                [code addCodeWithFormat:@"<style type=\"text/css\" media ='screen and (min-width:%dpx) and (max-width:%dpx)' id='style%d'>" , size, largestWidth-1, size];
+                largestWidth = size;
+            }
+            else{
+                [code addCodeWithFormat:@"<style type=\"text/css\" media ='screen and (max-width:%dpx)' id='style%d'>" , largestWidth-1, size];
+                
+            }
         }
         else{
-            [code addCodeWithFormat:@"@media screen and (max-width:%dpx){" , largestWidth-1];
-            
-            if(size < IUMobileSize && sheet.allChildren ){
-                if([sheet containClass:[IUMenuBar class]]){
-                    NSString *menubarMobileCSSPath = [[NSBundle mainBundle] pathForResource:@"menubarMobile" ofType:@"css"];
-                    NSString *menubarMobileCSS = [NSString stringWithContentsOfFile:menubarMobileCSSPath encoding:NSUTF8StringEncoding error:nil];
-                    [code increaseIndentLevelForEdit];
-                    [code addCodeLine:menubarMobileCSS];
-                    [code decreaseIndentLevelForEdit];
-                }
+            //build는 css파일로 따로 뽑아줌
+            if(count < mqSizeArray.count-1){
+                [code addCodeWithFormat:@"@media screen and (min-width:%dpx) and (max-width:%dpx){" , size, largestWidth-1];
+                largestWidth = size;
+            }
+            else{
+                [code addCodeWithFormat:@"@media screen and (max-width:%dpx){" , largestWidth-1];
                 
+                
+            }
+        }
+        
+        if(size < IUMobileSize && sheet.allChildren ){
+            if([sheet containClass:[IUMenuBar class]]){
+                NSString *menubarMobileCSSPath = [[NSBundle mainBundle] pathForResource:@"menubarMobile" ofType:@"css"];
+                NSString *menubarMobileCSS = [NSString stringWithContentsOfFile:menubarMobileCSSPath encoding:NSUTF8StringEncoding error:nil];
+                [code increaseIndentLevelForEdit];
+                [code addCodeLine:menubarMobileCSS];
+                [code decreaseIndentLevelForEdit];
             }
             
         }
-        
         
         [code increaseIndentLevelForEdit];
         
@@ -1573,7 +1605,13 @@
             }
         }
         [code decreaseIndentLevelForEdit];
-        [code addCodeLine:@"}"];
+        
+        if(_rule == IUCompileRuleWordpress){
+            [code addCodeLine:@"</style>"];
+        }
+        else{
+            [code addCodeLine:@"}"];
+        }
         
     }
     return code;
