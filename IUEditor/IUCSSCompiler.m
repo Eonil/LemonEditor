@@ -784,11 +784,16 @@
 - (void)updateCSSPositionCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
 
-    /*  X, Y, Width, Height */
-    
-    //FIXME: viewport에 없으면 default로 가져올수있게
-    IUUnit xUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagXUnitIsPercent viewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
-    IUUnit yUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagYUnitIsPercent viewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+    /*  X, Y, Width, Height */    
+    IUUnit xUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagXUnitIsPercent viewport:IUCSSDefaultViewPort] boolValue] ? IUUnitPercent : IUUnitPixel;
+    IUUnit yUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagYUnitIsPercent viewport:IUCSSDefaultViewPort] boolValue] ? IUUnitPercent : IUUnitPixel;
+
+    if([self valueForIUBox:_iu CSSTag:IUCSSTagXUnitIsPercent viewport:IUCSSDefaultViewPort]){
+        xUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagXUnitIsPercent viewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+    }
+    if([self valueForIUBox:_iu CSSTag:IUCSSTagYUnitIsPercent viewport:IUCSSDefaultViewPort]){
+        yUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagYUnitIsPercent viewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+    }
     
     NSNumber *xValue = (xUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentX] : cssTagDict[IUCSSTagPixelX];
     NSNumber *yValue = (yUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentY] : cssTagDict[IUCSSTagPixelY];
