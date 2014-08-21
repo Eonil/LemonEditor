@@ -158,6 +158,7 @@
     return cell;
 }
 
+//TODO: optimize - plist 호출하는 클래스 따로빼기 여러군데서 쓰임
 - (NSImage *)currentImage:(NSString *)className{
     NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForDefault" ofType:@"plist"];
     NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
@@ -168,7 +169,6 @@
             return classImage;
         }
     }
-
     return nil;
 }
 - (IBAction)outlineViewClicked:(NSOutlineView *)sender{

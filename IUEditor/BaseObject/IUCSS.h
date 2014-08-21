@@ -40,7 +40,7 @@
 -(NSArray*)allViewports;
 
 /**
- @brief : copy max-size cssDictionary to specific width dictionary;
+ @brief copy max-size cssDictionary to specific width dictionary;
  */
 - (void)copyMaxSizeToSize:(NSInteger)width;
 

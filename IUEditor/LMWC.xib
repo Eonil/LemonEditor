@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="6154.17"/>
@@ -9,11 +9,11 @@
             <connections>
                 <outlet property="appearanceV" destination="209-eo-kDy" id="Vjs-mp-RBg"/>
                 <outlet property="bottomToolbarV" destination="YTs-oo-nxs" id="krT-4z-IUv"/>
+                <outlet property="buildToolbarBox" destination="3cV-9o-ZJ9" id="zBx-op-WS5"/>
                 <outlet property="centerSplitV" destination="BqL-ro-r2J" id="VjN-GT-Bwc"/>
                 <outlet property="centerV" destination="LCo-BM-DQN" id="a81-Fm-UQ1"/>
                 <outlet property="clickWidgetTabMatrix" destination="vUX-uW-fTu" id="ZFU-Ng-NiY"/>
                 <outlet property="clipartV" destination="OBJ-vE-U5d" id="7VC-in-Aye"/>
-                <outlet property="commandV" destination="Nwr-vk-YZ2" id="0Yv-OA-2p6"/>
                 <outlet property="consoleV" destination="3fG-md-Skx" id="o7V-MH-chT"/>
                 <outlet property="eventV" destination="cND-E8-FNH" id="L2T-JZ-w7f"/>
                 <outlet property="leftBottomV" destination="4Tl-hR-JBi" id="Hgo-4P-SU6"/>
@@ -21,12 +21,15 @@
                 <outlet property="leftV" destination="6xJ-ed-1uG" id="1ox-b2-z6R"/>
                 <outlet property="leftVConstraint" destination="xZF-qx-AO8" id="zgq-OP-Oxg"/>
                 <outlet property="logV" destination="3fG-md-Skx" id="nIb-xb-fXl"/>
+                <outlet property="progressToolbarIndicator" destination="AxF-Rj-ZVo" id="2cw-Wn-aio"/>
                 <outlet property="propertyMatrix" destination="zhv-IX-K54" id="5PN-LA-8xg"/>
                 <outlet property="propertyTabV" destination="VEQ-BG-SDd" id="pKx-vM-P1p"/>
                 <outlet property="propertyV" destination="Ucu-5b-khM" id="mOL-zc-gXE"/>
                 <outlet property="resourceV" destination="yuK-jm-moa" id="vww-Rv-ZVx"/>
                 <outlet property="rightV" destination="Ci0-yr-ElZ" id="l8s-Lp-bUW"/>
                 <outlet property="rightVConstraint" destination="cR7-qD-bfW" id="fxY-5D-ZvE"/>
+                <outlet property="selectionToolbarImageView" destination="Hvr-pA-pnZ" id="MNC-DE-6dW"/>
+                <outlet property="selectionToolbarTF" destination="ugR-jR-WPz" id="TuT-U2-XgK"/>
                 <outlet property="serverView" destination="2Gw-Nv-6C2" id="47b-Fl-W03"/>
                 <outlet property="topToolbarV" destination="4es-7h-bcl" id="SBG-S6-dhA"/>
                 <outlet property="widgetTabV" destination="Rvr-f8-CYQ" id="rJr-Fz-ouO"/>
@@ -48,19 +51,12 @@
                     <splitView dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="6xJ-ed-1uG" userLabel="left">
                         <rect key="frame" x="0.0" y="0.0" width="220" height="887"/>
                         <subviews>
-                            <customView autoresizesSubviews="NO" id="Nwr-vk-YZ2">
-                                <rect key="frame" x="0.0" y="0.0" width="220" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="K9M-RB-dpU"/>
-                                </constraints>
-                            </customView>
                             <customView fixedFrame="YES" id="efd-DN-4Bq" userLabel="leftTopV">
-                                <rect key="frame" x="0.0" y="59" width="220" height="389"/>
+                                <rect key="frame" x="0.0" y="0.0" width="220" height="417"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </customView>
                             <customView fixedFrame="YES" id="4Tl-hR-JBi" userLabel="leftBottomV">
-                                <rect key="frame" x="0.0" y="449" width="220" height="438"/>
+                                <rect key="frame" x="0.0" y="418" width="220" height="469"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </customView>
                         </subviews>
@@ -68,7 +64,6 @@
                             <constraint firstAttribute="width" constant="220" id="Eot-6R-esO"/>
                         </constraints>
                         <holdingPriorities>
-                            <real value="250"/>
                             <real value="250"/>
                             <real value="250"/>
                         </holdingPriorities>
@@ -327,71 +322,24 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="018B36C5-2B8D-4E4A-AE78-F1067ED1DA23" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="Pu1-Pr-Bdl">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="xti-wR-ocl"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="OTd-KK-BCM"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="WZz-Hu-sNh"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="O76-fK-Hoh"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="rlk-P1-2MX"/>
-                    <toolbarItem implicitItemIdentifier="870A9C92-0A50-44D2-8425-F6969F68E6DB" label="" paletteLabel="" tag="-1" id="UhE-nB-agp">
+                    <toolbarItem implicitItemIdentifier="870A9C92-0A50-44D2-8425-F6969F68E6DB" label="" paletteLabel="" tag="-1" id="UhE-nB-agp" userLabel="Toolbar Item-Build">
                         <nil key="toolTip"/>
                         <size key="minSize" width="171" height="32"/>
-                        <size key="maxSize" width="281" height="32"/>
+                        <size key="maxSize" width="400" height="32"/>
                         <box key="view" autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="3cV-9o-ZJ9">
-                            <rect key="frame" x="0.0" y="14" width="281" height="32"/>
+                            <rect key="frame" x="0.0" y="14" width="400" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <view key="contentView">
-                                <rect key="frame" x="0.0" y="0.0" width="281" height="32"/>
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="32"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zf1-5G-oMv">
-                                        <rect key="frame" x="41" y="5" width="24" height="24"/>
-                                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="pause" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="JJE-MX-DjQ">
-                                            <behavior key="behavior" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                    </button>
-                                    <box autoresizesSubviews="NO" horizontalHuggingPriority="750" fixedFrame="YES" alphaValue="0.29999999999999999" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="dGX-HD-4Rb">
-                                        <rect key="frame" x="76" y="7" width="5" height="18"/>
-                                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <font key="titleFont" metaFont="system"/>
-                                    </box>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pfT-fw-uNb">
-                                        <rect key="frame" x="92" y="7" width="67" height="17"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Build Type  :" id="LQa-gV-FvU">
-                                            <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <popUpButton fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xBE-jb-aG6">
-                                        <rect key="frame" x="159" y="9" width="79" height="17"/>
-                                        <popUpButtonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" lineBreakMode="truncatingTail" inset="2" id="vH8-6t-Jky">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="smallSystem"/>
-                                            <menu key="menu" title="OtherViews" id="0Ht-In-Vu7">
-                                                <items>
-                                                    <menuItem title="HTML" id="ryr-Mb-VmR"/>
-                                                    <menuItem title="Django" id="ceN-1A-2O2"/>
-                                                    <menuItem title="Wordpress" id="anf-Qy-Xpo"/>
-                                                </items>
-                                            </menu>
-                                        </popUpButtonCell>
-                                    </popUpButton>
-                                    <button toolTip="Build" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VZj-r0-BF1">
-                                        <rect key="frame" x="10" y="4" width="24" height="24"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="export" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Iuv-a8-Y9w">
-                                            <behavior key="behavior" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                    </button>
-                                </subviews>
                             </view>
                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </box>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="FD138103-3790-49A7-BF4D-4A0E75872BB2" label="" paletteLabel="" tag="-1" id="zJ8-vt-eZO">
+                    <toolbarItem implicitItemIdentifier="FD138103-3790-49A7-BF4D-4A0E75872BB2" label="" paletteLabel="" tag="-1" id="zJ8-vt-eZO" userLabel="Toolbar Item-Server">
                         <nil key="toolTip"/>
                         <size key="minSize" width="171" height="32"/>
                         <size key="maxSize" width="268" height="32"/>
@@ -408,6 +356,9 @@
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="miniSystem"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="showServerWC:" target="-1" id="jSJ-yO-7vD"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zoC-zb-imB">
                                         <rect key="frame" x="148" y="5" width="104" height="24"/>
@@ -415,6 +366,9 @@
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="miniSystem"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="showHerokuWC:" target="-1" id="x1O-hz-txM"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </view>
@@ -422,7 +376,7 @@
                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </box>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="DC5475DE-B11E-4182-866C-81585E6D872C" label="" paletteLabel="" tag="-1" id="2EI-gL-BuQ">
+                    <toolbarItem implicitItemIdentifier="DC5475DE-B11E-4182-866C-81585E6D872C" label="" paletteLabel="" tag="-1" id="2EI-gL-BuQ" userLabel="Toolbar Item-Status">
                         <nil key="toolTip"/>
                         <size key="minSize" width="394" height="24"/>
                         <size key="maxSize" width="400" height="30"/>
@@ -434,24 +388,30 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hvr-pA-pnZ">
-                                        <rect key="frame" x="96" y="6" width="14" height="10"/>
+                                        <rect key="frame" x="130" y="6" width="14" height="10"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="stack_view" id="7KG-gj-cJc"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ugR-jR-WPz">
-                                        <rect key="frame" x="116" y="4" width="166" height="14"/>
-                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="IUBox  |  Bergerg" id="g0T-UX-3mv">
+                                        <rect key="frame" x="150" y="4" width="98" height="14"/>
+                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="IUBox  |  Bergerg" id="g0T-UX-3mv">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <progressIndicator fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="AxF-Rj-ZVo"/>
+                                    <progressIndicator maxValue="100" displayedWhenStopped="NO" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="AxF-Rj-ZVo">
+                                        <rect key="frame" x="-1" y="-2" width="400" height="26"/>
+                                    </progressIndicator>
                                 </subviews>
                             </view>
                             <constraints>
+                                <constraint firstAttribute="bottom" secondItem="AxF-Rj-ZVo" secondAttribute="bottom" id="Cvm-7A-e5H"/>
+                                <constraint firstItem="AxF-Rj-ZVo" firstAttribute="top" secondItem="ytQ-RO-fCm" secondAttribute="top" id="TdF-NT-tBF"/>
+                                <constraint firstAttribute="trailing" secondItem="AxF-Rj-ZVo" secondAttribute="trailing" id="Uip-df-5rz"/>
                                 <constraint firstAttribute="centerX" secondItem="ugR-jR-WPz" secondAttribute="centerX" id="V1B-uV-NWo"/>
                                 <constraint firstItem="ugR-jR-WPz" firstAttribute="leading" secondItem="Hvr-pA-pnZ" secondAttribute="trailing" constant="8" id="YSk-3F-odS"/>
                                 <constraint firstAttribute="centerY" secondItem="ugR-jR-WPz" secondAttribute="centerY" id="acP-Ct-dMB"/>
+                                <constraint firstItem="AxF-Rj-ZVo" firstAttribute="leading" secondItem="ytQ-RO-fCm" secondAttribute="leading" id="cQD-8s-DGk"/>
                                 <constraint firstAttribute="centerY" secondItem="Hvr-pA-pnZ" secondAttribute="centerY" id="d3U-vk-ot6"/>
                             </constraints>
                             <color key="borderColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="calibratedRGB"/>
@@ -474,9 +434,7 @@
         </window>
     </objects>
     <resources>
-        <image name="export" width="24" height="24"/>
         <image name="heroku" width="24" height="24"/>
-        <image name="pause" width="24" height="24"/>
         <image name="shoveling" width="380" height="340"/>
         <image name="stack_view" width="14" height="10"/>
         <image name="tab_off" width="100" height="30"/>

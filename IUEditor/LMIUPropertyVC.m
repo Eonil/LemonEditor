@@ -253,20 +253,10 @@
     propertyIUMovieVC.resourceManager = resourceManager;
     propertyIUGoogleMapVC.resourceManager = resourceManager;
 }
-- (BOOL)isAllSameIU{
-    NSString *className = [[[self.controller selectedObjects] firstObject] className];
-    for(IUBox *iu in [self.controller selectedObjects]){
-        if([className isEqualToString:[iu className]] ==NO){
-            return NO;
-        }
-    }
-    return YES;
-}
-
 
 -(void)selectedObjectsDidChange:(NSDictionary *)change{
     //FIXME: FIX FOR MANY SELECTION that has different kinds of types
-    if ([self isAllSameIU] == NO) {
+    if ([_controller isSelectionSameClass] == NO) {
         self.propertyVArray = [NSMutableArray arrayWithArray:@[self.noInspectorV]];
         doubleClickFocusVC = nil;
         [_tableV reloadData];

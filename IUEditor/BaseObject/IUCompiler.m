@@ -104,7 +104,7 @@
  <meta property="og:price:amount" content="15.00" />
  <meta property="og:price:currency" content="USD" />
  
- @brief : metadata for page
+ @brief metadata for page
  
  */
 

@@ -577,8 +577,8 @@
 }
 
 
-/*
- @brief: get element line count by only selected iu
+/**
+ @brief get element line count by only selected iu
  */
 -(NSInteger)countOfLineWithIdentifier:(NSString *)identifier{
     DOMNodeList *list = [self getHTMLElementsByClassname:identifier];

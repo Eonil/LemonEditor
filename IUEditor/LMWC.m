@@ -47,6 +47,11 @@
 #import "LMHerokuWC.h"
 
 @interface LMWC ()
+//window toolbar
+@property (weak) IBOutlet NSBox *buildToolbarBox;
+@property (weak) IBOutlet NSImageView *selectionToolbarImageView;
+@property (weak) IBOutlet NSTextField *selectionToolbarTF;
+@property (weak) IBOutlet NSProgressIndicator *progressToolbarIndicator;
 
 //toolbar
 @property (weak) IBOutlet NSView *topToolbarV;
@@ -57,7 +62,6 @@
 @property (weak) IBOutlet NSSplitView *leftV;
 @property (weak) IBOutlet NSView *leftTopV;
 @property (weak) IBOutlet NSView *leftBottomV;
-@property (weak) IBOutlet NSView *commandV;
 
 //Right-V
 @property (weak) IBOutlet NSSplitView *rightV;
@@ -167,9 +171,11 @@
     //consoleVC needs window to receive notification
     consoleVC = [[LMConsoleVC alloc] initWithNibName:@"LMConsoleVC" bundle:nil window:self.window];
 
+    //window - toolbar
+    [_buildToolbarBox addSubviewFullFrame:commandVC.view];
+    //left-view
     [_leftTopV addSubviewFullFrame:stackVC.view];
     [_leftBottomV addSubviewFullFrame:fileNaviVC.view];
-    [_commandV addSubviewFullFrame:commandVC.view];
 
     
     ////////////////center view/////////////////////////
@@ -191,15 +197,18 @@
     [_eventV addSubviewFullFrame:eventVC.view];
     
 
-
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performDoubleClick:) name:IUNotificationDoubleClickCanvas object:self.window];
-    
-    
     // console log
     [self setLogViewState:0];
+    
+    //notification observer default
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performDoubleClick:) name:IUNotificationDoubleClickCanvas object:self.window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(increaseConsoleLogReferenceCount) name:IUNotificationConsoleStart object:self.window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(decreaseConsoleLogReferenceCount) name:IUNotificationConsoleEnd object:self.window];
+    
+    //observer
+    [_IUController addObserver:self forKeyPath:@"selectedObjects" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld|NSKeyValueObservingOptionPrior context:nil];
+
+    
     
     //cell initialize
     NSCell *cell = [self.propertyMatrix cellAtRow:0 column:0];
@@ -226,17 +235,6 @@
     [stackVC setNotificationSender:_project];
     [stackVC connectWithEditor];
 }
-
-
-- (void)performDoubleClick:(NSNotification*)noti{
-    [_propertyTabV selectTabViewItemAtIndex:1];
-    [_propertyMatrix selectCellAtRow:0 column:1];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [iuInspectorVC setFocusForDoubleClickAction];
-    });
-}
-
-
 
 
 - (void)prepareDealloc{
@@ -267,6 +265,84 @@
 
 }
 
+
+-(LMWindow*)window{
+    return (LMWindow*)[super window];
+}
+
+- (void)setDocument:(IUProjectDocument *)document{
+    //create project class
+    [super setDocument:document];
+    
+    
+    
+    //document == nil means window will be closed
+    if(document && document.project){
+        
+        //undo manager
+        _IUController.undoManager = [document undoManager];
+        
+        _project = document.project;
+        //[canvasVC bind:@"documentBasePath" toObject:_project withKeyPath:@"path" options:nil];
+        NSError *error;
+        NSAssert(_project.pageSheets, @"");
+        NSAssert(_project.identifierManager, @"");
+        NSAssert(_project.resourceManager, @"");
+        
+        if (error) {
+            NSAssert(0, @"");
+            return;
+        }
+        if (_project == nil) {
+            return;
+        }
+        
+        
+        
+        //vc setting
+        
+        //construct widget library vc
+        NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForDefault" ofType:@"plist"];
+        NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
+        [widgetLibraryVC setWidgetProperties:availableWidgetProperties];
+        
+        //set project
+        fileNaviVC.project = _project;
+        widgetLibraryVC.project = _project;
+        [widgetLibraryVC setProject:_project];
+        iuInspectorVC.project = _project;
+        
+        //set ResourceManager
+        canvasVC.resourceManager = _project.resourceManager;
+        resourceVC.manager = _project.resourceManager;
+        appearanceVC.resourceManager = _project.resourceManager;
+        iuInspectorVC.resourceManager = _project.resourceManager;
+        bottomToolbarVC.resourceManager = _project.resourceManager;
+        commandVC.docController = self.documentController;
+        
+        [_project connectWithEditor];
+        [_project setIsConnectedWithEditor];
+        
+        //load sizeView
+        for(NSNumber *number in _project.mqSizes){
+            NSInteger frameSize = [number integerValue];
+            [canvasVC addFrame:frameSize];
+        }
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentDocument) name:IUNotificationMQSelected object:nil];
+        
+        self.window.title = [NSString stringWithFormat:@"%@.iu (%@)", _project.name, NSStringFromClass([_project class])];
+        
+    }
+}
+
+- (void)selectFirstDocument{
+    [fileNaviVC selectFirstDocument];
+}
+
+
+#pragma mark - constraint
+
 - (void)setLeftInspectorState:(NSInteger)state{
     [_leftV setHidden:!state];
     if(state){
@@ -287,6 +363,10 @@
         [_rightVConstraint setConstant:-300];
     }
 }
+
+
+
+#pragma mark -console
 
 - (void)increaseConsoleLogReferenceCount{
     consoleLogReferenceCount ++;
@@ -316,80 +396,7 @@
     }
 }
 
-
--(LMWindow*)window{
-    return (LMWindow*)[super window];
-}
-
-- (void)setDocument:(IUProjectDocument *)document{
-    //create project class
-    [super setDocument:document];
-    
-    
-    
-    //document == nil means window will be closed
-    if(document && document.project){
-        
-        //undo manager
-        _IUController.undoManager = [document undoManager];
-
-        _project = document.project;
-        //[canvasVC bind:@"documentBasePath" toObject:_project withKeyPath:@"path" options:nil];
-        NSError *error;
-        NSAssert(_project.pageSheets, @"");
-        NSAssert(_project.identifierManager, @"");
-        NSAssert(_project.resourceManager, @"");
-        
-        if (error) {
-            NSAssert(0, @"");
-            return;
-        }
-        if (_project == nil) {
-            return;
-        }
-        
-     
-                
-        //vc setting
-        
-        //construct widget library vc
-        NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForDefault" ofType:@"plist"];
-        NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
-        [widgetLibraryVC setWidgetProperties:availableWidgetProperties];
-        
-        //set project
-        fileNaviVC.project = _project;
-        widgetLibraryVC.project = _project;
-        [widgetLibraryVC setProject:_project];
-        iuInspectorVC.project = _project;
-  
-        //set ResourceManager
-        canvasVC.resourceManager = _project.resourceManager;
-        resourceVC.manager = _project.resourceManager;
-        appearanceVC.resourceManager = _project.resourceManager;
-        iuInspectorVC.resourceManager = _project.resourceManager;
-        bottomToolbarVC.resourceManager = _project.resourceManager;
-        commandVC.docController = self.documentController;
-        
-        [_project connectWithEditor];
-        [_project setIsConnectedWithEditor];
-        
-        //load sizeView
-        for(NSNumber *number in _project.mqSizes){
-            NSInteger frameSize = [number integerValue];
-            [canvasVC addFrame:frameSize];
-        }
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentDocument) name:IUNotificationMQSelected object:nil];
-
-        self.window.title = [NSString stringWithFormat:@"%@.iu (%@)", _project.name, NSStringFromClass([_project class])];
-
-    }
-}
-
-- (void)selectFirstDocument{
-    [fileNaviVC selectFirstDocument];
-}
+#pragma mark - node change
 
 -(void)setSelectedNode:(NSObject*)selectedNode{
     _selectedNode = (IUSheet*) selectedNode;
@@ -429,6 +436,45 @@
 }
 
 
+- (void)performDoubleClick:(NSNotification*)noti{
+    [_propertyTabV selectTabViewItemAtIndex:1];
+    [_propertyMatrix selectCellAtRow:0 column:1];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [iuInspectorVC setFocusForDoubleClickAction];
+    });
+}
+
+- (NSImage *)currentImage:(NSString *)className{
+    NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForDefault" ofType:@"plist"];
+    NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
+    for (NSDictionary *dict in availableWidgetProperties) {
+        NSString *name = dict[@"className"];
+        if([name isEqualToString:className]){
+            NSImage *classImage = [NSImage imageNamed:dict[@"navImage"]];
+            return classImage;
+        }
+    }
+    return nil;
+}
+
+-(void)selectedObjectsDidChange:(NSDictionary*)change{
+    NSString *currentClassName = [_IUController selectionClassName];
+    [_selectionToolbarImageView setImage:[self currentImage:currentClassName]];
+    
+    NSString *currentIdentifier;
+    if(_IUController.selectedObjects.count > 1){
+        currentIdentifier = @"Multiple Selection";
+    }
+    else{
+        currentIdentifier = ((IUBox *)[_IUController.selectedObjects firstObject]).htmlID;
+    }
+    
+    NSString *status = [NSString stringWithFormat:@"%@ | %@", currentClassName, currentIdentifier];
+    
+    [_selectionToolbarTF setStringValue:status];
+    [_selectionToolbarTF sizeToFit];
+}
+
 
 #pragma mark -
 #if 0
@@ -440,7 +486,7 @@
 
 
 #pragma mark -
-#pragma mark select TavView
+#pragma mark select TabView
 - (void)openProjectPropertyWindow{
     if(projectPropertyWC == nil){
         projectPropertyWC = [[LMProjectPropertyWC alloc] initWithWindowNibName:[LMProjectPropertyWC class].className withIUProject:_project];
@@ -472,6 +518,8 @@
 
 }
 
+#pragma mark - project
+
 
 - (IBAction)convertProject:(id)sender{
     //call from menu item
@@ -496,6 +544,19 @@
 
 - (void)windowWillClose:(NSNotification *)notification{
     [commandVC stopServer:self];
+}
+
+
+#pragma mark - IBaction
+
+-(void)setProgressBarValue:(CGFloat)value{
+    [_progressToolbarIndicator setDoubleValue:value];
+}
+
+-(void)stopProgressBar:(id)sender{
+    [_progressToolbarIndicator setDoubleValue:100.0];
+    [_progressToolbarIndicator stopAnimation:sender];
+    [_progressToolbarIndicator setHidden:YES];
 }
 
 - (IBAction)showServerWC:(id)sender{
@@ -524,8 +585,6 @@
         NSAssert(res, @"error");
     }
 }
-
-
 
 - (IBAction)showHerokuWC:(id)sender{
     if (herokuWC == nil) {

@@ -15,6 +15,11 @@
 #import "LMCanvasVC.h"
 
 @implementation WebCanvasView{
+    
+    //load web source indicator
+    NSTimer *progressTimer;
+    BOOL isStartVC;
+    int startVCIndicator;
 }
 
 - (id)init{
@@ -31,6 +36,10 @@
         [[[self mainFrame] frameView] setAllowsScrolling:NO];
         
         [self registerForDraggedTypes:@[(id)kUTTypeIUType, (id)kUTTypeIUImageResource]];
+        
+        isStartVC = NO;
+        startVCIndicator = 0;
+        
     }
     
     return self;
@@ -134,10 +143,43 @@
     [self.VC endDragSession:self];
 }
 
-- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame{
-    
-    [self.VC didFinishLoadFrame];
+#pragma mark - load
 
+- (void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame{
+    isStartVC = NO;
+    startVCIndicator = 0;
+    progressTimer = [NSTimer timerWithTimeInterval:0.01667 target:self selector:@selector(setProgressIndicator) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:progressTimer forMode:NSDefaultRunLoopMode];
+    
+
+}
+
+- (void)setProgressIndicator{
+    CGFloat progress = ([self estimatedProgress]) *100;
+    if(isStartVC ==NO && progress > 50){
+        progress/=2;
+    }
+    if(isStartVC){
+        startVCIndicator++;
+    }
+    progress += startVCIndicator;
+    if(progress > 98){
+        progress = 98;
+    }
+    LMWC *wc = (LMWC *)[[self window] windowController];
+    [wc setProgressBarValue:progress];
+    
+}
+
+- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame{
+    if (frame != [sender mainFrame]){
+        return;
+    }
+    isStartVC = YES;
+    [self.VC didFinishLoadFrame];
+    LMWC *wc = (LMWC *)[[self window] windowController];
+    [wc stopProgressBar:self];
+    [progressTimer invalidate];
 }
 
 

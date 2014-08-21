@@ -1,101 +1,98 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMCommandVC">
             <connections>
-                <outlet property="buildB" destination="mVA-rO-Kzp" id="WCW-lp-Wre"/>
-                <outlet property="compilerB" destination="Xvx-WQ-92o" id="HSL-tM-OjF"/>
-                <outlet property="recordingB" destination="26b-KO-hSx" id="hVT-Tu-RyE"/>
-                <outlet property="stopServerB" destination="5iw-6s-TJH" id="gC8-kZ-b1M"/>
-                <outlet property="view" destination="c22-O7-iKe" id="97Q-ig-2HN"/>
+                <outlet property="buildB" destination="0pn-qv-kJJ" id="wRn-4a-agu"/>
+                <outlet property="compilerB" destination="to0-mm-9wd" id="brO-5r-XAx"/>
+                <outlet property="stopServerB" destination="RcY-WV-hfW" id="SCb-y3-hDZ"/>
+                <outlet property="view" destination="K5R-Kp-WeX" id="Uu1-uf-2TK"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
-        <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="220" height="58"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <box autoresizesSubviews="NO" fixedFrame="YES" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="mYu-9d-YoD">
-                    <rect key="frame" x="-2" y="-1" width="222" height="60"/>
-                    <view key="contentView">
-                        <rect key="frame" x="1" y="1" width="220" height="58"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xvx-WQ-92o">
-                                <rect key="frame" x="52" y="15" width="79" height="22"/>
-                                <popUpButtonCell key="cell" type="recessed" bezelStyle="recessed" imagePosition="left" alignment="center" controlSize="small" lineBreakMode="truncatingTail" borderStyle="border" inset="2" id="o8V-jw-X48">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <menu key="menu" title="OtherViews" id="q5y-LX-7eX">
-                                        <items>
-                                            <menuItem title="HTML" id="8d2-ew-nqM"/>
-                                            <menuItem title="Django" id="fso-N9-RWL"/>
-                                            <menuItem title="Wordpress" id="XgR-1Q-uiU"/>
-                                            <menuItem title="Presentation" id="BRD-Ye-Tkd"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <action selector="changeCompilerRule:" target="-2" id="a28-lt-l7M"/>
-                                </connections>
-                            </popUpButton>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5iw-6s-TJH">
-                                <rect key="frame" x="160" y="12" width="32" height="31"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="pause" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="5t8-TM-9QR">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="stopServer:" target="-2" id="P92-04-j8d"/>
-                                </connections>
-                            </button>
-                            <button toolTip="Build" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mVA-rO-Kzp">
-                                <rect key="frame" x="21" y="13" width="32" height="31"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="export" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="TbZ-Pd-o9p">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="build:" target="-2" id="1sR-hP-hEq"/>
-                                </connections>
-                            </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cHn-RO-H4T">
-                                <rect key="frame" x="51" y="3" width="143" height="11"/>
-                                <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Python (13111) is running" id="Amp-fa-ViT">
-                                    <font key="font" metaFont="miniSystem"/>
-                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="-2" name="value" keyPath="serverState" id="Tf9-y1-yNk"/>
-                                </connections>
-                            </textField>
-                            <button hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26b-KO-hSx">
-                                <rect key="frame" x="194" y="29" width="26" height="26"/>
-                                <buttonCell key="cell" type="bevel" bezelStyle="circular" image="record" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" id="Geb-NQ-ecv">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="label"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="toggleRecording:" target="-2" id="gaS-5V-UBb"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                    </view>
-                    <color key="borderColor" red="0.50196081399917603" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="fillColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
-                </box>
-            </subviews>
-        </customView>
         <userDefaultsController representsSharedInstance="YES" id="p9F-we-jaS"/>
+        <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="K5R-Kp-WeX">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="32"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <view key="contentView">
+                <rect key="frame" x="0.0" y="0.0" width="400" height="32"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RcY-WV-hfW">
+                        <rect key="frame" x="41" y="5" width="24" height="24"/>
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="pause" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="VNJ-YO-JdD">
+                            <behavior key="behavior" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="stopServer:" target="-2" id="dnP-tH-qSt"/>
+                        </connections>
+                    </button>
+                    <box autoresizesSubviews="NO" horizontalHuggingPriority="750" fixedFrame="YES" alphaValue="0.29999999999999999" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Owz-eF-r3f">
+                        <rect key="frame" x="76" y="7" width="5" height="18"/>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <font key="titleFont" metaFont="system"/>
+                    </box>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iJF-Jf-NcV">
+                        <rect key="frame" x="92" y="7" width="67" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Build Type  :" id="8pE-bY-6Md">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <popUpButton fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="to0-mm-9wd">
+                        <rect key="frame" x="159" y="9" width="79" height="17"/>
+                        <popUpButtonCell key="cell" type="check" title="HTML" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" inset="2" id="MGG-er-e4k">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                            <menu key="menu" title="OtherViews" id="lrr-LA-6sB">
+                                <items>
+                                    <menuItem title="HTML" state="on" id="NMj-DY-aLH"/>
+                                    <menuItem title="Django" id="YGZ-bs-iNO"/>
+                                    <menuItem title="Wordpress" id="ZMp-AS-OdW"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="changeCompilerRule:" target="-2" id="KsJ-5m-Fed"/>
+                        </connections>
+                    </popUpButton>
+                    <button toolTip="Build" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0pn-qv-kJJ">
+                        <rect key="frame" x="10" y="4" width="24" height="24"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="export" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="TIt-pe-ksD">
+                            <behavior key="behavior" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="build:" target="-2" id="UVo-iJ-qgg"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tlO-db-iqc">
+                        <rect key="frame" x="248" y="12" width="143" height="11"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Python (13111) is running" id="VFG-Iz-dVF">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="serverState" id="KOc-Yw-TdA"/>
+                        </connections>
+                    </textField>
+                </subviews>
+            </view>
+            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <point key="canvasLocation" x="78" y="447"/>
+        </box>
     </objects>
     <resources>
         <image name="export" width="24" height="24"/>
         <image name="pause" width="24" height="24"/>
-        <image name="record" width="24" height="24"/>
     </resources>
 </document>

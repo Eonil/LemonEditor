@@ -35,4 +35,8 @@
 - (void)setRightInspectorState:(NSInteger)state;
 - (void)setLogViewState:(NSInteger)state;
 
+-(void)setProgressBarValue:(CGFloat)value;
+-(void)stopProgressBar:(id)sender;
+
+
 @end
