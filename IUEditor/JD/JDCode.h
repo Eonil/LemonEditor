@@ -19,6 +19,7 @@
 - (void)addCodeLineWithFormat:(NSString*)format, ...;
 
 - (void)addCode:(JDCode*)code;
+- (void)addCodeWithIncreaseIndent:(JDCode*)code;
 - (void)addCodeWithFormat:(NSString *)format, ...;
 - (void)addNewLine;
 

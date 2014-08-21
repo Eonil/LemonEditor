@@ -13,7 +13,7 @@
 @implementation JDCode{
     NSMutableString *string;
     NSInteger  indentLevel;
-    NSMutableString *whiteSpace;
+    NSString *whiteSpace;
 }
 
 + (id)code{
@@ -22,31 +22,28 @@
 
 - (void)increaseIndentLevelForEdit{
     indentLevel ++;
-    whiteSpace = [NSMutableString string];
-    [whiteSpace appendString:@" " multipleTimes:indentLevel*4];
+    whiteSpace = [@" " stringByPaddingToLength:indentLevel*4 withString:@" " startingAtIndex:0];
 }
 - (void)decreaseIndentLevelForEdit{
     indentLevel --;
     NSAssert(indentLevel >= 0, @"indent");
-    whiteSpace = [NSMutableString string];
-    [whiteSpace appendString:@" " multipleTimes:indentLevel*4];
+    whiteSpace = [@" " stringByPaddingToLength:indentLevel*4 withString:@" " startingAtIndex:0];
 }
 
 - (void)addCodeLine:(NSString*)newCode{
-    /*
-    if (string.length) {
-        if ([string characterAtIndex:[string length] - 1] != '\n') {
-            [string appendString:@"\n"];
-        }
-    }
-    */
     [string appendString:whiteSpace];
     [string appendString:newCode];
-    [string appendString:@"\n"];
+    [self addNewLine];
 }
 
 - (void)addNewLine{
+    [string appendString:whiteSpace];
     [string appendString:@"\n"];
+}
+
+- (void)addCodeWithIncreaseIndent:(JDCode*)code{
+    [code pushIndent:(indentLevel+1)*4 prependIndent:YES];
+    [string appendString:code.string];
 }
 
 - (void)addCode:(JDCode*)code{
@@ -54,6 +51,7 @@
     [string appendString:code.string];
 }
 - (void)addString:(NSString *)aString{
+    [string appendString:whiteSpace];
     [string appendString:aString];
 }
 
@@ -85,30 +83,34 @@
     return string.length;
 }
 
-- (void)pushIndent:(NSUInteger)aIndentLevel prependIndent:(BOOL)prepend{
-    NSMutableString *aWhiteSpace = [NSMutableString string];
-    [aWhiteSpace appendString:@" " multipleTimes:aIndentLevel*4];
-
+- (void)pushIndent:(NSUInteger)indentspace prependIndent:(BOOL)prepend{
+    if(string.length <1){
+        return;
+    }
+    
+    NSString *aWhiteSpace = [@" " stringByPaddingToLength:indentspace withString:@" " startingAtIndex:0];
+    
     if (prepend) {
         [string insertString:aWhiteSpace atIndex:0];
     }
     
-    NSString *aWhiteStringAndNewLine = [aWhiteSpace stringByAppendingString:@"\n"];
-    [string replaceOccurrencesOfString:@"\n" withString:aWhiteStringAndNewLine options:0 range:NSMakeRange(0, string.length)];
+    
+    NSString *aWhiteStringAndNewLine = [@"\n" stringByAppendingString:aWhiteSpace];
+    [string replaceOccurrencesOfString:@"\n" withString:aWhiteStringAndNewLine options:0 range:NSMakeRange(0, string.length-1)];
     
 }
 
 - (id)initWithCodeString:(NSString*)codeString{
     self = [super init];
     string = [codeString mutableCopy];
-    whiteSpace = [NSMutableString string];
+    whiteSpace = [NSString string];
     return self;
 }
 
 - (id)init{
     self = [super init];
     string = [NSMutableString string];
-    whiteSpace = [NSMutableString string];
+    whiteSpace = [NSString string];
     return self;
 }
 
@@ -118,7 +120,7 @@
     NSRange range = [string rangeOfString:codeString];
     
     NSUInteger space = 0;
-    for (NSUInteger i = range.location; i > 0; i-- ) {
+    for (NSUInteger i = range.location-1; i > 0; i-- ) {
         unichar c = [string characterAtIndex:i];
         if (c == '\n') {
             break;

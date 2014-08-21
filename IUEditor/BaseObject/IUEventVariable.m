@@ -176,7 +176,7 @@
                         }
                         [innerJS addCodeLineWithFormat:@"$(\"#%@\").data(\"run%@\", 1);", visibleID, fnName];
                         
-                        [fnCode addCode:innerJS];
+                        [fnCode addCodeWithIncreaseIndent:innerJS];
                         [fnCode addCodeLine:@"}"];
                         
                         [fnCode addCodeLine:@"else{"];
@@ -193,12 +193,12 @@
                             [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").hide(\"%@\", 1);", visibleID, typeStr];
                         }
                         [innerJS addString:@"}"];
-                        [fnCode addCode:innerJS];
+                        [fnCode addCodeWithIncreaseIndent:innerJS];
 
                         [fnCode addCodeLine:@"}"];
                         
                         [visibleFnCode addCodeLineWithFormat:@"function %@(){", fnName ];
-                        [visibleFnCode addCode:fnCode];
+                        [visibleFnCode addCodeWithIncreaseIndent:fnCode];
                         [visibleFnCode addString:@"}"];
 
                         
@@ -243,7 +243,7 @@
                             [innerJS addCodeWithFormat:@", 1, %@);", reframe];
                         }
                         
-                        [fnCode addCode:innerJS];
+                        [fnCode addCodeWithIncreaseIndent:innerJS];
                         
                         [fnCode addCodeLine:@"}"];
                         [fnCode addCodeLine:@"else{"];
@@ -270,17 +270,17 @@
                         [innerJS addString:@"}"];
                         
                         
-                        [fnCode addCode:innerJS];
+                        [fnCode addCodeWithIncreaseIndent:innerJS];
                         
                         [fnCode addCodeLine:@"}"];
                         
                         [frameFnCode addCodeLineWithFormat:@"function %@(){", fnName ];
-                        [frameFnCode addCode:fnCode];
+                        [frameFnCode addCodeWithIncreaseIndent:fnCode];
                         [frameFnCode addCodeLineWithFormat:@"}"];
                     }
                 }//End of receiverArray
                 
-                [initializeFn addCode:innerfunctionCode];
+                [initializeFn addCodeWithIncreaseIndent:innerfunctionCode];
                 
                 //initialize source
                 JDCode *eventCode = [JDCode code];
@@ -305,12 +305,12 @@
                     [eventCode increaseIndentLevelForEdit];
                     [eventCode addCodeLineWithFormat:@"%@++;",variable];
                     [eventCode addCodeLineWithFormat:@"if( %@ > MAX_IU_%@ ){ %@ = INIT_IU_%@ }",variable, variable, variable, variable];
-                    [eventCode addCode:innerfunctionCode];
+                    [eventCode addCodeWithIncreaseIndent:innerfunctionCode];
                     [eventCode decreaseIndentLevelForEdit];
                     [eventCode addCodeLine:@"});"];
 
                 }
-                [body addCode:eventCode];
+                [body addCodeWithIncreaseIndent:eventCode];
 
             }
             
@@ -323,21 +323,21 @@
     JDTraceLog(@"body======\n%@", body.string);
     
     JDCode *eventJSCode = [JDCode code];
-    [eventJSCode addCode:header];
+    [eventJSCode addCodeWithIncreaseIndent:header];
     
     [eventJSCode addCodeLine:@" /* Decleare Visible Fn */ "];
-    [eventJSCode addCode:visibleFnCode];
+    [eventJSCode addCodeWithIncreaseIndent:visibleFnCode];
 
     [eventJSCode addCodeLine:@" /* Decleare Frame Fn */ "];
-    [eventJSCode addCode:frameFnCode];
+    [eventJSCode addCodeWithIncreaseIndent:frameFnCode];
     
     [eventJSCode addCodeLine:@"$(document).ready(function(){"];
     [eventJSCode addCodeLine:@"console.log('ready : iuevent.js');"];
     [eventJSCode increaseIndentLevelForEdit];
-    [eventJSCode addCode:bodyHeader];
-    [eventJSCode addCode:body];
+    [eventJSCode addCodeWithIncreaseIndent:bodyHeader];
+    [eventJSCode addCodeWithIncreaseIndent:body];
     [eventJSCode addCodeLine:@" /* initialize fn */ "];
-    [eventJSCode addCode:initializeFn];
+    [eventJSCode addCodeWithIncreaseIndent:initializeFn];
     [eventJSCode decreaseIndentLevelForEdit];
 
     [eventJSCode addCodeLine:@"});"];
