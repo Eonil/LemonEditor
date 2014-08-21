@@ -22,12 +22,12 @@
 
 - (void)increaseIndentLevelForEdit{
     indentLevel ++;
-    whiteSpace = [@" " stringByPaddingToLength:indentLevel*4 withString:@" " startingAtIndex:0];
+    whiteSpace = [@" " stringByPaddingToLength:indentLevel*2 withString:@" " startingAtIndex:0];
 }
 - (void)decreaseIndentLevelForEdit{
     indentLevel --;
     NSAssert(indentLevel >= 0, @"indent");
-    whiteSpace = [@" " stringByPaddingToLength:indentLevel*4 withString:@" " startingAtIndex:0];
+    whiteSpace = [@" " stringByPaddingToLength:indentLevel*2 withString:@" " startingAtIndex:0];
 }
 
 - (void)addCodeLine:(NSString*)newCode{
@@ -42,12 +42,12 @@
 }
 
 - (void)addCodeWithIncreaseIndent:(JDCode*)code{
-    [code pushIndent:(indentLevel+1)*4 prependIndent:YES];
+    [code pushIndent:(indentLevel+1) prependIndent:YES];
     [string appendString:code.string];
 }
 
 - (void)addCode:(JDCode*)code{
-    [code pushIndent:indentLevel*4 prependIndent:YES];
+    [code pushIndent:indentLevel prependIndent:YES];
     [string appendString:code.string];
 }
 - (void)addString:(NSString *)aString{

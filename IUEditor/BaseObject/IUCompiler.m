@@ -483,6 +483,7 @@
 
     }
     else if(iu.text && iu.text.length > 0){
+        [code addNewLine];
         NSString *htmlText = [iu.text stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
         htmlText = [htmlText stringByReplacingOccurrencesOfString:@"  " withString:@" &nbsp;"];
         [code increaseIndentLevelForEdit];
@@ -889,6 +890,7 @@
     }
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     if(iu.text && iu.text.length > 0){
+        [code addNewLine];
         NSString *htmlText = [iu.text stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
         htmlText = [htmlText stringByReplacingOccurrencesOfString:@"  " withString:@" &nbsp;"];
         [code increaseIndentLevelForEdit];
