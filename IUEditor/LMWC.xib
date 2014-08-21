@@ -350,8 +350,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="331" height="32"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mLY-TX-1Mg">
-                                        <rect key="frame" x="93" y="3" width="104" height="29"/>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mLY-TX-1Mg">
+                                        <rect key="frame" x="94" y="4" width="103" height="24"/>
                                         <buttonCell key="cell" type="square" title=" Upload to Server" bezelStyle="shadowlessSquare" image="upload" imagePosition="left" alignment="left" state="on" inset="2" id="TJf-e7-Sza">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="miniSystem"/>
@@ -360,8 +360,8 @@
                                             <action selector="showServerWC:" target="-1" id="jSJ-yO-7vD"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zoC-zb-imB">
-                                        <rect key="frame" x="211" y="5" width="104" height="24"/>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zoC-zb-imB">
+                                        <rect key="frame" x="211" y="4" width="104" height="24"/>
                                         <buttonCell key="cell" type="smallSquare" title="Sync with Heroku" bezelStyle="smallSquare" image="heroku" imagePosition="left" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Dov-St-pBT">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="miniSystem"/>
@@ -372,6 +372,12 @@
                                     </button>
                                 </subviews>
                             </view>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="zoC-zb-imB" secondAttribute="trailing" constant="16" id="EPV-v7-e73"/>
+                                <constraint firstAttribute="centerY" secondItem="mLY-TX-1Mg" secondAttribute="centerY" id="XD8-nU-qzx"/>
+                                <constraint firstItem="zoC-zb-imB" firstAttribute="leading" secondItem="mLY-TX-1Mg" secondAttribute="trailing" constant="14" id="bbI-I4-05V"/>
+                                <constraint firstAttribute="centerY" secondItem="zoC-zb-imB" secondAttribute="centerY" id="ymi-3a-2l5"/>
+                            </constraints>
                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </box>
