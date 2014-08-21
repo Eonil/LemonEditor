@@ -170,11 +170,13 @@
                         
                         NSMutableString *innerJS = [NSMutableString string];
                         [innerJS appendFormat:@"$(\"#%@\").show(", visibleID];
+                        NSString *reframe = [NSString stringWithFormat:@"reframeCenterIU('#%@')", visibleID];
+
                         if(duration > 0){
-                            [innerJS appendFormat:@"\"%@\", %ld);\n", typeStr, duration*100];
+                            [innerJS appendFormat:@"\"%@\", %ld, %@);\n", typeStr, duration*100, reframe];
                         }
                         else{
-                            [innerJS appendFormat:@"\"%@\", 1);\n", typeStr];
+                            [innerJS appendFormat:@"\"%@\", 1, %@);\n", typeStr, reframe];
                         }
                         [innerJS appendFormat:@"$(\"#%@\").data(\"run%@\", 1);\n", visibleID, fnName];
                         
@@ -239,11 +241,12 @@
                         [innerJS appendFormat:@"width:\"%.2fpx\", height:\"%.2fpx\"}", width, height];
                         
                         NSInteger duration = [[receiverDict objectForKey:IUEventTagFrameDuration] integerValue];
+                        NSString *reframe = [NSString stringWithFormat:@"reframeCenterIU('#%@')", frameID];
                         if(duration > 0){
-                            [innerJS appendFormat:@", %ld);", duration*100];
+                            [innerJS appendFormat:@", %ld, %@);", duration*100, reframe];
                         }
                         else{
-                            [innerJS appendFormat:@", 1);"];
+                            [innerJS appendFormat:@", 1, %@);", reframe];
                         }
                         
                         [fnStr appendString:[innerJS stringByAddingTab]];

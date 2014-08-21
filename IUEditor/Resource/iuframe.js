@@ -38,29 +38,34 @@ function resizeCollection(){
 	});
 }
 
+function reframeCenterIU(iu){
+    //if flow layout, margin auto
+    //if absolute layout, set left
+    $(iu).css('margin-left', 'auto');
+    $(iu).css('margin-right', 'auto');
+    $(iu).css('left','');
+    var pos = $(iu).css('position');
+    if (pos == 'absolute'){
+        var parentW;
+        var parent = $(iu).parent();
+        if(parent.prop('tagName') == 'A'){
+            parentW = parent.parent().width();
+        }
+        else{
+            parentW = $(iu).parent().width();
+        }
+        
+        var myW = $(iu).width();
+        $(iu).css('left', (parentW-myW)/2 + 'px');
+    }
+    
+}
+
 function reframeCenter(){
     
     var respc = $('[horizontalCenter="1"]').toArray();
     $.each(respc, function( i, iu ){
-		//if flow layout, margin auto
-		//if absolute layout, set left
-		$(this).css('margin-left', 'auto');
-        $(this).css('margin-right', 'auto');
-        $(this).css('left','');
-		var pos = $(this).css('position');
-           if (pos == 'absolute'){
-           var parentW;
-           var parent = $(this).parent();
-           if(parent.prop('tagName') == 'A'){
-            parentW = parent.parent().width();
-           }
-           else{
-            parentW = $(this).parent().width();
-           }
-           
-           var myW = $(this).width();
-           $(this).css('left', (parentW-myW)/2 + 'px');
-           }
+        reframeCenterIU(iu);
     });
 }
 

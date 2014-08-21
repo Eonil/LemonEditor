@@ -79,7 +79,6 @@
 
     
     [self updateHTML];
-    [self updateJS];
 }
 
 - (void)setInputValue:(NSString *)inputValue{
@@ -94,7 +93,6 @@
 
     
     [self updateHTML];
-    [self updateJS];
 }
 
 - (void)setInputName:(NSString *)inputName{

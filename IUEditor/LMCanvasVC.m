@@ -49,6 +49,7 @@
     IUFrameDictionary *frameDict;
     LMHelpWC *helpWC;
     int levelForUpdateCSS;
+    //true for sheet loading 
     BOOL isCSSLoading;
 }
 

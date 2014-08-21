@@ -156,8 +156,8 @@
 
 - (void)setProgressIndicator{
     CGFloat progress = ([self estimatedProgress]) *100;
-    if(isStartVC ==NO && progress > 50){
-        progress/=2;
+    if(isStartVC ==NO && progress > 80){
+        progress *= 0.9;
     }
     if(isStartVC){
         startVCIndicator++;

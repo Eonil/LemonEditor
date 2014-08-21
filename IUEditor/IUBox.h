@@ -37,7 +37,6 @@
 - (NSSize)frameSize:(NSString *)identifier;
 - (void)changeIUPageHeight:(CGFloat)pageHeight;
 - (NSInteger)countOfLineWithIdentifier:(NSString *)identifier;
-- (void)runCSSJS;
 /**
  @brief call javascript function
  @param args javascirpt function argument, argument에 들어가는 것중에 dict, array는 string으로 보내서javascript내부에서 새로 var를 만들어서 사용
@@ -154,10 +153,6 @@ typedef enum _IUOverflowType{
 //HTML
 -(NSString*)html;
 - (void)updateHTML;
-
-//JS
-- (void)updateJS;
-
 
 //children
 - (NSArray*)children;

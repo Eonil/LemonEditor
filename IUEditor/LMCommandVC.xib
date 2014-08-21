@@ -48,7 +48,7 @@
                     </textField>
                     <popUpButton fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="to0-mm-9wd">
                         <rect key="frame" x="160" y="8" width="79" height="17"/>
-                        <popUpButtonCell key="cell" type="check" title="HTML" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" lineBreakMode="truncatingTail" inset="2" selectedItem="NMj-DY-aLH" id="MGG-er-e4k">
+                        <popUpButtonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" lineBreakMode="truncatingTail" inset="2" id="MGG-er-e4k">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="smallSystem"/>
                             <menu key="menu" title="OtherViews" id="lrr-LA-6sB">

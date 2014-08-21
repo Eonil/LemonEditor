@@ -429,8 +429,6 @@
         [iu updateCSS];
     }
     
-    [(IUBox *)self.controller.selection updateJS];
-
 }
 
 - (IBAction)helpMenu:(id)sender {

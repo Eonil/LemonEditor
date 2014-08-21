@@ -471,16 +471,6 @@
     
 }
 
-
-
-#pragma mark JS
-
-- (void)updateJS{
-    if(self.delegate){
-        [self.delegate runCSSJS];
-    }
-}
-
 //source
 #pragma mark HTML
 
@@ -660,8 +650,6 @@
     
 
     [iu updateHTML];
-
-    [self updateJS];
     [iu bind:@"identifierManager" toObject:self withKeyPath:@"identifierManager" options:nil];
 
     if (self.isConnectedWithEditor) {
@@ -695,7 +683,6 @@
         }
     
         [self updateHTML];
-        [self updateJS];
         return YES;
 }
 
@@ -732,7 +719,6 @@
     [_m_children insertObject:iu atIndex:index];
     
     [self updateHTML];
-    [self updateJS];
     if (self.isConnectedWithEditor) {
         [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureChangeReindexing, IUNotificationStructureChangedIU: iu}];
     }
@@ -967,7 +953,6 @@
 
     
     [self updateCSS];
-    [self updateJS];
 }
 
 - (void)movePosition:(NSPoint)point withParentSize:(NSSize)parentSize{
@@ -1168,7 +1153,6 @@
         [[self.undoManager prepareWithInvocationTarget:self] setEnableCenter:_enableCenter];
         _enableCenter = enableCenter;
         [self updateHTML];
-        [self updateJS];
         [self didChangeValueForKey:@"canChangeXByUserInput"];
     }
 }
@@ -1198,7 +1182,6 @@
         [self setLineHeightAuto:NO];
     }
     [self updateHTML];
-    [self updateJS];
     
     if(isNeedUpdated){
         [self didChangeValueForKey:@"shouldCompileFontInfo"];

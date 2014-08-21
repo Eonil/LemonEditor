@@ -60,7 +60,6 @@
     }
     
     [self updateHTML];
-    [self updateJS];
 }
 
 - (BOOL)shouldCompileFontInfo{

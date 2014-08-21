@@ -158,7 +158,6 @@
     }
     
     [self updateHTML];
-    [self updateJS];
 }
 
 - (NSInteger)count{
