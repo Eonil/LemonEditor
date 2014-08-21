@@ -695,7 +695,7 @@
         }
     
         [self updateHTML];
-
+        [self updateJS];
         return YES;
 }
 
