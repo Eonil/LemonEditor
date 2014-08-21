@@ -530,7 +530,7 @@
         }
     }
     [JDUIUtil hudAlert:@"You Found error. Please contact to us" second:2];
-    NSAssert(0, @"Error!!!");
+ //   NSAssert(0, @"Error!!!");
     return nil;
 }
 

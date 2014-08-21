@@ -158,7 +158,4 @@
     return NO;
 }
 
-- (IBAction)newWP:(id)sender {
-}
-
 @end
