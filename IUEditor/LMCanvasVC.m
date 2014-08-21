@@ -518,12 +518,20 @@
 }
 
 - (NSString *)tagWithHTML:(NSString *)html{
-   NSString *incompleteTag = [html componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]][0];
-    NSString *tag = [incompleteTag componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]][1];
-    if(tag.length == 0){
-        JDErrorLog(@"Can't find tag");
+    NSArray *separatedHTML = [html componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([separatedHTML count]) {
+        NSString *incompleteTag = separatedHTML[0];
+        NSArray *tags = [incompleteTag componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+        if ([tags count] > 1) {
+            NSString *tag = tags[1];
+            if (tag.length != 0) {
+                return tag;
+            }
+        }
     }
-    return tag;
+    [JDUIUtil hudAlert:@"You Found error. Please contact to us" second:2];
+    NSAssert(0, @"Error!!!");
+    return nil;
 }
 
 -(void)IUHTMLIdentifier:(NSString*)identifier textHTML:(NSString *)html withParentID:(NSString *)parentID nearestID:(NSString *)nID index:(NSUInteger)index{
