@@ -608,8 +608,6 @@
         //CLASS에서 WEBCANVASVIEW의 높이 변화를 위해서
         [self updateSheetHeight];
     }
-    
-    [self runCSSJS];
 }
 
 -(void)enableUpdateCSS{

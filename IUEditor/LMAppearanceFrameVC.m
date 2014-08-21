@@ -428,6 +428,8 @@
         [iu endDragSession];
         [iu updateCSS];
     }
+    
+    [(IUBox *)self.controller.selection updateJS];
 
 }
 
