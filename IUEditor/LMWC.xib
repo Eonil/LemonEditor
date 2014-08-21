@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="6154.17"/>
@@ -342,16 +342,16 @@
                     <toolbarItem implicitItemIdentifier="FD138103-3790-49A7-BF4D-4A0E75872BB2" label="" paletteLabel="" tag="-1" id="zJ8-vt-eZO" userLabel="Toolbar Item-Server">
                         <nil key="toolTip"/>
                         <size key="minSize" width="171" height="32"/>
-                        <size key="maxSize" width="268" height="32"/>
+                        <size key="maxSize" width="411" height="32"/>
                         <box key="view" autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="bK7-5s-Km2">
-                            <rect key="frame" x="0.0" y="14" width="268" height="32"/>
+                            <rect key="frame" x="0.0" y="14" width="331" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <view key="contentView">
-                                <rect key="frame" x="0.0" y="0.0" width="268" height="32"/>
+                                <rect key="frame" x="0.0" y="0.0" width="331" height="32"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mLY-TX-1Mg">
-                                        <rect key="frame" x="30" y="3" width="104" height="29"/>
+                                        <rect key="frame" x="93" y="3" width="104" height="29"/>
                                         <buttonCell key="cell" type="square" title=" Upload to Server" bezelStyle="shadowlessSquare" image="upload" imagePosition="left" alignment="left" state="on" inset="2" id="TJf-e7-Sza">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="miniSystem"/>
@@ -361,7 +361,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zoC-zb-imB">
-                                        <rect key="frame" x="148" y="5" width="104" height="24"/>
+                                        <rect key="frame" x="211" y="5" width="104" height="24"/>
                                         <buttonCell key="cell" type="smallSquare" title="Sync with Heroku" bezelStyle="smallSquare" image="heroku" imagePosition="left" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Dov-St-pBT">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="miniSystem"/>
