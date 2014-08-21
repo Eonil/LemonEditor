@@ -378,16 +378,8 @@
         
         [[[self undoManager] prepareWithInvocationTarget:self] setImageName:_css.assembledTagDictionary[IUCSSTagImage]];
         
-        
         [self willChangeValueForKey:@"imageName"];
-        
-        
-        NSDictionary *defaultTagDictionary = [_css tagDictionaryForViewport:IUCSSDefaultViewPort];
-        if (defaultTagDictionary) {
-            [_css setValue:imageName forTag:IUCSSTagImage forViewport:_css.editWidth];
-        }
-        [_css setValue:imageName forTag:IUCSSTagImage forViewport:IUCSSDefaultViewPort];
-        
+        [_css setValue:imageName forTag:IUCSSTagImage];
         [self didChangeValueForKey:@"imageName"];
     }
 }

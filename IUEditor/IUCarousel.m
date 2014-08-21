@@ -25,8 +25,8 @@
         [self.css setValue:[NSColor clearColor] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
         _selectColor = [NSColor blackColor];
         _deselectColor = [NSColor grayColor];
-        _rightArrowImage = @"arrow_right.png";
-        _leftArrowImage = @"arrow_left.png";
+        _rightArrowImage = @"clipArt/arrow_right.png";
+        _leftArrowImage = @"clipArt/arrow_left.png";
         _leftY = 100;
         _rightY = 100;
         _pagerPosition = 50;

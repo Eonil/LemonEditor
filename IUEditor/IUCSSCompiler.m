@@ -1229,9 +1229,9 @@
         [code insertTag:@"left" integer:carousel.leftX unit:IUUnitPixel];
         [code insertTag:@"top" integer:carousel.leftY unit:IUUnitPixel];
         
-        NSString *imgSrc = [[self imagePathWithImageName:imageName target:IUTargetEditor] CSSURLString];
+        NSString *imgSrc = [self imagePathWithImageName:imageName target:IUTargetEditor];
         if(imgSrc){
-            [code insertTag:@"background" string:imgSrc target:IUTargetEditor];
+            [code insertTag:@"background" string:[imgSrc CSSURLString] target:IUTargetEditor];
         }
         
         NSString *outputImgSrc = [[self imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
@@ -1242,12 +1242,10 @@
         NSImage *arrowImage;
         
         if ([imageName isHTTPURL]) {
-            arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
+            arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imgSrc]];
         }
         else{
-            IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
-            NSString *imageAbsolutePath = [file absolutePath];
-            arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
+            arrowImage = [[NSImage alloc] initWithContentsOfFile:imgSrc];
             
         }
         
@@ -1265,9 +1263,9 @@
         [code insertTag:@"right" integer:carousel.rightX unit:IUUnitPixel];
         [code insertTag:@"top" integer:carousel.rightY unit:IUUnitPixel];
         
-        NSString * imgSrc = [[self imagePathWithImageName:imageName target:IUTargetEditor] CSSURLString];
+        NSString * imgSrc = [self imagePathWithImageName:imageName target:IUTargetEditor];
         if(imgSrc){
-            [code insertTag:@"background" string:imgSrc target:IUTargetEditor];
+            [code insertTag:@"background" string:[imgSrc CSSURLString] target:IUTargetEditor];
         }
         
          NSString *outputImgSrc = [[self imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
@@ -1279,13 +1277,10 @@
 
         
         if ([imageName isHTTPURL]) {
-            arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageName]];
+            arrowImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imgSrc]];
         }
         else{
-            IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
-            NSString *imageAbsolutePath = [file absolutePath];
-            arrowImage = [[NSImage alloc] initWithContentsOfFile:imageAbsolutePath];
-            
+            arrowImage = [[NSImage alloc] initWithContentsOfFile:imgSrc];
         }
         
         if(arrowImage){
