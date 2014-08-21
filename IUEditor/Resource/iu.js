@@ -75,10 +75,6 @@ $(document).ready(function(){
     console.log('iu.js')
 });
 
-function onYouTubePlayerReady(playerid){
-	console.log("youtube:"+playerid);
-}
-
 
 function onWebMovieAutoPlay(){
 	//autoplay when appear
@@ -119,73 +115,112 @@ function onWebMovieAutoPlay(){
 	});
 }
 
-$(window).scroll(function(){
-    if (typeof isEditor != 'undefined' && isEditor == true){
 
-		return;
-	}
-	
+function relocateScrollAnimation(){
+	//move : current viewport pc type
 	if(isMobile()==false){
-		
-		onWebMovieAutoPlay();
-                 
-        var scrollY = $(document).scrollTop();
-        var screenH = $(window).height();
-		
-		//move horizontally
-		$('[opacitymove]').each(function(){
-			var opacityMove = $(this).attr('opacitymove'); 
-			var yPos = $(this).offset().top+$(this).outerHeight()/2;
-			var percent = (yPos - scrollY)/(screenH/2);
-			if(percent > 0){
-				if(percent<=0.35){
-					percent = percent*2.0;	
-				}
-				else if(percent>0.35 && percent <1.0){
-					percent = 1.0;
-				}
-				else if(percent > 1.0){
-					percent = percent - 1.0;
-					percent = 1.0 - percent;
-				}
-				$(this).css('opacity', percent);
-			}
-		});
 		$('[xPosMove]').each(function(){
-			var start = parseFloat($(this).attr('start'));
-			var xMove = parseFloat($(this).attr('xPosMove'));
-			y = $(window).height()/1.5;
-			x = (scrollY- $(this).offset().top+screenH);
-		
-			var current = (start) +  xMove/y* x;
-		
-			if (xMove > 0){
-				if (current < start){
-					current = start;
-				}
-				else if ( current > start + xMove ){
-					current = start + xMove;
-				}
-			}
-			else {
-				if (current > start){
-					current = start;
-				}
-				else if ( current < start + xMove ){
-					current = start + xMove;
-				}
-			}
-            var position = $(this).css('float');
-            if(position =='left'){
-                $(this).css('margin-left', current+'px');
+			var xPosMove = $(this).attr('xPosMove');
+            var start;
+            
+			if ($(this).css('float') == 'left'){
+                start = parseFloat($(this).css('margin-left')) - xPosMove;
+                $(this).css('margin-left', start + 'px');
             }
-            else if(position =='right'){
-                $(this).css('margin-right', current+'px');
+            else if($(this).css('float') == 'right'){
+               start = parseFloat($(this).css('margin-right')) - xPosMove;
+               $(this).css('margin-right', start + 'px');
             }
             else{
-                $(this).css('left', current+'px');
-            }
+				start = parseFloat($(this).css('left')) - xPosMove;
+				$(this).css('left', start + 'px');
+			};
+            $(this).attr('start', start);
+
 		});
-	
 	}
+}
+
+function moveScrollAnimation(){
+	//disable small size view port
+	var viewportWidth = $(window).width();
+	if(isMobile()==true || viewportWidth < 650){
+		
+		$('[xPosMove]').each(function(){
+			$(this).removeAttr('style');
+		});
+		
+		return;
+	}
+		
+	var scrollY = $(document).scrollTop();
+	var screenH = $(window).height();
+		
+	//move horizontally
+	$('[opacitymove]').each(function(){
+		var opacityMove = $(this).attr('opacitymove'); 
+		var yPos = $(this).offset().top+$(this).outerHeight()/2;
+		var percent = (yPos - scrollY)/(screenH/2);
+		if(percent > 0){
+			if(percent<=0.35){
+				percent = percent*2.0;	
+			}
+			else if(percent>0.35 && percent <1.0){
+				percent = 1.0;
+			}
+			else if(percent > 1.0){
+				percent = percent - 1.0;
+				percent = 1.0 - percent;
+			}
+			$(this).css('opacity', percent);
+		}
+	});
+	$('[xPosMove]').each(function(){
+		var start = parseFloat($(this).attr('start'));
+		var xMove = parseFloat($(this).attr('xPosMove'));
+		y = $(window).height()/1.5;
+		x = (scrollY- $(this).offset().top+screenH);
+		
+		var current = (start) +  xMove/y* x;
+		
+		if (xMove > 0){
+			if (current < start){
+				current = start;
+			}
+			else if ( current > start + xMove ){
+				current = start + xMove;
+			}
+		}
+		else {
+			if (current > start){
+				current = start;
+			}
+			else if ( current < start + xMove ){
+				current = start + xMove;
+			}
+		}
+		var position = $(this).css('float');
+		if(position =='left'){
+			$(this).css('margin-left', current+'px');
+		}
+		else if(position =='right'){
+			$(this).css('margin-right', current+'px');
+		}
+		else{
+			$(this).css('left', current+'px');
+		}
+	});
+}
+
+$(window).resize(function(){
+	relocateScrollAnimation();
+});
+
+$(window).scroll(function(){
+    if (typeof isEditor != 'undefined' && isEditor == true){
+		return;
+	}
+	onWebMovieAutoPlay();
+    moveScrollAnimation();             
+	
 });

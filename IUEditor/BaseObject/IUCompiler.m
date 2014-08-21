@@ -409,7 +409,7 @@
         JDCode *iuCSS = [self cssHeaderForSheet:sheet isEdit:NO];
         [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];
         
-//        [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCodeString:@""];
+        [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCodeString:@""];
         
         //change html
         JDCode *htmlCode = [self outputHTML:sheet];
@@ -855,10 +855,7 @@
     
     JDCode *iuCSS = [self cssHeaderForSheet:document isEdit:YES];
     [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];
-    
-//    JDCode *cssCode = [self cssSource:document cssSizeArray:mqSizeArray isEdit:YES];
-// [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCode:cssCode];
-    
+        
     //change html
     JDCode *htmlCode = [self editorHTML:document];
     [sourceCode replaceCodeString:@"<!--HTML_Replacement-->" toCode:htmlCode];

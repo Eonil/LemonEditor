@@ -25,29 +25,6 @@ $(document).ready(function(){
         $(secondObj).css('display', 'none');
 	});
                   
-	//move : current viewport pc type
-	if(isMobile()==false){
-		$('[xPosMove]').each(function(){
-			var xPosMove = $(this).attr('xPosMove');
-            var start;
-            
-			if ($(this).css('float') == 'left'){
-                start = parseFloat($(this).css('margin-left')) - xPosMove;
-                $(this).css('margin-left', start + 'px');
-            }
-            else if($(this).css('float') == 'right'){
-               start = parseFloat($(this).css('margin-right')) - xPosMove;
-               $(this).css('margin-right', start + 'px');
-            }
-            else{
-				start = parseFloat($(this).css('left')) - xPosMove;
-				$(this).css('left', start + 'px');
-			};
-            $(this).attr('start', start);
-
-		});
-	}
-                  
     //Initialize IUMenu
 	$('.mobile-button').on('click', function(){
 		var menu = $(this).next('ul');
@@ -97,6 +74,9 @@ $(document).ready(function(){
 	resizeCollection();
 	reframeCenter();
 	resizePageLinkSet();
+	
+	/* Initialize iu.js*/
+	relocateScrollAnimation();
             
-    console.log("ready : iuinit");
+    console.log("ready : iuinit.js");
 });
