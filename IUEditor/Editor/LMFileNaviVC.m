@@ -319,7 +319,14 @@
             return NO;
         }
         
-        NSMutableCharacterSet *characterSet = [NSMutableCharacterSet characterSetWithCharactersInString:@"_"];
+        if([[modifiedName substringToIndex:1] rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]].location != NSNotFound ){
+            [JDUIUtil hudAlert:@"This name should not start with digit" second:1];
+            IUBox *currentBox = (IUBox *)self.selection;
+            [control setStringValue:currentBox.name];
+            return NO;
+        }
+        
+        NSMutableCharacterSet *characterSet = [NSMutableCharacterSet characterSetWithCharactersInString:@"_-"];
         [characterSet formUnionWithCharacterSet:[NSCharacterSet alphanumericCharacterSet]];
         NSCharacterSet *allowedSet = [characterSet invertedSet];
         if([modifiedName rangeOfCharacterFromSet:allowedSet].location != NSNotFound){
