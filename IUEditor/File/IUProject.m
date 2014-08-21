@@ -543,8 +543,9 @@
         
         //js
         [eventVariable makeEventDictionary:sheet];
-        
+        [initializeJSSource increaseIndentLevelForEdit];
         [initializeJSSource addCodeLineWithFormat:@"/* Initialize %@ */\n", sheet.name];
+        [initializeJSSource decreaseIndentLevelForEdit];
         [initializeJSSource addCodeLine:[sheet outputInitJSSource]];
         [initializeJSSource addNewLine];
     }

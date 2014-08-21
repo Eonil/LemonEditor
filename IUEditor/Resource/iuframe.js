@@ -44,10 +44,10 @@ function reframeCenterIU(iu, isAlreadyChecked){
 		ius.push(iu);
 	}
 	else{
-		ius = $(iu).children('[horizontalCenter="1"]');
 	    if($(iu).attr('horizontalCenter')=='1'){
 			ius.push($(iu));
 		}
+		ius = $(iu).children('[horizontalCenter="1"]');
 	}
     //if flow layout, margin auto
     //if absolute layout, set left
