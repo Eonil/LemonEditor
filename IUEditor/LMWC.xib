@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="6154.17"/>
@@ -402,16 +402,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="268" height="32"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zoC-zb-imB">
-                                        <rect key="frame" x="148" y="5" width="104" height="24"/>
-                                        <buttonCell key="cell" type="smallSquare" title="Sync with Heroku" bezelStyle="smallSquare" image="heroku" imagePosition="left" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Dov-St-pBT">
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mLY-TX-1Mg">
+                                        <rect key="frame" x="30" y="3" width="104" height="29"/>
+                                        <buttonCell key="cell" type="square" title=" Upload to Server" bezelStyle="shadowlessSquare" image="upload" imagePosition="left" alignment="left" state="on" inset="2" id="TJf-e7-Sza">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="miniSystem"/>
                                         </buttonCell>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mLY-TX-1Mg">
-                                        <rect key="frame" x="30" y="3" width="104" height="29"/>
-                                        <buttonCell key="cell" type="square" title=" Upload to Server" bezelStyle="shadowlessSquare" image="upload" imagePosition="left" alignment="left" state="on" inset="2" id="TJf-e7-Sza">
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zoC-zb-imB">
+                                        <rect key="frame" x="148" y="5" width="104" height="24"/>
+                                        <buttonCell key="cell" type="smallSquare" title="Sync with Heroku" bezelStyle="smallSquare" image="heroku" imagePosition="left" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Dov-St-pBT">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="miniSystem"/>
                                         </buttonCell>
@@ -422,9 +422,47 @@
                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </box>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="DC5475DE-B11E-4182-866C-81585E6D872C" label="" paletteLabel="" tag="-1" id="2EI-gL-BuQ">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="394" height="24"/>
+                        <size key="maxSize" width="400" height="30"/>
+                        <box key="view" autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" id="ytQ-RO-fCm">
+                            <rect key="frame" x="0.0" y="14" width="400" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <view key="contentView">
+                                <rect key="frame" x="1" y="1" width="398" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hvr-pA-pnZ">
+                                        <rect key="frame" x="96" y="6" width="14" height="10"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="stack_view" id="7KG-gj-cJc"/>
+                                    </imageView>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ugR-jR-WPz">
+                                        <rect key="frame" x="116" y="4" width="166" height="14"/>
+                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="IUBox  |  Bergerg" id="g0T-UX-3mv">
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <progressIndicator fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="AxF-Rj-ZVo"/>
+                                </subviews>
+                            </view>
+                            <constraints>
+                                <constraint firstAttribute="centerX" secondItem="ugR-jR-WPz" secondAttribute="centerX" id="V1B-uV-NWo"/>
+                                <constraint firstItem="ugR-jR-WPz" firstAttribute="leading" secondItem="Hvr-pA-pnZ" secondAttribute="trailing" constant="8" id="YSk-3F-odS"/>
+                                <constraint firstAttribute="centerY" secondItem="ugR-jR-WPz" secondAttribute="centerY" id="acP-Ct-dMB"/>
+                                <constraint firstAttribute="centerY" secondItem="Hvr-pA-pnZ" secondAttribute="centerY" id="d3U-vk-ot6"/>
+                            </constraints>
+                            <color key="borderColor" red="0.60000002384185791" green="0.60000002384185791" blue="0.60000002384185791" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="fillColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                        </box>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="UhE-nB-agp"/>
+                    <toolbarItem reference="rlk-P1-2MX"/>
+                    <toolbarItem reference="2EI-gL-BuQ"/>
                     <toolbarItem reference="rlk-P1-2MX"/>
                     <toolbarItem reference="zJ8-vt-eZO"/>
                 </defaultToolbarItems>
@@ -432,6 +470,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="4"/>
             </connections>
+            <point key="canvasLocation" x="127" y="50.5"/>
         </window>
     </objects>
     <resources>
@@ -439,6 +478,7 @@
         <image name="heroku" width="24" height="24"/>
         <image name="pause" width="24" height="24"/>
         <image name="shoveling" width="380" height="340"/>
+        <image name="stack_view" width="14" height="10"/>
         <image name="tab_off" width="100" height="30"/>
         <image name="tab_on_01" width="100" height="30"/>
         <image name="tab_on_02" width="100" height="30"/>
