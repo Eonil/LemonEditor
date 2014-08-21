@@ -41,22 +41,24 @@ function resizeCollection(){
 function reframeCenterIU(iu){
     //if flow layout, margin auto
     //if absolute layout, set left
-    $(iu).css('margin-left', 'auto');
-    $(iu).css('margin-right', 'auto');
-    $(iu).css('left','');
-    var pos = $(iu).css('position');
-    if (pos == 'absolute'){
-        var parentW;
-        var parent = $(iu).parent();
-        if(parent.prop('tagName') == 'A'){
-            parentW = parent.parent().width();
+    if($(iu).attr('horizontalCenter')=='1'){
+        $(iu).css('margin-left', 'auto');
+        $(iu).css('margin-right', 'auto');
+        $(iu).css('left','');
+        var pos = $(iu).css('position');
+        if (pos == 'absolute'){
+            var parentW;
+            var parent = $(iu).parent();
+            if(parent.prop('tagName') == 'A'){
+                parentW = parent.parent().width();
+            }
+            else{
+                parentW = $(iu).parent().width();
+            }
+            
+            var myW = $(iu).width();
+            $(iu).css('left', (parentW-myW)/2 + 'px');
         }
-        else{
-            parentW = $(iu).parent().width();
-        }
-        
-        var myW = $(iu).width();
-        $(iu).css('left', (parentW-myW)/2 + 'px');
     }
     
 }

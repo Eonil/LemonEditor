@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface JDCode : NSObject
+
++ (id)code;
+
 - (void)increaseIndentLevelForEdit;
 - (void)decreaseIndentLevelForEdit;
 

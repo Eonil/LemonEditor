@@ -16,6 +16,10 @@
     NSMutableString *whiteSpace;
 }
 
++ (id)code{
+    return [[JDCode alloc] init];
+}
+
 - (void)increaseIndentLevelForEdit{
     indentLevel ++;
     whiteSpace = [NSMutableString string];

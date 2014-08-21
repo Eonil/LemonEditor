@@ -104,35 +104,31 @@
 - (NSString *)outputEventJSSource{
     NSArray *variableArray = _variablesDict.allKeys;
     
-    NSMutableString *header = [NSMutableString string];
-    NSMutableString *bodyHeader = [NSMutableString string];
-    NSMutableString *body = [NSMutableString string];
-    NSMutableString *visibleFnStr = [NSMutableString string];
-    NSMutableString *frameFnStr = [NSMutableString string];
-    NSMutableString *initializeFn = [NSMutableString string];
+    JDCode *header = [JDCode code];
+    JDCode *bodyHeader = [JDCode code];
+    JDCode *body = [JDCode code];
+    JDCode *visibleFnCode = [JDCode code];
+    JDCode *frameFnCode = [JDCode code];
+    JDCode *initializeFn = [JDCode code];
     
     for(NSString *variable in variableArray){
         NSDictionary *oneDict = [_variablesDict objectForKey:variable];
         if(oneDict){
-            [header appendFormat:@"var %@=0;", variable];
-            [header appendNewline];
+            [header addCodeLineWithFormat:@"var %@=0;", variable];
             
             id value;
 #pragma mark initialize variable
             value = [oneDict objectForKey:IUEventTagInitialValue];
             if(value){
                 NSInteger initial = [value integerValue];
-                [header appendFormat:@"var INIT_IU_%@=%ld;", variable, initial];
-                [header appendNewline];
-                [bodyHeader appendFormat:@"%@ = INIT_IU_%@;", variable, variable];
-                [bodyHeader appendNewline];
+                [header addCodeLineWithFormat:@"var INIT_IU_%@=%ld;", variable, initial];
+                [bodyHeader addCodeLineWithFormat:@"%@ = INIT_IU_%@;", variable, variable];
             }
             
             value = [oneDict objectForKey:IUEventTagMaxValue];
             if(value){
                 NSInteger max = [value integerValue];
-                [header appendFormat:@"var MAX_IU_%@=%ld;", variable, max];
-                [header appendNewline];
+                [header addCodeLineWithFormat:@"var MAX_IU_%@=%ld;", variable, max];
                 
             }
             
@@ -144,7 +140,7 @@
                 
 #pragma mark make event innerJS
                 NSArray *receiverArray = [oneDict objectForKey:IUEventTagReceiverArray];
-                NSMutableString *innerfunctionStr = [NSMutableString string];
+                JDCode *innerfunctionCode = [JDCode code];
 
                 for(NSDictionary *receiverDict in receiverArray){
 #pragma mark Visible Src
@@ -159,52 +155,57 @@
                         else if(type == IUEventActionTypeHover){
                             fnName =  [NSString stringWithFormat:@"%@HoverVisible%@Fn", variable, visibleID];
                         }
-                        [innerfunctionStr appendFormat:@"%@();\n", fnName];
+                        [innerfunctionCode addCodeLineWithFormat:@"%@();", fnName];
 
-                        NSMutableString *fnStr = [NSMutableString string];
+                        JDCode *fnCode = [JDCode code];
                         NSInteger duration = [[receiverDict objectForKey:IUEventTagVisibleDuration] integerValue];
                         IUEventVisibleType type = [[receiverDict objectForKey:IUEventTagVisibleType] intValue];
                         NSString *typeStr = [self visibleType:type];
                         
-                        [fnStr appendFormat:@"if( %@ ){\n", value];
+                        [fnCode addCodeLineWithFormat:@"if( %@ ){", value];
                         
-                        NSMutableString *innerJS = [NSMutableString string];
-                        [innerJS appendFormat:@"$(\"#%@\").show(", visibleID];
+                        JDCode *innerJS = [JDCode code];
+                        [innerJS addCodeWithFormat:@"$(\"#%@\").show(", visibleID];
                         NSString *reframe = [NSString stringWithFormat:@"reframeCenterIU('#%@')", visibleID];
 
                         if(duration > 0){
-                            [innerJS appendFormat:@"\"%@\", %ld, %@);\n", typeStr, duration*100, reframe];
+                            [innerJS addCodeLineWithFormat:@"\"%@\", %ld, %@);", typeStr, duration*100, reframe];
                         }
                         else{
-                            [innerJS appendFormat:@"\"%@\", 1, %@);\n", typeStr, reframe];
+                            [innerJS addCodeLineWithFormat:@"\"%@\", 1, %@);", typeStr, reframe];
                         }
-                        [innerJS appendFormat:@"$(\"#%@\").data(\"run%@\", 1);\n", visibleID, fnName];
+                        [innerJS addCodeLineWithFormat:@"$(\"#%@\").data(\"run%@\", 1);", visibleID, fnName];
                         
-                        [fnStr appendString:[innerJS stringByAddingTab]];
-                        [fnStr appendString:@"}"];
-                        [fnStr appendNewline];
+                        [fnCode increaseIndentLevelForEdit];
+                        [fnCode addCode:innerJS];
+                        [fnCode decreaseIndentLevelForEdit];
+                        [fnCode addCodeLine:@"}"];
                         
-                        [fnStr appendString:@"else{\n"];
-                        innerJS = [NSMutableString string];
-                        [innerJS appendFormat:@"var clicked =$(\"#%@\").data(\"run%@\");\n", visibleID,fnName];
-                        [innerJS appendString:@"if(clicked == undefined){\n"];
-                        [innerJS appendFormat:@"\t$(\"#%@\").hide();\n", visibleID];
-                        [innerJS appendString:@"}\n"];
-                        [innerJS appendString:@"else{\n"];
+                        [fnCode addCodeLine:@"else{"];
+                        innerJS = [JDCode code];
+                        [innerJS addCodeLineWithFormat:@"var clicked =$(\"#%@\").data(\"run%@\");", visibleID,fnName];
+                        [innerJS addCodeLineWithFormat:@"if(clicked == undefined){"];
+                        [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").hide();", visibleID];
+                        [innerJS addCodeLine:@"}"];
+                        [innerJS addCodeLine:@"else{"];
                         if(duration > 0){
-                            [innerJS appendFormat:@"\t$(\"#%@\").hide(\"%@\",%ld);\n", visibleID, typeStr, duration*100];
+                            [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").hide(\"%@\",%ld);", visibleID, typeStr, duration*100];
                         }
                         else{
-                            [innerJS appendFormat:@"\t$(\"#%@\").hide(\"%@\", 1);\n", visibleID, typeStr];
+                            [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").hide(\"%@\", 1);", visibleID, typeStr];
                         }
-                        [innerJS appendString:@"}"];
-                        [fnStr appendString:[innerJS stringByAddingTab]];
-                        [fnStr appendString:@"}"];
-                        [fnStr appendNewline];
+                        [innerJS addString:@"}"];
+                        [fnCode increaseIndentLevelForEdit];
+                        [fnCode addCode:innerJS];
+                        [fnCode decreaseIndentLevelForEdit];
+
+                        [fnCode addCodeLine:@"}"];
                         
-                        [visibleFnStr appendFormat:@"function %@(){\n", fnName ];
-                        [visibleFnStr appendString:[fnStr stringByAddingTab]];
-                        [visibleFnStr appendString:@"}\n"];
+                        [visibleFnCode addCodeLineWithFormat:@"function %@(){", fnName ];
+                        [fnCode increaseIndentLevelForEdit];
+                        [visibleFnCode addCode:fnCode];
+                        [fnCode decreaseIndentLevelForEdit];
+                        [visibleFnCode addString:@"}"];
 
                         
                         
@@ -223,101 +224,105 @@
                             fnName =  [NSString stringWithFormat:@"%@HoverVisible%@Fn", variable, frameID];
                         }
                         
-                        [innerfunctionStr appendFormat:@"%@();\n", fnName];
+                        [innerfunctionCode addCodeLineWithFormat:@"%@();", fnName];
 
-                        NSMutableString *fnStr = [NSMutableString string];
-                        [fnStr appendFormat:@"if( %@ ){", value];
-                        [fnStr appendNewline];
+                        JDCode *fnCode = [JDCode code];
+                        [fnCode addCodeLineWithFormat:@"if( %@ ){", value];
                         
-                        NSMutableString *innerJS = [NSMutableString string];
+                        JDCode *innerJS = [JDCode code];
                         
-                        [innerJS appendFormat:@"$(\"#%@\").data(\"run%@\", 1);\n", frameID, fnName];
-                        [innerJS appendFormat:@"$(\"#%@\").data(\"width\", $(\"#%@\").css('width'));\n", frameID, frameID];
-                        [innerJS appendFormat:@"$(\"#%@\").data(\"height\", $(\"#%@\").css('height'));\n", frameID, frameID];
-                        [innerJS appendFormat:@"$(\"#%@\").animate({", frameID];
+                        [innerJS addCodeLineWithFormat:@"$(\"#%@\").data(\"run%@\", 1);", frameID, fnName];
+                        [innerJS addCodeLineWithFormat:@"$(\"#%@\").data(\"width\", $(\"#%@\").css('width'));", frameID, frameID];
+                        [innerJS addCodeLineWithFormat:@"$(\"#%@\").data(\"height\", $(\"#%@\").css('height'));", frameID, frameID];
+                        [innerJS addCodeWithFormat:@"$(\"#%@\").animate({", frameID];
                         
                         CGFloat width = [[receiverDict objectForKey:IUEventTagFrameWidth] floatValue];
                         CGFloat height = [[receiverDict objectForKey:IUEventTagFrameHeight] floatValue];
-                        [innerJS appendFormat:@"width:\"%.2fpx\", height:\"%.2fpx\"}", width, height];
+                        [innerJS addCodeWithFormat:@"width:\"%.2fpx\", height:\"%.2fpx\"}", width, height];
                         
                         NSInteger duration = [[receiverDict objectForKey:IUEventTagFrameDuration] integerValue];
                         NSString *reframe = [NSString stringWithFormat:@"reframeCenterIU('#%@')", frameID];
                         if(duration > 0){
-                            [innerJS appendFormat:@", %ld, %@);", duration*100, reframe];
+                            [innerJS addCodeWithFormat:@", %ld, %@);", duration*100, reframe];
                         }
                         else{
-                            [innerJS appendFormat:@", 1, %@);", reframe];
+                            [innerJS addCodeWithFormat:@", 1, %@);", reframe];
                         }
                         
-                        [fnStr appendString:[innerJS stringByAddingTab]];
-                        [fnStr appendString:@"}"];
-                        [fnStr appendNewline];
-                        [fnStr appendString:@"else{\n"];
+                        [fnCode increaseIndentLevelForEdit];
+                        [fnCode addCode:innerJS];
+                        [fnCode decreaseIndentLevelForEdit];
                         
-                        innerJS = [NSMutableString string];
-                        [innerJS appendFormat:@"var clicked =$(\"#%@\").data(\"run%@\");\n", frameID, fnName];
-                        [innerJS appendFormat:@"var d_width =$(\"#%@\").data(\"width\");\n", frameID];
-                        [innerJS appendFormat:@"var d_height =$(\"#%@\").data(\"height\");\n", frameID];
-                        [innerJS appendString:@"if(clicked == undefined){\n"];
+                        [fnCode addCodeLine:@"}"];
+                        [fnCode addCodeLine:@"else{"];
+                        
+                        innerJS = [JDCode code];
+                        [innerJS addCodeLineWithFormat:@"var clicked =$(\"#%@\").data(\"run%@\");", frameID, fnName];
+                        [innerJS addCodeLineWithFormat:@"var d_width =$(\"#%@\").data(\"width\");", frameID];
+                        [innerJS addCodeLineWithFormat:@"var d_height =$(\"#%@\").data(\"height\");", frameID];
+                        [innerJS addCodeWithFormat:@"if(clicked == undefined){"];
                         if(duration > 0){
-                            [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, %ld);\n", frameID, duration*100];
+                            [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, %ld);", frameID, duration*100];
                         }
                         else{
-                            [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, 1 );\n", frameID];
+                            [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, 1 );", frameID];
                         }
-                        [innerJS appendString:@"}\n"];
-                        [innerJS appendString:@"else{\n"];
+                        [innerJS addCodeLine:@"}"];
+                        [innerJS addCodeLine:@"else{"];
                         if(duration > 0){
-                            [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, %ld);\n", frameID, duration*100];
+                            [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, %ld);", frameID, duration*100];
                         }
                         else{
-                            [innerJS appendFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height} ,1);\n", frameID];
+                            [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height} ,1);", frameID];
                         }
-                        [innerJS appendString:@"}"];
+                        [innerJS addString:@"}"];
                         
-                        [fnStr appendString:[innerJS stringByAddingTab]];
-                        [fnStr appendString:@"}"];
                         
-                        [fnStr appendNewline];
+                        [fnCode increaseIndentLevelForEdit];
+                        [fnCode addCode:innerJS];
+                        [fnCode decreaseIndentLevelForEdit];
                         
-                        [frameFnStr appendFormat:@"function %@(){\n", fnName ];
-                        [frameFnStr appendString:[fnStr stringByAddingTab]];
-                        [frameFnStr appendString:@"}\n"];
+                        [fnCode addCodeLine:@"}"];
+                        
+                        [frameFnCode addCodeLineWithFormat:@"function %@(){", fnName ];
+                        [frameFnCode increaseIndentLevelForEdit];
+                        [frameFnCode addCode:fnCode];
+                        [frameFnCode decreaseIndentLevelForEdit];
+                        [frameFnCode addCodeLineWithFormat:@"}"];
                     }
                 }//End of receiverArray
-                [initializeFn appendString:innerfunctionStr];
+                
+                [initializeFn addCode:innerfunctionCode];
                 
                 //initialize source
-                NSMutableString *eventString = [NSMutableString string];
+                JDCode *eventCode = [JDCode code];
                 NSArray *bindingIUArray = [oneDict objectForKey:IUEventTagIUID];;
                 for(NSString *bindingIUID in bindingIUArray){
                     
-                    [eventString appendFormat:@"/* [IU:%@] Event Declaration */\n", bindingIUID];
+                    [eventCode addCodeLineWithFormat:@"/* [IU:%@] Event Declaration */", bindingIUID];
                     if(type == IUEventActionTypeClick){
-                        [eventString appendFormat:@"$(\"#%@\").css('cursor', 'pointer');\n", bindingIUID];
+                        [eventCode addCodeLineWithFormat:@"$(\"#%@\").css('cursor', 'pointer');", bindingIUID];
                     }
-                    [eventString appendFormat:@"$(\"#%@\").", bindingIUID];
+                    [eventCode addCodeWithFormat:@"$(\"#%@\").", bindingIUID];
                     
                     if(type == IUEventActionTypeClick){
-                        [eventString appendString:@"click(function(){"];
+                        [eventCode addString:@"click(function(){"];
                     }
                     else if(type == IUEventActionTypeHover){
-                        [eventString appendString:@"hover(function(){"];
+                        [eventCode addString:@"hover(function(){"];
                     }
                     else{
                         JDFatalLog(@"no action type");
                     }
-                    [eventString appendNewline];
-                    [eventString appendTabAndString:[NSString stringWithFormat:@"%@++;",variable]];
-                    [eventString appendNewline];
-                    [eventString appendTabAndString:[NSString stringWithFormat:@"if( %@ > MAX_IU_%@ ){ %@ = INIT_IU_%@ }\n",variable, variable, variable, variable]];
-                    [eventString appendNewline];
-                    [eventString appendString:[innerfunctionStr stringByAddingTab]];
-                    [eventString appendString:@"});\n"];
-                    [eventString appendNewline];
+                    [eventCode increaseIndentLevelForEdit];
+                    [eventCode addCodeLineWithFormat:@"%@++;",variable];
+                    [eventCode addCodeLineWithFormat:@"if( %@ > MAX_IU_%@ ){ %@ = INIT_IU_%@ }",variable, variable, variable, variable];
+                    [eventCode addCode:innerfunctionCode];
+                    [eventCode decreaseIndentLevelForEdit];
+                    [eventCode addCodeLine:@"});"];
 
                 }
-                [body appendString:eventString];
+                [body addCode:eventCode];
 
             }
             
@@ -325,39 +330,33 @@
         
     }
     
-    JDTraceLog(@"header=====\n%@", header);
-    JDTraceLog(@"body-header=====\n%@", bodyHeader);
-    JDTraceLog(@"body======\n%@", body);
+    JDTraceLog(@"header=====\n%@", header.string);
+    JDTraceLog(@"body-header=====\n%@", bodyHeader.string);
+    JDTraceLog(@"body======\n%@", body.string);
     
-    NSMutableString *eventJSStr = [NSMutableString string];
-    [eventJSStr appendString:header];
-    [eventJSStr appendNewline];
+    JDCode *eventJSCode = [JDCode code];
+    [eventJSCode addCode:header];
     
-    [eventJSStr appendString:@" /* Decleare Visible Fn */ \n"];
-    [eventJSStr appendString:visibleFnStr];
-    [eventJSStr appendNewline];
+    [eventJSCode addCodeLine:@" /* Decleare Visible Fn */ "];
+    [eventJSCode addCode:visibleFnCode];
 
-    [eventJSStr appendString:@" /* Decleare Frame Fn */ \n"];
-    [eventJSStr appendString:frameFnStr];
-    [eventJSStr appendNewline];
+    [eventJSCode addCodeLine:@" /* Decleare Frame Fn */ "];
+    [eventJSCode addCode:frameFnCode];
     
-    [eventJSStr appendString:@"$(document).ready(function(){"];
-    [eventJSStr appendNewline];
-    [eventJSStr appendString:@"console.log('ready : iuevent.js');\n"];
-    [eventJSStr appendNewline];
-    [eventJSStr appendString:[bodyHeader stringByAddingTab]];
-    [eventJSStr appendNewline];
-    [eventJSStr appendString:[body stringByAddingTab]];
-    [eventJSStr appendNewline];
+    [eventJSCode addCodeLine:@"$(document).ready(function(){"];
+    [eventJSCode addCodeLine:@"console.log('ready : iuevent.js');"];
+    [eventJSCode increaseIndentLevelForEdit];
+    [eventJSCode addCode:bodyHeader];
+    [eventJSCode addCode:body];
+    [eventJSCode addCodeLine:@" /* initialize fn */ "];
+    [eventJSCode addCode:initializeFn];
+    [eventJSCode decreaseIndentLevelForEdit];
+
+    [eventJSCode addCodeLine:@"});"];
     
-    [eventJSStr appendString:@" /* initialize fn */ \n"];
-    [eventJSStr appendString:[initializeFn stringByAddingTab]];
-    [eventJSStr appendNewline];
-    [eventJSStr appendString:@"});"];
+    JDTraceLog(@"total======\n%@", eventJSCode.string);
     
-    JDTraceLog(@"total======\n%@", eventJSStr);
-    
-    return eventJSStr;
+    return eventJSCode.string;
 }
 
 #pragma mark visible event 
