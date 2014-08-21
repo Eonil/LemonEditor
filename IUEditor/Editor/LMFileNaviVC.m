@@ -190,7 +190,7 @@
         removeItem.target = self;
         [menu addItem:removeItem];
         
-        if([node isKindOfClass:[IUClass class]]){
+        if([node isKindOfClass:[IUClass class]] || [node isKindOfClass:[IUPage class]]){
             NSMenuItem *copyItem = [[NSMenuItem alloc] initWithTitle:@"Copy Document" action:@selector(copyDocument:) keyEquivalent:@""];
             copyItem.tag = row;
             copyItem.target = self;

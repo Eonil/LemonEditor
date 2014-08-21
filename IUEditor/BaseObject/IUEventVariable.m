@@ -166,7 +166,7 @@
                         
                         JDCode *innerJS = [JDCode code];
                         [innerJS addCodeWithFormat:@"$(\"#%@\").show(", visibleID];
-                        NSString *reframe = [NSString stringWithFormat:@"reframeCenterIU('#%@')", visibleID];
+                        NSString *reframe = [NSString stringWithFormat:@"reframeCenterIU('#%@' ,false)", visibleID];
 
                         if(duration > 0){
                             [innerJS addCodeLineWithFormat:@"\"%@\", %ld, %@);", typeStr, duration*100, reframe];
@@ -176,9 +176,7 @@
                         }
                         [innerJS addCodeLineWithFormat:@"$(\"#%@\").data(\"run%@\", 1);", visibleID, fnName];
                         
-                        [fnCode increaseIndentLevelForEdit];
                         [fnCode addCode:innerJS];
-                        [fnCode decreaseIndentLevelForEdit];
                         [fnCode addCodeLine:@"}"];
                         
                         [fnCode addCodeLine:@"else{"];
@@ -195,16 +193,12 @@
                             [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").hide(\"%@\", 1);", visibleID, typeStr];
                         }
                         [innerJS addString:@"}"];
-                        [fnCode increaseIndentLevelForEdit];
                         [fnCode addCode:innerJS];
-                        [fnCode decreaseIndentLevelForEdit];
 
                         [fnCode addCodeLine:@"}"];
                         
                         [visibleFnCode addCodeLineWithFormat:@"function %@(){", fnName ];
-                        [fnCode increaseIndentLevelForEdit];
                         [visibleFnCode addCode:fnCode];
-                        [fnCode decreaseIndentLevelForEdit];
                         [visibleFnCode addString:@"}"];
 
                         
@@ -241,7 +235,7 @@
                         [innerJS addCodeWithFormat:@"width:\"%.2fpx\", height:\"%.2fpx\"}", width, height];
                         
                         NSInteger duration = [[receiverDict objectForKey:IUEventTagFrameDuration] integerValue];
-                        NSString *reframe = [NSString stringWithFormat:@"reframeCenterIU('#%@')", frameID];
+                        NSString *reframe = [NSString stringWithFormat:@"reframeCenterIU('#%@', false)", frameID];
                         if(duration > 0){
                             [innerJS addCodeWithFormat:@", %ld, %@);", duration*100, reframe];
                         }
@@ -249,9 +243,7 @@
                             [innerJS addCodeWithFormat:@", 1, %@);", reframe];
                         }
                         
-                        [fnCode increaseIndentLevelForEdit];
                         [fnCode addCode:innerJS];
-                        [fnCode decreaseIndentLevelForEdit];
                         
                         [fnCode addCodeLine:@"}"];
                         [fnCode addCodeLine:@"else{"];
@@ -278,16 +270,12 @@
                         [innerJS addString:@"}"];
                         
                         
-                        [fnCode increaseIndentLevelForEdit];
                         [fnCode addCode:innerJS];
-                        [fnCode decreaseIndentLevelForEdit];
                         
                         [fnCode addCodeLine:@"}"];
                         
                         [frameFnCode addCodeLineWithFormat:@"function %@(){", fnName ];
-                        [frameFnCode increaseIndentLevelForEdit];
                         [frameFnCode addCode:fnCode];
-                        [frameFnCode decreaseIndentLevelForEdit];
                         [frameFnCode addCodeLineWithFormat:@"}"];
                     }
                 }//End of receiverArray

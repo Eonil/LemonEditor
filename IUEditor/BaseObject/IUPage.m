@@ -62,6 +62,23 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone{
+    [[self undoManager] disableUndoRegistration];
+
+    IUPage *page = [super copyWithZone:zone];
+    page.title = [_title copy];
+    page.keywords = [_keywords copy];
+    page.desc = [_desc copy];
+    page.metaImage = [_metaImage copy];
+    page.extraCode = [_extraCode copy];
+    page.googleCode = [_googleCode copy];
+    
+    [page setBackground:_background];
+    
+    [[self undoManager] enableUndoRegistration];
+    return page;
+}
+
 - (void)connectWithEditor{
     NSAssert(self.project, @"");
     

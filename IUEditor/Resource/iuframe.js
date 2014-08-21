@@ -38,35 +38,46 @@ function resizeCollection(){
 	});
 }
 
-function reframeCenterIU(iu){
+function reframeCenterIU(iu, isAlreadyChecked){
+	var ius = [];
+	if(isAlreadyChecked == true){
+		ius.push(iu);
+	}
+	else{
+		ius = $(iu).children('[horizontalCenter="1"]');
+	    if($(iu).attr('horizontalCenter')=='1'){
+			ius.push($(iu));
+		}
+	}
     //if flow layout, margin auto
     //if absolute layout, set left
-    if($(iu).attr('horizontalCenter')=='1'){
-        $(iu).css('margin-left', 'auto');
-        $(iu).css('margin-right', 'auto');
-        $(iu).css('left','');
+
+	$.each(ius, function(){
+        $(this).css('margin-left', 'auto');
+        $(this).css('margin-right', 'auto');
+        $(this).css('left','');
         var pos = $(iu).css('position');
         if (pos == 'absolute'){
             var parentW;
-            var parent = $(iu).parent();
+            var parent = $(this).parent();
             if(parent.prop('tagName') == 'A'){
                 parentW = parent.parent().width();
             }
             else{
-                parentW = $(iu).parent().width();
+                parentW = $(this).parent().width();
             }
             
-            var myW = $(iu).width();
-            $(iu).css('left', (parentW-myW)/2 + 'px');
+            var myW = $(this).width();
+            $(this).css('left', (parentW-myW)/2 + 'px');
         }
-    }
+    });
     
 }
 
 function reframeCenter(){
     var respc = $('[horizontalCenter="1"]').toArray();
     $.each(respc, function( i, iu ){
-        reframeCenterIU(iu);
+        reframeCenterIU(iu, true);
     });
 }
 
@@ -79,33 +90,6 @@ function resizePageLinkSet(){
 		$(this).width(width+'px');
 	});
 }
-
-
-function relocateScrollAnimation(){
-	//move : current viewport pc type
-	if(isMobile()==false){
-		$('[xPosMove]').each(function(){
-			var xPosMove = $(this).attr('xPosMove');
-            var start;
-            
-			if ($(this).css('float') == 'left'){
-                start = parseFloat($(this).css('margin-left')) - xPosMove;
-                $(this).css('margin-left', start + 'px');
-            }
-            else if($(this).css('float') == 'right'){
-               start = parseFloat($(this).css('margin-right')) - xPosMove;
-               $(this).css('margin-right', start + 'px');
-            }
-            else{
-				start = parseFloat($(this).css('left')) - xPosMove;
-				$(this).css('left', start + 'px');
-			};
-            $(this).attr('start', start);
-
-		});
-	}
-}
-
 
 $(window).resize(function(){
                  console.log("resize window : iuframe.js");

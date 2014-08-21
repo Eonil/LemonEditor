@@ -15,6 +15,11 @@ a{
     min-height:100%;
     display:initial;
 }
+.IUBackground{
+    width:100%;
+    min-height:100%;
+    display:initial;
+}
 
 .IUHeader{
     position:relative;

@@ -33,11 +33,13 @@
 }
 
 - (void)addCodeLine:(NSString*)newCode{
+    /*
     if (string.length) {
         if ([string characterAtIndex:[string length] - 1] != '\n') {
             [string appendString:@"\n"];
         }
     }
+    */
     [string appendString:whiteSpace];
     [string appendString:newCode];
     [string appendString:@"\n"];
@@ -61,9 +63,6 @@
     NSString *str = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
 
-    if ([string length] && [string characterAtIndex:[string length] - 1] != '\n') {
-        [string appendString:@"\n"];
-    }
     [string appendString:whiteSpace];
     [string appendString:str];
 }
