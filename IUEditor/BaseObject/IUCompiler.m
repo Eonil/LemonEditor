@@ -1306,11 +1306,15 @@
     if(iu.enableCenter){
         [retString appendString:@" horizontalCenter='1'"];
     }
-    if (iu.opacityMove) {
-        [retString appendFormat:@" opacityMove='%.1f'", iu.opacityMove];
-    }
-    if (iu.xPosMove) {
-        [retString appendFormat:@" xPosMove='%.1f'", iu.xPosMove];
+    
+    //event variable
+    if(isEdit == NO){
+        if (iu.opacityMove) {
+            [retString appendFormat:@" opacityMove='%.1f'", iu.opacityMove];
+        }
+        if (iu.xPosMove) {
+            [retString appendFormat:@" xPosMove='%.1f'", iu.xPosMove];
+        }
     }
     id value = [iu.css tagDictionaryForViewport:IUCSSDefaultViewPort][IUCSSTagImage];
     if([value isDjangoVariable] && _rule == IUCompileRuleDjango){

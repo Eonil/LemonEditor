@@ -266,7 +266,9 @@
     NSDictionary *sourceDictWithIdentifier = sourceDictWithViewPort[@(IUCSSDefaultViewPort)];
     
     NSMutableSet *allKeys =  [NSMutableSet setWithArray:[sourceDictWithViewPort[@(IUCSSDefaultViewPort)] allKeys]];
-    [allKeys addObjectsFromArray:[sourceDictWithViewPort[@(viewport)] allKeys]];
+    if(viewport != IUCSSDefaultViewPort){
+        [allKeys addObjectsFromArray:[sourceDictWithViewPort[@(viewport)] allKeys]];
+    }
     
     for (NSString *identifier in allKeys.allObjects) {
         NSDictionary *tagDict = sourceDictWithIdentifier[identifier];
@@ -282,13 +284,15 @@
             tagDictForReturn[tag] = value;
         }
         
-        //viewport css
-        tagDict = [sourceDictWithViewPort[@(viewport)] objectForKey:identifier];
-        for (NSString *tag in tagDict) {
-            NSString *value = tagDict[tag];
-            //Review:
-            // element에 style속성으로 지정하기 때문에 무조건 들어가야함.
-            tagDictForReturn[tag] = value;
+        if(viewport != IUCSSDefaultViewPort){
+            //viewport css
+            tagDict = [sourceDictWithViewPort[@(viewport)] objectForKey:identifier];
+            for (NSString *tag in tagDict) {
+                NSString *value = tagDict[tag];
+                //Review:
+                // element에 style속성으로 지정하기 때문에 무조건 들어가야함.
+                tagDictForReturn[tag] = value;
+            }
         }
         
         NSString *cssCode = [[tagDictForReturn CSSCode] stringByReplacingOccurrencesOfString:@".00px" withString:@"px"];
@@ -788,10 +792,10 @@
     IUUnit xUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagXUnitIsPercent viewport:IUCSSDefaultViewPort] boolValue] ? IUUnitPercent : IUUnitPixel;
     IUUnit yUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagYUnitIsPercent viewport:IUCSSDefaultViewPort] boolValue] ? IUUnitPercent : IUUnitPixel;
 
-    if([self valueForIUBox:_iu CSSTag:IUCSSTagXUnitIsPercent viewport:IUCSSDefaultViewPort]){
+    if([self valueForIUBox:_iu CSSTag:IUCSSTagXUnitIsPercent viewport:viewport]){
         xUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagXUnitIsPercent viewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
     }
-    if([self valueForIUBox:_iu CSSTag:IUCSSTagYUnitIsPercent viewport:IUCSSDefaultViewPort]){
+    if([self valueForIUBox:_iu CSSTag:IUCSSTagYUnitIsPercent viewport:viewport]){
         yUnit = [[self valueForIUBox:_iu CSSTag:IUCSSTagYUnitIsPercent viewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
     }
     
