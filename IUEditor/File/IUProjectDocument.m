@@ -181,8 +181,11 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
 }
 
 - (void)setFileURL:(NSURL *)fileURL{
-    [self changeProjectPath:fileURL];
-    [super setFileURL:fileURL];
+    //FIXME: fileURL nil호출됨. reload되면서 확인.
+    if(fileURL != nil){
+        [self changeProjectPath:fileURL];
+        [super setFileURL:fileURL];
+    }
 }
 
 
