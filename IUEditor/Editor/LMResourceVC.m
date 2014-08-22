@@ -58,7 +58,7 @@
         }
         
         else if (node.type == IUResourceTypeVideo){
-            [JDUIUtil hudAlert:@"Only image files can be draggable as a bacground or image type " second:2];
+            [JDUIUtil hudAlert:@"Sorry, Movie File is not draggable" second:2];
         }
         else {
             NSAssert(0, @"");
