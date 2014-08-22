@@ -295,8 +295,14 @@
             }
         }
         
-        NSString *cssCode = [[tagDictForReturn CSSCode] stringByReplacingOccurrencesOfString:@".00px" withString:@"px"];
-        [returnDict setObject:cssCode forKey:identifier];
+        if([identifier containsString:@"hover"]){
+            NSString *cssCode = [[tagDictForReturn hoverCSSCode] stringByReplacingOccurrencesOfString:@".00px" withString:@"px"];
+            [returnDict setObject:cssCode forKey:identifier];
+        }
+        else{
+            NSString *cssCode = [[tagDictForReturn CSSCode] stringByReplacingOccurrencesOfString:@".00px" withString:@"px"];
+            [returnDict setObject:cssCode forKey:identifier];
+        }
     }
     
     
@@ -1142,6 +1148,8 @@
                     [code insertTag:@"border-top-color" string:color];
                 }
             }
+            int top = (maxHeight- 10)/2;
+            [code insertTag:@"top" integer:top unit:IUUnitPixel];
             
         }
         

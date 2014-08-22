@@ -110,7 +110,7 @@
     
     if ([[notification.userInfo objectForKey:IUNotificationStructureChangeType] isEqualTo: IUNotificationStructureAdding]) {
         IUBox *newOne = [notification.userInfo objectForKey:IUNotificationStructureChangedIU];
-        if (newOne) {
+        if ([newOne canSelectAtFirst]) {
             [JDLogUtil timeLogStart:@"StackVC-setSelected"];
             [self.IUController setSelectedObject:newOne];
             [JDLogUtil timeLogEnd:@"StackVC-setSelected"];

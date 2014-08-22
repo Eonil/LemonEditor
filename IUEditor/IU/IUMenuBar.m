@@ -97,7 +97,7 @@
         else{
             _isOpened = NO;
         }
-        
+                
         [self updateCSSWithIdentifiers:@[[self editorDisplayIdentifier]]];
 
     }

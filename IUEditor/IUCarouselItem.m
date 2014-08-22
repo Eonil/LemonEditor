@@ -44,4 +44,7 @@
     return NO;
 }
 
+- (BOOL)canSelectAtFirst{
+    return NO;
+}
 @end

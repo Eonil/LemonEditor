@@ -28,5 +28,6 @@
 @end
 
 @interface NSDictionary (IUTag)
+- (NSString*)hoverCSSCode;
 - (NSString*)CSSCode;
 @end

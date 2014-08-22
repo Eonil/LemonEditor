@@ -94,4 +94,17 @@
     return code;
 }
 
+-(NSString*)hoverCSSCode{
+    NSMutableString *code = [NSMutableString string];
+    for (NSString *key in self) {
+        if([self[key] containsString:@"!important"]){
+            [code appendFormat:@"%@:%@; ", key, self[key]];
+        }
+        else{
+            [code appendFormat:@"%@:%@ !important; ", key, self[key]];
+        }
+    }
+    return code;
+}
+
 @end

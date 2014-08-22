@@ -87,6 +87,8 @@
 }
 
 
+
+
 -(void)selectionChanged:(NSNotification*)noti{
     
     if(self.children.count > 0 && self.css.editWidth > IUMobileSize){
@@ -101,6 +103,9 @@
         }
         
         [self updateCSSWithIdentifiers:@[[self editorDisplayIdentifier]]];
+        for(IUMenuItem *child in self.children){
+            [child updateCSS];
+        }
 
     }
     
@@ -114,8 +119,13 @@
 
 
 #pragma mark - count
+
+- (BOOL)canSelectAtFirst{
+    return NO;
+}
+
 - (void)setCount:(NSInteger)count{
-    if (count < 1 || count > 20 || count == self.children.count ) {
+    if (count < 0 || count > 20 || count == self.children.count ) {
         return;
     }
     if( count < self.children.count ){

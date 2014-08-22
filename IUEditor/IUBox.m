@@ -266,6 +266,9 @@
 - (BOOL)canCopy{
     return YES;
 }
+- (BOOL)canSelectAtFirst{
+    return YES;
+}
 #pragma mark - Undo Manager
 - (NSUndoManager *)undoManager{
    return [[[[NSApp mainWindow] windowController] document] undoManager];

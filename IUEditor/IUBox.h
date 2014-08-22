@@ -224,6 +224,7 @@ typedef enum _IUOverflowType{
 //Property
 - (BOOL)canCopy;
 - (BOOL)canChangeOverflow;
+- (BOOL)canSelectAtFirst;
 @property (nonatomic) IUOverflowType overflowType;
 @property (nonatomic) BOOL lineHeightAuto;
 

@@ -866,7 +866,11 @@
     
     JDCode *iuCSS = [self cssHeaderForSheet:document isEdit:YES];
     [sourceCode replaceCodeString:@"<!--CSS_Insert-->" toCode:iuCSS];
-        
+    
+    //add for hover css
+    [sourceCode replaceCodeString:@"<!--CSS_Replacement-->" toCodeString:@"<style id=\"default\"></style>"];
+
+    
     //change html
     JDCode *htmlCode = [self editorHTML:document];
     [sourceCode replaceCodeString:@"<!--HTML_Replacement-->" toCode:htmlCode];
