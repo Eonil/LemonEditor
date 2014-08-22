@@ -35,7 +35,7 @@
                         <subviews>
                             <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" emptySelection="NO" autosaveColumns="NO" rowHeight="26" viewBased="YES" indentationPerLevel="12" autosaveExpandedItems="YES" outlineTableColumn="PHW-2j-9jH" id="Oxr-EL-PIx" customClass="LMStackOutlineView">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <color key="backgroundColor" red="0.93725496529999996" green="0.93725496529999996" blue="0.93725496529999996" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="gridColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <tableColumns>
                                     <tableColumn width="220" minWidth="16" maxWidth="1000" id="PHW-2j-9jH">
