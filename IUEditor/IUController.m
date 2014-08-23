@@ -190,6 +190,9 @@
 
 
 -(void)trySetSelectedObjectsByIdentifiers:(NSArray *)identifiers{
+    //paste repeat count zero
+    _pasteRepeatCount = 0;
+
     [JDLogUtil log:IULogAction key:@"canvas selected objects" string:[identifiers description]];
     
     [[self.undoManager prepareWithInvocationTarget:self] trySetSelectedObjectsByIdentifiers:[self selectedIdentifiers]];
@@ -198,6 +201,16 @@
     
     NSString *firstIdentifier = [identifiers firstObject];
     if ([firstIdentifier containsString:@"ImportedBy_"]) { // it's imported!
+        /*
+         if one is imported, but other is not, just return
+         */
+
+        for (NSString *identifier in identifiers) {
+            if ([identifier containsString:@"ImportedBy_"] == NO) {
+                return;
+            }
+        }
+        
         NSArray *IUChain = [firstIdentifier componentsSeparatedByString:@"_"];
         NSAssert(IUChain.count == 3, @"import in import");
         
@@ -246,8 +259,6 @@
         NSArray *selectedChildren = [allChildren filteredArrayUsingPredicate:predicate];
         [self _setSelectedObjects:selectedChildren];
     }
-    //paste repeat count zero
-    _pasteRepeatCount = 0;
 }
 
 
