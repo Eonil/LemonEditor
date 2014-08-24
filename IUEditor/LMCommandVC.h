@@ -15,8 +15,10 @@
 @interface LMCommandVC : NSViewController <JDShellUtilPipeDelegate>
 
 @property (weak, nonatomic) IUSheetController      *docController;
-- (IBAction)toggleRecording:(id)sender;
-- (IBAction)stopServer:(id)sender;
 
+// Remove Recording feature at v0.3
+//- (IBAction)toggleRecording:(id)sender;
+
+- (IBAction)stopServer:(id)sender;
 - (void)prepareDealloc;
 @end

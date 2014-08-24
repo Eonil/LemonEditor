@@ -233,7 +233,8 @@
         [self.stopServerB setHidden:YES];
     }
 }
-
+/*
+ Remove Recording feature at v0.3
 - (IBAction)toggleRecording:(id)sender{
     if (recording == NO) {
         recording = YES;
@@ -251,7 +252,7 @@
         [JDUIUtil hudAlert:@"Recording saved at Desktop" second:3];
     }
 }
-
+*/
 
 - (void)shellUtil:(JDShellUtil*)util standardOutputDataReceived:(NSData*)data{
     NSString *log = [[NSString alloc] initWithData:data encoding:4];
