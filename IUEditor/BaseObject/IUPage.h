@@ -9,6 +9,7 @@
 
 #import "IUBox.h"
 #import "IUSheet.h"
+#import "IUPageContent.h"
 
 @class IUBackground;
 @class IUPageContent;

@@ -494,10 +494,19 @@
     
 #endif
     
-    if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol)]) {
+    else if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol) ]){
+        /* for example, WORDPRESS can be compiled as HTML */
         IUBox <IUSampleHTMLProtocol> *sampleProtocolIU = (id)iu;
-        NSString *sampleHTML = [sampleProtocolIU sampleHTML];
-        [code addCodeLine:sampleHTML];
+        if ([sampleProtocolIU respondsToSelector:@selector(sampleInnerHTML)]) {
+            NSString *sampleInnerHTML = [sampleProtocolIU sampleInnerHTML];
+            [code addCodeLineWithFormat:@"<div %@ >%@</div>", [self HTMLAttributes:iu option:nil isEdit:YES], sampleInnerHTML];
+        }
+        else if ([sampleProtocolIU respondsToSelector:@selector(sampleHTML)]) {
+            [code addCodeLine: sampleProtocolIU.sampleHTML];
+        }
+        else {
+            assert(0);
+        }
     }
     if (iu.children.count) {
         for (IUBox *child in iu.children) {
