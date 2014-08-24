@@ -16,7 +16,7 @@
 }
 
 -(void)WPInitializeAs404{
-    [self removeAllIU];
+    [self.pageContent removeAllIU];
     IUBox *text404 = [[IUBox alloc] initWithProject:self.project options:nil];
     text404.htmlID = @"text404";
     text404.name = @"text404";
@@ -26,8 +26,13 @@
     [text404.css setValue:@"1.3" forTag:IUCSSTagLineHeight];
     [text404.css setValue:@(100) forTag:IUCSSTagPixelY];
     [text404 setPositionType:IUPositionTypeAbsolute];
+    [text404.css setValue:@(750) forTag:IUCSSTagPixelWidth];
+    [text404.css setValue:@(75) forTag:IUCSSTagPixelHeight];
+    [text404.css eradicateTag:IUCSSTagBGColor];
+    
     text404.enableCenter = YES;
     
+    [self.pageContent addIU:text404 error:nil];
     [self.project.identifierManager registerIUs:@[text404]];
 }
 
