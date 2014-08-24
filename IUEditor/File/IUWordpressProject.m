@@ -62,23 +62,25 @@
     [bg WPInitialize];
     [self addSheet:bg toSheetGroup:_backgroundGroup];
     
+    
+    IUPage *home = [[IUPage alloc] initWithProject:self options:nil];
+    [home setBackground:bg];
+    [home WPInitializeAsHome];
+    home.name = @"home";
+    home.htmlID = @"home";
+    [self addSheet:home toSheetGroup:_pageGroup];
+    
     IUPage *index = [[IUPage alloc] initWithProject:self options:nil];
     [index setBackground:bg];
     [index WPInitializeAsIndex];
     index.name = @"index";
     index.htmlID = @"index";
     [self addSheet:index toSheetGroup:_pageGroup];
-    
-    IUPage *home = [[IUPage alloc] initWithProject:self options:nil];
-    [home setBackground:bg];
-    [index WPInitializeAsHome];
-    home.name = @"home";
-    home.htmlID = @"home";
-    [self addSheet:home toSheetGroup:_pageGroup];
+
 
     IUPage *_404 = [[IUPage alloc] initWithProject:self options:nil];
     [_404 setBackground:bg];
-    [index WPInitializeAs404];
+    [_404 WPInitializeAs404];
     _404.name = @"_404";
     _404.htmlID = @"_404";
     [self addSheet:_404 toSheetGroup:_pageGroup];
