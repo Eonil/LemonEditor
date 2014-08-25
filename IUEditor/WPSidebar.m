@@ -17,6 +17,7 @@
 //    self.widgetCount = 1;
     WPWidget *widget = [[WPWidget alloc] initWithProject:project options:options];
     [self addIU:widget error:nil];
+    [self.css eradicateTag:IUCSSTagPixelHeight];
     return self;
 }
 

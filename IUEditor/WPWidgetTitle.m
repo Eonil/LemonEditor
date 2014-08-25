@@ -10,6 +10,14 @@
 
 @implementation WPWidgetTitle
 
+- (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
+    self = [super initWithProject:project options:options];
+    [self setPositionType:IUPositionTypeRelative];
+    
+    [self.css eradicateTag:IUCSSTagPixelHeight];
+    return self;
+}
+
 - (BOOL)canChangeCenter{
     return NO;
 }

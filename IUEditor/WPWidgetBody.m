@@ -10,6 +10,13 @@
 
 @implementation WPWidgetBody
 
+- (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
+    self = [super initWithProject:project options:options];
+    [self setPositionType:IUPositionTypeRelative];
+    [self.css eradicateTag:IUCSSTagPixelHeight];
+    return self;
+}
+
 - (NSString *)sampleHTML{
     return [NSString stringWithFormat:@"<ul id='%@' class='%@'><li class='cat-item cat-item-1'>First Line</li><li class='cat-item cat-item-2'>Second Line</li></ul>", self.htmlID, self.cssClassStringForHTML];
 }

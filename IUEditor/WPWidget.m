@@ -18,6 +18,8 @@
         
         self.bodyWidget = [[WPWidgetBody alloc] initWithProject:project options:options];
         [self addIU:self.bodyWidget error:nil];
+        
+        [self.css eradicateTag:IUCSSTagPixelHeight];
     }
     return self;
 }
