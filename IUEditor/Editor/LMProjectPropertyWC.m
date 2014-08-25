@@ -41,7 +41,6 @@
 
 - (IBAction)pressOKBtn:(id)sender {
     [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseOK];
-    [self close];
 }
 
 @end

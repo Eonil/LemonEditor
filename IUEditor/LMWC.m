@@ -336,6 +336,10 @@
     }
 }
 
+- (NSString *)projectName{
+    return _project.name;
+}
+
 - (void)selectFirstDocument{
     [fileNaviVC selectFirstDocument];
 }
@@ -366,7 +370,7 @@
 
 
 
-#pragma mark -console
+#pragma mark - console
 
 - (void)increaseConsoleLogReferenceCount{
     consoleLogReferenceCount ++;
@@ -444,6 +448,8 @@
     });
 }
 
+
+//TODO: plist class따로 관리-코드겹침
 - (NSImage *)currentImage:(NSString *)className{
     NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForDefault" ofType:@"plist"];
     NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
@@ -476,33 +482,8 @@
 }
 
 
-#pragma mark -
-#if 0
-- (void)saveDocument:(id)sender{
-    JDInfoLog(@"saving document");
-    [_project save];
-}
-#endif
+#pragma mark - select TabView
 
-
-#pragma mark -
-#pragma mark select TabView
-- (void)openProjectPropertyWindow{
-    if(projectPropertyWC == nil){
-        projectPropertyWC = [[LMProjectPropertyWC alloc] initWithWindowNibName:[LMProjectPropertyWC class].className withIUProject:_project];
-    }
-    
-    [self.window beginSheet:projectPropertyWC.window completionHandler:^(NSModalResponse returnCode) {
-        switch (returnCode) {
-            case NSModalResponseOK:
-                break;
-            case NSModalResponseAbort:
-            default:
-                break;
-        }
-    }];
-}
-         
 
 - (IBAction)clickPropertyMatrix:(id)sender {
     NSMatrix *propertyMatrix = sender;
@@ -518,8 +499,40 @@
 
 }
 
-#pragma mark - project
+#pragma mark - window
+- (void)windowWillClose:(NSNotification *)notification{
+    [commandVC stopServer:self];
+}
 
+#pragma mark - tool-bar action
+
+-(void)setProgressBarValue:(CGFloat)value{
+    [_progressToolbarIndicator setDoubleValue:value];
+}
+
+-(void)stopProgressBar:(id)sender{
+    [_progressToolbarIndicator setDoubleValue:100.0];
+    [_progressToolbarIndicator stopAnimation:sender];
+    [_progressToolbarIndicator setHidden:YES];
+}
+
+- (IBAction)cleanBuild:(id)sender{
+    NSDirectoryEnumerator* en = [[NSFileManager defaultManager] enumeratorAtPath:_project.absoluteBuildPath];
+    BOOL res;
+    
+    NSString* file;
+    while (file = [en nextObject]) {
+        if ([[file lastPathComponent] characterAtIndex:0] == '.') {
+            //skip hidden file
+            continue;
+        }
+        NSError *err;
+        res = [[NSFileManager defaultManager] trashItemAtURL:[NSURL fileURLWithPath:[_project.absoluteBuildPath stringByAppendingPathComponent:file]] resultingItemURL:nil error:&err];
+        NSAssert(res, @"error");
+    }
+}
+
+#pragma mark - Sheet
 
 - (IBAction)convertProject:(id)sender{
     //call from menu item
@@ -538,26 +551,17 @@
     }];
 }
 
-- (NSString *)projectName{
-    return _project.name;
+
+- (void)openProjectPropertyWindow{
+    if(projectPropertyWC == nil){
+        projectPropertyWC = [[LMProjectPropertyWC alloc] initWithWindowNibName:[LMProjectPropertyWC class].className withIUProject:_project];
+    }
+    
+    [self.window beginSheet:projectPropertyWC.window completionHandler:^(NSModalResponse returnCode) {
+        //do nothing
+    }];
 }
 
-- (void)windowWillClose:(NSNotification *)notification{
-    [commandVC stopServer:self];
-}
-
-
-#pragma mark - IBaction
-
--(void)setProgressBarValue:(CGFloat)value{
-    [_progressToolbarIndicator setDoubleValue:value];
-}
-
--(void)stopProgressBar:(id)sender{
-    [_progressToolbarIndicator setDoubleValue:100.0];
-    [_progressToolbarIndicator stopAnimation:sender];
-    [_progressToolbarIndicator setHidden:YES];
-}
 
 - (IBAction)showServerWC:(id)sender{
     if (serverWC == nil) {
@@ -570,21 +574,6 @@
     }];
 }
 
-- (IBAction)cleanBuild:(id)sender{
-    NSDirectoryEnumerator* en = [[NSFileManager defaultManager] enumeratorAtPath:_project.absoluteBuildPath];
-    BOOL res;
-    
-    NSString* file;
-    while (file = [en nextObject]) {
-        if ([[file lastPathComponent] characterAtIndex:0] == '.') {
-            //skip hidden file
-            continue;
-        }
-        NSError *err;
-        res = [[NSFileManager defaultManager] trashItemAtURL:[NSURL fileURLWithPath:[_project.absoluteBuildPath stringByAppendingPathComponent:file]] resultingItemURL:nil error:&err];
-        NSAssert(res, @"error");
-    }
-}
 
 - (IBAction)showHerokuWC:(id)sender{
     if (herokuWC == nil) {

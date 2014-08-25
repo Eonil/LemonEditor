@@ -271,6 +271,9 @@
     [self.window.sheetParent endSheet:self.window];
 }
 
+- (void)cancelOperation:(id)sender{
+    [self pressCancel:self];
+}
 
 - (void)addHerokuLog:(NSString*)str{
     if ([str length]) {

@@ -43,6 +43,7 @@
     return _project.serverInfo;
 }
 
+
 - (IBAction)download:(id)sender{
     NSAssert(_notificationSender, @"Should Have Notification Sender");
     if (syncUtil.isSyncing) {
@@ -142,6 +143,11 @@
 
 - (IBAction)close:(id)sender{
     [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseOK];
+}
+
+
+- (void)cancelOperation:(id)sender{
+    [self close:self];
 }
 
 @end

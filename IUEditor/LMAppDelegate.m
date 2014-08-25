@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 JDLab. All rights reserved.
 //
 
+#import <SystemConfiguration/SystemConfiguration.h>
+#import "Reachability.h"
+
+
 #import "LMAppDelegate.h"
 #import "LMWC.h"
 #import "JDLogUtil.h"
@@ -20,6 +24,7 @@
 #import "JDEnvUtil.h"
 #import "LMTutorialWC.h"
 #import "LMHelpWC.h"
+#import "LMAppWarningWC.h"
 
 @implementation LMAppDelegate{
     LMStartWC *startWC;
@@ -36,8 +41,32 @@
     // register the stuff
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
+
+- (BOOL)isConnected
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    if([self isConnected] == NO){
+        
+        [NSApp activateIgnoringOtherApps:YES];
+        
+        //import warning
+        LMAppWarningWC *warnWC =  [[LMAppWarningWC alloc] initWithWindowNibName:[LMAppWarningWC class].className];
+        [warnWC showWindow:self];
+        [warnWC.window center];
+        [warnWC.window makeKeyAndOrderFront:self];
+
+        double delayInSeconds = 3.0;
+        [NSThread sleepForTimeInterval: delayInSeconds];
+        [[NSApplication sharedApplication] terminate:nil];
+    }
+    
+    
 #if DEBUG
 #else
     if ([JDEnvUtil isFirstExecution:@"IUEditor"]) {
@@ -70,10 +99,9 @@
     [JDLogUtil enableLogSection:IULogSource];
     [JDLogUtil enableLogSection:IULogJS];
     [JDLogUtil enableLogSection:IULogAction];
-//    [JDLogUtil enableLogSection:IULogText];
-    
-
+    [JDLogUtil enableLogSection:IULogText];
 */
+    
     [JDLogUtil enableLogSection:IULogDealloc];
 
     [JDLogUtil setGlobalLevel:JDLog_Level_Error];

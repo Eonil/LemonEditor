@@ -401,7 +401,7 @@
 
 
 - (void)runJSAfterRefreshCSS{
-    JDErrorLog(@"runJSAfterRefreshCSS");
+    JDTraceLog(@"runJSAfterRefreshCSS");
     [self reframeCenter];
     [self updateFrameDict];
 }

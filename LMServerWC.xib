@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMServerWC">
@@ -15,7 +15,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="400" height="540"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="400" height="540"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -25,7 +25,27 @@
                         <view key="contentView">
                             <rect key="frame" x="0.0" y="0.0" width="400" height="540"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K5b-C3-ieb">
+                                    <rect key="frame" x="113" y="499" width="175" height="26"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24" id="0cr-oR-UXb"/>
+                                        <constraint firstAttribute="width" constant="175" id="ydZ-Gf-ROL"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="smallSquare" title="Upload" bezelStyle="smallSquare" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gyt-Al-ubp">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="smallSystemBold"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="upload:" target="-2" id="jbC-RA-csK"/>
+                                    </connections>
+                                </button>
+                            </subviews>
                         </view>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="K5b-C3-ieb" secondAttribute="centerX" id="aHJ-eJ-n5z"/>
+                            <constraint firstItem="K5b-C3-ieb" firstAttribute="top" secondItem="OCt-sE-qvp" secondAttribute="top" constant="16" id="eWW-3E-7cS"/>
+                        </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" red="0.92941182851791382" green="0.92941182851791382" blue="0.92941182851791382" alpha="1" colorSpace="deviceRGB"/>
                     </box>
@@ -464,34 +484,6 @@ DQ
                             <color key="backgroundColor" red="0.92941182851791382" green="0.92941182851791382" blue="0.92941182851791382" alpha="1" colorSpace="deviceRGB"/>
                         </textFieldCell>
                     </textField>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6WR-M5-7cb">
-                        <rect key="frame" x="20" y="495" width="175" height="26"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="175" id="Bgz-UP-eIB"/>
-                            <constraint firstAttribute="height" constant="24" id="nXn-pn-xzw"/>
-                        </constraints>
-                        <buttonCell key="cell" type="smallSquare" title="Download" bezelStyle="smallSquare" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fmM-Iz-52n">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="smallSystemBold"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="download:" target="-2" id="iaa-yV-Inv"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K5b-C3-ieb">
-                        <rect key="frame" x="205" y="495" width="175" height="26"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="24" id="0cr-oR-UXb"/>
-                            <constraint firstAttribute="width" constant="175" id="ydZ-Gf-ROL"/>
-                        </constraints>
-                        <buttonCell key="cell" type="smallSquare" title="Upload" bezelStyle="smallSquare" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gyt-Al-ubp">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="smallSystemBold"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="upload:" target="-2" id="jbC-RA-csK"/>
-                        </connections>
-                    </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dSe-52-bJN">
                         <rect key="frame" x="20" y="16" width="100" height="19"/>
                         <constraints>
@@ -510,28 +502,22 @@ DQ
                 <constraints>
                     <constraint firstItem="dSe-52-bJN" firstAttribute="top" secondItem="WPZ-1K-fC5" secondAttribute="bottom" constant="16" id="0LV-Uu-bpW"/>
                     <constraint firstItem="dSe-52-bJN" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="1ac-KX-ekq"/>
-                    <constraint firstItem="6WR-M5-7cb" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="1ts-SB-Afl"/>
-                    <constraint firstAttribute="trailing" secondItem="K5b-C3-ieb" secondAttribute="trailing" constant="20" id="1wg-ph-aEA"/>
                     <constraint firstItem="gG1-lg-ySG" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="26" id="3vU-pf-g8z"/>
-                    <constraint firstItem="vbv-nv-KYZ" firstAttribute="top" secondItem="K5b-C3-ieb" secondAttribute="bottom" constant="25" id="5Yp-hv-hlq"/>
                     <constraint firstItem="WPZ-1K-fC5" firstAttribute="top" secondItem="6Pv-2E-Dvo" secondAttribute="bottom" constant="20" id="Bam-c3-tUo"/>
                     <constraint firstItem="gG1-lg-ySG" firstAttribute="top" secondItem="vbv-nv-KYZ" secondAttribute="bottom" constant="13" id="FjR-uS-0zX"/>
                     <constraint firstItem="OCt-sE-qvp" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="GD5-kI-YSG"/>
                     <constraint firstAttribute="bottom" secondItem="OCt-sE-qvp" secondAttribute="bottom" id="H6b-jl-xuN"/>
                     <constraint firstItem="6Pv-2E-Dvo" firstAttribute="top" secondItem="vbv-nv-KYZ" secondAttribute="bottom" constant="20" id="JKi-wy-yfd"/>
                     <constraint firstAttribute="trailing" secondItem="OCt-sE-qvp" secondAttribute="trailing" id="JXM-cX-F3L"/>
-                    <constraint firstItem="6WR-M5-7cb" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="LJo-9B-Kfg"/>
                     <constraint firstItem="qtV-qw-zQd" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="28" id="O9I-vh-zfG"/>
                     <constraint firstAttribute="trailing" secondItem="LIe-BI-GZ1" secondAttribute="trailing" constant="20" id="PFB-fY-Rnk"/>
                     <constraint firstItem="vbv-nv-KYZ" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="Ppp-h2-JsH"/>
                     <constraint firstItem="qtV-qw-zQd" firstAttribute="top" secondItem="6Pv-2E-Dvo" secondAttribute="bottom" constant="14" id="Qea-d3-QOs"/>
                     <constraint firstItem="LIe-BI-GZ1" firstAttribute="top" secondItem="WPZ-1K-fC5" secondAttribute="bottom" constant="16" id="T4c-Ez-aSg"/>
                     <constraint firstAttribute="bottom" secondItem="LIe-BI-GZ1" secondAttribute="bottom" constant="17" id="WiE-YV-W17"/>
-                    <constraint firstItem="K5b-C3-ieb" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="aDG-Sm-apL"/>
                     <constraint firstItem="OCt-sE-qvp" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="c5K-cC-2by"/>
                     <constraint firstItem="ROQ-pj-pWv" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="26" id="dOr-wu-iev"/>
-                    <constraint firstItem="ROQ-pj-pWv" firstAttribute="top" secondItem="6WR-M5-7cb" secondAttribute="bottom" constant="18" id="fWS-LN-osQ"/>
-                    <constraint firstItem="6WR-M5-7cb" firstAttribute="centerY" secondItem="K5b-C3-ieb" secondAttribute="centerY" id="hzg-OY-FEM"/>
+                    <constraint firstItem="ROQ-pj-pWv" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="62" id="gjd-mp-wLA"/>
                     <constraint firstAttribute="trailing" secondItem="WPZ-1K-fC5" secondAttribute="trailing" constant="20" id="iHK-Hn-lKo"/>
                     <constraint firstAttribute="trailing" secondItem="6Pv-2E-Dvo" secondAttribute="trailing" constant="20" id="ii0-bw-WTM"/>
                     <constraint firstAttribute="trailing" secondItem="vbv-nv-KYZ" secondAttribute="trailing" constant="20" id="jNU-XM-0ux"/>

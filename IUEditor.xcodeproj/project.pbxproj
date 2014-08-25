@@ -394,6 +394,11 @@
 		3DA77130199C8986001743B9 /* LMDefaultPropertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7712F199C8986001743B9 /* LMDefaultPropertyVC.m */; };
 		3DAEEDFD1938537700196A81 /* image_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAEEDFC1938537700196A81 /* image_default.png */; };
 		3DAEEE00193C3D2500196A81 /* iuinit.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DAEEDFE193C36E600196A81 /* iuinit.js */; };
+		3DB0AB3B19AAE84D0066FAB7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0AB3A19AAE84D0066FAB7 /* Reachability.m */; };
+		3DB0AB3F19AAE93B0066FAB7 /* LMAppWarningWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0AB3D19AAE93B0066FAB7 /* LMAppWarningWC.m */; };
+		3DB0AB4019AAE93B0066FAB7 /* LMAppWarningWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DB0AB3E19AAE93B0066FAB7 /* LMAppWarningWC.xib */; };
+		3DB0AB4419AAEC8A0066FAB7 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB0AB4319AAEC8A0066FAB7 /* CoreFoundation.framework */; };
+		3DB0AB4619AAECCC0066FAB7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB0AB4519AAECCC0066FAB7 /* SystemConfiguration.framework */; };
 		3DB3ACC518EBEF180046DFB7 /* LMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACC418EBEF180046DFB7 /* LMWindow.m */; };
 		3DB3ACCB18EBEF3D0046DFB7 /* SizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACC818EBEF3D0046DFB7 /* SizeView.m */; };
 		3DB3ACCC18EBEF3D0046DFB7 /* InnerSizeBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACCA18EBEF3D0046DFB7 /* InnerSizeBox.m */; };
@@ -1335,6 +1340,14 @@
 		3DA7712F199C8986001743B9 /* LMDefaultPropertyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMDefaultPropertyVC.m; path = Editor/LMDefaultPropertyVC.m; sourceTree = "<group>"; };
 		3DAEEDFC1938537700196A81 /* image_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_default.png; sourceTree = "<group>"; };
 		3DAEEDFE193C36E600196A81 /* iuinit.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = iuinit.js; sourceTree = "<group>"; };
+		3DB0AB3919AAE84D0066FAB7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		3DB0AB3A19AAE84D0066FAB7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		3DB0AB3C19AAE93B0066FAB7 /* LMAppWarningWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMAppWarningWC.h; path = Editor/LMAppWarningWC.h; sourceTree = "<group>"; };
+		3DB0AB3D19AAE93B0066FAB7 /* LMAppWarningWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMAppWarningWC.m; path = Editor/LMAppWarningWC.m; sourceTree = "<group>"; };
+		3DB0AB3E19AAE93B0066FAB7 /* LMAppWarningWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMAppWarningWC.xib; path = Editor/LMAppWarningWC.xib; sourceTree = "<group>"; };
+		3DB0AB4119AAEC630066FAB7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		3DB0AB4319AAEC8A0066FAB7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		3DB0AB4519AAECCC0066FAB7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3DB3ACC318EBEF180046DFB7 /* LMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWindow.h; sourceTree = "<group>"; };
 		3DB3ACC418EBEF180046DFB7 /* LMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMWindow.m; sourceTree = "<group>"; };
 		3DB3ACC718EBEF3D0046DFB7 /* SizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SizeView.h; sourceTree = "<group>"; };
@@ -2046,6 +2059,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DB0AB4619AAECCC0066FAB7 /* SystemConfiguration.framework in Frameworks */,
+				3DB0AB4419AAEC8A0066FAB7 /* CoreFoundation.framework in Frameworks */,
 				3DA6F30A1963B7DC004DF0AA /* AVKit.framework in Frameworks */,
 				69FEC48A19483D6D00483C11 /* Quartz.framework in Frameworks */,
 				3DED273C1904F9E0001A1D67 /* CoreMedia.framework in Frameworks */,
@@ -2756,6 +2771,9 @@
 				3DBD7C16195D61B5003E386C /* LMCloseWC.h */,
 				3DBD7C17195D61B5003E386C /* LMCloseWC.m */,
 				3DBD7C18195D61B5003E386C /* LMCloseWC.xib */,
+				3DB0AB3C19AAE93B0066FAB7 /* LMAppWarningWC.h */,
+				3DB0AB3D19AAE93B0066FAB7 /* LMAppWarningWC.m */,
+				3DB0AB3E19AAE93B0066FAB7 /* LMAppWarningWC.xib */,
 			);
 			name = window;
 			sourceTree = "<group>";
@@ -3551,6 +3569,8 @@
 		69757AD218D95BB10095CBAC /* JD */ = {
 			isa = PBXGroup;
 			children = (
+				3DB0AB3919AAE84D0066FAB7 /* Reachability.h */,
+				3DB0AB3A19AAE84D0066FAB7 /* Reachability.m */,
 				3D19E422198777B600A50D35 /* script */,
 				6983E71B18FFF54600D424B8 /* JDOutlineCellView.h */,
 				6983E71C18FFF54600D424B8 /* JDOutlineCellView.m */,
@@ -3657,6 +3677,9 @@
 		69C575A918D6F61E0016F050 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3DB0AB4519AAECCC0066FAB7 /* SystemConfiguration.framework */,
+				3DB0AB4319AAEC8A0066FAB7 /* CoreFoundation.framework */,
+				3DB0AB4119AAEC630066FAB7 /* CFNetwork.framework */,
 				3DA6F3091963B7DC004DF0AA /* AVKit.framework */,
 				69FEC48919483D6D00483C11 /* Quartz.framework */,
 				3DED273B1904F9E0001A1D67 /* CoreMedia.framework */,
@@ -4494,6 +4517,7 @@
 				3DED26621900D313001A1D67 /* align_right@2x.png in Resources */,
 				26CA36CE198760B70004D888 /* cs_mobile_02.png in Resources */,
 				692D98FA199D5A6E00A7E1C1 /* LMPropertySampleTextVC.xib in Resources */,
+				3DB0AB4019AAE93B0066FAB7 /* LMAppWarningWC.xib in Resources */,
 				2642096719A48E2400411666 /* heroku@2x.png in Resources */,
 				CBA87815196437DF00075294 /* IUHTML.rtf in Resources */,
 				3DC4AAED198200DF0024170A /* event_mobile_video.mp4 in Resources */,
@@ -4848,6 +4872,7 @@
 				690A826B190A25D500DDBA86 /* IUDjangoProject.m in Sources */,
 				692D9902199D807000A7E1C1 /* WPSidebar.m in Sources */,
 				3DA6F30E1963B810004DF0AA /* LMHelpVideoPopoverVC.m in Sources */,
+				3DB0AB3B19AAE84D0066FAB7 /* Reachability.m in Sources */,
 				3D5B5AF31990B8B900EF6F12 /* IUTweetButton.m in Sources */,
 				CB9BD6381914DC62002C9369 /* LMStartNewDjangoVC.m in Sources */,
 				692D98F9199D5A6E00A7E1C1 /* LMPropertySampleTextVC.m in Sources */,
@@ -4880,6 +4905,7 @@
 				693F24791977929C00451500 /* LMPropertyWPMenuVC.m in Sources */,
 				69C5764018D729830016F050 /* IUSheetController.m in Sources */,
 				06EA0FFC197F8C880068C683 /* ClipArt.m in Sources */,
+				3DB0AB3F19AAE93B0066FAB7 /* LMAppWarningWC.m in Sources */,
 				69AB7EAC19062598009E5195 /* IUTransition.m in Sources */,
 				58FF6B8E1946EA2B009A86F9 /* PGSubmitButtonVC.m in Sources */,
 				3DA416B81935A6BE00559028 /* LMPreferenceFontVC.m in Sources */,
