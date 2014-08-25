@@ -74,29 +74,6 @@
 #pragma mark -
 #pragma mark sizeView
 
-/*
-- (void)frameDidChange:(NSDictionary *)change{
-//    [[self webView] runJSAfterRefreshCSS];
-    JDDebugLog(@"mainView: point(%.1f, %.1f) size(%.1f, %.1f)",
-               self.mainView.frame.origin.x,
-               self.mainView.frame.origin.y,
-               self.mainView.frame.size.width,
-               self.mainView.frame.size.height);
-    
-    JDDebugLog(@"gridView: point(%.1f, %.1f) size(%.1f, %.1f)",
-               self.gridView.frame.origin.x,
-               self.gridView.frame.origin.y,
-               self.gridView.frame.size.width,
-               self.gridView.frame.size.height);
-
-    JDDebugLog(@"webView: point(%.1f, %.1f) size(%.1f, %.1f)",
-               self.webView.frame.origin.x,
-               self.webView.frame.origin.y,
-               self.webView.frame.size.width,
-               self.webView.frame.size.height);
-}
-*/
-
 - (void)changeMQSelect:(NSNotification *)notification{
     
     NSInteger selectedSize = [[notification.userInfo valueForKey:IUNotificationMQSize] integerValue];

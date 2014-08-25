@@ -21,7 +21,8 @@
 -(void)disableUpdateCSS;
 -(BOOL)isUpdateCSSEnabled;
 -(void)IUClassIdentifier:(NSString *)identifier CSSUpdated:(NSString*)css;
-
+//style-sheet css
+-(void)removeCSSTextInDefaultSheetWithIdentifier:(NSString *)identifier;
 
 //js update (frame)
 -(void)enableUpdateJS;
