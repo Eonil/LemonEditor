@@ -335,7 +335,6 @@
             [code addCodeLineWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@\"></script>", filename];
         }
         
-        [code addCodeLine:@"<script type=\"text/javascript\" src=\"resource/js/iucarousel.js\"></script>"];
         [code addCodeLine:@"<script src=\"http://maps.googleapis.com/maps/api/js?v=3.exp\"></script>"];
         [code addCodeLine:@"<script src=\"http://f.vimeocdn.com/js/froogaloop2.min.js\"></script>"];
         

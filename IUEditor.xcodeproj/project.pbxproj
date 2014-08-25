@@ -399,7 +399,7 @@
 		3DB0AB4019AAE93B0066FAB7 /* LMAppWarningWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DB0AB3E19AAE93B0066FAB7 /* LMAppWarningWC.xib */; };
 		3DB0AB4419AAEC8A0066FAB7 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB0AB4319AAEC8A0066FAB7 /* CoreFoundation.framework */; };
 		3DB0AB4619AAECCC0066FAB7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB0AB4519AAECCC0066FAB7 /* SystemConfiguration.framework */; };
-		3DB0AB4A19AB127A0066FAB7 /* jquery.mobile-1.4.3.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DB0AB4919AB127A0066FAB7 /* jquery.mobile-1.4.3.js */; };
+		3DB0AB4C19AB5CD90066FAB7 /* jquery.event.swipe.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DB0AB4B19AB5CD90066FAB7 /* jquery.event.swipe.js */; };
 		3DB3ACC518EBEF180046DFB7 /* LMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACC418EBEF180046DFB7 /* LMWindow.m */; };
 		3DB3ACCB18EBEF3D0046DFB7 /* SizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACC818EBEF3D0046DFB7 /* SizeView.m */; };
 		3DB3ACCC18EBEF3D0046DFB7 /* InnerSizeBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACCA18EBEF3D0046DFB7 /* InnerSizeBox.m */; };
@@ -1349,7 +1349,7 @@
 		3DB0AB4119AAEC630066FAB7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3DB0AB4319AAEC8A0066FAB7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		3DB0AB4519AAECCC0066FAB7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		3DB0AB4919AB127A0066FAB7 /* jquery.mobile-1.4.3.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery.mobile-1.4.3.js"; sourceTree = "<group>"; };
+		3DB0AB4B19AB5CD90066FAB7 /* jquery.event.swipe.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.event.swipe.js; sourceTree = "<group>"; };
 		3DB3ACC318EBEF180046DFB7 /* LMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWindow.h; sourceTree = "<group>"; };
 		3DB3ACC418EBEF180046DFB7 /* LMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMWindow.m; sourceTree = "<group>"; };
 		3DB3ACC718EBEF3D0046DFB7 /* SizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SizeView.h; sourceTree = "<group>"; };
@@ -3202,7 +3202,6 @@
 		3DED275D190E388F001A1D67 /* JS */ = {
 			isa = PBXGroup;
 			children = (
-				3DB0AB4919AB127A0066FAB7 /* jquery.mobile-1.4.3.js */,
 				698503E8199953A500576DBF /* jquery-1.10.2.js */,
 				698503E9199953A500576DBF /* jquery-ui-1.9.2.js */,
 				3D19E42119874A7400A50D35 /* ie8 */,
@@ -3240,6 +3239,7 @@
 		3DED2768190E3956001A1D67 /* plugins */ = {
 			isa = PBXGroup;
 			children = (
+				3DB0AB4B19AB5CD90066FAB7 /* jquery.event.swipe.js */,
 				3DED2769190E3956001A1D67 /* jquery.easing.1.3.js */,
 				3DED276A190E3956001A1D67 /* jquery.fitvids.js */,
 			);
@@ -4287,6 +4287,7 @@
 				69B260E719594E4F007D905C /* font.png in Resources */,
 				69D15F7018E893170046FBB0 /* LMBottomToolbarVC.xib in Resources */,
 				69DE5CE319614D880050D020 /* LMNotiMessageWC.xib in Resources */,
+				3DB0AB4C19AB5CD90066FAB7 /* jquery.event.swipe.js in Resources */,
 				3D9BC40E1994AADA00451F55 /* tool_map@2x.png in Resources */,
 				3DED26891900D329001A1D67 /* stack_navi@2x.png in Resources */,
 				58FF6B8F1946EA2B009A86F9 /* PGSubmitButtonVC.xib in Resources */,
@@ -4713,7 +4714,6 @@
 				690A825E190A047300DDBA86 /* LMPropertyIUTextFieldVC.xib in Resources */,
 				3DF803E518FE62C900913505 /* stack_transition.png in Resources */,
 				26EFF422194AEF9E00317C3E /* help@2x.png in Resources */,
-				3DB0AB4A19AB127A0066FAB7 /* jquery.mobile-1.4.3.js in Resources */,
 				690A8273190A2CC200DDBA86 /* new_django@2x.png in Resources */,
 				267CB1AB190F93370079E565 /* tab_secondary.png in Resources */,
 				2610CAC81999C1AC004C2F2E /* center_off.png in Resources */,

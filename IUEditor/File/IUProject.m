@@ -450,7 +450,7 @@
         [[NSFileManager defaultManager] createDirectoryAtPath:resourceJSPath withIntermediateDirectories:YES attributes:nil error:&error];
     }
     
-    for(NSString *filename in [self defaultEditorJSArray]){
+    for(NSString *filename in [self defaultCopyJSArray]){
         [[JDFileUtil util] overwriteBundleItem:filename toDirectory:resourceJSPath];
     }
     
@@ -646,11 +646,14 @@
 /** default js array
  */
 - (NSArray *)defaultEditorJSArray{
-    return @[@"iueditor.js", @"iuframe.js", @"iu.js", @"iucarousel.js"];
+    return @[@"iueditor.js", @"iuframe.js", @"iu.js"];
 }
 
+- (NSArray *)defaultCopyJSArray{
+    return @[@"jquery.event.swipe.js", @"iuframe.js", @"iu.js", @"iucarousel.js", ];
+}
 - (NSArray *)defaultOutputJSArray{
-    return @[@"iuframe.js", @"iu.js", @"iuevent.js", @"iuinit.js"];
+    return [[self defaultCopyJSArray] arrayByAddingObjectsFromArray:@[ @"iuevent.js", @"iuinit.js"]];
 }
 - (NSArray *)defaultOutputIEJSArray{
     return @[@"jquery.backgroundSize.js", @"respond.min.js"];

@@ -46,7 +46,6 @@ function initCarousel(carouselID){
 		nextCarousel(carouselID);
 	});
 	
-    /*
 	carousel.find('.IUCarouselItem').on( "swipeleft",function(){
 		nextCarousel(carouselID);
 	});
@@ -54,7 +53,7 @@ function initCarousel(carouselID){
 	carousel.find('.IUCarouselItem').on( "swiperight",function(){
 		prevCarousel(carouselID);
 	});
-     */	
+	
 	carousel.find('.Pager >li').each(function(index){
 		$(this).click(function(){
 			moveCarousel(carouselID, index+1);
