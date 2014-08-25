@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -129,53 +129,6 @@
             <rect key="frame" x="0.0" y="0.0" width="299" height="379"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="NOD-ph-6yz" userLabel="bottomBox">
-                    <rect key="frame" x="39" y="0.0" width="260" height="31"/>
-                    <view key="contentView">
-                        <rect key="frame" x="0.0" y="0.0" width="260" height="31"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="09H-fm-KUt" userLabel="iconBtn">
-                                <rect key="frame" x="229" y="3" width="29" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="29" id="bAk-U1-axx"/>
-                                    <constraint firstAttribute="height" constant="28" id="xdY-QJ-nrj"/>
-                                </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="view_collection" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="VF3-bQ-NCj">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="clickIconView:" target="-2" id="usr-2t-Kic"/>
-                                </connections>
-                            </button>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="Rfa-DJ-weo" userLabel="listBtn">
-                                <rect key="frame" x="203" y="3" width="28" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="28" id="C02-nc-T17"/>
-                                    <constraint firstAttribute="height" constant="28" id="eyt-o8-AkJ"/>
-                                </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="view_list" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="l6j-FH-3Jy">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="clickListView:" target="-2" id="1uE-7t-hwK"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                    </view>
-                    <constraints>
-                        <constraint firstItem="Rfa-DJ-weo" firstAttribute="top" secondItem="NOD-ph-6yz" secondAttribute="top" id="Uws-6T-jve"/>
-                        <constraint firstItem="09H-fm-KUt" firstAttribute="top" secondItem="NOD-ph-6yz" secondAttribute="top" id="Y5b-2K-weL"/>
-                        <constraint firstAttribute="trailing" secondItem="Rfa-DJ-weo" secondAttribute="trailing" constant="29" id="eW9-pu-4vR"/>
-                        <constraint firstAttribute="width" constant="260" id="gW4-tE-Ym6"/>
-                        <constraint firstAttribute="trailing" secondItem="09H-fm-KUt" secondAttribute="trailing" constant="2" id="o9S-7R-H5r"/>
-                        <constraint firstAttribute="height" constant="31" id="whZ-wu-THN"/>
-                    </constraints>
-                    <color key="borderColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="fillColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
-                </box>
                 <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Myo-YT-upo" userLabel="selectBox">
                     <rect key="frame" x="0.0" y="0.0" width="41" height="380"/>
                     <view key="contentView">
@@ -224,6 +177,53 @@
                     <color key="borderColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="fillColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                 </box>
+                <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="NOD-ph-6yz" userLabel="bottomBox">
+                    <rect key="frame" x="38" y="0.0" width="261" height="31"/>
+                    <view key="contentView">
+                        <rect key="frame" x="0.0" y="0.0" width="261" height="31"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="09H-fm-KUt" userLabel="iconBtn">
+                                <rect key="frame" x="230" y="3" width="29" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="29" id="bAk-U1-axx"/>
+                                    <constraint firstAttribute="height" constant="28" id="xdY-QJ-nrj"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="view_collection" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="VF3-bQ-NCj">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="clickIconView:" target="-2" id="usr-2t-Kic"/>
+                                </connections>
+                            </button>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="Rfa-DJ-weo" userLabel="listBtn">
+                                <rect key="frame" x="204" y="3" width="28" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="C02-nc-T17"/>
+                                    <constraint firstAttribute="height" constant="28" id="eyt-o8-AkJ"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="view_list" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="l6j-FH-3Jy">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="clickListView:" target="-2" id="1uE-7t-hwK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <constraints>
+                        <constraint firstItem="Rfa-DJ-weo" firstAttribute="top" secondItem="NOD-ph-6yz" secondAttribute="top" id="Uws-6T-jve"/>
+                        <constraint firstItem="09H-fm-KUt" firstAttribute="top" secondItem="NOD-ph-6yz" secondAttribute="top" id="Y5b-2K-weL"/>
+                        <constraint firstAttribute="trailing" secondItem="Rfa-DJ-weo" secondAttribute="trailing" constant="29" id="eW9-pu-4vR"/>
+                        <constraint firstAttribute="width" constant="261" id="gW4-tE-Ym6"/>
+                        <constraint firstAttribute="trailing" secondItem="09H-fm-KUt" secondAttribute="trailing" constant="2" id="o9S-7R-H5r"/>
+                        <constraint firstAttribute="height" constant="31" id="whZ-wu-THN"/>
+                    </constraints>
+                    <color key="borderColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="fillColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                </box>
                 <box autoresizesSubviews="NO" verticalHuggingPriority="750" alphaValue="0.40000000000000002" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="sGn-bl-Kcs">
                     <rect key="frame" x="0.0" y="28" width="300" height="5"/>
                     <constraints>
@@ -243,21 +243,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="uLh-jb-tV9" userLabel="simple">
+                                    <tabView misplaced="YES" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="uLh-jb-tV9" userLabel="simple">
                                         <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="Tab" identifier="1" id="t2D-Mm-F3S" userLabel="list_simple">
                                                 <view key="view" id="M40-my-pRc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="9QO-nv-ssd" userLabel="CollectionView">
-                                                            <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                             <subviews>
-                                                                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsW-LS-gZG">
+                                                                <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsW-LS-gZG">
                                                                     <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
-                                                                    <clipView key="contentView" copiesOnScroll="NO" id="bCG-sx-bTC">
+                                                                    <clipView key="contentView" misplaced="YES" copiesOnScroll="NO" id="bCG-sx-bTC">
                                                                         <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -547,11 +547,11 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Y79-Et-mvV" userLabel="CollectionView">
+                                                        <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y79-Et-mvV" userLabel="CollectionView">
                                                             <rect key="frame" x="0.0" y="0.0" width="259" height="348"/>
                                                             <subviews>
                                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8P0-1Z-CSb">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="259" height="348"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                                     <clipView key="contentView" copiesOnScroll="NO" id="N2A-jh-TwF">
                                                                         <rect key="frame" x="0.0" y="0.0" width="259" height="348"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -608,24 +608,24 @@
                         </tabViewItem>
                         <tabViewItem label="Item 3" identifier="" id="Bw6-6p-Nc3" userLabel="WP">
                             <view key="view" id="a32-aN-yBs">
-                                <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
+                                <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Lt0-do-8tU" userLabel="WP">
-                                        <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
+                                    <tabView misplaced="YES" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Lt0-do-8tU" userLabel="WP">
+                                        <rect key="frame" x="0.0" y="300" width="260" height="48"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="Tab" identifier="1" id="n6u-UK-GCt" userLabel="list_WP">
                                                 <view key="view" id="rSI-c6-ub3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="EJw-Y6-hzU" userLabel="CollectionView">
+                                                        <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EJw-Y6-hzU" userLabel="CollectionView">
                                                             <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
                                                             <subviews>
-                                                                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vc7-jD-GEn">
+                                                                <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vc7-jD-GEn">
                                                                     <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
-                                                                    <clipView key="contentView" copiesOnScroll="NO" id="jsM-Mi-oAN">
+                                                                    <clipView key="contentView" misplaced="YES" copiesOnScroll="NO" id="jsM-Mi-oAN">
                                                                         <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>

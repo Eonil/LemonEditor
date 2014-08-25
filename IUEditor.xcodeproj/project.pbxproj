@@ -223,6 +223,10 @@
 		265FCC0E1953D3C000BD9068 /* tab2_on_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 265FCC081953D3C000BD9068 /* tab2_on_02@2x.png */; };
 		26620E4B19458A2100B728CD /* select_directory.png in Resources */ = {isa = PBXBuildFile; fileRef = 26620E4919458A2100B728CD /* select_directory.png */; };
 		26620E4C19458A2100B728CD /* select_directory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26620E4A19458A2100B728CD /* select_directory@2x.png */; };
+		266C411419AB6CC9008A77CD /* wp-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 266C411219AB6CC9008A77CD /* wp-logo.png */; };
+		266C411519AB6CC9008A77CD /* wp-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 266C411319AB6CC9008A77CD /* wp-logo@2x.png */; };
+		266C411819AB8032008A77CD /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 266C411619AB8032008A77CD /* setting.png */; };
+		266C411919AB8032008A77CD /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 266C411719AB8032008A77CD /* setting@2x.png */; };
 		2672A0A1191207710050043E /* stack_textview.png in Resources */ = {isa = PBXBuildFile; fileRef = 2672A09D191207710050043E /* stack_textview.png */; };
 		2672A0A2191207710050043E /* stack_textview@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2672A09E191207710050043E /* stack_textview@2x.png */; };
 		2672A0A3191207710050043E /* tool_textview.png in Resources */ = {isa = PBXBuildFile; fileRef = 2672A09F191207710050043E /* tool_textview.png */; };
@@ -1137,6 +1141,10 @@
 		265FCC081953D3C000BD9068 /* tab2_on_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab2_on_02@2x.png"; sourceTree = "<group>"; };
 		26620E4919458A2100B728CD /* select_directory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select_directory.png; sourceTree = "<group>"; };
 		26620E4A19458A2100B728CD /* select_directory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select_directory@2x.png"; sourceTree = "<group>"; };
+		266C411219AB6CC9008A77CD /* wp-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wp-logo.png"; sourceTree = "<group>"; };
+		266C411319AB6CC9008A77CD /* wp-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wp-logo@2x.png"; sourceTree = "<group>"; };
+		266C411619AB8032008A77CD /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
+		266C411719AB8032008A77CD /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		2672A09D191207710050043E /* stack_textview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stack_textview.png; path = classImage/stack_textview.png; sourceTree = "<group>"; };
 		2672A09E191207710050043E /* stack_textview@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stack_textview@2x.png"; path = "classImage/stack_textview@2x.png"; sourceTree = "<group>"; };
 		2672A09F191207710050043E /* tool_textview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tool_textview.png; sourceTree = "<group>"; };
@@ -2370,6 +2378,10 @@
 		3D54D64718ED5D1B00B5FEC2 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				266C411619AB8032008A77CD /* setting.png */,
+				266C411719AB8032008A77CD /* setting@2x.png */,
+				266C411219AB6CC9008A77CD /* wp-logo.png */,
+				266C411319AB6CC9008A77CD /* wp-logo@2x.png */,
 				260D683B199B4B3100FFDCEC /* new_wp.png */,
 				260D683C199B4B3100FFDCEC /* new_wp@2x.png */,
 				69860E5F19768148001C3F7F /* wp.jpg */,
@@ -4149,6 +4161,7 @@
 				267CB19E190F93370079E565 /* tab_event_off@2x.png in Resources */,
 				69D100121997124F003F8772 /* wordpress.zip in Resources */,
 				06855610198A63430073FA83 /* johnny_automatic_Charles_Darwin.png in Resources */,
+				266C411819AB8032008A77CD /* setting.png in Resources */,
 				3DED26671900D313001A1D67 /* ic_comp@2x.png in Resources */,
 				2641F457195A72FF00DDF1C3 /* bg_v_center@2x.png in Resources */,
 				3DA6C653197536C6004D6587 /* iucarousel.js in Resources */,
@@ -4493,6 +4506,7 @@
 				3D9BC41719989AB900451F55 /* map_zoom.png in Resources */,
 				3DF803E018FE62C900913505 /* align_center.png in Resources */,
 				CBA878031963D3CF00075294 /* Tutorial04_en.png in Resources */,
+				266C411919AB8032008A77CD /* setting@2x.png in Resources */,
 				CBC65119197E8CA80012E4EF /* LMPropertyAnalyticsVC.xib in Resources */,
 				3DF803E318FE62C900913505 /* stack_carousel.png in Resources */,
 				3DF803E418FE62C900913505 /* stack_movie.png in Resources */,
@@ -4529,6 +4543,7 @@
 				3DED26C81900F65C001A1D67 /* ic_image.png in Resources */,
 				3DF8044F18FE62FC00913505 /* tool_transition.png in Resources */,
 				3DF8041418FE62F200913505 /* add_ghost.png in Resources */,
+				266C411519AB6CC9008A77CD /* wp-logo@2x.png in Resources */,
 				3DE201F219667F6E00976EBC /* LMHelpLargeVideoPopoverVC.xib in Resources */,
 				0685561E198A63430073FA83 /* johnny_automatic_Joseph_Wellington_Byrns.png in Resources */,
 				3D748C851921D1BD005665A3 /* stack_carousel_item.png in Resources */,
@@ -4617,6 +4632,7 @@
 				CBA878021963D3CF00075294 /* Tutorial03_kr.png in Resources */,
 				690A8275190A2CC200DDBA86 /* new_django.png in Resources */,
 				26CA36D7198760B70004D888 /* cs_thumbnail@2x.png in Resources */,
+				266C411419AB6CC9008A77CD /* wp-logo.png in Resources */,
 				3DF8044418FE62FC00913505 /* tool_twitter@2x.png in Resources */,
 				3D9BC4121994AAE400451F55 /* stack_map@2x.png in Resources */,
 				3DF8041818FE62F200913505 /* send_mail@2x.png in Resources */,

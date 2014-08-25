@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="6154.17"/>
@@ -344,14 +344,14 @@
                         <size key="minSize" width="171" height="32"/>
                         <size key="maxSize" width="411" height="32"/>
                         <box key="view" autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="bK7-5s-Km2">
-                            <rect key="frame" x="0.0" y="14" width="331" height="32"/>
+                            <rect key="frame" x="0.0" y="14" width="301" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <view key="contentView">
-                                <rect key="frame" x="0.0" y="0.0" width="331" height="32"/>
+                                <rect key="frame" x="0.0" y="0.0" width="301" height="32"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mLY-TX-1Mg">
-                                        <rect key="frame" x="94" y="4" width="103" height="24"/>
+                                        <rect key="frame" x="68" y="4" width="103" height="24"/>
                                         <buttonCell key="cell" type="square" title=" Upload to Server" bezelStyle="shadowlessSquare" image="upload" imagePosition="left" alignment="left" state="on" inset="2" id="TJf-e7-Sza">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="miniSystem"/>
@@ -361,7 +361,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zoC-zb-imB">
-                                        <rect key="frame" x="211" y="4" width="104" height="24"/>
+                                        <rect key="frame" x="183" y="4" width="104" height="24"/>
                                         <buttonCell key="cell" type="smallSquare" title="Sync with Heroku" bezelStyle="smallSquare" image="heroku" imagePosition="left" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Dov-St-pBT">
                                             <behavior key="behavior" lightByContents="YES"/>
                                             <font key="font" metaFont="miniSystem"/>
@@ -370,12 +370,28 @@
                                             <action selector="showHerokuWC:" target="-1" id="x1O-hz-txM"/>
                                         </connections>
                                     </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h0v-Zg-4Ia">
+                                        <rect key="frame" x="28" y="2" width="24" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="L6C-Sq-8DM"/>
+                                            <constraint firstAttribute="width" constant="24" id="l4K-49-4pO"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="setting" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="S1H-V4-Ian">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="openProjectPropertyWindow:" target="-2" id="zr1-8v-pro"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </view>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="zoC-zb-imB" secondAttribute="trailing" constant="16" id="EPV-v7-e73"/>
+                                <constraint firstAttribute="trailing" secondItem="zoC-zb-imB" secondAttribute="trailing" constant="14" id="EPV-v7-e73"/>
                                 <constraint firstAttribute="centerY" secondItem="mLY-TX-1Mg" secondAttribute="centerY" id="XD8-nU-qzx"/>
-                                <constraint firstItem="zoC-zb-imB" firstAttribute="leading" secondItem="mLY-TX-1Mg" secondAttribute="trailing" constant="14" id="bbI-I4-05V"/>
+                                <constraint firstItem="zoC-zb-imB" firstAttribute="leading" secondItem="mLY-TX-1Mg" secondAttribute="trailing" constant="12" id="bbI-I4-05V"/>
+                                <constraint firstItem="h0v-Zg-4Ia" firstAttribute="top" secondItem="bK7-5s-Km2" secondAttribute="top" constant="5" id="eL4-x0-kC2"/>
+                                <constraint firstItem="mLY-TX-1Mg" firstAttribute="leading" secondItem="h0v-Zg-4Ia" secondAttribute="trailing" constant="16" id="ffy-mO-dKR"/>
                                 <constraint firstAttribute="centerY" secondItem="zoC-zb-imB" secondAttribute="centerY" id="ymi-3a-2l5"/>
                             </constraints>
                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
@@ -424,26 +440,9 @@
                             <color key="fillColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                         </box>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="82169102-3B86-4E16-AE86-33D0E573281B" label="Custom View" paletteLabel="Custom View" id="Ov3-yg-ebZ">
-                        <nil key="toolTip"/>
-                        <size key="minSize" width="82" height="32"/>
-                        <size key="maxSize" width="148" height="43"/>
-                        <button key="view" verticalHuggingPriority="750" id="WX3-hL-uOF">
-                            <rect key="frame" x="0.0" y="14" width="148" height="43"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="push" title="ProjectProperty" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="03H-Rc-qG5">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                            <connections>
-                                <action selector="openProjectPropertyWindow:" target="-2" id="pek-LA-xLh"/>
-                            </connections>
-                        </button>
-                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="UhE-nB-agp"/>
-                    <toolbarItem reference="Ov3-yg-ebZ"/>
                     <toolbarItem reference="rlk-P1-2MX"/>
                     <toolbarItem reference="2EI-gL-BuQ"/>
                     <toolbarItem reference="rlk-P1-2MX"/>
@@ -458,6 +457,7 @@
     </objects>
     <resources>
         <image name="heroku" width="24" height="24"/>
+        <image name="setting" width="24" height="24"/>
         <image name="shoveling" width="380" height="340"/>
         <image name="stack_view" width="14" height="10"/>
         <image name="tab_off" width="100" height="30"/>
