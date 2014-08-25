@@ -41,12 +41,6 @@
     [aCoder encodeObject:_group forKey:@"group"];
 }
 
-- (id)copyWithZone:(NSZone *)zone{
-    
-    IUSheet *sheet = [super copyWithZone:zone];
-    
-    return sheet;
-}
 
 - (BOOL)containClass:(Class)class{
     for(IUBox *box in self.allChildren){

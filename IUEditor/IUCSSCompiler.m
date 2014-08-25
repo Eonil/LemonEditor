@@ -1349,7 +1349,10 @@
 
 - (void)updateCSSCode:(IUCSSCode*)code asWPWidgetTitle:(WPWidgetTitle*)_iu{
     NSArray *identifiers = [code allIdentifiers];
+    
     WPSidebar *sidebar = (WPSidebar*)_iu.parent.parent;
+    
+    
     
     for (NSString *identifier in identifiers) {
         NSString *newIdentifier = [identifier stringByReplacingOccurrencesOfString:_iu.htmlID withString:[NSString stringWithFormat:@"%@ > .WPWidget > .WPWidgetTitle" , sidebar.htmlID]];

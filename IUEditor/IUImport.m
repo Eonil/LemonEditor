@@ -33,9 +33,12 @@
 - (id)copyWithZone:(NSZone *)zone{
     IUImport *iu = [super copyWithZone:zone];
     [self.undoManager disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
+
     
     iu.prototypeClass = _prototypeClass;
-    
+
+    [self.delegate enableUpdateAll:self];
     [self.undoManager enableUndoRegistration];
     return iu;
 }

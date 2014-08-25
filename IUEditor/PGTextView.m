@@ -54,10 +54,12 @@
 - (id)copyWithZone:(NSZone *)zone{
     PGTextView *iu = [super copyWithZone:zone];
     [[self undoManager] disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
 
     iu.placeholder = [_placeholder copy];
     iu.inputValue = [_inputValue copy];
     
+    [self.delegate enableUpdateAll:self];
     [[self undoManager] enableUndoRegistration];
 
     return iu;

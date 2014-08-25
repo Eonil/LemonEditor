@@ -58,6 +58,8 @@
 - (id)copyWithZone:(NSZone *)zone{
     IUMenuBar *menuBar = [super copyWithZone:zone];
     [self.undoManager disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
+
     
     //menubar
     menuBar.align = self.align;
@@ -66,6 +68,7 @@
     menuBar.mobileTitle = [self.mobileTitle copy];
     menuBar.iconColor = [self.iconColor copy];
     
+    [self.delegate enableUpdateAll:self];
     [self.undoManager enableUndoRegistration];
     return menuBar;
 }

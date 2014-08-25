@@ -46,12 +46,14 @@
 - (id)copyWithZone:(NSZone *)zone{
     PGTextField *iu = [super copyWithZone:zone];
     [self.undoManager disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
     
     iu.inputName = [_inputName copy];
     iu.placeholder = [_placeholder copy];
     iu.inputValue = [_inputValue copy];
     iu.type = _type;
     
+    [self.delegate enableUpdateAll:self];
     [self.undoManager enableUndoRegistration];
     return iu;
 }

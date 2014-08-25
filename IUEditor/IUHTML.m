@@ -41,11 +41,14 @@
 - (id)copyWithZone:(NSZone *)zone{
     IUHTML *html = [super copyWithZone:zone];
     [self.undoManager disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
+
     
     if(html){
         html.innerHTML = [_innerHTML copy];
     }
     
+    [self.delegate enableUpdateAll:self];
     [self.undoManager enableUndoRegistration];
     return html;
 }

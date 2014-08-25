@@ -66,6 +66,8 @@
     [[self undoManager] disableUndoRegistration];
 
     IUPage *page = [super copyWithZone:zone];
+    [self.delegate disableUpdateAll:self];
+    
     page.title = [_title copy];
     page.keywords = [_keywords copy];
     page.desc = [_desc copy];
@@ -75,6 +77,7 @@
     
     [page setBackground:_background];
     
+    [self.delegate enableUpdateAll:self];
     [[self undoManager] enableUndoRegistration];
     return page;
 }

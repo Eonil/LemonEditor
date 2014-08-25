@@ -50,10 +50,15 @@
     IUCollection *iu = [super copyWithZone:zone];
     if(iu){
         [self.undoManager disableUndoRegistration];
+        [self.delegate disableUpdateAll:self];
+        
         iu.collectionVariable = [_collectionVariable copy];
         iu.responsiveSupport = _responsiveSupport;
         iu.responsiveSetting = [_responsiveSetting copy];
         iu.defaultItemCount = _defaultItemCount;
+        
+        
+        [self.delegate enableUpdateAll:self];
         [self.undoManager enableUndoRegistration];
     }
     return iu;

@@ -30,11 +30,14 @@
 
 -(id)copyWithZone:(NSZone *)zone{
     [self.undoManager disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
+
     
     IUImage *image = [super copyWithZone:zone];
     image.imageName = [_imageName copy];
     image.altText = [_altText copy];
     
+    [self.delegate enableUpdateAll:self];
     [self.undoManager enableUndoRegistration];
     return image;
 }

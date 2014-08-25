@@ -15,18 +15,25 @@
 @protocol IUSourceDelegate <NSObject>
 @required
 
+//enable, disable update
+- (void)enableUpdateAll:(id)sender;
+- (void)disableUpdateAll:(id)sender;
+- (void)enableUpdateCSS:(id)sender;
+- (void)disableUpdateCSS:(id)sender;
+- (BOOL)isUpdateCSSEnabled;
+- (void)enableUpdateJS:(id)sender;
+- (void)disableUpdateJS:(id)sender;
+- (BOOL)isUpdateJSEnabled;
+- (void)enableUpdateHTML:(id)sender;
+- (void)disableUpdateHTML:(id)sender;
+- (BOOL)isUpdateHTMLEnabled;
 
 //css update
--(void)enableUpdateCSS;
--(void)disableUpdateCSS;
--(BOOL)isUpdateCSSEnabled;
 -(void)IUClassIdentifier:(NSString *)identifier CSSUpdated:(NSString*)css;
 //style-sheet css
 -(void)removeCSSTextInDefaultSheetWithIdentifier:(NSString *)identifier;
 
 //js update (frame)
--(void)enableUpdateJS;
--(void)disableUpdateJS;
 - (void)updateJS;
 
 //html update

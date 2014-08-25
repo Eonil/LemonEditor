@@ -56,6 +56,7 @@
 - (id)copyWithZone:(NSZone *)zone{
     IUWebMovie *webMovie = [super copyWithZone:zone];
     [self.undoManager disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
     
     webMovie.thumbnail = self.thumbnail;
     webMovie.thumbnailID = [_thumbnailID copy];
@@ -67,6 +68,7 @@
     webMovie.movieLink = [_movieLink copy];
     webMovie.movieID = [_movieID copy];
     
+    [self.delegate enableUpdateAll:self];
     [self.undoManager enableUndoRegistration];
     return webMovie;
 }

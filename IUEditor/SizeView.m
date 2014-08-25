@@ -155,9 +155,8 @@
         [self setColorBox:sizeBox];
         
     }
-    [self.delegate disableUpdateCSS];
+    [self.delegate disableUpdateCSS:self];
     
-    [JDLogUtil timeLogStart:@"selectBox-noti"];
 
     //notification
     NSInteger maxSize = [[self sortedArray][0] integerValue];
@@ -168,10 +167,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQSelected object:self userInfo:@{IUNotificationMQSize:@(selectedWidth), IUNotificationMQMaxSize:@(maxSize)}];
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQSelectedWithInfo object:self userInfo:@{IUNotificationMQSize:@(selectedWidth), IUNotificationMQMaxSize:@(maxSize), IUNotificationMQLargerSize:@(largeSize)} ];
     
-    [self.delegate enableUpdateCSS];
-    
-    [JDLogUtil timeLogEnd:@"selectBox-noti"];
-    
+    [self.delegate enableUpdateCSS:self];
+        
 }
 
 #pragma mark -

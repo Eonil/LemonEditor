@@ -49,6 +49,8 @@
 - (id)copyWithZone:(NSZone *)zone{
     PGPageLinkSet *iu = [super copyWithZone:zone];
     [[self undoManager] disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
+
 
     iu.pageCountVariable = [_pageCountVariable copy];
     iu.pageLinkAlign = _pageLinkAlign;
@@ -56,6 +58,7 @@
     iu.defaultButtonBGColor = [_defaultButtonBGColor copy];
     iu.buttonMargin = _buttonMargin;
     
+    [self.delegate enableUpdateAll:self];
     [[self undoManager] enableUndoRegistration];
 
     return iu;

@@ -55,10 +55,13 @@
 - (id)copyWithZone:(NSZone *)zone{
     IUMenuItem *menuItem = [super copyWithZone:zone];
     [self.undoManager disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
+
     
     menuItem.bgActive = [NSColor grayColor];
     menuItem.fontActive = [NSColor whiteColor];
     
+    [self.delegate enableUpdateAll:self];
     [self.undoManager enableUndoRegistration];
     return menuItem;
 }

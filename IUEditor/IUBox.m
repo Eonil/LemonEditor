@@ -223,9 +223,11 @@
 - (id)copyWithZone:(NSZone *)zone{
     
     [[self undoManager] disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
 
     IUBox *box = [[[self class] allocWithZone: zone] init];
     if(box){
+        
         IUCSS *newCSS = [_css copy];
         IUEvent *newEvent = [_event copy];
         NSArray *children = [self.children deepCopy];
@@ -259,7 +261,7 @@
         [[self undoManager] enableUndoRegistration];
     }
 
-
+    [self.delegate enableUpdateAll:self];
     return box;
 }
 
@@ -479,9 +481,9 @@
 
 
 - (void)updateHTML{
-    if (self.delegate) {
+    if (self.delegate && [self.delegate isUpdateHTMLEnabled]) {
         
-        [self.delegate disableUpdateJS];
+        [self.delegate disableUpdateJS:self];
         
         [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.parent.htmlID];
 
@@ -491,12 +493,11 @@
             }
         }
         
-
         for(IUBox *box in self.allChildren){
             [box updateCSS];
         }
         
-        [self.delegate enableUpdateJS];
+        [self.delegate enableUpdateJS:self];
         [self updateCSS];
         
     }

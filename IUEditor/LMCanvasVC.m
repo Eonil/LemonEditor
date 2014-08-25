@@ -50,6 +50,7 @@
     LMHelpWC *helpWC;
     int levelForUpdateCSS;
     int levelForUpdateJS;
+    int levelForUpdateHTML;
 
 }
 
@@ -61,6 +62,7 @@
         _maxFrameWidth = 0;
         levelForUpdateCSS = 0;
         levelForUpdateJS =0;
+        levelForUpdateHTML= 0;
     }
     return self;
 }
@@ -194,14 +196,14 @@
 
 - (void)didFinishLoadFrame{
     
-    [self disableUpdateJS];
+    [self disableUpdateJS:self];
     
     [_sheet updateCSS];
     for(IUBox *box in _sheet.allChildren){
         [box updateCSS];
     }
     
-    [self enableUpdateJS];
+    [self enableUpdateJS:self];
     [self updateJS];
     
 }
@@ -642,14 +644,27 @@
     }
 }
 
--(void)enableUpdateCSS{
+#pragma mark - enable, disable
+
+- (void)enableUpdateAll:(id)sender{
+    [self enableUpdateHTML:sender];
+    [self enableUpdateCSS:sender];
+    [self enableUpdateJS:sender];
+}
+- (void)disableUpdateAll:(id)sender{
+    [self disableUpdateHTML:sender];
+    [self disableUpdateCSS:sender];
+    [self disableUpdateJS:sender];
+}
+
+- (void)enableUpdateCSS:(id)sender{
     levelForUpdateCSS++;
 }
--(void)disableUpdateCSS{
+- (void)disableUpdateCSS:(id)sender{
     levelForUpdateCSS--;
     
     if(levelForUpdateCSS > 0){
-        JDFatalLog(@"disableCSSUpdate is not pair, more than enableUpdate");
+        JDFatalLog(@"disableUpdateCSS is not pair, more than enableUpdate");
         assert(0);
     }
 }
@@ -662,19 +677,41 @@
     }
 }
 
--(void)enableUpdateJS{
+-(void)enableUpdateJS:(id)sender{
     levelForUpdateJS++;
 }
--(void)disableUpdateJS{
+-(void)disableUpdateJS:(id)sender{
     levelForUpdateJS--;
     
     if(levelForUpdateJS > 0){
-        JDFatalLog(@"disableCSSUpdate is not pair, more than enableUpdate");
+        JDFatalLog(@"levelForUpdateJS is not pair, more than enableUpdate");
         assert(0);
     }
 }
 -(BOOL)isUpdateJSEnabled{
     if(levelForUpdateJS==0){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
+
+- (void)enableUpdateHTML:(id)sender{
+    levelForUpdateHTML++;
+}
+
+-(void)disableUpdateHTML:(id)sender{
+    levelForUpdateHTML--;
+    
+    if(levelForUpdateHTML > 0){
+        JDFatalLog(@"enableUpdateHTML is not pair, more than enableUpdate");
+        assert(0);
+    }
+}
+
+-(BOOL)isUpdateHTMLEnabled{
+    if(levelForUpdateHTML==0){
         return YES;
     }
     else{

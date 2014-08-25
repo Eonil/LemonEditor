@@ -37,6 +37,9 @@
 -(id)copyWithZone:(NSZone *)zone{
     IUMovie *movie = [super copyWithZone:zone];
     [self.undoManager disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
+
+    
     movie.videoPath = [_videoPath copy];
     movie.altText = [_altText copy];
     movie.posterPath = [_posterPath copy];
@@ -46,6 +49,7 @@
     movie.enableLoop = _enableLoop;
     movie.enableMute = _enableMute;
     
+    [self.delegate enableUpdateAll:self];
     [self.undoManager enableUndoRegistration];
     return movie;
 }

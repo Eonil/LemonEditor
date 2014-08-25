@@ -50,6 +50,7 @@
 
 -(id)copyWithZone:(NSZone *)zone{
     [self.undoManager disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
     
     IUGoogleMap *map = [super copyWithZone:zone];
     
@@ -68,6 +69,7 @@
     map.landscape = [_landscape copy];
     map.poi = [_poi copy];
     
+    [self.delegate enableUpdateAll:self];
     [self.undoManager enableUndoRegistration];
     return map;
 }

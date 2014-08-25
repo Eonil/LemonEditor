@@ -61,12 +61,16 @@
 - (id)copyWithZone:(NSZone *)zone{
     IUTransition *iu = [super copyWithZone:zone];
     [[self undoManager] disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
+
+    
 
     iu.currentEdit = _currentEdit;
     iu.eventType = [_eventType copy];
     iu.animation = [_animation copy];
     iu.duration = _duration;
     
+    [self.delegate enableUpdateAll:self];
     [[self undoManager] enableUndoRegistration];
 
     return iu;

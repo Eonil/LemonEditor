@@ -189,15 +189,15 @@
         removeItem.tag = row;
         removeItem.target = self;
         [menu addItem:removeItem];
-        /* TODO: Copy Document
+        
+        
         if([node isKindOfClass:[IUClass class]] || [node isKindOfClass:[IUPage class]]){
             NSMenuItem *copyItem = [[NSMenuItem alloc] initWithTitle:@"Copy Document" action:@selector(copyDocument:) keyEquivalent:@""];
             copyItem.tag = row;
             copyItem.target = self;
             [menu addItem:copyItem];
         }
-         */
-
+        
 
         return menu;
     }

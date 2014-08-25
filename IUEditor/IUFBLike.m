@@ -61,10 +61,12 @@
 - (id)copyWithZone:(NSZone *)zone{
     IUFBLike *iu = [super copyWithZone:zone];
     [self.undoManager disableUndoRegistration];
+    [self.delegate disableUpdateAll:self];
     
     iu.likePage = [_likePage copy];
     iu.showFriendsFace = _showFriendsFace;
     
+    [self.delegate enableUpdateAll:self];
     [self.undoManager enableUndoRegistration];
     return iu;
 }
