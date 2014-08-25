@@ -52,6 +52,16 @@
     return NO;
 }
 
+//자기 자신대신 parent를 옮기는 경우
+- (BOOL)shouldMoveParent{
+    return YES;
+}
+
+- (NSString*)cssClass{
+    return [NSString stringWithFormat:@".%@ > .WPWidget", self.parent.htmlID];
+}
+
+
 - (NSString*)sampleHTML{
     NSString *ret =  [NSString stringWithFormat:@"<div id ='%@' class='%@'>%@%@</div>", self.htmlID, self.cssClassStringForHTML, self.titleWidget.sampleHTML, self.bodyWidget.sampleHTML];
     return ret;

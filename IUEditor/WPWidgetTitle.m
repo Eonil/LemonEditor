@@ -22,6 +22,10 @@
     return NO;
 }
 
+- (NSString*)cssClass{
+    return [NSString stringWithFormat:@".%@ > .WPWidget > .WPWidgetTitle", self.parent.parent.htmlID];
+}
+
 -(NSString*)sampleHTML{
     return [NSString stringWithFormat:@"<h2 id='%@' class='%@'>This is Title</h2>", self.htmlID, self.cssClassStringForHTML];
 }

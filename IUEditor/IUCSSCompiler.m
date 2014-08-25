@@ -1336,6 +1336,7 @@
     }
 }
 
+/*
 
 - (void)updateCSSCode:(IUCSSCode*)code asWPWidgetBody:(WPWidgetBody*)_iu{
     NSArray *identifiers = [code allIdentifiers];
@@ -1359,7 +1360,6 @@
         [code renameIdentifier:identifier to:newIdentifier];
     }
 }
-/*
 - (void)updateCSSCode:(IUCSSCode*)code asWPPageLink:(WPPageLink *)_iu{
     NSArray *identifiers = [code allIdentifiers];
     WPPageLinks *pageLinks = (WPPageLinks*)_iu.parent;

@@ -17,6 +17,10 @@
     return self;
 }
 
+- (NSString*)cssClass{
+    return [NSString stringWithFormat:@".%@ > .WPWidget > ul", self.parent.parent.htmlID];
+}
+
 - (NSString *)sampleHTML{
     return [NSString stringWithFormat:@"<ul id='%@' class='%@'><li class='cat-item cat-item-1'>First Line</li><li class='cat-item cat-item-2'>Second Line</li></ul>", self.htmlID, self.cssClassStringForHTML];
 }

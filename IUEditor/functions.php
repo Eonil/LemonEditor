@@ -13,7 +13,7 @@
                                     'id' => str_replace(' ', '',$iuname),
                                     'before_widget' => '<div class="WPWidget">',
                                     'after_widget' => '</div>',
-                                    'before_title' => '<h2 class="IUWidgetItemTitle">',
+                                    'before_title' => '<h2 class="WPWidgetTitle">',
                                     'after_title' => '</h2>',
                                     ) );
         }
