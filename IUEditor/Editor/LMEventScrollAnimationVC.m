@@ -51,7 +51,7 @@
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     
     if([[keyPath pathExtension] isEqualToString:@"opacityMove"]){
-        id opacityMove = [self valueForKeyPath:[self.controller keyPathFromControllerToProperty:@"opacityMove"]];
+        id opacityMove = [self valueForProperty:@"opacityMovie"];
         
         NSArray *selectedObj = [self.controller selectedObjects ];
         if ([opacityMove isKindOfClass:[NSNumber class]]) {

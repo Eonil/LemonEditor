@@ -325,23 +325,6 @@
 }
 
 
--(NSString*)keyPathFromControllerToTextCSSProperty:(NSString *)property{
-    return [@"self.selection.textController" stringByAppendingPathExtension:property];
-}
-
-
--(NSString*)keyPathFromControllerToCSSTag:(IUCSSTag)tag{
-    return [@"self.selection.css.assembledTagDictionary" stringByAppendingPathExtension:tag];
-}
-
--(NSString*)keyPathFromControllerToEventTag:(IUEventTag)tag{
-    return [@"controller.selection.event" stringByAppendingPathExtension:tag];
-}
-
--(NSString*)keyPathFromControllerToProperty:(NSString*)property{
-    return [@"self.selection" stringByAppendingPathExtension:property];
-}
-
 -(IUImport*)importIUInSelectionChain{
     NSIndexPath *firstPath = [[self.selectionIndexPaths firstObject] indexPathByRemovingLastIndex];
     if(firstPath){

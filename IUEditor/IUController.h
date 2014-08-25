@@ -28,11 +28,6 @@
 -(id)IUBoxByIdentifier:(NSString *)identifier;
 -(NSSet *)IUBoxesByIdentifiers:(NSArray *)identifiers;
 
--(NSString*)keyPathFromControllerToCSSTag:(IUCSSTag)tag;
--(NSString*)keyPathFromControllerToTextCSSProperty:(NSString *)property;
--(NSString*)keyPathFromControllerToEventTag:(IUEventTag)tag;
--(NSString*)keyPathFromControllerToProperty:(NSString*)property;
-
 -(IUImport*)importIUInSelectionChain;
 
 -(void)copySelectedIUToPasteboard:(id)sender;

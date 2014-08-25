@@ -32,14 +32,6 @@
     [self outlet:_dateB bind:NSValueBinding property:@"enableDate"];
     [self outlet:_bodyB bind:NSValueBinding property:@"enableBody"];
     
-
-    /*
-    [_dateB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableDate"] options:IUBindingDictNotRaisesApplicable];
-    [_timeB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableTime"] options:IUBindingDictNotRaisesApplicable];
-    [_categoryB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableCategory"] options:IUBindingDictNotRaisesApplicable];
-    [_tagB bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"enableTag"] options:IUBindingDictNotRaisesApplicable];
-  //  [_contentMTX bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToProperty:@"contentType"] options:IUBindingDictNotRaisesApplicable];
-     */
 }
 
 

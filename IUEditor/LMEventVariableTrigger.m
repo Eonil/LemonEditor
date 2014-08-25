@@ -31,16 +31,19 @@
 }
 
 - (void)awakeFromNib{
-    [_variableTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagVariable] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
-    [_initailValueTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagInitialValue] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_initialValueStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagInitialValue] options:IUBindingDictNotRaisesApplicable];
+
+    [self outlet:_variableTF bind:NSValueBinding cssTag:IUEventTagVariable];
     
-    [_maxValueTF bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagMaxValue] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_maxValueStepper bind:NSValueBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagMaxValue] options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_initailValueTF bind:NSValueBinding eventTag:IUEventTagInitialValue];
+    [self outlet:_initialValueStepper bind:NSValueBinding eventTag:IUEventTagInitialValue];
     
-    [_actionTypePopupButton bind:NSSelectedIndexBinding toObject:self withKeyPath:[_controller keyPathFromControllerToEventTag:IUEventTagActionType] options:IUBindingDictNotRaisesApplicable];
     
+    [self outlet:_maxValueTF bind:NSValueBinding eventTag:IUEventTagMaxValue];
+    [self outlet:_maxValueStepper bind:NSValueBinding eventTag:IUEventTagMaxValue];
+
+    [self outlet:_actionTypePopupButton bind:NSSelectedIndexBinding eventTag:IUEventTagActionType];
+
 }
 
 - (IBAction)clickHelpButton:(NSButton *)sender {
