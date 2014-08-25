@@ -115,14 +115,16 @@
         else if(rule == IUCompileRuleWordpress){
             IUWordpressProject *wProject = (IUWordpressProject *) _docController.project;
 
-            NSURL *url;
+            NSMutableString *path = [NSMutableString stringWithString:@"http://127.0.0.1"];
             if(wProject.port > 0){
-                url = [NSURL URLWithString:[NSString stringWithFormat:@"http://127.0.0.1:%ld/%@", wProject.port, wProject.documentRoot]];
+                [path appendString:[NSString stringWithFormat:@":%ld", wProject.port]];
             }
-            else{
-                url = [NSURL URLWithString:[NSString stringWithFormat:@"http://127.0.0.1/%@", wProject.documentRoot]];
+            
+            if(wProject.documentRoot){
+                [path appendFormat:@"/%@", wProject.documentRoot];
             }
-            [[NSWorkspace sharedWorkspace] openURL:url];
+            
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:path]];
         }
     }
     else if (rule == IUCompileRuleDjango){

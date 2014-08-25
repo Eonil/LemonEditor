@@ -69,12 +69,12 @@
     if([self.project isKindOfClass:[IUDjangoProject class]]){
         [viewArray addObject:_djangoView];
         
-        [_djangoPortTF bind:NSValueBinding toObject:self withKeyPath:@"project.port" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+        [_djangoPortTF bind:NSValueBinding toObject:self withKeyPath:@"project.port" options:IUBindingDictNumberAndNotRaisesApplicable];
     }
     else if([self.project isKindOfClass:[IUWordpressProject class]]){
         [viewArray addObject:_wordpressView];
         
-        [_wordPortTF bind:NSValueBinding toObject:self withKeyPath:@"project.port" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+        [_wordPortTF bind:NSValueBinding toObject:self withKeyPath:@"project.port" options:IUBindingDictNumberAndNotRaisesApplicable];
         [_documentRootTF bind:NSValueBinding toObject:self withKeyPath:@"project.documentRoot" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     }
     
