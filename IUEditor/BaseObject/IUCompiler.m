@@ -549,7 +549,9 @@
             if (iu.children.count) {
                 for (IUBox *child in iu.children) {
                     JDCode *childCode = [self outputHTML:child];
-                    [code addCodeWithIndent:childCode];
+                    if (childCode) {
+                        [code addCodeWithIndent:childCode];
+                    }
                 }
             }
         }
