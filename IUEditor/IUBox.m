@@ -476,6 +476,9 @@
 
 - (void)updateHTML{
     if (self.delegate) {
+        
+        [self.delegate disableUpdateJS];
+        
         [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.parent.htmlID];
 
         if([self.sheet isKindOfClass:[IUClass class]]){
@@ -484,12 +487,15 @@
             }
         }
         
-        [self updateCSS];
+
         for(IUBox *box in self.allChildren){
             [box updateCSS];
         }
+        
+        [self.delegate enableUpdateJS];
+        [self updateCSS];
+        
     }
-    
     
 }
 
@@ -543,6 +549,8 @@
             for (NSString *identifier in dictionaryWithIdentifier) {
                 [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];
             }
+            
+            [self.delegate updateJS];
         }
     }
 }

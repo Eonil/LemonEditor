@@ -49,8 +49,8 @@
     IUFrameDictionary *frameDict;
     LMHelpWC *helpWC;
     int levelForUpdateCSS;
-    //true for sheet loading 
-    BOOL isCSSLoading;
+    int levelForUpdateJS;
+
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,6 +60,7 @@
         frameDict = [[IUFrameDictionary alloc] init];;
         _maxFrameWidth = 0;
         levelForUpdateCSS = 0;
+        levelForUpdateJS =0;
     }
     return self;
 }
@@ -193,15 +194,16 @@
 
 - (void)didFinishLoadFrame{
     
-    isCSSLoading = YES;
+    [self disableUpdateJS];
     
     [_sheet updateCSS];
     for(IUBox *box in _sheet.allChildren){
         [box updateCSS];
     }
-    [self runCSSJS];
     
-    isCSSLoading = NO;
+    [self enableUpdateJS];
+    [self updateJS];
+    
 }
 
 - (void)updateSheetHeight{
@@ -567,7 +569,6 @@
 }
 
 - (void)runCSSJS{
-    [[self webView] runJSAfterRefreshCSS];
 }
 
 
@@ -633,11 +634,12 @@
         //CLASS에서 WEBCANVASVIEW의 높이 변화를 위해서
         [self updateSheetHeight];
     }
-    
-    /*first document loading*/
-    if(isCSSLoading==NO){
-        [self runCSSJS];
-        
+   
+}
+
+- (void)updateJS{
+    if( [self isUpdateJSEnabled]==YES){
+        [[self webView] runJSAfterRefreshCSS];
     }
 }
 
@@ -654,6 +656,26 @@
 }
 -(BOOL)isUpdateCSSEnabled{
     if(levelForUpdateCSS==0){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
+
+-(void)enableUpdateJS{
+    levelForUpdateJS++;
+}
+-(void)disableUpdateJS{
+    levelForUpdateJS--;
+    
+    if(levelForUpdateJS > 0){
+        JDFatalLog(@"disableCSSUpdate is not pair, more than enableUpdate");
+        assert(0);
+    }
+}
+-(BOOL)isUpdateJSEnabled{
+    if(levelForUpdateJS==0){
         return YES;
     }
     else{
@@ -933,7 +955,6 @@
         [moveObj updateCSS];
         
     }
-    [self runCSSJS];
 }
 
 - (BOOL)checkExtendSelectedIU:(NSSize)size{
@@ -1029,7 +1050,6 @@
         
     }
     
-    [self runCSSJS];
 }
 
 

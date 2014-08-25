@@ -23,6 +23,11 @@
 -(void)IUClassIdentifier:(NSString *)identifier CSSUpdated:(NSString*)css;
 
 
+//js update (frame)
+-(void)enableUpdateJS;
+-(void)disableUpdateJS;
+- (void)updateJS;
+
 //html update
 -(void)IUHTMLIdentifier:(NSString*)identifier textHTML:(NSString *)html withParentID:(NSString *)parentID nearestID:(NSString *)nID index:(NSUInteger)index;
 -(void)IUHTMLIdentifier:(NSString *)identifier HTML:(NSString *)html withParentID:(NSString *)parentID;

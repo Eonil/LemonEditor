@@ -145,6 +145,11 @@
     if ([set count] != 1) {
         return;
     }
+    
+    if(self.delegate){
+        [self.delegate disableUpdateCSS];
+    }
+    
     IUBox *selectedChild = [set anyObject];
     for(IUCarouselItem *item in self.children){
         if([item isEqualTo:selectedChild] || [item.allChildren containsObject:selectedChild]){
@@ -155,7 +160,10 @@
             [item.css setValue:@(NO) forTag:IUCSSTagEditorDisplay forViewport:IUCSSDefaultViewPort];
             item.isActive = NO;
         }
-        [item updateHTML];
+    }
+    
+    if(self.delegate){
+        [self.delegate enableUpdateCSS];
     }
     
     [self updateHTML];
