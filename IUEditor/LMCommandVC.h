@@ -16,9 +16,14 @@
 
 @property (weak, nonatomic) IUSheetController      *docController;
 
+- (void)prepareDealloc;
+
+
 // Remove Recording feature at v0.3
 //- (IBAction)toggleRecording:(id)sender;
 
+- (IBAction)build:(id)sender;
 - (IBAction)stopServer:(id)sender;
-- (void)prepareDealloc;
+
+
 @end

@@ -164,6 +164,10 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
     
 }
 
+- (NSString *)displayName{
+    return [NSString stringWithFormat:@"%@ - %@.iu", NSStringFromClass([_project class]), _project.name];
+}
+
 - (void)changeProjectPath:(NSURL *)fileURL{
     NSString *filePath = [fileURL relativePath];
     NSString *appName = [[fileURL lastPathComponent] stringByDeletingPathExtension];
@@ -228,27 +232,10 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
 
     }
     
-
-    /*
-    NSFileWrapper *cssWrapper = [[resourceWrapper fileWrappers] objectForKey:IUCSSResourceGroupName];
-    NSFileWrapper *jsWrapper = [[resourceWrapper fileWrappers] objectForKey:IUJSResourceGroupName];
-     */
     NSFileWrapper *imageWrapper = [[resourceWrapper fileWrappers] objectForKey:IUImageResourceGroupName];
     NSFileWrapper *videoWrapper = [[resourceWrapper fileWrappers] objectForKey:IUVideoResourceGroupName];
 
-    /*
-    if(cssWrapper == nil){
-        cssWrapper = [[NSFileWrapper alloc] initDirectoryWithFileWrappers:nil];
-        [cssWrapper setPreferredFilename:IUCSSResourceGroupName];
-        [resourceWrapper addFileWrapper:cssWrapper];
-    }
-    if(jsWrapper == nil){
-        jsWrapper = [[NSFileWrapper alloc] initDirectoryWithFileWrappers:nil];
-        [jsWrapper setPreferredFilename:IUJSResourceGroupName];
-        [resourceWrapper addFileWrapper:jsWrapper];
 
-    }
-     */
     if(imageWrapper == nil){
         imageWrapper = [[NSFileWrapper alloc] initDirectoryWithFileWrappers:nil];
         [imageWrapper setPreferredFilename:IUImageResourceGroupName];
@@ -261,19 +248,6 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
         [resourceWrapper addFileWrapper:videoWrapper];
     }
     
-    /*
-    [self fileWrapper:cssWrapper removeFileNotInArray:[_project.resourceManager namesWithFiles:_project.resourceManager.cssFiles]];
-    for(IUResourceFile *resourceFile in _project.resourceManager.cssFiles){
-        [self fileWrapper:cssWrapper overwriteResourceNode:resourceFile];
-//        [self fileWrapper:cssWrapper addResourceNode:resourceFile];
-    }
-    
-    [self fileWrapper:jsWrapper removeFileNotInArray:[_project.resourceManager namesWithFiles:_project.resourceManager.jsFiles]];
-    for(IUResourceFile *resourceFile in _project.resourceManager.jsFiles){
-        [self fileWrapper:jsWrapper overwriteResourceNode:resourceFile];
-        //[self fileWrapper:jsWrapper addResourceNode:resourceFile];
-    }
-     */
 
     [self fileWrapper:imageWrapper removeFileNotInArray:[_project.resourceManager namesWithFiles:_project.resourceManager.imageFiles]];
     for(IUResourceFile *resourceFile in _project.resourceManager.imageFiles){

@@ -69,14 +69,14 @@
                 <menuItem title="File" id="83">
                     <menu key="submenu" title="File" id="81">
                         <items>
-                            <menuItem title="New" keyEquivalent="n" id="g8r-O5-kBm">
-                                <connections>
-                                    <action selector="newDocument:" target="-1" id="zE0-VI-8xe"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="New Project" keyEquivalent="m" id="A0t-xC-hSz">
+                            <menuItem title="New Project" keyEquivalent="n" id="A0t-xC-hSz">
                                 <connections>
                                     <action selector="showStartWC:" target="494" id="ZIo-u7-pp3"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="New Default Project" keyEquivalent="m" id="g8r-O5-kBm">
+                                <connections>
+                                    <action selector="newDocument:" target="-1" id="zE0-VI-8xe"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open…" keyEquivalent="o" id="72">
@@ -152,6 +152,17 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Project" id="lXh-Vg-hj8">
                         <items>
+                            <menuItem title="Build" keyEquivalent="b" id="aFe-Um-CQJ">
+                                <connections>
+                                    <action selector="build:" target="-1" id="Bvz-UU-BX6"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Clean Build" keyEquivalent="K" id="1vp-OB-YEn">
+                                <connections>
+                                    <action selector="cleanBuild:" target="-1" id="TRd-ch-tei"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="2MR-Tf-6zJ"/>
                             <menuItem title="Server Management" id="d3C-pD-zXv">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -162,12 +173,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="showHerokuWC:" target="-1" id="NxN-EL-8Ic"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Clean Build" id="1vp-OB-YEn">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="cleanBuild:" target="-1" id="TRd-ch-tei"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Convert As..." id="JHk-ME-u7H">
