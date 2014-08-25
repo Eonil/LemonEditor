@@ -22,8 +22,8 @@ typedef enum _IUGitType{
 typedef enum {
     IUProjectTypeDefault,
     IUProjectTypeDjango,
-    IUProjectTypePresentation,
     IUProjectTypeWordpress,
+    IUProjectTypePresentation,
 } IUProjectType;
 
 
@@ -130,9 +130,9 @@ static NSString *IUClassGroupName = @"class";
 - (NSString*)absoluteBuildResourcePath;
 
 //build
+- (IUProjectType)projectType;
 - (IUCompiler *)compiler;
 - (BOOL)build:(NSError**)error;
-
 
 //manager
 - (IUIdentifierManager*)identifierManager;

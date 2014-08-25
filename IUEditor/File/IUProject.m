@@ -19,6 +19,9 @@
 #import "IUResourceManager.h"
 #import "IUIdentifierManager.h"
 
+#import "IUDjangoProject.h"
+#import "IUWordpressProject.h"
+
 @interface IUProject()
 
 @end
@@ -243,7 +246,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMQSize:) name:IUNotificationMQAdded object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMQSize:) name:IUNotificationMQRemoved object:nil];
     
-    IUProjectType type = [self ProjectTypeForString:[self className]];
+    IUProjectType type = [self projectType];
     IUCompileRule rule;
     switch (type) {
         case IUProjectTypeDefault:
@@ -254,7 +257,7 @@
             rule = IUCompileRuleDjango;
             break;
         case IUProjectTypeWordpress:
-            rule = IUCompileRuleDjango;
+            rule = IUCompileRuleWordpress;
             break;
         default:
             assert(0);
@@ -354,20 +357,24 @@
     }
     return projectName;
 }
-- (IUProjectType)ProjectTypeForString:(NSString *)projectName{
+
+
+- (IUProjectType)projectType{
     IUProjectType type;
-    if([projectName isEqualToString:@"IUProject"]){
-        type = IUProjectTypeDefault;
-    }
-    else if([projectName isEqualToString:@"IUDjangoProject"]){
+   
+    if([self isKindOfClass:[IUDjangoProject class]]){
         type = IUProjectTypeDjango;
     }
-    else if([projectName isEqualToString:@"IUPresentationProject"]){
+    else if([self isKindOfClass:[IUWordpressProject class]]){
+        type = IUProjectTypeWordpress;
+    }
+    /*
+    else if([self isKindOfClass:[IUPresentationProject class]){
         type = IUProjectTypePresentation;
     }
-    
-    else if([projectName isEqualToString:@"IUWordpressProject"]){
-        type = IUProjectTypeWordpress;
+    */
+    else if([self isKindOfClass:[IUProject class]]){
+        type = IUProjectTypeDefault;
     }
     else{
         assert(0);

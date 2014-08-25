@@ -8,8 +8,10 @@
             <connections>
                 <outlet property="buildB" destination="0pn-qv-kJJ" id="wRn-4a-agu"/>
                 <outlet property="compilerB" destination="to0-mm-9wd" id="brO-5r-XAx"/>
+                <outlet property="djangoMenuItem" destination="YGZ-bs-iNO" id="Gr9-y5-wr7"/>
                 <outlet property="stopServerB" destination="RcY-WV-hfW" id="SCb-y3-hDZ"/>
                 <outlet property="view" destination="K5R-Kp-WeX" id="Uu1-uf-2TK"/>
+                <outlet property="wpMenuItem" destination="ZMp-AS-OdW" id="v72-Xk-ahx"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -55,13 +57,13 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="85" id="OIq-Tj-Rnc"/>
                         </constraints>
-                        <popUpButtonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" lineBreakMode="truncatingTail" inset="2" id="MGG-er-e4k">
+                        <popUpButtonCell key="cell" type="check" title="Django" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" inset="2" selectedItem="YGZ-bs-iNO" id="MGG-er-e4k">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="smallSystem"/>
                             <menu key="menu" title="OtherViews" id="lrr-LA-6sB">
                                 <items>
                                     <menuItem title="HTML" id="NMj-DY-aLH"/>
-                                    <menuItem title="Django" id="YGZ-bs-iNO"/>
+                                    <menuItem title="Django" state="on" id="YGZ-bs-iNO"/>
                                     <menuItem title="Wordpress" id="ZMp-AS-OdW"/>
                                     <menuItem title="Presentation" id="yoX-I8-zmP">
                                         <modifierMask key="keyEquivalentModifierMask"/>
