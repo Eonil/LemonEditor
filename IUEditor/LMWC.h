@@ -28,7 +28,7 @@
 - (void)prepareDealloc;
 
 - (void)selectFirstDocument;
-- (void)reloadCurrentDocument;
+- (IBAction)reloadCurrentDocument:(id)sender;
 - (NSString *)projectName;
 - (void)reloadNavigation;
 

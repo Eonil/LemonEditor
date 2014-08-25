@@ -156,7 +156,7 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
     
     if(isLoaded && [self lemonWindowController]){
         [[self lemonWindowController] reloadNavigation];
-        [[self lemonWindowController] reloadCurrentDocument];
+        [[self lemonWindowController] reloadCurrentDocument:self];
     }
     else if([self lemonWindowController]){
         [[self lemonWindowController] selectFirstDocument];

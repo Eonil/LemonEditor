@@ -71,7 +71,7 @@
                         <items>
                             <menuItem title="New Project" keyEquivalent="n" id="A0t-xC-hSz">
                                 <connections>
-                                    <action selector="showStartWC:" target="494" id="ZIo-u7-pp3"/>
+                                    <action selector="showStartDefault:" target="-1" id="u9w-8A-LX5"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="New Default Project" keyEquivalent="m" id="g8r-O5-kBm">
@@ -79,9 +79,20 @@
                                     <action selector="newDocument:" target="-1" id="zE0-VI-8xe"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="New Templates" keyEquivalent="t" id="qWt-gB-OZt">
+                                <connections>
+                                    <action selector="showStartTemplate:" target="-1" id="0TC-tJ-gwd"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="1r5-n3-NFD"/>
                             <menuItem title="Open…" keyEquivalent="o" id="72">
                                 <connections>
                                     <action selector="openDocument:" target="-1" id="374"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Open Recents" keyEquivalent="O" id="KOP-qj-yv8">
+                                <connections>
+                                    <action selector="showRecentFiles:" target="-1" id="TBu-lN-OTf"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open Recent" id="124">
@@ -98,14 +109,14 @@
                             <menuItem isSeparatorItem="YES" id="79">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Close" keyEquivalent="w" id="73">
-                                <connections>
-                                    <action selector="performClose:" target="-1" id="193"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Save" keyEquivalent="s" id="75">
                                 <connections>
                                     <action selector="saveDocument:" target="-1" id="tVt-CW-fnV"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Close" keyEquivalent="w" id="73">
+                                <connections>
+                                    <action selector="performClose:" target="-1" id="193"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -132,6 +143,12 @@
                             <menuItem title="Delete" id="202">
                                 <connections>
                                     <action selector="delete:" target="-1" id="235"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="aRO-qn-Jcx"/>
+                            <menuItem title="Refresh Current Page" keyEquivalent="r" id="bEg-9Z-Ra9">
+                                <connections>
+                                    <action selector="reloadCurrentDocument:" target="-1" id="WXB-uV-xVQ"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="48k-QC-sCY"/>

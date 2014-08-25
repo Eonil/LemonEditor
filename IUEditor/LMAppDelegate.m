@@ -120,11 +120,24 @@
 }
 
 
-- (IBAction)showStartWC:(id)sender{
+- (IBAction)showStartDefault:(id)sender{
     startWC = [LMStartWC sharedStartWindow];
+    [startWC selectStartViewOfType:LMStartWCTypeDefault];
     [startWC showWindow:self];
 }
 
+- (IBAction)showStartTemplate:(id)sender{
+    startWC = [LMStartWC sharedStartWindow];
+    [startWC selectStartViewOfType:LMStartWCTypeTemplate];
+    [startWC showWindow:self];
+    
+}
+- (IBAction)showRecentFiles:(id)sender{
+    startWC = [LMStartWC sharedStartWindow];
+    [startWC selectStartViewOfType:LMStartWCTypeRecent];
+    [startWC showWindow:self];
+    
+}
 
 - (IBAction)openPreference:(id)sender {
      preferenceWC = [[LMPreferenceWC alloc] initWithWindowNibName:@"LMPreferenceWC"];

@@ -15,6 +15,10 @@
 #import "LMStartNewVC.h"
 
 @interface LMStartNewDefaultVC ()
+
+@property NSString *defaultProjectDir, *appName;
+
+
 @end
 
 @implementation LMStartNewDefaultVC
@@ -22,9 +26,13 @@
 - (void)performNext{
     [self.view.window close];
     
+    NSString *iuName = [_appName stringByAppendingPathExtension:@"iu"];
+    
     NSDictionary *options = @{  IUProjectKeyGit: @(NO),
                                 IUProjectKeyHeroku: @(NO),
                                 IUProjectKeyType:@(IUProjectTypeDefault),
+                                IUProjectKeyAppName : _appName,
+                                IUProjectKeyIUFilePath : [_defaultProjectDir stringByAppendingPathComponent:iuName],
                                 };
     
     [(IUProjectController *)[NSDocumentController sharedDocumentController] newDocument:self withOption:options];
@@ -48,6 +56,10 @@
     _nextB.target = self;
     [_prevB setAction:@selector(performPrev)];
     [_nextB setAction:@selector(performNext)];
+}
+
+- (IBAction)performProjectDirSelect:(id)sender {
+    self.defaultProjectDir = [[[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Default Project Directory"] path];
 }
 
 @end

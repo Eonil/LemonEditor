@@ -158,7 +158,7 @@
 }
 - (IBAction)clickRefreshBtn:(id)sender {
     LMWC *lmWC = [NSApp mainWindow].windowController;
-    [lmWC reloadCurrentDocument];
+    [lmWC reloadCurrentDocument:self];
 }
 
 - (IBAction)toggleLeftInspector:(id)sender {

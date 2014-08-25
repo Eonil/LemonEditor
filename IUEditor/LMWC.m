@@ -329,7 +329,7 @@
             [canvasVC addFrame:frameSize];
         }
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentDocument) name:IUNotificationMQSelected object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentDocument:) name:IUNotificationMQSelected object:self];
         
         
     }
@@ -437,7 +437,7 @@
     }
 }
 
-- (void)reloadCurrentDocument{
+- (IBAction)reloadCurrentDocument:(id)sender{
     [canvasVC reloadSheet];
 }
 

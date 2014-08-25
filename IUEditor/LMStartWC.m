@@ -69,4 +69,9 @@ static LMStartWC *gStartWindow = nil;
     NSUInteger selectedIndex = [_menuSelectB selectedColumn];
     [_tabView selectTabViewItemAtIndex:selectedIndex];
 }
+
+- (IBAction)selectStartViewOfType:(LMStartWCType)type{
+    [_menuSelectB selectCellAtRow:0 column:type];
+    [_tabView selectTabViewItemAtIndex:type];
+}
 @end

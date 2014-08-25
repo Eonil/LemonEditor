@@ -8,8 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 
+typedef enum{
+    LMStartWCTypeDefault,
+    LMStartWCTypeTemplate,
+    LMStartWCTypeRecent,
+}LMStartWCType;
+
 @interface LMStartWC : NSWindowController
 
 + (LMStartWC *)sharedStartWindow;
+
+- (IBAction)selectStartViewOfType:(LMStartWCType)type;
 
 @end
