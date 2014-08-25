@@ -11,7 +11,7 @@
             register_sidebar( array(
                                     'name' => $iuname,
                                     'id' => str_replace(' ', '',$iuname),
-                                    'before_widget' => '<div class="IUWidgetItem">',
+                                    'before_widget' => '<div class="WPWidget">',
                                     'after_widget' => '</div>',
                                     'before_title' => '<h2 class="IUWidgetItemTitle">',
                                     'after_title' => '</h2>',
