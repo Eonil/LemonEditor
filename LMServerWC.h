@@ -9,8 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 #import "IUProject.h"
-#import "JDShellUtil.h"
+
 #import "JDSyncUtil.h"
+#import "JDShellUtil.h"
 
 
 @interface LMServerWC : NSWindowController <JDShellUtilPipeDelegate, JDSyncUtilDeleagate>
@@ -21,7 +22,6 @@
 - (IUProject *)project;
 - (IUServerInfo*)serverInfo;
 
-- (IBAction)download:(id)sender;
 - (IBAction)upload:(id)sender;
 - (IBAction)serverRestart:(id)sender;
 

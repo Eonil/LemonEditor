@@ -43,7 +43,7 @@
     return _project.serverInfo;
 }
 
-
+/* do not use - db overwrite problem
 - (IBAction)download:(id)sender{
     NSAssert(_notificationSender, @"Should Have Notification Sender");
     if (syncUtil.isSyncing) {
@@ -68,6 +68,7 @@
     }
     [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseOK];
 }
+*/
 
 - (IBAction)upload:(id)sender{
     NSAssert(_notificationSender, @"Should Have Notification Sender");
@@ -81,8 +82,7 @@
         syncUtil.password = self.serverInfo.syncPassword;
         syncUtil.protocol = 0;
         syncUtil.remoteDirectory = self.serverInfo.remotePath;
-        syncUtil.localDirectory = self.serverInfo.localPath;
-        syncUtil.syncDirectory = self.serverInfo.syncItem;
+        syncUtil.localDirectory = _project.absoluteBuildPath;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleStart object:_notificationSender userInfo:nil];
         [syncUtil upload];
@@ -141,16 +141,9 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleEnd object:_notificationSender];
 }
 
-- (IBAction)findLocalPath:(id)sender {
-    NSURL *url = [[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Build Folder"];
-    self.serverInfo.localPath = [url path];
-
-}
-
 - (IBAction)close:(id)sender{
     [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseOK];
 }
-
 
 - (void)cancelOperation:(id)sender{
     [self close:self];

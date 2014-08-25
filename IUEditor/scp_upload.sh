@@ -10,10 +10,9 @@ set from [lrange $argv 0 0]
 set user [lrange $argv 1 1]
 set server [lrange $argv 2 2]
 set remoteDirectory [lrange $argv 3 3]
-set syncdir [lrange $argv 4 4]
-set password [lrange $argv 5 5]
+set password [lrange $argv 4 4]
 
-spawn sh -c "scp -rp $from/$syncdir/* $user@$server:$remoteDirectory/."
+spawn sh -c "scp -rp $from $user@$server:$remoteDirectory/."
 match_max 100000
 
 # Look for passwod prompt

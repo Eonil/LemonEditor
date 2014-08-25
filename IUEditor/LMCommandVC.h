@@ -10,7 +10,6 @@
 #import "IUCompiler.h"
 #import "IUSheetController.h"
 #import "JDShellUtil.h"
-#import "JDSyncUtil.h"
 
 @interface LMCommandVC : NSViewController <JDShellUtilPipeDelegate>
 
