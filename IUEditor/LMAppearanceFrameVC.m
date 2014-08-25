@@ -185,6 +185,7 @@
     [self outlet:_phStepper bind:@"enabled2" property:@"canChangeHeightByUserInput"];
     
     [_positionPopupBtn bind:@"enabled2" toObject:self withKeyPath:@"enablePosition" options:IUBindingDictNotRaisesApplicable];
+    [self outlet:_centerBtn bind:@"enabled2" property:@"xPosMove" options:IUBindingNegationAndNotRaise];
 
     
     

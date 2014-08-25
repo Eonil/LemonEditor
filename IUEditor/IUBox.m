@@ -334,6 +334,10 @@
     if(_xPosMove != xPosMove){
         [[self.undoManager prepareWithInvocationTarget:self] setXPosMove:_xPosMove];
         _xPosMove = xPosMove;
+        
+        if(xPosMove !=0 && _enableCenter==YES){
+            self.enableCenter = NO;
+        }
     }
 }
 
