@@ -58,7 +58,7 @@
     NSArray *selectedProject = self.templateAC.selectedObjects;
     LMStartItem *item = selectedProject[0];
     
-    NSURL *url = [[JDFileUtil util] openDirectoryByNSOpenPanel:@"Select Directory"];
+    NSURL *url = [[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Directory"];
     if (url == nil) {
         return;
     }

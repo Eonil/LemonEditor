@@ -75,7 +75,7 @@
 }
 
 - (IBAction)selectWordpressThemeDirectory:(id)sender {
-    NSURL *url = [[JDFileUtil util] openDirectoryByNSOpenPanel:@"Select Wordpress Theme Collection Directory"];
+    NSURL *url = [[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Wordpress Theme Collection Directory"];
     self.themeCollectionDirectory = [url path];
 }
 

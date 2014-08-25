@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "IUProject.h"
 
-@interface LMProjectPropertyWC : NSWindowController 
+@interface LMProjectPropertyWC : NSWindowController <NSTableViewDataSource, NSTableViewDelegate>
 
 - (id)initWithWindowNibName:(NSString *)windowNibName withIUProject:(IUProject *)project;
 

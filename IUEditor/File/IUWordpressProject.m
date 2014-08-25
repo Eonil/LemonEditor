@@ -21,7 +21,16 @@
 @implementation IUWordpressProject
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
-    return [super initWithCoder:aDecoder];
+    self = [super initWithCoder:aDecoder];
+    _port = [aDecoder decodeIntForKey:@"_port"];
+    _documentRoot = [aDecoder decodeObjectForKey:@"_documentRoot"];
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder{
+    [super encodeWithCoder:encoder];
+    [encoder encodeInteger:_port forKey:@"_port"];
+    [encoder encodeObject:_documentRoot forKey:@"_documentRoot"];
 }
 
 - (BOOL)runnable{
@@ -29,8 +38,10 @@
 }
 
 - (id)initWithCreation:(NSDictionary *)options error:(NSError *__autoreleasing *)error{
-    _mqSizes = [NSMutableArray arrayWithArray:@[@(defaultFrameWidth), @320]];
     
+    _port = -1;
+    _documentRoot = [NSString stringWithFormat:@"~%@/wordpress", NSUserName()];
+    _mqSizes = [NSMutableArray arrayWithArray:@[@(defaultFrameWidth), @320]];
     
     _compiler = [[IUCompiler alloc] init];
     _resourceManager = [[IUResourceManager alloc] init];

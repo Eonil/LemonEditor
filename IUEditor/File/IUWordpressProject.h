@@ -11,4 +11,7 @@
 
 @interface IUWordpressProject : IUProject
 
+@property (nonatomic) NSInteger port;
+@property  NSString *documentRoot;
+
 @end

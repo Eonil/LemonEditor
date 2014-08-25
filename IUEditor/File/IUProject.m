@@ -34,6 +34,7 @@
     [encoder encodeObject:_mqSizes forKey:@"mqSizes"];
     [encoder encodeObject:_buildPath forKey:@"_buildPath"];
     [encoder encodeObject:_buildResourcePath forKey:@"_buildResourcePath"];
+    [encoder encodeObject:_buildDirectory forKey:@"_buildDirectory"];
     [encoder encodeObject:_pageGroup forKey:@"_pageGroup"];
     [encoder encodeObject:_backgroundGroup forKey:@"_backgroundGroup"];
     [encoder encodeObject:_classGroup forKey:@"_classGroup"];
@@ -55,6 +56,9 @@
         
         _mqSizes = [[aDecoder decodeObjectForKey:@"mqSizes"] mutableCopy];
         _buildPath = [aDecoder decodeObjectForKey:@"_buildPath"];
+        if(_buildDirectory){
+            _buildDirectory = [aDecoder decodeObjectForKey:@"_buildDirectory"];
+        }
         _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _backgroundGroup = [aDecoder decodeObjectForKey:@"_backgroundGroup"];
         _classGroup = [aDecoder decodeObjectForKey:@"_classGroup"];
@@ -328,6 +332,7 @@
     return project;
 }
 
+
 + (NSString *)stringProjectType:(IUProjectType)type{
     NSString *projectName ;
     switch (type) {
@@ -371,17 +376,22 @@
     return type;
 }
 
-- (NSString*)directoryPath{
-    return [self.path stringByDeletingLastPathComponent];
-}
-
 - (NSString*)buildPath{
     return _buildPath;
 }
 
+- (NSString *)buildDirectory{
+    if(_buildDirectory){
+        return _buildDirectory;
+    }
+    else{
+        return [self.path stringByDeletingLastPathComponent];
+    }
+}
+
 - (NSString*)absoluteBuildPath{
     NSMutableString *str = [_buildPath mutableCopy];
-    [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[self directoryPath] options:0 range:NSMakeRange(0, [str length])];
+    [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[self buildDirectory] options:0 range:NSMakeRange(0, [str length])];
     [str replaceOccurrencesOfString:@"$AppName" withString:[self name] options:0 range:NSMakeRange(0, [str length])];
 
     NSString *returnPath = [str stringByExpandingTildeInPath];
@@ -394,7 +404,7 @@
 
 - (NSString*)absoluteBuildResourcePath{
     NSMutableString *str = [_buildResourcePath mutableCopy];
-    [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[self directoryPath] options:0 range:NSMakeRange(0, [str length])];
+    [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[self buildDirectory] options:0 range:NSMakeRange(0, [str length])];
     [str replaceOccurrencesOfString:@"$AppName" withString:[self name] options:0 range:NSMakeRange(0, [str length])];
     
     NSString *returnPath = [str stringByExpandingTildeInPath];
@@ -844,8 +854,8 @@
 
 - (IUServerInfo*)serverInfo{
     if (_serverInfo.localPath == nil) {
-        _serverInfo.localPath = [[self directoryPath] stringByDeletingLastPathComponent];
-        _serverInfo.syncItem = [self.directoryPath lastPathComponent];
+        _serverInfo.localPath = [self buildDirectory];
+        _serverInfo.syncItem = [self.path lastPathComponent];
     }
     return _serverInfo;
 }

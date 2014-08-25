@@ -19,10 +19,19 @@
     return self;
 }
 
+- (id)initWithCreation:(NSDictionary *)options error:(NSError *__autoreleasing *)error{
+    self = [super initWithCreation:options error:error];
+    if(self){
+        _port = 8000;
+    }
+    return self;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     /* version control code */
     IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
+    _port = [aDecoder decodeIntForKey:@"_port"];
     if (IUEditorVersion < 1) {
         _buildPath = @"$IUFileDirectory/templates";
         _buildResourcePath = @"$IUFileDirectory/templates/resource";
@@ -31,9 +40,13 @@
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder{
+    [super encodeWithCoder:encoder];
+    [encoder encodeInteger:_port forKey:@"_port"];
+}
+
 - (BOOL)runnable{
     return YES;
 }
-
 
 @end

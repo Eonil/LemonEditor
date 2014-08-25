@@ -114,7 +114,14 @@ static NSString *IUClassGroupName = @"class";
  */
 @property   NSString    *name, *path, *author, *favicon;
 
-- (NSString*)directoryPath;
+/**
+ Users can change build Directory.
+ build directory's default value : self.path의 directory
+ e.g)
+ self.path = ~/Document/sample.iu
+ buildDirectory => ~/Document/
+ */
+@property (nonatomic) NSString *buildDirectory;
 
 - (NSString*)buildPath;
 - (NSString*)buildResourcePath;

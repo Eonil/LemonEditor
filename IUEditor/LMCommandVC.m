@@ -6,13 +6,16 @@
 //  Copyright (c) 2014 JDLab. All rights reserved.
 //
 
-#import "LMCommandVC.h"
 #import "IUSheetGroup.h"
 #import "IUDjangoProject.h"
+#import "IUWordPressProject.h"
+
 #import "JDScreenRecorder.h"
 #import "JDDateTimeUtil.h"
 #import "LMTutorialManager.h"
 #import "LMHelpWC.h"
+#import "LMCommandVC.h"
+
 #import "JDNetworkUtil.h"
 
 @interface LMCommandVC ()
@@ -76,14 +79,6 @@
     [JDLogUtil log:IULogDealloc string:@"LMCommandVC"];
 }
 
-- (NSInteger)djangoDebugPort{
-    NSString *port = [[NSUserDefaults standardUserDefaults] objectForKey:@"DjangoDebugPort"];
-    if (port == nil) {
-        port = @"8000";
-    }
-    return [port integerValue];
-}
-
 -(void)docController_project_runnableDidChange:(NSDictionary*)change{
     if (_docController.project.runnable == NO) {
         [_serverB setEnabled:NO];
@@ -117,16 +112,26 @@
             NSString *firstPath = [project.absoluteBuildPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.html",[doc.name lowercaseString]]];
             [[NSWorkspace sharedWorkspace] openFile:firstPath];
         }
-        else {
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://127.0.0.1/~%@/wordpress", NSUserName()]];
+        else if(rule == IUCompileRuleWordpress){
+            IUWordpressProject *wProject = (IUWordpressProject *) _docController.project;
+
+            NSURL *url;
+            if(wProject.port > 0){
+                url = [NSURL URLWithString:[NSString stringWithFormat:@"http://127.0.0.1:%ld/%@", wProject.port, wProject.documentRoot]];
+            }
+            else{
+                url = [NSURL URLWithString:[NSString stringWithFormat:@"http://127.0.0.1/%@", wProject.documentRoot]];
+            }
             [[NSWorkspace sharedWorkspace] openURL:url];
         }
     }
     else if (rule == IUCompileRuleDjango){
+        IUDjangoProject *project = (IUDjangoProject *)_docController.project;
+
         //get port
         //run server
         if ([debugServerShell.task isRunning] == NO) {
-            if ([JDNetworkUtil isPortAvailable:[self djangoDebugPort]]) {
+            if ([JDNetworkUtil isPortAvailable:project.port]) {
                 BOOL result = [self runServer:nil];
                 if (result == NO) {
                     return;
@@ -135,7 +140,6 @@
         }
         
         //compile
-        IUProject *project = _docController.project;
         BOOL result = [project build:nil];
         if (result == NO) {
             NSAssert(0, @"compile failed");
@@ -147,7 +151,7 @@
             node = [project.pageSheets firstObject];
         }
 
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://127.0.0.1:%ld/%@",[self djangoDebugPort], [node.name lowercaseString]]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat: @"http://127.0.0.1:%ld/%@", project.port, [node.name lowercaseString]]];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [[NSWorkspace sharedWorkspace] openURL:url];
@@ -165,12 +169,13 @@
 
 - (BOOL) runServer:(NSError **)error{
     //get port
-    NSString *filePath = [_docController.project.directoryPath stringByAppendingPathComponent:@"manage.py"];
+    NSString *filePath = [_docController.project.buildDirectory stringByAppendingPathComponent:@"manage.py"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath] == NO) {
         [JDUIUtil hudAlert:@"No manage.py" second:2];
         return NO;
     }
-    NSString *command = [NSString stringWithFormat:@"%@ runserver %ld",filePath , [self djangoDebugPort]];
+    IUDjangoProject *project = (IUDjangoProject *)_docController.project;
+    NSString *command = [NSString stringWithFormat:@"%@ runserver %ld",filePath , project.port];
     if ([debugServerShell.task isRunning] == NO) {
         debugServerShell = [[JDShellUtil alloc] init];
         [debugServerShell execute:command delegate:self];
@@ -187,11 +192,8 @@
         [debugServerShell stop];
         debugServerShell = nil;
     }
-    NSString *port = [[NSUserDefaults standardUserDefaults] objectForKey:@"DjangoDebugPort"];
-    if (port == nil) {
-        port = @"8000";
-    }
-    NSInteger pid = [JDNetworkUtil pidOfPort:[port integerValue]];
+    IUDjangoProject *project = (IUDjangoProject *)_docController.project;
+    NSInteger pid = [JDNetworkUtil pidOfPort:project.port];
     if (pid != NSNotFound) {
         //kill
         NSString *killCommand = [NSString stringWithFormat:@"kill %ld", pid];
@@ -213,12 +215,14 @@
 }
 
 - (void)refreshServerStatePerform{
-    NSInteger pid = [JDNetworkUtil pidOfPort:[self djangoDebugPort]];
+    IUDjangoProject *project = (IUDjangoProject *)_docController.project;
+    NSInteger port = project.port;
+    NSInteger pid = [JDNetworkUtil pidOfPort:port];
     if (pid == NSNotFound) {
         self.serverState = nil;
         return;
     }
-    NSString *processName = [JDNetworkUtil processNameOfPort:[self djangoDebugPort]];
+    NSString *processName = [JDNetworkUtil processNameOfPort:port];
     self.serverState = [NSString stringWithFormat:@"%@(%ld) is running", processName, pid];
 }
 

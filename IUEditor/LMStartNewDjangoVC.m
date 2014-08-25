@@ -65,17 +65,17 @@
 }
 
 - (IBAction)performProjectDirSelect:(id)sender {
-    self.djangoProjectDir = [[[JDFileUtil util] openDirectoryByNSOpenPanel:@"Select Django Project Directory"] path];
+    self.djangoProjectDir = [[[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Django Project Directory"] path];
     self.djangoTemplateDir = @"FileDirectory/templates";
     self.djangoResourceDir = @"FileDirectory/templates/resource";
 }
 
 - (IBAction)performResourceDirSelect:(id)sender {
-    self.djangoProjectDir = [[[JDFileUtil util] openDirectoryByNSOpenPanel:@"Select Django resource Directory"] path];
+    self.djangoProjectDir = [[[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Django resource Directory"] path];
 }
 
 - (IBAction)performTemplateDirSelect:(id)sender {
-    self.djangoTemplateDir = [[[JDFileUtil util] openDirectoryByNSOpenPanel:@"Select Django Project Template Directory"] path];
+    self.djangoTemplateDir = [[[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Django Project Template Directory"] path];
 }
 
 - (void)show{

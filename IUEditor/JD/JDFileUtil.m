@@ -97,7 +97,7 @@ static JDFileUtil *sharedJDFileUtill;
 }
 
 
--(NSURL*)openDirectoryByNSOpenPanel:(NSString*)title{
+-(NSURL*)openDirectoryByNSOpenPanelWithTitle:(NSString*)title{
     NSOpenPanel* openDlg = [NSOpenPanel openPanel];
     [openDlg setCanChooseFiles:NO];
     [openDlg setCanChooseDirectories:YES];
@@ -120,7 +120,7 @@ static JDFileUtil *sharedJDFileUtill;
 
 
 -(NSURL*)openDirectoryByNSOpenPanel{
-    return [self openDirectoryByNSOpenPanel:nil];
+    return [self openDirectoryByNSOpenPanelWithTitle:nil];
 }
 
 - (NSURL *)openSavePanelWithAllowFileTypes:(NSArray *)fileTypes withTitle:(NSString *)title{

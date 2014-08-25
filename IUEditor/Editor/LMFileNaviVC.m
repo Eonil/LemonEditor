@@ -210,7 +210,7 @@
 
 
 - (void)openProject:(id)sender {
-    [[NSWorkspace sharedWorkspace] openFile:_project.directoryPath];
+    [[NSWorkspace sharedWorkspace] openFile:_project.buildDirectory];
 }
 
 - (void)copyDocument:(NSMenuItem*)sender{

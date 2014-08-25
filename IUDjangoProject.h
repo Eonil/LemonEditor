@@ -10,4 +10,6 @@
 
 @interface IUDjangoProject : IUProject
 
+@property (nonatomic) NSInteger port;
+
 @end

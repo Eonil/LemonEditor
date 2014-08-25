@@ -19,7 +19,7 @@
 +(BOOL)isFileImage:(NSURL*)url;
 -(NSURL*)openFileByNSOpenPanel;
 -(NSURL*)openFileByNSOpenPanel:(NSString*)title withExt:(NSArray*)extensions;
--(NSURL*)openDirectoryByNSOpenPanel:(NSString*)title;
+-(NSURL*)openDirectoryByNSOpenPanelWithTitle:(NSString*)title;
 -(NSURL*)openDirectoryByNSOpenPanel;
 
 

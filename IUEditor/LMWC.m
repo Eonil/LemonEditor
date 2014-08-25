@@ -421,7 +421,6 @@
         return;
     }
     else if ([selectedNode isKindOfClass:[IUProject class]]){
-        [self openProjectPropertyWindow];
         return;
     }
     else if ([selectedNode isKindOfClass:[IUSheetGroup class]]){
@@ -501,7 +500,9 @@
 
 #pragma mark - window
 - (void)windowWillClose:(NSNotification *)notification{
-    [commandVC stopServer:self];
+    if([_project isKindOfClass:[IUDjangoProject class]]){
+        [commandVC stopServer:self];
+    }
 }
 
 #pragma mark - tool-bar action
@@ -551,8 +552,8 @@
     }];
 }
 
+- (IBAction)openProjectPropertyWindow:(id)sender {
 
-- (void)openProjectPropertyWindow{
     if(projectPropertyWC == nil){
         projectPropertyWC = [[LMProjectPropertyWC alloc] initWithWindowNibName:[LMProjectPropertyWC class].className withIUProject:_project];
     }

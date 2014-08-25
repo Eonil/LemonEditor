@@ -141,6 +141,12 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleEnd object:_notificationSender];
 }
 
+- (IBAction)findLocalPath:(id)sender {
+    NSURL *url = [[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Build Folder"];
+    self.serverInfo.localPath = [url path];
+
+}
+
 - (IBAction)close:(id)sender{
     [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseOK];
 }

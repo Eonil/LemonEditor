@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
         <plugIn identifier="com.apple.WebKitIBPlugin" version="6154.17"/>
@@ -424,9 +424,26 @@
                             <color key="fillColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                         </box>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="82169102-3B86-4E16-AE86-33D0E573281B" label="Custom View" paletteLabel="Custom View" id="Ov3-yg-ebZ">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="82" height="32"/>
+                        <size key="maxSize" width="148" height="43"/>
+                        <button key="view" verticalHuggingPriority="750" id="WX3-hL-uOF">
+                            <rect key="frame" x="0.0" y="14" width="148" height="43"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="push" title="ProjectProperty" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="03H-Rc-qG5">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="openProjectPropertyWindow:" target="-2" id="pek-LA-xLh"/>
+                            </connections>
+                        </button>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="UhE-nB-agp"/>
+                    <toolbarItem reference="Ov3-yg-ebZ"/>
                     <toolbarItem reference="rlk-P1-2MX"/>
                     <toolbarItem reference="2EI-gL-BuQ"/>
                     <toolbarItem reference="rlk-P1-2MX"/>
