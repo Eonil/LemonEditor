@@ -759,6 +759,7 @@
 		69965421190F9F1D000379DA /* LMPropertyIUCollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6996541F190F9F1D000379DA /* LMPropertyIUCollectionVC.xib */; };
 		6999161D1919F05E000ECF57 /* PGSubmitButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6999161C1919F05E000ECF57 /* PGSubmitButton.m */; };
 		699916201919F090000ECF57 /* PGForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 6999161F1919F090000ECF57 /* PGForm.m */; };
+		699C2AA619AAA7C50075C2E6 /* WPPageLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 699C2AA519AAA7C50075C2E6 /* WPPageLink.m */; };
 		699D12DB1957D17A0096B21C /* handArrow.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 699D12DA1957D17A0096B21C /* handArrow.jpg */; };
 		69A45DE018F6702C00C551D9 /* LMPropertyBorderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69A45DDE18F6702C00C551D9 /* LMPropertyBorderVC.m */; };
 		69A45DE118F6702C00C551D9 /* LMPropertyBorderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69A45DDF18F6702C00C551D9 /* LMPropertyBorderVC.xib */; };
@@ -1830,6 +1831,8 @@
 		6999161C1919F05E000ECF57 /* PGSubmitButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGSubmitButton.m; sourceTree = "<group>"; };
 		6999161E1919F090000ECF57 /* PGForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGForm.h; sourceTree = "<group>"; };
 		6999161F1919F090000ECF57 /* PGForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGForm.m; sourceTree = "<group>"; };
+		699C2AA419AAA7C50075C2E6 /* WPPageLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPPageLink.h; sourceTree = "<group>"; };
+		699C2AA519AAA7C50075C2E6 /* WPPageLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPPageLink.m; sourceTree = "<group>"; };
 		699D12DA1957D17A0096B21C /* handArrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = handArrow.jpg; sourceTree = "<group>"; };
 		69A45DDD18F6702C00C551D9 /* LMPropertyBorderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyBorderVC.h; sourceTree = "<group>"; };
 		69A45DDE18F6702C00C551D9 /* LMPropertyBorderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyBorderVC.m; sourceTree = "<group>"; };
@@ -3468,6 +3471,8 @@
 				6923AB4519A2A9B20084FFAC /* WPWidgetTitle.m */,
 				6923AB4719A2A9BC0084FFAC /* WPWidgetBody.h */,
 				6923AB4819A2A9BC0084FFAC /* WPWidgetBody.m */,
+				699C2AA419AAA7C50075C2E6 /* WPPageLink.h */,
+				699C2AA519AAA7C50075C2E6 /* WPPageLink.m */,
 			);
 			name = WPGroup;
 			sourceTree = "<group>";
@@ -4831,6 +4836,7 @@
 				3DED273A1904F271001A1D67 /* IUImageUtil.m in Sources */,
 				3D095C801990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.m in Sources */,
 				69C5760B18D6FE020016F050 /* IUClass.m in Sources */,
+				699C2AA619AAA7C50075C2E6 /* WPPageLink.m in Sources */,
 				3DA416BD1935ABB400559028 /* LMFontController.m in Sources */,
 				3D748C81192095A1005665A3 /* LMPropertyIUPageVC.m in Sources */,
 				3DED271D1904ADD9001A1D67 /* LMEventVariableTrigger.m in Sources */,
