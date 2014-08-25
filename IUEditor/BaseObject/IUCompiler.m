@@ -328,7 +328,7 @@
     else{
         [code addCodeLine:@"<script src='http://code.jquery.com/jquery-1.10.2.js'></script>"];
         [code addCodeLine:@"<script src='http://code.jquery.com/ui/1.9.2/jquery-ui.js'></script>"];
-        [code addCodeLine:@"<script src=\"http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js\"></script>"];
+//        [code addCodeLine:@"<script src=\"http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js\"></script>"];
 
         
         for(NSString *filename in sheet.project.defaultOutputJSArray){
