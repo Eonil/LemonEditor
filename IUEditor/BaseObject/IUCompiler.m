@@ -45,6 +45,9 @@
 
 #import "IUCSSCompiler.h"
 
+#import "WPPageLink.h"
+#import "WPPageLinks.h"
+
 #if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
 #import "IUText.h"
 #endif
@@ -494,15 +497,15 @@
     
 #endif
     
-    else if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol) ]){
+    else if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol)] && self.rule == IUCompileRuleDefault){
         /* for example, WORDPRESS can be compiled as HTML */
         IUBox <IUSampleHTMLProtocol> *sampleProtocolIU = (id)iu;
         if ([sampleProtocolIU respondsToSelector:@selector(sampleInnerHTML)]) {
             NSString *sampleInnerHTML = [sampleProtocolIU sampleInnerHTML];
-            [code addCodeLineWithFormat:@"<div %@ >%@</div>", [self HTMLAttributes:iu option:nil isEdit:YES], sampleInnerHTML];
+            [code addCodeWithFormat:sampleInnerHTML];
         }
         else if ([sampleProtocolIU respondsToSelector:@selector(sampleHTML)]) {
-            [code addCodeLine: sampleProtocolIU.sampleHTML];
+            [code setCodeString: sampleProtocolIU.sampleHTML];
         }
         else {
             assert(0);
@@ -510,7 +513,10 @@
     }
     if (iu.children.count) {
         for (IUBox *child in iu.children) {
-            [code addCodeWithIncreaseIndent:[self outputHTML:child]];
+            JDCode *childCode = [self outputHTML:child];
+            if (childCode) {
+                [code addCodeWithIndent:childCode];
+            }
         }
     }
     
@@ -523,6 +529,11 @@
 
 -(JDCode *)outputHTML:(IUBox *)iu{
     JDCode *code = [[JDCode alloc] init];
+
+    if ([iu isKindOfClass:[WPPageLink class]]) {
+        return nil; // do not compile
+    }
+
 #pragma mark IUBox
     if ([iu conformsToProtocol:@protocol(IUCodeProtocol)] && self.rule != IUCompileRuleDefault ) {
         NSObject <IUCodeProtocol>* iuCode = (id)iu;
@@ -537,7 +548,8 @@
             [iuCode shouldCompileChildrenForOutput] == YES ) {
             if (iu.children.count) {
                 for (IUBox *child in iu.children) {
-                    [code addCodeWithIncreaseIndent:[self outputHTML:child]];
+                    JDCode *childCode = [self outputHTML:child];
+                    [code addCodeWithIndent:childCode];
                 }
             }
         }
@@ -552,20 +564,23 @@
         if (page.background) {
             [code addCodeLineWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:NO]];
             for (IUBox *obj in page.background.children) {
-                [code addCodeWithIncreaseIndent:[self outputHTML:obj]];
+                [code addCodeWithIndent:[self outputHTML:obj]];
             }
             if (iu.children.count) {
                 for (IUBox *child in iu.children) {
                     if (child == page.background) {
                         continue;
                     }
-                    [code addCodeWithIncreaseIndent:[self outputHTML:child]];
+                    JDCode *childCode = [self outputHTML:child];
+                    if (childCode) {
+                        [code addCodeWithIndent:childCode];
+                    }
                 }
             }
             [code addCodeLine:@"</div>"];
         }
         else {
-            [code addCodeWithIncreaseIndent:[self outputHTMLAsBox:iu option:nil]];
+            [code addCodeWithIndent:[self outputHTMLAsBox:iu option:nil]];
 
         }
     }
@@ -584,7 +599,7 @@
             [code addCodeLine:@"<ul>"];
             
             for (IUBox *child in menuBar.children){
-                [code addCodeWithIncreaseIndent:[self outputHTML:child]];
+                [code addCodeWithIndent:[self outputHTML:child]];
             }
             [code addCodeLine:@"</ul>"];
             [code decreaseIndentLevelForEdit];
@@ -609,7 +624,7 @@
             [code addCodeLine:@"<div class='closure'></div>"];
             [code addCodeLine:@"<ul>"];
             for(IUBox *child in menuItem.children){
-                [code addCodeWithIncreaseIndent:[self outputHTML:child]];
+                [code addCodeWithIndent:[self outputHTML:child]];
             }
             [code addCodeLine:@"</ul>"];
         }
@@ -629,7 +644,7 @@
             [code addCodeLineWithFormat:@"</div>"];
         }
         else {
-            [code addCodeWithIncreaseIndent:[self outputHTMLAsBox:iuCollection option:nil]];
+            [code addCodeWithIndent:[self outputHTMLAsBox:iuCollection option:nil]];
         }
     }
 #pragma mark IUCarousel
@@ -639,7 +654,7 @@
         //carousel item
         [code addCodeLineWithFormat:@"<div class='wrapper' id='wrapper_%@'>", iu.htmlID];
         for(IUItem *item in iu.children){
-            [code addCodeWithIncreaseIndent:[self outputHTML:item]];
+            [code addCodeWithIndent:[self outputHTML:item]];
         }
         [code addCodeLine:@"</div>"];
         
@@ -697,7 +712,7 @@
         }
         if (iu.children.count) {
             for (IUBox *child in iu.children) {
-                [code addCodeWithIncreaseIndent:[self outputHTML:child]];
+                [code addCodeWithIndent:[self outputHTML:child]];
             }
         }
         [code addCodeLineWithFormat:@"</div>"];
@@ -729,7 +744,7 @@
     else if([iu isKindOfClass:[IUImport class]]){
         [code addCodeLineWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:NO]];
         for (IUBox *child in iu.children) {
-            [code addCodeWithIncreaseIndent:[self outputHTML:child]];
+            [code addCodeWithIndent:[self outputHTML:child]];
         }
         
         [code addCodeLineWithFormat:@"</div>"];
@@ -741,7 +756,7 @@
         IUText *textIU = (IUText *)iu;
         if (_rule == IUCompileRuleDjango && iu.textVariable) {
             JDCode *outputCode = [self outputHTMLAsBox:iu option:nil];
-            [code addCodeWithIncreaseIndent:outputCode];
+            [code addCodeWithIndent:outputCode];
         }
         else{
             [code addCodeLineWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:NO]];
@@ -775,7 +790,7 @@
     }
     
     else if ([iu isKindOfClass:[PGForm class]]){
-        [code addCodeWithIncreaseIndent:[self outputHTMLAsBox:iu option:nil]];
+        [code addCodeWithIndent:[self outputHTMLAsBox:iu option:nil]];
     }
     else if ([iu isKindOfClass:[PGSubmitButton class]]){
         [code addCodeLineWithFormat:@"<input %@ >", [self HTMLAttributes:iu option:nil isEdit:NO]];
@@ -785,7 +800,7 @@
 #pragma mark IUBox
     else if ([iu isKindOfClass:[IUBox class]]) {
         JDCode *outputCode = [self outputHTMLAsBox:iu option:nil];
-        [code addCodeWithIncreaseIndent:outputCode];
+        [code addCodeWithIndent:outputCode];
     }
     
     
@@ -913,7 +928,7 @@
 #endif
     if (iu.children.count) {
         for (IUBox *child in iu.children) {
-            [code addCodeWithIncreaseIndent:[self editorHTML:child]];
+            [code addCodeWithIndent:[self editorHTML:child]];
         }
     }
     [code addCodeLineWithFormat:@"</div>"];
@@ -921,6 +936,10 @@
 }
 
 -(JDCode *)editorHTML:(IUBox*)iu{
+    if ([iu isKindOfClass:[WPPageLink class]]) {
+        return nil; // do not compile
+    }
+
     JDCode *code = [[JDCode alloc] init];
 #pragma mark IUPage
     if ([iu isKindOfClass:[IUPage class]]) {
@@ -928,20 +947,20 @@
         if (page.background) {
             [code addCodeLineWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:YES]];
             for (IUBox *obj in page.background.children) {
-                [code addCodeWithIncreaseIndent:[self editorHTML:obj]];
+                [code addCodeWithIndent:[self editorHTML:obj]];
             }
             if (iu.children.count) {
                 for (IUBox *child in iu.children) {
                     if (child == page.background) {
                         continue;
                     }
-                    [code addCodeWithIncreaseIndent:[self editorHTML:child]];
+                    [code addCodeWithIndent:[self editorHTML:child]];
                 }
             }
             [code addCodeLine:@"</div>"];
         }
         else {
-            [code addCodeWithIncreaseIndent:[self editorHTMLAsBOX:iu]];
+            [code addCodeWithIndent:[self editorHTMLAsBOX:iu]];
         }
     }
     else if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol) ]){
@@ -973,7 +992,7 @@
             [code addCodeLine:@"<ul>"];
             
             for (IUBox *child in menuBar.children){
-                [code addCodeWithIncreaseIndent:[self outputHTML:child]];
+                [code addCodeWithIndent:[self outputHTML:child]];
             }
             [code addCodeLine:@"</ul>"];
             [code decreaseIndentLevelForEdit];
@@ -994,7 +1013,7 @@
             [code addCodeLine:@"<div class='closure'></div>"];
             [code addCodeLine:@"<ul>"];
             for(IUBox *child in menuItem.children){
-                [code addCodeWithIncreaseIndent:[self outputHTML:child]];
+                [code addCodeWithIndent:[self outputHTML:child]];
             }
             [code addCodeLine:@"</ul>"];
         }
@@ -1009,7 +1028,7 @@
         [code addCodeLineWithFormat:@"<div %@>", [self HTMLAttributes:carousel option:nil isEdit:YES]];
         //carousel item
         for(IUCarouselItem *item in iu.children){
-            [code addCodeWithIncreaseIndent:[self editorHTML:item]];
+            [code addCodeWithIndent:[self editorHTML:item]];
         }        
         //control
         if(carousel.disableArrowControl == NO){
@@ -1207,7 +1226,7 @@
         if (iu.children.count) {
             
             for (IUBox *child in iu.children) {
-                [code addCodeWithIncreaseIndent:[self editorHTML:child]];
+                [code addCodeWithIndent:[self editorHTML:child]];
             }
         }
         [code addCodeLineWithFormat:@"</div>"];
@@ -1258,7 +1277,7 @@
         NSString *idReplacementString = [NSString stringWithFormat:@" id=\"ImportedBy_%@_", iu.htmlID];
         
         [importCode replaceCodeString:@" id=\"" toCodeString:idReplacementString];
-        [code addCodeWithIncreaseIndent:importCode];
+        [code addCodeWithIndent:importCode];
         [code addCodeLine:@"</div>"];
     }
     
@@ -1269,7 +1288,7 @@
     
 #pragma mark IUBox
     else if ([iu isKindOfClass:[IUBox class]]) {
-        [code addCodeWithIncreaseIndent:[self editorHTMLAsBOX:iu]];
+        [code addCodeWithIndent:[self editorHTMLAsBOX:iu]];
     }
     
     return code;
@@ -1654,7 +1673,7 @@
         [code addCodeLine:@"/* IUCarousel initialize */\n"];
         [code addCodeLineWithFormat:@"initCarousel('%@')", iu.htmlID];
         for (IUBox *child in iu.children) {
-            [code addCodeWithIncreaseIndent:[self jsCode:child isEdit:isEdit]];
+            [code addCodeWithIndent:[self jsCode:child isEdit:isEdit]];
         }
     }
     else if([iu isKindOfClass:[IUGoogleMap class]]){
@@ -1736,7 +1755,7 @@
     
     else if ([iu isKindOfClass:[IUBox class]]) {
         for (IUBox *child in iu.children) {
-            [code addCodeWithIncreaseIndent:[self jsCode:child isEdit:isEdit]];
+            [code addCodeWithIndent:[self jsCode:child isEdit:isEdit]];
         }
 
     }

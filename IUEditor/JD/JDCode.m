@@ -41,7 +41,7 @@
     [string appendString:@"\n"];
 }
 
-- (void)addCodeWithIncreaseIndent:(JDCode*)code{
+- (void)addCodeWithIndent:(JDCode*)code{
     [code pushIndent:(indentLevel+1) prependIndent:YES];
     [string appendString:code.string];
 }
@@ -53,6 +53,11 @@
 - (void)addString:(NSString *)aString{
     [string appendString:whiteSpace];
     [string appendString:aString];
+}
+
+- (void)setCodeString:(NSString *)aString{
+    string = [NSMutableString string];
+    [self addString:aString];
 }
 
 - (void)addCodeWithFormat:(NSString *)format, ...{

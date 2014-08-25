@@ -25,6 +25,9 @@
 #import "WPWidgetTitle.h"
 #import "WPWidgetBody.h"
 
+#import "WPPageLinks.h"
+#import "WPPageLink.h"
+
 @interface IUCSSCode() {
     IUTarget _currentTarget;
     int _currentViewPort;
@@ -1353,6 +1356,16 @@
         [code renameIdentifier:identifier to:newIdentifier];
     }
 }
+/*
+- (void)updateCSSCode:(IUCSSCode*)code asWPPageLink:(WPPageLink *)_iu{
+    NSArray *identifiers = [code allIdentifiers];
+    WPPageLinks *pageLinks = (WPPageLinks*)_iu.parent;
+    
+    for (NSString *identifier in identifiers) {
+        NSString *newIdentifier = [identifier stringByReplacingOccurrencesOfString:_iu.htmlID withString:[NSString stringWithFormat:@"%@ > .WPWidgetTitle" , pageLinks.htmlID]];
+        [code renameIdentifier:identifier to:newIdentifier];
+    }
 
-
+}
+*/
 @end

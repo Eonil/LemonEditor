@@ -3,11 +3,12 @@
     display:block;
     border-style:solid;
     overflow:hidden;
-    cursor:default;
+    background-repeat: no-repeat;
 }
 
 a{
     text-decoration:none;
+    display:block;
 }
 
 .IUPage{
@@ -303,4 +304,12 @@ a{
 
 .WPWidgetBody {
     display: block;
+}
+
+.WPPageLinks > a{
+    display: inline;
+}
+
+.WPPageLinks > ul > li {
+    float : left;
 }

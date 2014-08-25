@@ -53,6 +53,10 @@ nav ul {
     list-style:none;
 }
 
+ul {
+   list-style-type: none;
+}
+
 blockquote, q {
     quotes:none;
 }

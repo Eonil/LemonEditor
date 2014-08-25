@@ -183,3 +183,11 @@ a{
 .WPWidgetBody {
     display: block;
 }
+
+.WPPageLinks > a{
+    display: inline;
+}
+
+.WPPageLinks > ul > li {
+    float : left;
+}
