@@ -141,7 +141,7 @@
         }
         
         //background
-        [_css setValue:[NSColor randomColor] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
+        [_css setValue:[NSColor randomLightMonoColor] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
         [_css setValue:@(IUBGSizeTypeAuto) forTag:IUCSSTagBGSize forViewport:IUCSSDefaultViewPort];
         [_css setValue:@(0) forTag:IUCSSTagBGXPosition forViewport:IUCSSDefaultViewPort];
         [_css setValue:@(0) forTag:IUCSSTagBGYPosition forViewport:IUCSSDefaultViewPort];

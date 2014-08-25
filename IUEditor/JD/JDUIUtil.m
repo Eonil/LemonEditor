@@ -972,6 +972,21 @@ static NSWindowController *hudWC;
     return [NSColor colorWithCalibratedRed:c[0] green:c[1] blue:c[2] alpha:c[3]];
 }
 
++ (NSColor *)randomLightMonoColor {
+    static int seeded;
+    if (seeded == 0) {
+        srand((unsigned int)time(NULL));
+        seeded++;
+    }
+    
+    float c[2];
+    //150-255
+    c[0] = ((float)((rand()%151)+100))/256;
+    c[1] = 1.0;
+    
+    return [NSColor colorWithCalibratedRed:c[0] green:c[0] blue:c[0] alpha:c[1]];
+}
+
 
 
 -(NSColor*) complementaryColor{
