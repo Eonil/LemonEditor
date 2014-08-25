@@ -68,6 +68,9 @@
     [_documentController setSelectedObject:_project.pageSheets.firstObject];
 }
 
+- (void)reloadNavigation{
+    [_outlineV reloadData];
+}
 
 #pragma mark - outlineView
 

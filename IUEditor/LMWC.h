@@ -30,6 +30,7 @@
 - (void)selectFirstDocument;
 - (void)reloadCurrentDocument;
 - (NSString *)projectName;
+- (void)reloadNavigation;
 
 - (void)setLeftInspectorState:(NSInteger)state;
 - (void)setRightInspectorState:(NSInteger)state;

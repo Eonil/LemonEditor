@@ -335,6 +335,10 @@
     }
 }
 
+- (void)reloadNavigation{
+    [fileNaviVC reloadNavigation];
+}
+
 - (NSString *)projectName{
     return _project.name;
 }

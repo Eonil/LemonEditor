@@ -22,5 +22,7 @@
 @property (nonatomic, weak) IUProject *project;
 @property (weak) id <LMFileNaviDelegate> delegate;
 
--(void)selectFirstDocument;
+- (void)selectFirstDocument;
+- (void)reloadNavigation;
+
 @end
