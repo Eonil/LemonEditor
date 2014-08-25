@@ -868,7 +868,6 @@ static NSWindowController *hudWC;
         redIntValue=redFloatValue*0xff;
         greenIntValue=greenFloatValue*0xff;
         blueIntValue=blueFloatValue*0xff;
-        alphaIntValue = alphaFloatValue*0xff;
         
         // Concatenate the red, green, and blue, alpha components' hex strings
         return [NSString stringWithFormat:@"%02X%02X%02X", redIntValue, greenIntValue, blueIntValue];

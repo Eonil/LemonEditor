@@ -80,7 +80,7 @@
 
     //if there is no opend document,
     if([[[NSDocumentController sharedDocumentController] documents] count] < 1){
-        [self showStartWC:self];
+        [self showStartTemplate:self];
     }
     
     notiManager = [[LMNotiManager alloc] init];
@@ -193,7 +193,7 @@
         //cmd + N 화면
         //https://developer.apple.com/library/mac/documentation/cocoa/reference/NSApplicationDelegate_Protocol/Reference/Reference.html#//apple_ref/occ/intfm/NSApplicationDelegate/applicationOpenUntitledFile:
         
-        [self showStartWC:self];
+        [self showStartTemplate:self];
         
 #endif
         return NO;

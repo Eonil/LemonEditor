@@ -353,9 +353,9 @@
     else if(type == IUCarouselArrowRight){
         arrowID = self.nextID;
     }
-    
-    
-    [self updateCSSWithIdentifiers:@[arrowID]];
+    if(arrowID){
+        [self updateCSSWithIdentifiers:@[arrowID]];
+    }
 }
 
 #pragma mark - property for undo
