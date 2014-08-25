@@ -67,4 +67,8 @@
     [JDLogUtil log:IULogDealloc string:@"IUBackGround"];
 }
 
+- (BOOL)canCopy{
+    return NO;
+}
+
 @end
