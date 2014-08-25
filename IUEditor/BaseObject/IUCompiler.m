@@ -328,11 +328,13 @@
     else{
         [code addCodeLine:@"<script src='http://code.jquery.com/jquery-1.10.2.js'></script>"];
         [code addCodeLine:@"<script src='http://code.jquery.com/ui/1.9.2/jquery-ui.js'></script>"];
+        [code addCodeLine:@"<script src=\"http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js\"></script>"];
 
         
         for(NSString *filename in sheet.project.defaultOutputJSArray){
             [code addCodeLineWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@\"></script>", filename];
         }
+        
         [code addCodeLine:@"<script type=\"text/javascript\" src=\"resource/js/iucarousel.js\"></script>"];
         [code addCodeLine:@"<script src=\"http://maps.googleapis.com/maps/api/js?v=3.exp\"></script>"];
         [code addCodeLine:@"<script src=\"http://f.vimeocdn.com/js/froogaloop2.min.js\"></script>"];
