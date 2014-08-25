@@ -226,11 +226,11 @@
     _docController.project.compiler.rule = (int)[_compilerB indexOfSelectedItem];
     if (_docController.project.compiler.rule == IUCompileRuleDjango) {
         [self refreshServerState];
-        [self.stopServerB setHidden:NO];
+        [self.stopServerB setEnabled:YES];
     }
     else {
         self.serverState = nil;
-        [self.stopServerB setHidden:YES];
+        [self.stopServerB setEnabled:NO];
     }
 }
 /*
