@@ -38,7 +38,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="540" height="520"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="erb-IH-bmM">
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="erb-IH-bmM" userLabel="GitInfo">
                                     <rect key="frame" x="0.0" y="350" width="540" height="110"/>
                                     <subviews>
                                         <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="yDb-ke-wEu">
@@ -157,7 +157,7 @@
                                         <constraint firstItem="nhf-v5-dXh" firstAttribute="leading" secondItem="erb-IH-bmM" secondAttribute="leading" constant="30" id="wT0-TQ-V26"/>
                                     </constraints>
                                 </customView>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="IQf-Tp-Kzs">
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="IQf-Tp-Kzs" userLabel="HerokuAppInfo">
                                     <rect key="frame" x="0.0" y="50" width="540" height="180"/>
                                     <subviews>
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="4RZ-AM-ZV0">
@@ -340,30 +340,7 @@
                                         <constraint firstAttribute="width" constant="540" id="xnY-gm-YYW"/>
                                     </constraints>
                                 </customView>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="a5k-HN-mmZ">
-                                    <rect key="frame" x="206" y="194" width="315" height="31"/>
-                                    <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6oX-UG-uw7">
-                                            <rect key="frame" x="17" y="6" width="296" height="17"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="296" id="NWv-Vl-jNd"/>
-                                                <constraint firstAttribute="height" constant="17" id="rxL-i9-Fga"/>
-                                            </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="You should build before syncronize with Heroku" drawsBackground="YES" id="fyq-6B-tZJ">
-                                                <font key="font" metaFont="smallSystemBold"/>
-                                                <color key="textColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="deviceRGB"/>
-                                            </textFieldCell>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="6oX-UG-uw7" secondAttribute="trailing" constant="2" id="K9c-6W-5xD"/>
-                                        <constraint firstAttribute="width" constant="315" id="hqo-g1-7Fa"/>
-                                        <constraint firstAttribute="height" constant="31" id="hro-v1-hOa"/>
-                                        <constraint firstItem="6oX-UG-uw7" firstAttribute="top" secondItem="a5k-HN-mmZ" secondAttribute="top" constant="8" id="mhh-l2-Xaj"/>
-                                    </constraints>
-                                </customView>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="jdS-0c-ijs">
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="jdS-0c-ijs" userLabel="loginedView">
                                     <rect key="frame" x="0.0" y="230" width="540" height="120"/>
                                     <subviews>
                                         <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="6Jm-er-FA3">
@@ -450,7 +427,7 @@
                                         <constraint firstAttribute="centerX" secondItem="7kd-1r-gN0" secondAttribute="centerX" id="yFP-Gf-C4K"/>
                                     </constraints>
                                 </customView>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="nGg-EU-DcJ">
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="nGg-EU-DcJ" userLabel="loginView">
                                     <rect key="frame" x="0.0" y="230" width="540" height="120"/>
                                     <subviews>
                                         <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="qlW-7k-OmM">
@@ -601,9 +578,7 @@
                             <constraint firstItem="nGg-EU-DcJ" firstAttribute="top" secondItem="erb-IH-bmM" secondAttribute="bottom" id="Tfd-wb-WrL"/>
                             <constraint firstItem="jdS-0c-ijs" firstAttribute="top" secondItem="nGg-EU-DcJ" secondAttribute="top" id="aee-QY-rgF"/>
                             <constraint firstItem="erb-IH-bmM" firstAttribute="top" secondItem="5aW-ji-S2K" secondAttribute="top" constant="60" id="aho-TZ-Ln9"/>
-                            <constraint firstAttribute="trailing" secondItem="a5k-HN-mmZ" secondAttribute="trailing" constant="19" id="bL2-n2-usv"/>
                             <constraint firstAttribute="bottom" secondItem="IQf-Tp-Kzs" secondAttribute="bottom" constant="50" id="f0i-Y2-JeU"/>
-                            <constraint firstItem="a5k-HN-mmZ" firstAttribute="top" secondItem="nGg-EU-DcJ" secondAttribute="bottom" constant="5" id="m3p-GW-hCE"/>
                             <constraint firstItem="jdS-0c-ijs" firstAttribute="bottom" secondItem="nGg-EU-DcJ" secondAttribute="bottom" id="woM-dA-PmD"/>
                         </constraints>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
@@ -677,9 +652,33 @@ Gw
                             <constraint firstItem="4k6-Oh-Rke" firstAttribute="top" secondItem="qk0-6S-21C" secondAttribute="top" constant="10" id="lco-sj-qTg"/>
                         </constraints>
                     </customView>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="a5k-HN-mmZ" userLabel="not build">
+                        <rect key="frame" x="113" y="399" width="315" height="31"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6oX-UG-uw7">
+                                <rect key="frame" x="17" y="6" width="296" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="296" id="NWv-Vl-jNd"/>
+                                    <constraint firstAttribute="height" constant="17" id="rxL-i9-Fga"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="You should build before syncronize with Heroku" drawsBackground="YES" id="fyq-6B-tZJ">
+                                    <font key="font" metaFont="smallSystemBold"/>
+                                    <color key="textColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="deviceRGB"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6oX-UG-uw7" secondAttribute="trailing" constant="2" id="K9c-6W-5xD"/>
+                            <constraint firstAttribute="width" constant="315" id="hqo-g1-7Fa"/>
+                            <constraint firstAttribute="height" constant="31" id="hro-v1-hOa"/>
+                            <constraint firstItem="6oX-UG-uw7" firstAttribute="top" secondItem="a5k-HN-mmZ" secondAttribute="top" constant="8" id="mhh-l2-Xaj"/>
+                        </constraints>
+                    </customView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="5aW-ji-S2K" secondAttribute="bottom" id="1fJ-15-EkK"/>
+                    <constraint firstItem="a5k-HN-mmZ" firstAttribute="top" secondItem="qk0-6S-21C" secondAttribute="bottom" constant="25" id="7Z3-tB-V09"/>
                     <constraint firstItem="5aW-ji-S2K" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="NzF-1Q-0Ou"/>
                     <constraint firstAttribute="bottom" secondItem="4U5-fy-W8Q" secondAttribute="bottom" constant="20" id="VmH-WU-8oc"/>
                     <constraint firstItem="qbX-ng-M9c" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="36" id="aYs-GR-FAR"/>
@@ -688,6 +687,7 @@ Gw
                     <constraint firstAttribute="centerX" secondItem="4U5-fy-W8Q" secondAttribute="centerX" id="n77-Uh-dOB"/>
                     <constraint firstItem="qk0-6S-21C" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="25" id="oF6-dh-f2Z"/>
                     <constraint firstAttribute="trailing" secondItem="qk0-6S-21C" secondAttribute="trailing" constant="3" id="sHq-7v-Ltr"/>
+                    <constraint firstAttribute="centerX" secondItem="a5k-HN-mmZ" secondAttribute="centerX" id="x1H-6d-BjT"/>
                     <constraint firstItem="5aW-ji-S2K" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="zix-Zt-iUr"/>
                 </constraints>
             </view>
