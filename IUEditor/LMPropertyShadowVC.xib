@@ -67,7 +67,7 @@
                                     <constraint firstAttribute="width" constant="13" id="EtQ-dO-eLp"/>
                                     <constraint firstAttribute="height" constant="12" id="XVL-oP-0x8"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="warning" id="lQ1-0E-l4j"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="info" id="lQ1-0E-l4j"/>
                             </imageView>
                         </subviews>
                     </view>
@@ -275,6 +275,6 @@
         <userDefaultsController representsSharedInstance="YES" id="vuW-ma-3L4"/>
     </objects>
     <resources>
-        <image name="warning" width="13" height="12"/>
+        <image name="info" width="13" height="12"/>
     </resources>
 </document>

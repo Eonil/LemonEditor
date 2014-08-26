@@ -13,6 +13,8 @@
 #import "WPArticleList.h"
 #import "WPPageLinks.h"
 
+#import "IUImage.h"
+
 @implementation IUPage (WP)
 
 -(void)WPInitializeAsHome{
@@ -38,21 +40,41 @@
     [self.undoManager disableUndoRegistration];
 
     [self.pageContent removeAllIU];
+    
+    IUImage *image = [[IUImage alloc] initWithProject:self.project options:nil];
+    image.htmlID = @"image404";
+    image.name = @"image404";
+    image.imageName = @"clipArt/warning.png";
+    image.enableCenter = YES;
+    [image.css setValue:@(100) forTag:IUCSSTagPixelY];
+    [image.css setValue:@(160) forTag:IUCSSTagPixelWidth];
+    [image.css setValue:@(160) forTag:IUCSSTagPixelHeight];
+    [image.css eradicateTag:IUCSSTagBGColor];
+    
+    [self.pageContent addIU:image error:nil];
+    
     IUBox *text404 = [[IUBox alloc] initWithProject:self.project options:nil];
     text404.htmlID = @"text404";
     text404.name = @"text404";
     text404.text = @"Sorry, but the page you are looking for has not been found.\nTry checking the URL for errors, then hit the refresh button.";
-    [text404.css setValue:@"Raleway Dots" forTag:IUCSSTagFontName];
-    [text404.css setValue:@(24) forTag:IUCSSTagFontSize];
-    [text404.css setValue:@"1.3" forTag:IUCSSTagLineHeight];
-    [text404.css setValue:@(100) forTag:IUCSSTagPixelY];
+    //frame
+    text404.enableCenter = YES;
     [text404 setPositionType:IUPositionTypeAbsolute];
-    [text404.css setValue:@(750) forTag:IUCSSTagPixelWidth];
-    [text404.css setValue:@(75) forTag:IUCSSTagPixelHeight];
+    
+    [text404.css setValue:@(280) forTag:IUCSSTagPixelY];
+    [text404.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent];
+    [text404.css setValue:@(80) forTag:IUCSSTagPercentWidth];
+    [text404.css eradicateTag:IUCSSTagPixelHeight];
+    
+    //
     [text404.css eradicateTag:IUCSSTagBGColor];
     
-    text404.enableCenter = YES;
-    
+    //font
+    [text404.css setValue:@"Roboto" forTag:IUCSSTagFontName];
+    [text404.css setValue:@(14) forTag:IUCSSTagFontSize];
+    [text404.css setValue:@(2.0) forTag:IUCSSTagLineHeight];
+    [text404.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign];
+
     [self.pageContent addIU:text404 error:nil];
     
     [self.undoManager enableUndoRegistration];
