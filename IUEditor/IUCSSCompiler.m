@@ -554,7 +554,8 @@
     if (cssTagDict[IUCSSTagBorderTopWidth]) {
         CGFloat width = [cssTagDict[IUCSSTagBorderTopWidth] floatValue];
         [code insertTag:@"border-top-width" floatValue:width unit:IUUnitPixel];
-        [code insertTag:@"border-top-color" color:cssTagDict[IUCSSTagBorderTopColor]];
+        id value = [_iu.css valueByStepForTag:IUCSSTagBorderTopColor forViewport:viewport];
+        [code insertTag:@"border-top-color" color:value];
         if(width >0){
             isborder = YES;
         }
@@ -562,7 +563,8 @@
     if (cssTagDict[IUCSSTagBorderLeftWidth]) {
         CGFloat width = [cssTagDict[IUCSSTagBorderLeftWidth] floatValue];
         [code insertTag:@"border-left-width" floatValue:width unit:IUUnitPixel];
-        [code insertTag:@"border-left-color" color:cssTagDict[IUCSSTagBorderLeftColor]];
+        id value = [_iu.css valueByStepForTag:IUCSSTagBorderLeftColor forViewport:viewport];
+        [code insertTag:@"border-left-color" color:value];
         if(width >0){
             isborder = YES;
         }
@@ -571,7 +573,8 @@
     if (cssTagDict[IUCSSTagBorderRightWidth]) {
         CGFloat width = [cssTagDict[IUCSSTagBorderRightWidth] floatValue];
         [code insertTag:@"border-right-width" floatValue:width unit:IUUnitPixel];
-        [code insertTag:@"border-right-color" color:cssTagDict[IUCSSTagBorderRightColor]];
+        id value = [_iu.css valueByStepForTag:IUCSSTagBorderRightColor forViewport:viewport];
+        [code insertTag:@"border-right-color" color:value];
         if(width >0){
             isborder = YES;
         }
@@ -580,7 +583,8 @@
     if (cssTagDict[IUCSSTagBorderBottomWidth]) {
         CGFloat width = [cssTagDict[IUCSSTagBorderBottomWidth] floatValue];
         [code insertTag:@"border-bottom-width" floatValue:width unit:IUUnitPixel];
-        [code insertTag:@"border-bottom-color" color:cssTagDict[IUCSSTagBorderBottomColor]];
+        id value = [_iu.css valueByStepForTag:IUCSSTagBorderBottomColor forViewport:viewport];
+        [code insertTag:@"border-bottom-color" color:value];
         if(width >0){
             isborder = YES;
         }
