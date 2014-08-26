@@ -725,6 +725,14 @@
                                             </tabViewItem>
                                         </tabViewItems>
                                     </tabView>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ar1-jt-2gf">
+                                        <rect key="frame" x="20" y="200" width="240" height="50"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Sorry, Wordpress Widgets are only enabled at Wordpress Project Type" id="08n-Qj-Ec9">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Lt0-do-8tU" firstAttribute="leading" secondItem="a32-aN-yBs" secondAttribute="leading" id="D1O-Fy-4ib"/>
