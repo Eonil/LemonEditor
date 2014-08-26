@@ -9,8 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 typedef enum{
-    LMStartWCTypeDefault,
     LMStartWCTypeTemplate,
+    LMStartWCTypeDefault,
     LMStartWCTypeRecent,
 }LMStartWCType;
 

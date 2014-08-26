@@ -74,11 +74,6 @@
                                     <action selector="showStartDefault:" target="-1" id="u9w-8A-LX5"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="New Default Project" keyEquivalent="m" id="g8r-O5-kBm">
-                                <connections>
-                                    <action selector="newDocument:" target="-1" id="zE0-VI-8xe"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="New Templates" keyEquivalent="t" id="qWt-gB-OZt">
                                 <connections>
                                     <action selector="showStartTemplate:" target="-1" id="0TC-tJ-gwd"/>

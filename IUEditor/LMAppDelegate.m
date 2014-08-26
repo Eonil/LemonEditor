@@ -122,20 +122,20 @@
 
 - (IBAction)showStartDefault:(id)sender{
     startWC = [LMStartWC sharedStartWindow];
-    [startWC selectStartViewOfType:LMStartWCTypeDefault];
     [startWC showWindow:self];
+    [startWC selectStartViewOfType:LMStartWCTypeDefault];
 }
 
 - (IBAction)showStartTemplate:(id)sender{
     startWC = [LMStartWC sharedStartWindow];
-    [startWC selectStartViewOfType:LMStartWCTypeTemplate];
     [startWC showWindow:self];
+    [startWC selectStartViewOfType:LMStartWCTypeTemplate];
     
 }
 - (IBAction)showRecentFiles:(id)sender{
     startWC = [LMStartWC sharedStartWindow];
-    [startWC selectStartViewOfType:LMStartWCTypeRecent];
     [startWC showWindow:self];
+    [startWC selectStartViewOfType:LMStartWCTypeRecent];
     
 }
 
