@@ -14,7 +14,9 @@
 + (BOOL) isPortAvailable:(NSInteger)port{
     NSString *stdOut;
     NSString *stdErr;
-    [JDShellUtil execute:@"lsof -i tcp:8000 | grep LISTEN | awk -F  ' ' '{print $2}'" stdOut:&stdOut stdErr:&stdErr];
+    
+    NSString *command = [NSString stringWithFormat:@"lsof -i tcp:%ld | grep LISTEN | awk -F  ' ' '{print $2}'", port];
+    [JDShellUtil execute:command stdOut:&stdOut stdErr:&stdErr];
     
     NSAssert([stdErr length] == 0, stdErr);
     if ([stdOut length]) {
@@ -26,7 +28,8 @@
 + (NSInteger) pidOfPort:(NSInteger)port{
     NSString *stdOut;
     NSString *stdErr;
-    [JDShellUtil execute:@"lsof -i tcp:8000 | grep LISTEN | awk -F  ' ' '{print $2}'" stdOut:&stdOut stdErr:&stdErr];
+    NSString *command = [NSString stringWithFormat:@"lsof -i tcp:%ld | grep LISTEN | awk -F  ' ' '{print $2}'", port];
+    [JDShellUtil execute:command stdOut:&stdOut stdErr:&stdErr];
     
     NSAssert([stdErr length] == 0, stdErr);
     if ([stdOut length]) {
@@ -38,7 +41,8 @@
 + (NSString*)processNameOfPort:(NSInteger)port{
     NSString *stdOut;
     NSString *stdErr;
-    [JDShellUtil execute:@"lsof -i tcp:8000 | grep LISTEN | awk -F  ' ' '{print $1}'" stdOut:&stdOut stdErr:&stdErr];
+    NSString *command = [NSString stringWithFormat:@"lsof -i tcp:%ld | grep LISTEN | awk -F  ' ' '{print $1}'", port];
+    [JDShellUtil execute:command stdOut:&stdOut stdErr:&stdErr];
     
     NSAssert(stdErr, stdErr);
     if ([stdOut length]) {

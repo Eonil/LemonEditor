@@ -159,6 +159,8 @@
             }
         }
         
+        [self refreshServerState];
+        
         //compile
         BOOL result = [project build:nil];
         if (result == NO) {
@@ -187,7 +189,7 @@
     }
 }
 
-- (BOOL) runServer:(NSError **)error{
+- (BOOL)runServer:(NSError **)error{
     //get port
     NSString *filePath = [_docController.project.buildDirectory stringByAppendingPathComponent:@"manage.py"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath] == NO) {
@@ -195,6 +197,11 @@
         return NO;
     }
     IUDjangoProject *project = (IUDjangoProject *)_docController.project;
+    if(project.port < 1024){
+        [JDUIUtil hudAlert:@"You should be use port number larger than 1024" second:2];
+        return NO;
+    }
+    
     NSString *command = [NSString stringWithFormat:@"%@ runserver %ld",filePath , project.port];
     if ([debugServerShell.task isRunning] == NO) {
         debugServerShell = [[JDShellUtil alloc] init];
@@ -235,15 +242,17 @@
 }
 
 - (void)refreshServerStatePerform{
-    IUDjangoProject *project = (IUDjangoProject *)_docController.project;
-    NSInteger port = project.port;
-    NSInteger pid = [JDNetworkUtil pidOfPort:port];
-    if (pid == NSNotFound) {
-        self.serverState = nil;
-        return;
+    if(_docController.project.projectType == IUProjectTypeDjango){
+        IUDjangoProject *project = (IUDjangoProject *)_docController.project;
+        NSInteger port = project.port;
+        NSInteger pid = [JDNetworkUtil pidOfPort:port];
+        if (pid == NSNotFound) {
+            self.serverState = nil;
+            return;
+        }
+        NSString *processName = [JDNetworkUtil processNameOfPort:port];
+        self.serverState = [NSString stringWithFormat:@"%@(%ld) is running", processName, pid];
     }
-    NSString *processName = [JDNetworkUtil processNameOfPort:port];
-    self.serverState = [NSString stringWithFormat:@"%@(%ld) is running", processName, pid];
 }
 
 - (IBAction)changeCompilerRule:(id)sender {
