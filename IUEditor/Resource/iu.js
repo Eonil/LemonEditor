@@ -212,7 +212,28 @@ function moveScrollAnimation(){
 	});
 }
 
+function resizeCollection(){
+	$('.IUCollection').each(function(){
+		//find current count
+		var responsive = $(this).attr('responsive');
+		responsiveArray = eval(responsive);
+		count = $(this).attr('defaultItemCount');
+		viewportWidth = $(window).width();
+		for (var index in responsiveArray){
+			dict = responsiveArray[index];
+			width = dict.width;
+			if (viewportWidth<width){
+				count = dict.count;
+			}
+		}		
+		//			var width  = 1/count *100;
+		var width = $(this).width()/count;
+		$(this).children().css('width', width.toFixed(0)+'px');
+	});
+}
+
 $(window).resize(function(){
+	resizeCollection();
 	relocateScrollAnimation();
 });
 

@@ -139,107 +139,110 @@ function resizePageContentHeightEditor(){
 				console.resizePageContentHeightFinished(pageHeight);
 			}
 		}
-		else {
-			console.log('failed!!!!!');
-			//background 가 없으면 page content 도 없는데...
-		}
+	else {
+		console.log('failed!!!!!');
+		//background 가 없으면 page content 도 없는데...
 	}
+}
 
-	function getIUUpdatedFrameThread(){
-		//새로운 인풋이 들어왔을때 변해야 하면 이곳에서 호출
-		//editor mode 에서
-		console.log('iu update thread');
-		$('.IUBox').updatePixel();
+
+function getIUUpdatedFrameThread(){
+	//새로운 인풋이 들어왔을때 변해야 하면 이곳에서 호출
+	//editor mode 에서
+	console.log('iu update thread');
+	$('.IUBox').updatePixel();
     
-		if (Object.keys(document.sharedFrameDict).length > 0
-		&& console.reportFrameDict ){
+	if (Object.keys(document.sharedFrameDict).length > 0
+	&& console.reportFrameDict ){
         
-			console.reportFrameDict(document.sharedFrameDict);
-			//console.reportPercentFrame(document.sharedPercentFrameDict);
+		console.reportFrameDict(document.sharedFrameDict);
+		//console.reportPercentFrame(document.sharedPercentFrameDict);
         
-			document.sharedPercentFrameDict = {};
-			document.sharedFrameDict = {};
-		}
-		resizePageContentHeightEditor();
+		document.sharedPercentFrameDict = {};
+		document.sharedFrameDict = {};
 	}
+	resizePageContentHeightEditor();
+}
 
-	function resizeBackgroundSize(){
-		var height=0;
-		$('.IUBackground').css('height', '100%');
-		$('.IUBackground').css('width', '100%');
-	}
-	function reInsertCarousel(){
-		$('.IUCarousel').each(function(){
-			var iuid = $(this).attr('id');
-			insertNewCarousel(iuid);
-		});
-	}
 
-	function remakeCollection(){
-		$('.IUCollection').each(function(){
+function resizeBackgroundSize(){
+	var height=0;
+	$('.IUBackground').css('height', '100%');
+	$('.IUBackground').css('width', '100%');
+}
+function reInsertCarousel(){
+	$('.IUCarousel').each(function(){
+		var iuid = $(this).attr('id');
+		insertNewCarousel(iuid);
+	});
+}
+
+function remakeCollection(){
+	$('.IUCollection').each(function(){
 			
-			//find current count
-			var responsive = $(this).attr('responsive');
-			responsiveArray = eval(responsive);
-			count = $(this).attr('defaultItemCount');
-			viewportWidth = $(window).width();
-			for (var index in responsiveArray){
-				dict = responsiveArray[index];
-				width = dict.width;
-				if (viewportWidth<width){
-					count = dict.count;
-				}
+		//find current count
+		var responsive = $(this).attr('responsive');
+		responsiveArray = eval(responsive);
+		count = $(this).attr('defaultItemCount');
+		viewportWidth = $(window).width();
+		for (var index in responsiveArray){
+			dict = responsiveArray[index];
+			width = dict.width;
+			if (viewportWidth<width){
+				count = dict.count;
 			}
-			$(this).children().find('.collectioncopy').remove();
-			//copy children
-			var copy = $($(this).children()[0]).clone().addClass('collectioncopy');
-			copy.removeAttr('id');
-			copy.find('*').each(function(){
-				$(this).removeAttr('id');
-				$(this).addClass('collectioncopy');
-				$(this).css('opacity',0.5);
-			})
+		}
+		$(this).children().find('.collectioncopy').remove();
+		//copy children
+		var copy = $($(this).children()[0]).clone(true).addClass('collectioncopy');
+		copy.removeAttr('id');
+		copy.find('*').each(function(){
+			$(this).removeAttr('id');
+			$(this).addClass('collectioncopy');
+			$(this).css('opacity',0.5);
+		})
                                 
 			
-			for(var index=0; index<count-1; index++){
-				var secondcopy = copy.clone();
-				$(this).append(secondcopy);
-			}
-			
-			var width  = 1/count *100 - 0.5;
-			$(this).children().css('width', width+'%');
-		});
-	}
-
-	function getImageHeight(imageSrc){
-		var theImage = new Image();
-		theImage.src = imageSrc;
-    
-		// Get accurate measurements from that.
-		var imageHeight = theImage.height;
-		return imageHeight;
-	}
-
-	function getImageWidth(imageSrc){
-		var theImage = new Image();
-		theImage.src = imageSrc;
-    
-		// Get accurate measurements from that.
-		var imageWidth = theImage.width;
-		return imageWidth;
-	}
-
-	$(window).resize(function(){
-		getIUUpdatedFrameThread();
+		for(var index=0; index<count-1; index++){
+			var secondcopy = copy.clone();
+			$(this).append(secondcopy);
+		}			
+		//			var width  = 1/count *100;
+		var width = $(this).width()/count;
+		$(this).children().css('width', width.toFixed(0)+'px');
 	});
+}
 
-	$(document).ready(function(){
-		console.log("ready : iueditor.js");
-		resizePageContentHeight();
-		remakeCollection();
-		reframeCenter();
-		resizePageLinkSet();
-		getIUUpdatedFrameThread();            
-		console.log("endof : iueditor.js");
+function getImageHeight(imageSrc){
+	var theImage = new Image();
+	theImage.src = imageSrc;
+    
+	// Get accurate measurements from that.
+	var imageHeight = theImage.height;
+	return imageHeight;
+}
 
-	});
+function getImageWidth(imageSrc){
+	var theImage = new Image();
+	theImage.src = imageSrc;
+    
+	// Get accurate measurements from that.
+	var imageWidth = theImage.width;
+	return imageWidth;
+}
+
+$(window).resize(function(){
+	resizeCollection();
+	getIUUpdatedFrameThread();
+});
+
+$(document).ready(function(){
+	console.log("ready : iueditor.js");
+	resizePageContentHeight();
+	remakeCollection();
+	reframeCenter();
+	resizePageLinkSet();
+	getIUUpdatedFrameThread();            
+	console.log("endof : iueditor.js");
+
+});
