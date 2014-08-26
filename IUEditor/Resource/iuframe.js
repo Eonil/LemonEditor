@@ -88,6 +88,7 @@ function resizePageLinkSet(){
 		w = $(this).children().children().children().width();
 		width = (2*m+w)*len;
 		$(this).width(width+'px');
+        console.log('setting width'+$(this).id+' width : '+width);
 	});
 }
 

@@ -64,6 +64,7 @@
     return iu;
 }
 
+
 - (void)setPageLinkAlign:(IUAlign)pageLinkAlign{
     if (_pageLinkAlign == pageLinkAlign) {
         return;
@@ -72,7 +73,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setPageLinkAlign:_pageLinkAlign];
     
     _pageLinkAlign = pageLinkAlign;
-    [self updateCSS];
+    [self updateCSSWithIdentifiers:@[self.clipIdentifier]];
 
 }
 
@@ -85,7 +86,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setSelectedButtonBGColor:_selectedButtonBGColor];
     
     _selectedButtonBGColor = selectedButtonBGColor;
-    [self updateCSS];
+    [self updateCSSWithIdentifiers:@[self.activeIdentifier, self.hoverIdentifier]];
 }
 
 - (void)setDefaultButtonBGColor:(NSColor *)defaultButtonBGColor{
@@ -97,7 +98,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setDefaultButtonBGColor:_defaultButtonBGColor];
     
     _defaultButtonBGColor = defaultButtonBGColor;
-    [self updateCSS];
+    [self updateCSSWithIdentifiers:@[self.itemIdentifier]];
 }
 
 - (void)setButtonMargin:(float)buttonMargin{
@@ -107,7 +108,7 @@
         [[self.undoManager prepareWithInvocationTarget:self] setButtonMargin:_buttonMargin];
         
         _buttonMargin = buttonMargin;
-        [self updateCSS];
+        [self updateCSSWithIdentifiers:@[self.itemIdentifier]];
     }
 }
 #pragma mark - shouldXXX
@@ -116,6 +117,36 @@
     return NO;
 }
 
+
 #pragma mark - css
+
+- (void)updateCSS{
+    [super updateCSS];
+    if(self.delegate){
+        [self.delegate callWebScriptMethod:@"resizePageLinkSet" withArguments:nil];
+    }
+}
+- (void)updateCSSWithIdentifiers:(NSArray *)identifiers{
+    [super updateCSSWithIdentifiers:identifiers];
+    if(self.delegate){
+        [self.delegate callWebScriptMethod:@"resizePageLinkSet" withArguments:nil];
+    }
+}
+- (NSArray *)cssIdentifierArray{
+    return [[super cssIdentifierArray] arrayByAddingObjectsFromArray:@[self.clipIdentifier, self.activeIdentifier, self.hoverIdentifier, self.hoverIdentifier, self.itemIdentifier]];
+}
+
+- (NSString *)clipIdentifier{
+    return [self.cssClass stringByAppendingString:@" > div"];
+}
+- (NSString *)activeIdentifier{
+    return [self.cssClass stringByAppendingString:@" selected > div > ul > a > li"];
+}
+- (NSString *)hoverIdentifier{
+    return [self.cssClass stringByAppendingString:@" > div > ul > a > li:hover"];
+}
+- (NSString *)itemIdentifier{
+    return [self.cssClass stringByAppendingString:@" > div > ul > a > li"];
+}
 
 @end

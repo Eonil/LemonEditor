@@ -9,9 +9,15 @@
 #import "IUBox.h"
 
 @interface PGPageLinkSet : IUBox
+
 @property (nonatomic) NSString  *pageCountVariable;
 @property (nonatomic) IUAlign   pageLinkAlign;
 @property (nonatomic) NSColor   *selectedButtonBGColor;
 @property (nonatomic) NSColor   *defaultButtonBGColor;
 @property (nonatomic) float     buttonMargin;
+
+- (NSString *)clipIdentifier;
+- (NSString *)activeIdentifier;
+- (NSString *)hoverIdentifier;
+- (NSString *)itemIdentifier;
 @end

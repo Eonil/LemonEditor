@@ -573,11 +573,11 @@
 }
 
 - (void)updateCSSWithIdentifiers:(NSArray *)identifiers{
-    
     if (self.delegate) {
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
         NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editWidth];
-        for (NSString *identifier in dictionaryWithIdentifier) {
+        
+        for (NSString *identifier in identifiers) {
             [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];
         }
     }

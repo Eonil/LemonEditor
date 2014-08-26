@@ -939,39 +939,42 @@
     [code setInsertingTarget:IUTargetBoth];
     [code setInsertingViewPort:IUCSSDefaultViewPort];
     
-    [code setInsertingIdentifier:[pageLinkSet.cssClass stringByAppendingString:@" > div"]];
+    //ul class
+    [code setInsertingIdentifier:pageLinkSet.clipIdentifier];
     switch (pageLinkSet.pageLinkAlign) {
         case IUAlignLeft: break;
         case IUAlignRight: [code insertTag:@"float" string:@"right"]; break;
         case IUAlignCenter: [code insertTag:@"margin" string:@"auto"]; break;
         default:NSAssert(0, @"Error");
     }
+    [code insertTag:@"display" string:@"block"];
     
-    [code setInsertingIdentifier:[pageLinkSet.cssClass stringByAppendingString:@" selected > div > ul > a > li"]];
+    //li class - active, hover
+    [code setInsertingIdentifiers:@[pageLinkSet.activeIdentifier, pageLinkSet.hoverIdentifier]];
     [code insertTag:@"background-color" color:pageLinkSet.selectedButtonBGColor];
     
-    NSArray *editWidths = [pageLinkSet.css allViewports];
-    for (NSNumber *viewportNumber in editWidths) {
-        [code setInsertingViewPort:[viewportNumber intValue]];
-        
-    }
 
-    
-    [code setInsertingIdentifier:[pageLinkSet.cssClass stringByAppendingString:@" > div > ul > a > li"]];
+    //li class
+    [code setInsertingIdentifier:pageLinkSet.itemIdentifier];
     [code insertTag:@"display" string:@"block"];
     [code insertTag:@"margin-left" floatFromNumber:@(pageLinkSet.buttonMargin) unit:IUUnitPixel];
     [code insertTag:@"margin-right" floatFromNumber:@(pageLinkSet.buttonMargin) unit:IUUnitPixel];
     [code insertTag:@"background-color" color:pageLinkSet.defaultButtonBGColor];
+
     
+    //li media query
+    [code setInsertingIdentifier:pageLinkSet.itemIdentifier];
     for (NSNumber *viewPort in [pageLinkSet.css allViewports]) {
         NSDictionary *tagDictionary = [pageLinkSet.css tagDictionaryForViewport:[viewPort intValue]];
-        if ([tagDictionary objectForKey:IUCSSTagPixelY]) {
+        if ([tagDictionary objectForKey:IUCSSTagPixelHeight]) {
             [code setInsertingViewPort:[viewPort intValue]];
-            [code insertTag:@"height" floatFromNumber:tagDictionary[IUCSSTagPixelY] unit:IUUnitPixel];
-            [code insertTag:@"width" floatFromNumber:tagDictionary[IUCSSTagPixelY] unit:IUUnitPixel];
-            [code insertTag:@"line-height" floatFromNumber:tagDictionary[IUCSSTagPixelY] unit:IUUnitPixel];
+            [code insertTag:@"height" floatFromNumber:tagDictionary[IUCSSTagPixelHeight] unit:IUUnitPixel];
+            [code insertTag:@"width" floatFromNumber:tagDictionary[IUCSSTagPixelHeight] unit:IUUnitPixel];
+            [code insertTag:@"line-height" floatFromNumber:tagDictionary[IUCSSTagPixelHeight] unit:IUUnitPixel];
         }
     }
+
+    
 }
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUMenuBar:(IUMenuBar*)menuBar{
