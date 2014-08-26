@@ -11,7 +11,11 @@
 
 @interface WPMenu : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
 @property (nonatomic) NSInteger itemCount;
-@property BOOL fullWidthMenu;
-@property NSInteger leftRightPadding;
-@property IUAlign align;
+@property (nonatomic) NSInteger leftRightPadding;
+@property (nonatomic) IUAlign align;
+
+
+- (NSString *)containerIdentifier;
+- (NSString *)itemIdetnfier;
+
 @end

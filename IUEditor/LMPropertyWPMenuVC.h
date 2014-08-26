@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "LMDefaultPropertyVC.h"
 
-@interface LMPropertyWPMenuVC : LMDefaultPropertyVC <NSComboBoxDelegate>
+@interface LMPropertyWPMenuVC : LMDefaultPropertyVC
 
 
 @end

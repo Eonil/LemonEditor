@@ -13,8 +13,28 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
+    [self.undoManager disableUndoRegistration];
+    
+    self.positionType = IUPositionTypeRelative;
+    self.enableCenter = YES;
+    
+    [self.css setValue:@(60) forTag:IUCSSTagPixelY];
+    [self.css setValue:@(800) forTag:IUCSSTagPixelWidth];
+    [self.css setValue:@(140) forTag:IUCSSTagPixelHeight];
+    [self.css eradicateTag:IUCSSTagBGColor];
+    
+    [self.css setValue:@"Roboto" forTag:IUCSSTagFontName];
+    [self.css setValue:@(12) forTag:IUCSSTagFontSize];
+    [self.css setValue:@(1.0) forTag:IUCSSTagLineHeight];
+    [self.css setValue:@(1.0) forTag:IUCSSTagTextLetterSpacing];
+    [self.css setValue:@(IUAlignRight) forTag:IUCSSTagTextAlign];
+    [self.css setValue:[NSColor rgbColorRed:0 green:120 blue:220 alpha:1] forTag:IUCSSTagFontColor];
+
+    
     WPPageLink *pageLink = [[WPPageLink alloc] initWithProject:project options:options];
     [self addIU:pageLink error:nil];
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 

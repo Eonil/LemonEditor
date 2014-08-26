@@ -1284,29 +1284,45 @@
     [code setInsertingTarget:IUTargetBoth];
     [code setInsertingViewPort:IUCSSDefaultViewPort];
     
-    if (wpmenu.fullWidthMenu) {
-        [code setInsertingIdentifier:[wpmenu.cssClass stringByAppendingString:@" > div > ul"]];
-        [code insertTag:@"display" string:@"table"];
-        [code insertTag:@"table-layout" string:@"fixed"];
-        [code insertTag:@"width" string:@"100%"];
+    switch (wpmenu.align) {
+        case IUAlignJustify:
+            [code setInsertingIdentifier:wpmenu.containerIdentifier];
+            [code insertTag:@"display" string:@"table"];
+            [code insertTag:@"table-layout" string:@"fixed"];
+            [code insertTag:@"width" string:@"100%"];
+            
+            [code setInsertingIdentifier:wpmenu.itemIdetnfier];
+            [code insertTag:@"display" string:@"table-cell"];
+            [code insertTag:@"text-align" string:@"center"];
+            break;
+        case IUAlignLeft:
+            [code setInsertingIdentifier:wpmenu.itemIdetnfier];
+            [code insertTag:@"float" string:@"left"];
+        case IUAlignCenter:
+            [code setInsertingIdentifier:wpmenu.containerIdentifier];
+            [code insertTag:@"text-align" string:@"center"];
+            break;
+        case IUAlignRight:
+            [code setInsertingIdentifier:wpmenu.containerIdentifier];
+            [code insertTag:@"text-align" string:@"right"];
+
+        default:
+            break;
+    }
+    if(wpmenu.align != IUAlignJustify){
+        [code setInsertingIdentifier:wpmenu.itemIdetnfier];
+        [code insertTag:@"position" string:@"relative"];
         
-        [code setInsertingIdentifier:[wpmenu.cssClass stringByAppendingString:@" > div > ul > li"]];
-        [code insertTag:@"display" string:@"table-cell"];
-        [code insertTag:@"text-align" string:@"center"];
+        [code insertTag:@"padding" string:[NSString stringWithFormat:@"0 %ldpx", wpmenu.leftRightPadding]];
+        [code insertTag:@"display" string:@"inline-block"];
     }
     
-    else {
-        [code setInsertingIdentifier:[wpmenu.cssClass stringByAppendingString:@" > div > ul > li"]];
-        [code insertTag:@"position" string:@"relative"];
-        [code insertTag:@"padding" string:@"0 16px"];
-        [code insertTag:@"float" string:@"left"];
-        
-        for (NSNumber *viewport in [code allViewports]) {
-            NSString *heightValue = [code valueForTag:IUCSSTagPixelHeight identifier:wpmenu.cssClass viewport:[viewport intValue] target:IUTargetEditor];
-            //IUTarget Editor value is equal to IUTargetOutput.
-            if (heightValue) {
-                [code insertTag:@"line-height" string:heightValue];
-            }
+    [code setInsertingIdentifier:wpmenu.itemIdetnfier];
+    for (NSNumber *viewport in [code allViewports]) {
+        NSNumber *heightValue = [wpmenu.css valueByStepForTag:IUCSSTagPixelHeight forViewport:[viewport intValue]];
+        //IUTarget Editor value is equal to IUTargetOutput.
+        if (heightValue) {
+            [code insertTag:@"line-height" floatFromNumber:heightValue unit:IUUnitPixel];
         }
     }
 }

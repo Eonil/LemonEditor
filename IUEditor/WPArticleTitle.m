@@ -11,15 +11,25 @@
 @implementation WPArticleTitle
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
+    [self.undoManager disableUndoRegistration];
+    
+    //css
     self.positionType = IUPositionTypeRelative;
-    [self.css setValue:nil forTag:IUCSSTagBGColor];
-    self.lineHeightAuto = NO;
+    
+    [self.css setValue:@(40) forTag:IUCSSTagPixelY];
+    [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent];
+    [self.css setValue:@(90) forTag:IUCSSTagPercentWidth];
     [self.css eradicateTag:IUCSSTagPixelHeight];
-    [self.css setValue:@(2.0) forTag:IUCSSTagLineHeight];
+    [self.css eradicateTag:IUCSSTagBGColor];
+    
+    self.enableCenter = YES;
+    
     [self.css setValue:@(24) forTag:IUCSSTagFontSize];
-    [self.css setValue:@(700) forTag:IUCSSTagPixelWidth];
-
-    [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign];
+    [self.css setValue:@(1.5) forTag:IUCSSTagLineHeight];
+    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign];
+    [self.css setValue:@"HelveticaNeue-Light" forTag:IUCSSTagFontName];
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 

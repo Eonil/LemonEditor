@@ -48,14 +48,19 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
+    [self.undoManager disableUndoRegistration];
+    
     self.positionType = IUPositionTypeRelative;
     [self.css eradicateTag:IUCSSTagPixelHeight];
+    [self.css eradicateTag:IUCSSTagBGColor];
+
     [self.css setValue:@(100) forTag:IUCSSTagPercentWidth];
     [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent];
-    [self.css setValue:[NSColor colorWithWhite:200.f/256.f alpha:1] forTag:IUCSSTagBGColor];
     [self setEnableTitle:YES];
     [self setEnableDate:YES];
     [self setEnableBody:YES];
+    
+    [self.undoManager enableUndoRegistration];
     
     return self;
 }

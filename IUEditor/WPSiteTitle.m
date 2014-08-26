@@ -12,9 +12,20 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
+    [self.undoManager disableUndoRegistration];
+    
+    [self.css setValue:@(60) forTag:IUCSSTagPixelY];
     [self.css setValue:@(300) forTag:IUCSSTagPixelWidth];
-    [self.css setValue:@(40) forTag:IUCSSTagPixelHeight];
+    [self.css eradicateTag:IUCSSTagPixelHeight];
+    [self.css eradicateTag:IUCSSTagBGColor];
+    self.enableCenter = YES;
+    
     [self.css setValue:@(30) forTag:IUCSSTagFontSize];
+    [self.css setValue:@(1.5) forTag:IUCSSTagLineHeight];
+    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign];
+    [self.css setValue:[NSColor rgbColorRed:51 green:51 blue:51 alpha:1] forTag:IUCSSTagFontColor];    
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 
@@ -23,7 +34,7 @@
 }
 
 - (NSString*)code{
-    return @"<?bloginfo()?>";
+    return @"<h1><a href=\"<?php echo home_url(); ?>\"><?bloginfo()?></a>/h1<>";
 }
 
 - (BOOL)shouldCompileFontInfo{

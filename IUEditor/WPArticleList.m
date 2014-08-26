@@ -20,18 +20,20 @@
 @implementation WPArticleList
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
+    [self.undoManager disableUndoRegistration];
+    
     self.positionType = IUPositionTypeRelative;
+    self.enableCenter = YES;
+    
     [self.css eradicateTag:IUCSSTagPixelHeight];
-    
-    [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagBGColor];
-    
-    
+    [self.css eradicateTag:IUCSSTagBGColor];
+    [self.css setValue:@(40) forTag:IUCSSTagPixelY];
+    [self.css setValue:@(800) forTag:IUCSSTagPixelWidth];
+
     WPArticle *article = [[WPArticle alloc] initWithProject:project options:options];
     [self addIU:article error:nil];
     
-    [self.css setValue:@(800) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
-    [self.css setValue:[NSColor colorWithRed:220.f/256.f green:220.f/256.f blue:220.f/245.f alpha:1] forTag:IUCSSTagBGColor];
-
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 

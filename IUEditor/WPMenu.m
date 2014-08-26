@@ -10,10 +10,34 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
+    [self.undoManager disableUndoRegistration];
+    
+    //property
     self.itemCount = 4;
-    self.fullWidthMenu = NO;
     self.leftRightPadding = 16;
     self.align = IUAlignLeft;
+    
+    //css
+    self.enableCenter = YES;
+    [self.css setValue:@(160) forTag:IUCSSTagPixelY];
+    [self.css setValue:@(800) forTag:IUCSSTagPixelWidth];
+    [self.css setValue:@(40) forTag:IUCSSTagPixelHeight];
+    [self.css eradicateTag:IUCSSTagBGColor];
+    
+    //font
+    [self.css setValue:@(12) forTag:IUCSSTagFontSize];
+    [self.css setValue:@(1.0) forTag:IUCSSTagLineHeight];
+    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign];
+    [self.css setValue:@"Roboto" forTag:IUCSSTagFontName];
+    [self.css setValue:[NSColor rgbColorRed:0 green:120 blue:220 alpha:1] forTag:IUCSSTagFontColor];
+    
+    //border
+    [self.css setValue:[NSColor rgbColorRed:204 green:204 blue:204 alpha:1] forTag:IUCSSTagBorderTopColor];
+    [self.css setValue:[NSColor rgbColorRed:204 green:204 blue:204 alpha:1] forTag:IUCSSTagBorderBottomColor];
+    [self.css setValue:@(1) forTag:IUCSSTagBorderTopWidth];
+    [self.css setValue:@(1) forTag:IUCSSTagBorderBottomWidth];
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 
@@ -24,14 +48,52 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
+    [self.undoManager disableUndoRegistration];
+
     [aDecoder decodeToObject:self withProperties:[[WPMenu class] properties]];
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 
+#pragma mark - property
+
 - (void)setItemCount:(NSInteger)itemCount{
-    _itemCount = itemCount;
-    [self updateHTML];
+    if(_itemCount != itemCount){
+        [[self.undoManager prepareWithInvocationTarget:self] setItemCount:_itemCount];
+
+        _itemCount = itemCount;
+        [self updateHTML];
+    }
 }
+
+- (void)setAlign:(IUAlign)align{
+    if(_align != align){
+        
+        [[self.undoManager prepareWithInvocationTarget:self] setAlign:_align];
+        _align = align;
+        [self updateCSS];
+    }
+}
+
+- (void)setLeftRightPadding:(NSInteger)leftRightPadding{
+    if(_leftRightPadding != leftRightPadding){
+        [[self.undoManager prepareWithInvocationTarget:self] setLeftRightPadding:_leftRightPadding];
+        _leftRightPadding = leftRightPadding;
+        [self updateCSSWithIdentifiers:@[self.itemIdetnfier]];
+    }
+}
+
+#pragma mark - css
+- (NSString *)containerIdentifier{
+    return [self.cssClass stringByAppendingString:@" > div > ul"];
+}
+- (NSString *)itemIdetnfier{
+    return [self.cssClass stringByAppendingString:@" > div > ul > li"];
+}
+
+#pragma mark - default
+
 - (NSString*)sampleInnerHTML{
     NSMutableString *returnText = [NSMutableString stringWithString:@"<div class='menu-samplemenu-container'><ul id='menu-samplemenu'>\
                                    <li id='menu-item-01' class='menu-item'>JDLab blog</li>"];

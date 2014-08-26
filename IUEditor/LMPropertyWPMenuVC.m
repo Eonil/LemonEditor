@@ -9,7 +9,11 @@
 #import "LMPropertyWPMenuVC.h"
 
 @interface LMPropertyWPMenuVC ()
-@property (weak) IBOutlet NSComboBox *menuCountCB;
+
+@property (weak) IBOutlet NSPopUpButton *menuCountCB;
+@property (weak) IBOutlet NSSegmentedControl *alignSegmentedControl;
+@property (weak) IBOutlet NSTextField *paddingTF;
+@property (weak) IBOutlet NSStepper *paddingStpper;
 
 @end
 
@@ -25,17 +29,10 @@
 }
 
 - (void)awakeFromNib{
-    [_menuCountCB setDelegate:self];
-}
-
-- (void)comboBoxSelectionDidChange:(NSNotification *)notification{
-    NSString *v = [[_menuCountCB selectedCell] stringValue];
-    [self setValue:v forIUProperty:@"itemCount"];
-}
-
-- (void)controlTextDidChange:(NSNotification *)obj{
-    NSString *v = [_menuCountCB stringValue];
-    [self setValue:v forIUProperty:@"itemCount"];
+    [self outlet:_alignSegmentedControl bind:NSSelectedIndexBinding property:@"align"];
+    [self outlet:_menuCountCB bind:NSSelectedTagBinding property:@"itemCount"];
+    [self outlet:_paddingTF bind:NSValueBinding property:@"leftRightPadding" options:IUBindingDictNumberAndNotRaisesApplicable];
+    [self outlet:_paddingStpper bind:NSValueBinding property:@"leftRightPadding"];
 }
 
 @end

@@ -12,17 +12,33 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
+    [self.undoManager disableUndoRegistration];
+    
+    //css
     self.positionType = IUPositionTypeRelative;
-    [self.css eradicateTag:IUCSSTagPixelHeight];
-    [self.css setValue:@(2.0) forTag:IUCSSTagLineHeight];
-    [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign];
+    
+    [self.css setValue:@(0) forTag:IUCSSTagPixelX];
+    [self.css setValue:@(40) forTag:IUCSSTagPixelY];
     [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent];
     [self.css setValue:@(100) forTag:IUCSSTagPercentWidth];
-    [self.css setValue:@(15) forTag:IUCSSTagFontSize];
+    [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css eradicateTag:IUCSSTagBGColor];
+
+
+    //font
+    [self.css setValue:@(14) forTag:IUCSSTagFontSize];
+    [self.css setValue:@(2.0) forTag:IUCSSTagLineHeight];
+    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign];
+    [self.css setValue:@"HelveticaNeue-Light" forTag:IUCSSTagFontName];
+    [self.css setValue:[NSColor rgbColorRed:51 green:51 blue:51 alpha:1] forTag:IUCSSTagFontColor];
+
     
+    //sample text
     NSString *res = [[NSBundle mainBundle] pathForResource:@"loremipsum" ofType:@"txt"];
     self.sampleText = [[NSString stringWithContentsOfFile:res encoding:NSUTF8StringEncoding error:nil] stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
+    
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 
