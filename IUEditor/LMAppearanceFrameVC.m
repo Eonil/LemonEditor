@@ -418,10 +418,6 @@
 
     id updateValue = value;
     if (value == nil || [value isEqualToString:@"-"]) {
-        if([tag isEqualToString:IUCSSTagPixelHeight] || [tag isEqualToString:IUCSSTagPercentHeight]){
-            [self setValueWithouUpdateCSS:@(1.0) forCSSTag:IUCSSTagLineHeight];
-        }
-        
         updateValue = nil;
     }
     [self setValueWithouUpdateCSS:updateValue forCSSTag:tag];
