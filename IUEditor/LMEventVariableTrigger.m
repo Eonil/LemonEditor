@@ -33,7 +33,7 @@
 - (void)awakeFromNib{
     
 
-    [self outlet:_variableTF bind:NSValueBinding cssTag:IUEventTagVariable];
+    [self outlet:_variableTF bind:NSValueBinding eventTag:IUEventTagVariable];
     
     [self outlet:_initailValueTF bind:NSValueBinding eventTag:IUEventTagInitialValue];
     [self outlet:_initialValueStepper bind:NSValueBinding eventTag:IUEventTagInitialValue];

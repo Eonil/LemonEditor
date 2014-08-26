@@ -34,7 +34,7 @@
 }
 
 - (NSString*)code{
-    return @"<h1><a href=\"<?php echo home_url(); ?>\"><?bloginfo()?></a>/h1<>";
+    return @"<h1><a href=\"<?php echo home_url(); ?>\"><?bloginfo()?></a></h1>";
 }
 
 - (BOOL)shouldCompileFontInfo{
