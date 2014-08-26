@@ -257,6 +257,14 @@
             return NO;
         }];
         NSArray *selectedChildren = [allChildren filteredArrayUsingPredicate:predicate];
+
+        //check all selected children share parent;
+        IUBox *firstSelectedChild = [selectedChildren firstObject];
+        for (IUBox *box in selectedChildren) {
+            if (box.parent != firstSelectedChild.parent) {
+                return; // fail to select
+            }
+        }
         [self _setSelectedObjects:selectedChildren];
     }
 }
