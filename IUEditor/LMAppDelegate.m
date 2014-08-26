@@ -148,25 +148,29 @@
 
 - (IBAction)performHelp:(NSMenuItem *)sender{
     LMHelpWC *hWC = [LMHelpWC sharedHelpWC];
-    if (sender.tag == 0) {
-        [hWC showHelpWebURL:[NSURL URLWithString:@"http://jdlaborg.github.io/LemonEditor/"] withTitle:@"About Project"];
-    }
-    else {
-        switch (sender.tag) {
-            case 1:
-                [hWC showHelpDocumentWithKey:@"RunningAProject"];
-                break;
-            case 2:
-                [hWC showHelpDocumentWithKey:@"tracing"];
-                break;
-            case 3:
-                [hWC showHelpDocumentWithKey:@"positionProperty"];
-                break;
-                
-            default:
-                break;
+    switch (sender.tag) {
+        case 0://Documentation
+            
+            break;
+        case 1://Release Notes
+            
+            break;
+        case 2:{
+            //Tutorial
+            NSString *tutorial = @"http://guide.iueditor.org";
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:tutorial]];
+            break;
         }
+        case 3:{
+            //IUEditor Homepage
+            NSString *tutorial = @"http://www.iueditor.org";
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:tutorial]];
+            break;
+        }
+        default:
+            break;
     }
+    
 }
 
 

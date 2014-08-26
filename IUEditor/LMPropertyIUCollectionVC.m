@@ -150,15 +150,14 @@
     else{
         NSMutableArray *responsiveSetting = [[self valueForProperty:@"responsiveSetting"] mutableCopy];
 
-        NSDictionary *selectedDict;
+        NSMutableArray *selectedDictArray = [NSMutableArray array];
         for(NSDictionary *dict in responsiveSetting){
             NSInteger width = [[dict objectForKey:@"width"] integerValue];
-            if(width == selectedSize){
-                selectedDict = dict;
-                break;
+            if(width == largeSize-1){
+                [selectedDictArray addObject:dict];
             }
         }
-        if(selectedDict){
+        for(NSDictionary *selectedDict in selectedDictArray){
             [responsiveSetting removeObject:selectedDict];
         }
         [responsiveSetting addObject:@{@"width":@(largeSize-1), @"count":@(count)}];

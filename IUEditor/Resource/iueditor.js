@@ -185,11 +185,13 @@ function remakeCollection(){
 		responsiveArray = eval(responsive);
 		count = $(this).attr('defaultItemCount');
 		viewportWidth = $(window).width();
+		var minWidth = 9999;
 		for (var index in responsiveArray){
 			dict = responsiveArray[index];
 			width = dict.width;
-			if (viewportWidth<width){
+			if (viewportWidth<width && minWidth > width){
 				count = dict.count;
+				minWidth = width;
 			}
 		}
 		$(this).children().find('.collectioncopy').remove();
@@ -199,10 +201,8 @@ function remakeCollection(){
 		copy.find('*').each(function(){
 			$(this).removeAttr('id');
 			$(this).addClass('collectioncopy');
-			$(this).css('opacity',0.5);
 		})
                                 
-			
 		for(var index=0; index<count-1; index++){
 			var secondcopy = copy.clone();
 			$(this).append(secondcopy);
@@ -231,8 +231,9 @@ function getImageWidth(imageSrc){
 	return imageWidth;
 }
 
+
 $(window).resize(function(){
-	resizeCollection();
+	remakeCollection();
 	getIUUpdatedFrameThread();
 });
 

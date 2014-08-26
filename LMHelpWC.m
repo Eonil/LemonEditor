@@ -13,8 +13,8 @@ static LMHelpWC *gHelpWC = nil;
 
 @interface LMHelpWC ()
 
-@property (weak) IBOutlet NSView *pdfEmbedV;
-@property (weak) IBOutlet NSView *webEmbedV;
+@property (weak) IBOutlet NSTabView *tabView;
+
 @property (weak) IBOutlet WebView *webV;
 @property (weak) IBOutlet PDFView *pdfV;
 @property (weak) IBOutlet PDFThumbnailView *pdfThumbnailV;
@@ -43,8 +43,8 @@ static LMHelpWC *gHelpWC = nil;
 
     self.window.title = title;
     
-    [_pdfEmbedV setHidden:YES];
-    [_webEmbedV setHidden:NO];
+    [_tabView selectTabViewItemAtIndex:1];
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [[self.webV mainFrame] loadRequest:request];
     [self.window makeKeyAndOrderFront:nil];
@@ -81,9 +81,8 @@ static LMHelpWC *gHelpWC = nil;
     if (self.window == nil) {
         [self window];
     }
-    
-    [_webEmbedV setHidden:YES];
-    [_pdfEmbedV setHidden:NO];
+    [_tabView selectTabViewItemAtIndex:0];
+
     if([[fileName pathExtension] isEqualToString:@"pdf"]){
         NSURL *url = [[NSBundle mainBundle] URLForResource:[fileName stringByDeletingPathExtension] withExtension:@"pdf"];
         PDFDocument *doc = [[PDFDocument alloc] initWithURL:url];
@@ -97,6 +96,10 @@ static LMHelpWC *gHelpWC = nil;
         [[self window] setTitle:@"Manual"];
     }
     
+}
+
+- (void)showHelpPdfWindow{
+    //FIXME: select firstwindow
 }
 
 - (void)showHelpDocumentWithKey:(NSString *)key{

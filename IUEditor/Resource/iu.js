@@ -219,11 +219,13 @@ function resizeCollection(){
 		responsiveArray = eval(responsive);
 		count = $(this).attr('defaultItemCount');
 		viewportWidth = $(window).width();
+		var minWidth = 9999;
 		for (var index in responsiveArray){
 			dict = responsiveArray[index];
 			width = dict.width;
-			if (viewportWidth<width){
+			if (viewportWidth<width && minWidth > width){
 				count = dict.count;
+				minWidth = width;
 			}
 		}		
 		//			var width  = 1/count *100;

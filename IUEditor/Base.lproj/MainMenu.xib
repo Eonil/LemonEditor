@@ -200,28 +200,29 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="491">
                         <items>
-                            <menuItem title="About Project" id="jHa-Jg-mkb">
+                            <menuItem title="Documentation" id="1Mp-wp-LLA">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="performHelp:" target="494" id="n6g-B8-Ioz"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Release Notes" tag="1" enabled="NO" id="8vt-Pq-NBN">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="performHelp:" target="494" id="rVw-q3-ojT"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="cv6-XT-ZVA"/>
+                            <menuItem title="Tutorial (Web)" tag="2" id="jHa-Jg-mkb">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="performHelp:" target="494" id="Wrc-ry-YJb"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Running a project" tag="1" id="KCO-EM-J4m">
+                            <menuItem title="IUEditor Homepage" tag="3" id="kCQ-jE-ILK">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="performHelp:" target="494" id="o95-eX-ArK"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Tracing overview" tag="2" id="GwS-XB-5dZ">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="performHelp:" target="494" id="ei0-Pn-3CE"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Positioning" tag="3" id="q0Y-4a-xgB">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="performHelp:" target="494" id="fui-Zv-erI"/>
+                                    <action selector="performHelp:" target="494" id="ayZ-By-5r2"/>
                                 </connections>
                             </menuItem>
                         </items>
