@@ -56,7 +56,12 @@
 - (NSString*)sampleInnerHTML{
     NSMutableString *retInnerHTML = [NSMutableString string];
     for (WPWidget *widget in self.children) {
-        [retInnerHTML appendString:widget.sampleHTML];
+        if([widget isKindOfClass:[WPWidget class]]){
+            [retInnerHTML appendString:widget.sampleHTML];
+        }
+        else{
+            [retInnerHTML appendString:widget.html];
+        }
     }
     return retInnerHTML;
 }
