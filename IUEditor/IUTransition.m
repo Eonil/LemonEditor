@@ -10,8 +10,10 @@
 #import "IUItem.h"
 
 @interface IUTransition()
+
 @property IUItem *firstItem;
 @property IUItem *secondItem;
+
 @end
 
 
@@ -23,7 +25,15 @@
     if (self) {
         [[self undoManager] disableUndoRegistration];
         
-        [aDecoder decodeToObject:self withProperties:[IUTransition properties]];
+        [aDecoder decodeToObject:self withProperties:[IUTransition propertiesWithOutProperties:@[@"firstItem", @"secondItem"]]];
+        
+        if(self.children.count > 1){
+            _firstItem = self.children[0];
+            _secondItem = self.children[1];
+        }
+        else{
+            assert(0);
+        }
         
         [[self undoManager] enableUndoRegistration];
     }
@@ -32,7 +42,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [super encodeWithCoder:aCoder];
-    [aCoder encodeFromObject:self withProperties:[IUTransition properties]];
+    [aCoder encodeFromObject:self withProperties:[IUTransition propertiesWithOutProperties:@[@"firstItem", @"secondItem"]]];
 }
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
@@ -88,11 +98,19 @@
 }
 
 - (void)selectionChanged:(NSNotification*)noti{
+    
+    
     NSMutableSet *set = [NSMutableSet setWithArray:self.children];
     [set intersectSet:[NSSet setWithArray:[noti userInfo][@"selectedObjects"]]];
     if ([set count] != 1) {
         return;
     }
+    
+    if(self.delegate){
+        [self.delegate disableUpdateCSS:self];
+    }
+    
+    
     IUBox *box = [set anyObject];
     if (box == _firstItem) {
         [self setCurrentEdit:0];
@@ -100,6 +118,12 @@
     else {
         [self setCurrentEdit:1];
     }
+    
+    if(self.delegate){
+        [self.delegate enableUpdateCSS:self];
+    }
+    
+    [self updateHTML];
 }
 
 

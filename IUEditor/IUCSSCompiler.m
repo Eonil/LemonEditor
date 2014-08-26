@@ -665,7 +665,7 @@
         [code insertTag:@"display" string:@"inherit"];
     }
 
-    value = cssTagDict[IUCSSTagEditorDisplay];
+    value = [_iu.css valueByStepForTag:IUCSSTagEditorDisplay forViewport:viewport];
     if (value && [value boolValue] == NO) {
         [code insertTag:@"display" string:@"none" target:IUTargetEditor];
     }
