@@ -10,6 +10,7 @@
         <key>navImage</key>
         <string>stack_wparticle</string>
     </dict>
+    
     <dict>
         <key>isWidget</key>
         <false/>
@@ -22,9 +23,49 @@
         <key>isWidget</key>
         <false/>
         <key>className</key>
-        <string>WPArticle</string>
+        <string>WPArticleDate</string>
+        <key>navImage</key>
+        <string>stack_wparticledate</string>
+    </dict>
+    <dict>
+        <key>isWidget</key>
+        <false/>
+        <key>className</key>
+        <string>WPArticleBody</string>
+        <key>navImage</key>
+        <string>stack_wpsitedesc</string>
+    </dict>
+    <dict>
+        <key>isWidget</key>
+        <false/>
+        <key>className</key>
+        <string>WPWidget</string>
         <key>navImage</key>
         <string>stack_wparticle</string>
+    </dict>
+    <dict>
+        <key>isWidget</key>
+        <false/>
+        <key>className</key>
+        <string>WPWidgetTitle</string>
+        <key>navImage</key>
+        <string>stack_wpsitetitle</string>
+    </dict>
+    <dict>
+        <key>isWidget</key>
+        <false/>
+        <key>className</key>
+        <string>WPWidgetBody</string>
+        <key>navImage</key>
+        <string>stack_wpsitedesc</string>
+    </dict>
+    <dict>
+        <key>isWidget</key>
+        <false/>
+        <key>className</key>
+        <string>WPPageLink</string>
+        <key>navImage</key>
+        <string>stack_page_nav</string>
     </dict>
     <dict>
         <key>isWidget</key>

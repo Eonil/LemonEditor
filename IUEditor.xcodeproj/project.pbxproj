@@ -299,10 +299,12 @@
 		26B2886019ACBEEC00A38D19 /* stack_wpsitedesc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2885C19ACBEEC00A38D19 /* stack_wpsitedesc@2x.png */; };
 		26B2886119ACBEEC00A38D19 /* stack_wpsitetitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2885D19ACBEEC00A38D19 /* stack_wpsitetitle.png */; };
 		26B2886219ACBEEC00A38D19 /* stack_wpsitetitle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2885E19ACBEEC00A38D19 /* stack_wpsitetitle@2x.png */; };
-		26B2886519ACC67E00A38D19 /* wp_articlelist.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2886319ACC67E00A38D19 /* wp_articlelist.png */; };
-		26B2886619ACC67E00A38D19 /* wp_articlelist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2886419ACC67E00A38D19 /* wp_articlelist@2x.png */; };
-		26B2886919ACCD3D00A38D19 /* stack_wparticlelist.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2886719ACCD3D00A38D19 /* stack_wparticlelist.png */; };
-		26B2886A19ACCD3D00A38D19 /* stack_wparticlelist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2886819ACCD3D00A38D19 /* stack_wparticlelist@2x.png */; };
+		26B2886D19ACCEB700A38D19 /* wp_articlelist.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2886B19ACCEB700A38D19 /* wp_articlelist.png */; };
+		26B2886E19ACCEB700A38D19 /* wp_articlelist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2886C19ACCEB700A38D19 /* wp_articlelist@2x.png */; };
+		26B2887119ACCF1300A38D19 /* stack_wparticlelist.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2886F19ACCF1300A38D19 /* stack_wparticlelist.png */; };
+		26B2887219ACCF1300A38D19 /* stack_wparticlelist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2887019ACCF1300A38D19 /* stack_wparticlelist@2x.png */; };
+		26B2887519ACD1F000A38D19 /* stack_wparticledate.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2887319ACD1F000A38D19 /* stack_wparticledate.png */; };
+		26B2887619ACD1F000A38D19 /* stack_wparticledate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26B2887419ACD1F000A38D19 /* stack_wparticledate@2x.png */; };
 		26C8565F192060DC00118CA5 /* stack_page_nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C8565D192060DC00118CA5 /* stack_page_nav.png */; };
 		26C85660192060DC00118CA5 /* stack_page_nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C8565E192060DC00118CA5 /* stack_page_nav@2x.png */; };
 		26C85663192060E500118CA5 /* tool_page_nav.png in Resources */ = {isa = PBXBuildFile; fileRef = 26C85661192060E500118CA5 /* tool_page_nav.png */; };
@@ -1246,10 +1248,12 @@
 		26B2885C19ACBEEC00A38D19 /* stack_wpsitedesc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_wpsitedesc@2x.png"; sourceTree = "<group>"; };
 		26B2885D19ACBEEC00A38D19 /* stack_wpsitetitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stack_wpsitetitle.png; sourceTree = "<group>"; };
 		26B2885E19ACBEEC00A38D19 /* stack_wpsitetitle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_wpsitetitle@2x.png"; sourceTree = "<group>"; };
-		26B2886319ACC67E00A38D19 /* wp_articlelist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_articlelist.png; path = ../wp_articlelist.png; sourceTree = "<group>"; };
-		26B2886419ACC67E00A38D19 /* wp_articlelist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_articlelist@2x.png"; path = "../wp_articlelist@2x.png"; sourceTree = "<group>"; };
-		26B2886719ACCD3D00A38D19 /* stack_wparticlelist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stack_wparticlelist.png; sourceTree = "<group>"; };
-		26B2886819ACCD3D00A38D19 /* stack_wparticlelist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_wparticlelist@2x.png"; sourceTree = "<group>"; };
+		26B2886B19ACCEB700A38D19 /* wp_articlelist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wp_articlelist.png; path = ../wp_articlelist.png; sourceTree = "<group>"; };
+		26B2886C19ACCEB700A38D19 /* wp_articlelist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wp_articlelist@2x.png"; path = "../wp_articlelist@2x.png"; sourceTree = "<group>"; };
+		26B2886F19ACCF1300A38D19 /* stack_wparticlelist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stack_wparticlelist.png; sourceTree = "<group>"; };
+		26B2887019ACCF1300A38D19 /* stack_wparticlelist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_wparticlelist@2x.png"; sourceTree = "<group>"; };
+		26B2887319ACD1F000A38D19 /* stack_wparticledate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stack_wparticledate.png; sourceTree = "<group>"; };
+		26B2887419ACD1F000A38D19 /* stack_wparticledate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_wparticledate@2x.png"; sourceTree = "<group>"; };
 		26C8565D192060DC00118CA5 /* stack_page_nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stack_page_nav.png; sourceTree = "<group>"; };
 		26C8565E192060DC00118CA5 /* stack_page_nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_page_nav@2x.png"; sourceTree = "<group>"; };
 		26C85661192060E500118CA5 /* tool_page_nav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tool_page_nav.png; sourceTree = "<group>"; };
@@ -2936,8 +2940,10 @@
 		3DED26A21900D393001A1D67 /* stackImage */ = {
 			isa = PBXGroup;
 			children = (
-				26B2886719ACCD3D00A38D19 /* stack_wparticlelist.png */,
-				26B2886819ACCD3D00A38D19 /* stack_wparticlelist@2x.png */,
+				26B2887319ACD1F000A38D19 /* stack_wparticledate.png */,
+				26B2887419ACD1F000A38D19 /* stack_wparticledate@2x.png */,
+				26B2886F19ACCF1300A38D19 /* stack_wparticlelist.png */,
+				26B2887019ACCF1300A38D19 /* stack_wparticlelist@2x.png */,
 				26B2885B19ACBEEC00A38D19 /* stack_wpsitedesc.png */,
 				26B2885C19ACBEEC00A38D19 /* stack_wpsitedesc@2x.png */,
 				26B2885D19ACBEEC00A38D19 /* stack_wpsitetitle.png */,
@@ -3515,8 +3521,6 @@
 		690A40A018E170B700095263 /* classImage */ = {
 			isa = PBXGroup;
 			children = (
-				26B2886319ACC67E00A38D19 /* wp_articlelist.png */,
-				26B2886419ACC67E00A38D19 /* wp_articlelist@2x.png */,
 				26B2885319ACBEE000A38D19 /* wp_sitedesc.png */,
 				26B2885419ACBEE000A38D19 /* wp_sitedesc@2x.png */,
 				26B2885519ACBEE000A38D19 /* wp_sitetitle.png */,
@@ -3527,6 +3531,8 @@
 				26B2883C19ACB8A800A38D19 /* wp_article@2x.png */,
 				26B2883D19ACB8A800A38D19 /* wp_menu.png */,
 				26B2883E19ACB8A800A38D19 /* wp_menu@2x.png */,
+				26B2886B19ACCEB700A38D19 /* wp_articlelist.png */,
+				26B2886C19ACCEB700A38D19 /* wp_articlelist@2x.png */,
 				3D9BC40B1994AADA00451F55 /* tool_map.png */,
 				3D9BC40C1994AADA00451F55 /* tool_map@2x.png */,
 				2640BCBE1933194B004A1E4B /* tool_text.png */,
@@ -4249,7 +4255,7 @@
 				267CB1A2190F93370079E565 /* tab_library_off@2x.png in Resources */,
 				3DED26BE1900F450001A1D67 /* panel_right_off@2x.png in Resources */,
 				2628C92F191A31F600D9D8CD /* stack_form@2x.png in Resources */,
-				26B2886A19ACCD3D00A38D19 /* stack_wparticlelist@2x.png in Resources */,
+				26B2887219ACCF1300A38D19 /* stack_wparticlelist@2x.png in Resources */,
 				260C02E819A373B10022D8F1 /* pf_thumbnail.png in Resources */,
 				267CB19E190F93370079E565 /* tab_event_off@2x.png in Resources */,
 				69D100121997124F003F8772 /* wordpress.zip in Resources */,
@@ -4280,7 +4286,7 @@
 				262D4AA41947FB05006F5FBE /* radius_icon_01.png in Resources */,
 				06855633198A63430073FA83 /* rocket.png in Resources */,
 				068555C0198A56740073FA83 /* Charles_Chaplin.png in Resources */,
-				26B2886619ACC67E00A38D19 /* wp_articlelist@2x.png in Resources */,
+				26B2886E19ACCEB700A38D19 /* wp_articlelist@2x.png in Resources */,
 				2628C91F1919C8C800D9D8CD /* tab_primary_on@2x.png in Resources */,
 				3D2E6BB519653F5800AC7DE5 /* IUTransition.mp4 in Resources */,
 				262D4AB519481DA2006F5FBE /* tab_on_02@2x.png in Resources */,
@@ -4302,7 +4308,7 @@
 				3D0D481418FFDC96000A5B53 /* LMFileTabItemVC.xib in Resources */,
 				3DF803E618FE62C900913505 /* stack_render.png in Resources */,
 				3DF8044D18FE62FC00913505 /* tool_render.png in Resources */,
-				26B2886919ACCD3D00A38D19 /* stack_wparticlelist.png in Resources */,
+				26B2887119ACCF1300A38D19 /* stack_wparticlelist.png in Resources */,
 				69C575B518D6F61E0016F050 /* InfoPlist.strings in Resources */,
 				3DF8043F18FE62FC00913505 /* tool_carousel@2x.png in Resources */,
 				3DBD7C2E19612FEC003E386C /* iueditor_thumbnail@2x.png in Resources */,
@@ -4319,6 +4325,7 @@
 				26B2883F19ACB8A800A38D19 /* wp_article.png in Resources */,
 				3DED268B1900D329001A1D67 /* stack_view@2x.png in Resources */,
 				3DED26BF1900F450001A1D67 /* panel_right_on.png in Resources */,
+				26B2887519ACD1F000A38D19 /* stack_wparticledate.png in Resources */,
 				262D4AAA1947FB05006F5FBE /* radius_icon_04.png in Resources */,
 				3DF803DF18FE62C900913505 /* align_right.png in Resources */,
 				CBA877FF1963D3CF00075294 /* Tutorial02_en.png in Resources */,
@@ -4357,7 +4364,7 @@
 				3DF8041518FE62F200913505 /* add_mediaquery@2x.png in Resources */,
 				2610CAC91999C1AC004C2F2E /* center_off@2x.png in Resources */,
 				26FC5DAB196F8489004B4DB4 /* panel_bottom_on@2x.png in Resources */,
-				26B2886519ACC67E00A38D19 /* wp_articlelist.png in Resources */,
+				26B2886D19ACCEB700A38D19 /* wp_articlelist.png in Resources */,
 				265FCC021953D08F00BD9068 /* reload@2x.png in Resources */,
 				3DF8046618FF784500913505 /* LMPropertyFontVC.xib in Resources */,
 				2628C91D1919C8C800D9D8CD /* tab_primary_off@2x.png in Resources */,
@@ -4646,6 +4653,7 @@
 				2642096719A48E2400411666 /* heroku@2x.png in Resources */,
 				CBA87815196437DF00075294 /* IUHTML.rtf in Resources */,
 				3DC4AAED198200DF0024170A /* event_mobile_video.mp4 in Resources */,
+				26B2887619ACD1F000A38D19 /* stack_wparticledate@2x.png in Resources */,
 				262D4AB219481DA2006F5FBE /* tab_on_01.png in Resources */,
 				3DED26C81900F65C001A1D67 /* ic_image.png in Resources */,
 				3DF8044F18FE62FC00913505 /* tool_transition.png in Resources */,
