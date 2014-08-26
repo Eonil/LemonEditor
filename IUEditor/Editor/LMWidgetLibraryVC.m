@@ -93,12 +93,9 @@
 }
 
 - (void)awakeFromNib{
-    if(_project){
-        if(_project.projectType != IUProjectTypeWordpress){
-            [_wpButtonCell setEnabled:NO];
-        }
-    }
 }
+
+
 
 
 
