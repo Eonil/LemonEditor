@@ -2,63 +2,87 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-	<dict>
-		<key>isWidget</key>
-		<true/>
-		<key>className</key>
-		<string>WPSidebar</string>
-		<key>classImage</key>
-		<string>tool_view</string>
-		<key>navImage</key>
-		<string>stack_view</string>
-		<key>shortDesc</key>
-		<string>WPSidebar</string>
-		<key>longDesc</key>
-		<string></string>
-		<key>widgetClass</key>
-		<integer>3</integer>
-	</dict>
-	<dict>
-		<key>isWidget</key>
-		<true/>
-		<key>className</key>
-		<string>WPSiteDescription</string>
-		<key>classImage</key>
-		<string>tool_view</string>
-		<key>navImage</key>
-		<string>stack_view</string>
-		<key>shortDesc</key>
-		<string>Wordpress Site Description</string>
-		<key>longDesc</key>
-		<string></string>
-		<key>widgetClass</key>
-		<integer>3</integer>
-	</dict>
-	<dict>
-		<key>isWidget</key>
-		<true/>
-		<key>className</key>
-		<string>WPMenu</string>
-		<key>classImage</key>
-		<string>tool_view</string>
-		<key>navImage</key>
-		<string>stack_view</string>
-		<key>shortDesc</key>
-		<string>Wordpress Content Collection</string>
-		<key>longDesc</key>
-		<string></string>
-		<key>widgetClass</key>
-		<integer>3</integer>
-	</dict>
+    <dict>
+        <key>isWidget</key>
+        <false/>
+        <key>className</key>
+        <string>WPArticle</string>
+        <key>navImage</key>
+        <string>stack_wparticle</string>
+    </dict>
+    <dict>
+        <key>isWidget</key>
+        <false/>
+        <key>className</key>
+        <string>WPArticleTitle</string>
+        <key>navImage</key>
+        <string>stack_wpsitetitle</string>
+    </dict>
+    <dict>
+        <key>isWidget</key>
+        <false/>
+        <key>className</key>
+        <string>WPArticle</string>
+        <key>navImage</key>
+        <string>stack_wparticle</string>
+    </dict>
+    <dict>
+        <key>isWidget</key>
+        <true/>
+        <key>className</key>
+        <string>WPSiteTitle</string>
+        <key>classImage</key>
+        <string>wp_sitetitle</string>
+        <key>navImage</key>
+        <string>stack_wpsitetitle</string>
+        <key>shortDesc</key>
+        <string>Wordpress Site Name</string>
+        <key>longDesc</key>
+        <string></string>
+        <key>widgetClass</key>
+        <integer>3</integer>
+    </dict>
+    <dict>
+        <key>isWidget</key>
+        <true/>
+        <key>className</key>
+        <string>WPSiteDescription</string>
+        <key>classImage</key>
+        <string>wp_sitedesc</string>
+        <key>navImage</key>
+        <string>stack_wpsitedesc</string>
+        <key>shortDesc</key>
+        <string>Wordpress Site Description</string>
+        <key>longDesc</key>
+        <string></string>
+        <key>widgetClass</key>
+        <integer>3</integer>
+    </dict>
+    <dict>
+        <key>isWidget</key>
+        <true/>
+        <key>className</key>
+        <string>WPMenu</string>
+        <key>classImage</key>
+        <string>wp_menu</string>
+        <key>navImage</key>
+        <string>stack_wpmenu</string>
+        <key>shortDesc</key>
+        <string>Wordpress Content Collection</string>
+        <key>longDesc</key>
+        <string></string>
+        <key>widgetClass</key>
+        <integer>3</integer>
+    </dict>
 	<dict>
 		<key>isWidget</key>
 		<true/>
 		<key>className</key>
 		<string>WPArticleList</string>
 		<key>classImage</key>
-		<string>tool_view</string>
+		<string>wp_articlelist</string>
 		<key>navImage</key>
-		<string>stack_view</string>
+		<string>stack_wparticlelist</string>
 		<key>shortDesc</key>
 		<string>Wordpress Content Collection</string>
 		<key>longDesc</key>
@@ -72,9 +96,9 @@
 		<key>className</key>
 		<string>WPPageLinks</string>
 		<key>classImage</key>
-		<string>tool_view</string>
+		<string>tool_page_nav</string>
 		<key>navImage</key>
-		<string>stack_view</string>
+		<string>stack_page_nav</string>
 		<key>shortDesc</key>
 		<string>Wordpress Site Name</string>
 		<key>longDesc</key>
@@ -82,21 +106,21 @@
 		<key>widgetClass</key>
 		<integer>3</integer>
 	</dict>
-	<dict>
-		<key>isWidget</key>
-		<true/>
-		<key>className</key>
-		<string>WPSiteTitle</string>
-		<key>classImage</key>
-		<string>tool_view</string>
-		<key>navImage</key>
-		<string>stack_view</string>
-		<key>shortDesc</key>
-		<string>Wordpress Site Name</string>
-		<key>longDesc</key>
-		<string></string>
-		<key>widgetClass</key>
-		<integer>3</integer>
-	</dict>
+    <dict>
+        <key>isWidget</key>
+        <true/>
+        <key>className</key>
+        <string>WPSidebar</string>
+        <key>classImage</key>
+        <string>wp_sidebar</string>
+        <key>navImage</key>
+        <string>stack_wpsidebar</string>
+        <key>shortDesc</key>
+        <string>WPSidebar</string>
+        <key>longDesc</key>
+        <string></string>
+        <key>widgetClass</key>
+        <integer>3</integer>
+    </dict>
 </array>
 </plist>
