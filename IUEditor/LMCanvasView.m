@@ -240,8 +240,7 @@
                         }
                     }
                     
-                    if([self.webView isDOMTextAtPoint:convertedPoint] == NO
-                       && currentIUID){
+                    if(currentIUID){
                         isSelected = YES;
                     }
                     [((LMCanvasVC *)(self.delegate)) startDragSession:self];

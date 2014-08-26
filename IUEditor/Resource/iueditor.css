@@ -11,6 +11,10 @@ a{
     display:block;
 }
 
+p{
+    cursor:default;
+}
+
 .IUPage{
     width:100%;
     min-height:100%;
