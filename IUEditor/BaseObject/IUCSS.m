@@ -126,6 +126,18 @@
     }
 }
 
+-(id)valueByStepForTag:(IUCSSTag)tag forViewport:(NSInteger)width{
+    if( _cssFrameDict[@(width)]){
+        id value = [_cssFrameDict[@(width)] objectForKey:tag];
+        if(value){
+            return value;
+        }
+    }
+    
+    id value = [_cssFrameDict[@(IUCSSDefaultViewPort)] objectForKey:tag];
+    return value;
+}
+
 
 - (void)copyMaxSizeToSize:(NSInteger)width{
     if(_cssFrameDict[@(width)] == nil){

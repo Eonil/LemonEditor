@@ -30,6 +30,11 @@
 -(void)setValueWithoutUpdateCSS:(id)value forTag:(IUCSSTag)tag;
 -(void)setValueWithoutUpdateCSS:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width;
 
+/**
+ @brief find viewport tag, if there not, return default value for tag
+ */
+-(id)valueByStepForTag:(IUCSSTag)tag forViewport:(NSInteger)width;
+
 
 //remove tag of all tag dictionay in width
 -(void)eradicateTag:(IUCSSTag)type;
