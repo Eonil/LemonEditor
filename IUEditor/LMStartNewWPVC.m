@@ -30,14 +30,19 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        /* We do not support mysql on v3
         // Initialization code here.
         NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://mysql.iueditor.org/state"]];
-        NSDictionary *d = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSDictionary *d;
+        if (data) {
+            d = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        }
         self.serverState = [d[@"state"] intValue];
         self.serverText = @"Server is down";
         if (d[@"text"]) {
             self.serverText = d[@"text"];
         }
+          */
         self.themeName = @"iusample";
         self.themeCollectionDirectory = [@"~/Sites/wordpress/wp-content/themes" stringByExpandingTildeInPath];
     }
