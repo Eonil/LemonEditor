@@ -446,37 +446,18 @@
         /* update CSSCode */
         [self updateCSSPositionCode:code asIUBox:_iu viewport:viewport];
         [self updateCSSApperanceCode:code asIUBox:_iu viewport:viewport ];
-        
-        [code setInsertingTarget:IUTargetBoth];
+
         if ([_iu shouldCompileFontInfo]) {
+            [code setInsertingTarget:IUTargetBoth];
             [self updateCSSFontCode:code asIUBox:_iu viewport:viewport];
         }
+        
+        [code setInsertingTarget:IUTargetBoth];
         [self updateCSSRadiousAndBorderCode:code asIUBox:_iu viewport:viewport];
         
         [code setInsertingIdentifier:_iu.cssHoverClass];
         [self updateCSSHoverCode:code asIUBox:_iu viewport:viewport];
-        
-#if 0
-        if(_rule == IUCompileRuleDjango && isEdit == NO && iu.pgContentVariable){
-            NSDictionary *cssDict = [iu.css tagDictionaryForViewport:width];
-            NSInteger line =  [cssDict[IUCSSTagEllipsis] integerValue];
-            if([identifier isEqualToString:[[iu.htmlID cssClass] stringByAppendingString:@">p"]])
-                if(line > 0){
-                    if(line > 1){
-                        [dict putTag:@"display" string:@"-webkit-box"];
-                    }
-                    else if(line == 1){
-                        [dict putTag:@"white-space" string:@"nowrap"];
-                    }
-                    [dict putTag:@"overflow" string:@"hidden"];
-                    [dict putTag:@"text-overflow" string:@"ellipsis"];
-                    [dict putTag:@"-webkit-line-clamp" intValue:(int)line ignoreZero:YES unit:IUCSSUnitNone];
-                    [dict putTag:@"-webkit-box-orient" string:@"vertical"];
-                    [dict putTag:@"height" intValue:100 ignoreZero:NO unit:IUCSSUnitPercent];
-                }
-        }
-
-#endif
+     
     }
 }
 
@@ -543,6 +524,27 @@
     if (cssTagDict[IUCSSTagLineHeight]) {
         [code insertTag:@"line-height" floatFromNumber:cssTagDict[IUCSSTagLineHeight]];
     }
+    if(_rule == IUCompileRuleDjango){
+        if(cssTagDict[IUCSSTagEllipsis]){
+            [code setInsertingTarget:IUTargetOutput];
+            NSInteger line =  [cssTagDict[IUCSSTagEllipsis] integerValue];
+            if(line > 0){
+                if(line > 1){
+                    [code insertTag:@"display" string:@"-webkit-box"];
+                }
+                else if(line == 1){
+                    [code insertTag:@"white-space" string:@"nowrap"];
+                }
+                [code insertTag:@"overflow" string:@"hidden"];
+                [code insertTag:@"text-overflow" string:@"ellipsis"];
+                [code insertTag:@"-webkit-line-clamp" integer:(int)line unit:IUUnitNone];
+                [code insertTag:@"-webkit-box-orient" string:@"vertical"];
+                [code insertTag:@"height" integer:100 unit:IUUnitPercent];
+            }
+        }
+
+    }
+    
 }
 
 - (void)updateCSSRadiousAndBorderCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{

@@ -474,9 +474,14 @@
         currentIdentifier = @"Multiple Selection";
     }
     else{
+#if DEBUG
         currentIdentifier = ((IUBox *)[_IUController.selectedObjects firstObject]).htmlID;
+#else
+        currentIdentifier = ((IUBox *)[_IUController.selectedObjects firstObject]).name;
+#endif
     }
     
+
     NSString *status = [NSString stringWithFormat:@"%@ | %@", currentClassName, currentIdentifier];
     
     [_selectionToolbarTF setStringValue:status];

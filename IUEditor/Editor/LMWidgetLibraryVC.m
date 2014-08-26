@@ -59,6 +59,8 @@
             obj.shortDesc = dict[@"shortDesc"];
             obj.longDesc = dict[@"longDesc"];
             int widgetClass = [dict[@"widgetClass"] intValue];
+            
+            
             if(widgetClass == WidgetClassTypePrimary){
                 [primaryArray addObject:obj];
             }
