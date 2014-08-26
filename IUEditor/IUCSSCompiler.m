@@ -342,28 +342,6 @@
                 tagDictForReturn[tag] = value;
             }
         }
-        
-        if(viewport == IUCSSDefaultViewPort){
-            
-            if ([tagDictForReturn[@"border-top-width"] isEqualToString:@"0.00px"]) {
-                [tagDictForReturn removeObjectForKey:@"border-top-width"];
-                [tagDictForReturn removeObjectForKey:@"border-top-color"];
-            }
-            if ([tagDictForReturn[@"border-bottom-width"] isEqualToString:@"0.00px"]) {
-                [tagDictForReturn removeObjectForKey:@"border-bottom-width"];
-                [tagDictForReturn removeObjectForKey:@"border-bottom-color"];
-            }
-            if ([tagDictForReturn[@"border-left-width"] isEqualToString:@"0.00px"]) {
-                [tagDictForReturn removeObjectForKey:@"border-left-width"];
-                [tagDictForReturn removeObjectForKey:@"border-left-color"];
-            }
-            if ([tagDictForReturn[@"border-right-width"] isEqualToString:@"0.00px"]) {
-                [tagDictForReturn removeObjectForKey:@"border-right-width"];
-                [tagDictForReturn removeObjectForKey:@"border-right-color"];
-            }
-        }
-
-
         NSString *cssCode = [[tagDictForReturn CSSCode] stringByReplacingOccurrencesOfString:@".00px" withString:@"px"];
         [returnDict setObject:cssCode forKey:identifier];
     }
