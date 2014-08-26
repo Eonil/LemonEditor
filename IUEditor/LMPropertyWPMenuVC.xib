@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -85,17 +85,16 @@
                     </popUpButtonCell>
                 </popUpButton>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r4Z-8U-dtE">
-                    <rect key="frame" x="90" y="9" width="112" height="19"/>
+                    <rect key="frame" x="90" y="8" width="50" height="19"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="RNd-AV-Lsa"/>
+                    </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="buU-uk-QOE">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jld-iK-XvM">
-                    <rect key="frame" x="202" y="6" width="15" height="22"/>
-                    <stepperCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="100" id="yNw-sG-lMo"/>
-                </stepper>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LXn-k8-aZa">
                     <rect key="frame" x="31" y="11" width="54" height="14"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Paddding" id="A1g-nR-r4z">
@@ -104,11 +103,16 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Jld-iK-XvM">
+                    <rect key="frame" x="140" y="10" width="13" height="15"/>
+                    <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="100" id="yNw-sG-lMo"/>
+                </stepper>
             </subviews>
             <constraints>
                 <constraint firstItem="Jld-iK-XvM" firstAttribute="leading" secondItem="r4Z-8U-dtE" secondAttribute="trailing" constant="2" id="Apv-zh-YcE"/>
                 <constraint firstItem="wHx-Lf-OSd" firstAttribute="leading" secondItem="8kR-6R-cYz" secondAttribute="leading" constant="5" id="JIJ-dv-r6U"/>
-                <constraint firstItem="Jld-iK-XvM" firstAttribute="top" secondItem="qEO-oW-Zqm" secondAttribute="bottom" constant="8" id="MVm-Np-xEi"/>
+                <constraint firstItem="Jld-iK-XvM" firstAttribute="top" secondItem="qEO-oW-Zqm" secondAttribute="bottom" constant="10" id="MVm-Np-xEi"/>
+                <constraint firstItem="Jld-iK-XvM" firstAttribute="leading" secondItem="r4Z-8U-dtE" secondAttribute="trailing" constant="2" id="Oc6-Sq-Sb8"/>
                 <constraint firstItem="LXn-k8-aZa" firstAttribute="centerY" secondItem="r4Z-8U-dtE" secondAttribute="centerY" id="OiR-XO-o8i"/>
                 <constraint firstItem="wHx-Lf-OSd" firstAttribute="trailing" secondItem="fwh-KW-GMj" secondAttribute="trailing" id="RfJ-go-fxi"/>
                 <constraint firstItem="LXn-k8-aZa" firstAttribute="centerY" secondItem="Jld-iK-XvM" secondAttribute="centerY" id="Svd-1i-al6"/>
@@ -122,9 +126,9 @@
                 <constraint firstItem="qEO-oW-Zqm" firstAttribute="leading" secondItem="r4Z-8U-dtE" secondAttribute="leading" id="kLA-JA-8pR"/>
                 <constraint firstItem="qEO-oW-Zqm" firstAttribute="trailing" secondItem="JXX-lC-UHn" secondAttribute="trailing" id="l4C-gi-WTt"/>
                 <constraint firstItem="fwh-KW-GMj" firstAttribute="baseline" secondItem="qEO-oW-Zqm" secondAttribute="baseline" id="nni-6d-epj"/>
+                <constraint firstItem="LXn-k8-aZa" firstAttribute="top" secondItem="fwh-KW-GMj" secondAttribute="bottom" constant="13" id="pb7-cc-GkL"/>
                 <constraint firstItem="qEO-oW-Zqm" firstAttribute="top" secondItem="JXX-lC-UHn" secondAttribute="bottom" constant="8" id="roQ-WQ-grI"/>
                 <constraint firstItem="P29-DO-3r6" firstAttribute="top" secondItem="8kR-6R-cYz" secondAttribute="top" constant="6" id="v3s-LQ-Ra8"/>
-                <constraint firstItem="Jld-iK-XvM" firstAttribute="trailing" secondItem="qEO-oW-Zqm" secondAttribute="trailing" id="x0j-to-TUw"/>
             </constraints>
             <point key="canvasLocation" x="139" y="121"/>
         </customView>

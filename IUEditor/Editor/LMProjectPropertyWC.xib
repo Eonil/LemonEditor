@@ -142,18 +142,6 @@
             <rect key="frame" x="0.0" y="0.0" width="400" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1AM-3a-LTw">
-                    <rect key="frame" x="35" y="45" width="110" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="17" id="3tJ-rv-BVo"/>
-                        <constraint firstAttribute="width" constant="110" id="iGP-b2-Jp5"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Django Property" drawsBackground="YES" id="Sgz-oi-nhc">
-                        <font key="font" metaFont="smallSystemBold"/>
-                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="backgroundColor" red="0.92941182850000004" green="0.92941182850000004" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
-                    </textFieldCell>
-                </textField>
                 <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="H9p-d5-Z2h">
                     <rect key="frame" x="20" y="4" width="360" height="50"/>
                     <view key="contentView">
@@ -193,6 +181,18 @@
                     <color key="borderColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1AM-3a-LTw">
+                    <rect key="frame" x="35" y="45" width="110" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="3tJ-rv-BVo"/>
+                        <constraint firstAttribute="width" constant="110" id="iGP-b2-Jp5"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Django Property" drawsBackground="YES" id="Sgz-oi-nhc">
+                        <font key="font" metaFont="smallSystemBold"/>
+                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.92941182850000004" green="0.92941182850000004" blue="0.92941182850000004" alpha="1" colorSpace="deviceRGB"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="H9p-d5-Z2h" secondAttribute="bottom" constant="4" id="6ls-DQ-sdZ"/>
