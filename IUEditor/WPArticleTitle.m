@@ -24,7 +24,7 @@
 }
 
 -(NSString*)code{
-    return @"<?php the_title(); ?>";
+    return @"<a href=\"<?php the_permalink(); ?>\"><?php the_title(); ?></a>";
 }
 
 - (NSString*)sampleInnerHTML{
