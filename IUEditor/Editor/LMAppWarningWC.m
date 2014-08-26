@@ -29,5 +29,12 @@
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
+- (IBAction)closeIUEditor:(id)sender {
+    [[NSApplication sharedApplication] terminate:nil];
+}
+
+- (IBAction)runWithoutInternet:(id)sender {
+    [self.window close];
+}
 
 @end

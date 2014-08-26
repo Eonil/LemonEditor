@@ -31,6 +31,7 @@
     LMPreferenceWC *preferenceWC;
     LMNotiManager *notiManager;
     LMTutorialWC *tutorialWC;
+    LMAppWarningWC *warnWC;
 }
 
 + (void)initialize{
@@ -56,14 +57,10 @@
         [NSApp activateIgnoringOtherApps:YES];
         
         //import warning
-        LMAppWarningWC *warnWC =  [[LMAppWarningWC alloc] initWithWindowNibName:[LMAppWarningWC class].className];
+        warnWC =  [[LMAppWarningWC alloc] initWithWindowNibName:[LMAppWarningWC class].className];
         [warnWC showWindow:self];
         [warnWC.window center];
         [warnWC.window makeKeyAndOrderFront:self];
-
-        double delayInSeconds = 3.0;
-        [NSThread sleepForTimeInterval: delayInSeconds];
-        [[NSApplication sharedApplication] terminate:nil];
     }
     
     
