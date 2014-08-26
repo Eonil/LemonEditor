@@ -64,6 +64,7 @@ typedef enum _IUUnit{
 - (void)insertTag:(NSString*)tag string:(NSString*)stringValue target:(IUTarget)target;
 - (void)insertTag:(NSString*)tag floatFromNumber:(NSNumber*)floatNumber;
 - (void)insertTag:(NSString*)tag floatFromNumber:(NSNumber*)floatNumber unit:(IUUnit)unit;
+- (void)insertTag:(NSString*)tag floatValue:(CGFloat)value unit:(IUUnit)unit;
 - (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber;
 - (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber unit:(IUUnit)unit;
 - (void)insertTag:(NSString*)tag integer:(int)number unit:(IUUnit)unit;

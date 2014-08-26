@@ -171,17 +171,21 @@
 
 - (void)insertTag:(NSString*)tag floatFromNumber:(NSNumber*)floatNumber unit:(IUUnit)unit{
     if(floatNumber){
-        NSString *unitString;
-        switch (unit) {
-            case IUUnitPercent: unitString = @"%"; break;
-            case IUUnitPixel: unitString = @"px"; break;
-            case IUUnitNone: unitString = @""; break;
-        }
-        NSString *stringValue = [NSString stringWithFormat:@"%.2f%@", [floatNumber floatValue] , unitString];
-        [self insertTag:tag string:stringValue];
+        [self insertTag:tag floatValue:[floatNumber floatValue] unit:unit];
     }
 }
 
+- (void)insertTag:(NSString*)tag floatValue:(CGFloat)value unit:(IUUnit)unit{
+    NSString *unitString;
+    switch (unit) {
+        case IUUnitPercent: unitString = @"%"; break;
+        case IUUnitPixel: unitString = @"px"; break;
+        case IUUnitNone: unitString = @""; break;
+    }
+    NSString *stringValue = [NSString stringWithFormat:@"%.2f%@",  value , unitString];
+    [self insertTag:tag string:stringValue];
+    
+}
 - (void)insertTag:(NSString*)tag intFromNumber:(NSNumber*)intNumber{
     if(intNumber){
         [self insertTag:tag intFromNumber:intNumber unit:IUUnitNone];
@@ -565,23 +569,46 @@
 
 - (void)updateCSSRadiousAndBorderCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
-
+    BOOL isborder = NO;
 
     if (cssTagDict[IUCSSTagBorderTopWidth]) {
-        [code insertTag:@"border-top-width" floatFromNumber:cssTagDict[IUCSSTagBorderTopWidth] unit:IUUnitPixel];
+        CGFloat width = [cssTagDict[IUCSSTagBorderTopWidth] floatValue];
+        [code insertTag:@"border-top-width" floatValue:width unit:IUUnitPixel];
         [code insertTag:@"border-top-color" color:cssTagDict[IUCSSTagBorderTopColor]];
+        if(width >0){
+            isborder = YES;
+        }
     }
     if (cssTagDict[IUCSSTagBorderLeftWidth]) {
-        [code insertTag:@"border-left-width" floatFromNumber:cssTagDict[IUCSSTagBorderLeftWidth] unit:IUUnitPixel];
+        CGFloat width = [cssTagDict[IUCSSTagBorderLeftWidth] floatValue];
+        [code insertTag:@"border-left-width" floatValue:width unit:IUUnitPixel];
         [code insertTag:@"border-left-color" color:cssTagDict[IUCSSTagBorderLeftColor]];
+        if(width >0){
+            isborder = YES;
+        }
+
     }
     if (cssTagDict[IUCSSTagBorderRightWidth]) {
-        [code insertTag:@"border-right-width" floatFromNumber:cssTagDict[IUCSSTagBorderRightWidth] unit:IUUnitPixel];
+        CGFloat width = [cssTagDict[IUCSSTagBorderRightWidth] floatValue];
+        [code insertTag:@"border-right-width" floatValue:width unit:IUUnitPixel];
         [code insertTag:@"border-right-color" color:cssTagDict[IUCSSTagBorderRightColor]];
+        if(width >0){
+            isborder = YES;
+        }
+
     }
     if (cssTagDict[IUCSSTagBorderBottomWidth]) {
-        [code insertTag:@"border-bottom-width" floatFromNumber:cssTagDict[IUCSSTagBorderBottomWidth] unit:IUUnitPixel];
+        CGFloat width = [cssTagDict[IUCSSTagBorderBottomWidth] floatValue];
+        [code insertTag:@"border-bottom-width" floatValue:width unit:IUUnitPixel];
         [code insertTag:@"border-bottom-color" color:cssTagDict[IUCSSTagBorderBottomColor]];
+        if(width >0){
+            isborder = YES;
+        }
+    }
+    
+    if(isborder){
+        //REVIEW: input tag default border-width 2px
+        [code insertTag:@"border-style" string:@"solid"];
     }
 
     if (cssTagDict[IUCSSTagBorderRadiusTopLeft]) {
@@ -783,10 +810,6 @@
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
 
     /*  X, Y, Width, Height */
-    
-    id height = [_iu.css valueByStepForTag:IUCSSTagXUnitIsPercent forViewport:viewport];
-
-    
     IUUnit xUnit = [[_iu.css valueByStepForTag:IUCSSTagXUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
     IUUnit yUnit = [[_iu.css valueByStepForTag:IUCSSTagYUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
     
