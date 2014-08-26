@@ -9,7 +9,6 @@
 #import "IUCollection.h"
 
 @implementation IUCollection
-//TODO: responsiv setting is not implemented.
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];

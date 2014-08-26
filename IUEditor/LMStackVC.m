@@ -137,7 +137,7 @@
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(NSTreeNode*)item {
 
     id representObject = [item representedObject];
-    NSImage *classImage = [self currentImage:[representObject className]];
+    NSImage *classImage = [IUResourceUtil classNavImage:[representObject className] forProjectType:self.sheet.project.projectType];
     
     NSTableCellView *cell;
     if([representObject isKindOfClass:[IUPageContent class]]){
@@ -158,19 +158,6 @@
     return cell;
 }
 
-//TODO: optimize - plist 호출하는 클래스 따로빼기 여러군데서 쓰임
-- (NSImage *)currentImage:(NSString *)className{
-    NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForDefault" ofType:@"plist"];
-    NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
-    for (NSDictionary *dict in availableWidgetProperties) {
-        NSString *name = dict[@"className"];
-        if([name isEqualToString:className]){
-            NSImage *classImage = [NSImage imageNamed:dict[@"navImage"]];
-            return classImage;
-        }
-    }
-    return nil;
-}
 - (IBAction)outlineViewClicked:(NSOutlineView *)sender{
     NSTreeNode* clickItem = [sender itemAtRow:[sender clickedRow]];
     BOOL extended = [sender isItemExpanded:clickItem];

@@ -8,6 +8,7 @@
 
 #import "LMWidgetLibraryVC.h"
 #import "LMGeneralObject.h"
+#import "IUResourceUtil.h"
 #import "IUBox.h"
 #import "LMWC.h"
 #import "LMHelpPopover.h"
@@ -87,22 +88,7 @@
 
 - (void)setProject:(IUProject *)project{
     _project = project;
-    
-    //construct widget
-    NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForDefault" ofType:@"plist"];
-    NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
-    [self addWidgetProperties:availableWidgetProperties];
-    
-    if(_project.projectType == IUProjectTypeDjango){
-        NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForDjango" ofType:@"plist"];
-        NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
-        [self addWidgetProperties:availableWidgetProperties];
-    }
-    else if(_project.projectType == IUProjectTypeWordpress){
-        NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForWordpress" ofType:@"plist"];
-        NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
-        [self addWidgetProperties:availableWidgetProperties];
-    }
+    [self addWidgetProperties:[IUResourceUtil widgetListForProjectType:_project.projectType]];
     
 }
 

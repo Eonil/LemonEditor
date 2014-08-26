@@ -18,6 +18,7 @@
 
 #import "IUResourceManager.h"
 #import "IUIdentifierManager.h"
+#import "IUResourceUtil.h"
 
 
 //connect VC
@@ -442,23 +443,9 @@
 }
 
 
-//TODO: plist class따로 관리-코드겹침
-- (NSImage *)currentImage:(NSString *)className{
-    NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForDefault" ofType:@"plist"];
-    NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
-    for (NSDictionary *dict in availableWidgetProperties) {
-        NSString *name = dict[@"className"];
-        if([name isEqualToString:className]){
-            NSImage *classImage = [NSImage imageNamed:dict[@"navImage"]];
-            return classImage;
-        }
-    }
-    return nil;
-}
-
 -(void)selectedObjectsDidChange:(NSDictionary*)change{
     NSString *currentClassName = [_IUController selectionClassName];
-    [_selectionToolbarImageView setImage:[self currentImage:currentClassName]];
+    [_selectionToolbarImageView setImage:[IUResourceUtil classNavImage:currentClassName forProjectType:_project.projectType]];
     
     NSString *currentIdentifier;
     if(_IUController.selectedObjects.count > 1){

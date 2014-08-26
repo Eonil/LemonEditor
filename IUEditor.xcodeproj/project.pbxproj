@@ -430,6 +430,7 @@
 		3DB0AB4E19AC7EA00066FAB7 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB0AB4D19AC7EA00066FAB7 /* warning.png */; };
 		3DB0AB5119ACA7530066FAB7 /* widgetForDjango.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DB0AB5019ACA7530066FAB7 /* widgetForDjango.plist */; };
 		3DB0AB5319ACA7640066FAB7 /* widgetForWordpress.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DB0AB5219ACA7640066FAB7 /* widgetForWordpress.plist */; };
+		3DB0AB5619ACC4810066FAB7 /* IUResourceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB0AB5519ACC4810066FAB7 /* IUResourceUtil.m */; };
 		3DB3ACC518EBEF180046DFB7 /* LMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACC418EBEF180046DFB7 /* LMWindow.m */; };
 		3DB3ACCB18EBEF3D0046DFB7 /* SizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACC818EBEF3D0046DFB7 /* SizeView.m */; };
 		3DB3ACCC18EBEF3D0046DFB7 /* InnerSizeBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACCA18EBEF3D0046DFB7 /* InnerSizeBox.m */; };
@@ -1404,6 +1405,8 @@
 		3DB0AB4D19AC7EA00066FAB7 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
 		3DB0AB5019ACA7530066FAB7 /* widgetForDjango.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = widgetForDjango.plist; sourceTree = "<group>"; };
 		3DB0AB5219ACA7640066FAB7 /* widgetForWordpress.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = widgetForWordpress.plist; sourceTree = "<group>"; };
+		3DB0AB5419ACC4810066FAB7 /* IUResourceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUResourceUtil.h; path = IU/IUResourceUtil.h; sourceTree = "<group>"; };
+		3DB0AB5519ACC4810066FAB7 /* IUResourceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUResourceUtil.m; path = IU/IUResourceUtil.m; sourceTree = "<group>"; };
 		3DB3ACC318EBEF180046DFB7 /* LMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWindow.h; sourceTree = "<group>"; };
 		3DB3ACC418EBEF180046DFB7 /* LMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMWindow.m; sourceTree = "<group>"; };
 		3DB3ACC718EBEF3D0046DFB7 /* SizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SizeView.h; sourceTree = "<group>"; };
@@ -2820,6 +2823,8 @@
 				3DED27381904F271001A1D67 /* IUImageUtil.h */,
 				3DED27391904F271001A1D67 /* IUImageUtil.m */,
 				3DB3ACEB18EBEFD80046DFB7 /* IUDefinition.h */,
+				3DB0AB5419ACC4810066FAB7 /* IUResourceUtil.h */,
+				3DB0AB5519ACC4810066FAB7 /* IUResourceUtil.m */,
 			);
 			name = IULib;
 			sourceTree = "<group>";
@@ -5023,6 +5028,7 @@
 				3DA416B81935A6BE00559028 /* LMPreferenceFontVC.m in Sources */,
 				6983E71D18FFF54600D424B8 /* JDOutlineCellView.m in Sources */,
 				3DED270519010C71001A1D67 /* LMPropertyIUFBLikeVC.m in Sources */,
+				3DB0AB5619ACC4810066FAB7 /* IUResourceUtil.m in Sources */,
 				3DED270019010C55001A1D67 /* LMPropertyIUTransitionVC.m in Sources */,
 				3DD4787D193DDCE100639AB5 /* LMEventScrollAnimationVC.m in Sources */,
 				3DBD7C2419612107003E386C /* LMStartPreviewWC.m in Sources */,
