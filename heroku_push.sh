@@ -7,9 +7,10 @@ set timeout 60
 spawn $git push --force heroku master
 
 expect {
-    "(yes/no)?" {
+    "Are you sure you want to continue connecting" {
         send -- "yes"
         send -- "\r"
+        exp_continue
     }
     timeout{
         exit

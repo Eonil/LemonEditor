@@ -102,6 +102,12 @@
     return _gitRepoPath;
 }
 
+//FIXME: 호출될때마다 불리게.
+- (void)showWindow:(id)sender{
+    [self rearrangeView];
+    [super showWindow:sender];
+}
+
 - (void)rearrangeView{
     BOOL herokuInstalled = [JDShellUtil canFindCommand:@"heroku"];
     

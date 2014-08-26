@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		060EC42519AC976700DD9200 /* heroku_login.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69347434198B6878009E4472 /* heroku_login.sh */; };
+		060EC42619AC976700DD9200 /* heroku_auth.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A4E1987F55C00F84850 /* heroku_auth.sh */; };
+		060EC42719AC976700DD9200 /* heroku_push.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69347438198C0F84009E4472 /* heroku_push.sh */; };
 		062EFBD819655238007ECFD0 /* IUCollection.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 062EFBD719655238007ECFD0 /* IUCollection.rtf */; };
 		062EFBDA1965543A007ECFD0 /* IUTransition.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 062EFBD91965543A007ECFD0 /* IUTransition.rtf */; };
 		062EFBDC196562DF007ECFD0 /* IUCarousel.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 062EFBDB196562DF007ECFD0 /* IUCarousel.rtf */; };
@@ -693,8 +696,6 @@
 		69346623192B805000F82DAF /* LMCommandVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69346622192B805000F82DAF /* LMCommandVC.xib */; };
 		69347430198A8B21009E4472 /* composer.zip in Resources */ = {isa = PBXBuildFile; fileRef = 6934742F198A8B21009E4472 /* composer.zip */; };
 		69347432198A9D52009E4472 /* index.php in Resources */ = {isa = PBXBuildFile; fileRef = 69347431198A9D52009E4472 /* index.php */; };
-		69347435198B6878009E4472 /* heroku_login.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69347434198B6878009E4472 /* heroku_login.sh */; };
-		69347439198C0F84009E4472 /* heroku_push.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69347438198C0F84009E4472 /* heroku_push.sh */; };
 		693849E41914D711005C0546 /* NSIndexPath+JDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 693849E31914D711005C0546 /* NSIndexPath+JDExtension.m */; };
 		693F24791977929C00451500 /* LMPropertyWPMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 693F24771977929C00451500 /* LMPropertyWPMenuVC.m */; };
 		693F247A1977929C00451500 /* LMPropertyWPMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */; };
@@ -794,7 +795,6 @@
 		69BD0C8B197D64CE00CB4815 /* sftp_download.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69BD0C8A197D64CE00CB4815 /* sftp_download.sh */; };
 		69BE6A4C1987E1DA00F84850 /* LMHerokuWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BE6A4A1987E1DA00F84850 /* LMHerokuWC.m */; };
 		69BE6A4D1987E1DA00F84850 /* LMHerokuWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A4B1987E1DA00F84850 /* LMHerokuWC.xib */; };
-		69BE6A4F1987F55C00F84850 /* heroku_auth.sh in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A4E1987F55C00F84850 /* heroku_auth.sh */; };
 		69BE6A511989527000F84850 /* git in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A501989527000F84850 /* git */; };
 		69BE6A551989847300F84850 /* config.ru in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A541989847300F84850 /* config.ru */; };
 		69BE6A571989848300F84850 /* config.ruunit in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A561989848300F84850 /* config.ruunit */; };
@@ -4084,6 +4084,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				060EC42519AC976700DD9200 /* heroku_login.sh in Resources */,
+				060EC42619AC976700DD9200 /* heroku_auth.sh in Resources */,
+				060EC42719AC976700DD9200 /* heroku_push.sh in Resources */,
 				3D9BC41319988AD700451F55 /* MainMenu.xib in Resources */,
 				698503EA199953A500576DBF /* jquery-1.10.2.js in Resources */,
 				698503EB199953A500576DBF /* jquery-ui-1.9.2.js in Resources */,
@@ -4360,7 +4363,6 @@
 				2641F454195A72FF00DDF1C3 /* bg_v_bottom.png in Resources */,
 				3DF8041918FE62F200913505 /* view_border.png in Resources */,
 				69CFCAC318EAA21E00E3048A /* sample.jpg in Resources */,
-				69BE6A4F1987F55C00F84850 /* heroku_auth.sh in Resources */,
 				692C4DC41966A15400EAB2E7 /* tracingOverview.pages in Resources */,
 				3DF803E718FE62C900913505 /* ic_document.png in Resources */,
 				26378CDD194EC42A004B5001 /* import.png in Resources */,
@@ -4431,7 +4433,6 @@
 				26EFF41D194AECB900317C3E /* auto_resize.png in Resources */,
 				3DED270119010C55001A1D67 /* LMPropertyIUTransitionVC.xib in Resources */,
 				3DF8044218FE62FC00913505 /* tool_navi@2x.png in Resources */,
-				69347435198B6878009E4472 /* heroku_login.sh in Resources */,
 				3DB3ACFE18EC1F700046DFB7 /* LMCanvasVC.xib in Resources */,
 				3DED26BB1900F450001A1D67 /* panel_left_on.png in Resources */,
 				267CB1B9190F95750079E565 /* bg_center.png in Resources */,
@@ -4657,7 +4658,6 @@
 				69860E6019768148001C3F7F /* wp.jpg in Resources */,
 				CBA878051963D3CF00075294 /* Tutorial05_en.png in Resources */,
 				06855608198A63430073FA83 /* JicJac_Chair.png in Resources */,
-				69347439198C0F84009E4472 /* heroku_push.sh in Resources */,
 				267CB1A0190F93370079E565 /* tab_event_on@2x.png in Resources */,
 				3D5B5AF81990DDDC00EF6F12 /* ttwidgetNone.png in Resources */,
 				3DED26881900D329001A1D67 /* stack_html.png in Resources */,
