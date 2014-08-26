@@ -71,7 +71,7 @@
     _docController = docController;
     [self addObserver:self forKeyPath:@"docController.project.runnable" options:NSKeyValueObservingOptionInitial context:nil];
 #ifndef DEBUG
-    [_recordingB setHidden:YES];
+    //[_recordingB setHidden:YES];
 #endif
     
     
