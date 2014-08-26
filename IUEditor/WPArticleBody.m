@@ -28,7 +28,7 @@
     //font
     [self.css setValue:@(14) forTag:IUCSSTagFontSize];
     [self.css setValue:@(2.0) forTag:IUCSSTagLineHeight];
-    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign];
+    [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign];
     [self.css setValue:@"HelveticaNeue-Light" forTag:IUCSSTagFontName];
     [self.css setValue:[NSColor rgbColorRed:51 green:51 blue:51 alpha:1] forTag:IUCSSTagFontColor];
 

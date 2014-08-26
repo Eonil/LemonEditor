@@ -82,22 +82,15 @@
 }
 
 -(void)WPInitializeAsIndex{
-    [self.undoManager disableUndoRegistration];
-    [self removeAllIU];
-    [self.undoManager enableUndoRegistration];
+    [self WPInitializeAsHome];
 }
 
 -(void)WPInitializeAsPage{
-    [self.undoManager disableUndoRegistration];
-    [self removeAllIU];
-    [self.undoManager enableUndoRegistration];
+    [self WPInitializeAsHome];
 }
 
 -(void)WPInitializeAsCategory{
-    [self.undoManager disableUndoRegistration];
-    [self removeAllIU];
-    [self.undoManager enableUndoRegistration];
-
+    [self WPInitializeAsHome];
 }
 
 
