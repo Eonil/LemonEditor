@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>isWidget</key>
+		<true/>
+		<key>className</key>
+		<string>WPSidebar</string>
+		<key>classImage</key>
+		<string>tool_view</string>
+		<key>navImage</key>
+		<string>stack_view</string>
+		<key>shortDesc</key>
+		<string>WPSidebar</string>
+		<key>longDesc</key>
+		<string></string>
+		<key>widgetClass</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>isWidget</key>
+		<true/>
+		<key>className</key>
+		<string>WPSiteDescription</string>
+		<key>classImage</key>
+		<string>tool_view</string>
+		<key>navImage</key>
+		<string>stack_view</string>
+		<key>shortDesc</key>
+		<string>Wordpress Site Description</string>
+		<key>longDesc</key>
+		<string></string>
+		<key>widgetClass</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>isWidget</key>
+		<true/>
+		<key>className</key>
+		<string>WPMenu</string>
+		<key>classImage</key>
+		<string>tool_view</string>
+		<key>navImage</key>
+		<string>stack_view</string>
+		<key>shortDesc</key>
+		<string>Wordpress Content Collection</string>
+		<key>longDesc</key>
+		<string></string>
+		<key>widgetClass</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>isWidget</key>
+		<true/>
+		<key>className</key>
+		<string>WPArticleList</string>
+		<key>classImage</key>
+		<string>tool_view</string>
+		<key>navImage</key>
+		<string>stack_view</string>
+		<key>shortDesc</key>
+		<string>Wordpress Content Collection</string>
+		<key>longDesc</key>
+		<string></string>
+		<key>widgetClass</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>isWidget</key>
+		<true/>
+		<key>className</key>
+		<string>WPPageLinks</string>
+		<key>classImage</key>
+		<string>tool_view</string>
+		<key>navImage</key>
+		<string>stack_view</string>
+		<key>shortDesc</key>
+		<string>Wordpress Site Name</string>
+		<key>longDesc</key>
+		<string></string>
+		<key>widgetClass</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>isWidget</key>
+		<true/>
+		<key>className</key>
+		<string>WPSiteTitle</string>
+		<key>classImage</key>
+		<string>tool_view</string>
+		<key>navImage</key>
+		<string>stack_view</string>
+		<key>shortDesc</key>
+		<string>Wordpress Site Name</string>
+		<key>longDesc</key>
+		<string></string>
+		<key>widgetClass</key>
+		<integer>3</integer>
+	</dict>
+</array>
+</plist>

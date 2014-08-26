@@ -14,11 +14,6 @@
 @interface LMWidgetLibraryVC : NSViewController
 
 @property (nonatomic, weak) _binding_ IUController *controller;
-@property (nonatomic, weak) _binding_ IUProject   *project;
+@property (nonatomic, weak) IUProject   *project;
 
--(void)setWidgetProperties:(NSArray*)array;
-@property (nonatomic, readonly) NSArray *primaryWidgets;
-@property (nonatomic, readonly) NSArray *secondaryWidgets;
-@property (nonatomic, readonly) NSArray *PGWidgets;
-@property (nonatomic, readonly) NSArray *WPWidgets;
 @end

@@ -279,11 +279,8 @@
     //document == nil means window will be closed
     if(document && document.project){
         
-        //undo manager
-        _IUController.undoManager = [document undoManager];
-        
+        //project error check
         _project = document.project;
-        //[canvasVC bind:@"documentBasePath" toObject:_project withKeyPath:@"path" options:nil];
         NSError *error;
         NSAssert(_project.pageSheets, @"");
         NSAssert(_project.identifierManager, @"");
@@ -297,19 +294,13 @@
             return;
         }
         
+        //undo manager
+        _IUController.undoManager = [document undoManager];
         
-        
-        //vc setting
-        
-        //construct widget library vc
-        NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForDefault" ofType:@"plist"];
-        NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
-        [widgetLibraryVC setWidgetProperties:availableWidgetProperties];
-        
+              
         //set project
         fileNaviVC.project = _project;
         widgetLibraryVC.project = _project;
-        [widgetLibraryVC setProject:_project];
         iuInspectorVC.project = _project;
         
         //set ResourceManager

@@ -408,6 +408,8 @@
 		3DB0AB4619AAECCC0066FAB7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB0AB4519AAECCC0066FAB7 /* SystemConfiguration.framework */; };
 		3DB0AB4C19AB5CD90066FAB7 /* jquery.event.swipe.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DB0AB4B19AB5CD90066FAB7 /* jquery.event.swipe.js */; };
 		3DB0AB4E19AC7EA00066FAB7 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DB0AB4D19AC7EA00066FAB7 /* warning.png */; };
+		3DB0AB5119ACA7530066FAB7 /* widgetForDjango.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DB0AB5019ACA7530066FAB7 /* widgetForDjango.plist */; };
+		3DB0AB5319ACA7640066FAB7 /* widgetForWordpress.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DB0AB5219ACA7640066FAB7 /* widgetForWordpress.plist */; };
 		3DB3ACC518EBEF180046DFB7 /* LMWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACC418EBEF180046DFB7 /* LMWindow.m */; };
 		3DB3ACCB18EBEF3D0046DFB7 /* SizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACC818EBEF3D0046DFB7 /* SizeView.m */; };
 		3DB3ACCC18EBEF3D0046DFB7 /* InnerSizeBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACCA18EBEF3D0046DFB7 /* InnerSizeBox.m */; };
@@ -1284,7 +1286,7 @@
 		3D748C80192095A1005665A3 /* LMPropertyIUPageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyIUPageVC.xib; path = IU/LMPropertyIUPageVC.xib; sourceTree = "<group>"; };
 		3D748C831921D1BD005665A3 /* stack_carousel_item.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stack_carousel_item.png; sourceTree = "<group>"; };
 		3D748C841921D1BD005665A3 /* stack_carousel_item@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_carousel_item@2x.png"; sourceTree = "<group>"; };
-		3D7F0BA5199B4F8D0062415D /* loremipsum.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = loremipsum.txt; sourceTree = "<group>"; };
+		3D7F0BA5199B4F8D0062415D /* loremipsum.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = loremipsum.txt; path = ../../loremipsum.txt; sourceTree = "<group>"; };
 		3D825BC6195940E0001CC3C2 /* LMInspectorAltTextVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMInspectorAltTextVC.h; path = Editor/LMInspectorAltTextVC.h; sourceTree = "<group>"; };
 		3D825BC7195940E0001CC3C2 /* LMInspectorAltTextVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMInspectorAltTextVC.m; path = Editor/LMInspectorAltTextVC.m; sourceTree = "<group>"; };
 		3D825BC8195940E0001CC3C2 /* LMInspectorAltTextVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMInspectorAltTextVC.xib; path = Editor/LMInspectorAltTextVC.xib; sourceTree = "<group>"; };
@@ -1360,6 +1362,8 @@
 		3DB0AB4519AAECCC0066FAB7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3DB0AB4B19AB5CD90066FAB7 /* jquery.event.swipe.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.event.swipe.js; sourceTree = "<group>"; };
 		3DB0AB4D19AC7EA00066FAB7 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
+		3DB0AB5019ACA7530066FAB7 /* widgetForDjango.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = widgetForDjango.plist; sourceTree = "<group>"; };
+		3DB0AB5219ACA7640066FAB7 /* widgetForWordpress.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = widgetForWordpress.plist; sourceTree = "<group>"; };
 		3DB3ACC318EBEF180046DFB7 /* LMWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWindow.h; sourceTree = "<group>"; };
 		3DB3ACC418EBEF180046DFB7 /* LMWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMWindow.m; sourceTree = "<group>"; };
 		3DB3ACC718EBEF3D0046DFB7 /* SizeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SizeView.h; sourceTree = "<group>"; };
@@ -1690,7 +1694,7 @@
 		690A826F190A2CC200DDBA86 /* new_django.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_django.png; sourceTree = "<group>"; };
 		690A8270190A2CC200DDBA86 /* new_pt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_pt@2x.png"; sourceTree = "<group>"; };
 		690A8271190A2CC200DDBA86 /* new_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_default.png; sourceTree = "<group>"; };
-		690D465A198E8F3200478EC9 /* IUProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUProtocols.h; sourceTree = "<group>"; };
+		690D465A198E8F3200478EC9 /* IUProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IUProtocols.h; path = ../IUProtocols.h; sourceTree = "<group>"; };
 		6919204518DCFC8200F8522B /* NSCoder+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSCoder+JDExtension.h"; path = "JD/NSCoder+JDExtension.h"; sourceTree = "<group>"; };
 		6919204618DCFC8200F8522B /* NSCoder+JDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCoder+JDExtension.m"; path = "JD/NSCoder+JDExtension.m"; sourceTree = "<group>"; };
 		6919204818DCFED000F8522B /* NSObject+JDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JDExtension.h"; sourceTree = "<group>"; };
@@ -1858,7 +1862,7 @@
 		6999161F1919F090000ECF57 /* PGForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGForm.m; sourceTree = "<group>"; };
 		699C2AA419AAA7C50075C2E6 /* WPPageLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPPageLink.h; sourceTree = "<group>"; };
 		699C2AA519AAA7C50075C2E6 /* WPPageLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPPageLink.m; sourceTree = "<group>"; };
-		699D12DA1957D17A0096B21C /* handArrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = handArrow.jpg; sourceTree = "<group>"; };
+		699D12DA1957D17A0096B21C /* handArrow.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = handArrow.jpg; path = ../../handArrow.jpg; sourceTree = "<group>"; };
 		69A45DDD18F6702C00C551D9 /* LMPropertyBorderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyBorderVC.h; sourceTree = "<group>"; };
 		69A45DDE18F6702C00C551D9 /* LMPropertyBorderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyBorderVC.m; sourceTree = "<group>"; };
 		69A45DDF18F6702C00C551D9 /* LMPropertyBorderVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyBorderVC.xib; sourceTree = "<group>"; };
@@ -1866,7 +1870,7 @@
 		69AB7EAB19062598009E5195 /* IUTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUTransition.m; sourceTree = "<group>"; };
 		69ABB14818D733ED0065D584 /* IUCompiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUCompiler.h; sourceTree = "<group>"; };
 		69ABB14918D733ED0065D584 /* IUCompiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUCompiler.m; sourceTree = "<group>"; };
-		69B260E619594E4F007D905C /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
+		69B260E619594E4F007D905C /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font.png; path = ../../font.png; sourceTree = "<group>"; };
 		69B260E81959502A007D905C /* LMPreferenceDjangoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPreferenceDjangoVC.h; sourceTree = "<group>"; };
 		69B260E91959502A007D905C /* LMPreferenceDjangoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPreferenceDjangoVC.m; sourceTree = "<group>"; };
 		69B260EA1959502A007D905C /* LMPreferenceDjangoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPreferenceDjangoVC.xib; sourceTree = "<group>"; };
@@ -1961,7 +1965,7 @@
 		69CFDF151963D48900341B07 /* LMTutorialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMTutorialManager.m; sourceTree = "<group>"; };
 		69D1000D19970D00003F8772 /* InstallingWordpress.pages */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = InstallingWordpress.pages; sourceTree = "<group>"; };
 		69D1000F19970D32003F8772 /* InstallingWordpress.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = InstallingWordpress.pdf; sourceTree = "<group>"; };
-		69D100111997124F003F8772 /* wordpress.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = wordpress.zip; sourceTree = "<group>"; };
+		69D100111997124F003F8772 /* wordpress.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; name = wordpress.zip; path = ../../wordpress.zip; sourceTree = "<group>"; };
 		69D15F6918E73E690046FBB0 /* NSString+IUTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+IUTag.h"; sourceTree = "<group>"; };
 		69D15F6A18E73E690046FBB0 /* NSString+IUTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+IUTag.m"; sourceTree = "<group>"; };
 		69D15F6C18E893170046FBB0 /* LMBottomToolbarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMBottomToolbarVC.h; sourceTree = "<group>"; };
@@ -1972,7 +1976,7 @@
 		69D4EE6119654C2C00BAF8C1 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		69D4EE6319654D9A00BAF8C1 /* LMDragAndDropButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMDragAndDropButton.h; sourceTree = "<group>"; };
 		69D4EE6419654D9A00BAF8C1 /* LMDragAndDropButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMDragAndDropButton.m; sourceTree = "<group>"; };
-		69D5A94519A514BA00C24683 /* wpPageInformation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = wpPageInformation.plist; sourceTree = "<group>"; };
+		69D5A94519A514BA00C24683 /* wpPageInformation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = wpPageInformation.plist; path = ../../wpPageInformation.plist; sourceTree = "<group>"; };
 		69D5B68F18F247C100E9FB11 /* LMCompilerResourceSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LMCompilerResourceSource.h; sourceTree = "<group>"; };
 		69D5B69018F2675C00E9FB11 /* IUCompilerResourceSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUCompilerResourceSource.h; sourceTree = "<group>"; };
 		69D79B2B19138CB80020608D /* LMStartNewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMStartNewVC.h; sourceTree = "<group>"; };
@@ -2380,6 +2384,8 @@
 		3D54D64718ED5D1B00B5FEC2 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				69B260E619594E4F007D905C /* font.png */,
+				699D12DA1957D17A0096B21C /* handArrow.jpg */,
 				266C411619AB8032008A77CD /* setting.png */,
 				266C411719AB8032008A77CD /* setting@2x.png */,
 				266C411219AB6CC9008A77CD /* wp-logo.png */,
@@ -2505,6 +2511,8 @@
 			isa = PBXGroup;
 			children = (
 				690A40A418E17C5700095263 /* widgetForDefault.plist */,
+				3DB0AB5019ACA7530066FAB7 /* widgetForDjango.plist */,
+				3DB0AB5219ACA7640066FAB7 /* widgetForWordpress.plist */,
 				3DA416C21935B29200559028 /* defaultFont.plist */,
 				3D97D45C1950339500826280 /* Defaults.plist */,
 			);
@@ -2693,6 +2701,16 @@
 				69C5762B18D70B850016F050 /* LMWC.xib */,
 			);
 			name = MainWindow;
+			sourceTree = "<group>";
+		};
+		3DB0AB4F19ACA63C0066FAB7 /* wpResource */ = {
+			isa = PBXGroup;
+			children = (
+				3D7F0BA5199B4F8D0062415D /* loremipsum.txt */,
+				69D5A94519A514BA00C24683 /* wpPageInformation.plist */,
+				69D100111997124F003F8772 /* wordpress.zip */,
+			);
+			name = wpResource;
 			sourceTree = "<group>";
 		};
 		3DB3ACC218EBEEFA0046DFB7 /* Canvas */ = {
@@ -3417,6 +3435,7 @@
 		690A409E18E170AC00095263 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				3DB0AB4F19ACA63C0066FAB7 /* wpResource */,
 				3DA6C65419763480004D6587 /* clipArt */,
 				CBA877EC1963D1A300075294 /* helpResource */,
 				3DA416C11935B26F00559028 /* plist */,
@@ -3478,6 +3497,7 @@
 		691F91AA1973C5D100A4CFFF /* WPGroup */ = {
 			isa = PBXGroup;
 			children = (
+				690D465A198E8F3200478EC9 /* IUProtocols.h */,
 				692D98FB199D7B9A00A7E1C1 /* functions.php */,
 				69FEF94E1996D46600AEB283 /* WPArticleBody.h */,
 				69FEF94F1996D46600AEB283 /* WPArticleBody.m */,
@@ -3554,7 +3574,6 @@
 		694233A118D7E1A500C96A92 /* IU */ = {
 			isa = PBXGroup;
 			children = (
-				69FEF94D1996D42600AEB283 /* WP */,
 				3DF8029E18FE3F1A00913505 /* IUHTMLGroup */,
 				3DA6C65119753651004D6587 /* PGGroup */,
 				3DA6C64F1975361D004D6587 /* DefaultGroup */,
@@ -3665,16 +3684,10 @@
 		69C5759E18D6F61E0016F050 = {
 			isa = PBXGroup;
 			children = (
-				3D7F0BA5199B4F8D0062415D /* loremipsum.txt */,
-				69D5A94519A514BA00C24683 /* wpPageInformation.plist */,
-				690D465A198E8F3200478EC9 /* IUProtocols.h */,
-				69D100111997124F003F8772 /* wordpress.zip */,
 				CBFBE67C192A07A300F03F76 /* SampleTemplate */,
 				690A409E18E170AC00095263 /* Resource */,
 				69DE5CE419614E2B0050D020 /* Server */,
 				69FEC48B194845B600483C11 /* Help */,
-				69B260E619594E4F007D905C /* font.png */,
-				699D12DA1957D17A0096B21C /* handArrow.jpg */,
 				3DD4786A193DB2F900639AB5 /* IUDebug */,
 				69C575B018D6F61E0016F050 /* IUEditor */,
 				69C575CE18D6F61E0016F050 /* IUEditorTests */,
@@ -3901,13 +3914,6 @@
 				69FEF9471996D3B200AEB283 /* LMWordpressCreateFileWC.h */,
 				69FEF9481996D3B200AEB283 /* LMWordpressCreateFileWC.m */,
 				69FEF9491996D3B200AEB283 /* LMWordpressCreateFileWC.xib */,
-			);
-			name = WP;
-			sourceTree = "<group>";
-		};
-		69FEF94D1996D42600AEB283 /* WP */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			name = WP;
 			sourceTree = "<group>";
@@ -4421,6 +4427,7 @@
 				690A8274190A2CC200DDBA86 /* new_pt.png in Resources */,
 				3D9BC4311999F19700451F55 /* iueditor.iu.zip in Resources */,
 				69D79B3919138CDC0020608D /* LMStartTemplateVC.xib in Resources */,
+				3DB0AB5319ACA7640066FAB7 /* widgetForWordpress.plist in Resources */,
 				06855629198A63430073FA83 /* johnny_automatic_vertical_filing_cabinets.png in Resources */,
 				0685561B198A63430073FA83 /* johnny_automatic_John_Masefield.png in Resources */,
 				267CB194190F93370079E565 /* tab_appearance_off@2x.png in Resources */,
@@ -4525,6 +4532,7 @@
 				69347432198A9D52009E4472 /* index.php in Resources */,
 				69BD0C8B197D64CE00CB4815 /* sftp_download.sh in Resources */,
 				3DED274A19078991001A1D67 /* clear_color@2x.png in Resources */,
+				3DB0AB5119ACA7530066FAB7 /* widgetForDjango.plist in Resources */,
 				06855619198A63430073FA83 /* johnny_automatic_Giovanni_Martinelli.png in Resources */,
 				3DF8041318FE62F200913505 /* add_ghost@2x.png in Resources */,
 				3DED26C11900F450001A1D67 /* view_border_off.png in Resources */,

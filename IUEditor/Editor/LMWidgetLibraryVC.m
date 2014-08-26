@@ -24,6 +24,15 @@
 @property (weak) IBOutlet NSButton *listB;
 @property (weak) IBOutlet NSButton *iconB;
 
+
+//select widget
+@property (weak) IBOutlet NSMatrix *widgetTabMatrix;
+@property (weak) IBOutlet NSButtonCell *wpButtonCell;
+
+
+//widget array
+@property  NSMutableArray *primaryWidgets, *secondaryWidgets, *PGWidgets, *WPWidgets;
+
 @end
 
 @implementation LMWidgetLibraryVC{
@@ -35,19 +44,18 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Initialization code here.
+        _primaryWidgets = [NSMutableArray array];
+        _secondaryWidgets = [NSMutableArray array];
+        _PGWidgets = [NSMutableArray array];
+        _WPWidgets = [NSMutableArray array];
     }
     return self;
 }
 
 #pragma mark -init with LMWC
 
--(void)setWidgetProperties:(NSArray*)array{
-    NSMutableArray *primaryArray = [NSMutableArray array];
-    NSMutableArray *secondaryArray = [NSMutableArray array];
-    NSMutableArray *PGArray = [NSMutableArray array];
-    NSMutableArray *WPArray = [NSMutableArray array];
-
+-(void)addWidgetProperties:(NSArray*)array{
+    
     for (NSDictionary *dict in array) {
         
         BOOL isWidget = [dict[@"isWidget"] boolValue];
@@ -62,36 +70,50 @@
             
             
             if(widgetClass == WidgetClassTypePrimary){
-                [primaryArray addObject:obj];
+                [_primaryWidgets addObject:obj];
             }
             else if(widgetClass == WidgetClassTypeSecondary){
-                [secondaryArray addObject:obj];
+                [_secondaryWidgets addObject:obj];
             }
             else if(widgetClass == WidgetClassTypePG){
-                [PGArray addObject:obj];
+                [_PGWidgets addObject:obj];
             }
             else if(widgetClass == WidgetClassTypeWP){
-                [WPArray addObject:obj];
+                [_WPWidgets addObject:obj];
             }
         }
     }
-    [self willChangeValueForKey:@"primaryWidgets"];
-    _primaryWidgets = primaryArray;
-    [self didChangeValueForKey:@"primaryWidgets"];
-    
-    [self willChangeValueForKey:@"secondaryWidgets"];
-    _secondaryWidgets = secondaryArray;
-    [self didChangeValueForKey:@"secondaryWidgets"];
-    
-    [self willChangeValueForKey:@"PGWidgets"];
-    _PGWidgets = PGArray;
-    [self didChangeValueForKey:@"PGWidgets"];
-    
-    [self willChangeValueForKey:@"WPWidgets"];
-    _WPWidgets = WPArray;
-    [self didChangeValueForKey:@"WPWidgets"];
-
 }
+
+- (void)setProject:(IUProject *)project{
+    _project = project;
+    
+    //construct widget
+    NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForDefault" ofType:@"plist"];
+    NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
+    [self addWidgetProperties:availableWidgetProperties];
+    
+    if(_project.projectType == IUProjectTypeDjango){
+        NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForDjango" ofType:@"plist"];
+        NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
+        [self addWidgetProperties:availableWidgetProperties];
+    }
+    else if(_project.projectType == IUProjectTypeWordpress){
+        NSString *widgetFilePath = [[NSBundle mainBundle] pathForResource:@"widgetForWordpress" ofType:@"plist"];
+        NSArray *availableWidgetProperties = [NSArray arrayWithContentsOfFile:widgetFilePath];
+        [self addWidgetProperties:availableWidgetProperties];
+    }
+    
+}
+
+- (void)awakeFromNib{
+    if(_project){
+        if(_project.projectType != IUProjectTypeWordpress){
+            [_wpButtonCell setEnabled:NO];
+        }
+    }
+}
+
 
 
 #pragma mark collectionview -drag

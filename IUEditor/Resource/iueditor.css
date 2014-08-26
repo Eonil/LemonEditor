@@ -47,6 +47,10 @@ p{
     position:relative !important;
 }
 
+.collectioncopy{
+    opacity:0.5;
+}
+
 .PGTextField {
     padding-left: 8px;
 }

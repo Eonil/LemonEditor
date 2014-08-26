@@ -6,102 +6,6 @@
 		<key>isWidget</key>
 		<true/>
 		<key>className</key>
-		<string>WPSidebar</string>
-		<key>classImage</key>
-		<string>tool_view</string>
-		<key>navImage</key>
-		<string>stack_view</string>
-		<key>shortDesc</key>
-		<string>WPSidebar</string>
-		<key>longDesc</key>
-		<string></string>
-		<key>widgetClass</key>
-		<integer>3</integer>
-	</dict>
-	<dict>
-		<key>isWidget</key>
-		<true/>
-		<key>className</key>
-		<string>WPSiteDescription</string>
-		<key>classImage</key>
-		<string>tool_view</string>
-		<key>navImage</key>
-		<string>stack_view</string>
-		<key>shortDesc</key>
-		<string>Wordpress Site Description</string>
-		<key>longDesc</key>
-		<string></string>
-		<key>widgetClass</key>
-		<integer>3</integer>
-	</dict>
-	<dict>
-		<key>isWidget</key>
-		<true/>
-		<key>className</key>
-		<string>WPMenu</string>
-		<key>classImage</key>
-		<string>tool_view</string>
-		<key>navImage</key>
-		<string>stack_view</string>
-		<key>shortDesc</key>
-		<string>Wordpress Content Collection</string>
-		<key>longDesc</key>
-		<string></string>
-		<key>widgetClass</key>
-		<integer>3</integer>
-	</dict>
-	<dict>
-		<key>isWidget</key>
-		<true/>
-		<key>className</key>
-		<string>WPArticleList</string>
-		<key>classImage</key>
-		<string>tool_view</string>
-		<key>navImage</key>
-		<string>stack_view</string>
-		<key>shortDesc</key>
-		<string>Wordpress Content Collection</string>
-		<key>longDesc</key>
-		<string></string>
-		<key>widgetClass</key>
-		<integer>3</integer>
-	</dict>
-	<dict>
-		<key>isWidget</key>
-		<true/>
-		<key>className</key>
-		<string>WPPageLinks</string>
-		<key>classImage</key>
-		<string>tool_view</string>
-		<key>navImage</key>
-		<string>stack_view</string>
-		<key>shortDesc</key>
-		<string>Wordpress Site Name</string>
-		<key>longDesc</key>
-		<string></string>
-		<key>widgetClass</key>
-		<integer>3</integer>
-	</dict>
-	<dict>
-		<key>isWidget</key>
-		<true/>
-		<key>className</key>
-		<string>WPSiteTitle</string>
-		<key>classImage</key>
-		<string>tool_view</string>
-		<key>navImage</key>
-		<string>stack_view</string>
-		<key>shortDesc</key>
-		<string>Wordpress Site Name</string>
-		<key>longDesc</key>
-		<string></string>
-		<key>widgetClass</key>
-		<integer>3</integer>
-	</dict>
-	<dict>
-		<key>isWidget</key>
-		<true/>
-		<key>className</key>
 		<string>IUBox</string>
 		<key>classImage</key>
 		<string>tool_view</string>
@@ -285,22 +189,6 @@
 		<string>stack_fblike</string>
 		<key>shortDesc</key>
 		<string>Object for Facebook Like widget</string>
-		<key>longDesc</key>
-		<string></string>
-		<key>widgetClass</key>
-		<integer>1</integer>
-	</dict>
-	<dict>
-		<key>isWidget</key>
-		<true/>
-		<key>className</key>
-		<string>IUCollection</string>
-		<key>classImage</key>
-		<string>tool_collection</string>
-		<key>navImage</key>
-		<string>stack_collection</string>
-		<key>shortDesc</key>
-		<string>[Only for Django] for-loop for array object</string>
 		<key>longDesc</key>
 		<string></string>
 		<key>widgetClass</key>

@@ -197,6 +197,7 @@ function resizePageContentHeightEditor(){
 			copy.find('*').each(function(){
 				$(this).removeAttr('id');
 				$(this).addClass('collectioncopy');
+				$(this).css('opacity',0.5);
 			})
                                 
 			
