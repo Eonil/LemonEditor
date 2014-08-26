@@ -18,6 +18,8 @@
 #import "IUHeader.h"
 #import "IUImport.h"
 
+#import "IUResourceUtil.h"
+
 @implementation LMStackOutlineView
 
 - (void)keyDown:(NSEvent *)theEvent{
