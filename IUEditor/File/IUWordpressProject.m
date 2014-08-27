@@ -39,7 +39,7 @@
 
 - (id)initWithCreation:(NSDictionary *)options error:(NSError *__autoreleasing *)error{
     
-    _port = -1;
+    _port = 0;
     _documentRoot = [NSString stringWithFormat:@"~%@/wordpress", NSUserName()];
     _mqSizes = [NSMutableArray arrayWithArray:@[@(defaultFrameWidth), @320]];
     

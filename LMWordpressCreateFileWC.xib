@@ -28,7 +28,7 @@
                             <subviews>
                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iwd-zs-yIa">
                                     <rect key="frame" x="110" y="386" width="361" height="19"/>
-                                    <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="KxD-U4-v1z">
+                                    <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="KxD-U4-v1z">
                                         <font key="font" metaFont="smallSystem"/>
                                         <segments>
                                             <segment label="index.php"/>

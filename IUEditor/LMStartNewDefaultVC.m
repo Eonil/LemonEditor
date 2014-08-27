@@ -16,7 +16,8 @@
 
 @interface LMStartNewDefaultVC ()
 
-@property NSString *defaultProjectDir, *appName;
+@property (nonatomic) NSString *defaultProjectDir, *appName;
+@property (nonatomic) NSString *wholeName;
 
 
 @end
@@ -26,13 +27,12 @@
 - (void)performNext{
     [self.view.window close];
     
-    NSString *iuName = [_appName stringByAppendingPathExtension:@"iu"];
     
     NSDictionary *options = @{  IUProjectKeyGit: @(NO),
                                 IUProjectKeyHeroku: @(NO),
                                 IUProjectKeyType:@(IUProjectTypeDefault),
                                 IUProjectKeyAppName : _appName,
-                                IUProjectKeyIUFilePath : [_defaultProjectDir stringByAppendingPathComponent:iuName],
+                                IUProjectKeyIUFilePath : _wholeName,
                                 };
     
     [(IUProjectController *)[NSDocumentController sharedDocumentController] newDocument:self withOption:options];
@@ -60,6 +60,23 @@
 
 - (IBAction)performProjectDirSelect:(id)sender {
     self.defaultProjectDir = [[[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Default Project Directory"] path];
+}
+
+- (void)setDefaultProjectDir:(NSString *)defaultProjectDir{
+    [self willChangeValueForKey:@"wholeName"];
+    _defaultProjectDir = defaultProjectDir;
+    [self didChangeValueForKey:@"wholeName"];
+}
+
+- (void)setAppName:(NSString *)appName{
+    [self willChangeValueForKey:@"wholeName"];
+    _appName = appName;
+    [self didChangeValueForKey:@"wholeName"];
+}
+
+- (NSString *)wholeName{
+    NSString *iuName = [_appName stringByAppendingPathExtension:@"iu"];
+    return [_defaultProjectDir stringByAppendingPathComponent:iuName];
 }
 
 @end

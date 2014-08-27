@@ -32,6 +32,9 @@
     /* version control code */
     IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
     _port = [aDecoder decodeIntForKey:@"_port"];
+    if(_port ==0 ){
+        _port = 8000;
+    }
     if (IUEditorVersion < 1) {
         _buildPath = @"$IUFileDirectory/templates";
         _buildResourcePath = @"$IUFileDirectory/templates/resource";

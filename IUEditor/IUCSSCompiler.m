@@ -448,14 +448,10 @@
         [self updateCSSApperanceCode:code asIUBox:_iu viewport:viewport ];
 
         if ([_iu shouldCompileFontInfo]) {
-            [code setInsertingTarget:IUTargetBoth];
             [self updateCSSFontCode:code asIUBox:_iu viewport:viewport];
         }
         
-        [code setInsertingTarget:IUTargetBoth];
         [self updateCSSRadiousAndBorderCode:code asIUBox:_iu viewport:viewport];
-        
-        [code setInsertingIdentifier:_iu.cssHoverClass];
         [self updateCSSHoverCode:code asIUBox:_iu viewport:viewport];
      
     }
@@ -463,6 +459,8 @@
 
 - (void)updateCSSHoverCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
+
+    [code setInsertingIdentifier:_iu.cssHoverClass];
 
     if ([cssTagDict[IUCSSTagHoverBGImagePositionEnable] boolValue]) {
         [code insertTag:@"background-position-x" floatFromNumber:cssTagDict[IUCSSTagHoverBGImageX] unit:IUUnitPixel];
@@ -486,6 +484,8 @@
 
 - (void)updateCSSFontCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
+    
+    [code setInsertingTarget:IUTargetBoth];
     if (cssTagDict[IUCSSTagFontName] ) {
         NSString *fontFamily = [[LMFontController sharedFontController] cssForFontName:cssTagDict[IUCSSTagFontName]];
         if(fontFamily){
@@ -550,6 +550,8 @@
 - (void)updateCSSRadiousAndBorderCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
     BOOL isborder = NO;
+
+    [code setInsertingTarget:IUTargetBoth];
 
     if (cssTagDict[IUCSSTagBorderTopWidth]) {
         CGFloat width = [cssTagDict[IUCSSTagBorderTopWidth] floatValue];
