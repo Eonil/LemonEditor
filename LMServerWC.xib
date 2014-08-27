@@ -15,7 +15,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="400" height="476"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="400" height="476"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -118,36 +118,6 @@
                                         </binding>
                                     </connections>
                                 </textField>
-                                <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oMk-SE-gqI">
-                                    <rect key="frame" x="111" y="98" width="98" height="18"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="RLV-Ha-RVu"/>
-                                        <constraint firstAttribute="width" constant="98" id="Rtl-Ru-ihC"/>
-                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="98" id="YmD-gP-YqD"/>
-                                        <constraint firstAttribute="height" constant="18" id="vxf-5i-cD5"/>
-                                    </constraints>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="cellSize" width="47" height="18"/>
-                                    <size key="intercellSpacing" width="4" height="2"/>
-                                    <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="small" inset="2" id="gLV-Jq-JnQ">
-                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                        <font key="font" metaFont="smallSystem"/>
-                                    </buttonCell>
-                                    <cells>
-                                        <column>
-                                            <buttonCell type="radio" title="SFTP" imagePosition="left" alignment="left" controlSize="small" state="on" tag="1" inset="2" id="J1g-Ze-aOw">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="smallSystem"/>
-                                            </buttonCell>
-                                        </column>
-                                        <column>
-                                            <buttonCell type="radio" title="GIT" imagePosition="left" alignment="left" controlSize="small" inset="2" id="iIB-uu-xmN">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="smallSystem"/>
-                                            </buttonCell>
-                                        </column>
-                                    </cells>
-                                </matrix>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="e4s-YR-t7D">
                                     <rect key="frame" x="58" y="100" width="48" height="14"/>
                                     <constraints>
@@ -197,6 +167,38 @@
                                         </binding>
                                     </connections>
                                 </secureTextField>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uXQ-Bk-bEu">
+                                    <rect key="frame" x="170" y="100" width="143" height="14"/>
+                                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Git will be supported later" id="6ak-HY-LK5">
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <matrix verticalHuggingPriority="750" misplaced="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oMk-SE-gqI">
+                                    <rect key="frame" x="111" y="98" width="47" height="18"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="RLV-Ha-RVu"/>
+                                        <constraint firstAttribute="width" constant="98" id="Rtl-Ru-ihC"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="98" id="YmD-gP-YqD"/>
+                                        <constraint firstAttribute="height" constant="18" id="vxf-5i-cD5"/>
+                                    </constraints>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="cellSize" width="47" height="18"/>
+                                    <size key="intercellSpacing" width="4" height="2"/>
+                                    <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="small" inset="2" id="gLV-Jq-JnQ">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="smallSystem"/>
+                                    </buttonCell>
+                                    <cells>
+                                        <column>
+                                            <buttonCell type="radio" title="SFTP" imagePosition="left" alignment="left" controlSize="small" state="on" tag="1" inset="2" id="J1g-Ze-aOw">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="smallSystem"/>
+                                            </buttonCell>
+                                        </column>
+                                    </cells>
+                                </matrix>
                             </subviews>
                         </view>
                         <constraints>
@@ -460,7 +462,7 @@ DQ
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="139" y="161.5"/>
+            <point key="canvasLocation" x="139" y="161"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="0WG-OM-GNh"/>
     </objects>
