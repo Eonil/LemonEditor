@@ -22,19 +22,23 @@ function resizePageContentHeight(){
 
 function resizeCollection(){
 	$('.IUCollection').each(function(){
+		//find current count
 		var responsive = $(this).attr('responsive');
 		responsiveArray = eval(responsive);
 		count = $(this).attr('defaultItemCount');
 		viewportWidth = $(window).width();
+		var minWidth = 9999;
 		for (var index in responsiveArray){
 			dict = responsiveArray[index];
 			width = dict.width;
-			if (viewportWidth<width){
+			if (viewportWidth<width && minWidth > width){
 				count = dict.count;
+				minWidth = width;
 			}
-		}
-		widthStr = 1/count *100 + '%';
-		$(this).children().css('width', widthStr);
+		}		
+		//			var width  = 1/count *100;
+		var width = $(this).width()/count;
+		$(this).children().css('width', width.toFixed(0)+'px');
 	});
 }
 
@@ -93,15 +97,17 @@ function resizePageLinkSet(){
 }
 
 $(window).resize(function(){
-                 console.log("resize window : iuframe.js");
-                 resizePageContentHeight();
-                 resizeCollection();
-                 reframeCenter();
-				 resizePageLinkSet();
-                 });
+	console.log("resize window : iuframe.js");
+	resizePageContentHeight();
+	resizeCollection();
+	reframeCenter();
+	resizePageLinkSet();
+	relocateScrollAnimation();
+				 
+});
 
 $(document).ready(function(){
-                 console.log("ready : iuframe.js");
-                 });
+	console.log("ready : iuframe.js");
+});
 
 

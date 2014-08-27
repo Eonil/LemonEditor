@@ -212,27 +212,7 @@ function moveScrollAnimation(){
 	});
 }
 
-function resizeCollection(){
-	$('.IUCollection').each(function(){
-		//find current count
-		var responsive = $(this).attr('responsive');
-		responsiveArray = eval(responsive);
-		count = $(this).attr('defaultItemCount');
-		viewportWidth = $(window).width();
-		var minWidth = 9999;
-		for (var index in responsiveArray){
-			dict = responsiveArray[index];
-			width = dict.width;
-			if (viewportWidth<width && minWidth > width){
-				count = dict.count;
-				minWidth = width;
-			}
-		}		
-		//			var width  = 1/count *100;
-		var width = $(this).width()/count;
-		$(this).children().css('width', width.toFixed(0)+'px');
-	});
-}
+
 
 $(window).resize(function(){
 	resizeCollection();
