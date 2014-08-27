@@ -46,6 +46,7 @@
     [encoder encodeObject:_favicon forKey:@"_favicon"];
     [encoder encodeObject:_author forKey:@"_author"];
     [encoder encodeObject:_serverInfo forKey:@"serverInfo"];
+    [encoder encodeBool:_enableMinWidth forKey:@"_enableMinWidth"];
     [encoder encodeInt:1 forKey:@"IUEditorVersion"];
 }
 
@@ -71,6 +72,7 @@
         
         _favicon = [aDecoder decodeObjectForKey:@"_favicon"];
         _author = [aDecoder decodeObjectForKey:@"_author"];
+        _enableMinWidth = [aDecoder decodeBoolForKey:@"_enableMinWidth"];
         
         //version code
         if ([[_pageGroup.name lowercaseString] isEqualToString:@"pages"]){
@@ -164,6 +166,11 @@
     _serverInfo = [[IUServerInfo alloc] init];
     _serverInfo.localPath = [self path];
     
+    
+    _enableMinWidth = project.enableMinWidth;
+    _author = [project.author copy];
+    _favicon = [project.favicon copy];
+    
     // create build directory
     [[NSFileManager defaultManager] createDirectoryAtPath:self.absoluteBuildPath withIntermediateDirectories:YES attributes:nil error:nil];
 
@@ -233,6 +240,7 @@
     
     //    ReturnNilIfFalse([self save]);
     _serverInfo = [[IUServerInfo alloc] init];
+    _enableMinWidth = YES;
     
     // create build directory
     [[NSFileManager defaultManager] createDirectoryAtPath:self.absoluteBuildPath withIntermediateDirectories:YES attributes:nil error:nil];

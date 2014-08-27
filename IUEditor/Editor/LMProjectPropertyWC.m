@@ -22,7 +22,7 @@
 @property (weak) IBOutlet NSComboBox *faviconComboBox;
 @property (weak) IBOutlet NSTextField *authorTF;
 @property (weak) IBOutlet NSTextField *buildPathTF;
-
+@property (weak) IBOutlet NSButton *enableMinWidthCheckBox;
 
 //django
 @property (strong) IBOutlet NSView *djangoView;
@@ -58,6 +58,7 @@
     [_authorTF bind:NSValueBinding toObject:self withKeyPath:@"project.author" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_faviconComboBox bind:NSContentBinding toObject:self withKeyPath:@"project.resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
     [_faviconComboBox bind:NSValueBinding toObject:self withKeyPath:@"project.favicon" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_enableMinWidthCheckBox bind:NSValueBinding toObject:self withKeyPath:@"project.enableMinWidth" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
     
     //project build property

@@ -9,9 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 
-@interface LMHelpWC : NSWindowController 
+@interface LMHelpWC : NSWindowController <NSTableViewDelegate>
 
 + (LMHelpWC *)sharedHelpWC;
-- (void)showHelpDocumentWithKey:(NSString *)key;
+- (void)showFirstItem;
+
+- (void)showHelpWindowWithKey:(NSString *)key;
 - (void)showHelpWebURL:(NSURL*)url withTitle:(NSString*)title;
 @end

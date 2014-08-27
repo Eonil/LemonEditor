@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -12,6 +12,7 @@
                 <outlet property="djangoPortTF" destination="LzS-sL-Cbp" id="Bsb-UF-tWH"/>
                 <outlet property="djangoView" destination="ePI-hN-WNQ" id="8ZU-Ef-8Z9"/>
                 <outlet property="documentRootTF" destination="GEK-mR-Kkg" id="JVa-4f-6mZ"/>
+                <outlet property="enableMinWidthCheckBox" destination="8XN-IR-Jb1" id="BhW-Pq-66l"/>
                 <outlet property="faviconComboBox" destination="1VZ-aM-O4C" id="34T-NJ-4Ia"/>
                 <outlet property="heightConstraint" destination="UCe-6c-KbQ" id="8RB-a3-0SR"/>
                 <outlet property="tableV" destination="JR0-8f-Z8n" id="gX5-E4-a9L"/>
@@ -202,7 +203,7 @@
                 <constraint firstItem="1AM-3a-LTw" firstAttribute="leading" secondItem="ePI-hN-WNQ" secondAttribute="leading" constant="35" id="fR4-N5-piU"/>
                 <constraint firstItem="1AM-3a-LTw" firstAttribute="top" secondItem="ePI-hN-WNQ" secondAttribute="top" constant="8" id="xMF-IJ-4lc"/>
             </constraints>
-            <point key="canvasLocation" x="-76" y="571"/>
+            <point key="canvasLocation" x="-89" y="459"/>
         </customView>
         <customView id="iKw-Z6-Y5c" userLabel="WordpressView">
             <rect key="frame" x="0.0" y="0.0" width="400" height="97"/>
@@ -378,6 +379,13 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8XN-IR-Jb1">
+                                <rect key="frame" x="107" y="-5" width="117" height="18"/>
+                                <buttonCell key="cell" type="check" title="Enable min-width" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="uLY-QP-VXX">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                     </view>
                     <constraints>

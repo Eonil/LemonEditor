@@ -183,10 +183,6 @@
         NSAssert(0, @"not coded");
     }
     
-    //show tutorial if needed
-    if ([LMTutorialManager shouldShowTutorial:@"run"]) {
-        [[LMHelpWC sharedHelpWC] showHelpDocumentWithKey:@"RunningAProject"];
-    }
 }
 
 - (BOOL)runServer:(NSError **)error{

@@ -117,7 +117,7 @@
 }
 
 #pragma mark - keyPath
-//FIXME: (JDYANG) self.selection not working
+//REVIEW: self.selection not working (proxy multiple 전달 안됨)
 - (NSString *)pathForCSSTagWOUpdateCSS:(IUCSSTag)tag{
     return [@"self.controller.selection.css.assembledTagDictionaryWOUpdateCSS." stringByAppendingString:tag];
 }

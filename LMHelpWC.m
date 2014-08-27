@@ -36,27 +36,13 @@ static LMHelpWC *gHelpWC = nil;
     return gHelpWC;
 }
 
-- (void)showHelpWebURL:(NSURL*)url withTitle:(NSString *)title{
-    if (self.window == nil) {
-        [self window];
-    }
-
-    self.window.title = title;
-    
-    [_tabView selectTabViewItemAtIndex:1];
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [[self.webV mainFrame] loadRequest:request];
-    [self.window makeKeyAndOrderFront:nil];
-}
-
 
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
     if (self) {
         [self loadWindow];
-        NSString *pdfFilePath = [[NSBundle mainBundle] pathForResource:@"helpPdf" ofType:@"plist"];
+        NSString *pdfFilePath = [[NSBundle mainBundle] pathForResource:@"help" ofType:@"plist"];
         _pdfListDictionary = [NSDictionary dictionaryWithContentsOfFile:pdfFilePath];
     }
     return self;
@@ -98,40 +84,56 @@ static LMHelpWC *gHelpWC = nil;
     
 }
 
-- (void)showHelpPdfWindow{
-    //FIXME: select firstwindow
-}
-
-- (void)showHelpDocumentWithKey:(NSString *)key{
-   // NSString *currentKey = [_pdfListDictController.selectedObjects[0] key];
-    //TODO: selection tableView - manual is not pdf -> html
-    
-/*    if([key isEqualToString:currentKey] == NO){
-        NSDictionary *dict = [NSDictionary dictionaryWithObject:_pdfListDictionary[key] forKey:key];
-        [_pdfListDictController setSelectedObjects:@[dict]];
-    }
- */
-    
-    //pdf list
-    
+- (void)showHelpWebURL:(NSURL*)url withTitle:(NSString *)title{
     if (self.window == nil) {
         [self window];
     }
-
-    NSString *fileName = [_pdfListDictionary objectForKey:key][@"pdf"];
-    NSString *title= [_pdfListDictionary objectForKey:key][@"title"];
     
-    [self showHelpDocument:fileName title:title];
-
+    self.window.title = title;
+    
+    [_tabView selectTabViewItemAtIndex:1];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [[self.webV mainFrame] loadRequest:request];
     [self.window makeKeyAndOrderFront:nil];
+}
+
+
+- (void)showFirstItem{
+    [self showWindow:self];
+
+    //select firstItem
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+    [_pdfListTableView selectRowIndexes:indexSet byExtendingSelection:NO];
+}
+
+- (void)tableViewSelectionDidChange:(NSNotification *)aNotification{
+    NSString *key = [[_pdfListDictController selectedObjects][0] key];
+    [self showHelpWindowWithKey:key];
+}
+
+
+- (void)showHelpWindowWithKey:(NSString *)key{
+    [self showWindow:self];
+
+    NSString *type = [_pdfListDictionary objectForKey:key][@"type"];
+    
+    if([type isEqualToString:@"pdf"]){
+        
+        NSString *fileName = [_pdfListDictionary objectForKey:key][@"pdf"];
+        NSString *title= [_pdfListDictionary objectForKey:key][@"title"];
+        
+        [self showHelpDocument:fileName title:title];
+    }
+    else if([type isEqualToString:@"web"]){
+        NSString *path = [_pdfListDictionary objectForKey:key][@"web"];
+        NSString *title= [_pdfListDictionary objectForKey:key][@"title"];
+        
+        [self showHelpWebURL:[NSURL URLWithString:path] withTitle:title];
+    }
 
 }
-/*
-- (void)tableViewSelectionDidChange:(NSNotification *)notification{
-    NSString *key = [[_pdfListDictController selectedObjects][0] key];
-    [self showHelpDocumentWithKey:key];
-}
-*/
+
 
 #pragma mark -policy delegate
 
@@ -160,8 +162,17 @@ static LMHelpWC *gHelpWC = nil;
      */
     NSDictionary *actionDict = [actionInformation objectForKey:WebActionElementKey];
     if(actionDict){
-        [[NSWorkspace sharedWorkspace] openURL:actionDict[@"WebElementLinkURL"]];
-        [listener ignore];
+        NSURL *url = actionDict[@"WebElementLinkURL"];
+        //Review : 링크가 help window 에서 열리기 위해서는 여기에 추가.
+        if([[url host] isEqualToString:@"guide.iueditor.org"]){
+            [listener use];
+        }
+        else{
+            if(url){
+                [[NSWorkspace sharedWorkspace] openURL:actionDict[@"WebElementLinkURL"]];
+            }
+            [listener ignore];
+        }
     }
     else{
         [listener use];
@@ -172,6 +183,10 @@ static LMHelpWC *gHelpWC = nil;
 {
     NSDictionary *actionDict = [actionInformation objectForKey:WebActionElementKey];
     if(actionDict){
+        NSURL *url = actionDict[@"WebElementLinkURL"];
+        if(url){
+            [[NSWorkspace sharedWorkspace] openURL:actionDict[@"WebElementLinkURL"]];
+        }
         [listener ignore];
     }
     else{

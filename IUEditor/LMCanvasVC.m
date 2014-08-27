@@ -1125,6 +1125,8 @@
 }
 
 - (void)performRightClick:(NSString*)IUID withEvent:(NSEvent*)event{
+    
+    /*
     //make help menu
     NSMenu *menu = [[NSMenu alloc] init];
     NSMenuItem *helpItem = [[NSMenuItem alloc] init];
@@ -1159,10 +1161,7 @@
     
     //get
     [NSMenu popUpContextMenu:menu withEvent:event forView:self.view];
+     */
 }
 
-- (void)performHelp:(NSMenuItem *)sender{
-    helpWC = [LMHelpWC sharedHelpWC];
-    [helpWC showHelpDocumentWithKey:sender.representedObject];
-}
 @end

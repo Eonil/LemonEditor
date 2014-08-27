@@ -51,7 +51,7 @@
 
 - (IBAction)openInstallTutorial:(id)sender {
     LMHelpWC *hWC = [LMHelpWC sharedHelpWC];
-    [hWC showHelpDocumentWithKey:@"InstallingWordpress"];
+    [hWC showHelpWindowWithKey:@"InstallingWordpress"];
 }
 
 - (IBAction)copyWordpressFile:(id)sender {

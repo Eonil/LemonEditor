@@ -350,7 +350,7 @@
 		3D19E43D198A104300A50D35 /* LMPropertyIUMenuItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D19E43B198A104300A50D35 /* LMPropertyIUMenuItemVC.xib */; };
 		3D1BACC919330240004C554F /* IUText.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1BACC819330240004C554F /* IUText.m */; };
 		3D2E6B8E19640DED00AC7DE5 /* SelectionBorderLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2E6B8D19640DED00AC7DE5 /* SelectionBorderLayer.m */; };
-		3D2E6BA11965212700AC7DE5 /* helpPdf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E6BA01965212700AC7DE5 /* helpPdf.plist */; };
+		3D2E6BA11965212700AC7DE5 /* help.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E6BA01965212700AC7DE5 /* help.plist */; };
 		3D2E6BA919653F3A00AC7DE5 /* EventFrame.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E6BA419653F3A00AC7DE5 /* EventFrame.mp4 */; };
 		3D2E6BAA19653F3A00AC7DE5 /* EventMouseOn.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E6BA519653F3A00AC7DE5 /* EventMouseOn.mp4 */; };
 		3D2E6BAB19653F3A00AC7DE5 /* EventScrollAnimation.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E6BA619653F3A00AC7DE5 /* EventScrollAnimation.mp4 */; };
@@ -1306,7 +1306,7 @@
 		3D1BACC819330240004C554F /* IUText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUText.m; path = IU/IUText.m; sourceTree = "<group>"; };
 		3D2E6B8C19640DED00AC7DE5 /* SelectionBorderLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionBorderLayer.h; path = Editor/SelectionBorderLayer.h; sourceTree = "<group>"; };
 		3D2E6B8D19640DED00AC7DE5 /* SelectionBorderLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectionBorderLayer.m; path = Editor/SelectionBorderLayer.m; sourceTree = "<group>"; };
-		3D2E6BA01965212700AC7DE5 /* helpPdf.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = helpPdf.plist; path = IUEditor/Editor/Help/helpPdf.plist; sourceTree = "<group>"; };
+		3D2E6BA01965212700AC7DE5 /* help.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = help.plist; path = IUEditor/Editor/Help/help.plist; sourceTree = "<group>"; };
 		3D2E6BA419653F3A00AC7DE5 /* EventFrame.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = EventFrame.mp4; sourceTree = "<group>"; };
 		3D2E6BA519653F3A00AC7DE5 /* EventMouseOn.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = EventMouseOn.mp4; sourceTree = "<group>"; };
 		3D2E6BA619653F3A00AC7DE5 /* EventScrollAnimation.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = EventScrollAnimation.mp4; sourceTree = "<group>"; };
@@ -3612,7 +3612,7 @@
 		692C4DC01966A04300EAB2E7 /* ManualPages */ = {
 			isa = PBXGroup;
 			children = (
-				3D2E6BA01965212700AC7DE5 /* helpPdf.plist */,
+				3D2E6BA01965212700AC7DE5 /* help.plist */,
 				69D1000D19970D00003F8772 /* InstallingWordpress.pages */,
 				69D1000F19970D32003F8772 /* InstallingWordpress.pdf */,
 				06D5A9E219A4A1FA00EB45E5 /* positionProperty.pdf */,
@@ -4374,7 +4374,7 @@
 				262D4A991947FAF0006F5FBE /* border_icon_03@2x.png in Resources */,
 				3DED26B91900F450001A1D67 /* panel_left_off.png in Resources */,
 				267CB19B190F93370079E565 /* tab_close.png in Resources */,
-				3D2E6BA11965212700AC7DE5 /* helpPdf.plist in Resources */,
+				3D2E6BA11965212700AC7DE5 /* help.plist in Resources */,
 				3DA6F30F1963B810004DF0AA /* LMHelpVideoPopoverVC.xib in Resources */,
 				690A409618E1645B00095263 /* LMWidgetLibraryVC.xib in Resources */,
 				CBA878061963D3CF00075294 /* Tutorial05_kr.png in Resources */,

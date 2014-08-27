@@ -113,7 +113,7 @@ static NSString *IUClassGroupName = @"class";
  name , path are set by IUProjectDocument
  */
 @property   NSString    *name, *path, *author, *favicon;
-
+@property   BOOL enableMinWidth;
 /**
  Users can change build Directory.
  build directory's default value : self.path의 directory

@@ -1557,45 +1557,21 @@
     //remove default size
     NSInteger largestWidth = [[mqSizeArray objectAtIndex:0] integerValue];
     [mqSizeArray removeObjectAtIndex:0];
+    [mqSizeArray insertObject:@(IUCSSDefaultViewPort) atIndex:0];
 
     JDCode *code = [[JDCode alloc] init];
+    NSInteger minCount = mqSizeArray.count-1;
     
-    //make default css code
-    if(_rule == IUCompileRuleWordpress){
-        [code addCodeLine:@"<style id=default>"];
-        [code increaseIndentLevelForEdit];
-    }
-    
-    NSDictionary *cssDict = [[cssCompiler cssCodeForIU:sheet] stringTagDictionaryWithIdentifierForOutputViewport:IUCSSDefaultViewPort];
-    
-    for (NSString *identifier in cssDict) {
-        [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
-    }
-    NSSet *districtChildren = [NSSet setWithArray:sheet.allChildren];
-    
-    for (IUBox *obj in districtChildren) {
-            NSDictionary *cssDict = [[cssCompiler cssCodeForIU:obj] stringTagDictionaryWithIdentifierForOutputViewport:IUCSSDefaultViewPort];
-            for (NSString *identifier in cssDict) {
-                [code addCodeLineWithFormat:@"%@ {%@}", identifier, cssDict[identifier]];
-        }
-    }
-    
-    if(_rule == IUCompileRuleWordpress){
-        [code decreaseIndentLevelForEdit];
-        [code addCodeLine:@"</style>"];
-    }
-    
-    [code addNewLine];
-    
-#pragma mark extract MQ css
-    //mediaQuery css
     for(int count=0; count<mqSizeArray.count; count++){
         int size = [[mqSizeArray objectAtIndex:count] intValue];
         
         //REVIEW: word press rule은 header에 붙임, 나머지는 .css파일로 따로 뽑아냄.
         if(_rule == IUCompileRuleWordpress){
-            //<style type="text/css" media="screen and (max-width:400px)" id="style400">
-            if(count < mqSizeArray.count-1){
+            
+            if(size == IUCSSDefaultViewPort){
+                [code addCodeLine:@"<style id=default>"];
+            }
+            else if(count < mqSizeArray.count-1){
                 [code addCodeWithFormat:@"<style type=\"text/css\" media ='screen and (min-width:%dpx) and (max-width:%dpx)' id='style%d'>" , size, largestWidth-1, size];
                 largestWidth = size;
             }
@@ -1605,16 +1581,30 @@
             }
         }
         else{
-            //build는 css파일로 따로 뽑아줌
-            if(count < mqSizeArray.count-1){
-                [code addCodeWithFormat:@"@media screen and (min-width:%dpx) and (max-width:%dpx){" , size, largestWidth-1];
-                largestWidth = size;
+            if(size != IUCSSDefaultViewPort){
+                //build는 css파일로 따로 뽑아줌
+                if(count < mqSizeArray.count-1){
+                    [code addCodeWithFormat:@"@media screen and (min-width:%dpx) and (max-width:%dpx){" , size, largestWidth-1];
+                    largestWidth = size;
+                }
+                else{
+                    [code addCodeWithFormat:@"@media screen and (max-width:%dpx){" , largestWidth-1];
+                }
+            }
+        }
+        //smallist size
+        if(count==minCount && sheet.project.enableMinWidth){
+            [code increaseIndentLevelForEdit];
+            NSInteger minWidth;
+            if(size == IUCSSDefaultViewPort){
+                minWidth = largestWidth;
             }
             else{
-                [code addCodeWithFormat:@"@media screen and (max-width:%dpx){" , largestWidth-1];
-                
-                
+                minWidth = size;
             }
+            [code addCodeLineWithFormat:@"body{ min-width:%ldpx; }", minWidth];
+            [code decreaseIndentLevelForEdit];
+
         }
         
         if(size < IUMobileSize && sheet.allChildren ){
@@ -1652,7 +1642,7 @@
         if(_rule == IUCompileRuleWordpress){
             [code addCodeLine:@"</style>"];
         }
-        else{
+        else if(size != IUCSSDefaultViewPort){
             [code addCodeLine:@"}"];
         }
         

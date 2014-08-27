@@ -145,19 +145,21 @@
 
 - (IBAction)performHelp:(NSMenuItem *)sender{
     LMHelpWC *hWC = [LMHelpWC sharedHelpWC];
+
     switch (sender.tag) {
-        case 0://Documentation
+        case 0:
+            //Documentation
+            [hWC showFirstItem];
+            break;
+        case 1:
+            //Release Notes
             
             break;
-        case 1://Release Notes
-            
-            break;
-        case 2:{
+        case 2:
             //Tutorial
-            NSString *tutorial = @"http://guide.iueditor.org";
-            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:tutorial]];
+            [hWC showHelpWindowWithKey:@"tutorial"];
             break;
-        }
+        
         case 3:{
             //IUEditor Homepage
             NSString *tutorial = @"http://www.iueditor.org";

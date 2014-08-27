@@ -138,12 +138,6 @@
 }
 
 
-- (IBAction)helpTracing:(id)sender {
-    LMHelpWC *hWC = [LMHelpWC sharedHelpWC];
-    [hWC showHelpDocumentWithKey:@"tracing"];
-}
-
-
 #pragma mark - bottom tool
 
 
