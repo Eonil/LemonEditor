@@ -21,6 +21,9 @@
     WPSiteTitle *title = [[WPSiteTitle alloc] initWithProject:self.project options:nil];
     title.htmlID = @"SiteTitle";
     title.name = @"SiteTitle";
+    [title.css setValue:@(60) forTag:IUCSSTagPixelY];
+    title.enableCenter = YES;
+
     [self.header addIU:title error:nil];
     [self.project.identifierManager registerIUs:@[title]];
     
