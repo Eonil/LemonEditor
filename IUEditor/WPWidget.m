@@ -24,6 +24,13 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone{
+    WPWidget *widget = [super copyWithZone:zone];
+    widget.titleWidget = widget.children[0];
+    widget.bodyWidget = widget.children[1];
+    return widget;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     [aDecoder decodeToObject:self withProperties:[WPWidget properties]];
