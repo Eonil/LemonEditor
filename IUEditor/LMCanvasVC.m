@@ -624,16 +624,18 @@
 
 -(void)IUClassIdentifier:(NSString*)identifier CSSUpdated:(NSString*)css{
     
-    if([identifier containsString:@":hover"]){
-        [self updateHoverCSS:css identifier:identifier];
-    }
-    else{
-        [self updateCSS:css selector:identifier];
-    }
-    
-    if([self isSheetHeightChanged:identifier]){
-        //CLASS에서 WEBCANVASVIEW의 높이 변화를 위해서
-        [self updateSheetHeight];
+    if([self isUpdateCSSEnabled]){
+        if([identifier containsString:@":hover"]){
+            [self updateHoverCSS:css identifier:identifier];
+        }
+        else{
+            [self updateCSS:css selector:identifier];
+        }
+        
+        if([self isSheetHeightChanged:identifier]){
+            //CLASS에서 WEBCANVASVIEW의 높이 변화를 위해서
+            [self updateSheetHeight];
+        }
     }
    
 }

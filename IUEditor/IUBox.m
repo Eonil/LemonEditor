@@ -546,27 +546,26 @@
             }
         }
         
-        if([self.delegate isUpdateCSSEnabled]){    
-            IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
-            NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editWidth];
-            for (NSString *identifier in dictionaryWithIdentifier) {
-                [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];
-            }
-            
-            
-            //Review : sheet css로 들어가는 id 들은 없어지면, 지워줘야함.
-            NSMutableArray *removedIdentifier = [NSMutableArray arrayWithArray:[self cssIdentifierArray]];
-            [removedIdentifier removeObjectsInArray:[dictionaryWithIdentifier allKeys]];
-            
-            for(NSString *identifier in removedIdentifier){
-                if([identifier containsString:@"hover"]){
-                    [self.delegate removeCSSTextInDefaultSheetWithIdentifier:identifier];
-                }
-            }
-            
-            
-            [self.delegate updateJS];
+        IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
+        NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editWidth];
+        for (NSString *identifier in dictionaryWithIdentifier) {
+            [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];
         }
+        
+        
+        //Review : sheet css로 들어가는 id 들은 없어지면, 지워줘야함.
+        NSMutableArray *removedIdentifier = [NSMutableArray arrayWithArray:[self cssIdentifierArray]];
+        [removedIdentifier removeObjectsInArray:[dictionaryWithIdentifier allKeys]];
+        
+        for(NSString *identifier in removedIdentifier){
+            if([identifier containsString:@"hover"]){
+                [self.delegate removeCSSTextInDefaultSheetWithIdentifier:identifier];
+            }
+        }
+        
+        
+        [self.delegate updateJS];
+        
     }
 }
 
