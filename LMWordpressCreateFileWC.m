@@ -77,7 +77,6 @@
 
 - (IBAction)create:(id)sender{
     NSAssert(self.project && self.sheetController, @"not initialized");
-    //FIXME: ?
     NSString *fileName = self.selectedFileName;
     if ([fileName isEqualToString:@"404"]) {
         fileName = @"_404";

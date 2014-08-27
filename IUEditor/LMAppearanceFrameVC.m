@@ -265,7 +265,6 @@
     }
 }
 
-//FIXME: editor js modify
 - (void)checkForIUPageContent{
     BOOL isPageContentChildren = NO;
     for (IUBox *iu in self.controller.selectedObjects) {

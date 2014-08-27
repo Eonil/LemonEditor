@@ -8,9 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface LMHerokuWC : NSWindowController
+@interface LMHerokuWC : NSWindowController <NSWindowDelegate>
 
 - (IBAction)sync:(id)sender;
 - (void)setGitRepoPath:(NSString*)path;
 - (NSString*)gitRepoPath;
+- (void)willBeginSheet:(NSNotification *)notification;
 @end

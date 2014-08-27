@@ -66,8 +66,6 @@
     self = [super initWithWindow:window];
     if (self) {
         herokuUtil = [[JDHerokuUtil alloc] init];
-//        self.herokuLogMessage = [NSMutableString string];
-        // Initialization code here.
     }
     return self;
 }
@@ -75,13 +73,8 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    // check heroku login
-    
-    [self rearrangeView];
     windowLoaded = YES;
 }
-
-
 
 - (void)setGitRepoPath:(NSString *)path{
     _gitRepoPath = [path copy];
@@ -102,10 +95,8 @@
     return _gitRepoPath;
 }
 
-//FIXME: 호출될때마다 불리게.
-- (void)showWindow:(id)sender{
+- (void)willBeginSheet:(NSNotification *)notification{
     [self rearrangeView];
-    [super showWindow:sender];
 }
 
 - (void)rearrangeView{

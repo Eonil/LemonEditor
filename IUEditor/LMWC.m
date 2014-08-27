@@ -542,6 +542,7 @@
         [serverWC setNotificationSender:self.window];
         [serverWC setProject:_project];
     }
+    
     [self.window beginSheet:serverWC.window completionHandler:^(NSModalResponse returnCode) {
         //do nothing
     }];
@@ -554,9 +555,17 @@
         NSString *absoluteBuildPath = [_project absoluteBuildPath];
         [herokuWC setGitRepoPath:absoluteBuildPath];
     }
+    
     [self.window beginSheet:herokuWC.window completionHandler:^(NSModalResponse returnCode) {
         //do nothing
     }];
+    
+}
+
+- (void)windowWillBeginSheet:(NSNotification *)notification{
+    if(herokuWC){
+        [herokuWC willBeginSheet:notification];
+    }
 }
 
 - (IBAction)cleanBuild:(id)sender{
