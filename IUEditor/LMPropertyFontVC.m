@@ -45,7 +45,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        currentFontName = @"Arial";
+        currentFontName = @"Helvetica";
         currentFontSize = 12;
         self.fontDefaultSizes = @[@(6), @(8), @(9), @(10), @(11), @(12),
                                   @(14), @(18), @(21), @(24), @(30), @(36), @(48), @(60), @(72)];
@@ -232,14 +232,24 @@
             [_fontStyleB setEnabled:NO];
         }
         
-        
+        //set current value
+        for(IUBox *box in self.controller.selectedObjects){
+            NSString *fontName = [box.css valueByStepForTag:IUCSSTagFontName forViewport:box.css.editWidth];
+            if(fontName == nil){
+                fontName = currentFontName;
+                [self setValue:currentFontName forCSSTag:IUCSSTagFontName];
+            }
+            
+            NSString *fontSize = [box.css valueByStepForTag:IUCSSTagFontSize forViewport:box.css.editWidth];
+            if(fontSize == nil){
+                [self setValue:@(currentFontSize) forCSSTag:IUCSSTagFontSize];
+            }
+        }
         
         //set font name
+       
         NSString *iuFontName = [self valueForCSSTag:IUCSSTagFontName];
-        if(iuFontName == nil){
-            iuFontName = currentFontName;
-            [self setValue:currentFontName forCSSTag:IUCSSTagFontName];
-        }
+
         if(iuFontName == NSMultipleValuesMarker){
             NSString *placeholder = [NSString stringWithValueMarker:NSMultipleValuesMarker];
             [[_fontB cell] setPlaceholderString:placeholder];
@@ -252,11 +262,7 @@
         
         
         //set Font size
-        if([self valueForCSSTag:IUCSSTagFontSize] == nil){
-            [self setValue:@(currentFontSize) forCSSTag:IUCSSTagFontSize];
-        }
-        
-        else if([self valueForCSSTag:IUCSSTagFontSize] == NSMultipleValuesMarker){
+        if([self valueForCSSTag:IUCSSTagFontSize] == NSMultipleValuesMarker){
             NSString *placeholder = [NSString stringWithValueMarker:NSMultipleValuesMarker];
             [[_fontSizeComboBox cell] setPlaceholderString:placeholder];
             [_fontSizeComboBox setStringValue:@""];

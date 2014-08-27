@@ -160,8 +160,6 @@
         //font-type
         [_css setValue:@(1.0) forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
         [_css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
-        [_css setValue:@(12) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
-        [_css setValue:@"Helvetica" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
         
         changedCSSWidths = [NSMutableSet set];
         
