@@ -25,6 +25,7 @@
 @property (weak) IBOutlet NSButton *listB;
 @property (weak) IBOutlet NSButton *iconB;
 
+@property (weak) IBOutlet NSTextField *wpDisableTF;
 
 //select widget
 @property (weak) IBOutlet NSMatrix *widgetTabMatrix;

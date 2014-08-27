@@ -245,7 +245,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="uLh-jb-tV9" userLabel="simple">
+                                    <tabView misplaced="YES" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="uLh-jb-tV9" userLabel="simple">
                                         <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
