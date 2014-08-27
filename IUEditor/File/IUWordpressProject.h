@@ -14,4 +14,7 @@
 @property (nonatomic) NSInteger port;
 @property  NSString *documentRoot;
 
+//theme meta data
+@property NSString *uri, *tags, *version, *themeDescription;
+
 @end

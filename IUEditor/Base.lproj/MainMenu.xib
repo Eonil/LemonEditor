@@ -208,9 +208,6 @@
                             </menuItem>
                             <menuItem title="Release Notes" tag="1" enabled="NO" id="8vt-Pq-NBN">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="performHelp:" target="494" id="rVw-q3-ojT"/>
-                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="cv6-XT-ZVA"/>
                             <menuItem title="Tutorial (Web)" tag="2" id="jHa-Jg-mkb">

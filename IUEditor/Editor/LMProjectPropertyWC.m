@@ -32,7 +32,10 @@
 @property (strong) IBOutlet NSView *wordpressView;
 @property (weak) IBOutlet NSTextField *wordPortTF;
 @property (weak) IBOutlet NSTextField *documentRootTF;
-
+@property (weak) IBOutlet NSTextField *uriTF;
+@property (weak) IBOutlet NSTextField *tagTF;
+@property (weak) IBOutlet NSTextField *versionTF;
+@property (unsafe_unretained) IBOutlet NSTextView *themeDescTV;
 
 @end
 
@@ -77,6 +80,13 @@
         
         [_wordPortTF bind:NSValueBinding toObject:self withKeyPath:@"project.port" options:IUBindingDictNumberAndNotRaisesApplicable];
         [_documentRootTF bind:NSValueBinding toObject:self withKeyPath:@"project.documentRoot" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+        
+        [_uriTF bind:NSValueBinding toObject:self withKeyPath:@"project.uri" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+        [_tagTF bind:NSValueBinding toObject:self withKeyPath:@"project.tags" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+        [_versionTF bind:NSValueBinding toObject:self withKeyPath:@"project.version" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+
+        [_themeDescTV bind:NSValueBinding toObject:self withKeyPath:@"project.themeDescription" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+
     }
     
     [self setTableHeight];

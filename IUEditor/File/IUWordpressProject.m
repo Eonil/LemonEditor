@@ -24,6 +24,13 @@
     self = [super initWithCoder:aDecoder];
     _port = [aDecoder decodeIntForKey:@"_port"];
     _documentRoot = [aDecoder decodeObjectForKey:@"_documentRoot"];
+    
+    //theme meta property
+    _uri = [aDecoder decodeObjectForKey:@"_uri"];
+    _tags = [aDecoder decodeObjectForKey:@"_tags"];
+    _version = [aDecoder decodeObjectForKey:@"_version"];
+    _themeDescription = [aDecoder decodeObjectForKey:@"_themeDescription"];
+    
     return self;
 }
 
@@ -31,6 +38,12 @@
     [super encodeWithCoder:encoder];
     [encoder encodeInteger:_port forKey:@"_port"];
     [encoder encodeObject:_documentRoot forKey:@"_documentRoot"];
+    
+    [encoder encodeObject:_uri forKey:@"_uri"];
+    [encoder encodeObject:_tags forKey:@"_tags"];
+    [encoder encodeObject:_version forKey:@"_version"];
+    [encoder encodeObject:_themeDescription forKey:@"_themeDescription"];
+
 }
 
 - (BOOL)runnable{
@@ -123,8 +136,14 @@
     BOOL result = [super build:error];
     if (result) {
         NSString *path = [self absoluteBuildPath];
-        NSString *command = [NSString stringWithFormat:@"touch %@", [path stringByAppendingPathComponent:@"style.css"]];
-        [JDShellUtil execute:command];
+
+        /* style.css : metainfo */
+        JDCode *metaCode = [self.compiler wordpressMetaDataSource:self];
+        NSString *stylePath = [[path stringByAppendingPathComponent:@"style"] stringByAppendingPathExtension:@"css"];
+        [[NSFileManager defaultManager] removeItemAtPath:stylePath error:nil];
+        if ([metaCode.string writeToFile:stylePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
+            NSAssert(0, @"write fail");
+        }
         
         /* build functions.php */
         NSString *functionPath = [[NSBundle mainBundle] pathForResource:@"functions" ofType:@"php"];

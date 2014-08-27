@@ -13,12 +13,14 @@
 #import "JDCode.h"
 #import "IUResourceManager.h"
 
+
 @class IUCSSCode;
 
 static NSString * IUCompilerTagOption = @"tag";
 
 @class IUSheet;
 @class IUResourceManager;
+@class IUWordpressProject;
 
 typedef enum _IUCompileRule{
     IUCompileRuleDefault,
@@ -31,6 +33,8 @@ typedef enum _IUCompileRule{
 
 @property (weak, nonatomic) IUResourceManager *resourceManager;
 @property (nonatomic) IUCompileRule    rule;
+//meta source
+- (JDCode *)wordpressMetaDataSource:(IUWordpressProject *)project;
 
 //build source
 - (NSString *)outputCSSSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray;
