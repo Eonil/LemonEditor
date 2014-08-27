@@ -230,6 +230,35 @@
         <key>projectPackageFile</key>
         <string>portfolio.zip</string>
     </dict>
+    <dict>
+        <key>feature</key>
+        <string>Wordpress, Responsive</string>
+        <key>isReady</key>
+        <true/>
+        <key>thumbnail</key>
+        <string>wp_thumbnail</string>
+        <key>name</key>
+        <string>Blog</string>
+        <key>fileName</key>
+        <string>bloh</string>
+        <key>type</key>
+        <real>0</real>
+        <key>desc</key>
+        <string>Wordpress blog theme</string>
+        <key>pageSize</key>
+        <string>960 / 768 / 320 (Support PC, Tablet, Mobile)</string>
+        <key>previewImages</key>
+        <array>
+            <string>wpblog_pc_01.png</string>
+            <string>wpblog_pc_02.png</string>
+            <string>wpblog_tablet_01.png</string>
+            <string>wpblog_tablet_02.png</string>
+            <string>wpblog_mobile_01.png</string>
+            <string>wpblog_mobile_02.png</string>
+        </array>
+        <key>projectPackageFile</key>
+        <string>blog.zip</string>
+    </dict>
 
 </array>
 </plist>
