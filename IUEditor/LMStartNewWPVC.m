@@ -85,9 +85,7 @@
 }
 
 - (void)show{
-    NSAssert(_parentVC, @"");
     NSAssert(_nextB, @"");
-    NSAssert(_prevB, @"");
     NSAssert(_nextB != _prevB, @"");
     
     [_nextB setEnabled:YES];

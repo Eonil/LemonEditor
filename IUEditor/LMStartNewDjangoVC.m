@@ -80,7 +80,7 @@
 
 - (void)show{
     NSAssert(_nextB, @"");
-    NSAssert(_prevB, @"");
+//    NSAssert(_prevB, @"");
     
     _nextB.target = self;
     _prevB.target = self;

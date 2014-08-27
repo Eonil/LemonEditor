@@ -32,7 +32,7 @@
                                 IUProjectKeyHeroku: @(NO),
                                 IUProjectKeyType:@(IUProjectTypeDefault),
                                 IUProjectKeyAppName : _appName,
-                                IUProjectKeyIUFilePath : _wholeName,
+                                IUProjectKeyIUFilePath : self.wholeName,
                                 };
     
     [(IUProjectController *)[NSDocumentController sharedDocumentController] newDocument:self withOption:options];
@@ -44,9 +44,7 @@
 }
 
 - (void)show{
-    NSAssert(_parentVC, @"");
     NSAssert(_nextB, @"");
-    NSAssert(_prevB, @"");
     NSAssert(_nextB != _prevB, @"");
     
     [_nextB setEnabled:YES];
