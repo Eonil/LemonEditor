@@ -124,7 +124,7 @@
         _css.delegate = self;
         _event = [[IUEvent alloc] init];
         _m_children = [NSMutableArray array];
-        _lineHeightAuto = NO;
+        _lineHeightAuto = YES;
         
         _overflowType = IUOverflowTypeHidden;
         
