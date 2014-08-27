@@ -14,11 +14,10 @@
     self = [super initWithProject:project options:options];
     [self.undoManager disableUndoRegistration];
     
-    [self.css setValue:@(60) forTag:IUCSSTagPixelY];
     [self.css setValue:@(300) forTag:IUCSSTagPixelWidth];
     [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css eradicateTag:IUCSSTagBGColor];
-    self.enableCenter = YES;
+    
     
     [self.css setValue:@(30) forTag:IUCSSTagFontSize];
     [self.css setValue:@(1.5) forTag:IUCSSTagLineHeight];
