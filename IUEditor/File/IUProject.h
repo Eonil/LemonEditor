@@ -33,7 +33,7 @@ static NSString * IUProjectKeyGit = @"git";
 static NSString * IUProjectKeyHeroku = @"heroku";
 
 //project.path : /~/~/abcd.iu
-static NSString * IUProjectKeyIUFilePath = @"projectPath";
+static NSString * IUProjectKeyIUFilePath = @"iuFilePath";
 
 //appname : abcd
 static NSString * IUProjectKeyAppName = @"appName";
