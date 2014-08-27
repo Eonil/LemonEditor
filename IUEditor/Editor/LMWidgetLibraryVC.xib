@@ -245,8 +245,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <tabView misplaced="YES" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="uLh-jb-tV9" userLabel="simple">
-                                        <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
+                                    <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="uLh-jb-tV9" userLabel="simple">
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="Tab" identifier="1" id="t2D-Mm-F3S" userLabel="list_simple">
@@ -257,9 +257,9 @@
                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="9QO-nv-ssd" userLabel="CollectionView">
                                                             <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                             <subviews>
-                                                                <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsW-LS-gZG">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
-                                                                    <clipView key="contentView" misplaced="YES" copiesOnScroll="NO" id="bCG-sx-bTC">
+                                                                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsW-LS-gZG">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
+                                                                    <clipView key="contentView" copiesOnScroll="NO" id="bCG-sx-bTC">
                                                                         <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -549,8 +549,8 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y79-Et-mvV" userLabel="CollectionView">
-                                                            <rect key="frame" x="0.0" y="0.0" width="259" height="348"/>
+                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Y79-Et-mvV" userLabel="CollectionView">
+                                                            <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                             <subviews>
                                                                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8P0-1Z-CSb">
                                                                     <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
@@ -613,8 +613,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <tabView misplaced="YES" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Lt0-do-8tU" userLabel="WP">
-                                        <rect key="frame" x="0.0" y="300" width="260" height="48"/>
+                                    <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Lt0-do-8tU" userLabel="WP">
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="Tab" identifier="1" id="n6u-UK-GCt" userLabel="list_WP">
@@ -622,12 +622,12 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EJw-Y6-hzU" userLabel="CollectionView">
-                                                            <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
+                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="EJw-Y6-hzU" userLabel="CollectionView">
+                                                            <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                             <subviews>
-                                                                <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vc7-jD-GEn">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="48"/>
-                                                                    <clipView key="contentView" misplaced="YES" copiesOnScroll="NO" id="jsM-Mi-oAN">
+                                                                <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vc7-jD-GEn">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
+                                                                    <clipView key="contentView" copiesOnScroll="NO" id="jsM-Mi-oAN">
                                                                         <rect key="frame" x="0.0" y="0.0" width="260" height="348"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
@@ -725,14 +725,6 @@
                                             </tabViewItem>
                                         </tabViewItems>
                                     </tabView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ar1-jt-2gf">
-                                        <rect key="frame" x="20" y="200" width="240" height="50"/>
-                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Sorry, Wordpress Widgets are only enabled at Wordpress Project Type" id="08n-Qj-Ec9">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Lt0-do-8tU" firstAttribute="leading" secondItem="a32-aN-yBs" secondAttribute="leading" id="D1O-Fy-4ib"/>

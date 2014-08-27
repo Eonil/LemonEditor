@@ -93,11 +93,12 @@
 }
 
 - (void)awakeFromNib{
+    if(_project){
+        if(_project.projectType != IUProjectTypeWordpress){
+            [_wpButtonCell setEnabled:NO];
+        }
+    }
 }
-
-
-
-
 
 #pragma mark collectionview -drag
 - (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard{
