@@ -102,6 +102,10 @@
     
 }
 
+- (void)prepareDealloc{
+    [_leftImageComboBox unbind:NSContentBinding];
+    [_rightImageComboBox unbind:NSContentBinding];
+}
 
 
 #pragma mark outlineview

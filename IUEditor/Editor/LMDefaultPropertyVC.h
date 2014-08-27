@@ -14,6 +14,8 @@
 @property (nonatomic, weak) IUController      *controller;
 @property (weak) id selection;
 
+//dealloc
+- (void)prepareDealloc;
 
 //binding
 - (void)outlet:(id)outlet bind:(NSString *)binding cssTag:(IUCSSTag)tag;

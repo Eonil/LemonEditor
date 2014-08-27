@@ -26,6 +26,9 @@
 - (void)awakeFromNib{
     
 }
+- (void)prepareDealloc{
+    
+}
 
 - (void)setController:(IUController *)controller{
     _controller = controller;

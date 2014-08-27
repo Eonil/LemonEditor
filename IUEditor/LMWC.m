@@ -255,6 +255,7 @@
     [canvasVC prepareDealloc];
     [commandVC prepareDealloc];
     [resourceVC prepareDealloc];
+    [iuInspectorVC prepareDealloc];
 }
 
 

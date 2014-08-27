@@ -251,6 +251,11 @@
     [JDLogUtil log:IULogDealloc string:@"LMIUPropertyVC"];
     [_controller removeObserver:self forKeyPath:@"selectedObjects"];
 }
+- (void)prepareDealloc{
+    [propertyIUCarouselVC prepareDealloc];
+    [propertyIUMovieVC prepareDealloc];
+    [propertyIUGoogleMapVC prepareDealloc];
+}
 
 - (void)setResourceManager:(IUResourceManager *)resourceManager{
     _resourceManager = resourceManager;

@@ -570,9 +570,6 @@
     
 }
 
-- (void)runCSSJS{
-}
-
 
 #pragma mark -
 #pragma mark CSS

@@ -21,6 +21,7 @@
 
 - (void)setProject:(IUProject*)project;
 - (void)setFocusForDoubleClickAction;
+- (void)prepareDealloc;
 
 @property (nonatomic) IUController *controller;
 @property (nonatomic) IUResourceManager     *resourceManager;

@@ -74,7 +74,9 @@
     [self outlet:_poiColor bind:NSValueBinding property:@"poi"];
      
 }
-
+- (void)prepareDealloc{
+    [_markerIconComboBox unbind:NSContentBinding];
+}
 #pragma mark - combobox
 
 - (void)controlTextDidChange:(NSNotification *)obj{
