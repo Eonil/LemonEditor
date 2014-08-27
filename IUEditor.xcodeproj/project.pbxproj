@@ -360,6 +360,8 @@
 		3D2E6BB319653F5800AC7DE5 /* IUImport.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E6BAF19653F5800AC7DE5 /* IUImport.mp4 */; };
 		3D2E6BB419653F5800AC7DE5 /* IUResponsive.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E6BB019653F5800AC7DE5 /* IUResponsive.mp4 */; };
 		3D2E6BB519653F5800AC7DE5 /* IUTransition.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E6BB119653F5800AC7DE5 /* IUTransition.mp4 */; };
+		3D2FE76A19AD803F0086E0AB /* LMPropertyWPPageLinksVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2FE76819AD803F0086E0AB /* LMPropertyWPPageLinksVC.m */; };
+		3D2FE76B19AD803F0086E0AB /* LMPropertyWPPageLinksVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D2FE76919AD803F0086E0AB /* LMPropertyWPPageLinksVC.xib */; };
 		3D33BAD01935A4F600DA4F4A /* LMPreferenceWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D33BACE1935A4F600DA4F4A /* LMPreferenceWC.m */; };
 		3D33BAD11935A4F600DA4F4A /* LMPreferenceWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D33BACF1935A4F600DA4F4A /* LMPreferenceWC.xib */; };
 		3D54D64B18ED5D2E00B5FEC2 /* ResizeNE-SW.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3D54D64918ED5D2E00B5FEC2 /* ResizeNE-SW.tiff */; };
@@ -1314,6 +1316,9 @@
 		3D2E6BAF19653F5800AC7DE5 /* IUImport.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IUImport.mp4; sourceTree = "<group>"; };
 		3D2E6BB019653F5800AC7DE5 /* IUResponsive.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IUResponsive.mp4; sourceTree = "<group>"; };
 		3D2E6BB119653F5800AC7DE5 /* IUTransition.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IUTransition.mp4; sourceTree = "<group>"; };
+		3D2FE76719AD803F0086E0AB /* LMPropertyWPPageLinksVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyWPPageLinksVC.h; path = Editor/LMPropertyWPPageLinksVC.h; sourceTree = "<group>"; };
+		3D2FE76819AD803F0086E0AB /* LMPropertyWPPageLinksVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPropertyWPPageLinksVC.m; path = Editor/LMPropertyWPPageLinksVC.m; sourceTree = "<group>"; };
+		3D2FE76919AD803F0086E0AB /* LMPropertyWPPageLinksVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyWPPageLinksVC.xib; path = Editor/LMPropertyWPPageLinksVC.xib; sourceTree = "<group>"; };
 		3D33BACD1935A4F600DA4F4A /* LMPreferenceWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPreferenceWC.h; path = Editor/Preference/LMPreferenceWC.h; sourceTree = "<group>"; };
 		3D33BACE1935A4F600DA4F4A /* LMPreferenceWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPreferenceWC.m; path = Editor/Preference/LMPreferenceWC.m; sourceTree = "<group>"; };
 		3D33BACF1935A4F600DA4F4A /* LMPreferenceWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPreferenceWC.xib; path = Editor/Preference/LMPreferenceWC.xib; sourceTree = "<group>"; };
@@ -3987,6 +3992,9 @@
 				693F24761977929C00451500 /* LMPropertyWPMenuVC.h */,
 				693F24771977929C00451500 /* LMPropertyWPMenuVC.m */,
 				693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */,
+				3D2FE76719AD803F0086E0AB /* LMPropertyWPPageLinksVC.h */,
+				3D2FE76819AD803F0086E0AB /* LMPropertyWPPageLinksVC.m */,
+				3D2FE76919AD803F0086E0AB /* LMPropertyWPPageLinksVC.xib */,
 			);
 			name = WPGroup;
 			sourceTree = "<group>";
@@ -4219,6 +4227,7 @@
 				26CA36D1198760B70004D888 /* cs_pc_02.png in Resources */,
 				06855617198A63430073FA83 /* johnny_automatic_Garet_Garrett.png in Resources */,
 				3D2E6BAA19653F3A00AC7DE5 /* EventMouseOn.mp4 in Resources */,
+				3D2FE76B19AD803F0086E0AB /* LMPropertyWPPageLinksVC.xib in Resources */,
 				69FFB28E195041E500DA2783 /* LMPropertyProgrammingType2VC.xib in Resources */,
 				3DF8043818FE62FC00913505 /* tool_image@2x.png in Resources */,
 				3DED26851900D329001A1D67 /* stack_mail@2x.png in Resources */,
@@ -5025,6 +5034,7 @@
 				3DD4787D193DDCE100639AB5 /* LMEventScrollAnimationVC.m in Sources */,
 				3DBD7C2419612107003E386C /* LMStartPreviewWC.m in Sources */,
 				3DED27131904AC8A001A1D67 /* LMEventVC.m in Sources */,
+				3D2FE76A19AD803F0086E0AB /* LMPropertyWPPageLinksVC.m in Sources */,
 				693849E41914D711005C0546 /* NSIndexPath+JDExtension.m in Sources */,
 				6905BE7A199FEE0400DF0B70 /* WPWidget.m in Sources */,
 				3DF8046A18FF790400913505 /* LMPropertyShadowVC.m in Sources */,

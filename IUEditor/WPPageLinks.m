@@ -17,6 +17,8 @@
     
     self.positionType = IUPositionTypeRelative;
     self.enableCenter = YES;
+    self.align = IUAlignLeft;
+    self.leftRightPadding = 5;
     
     [self.css setValue:@(60) forTag:IUCSSTagPixelY];
     [self.css setValue:@(800) forTag:IUCSSTagPixelWidth];
@@ -63,5 +65,38 @@
 - (BOOL)shouldCompileFontInfo{
     return YES;
 }
+
+
+#pragma mark - property
+
+- (void)setAlign:(IUAlign)align{
+    if(_align != align){
+        
+        [[self.undoManager prepareWithInvocationTarget:self] setAlign:_align];
+        _align = align;
+        [self updateCSS];
+    }
+}
+
+- (void)setLeftRightPadding:(NSInteger)leftRightPadding{
+    if(_leftRightPadding != leftRightPadding){
+        [[self.undoManager prepareWithInvocationTarget:self] setLeftRightPadding:_leftRightPadding];
+        _leftRightPadding = leftRightPadding;
+        [self updateCSSWithIdentifiers:@[self.itemIdetnfier]];
+    }
+}
+
+#pragma mark - css
+
+- (NSArray *)cssIdentifierArray{
+    return [[super cssIdentifierArray] arrayByAddingObjectsFromArray:@[self.containerIdentifier, self.itemIdetnfier]];
+}
+- (NSString *)containerIdentifier{
+    return [self.cssClass stringByAppendingString:@" > ul"];
+}
+- (NSString *)itemIdetnfier{
+    return [self.cssClass stringByAppendingString:@" > ul > li"];
+}
+
 
 @end

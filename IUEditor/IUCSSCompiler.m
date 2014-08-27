@@ -1287,6 +1287,8 @@
     }
 }
 
+#pragma mark - WP Widgets
+
 - (void)updateCSSCode:(IUCSSCode*)code asWPMenu:(WPMenu*)wpmenu{
     [code setInsertingTarget:IUTargetBoth];
     [code setInsertingViewPort:IUCSSDefaultViewPort];
@@ -1334,6 +1336,44 @@
     }
 }
 
+- (void)updateCSSCode:(IUCSSCode*)code asWPPageLinks:(WPPageLinks*)wpPageLinks{
+    [code setInsertingTarget:IUTargetBoth];
+    [code setInsertingViewPort:IUCSSDefaultViewPort];
+    
+    switch (wpPageLinks.align) {
+        case IUAlignJustify:
+            [code setInsertingIdentifier:wpPageLinks.containerIdentifier];
+            [code insertTag:@"display" string:@"table"];
+            [code insertTag:@"table-layout" string:@"fixed"];
+            [code insertTag:@"width" string:@"100%"];
+            
+            [code setInsertingIdentifier:wpPageLinks.itemIdetnfier];
+            [code insertTag:@"display" string:@"table-cell"];
+            [code insertTag:@"text-align" string:@"center"];
+            break;
+        case IUAlignLeft:
+            [code setInsertingIdentifier:wpPageLinks.itemIdetnfier];
+            [code insertTag:@"float" string:@"left"];
+        case IUAlignCenter:
+            [code setInsertingIdentifier:wpPageLinks.containerIdentifier];
+            [code insertTag:@"text-align" string:@"center"];
+            break;
+        case IUAlignRight:
+            [code setInsertingIdentifier:wpPageLinks.containerIdentifier];
+            [code insertTag:@"text-align" string:@"right"];
+            
+        default:
+            break;
+    }
+    if(wpPageLinks.align != IUAlignJustify){
+        [code setInsertingIdentifier:wpPageLinks.itemIdetnfier];
+        [code insertTag:@"position" string:@"relative"];
+        
+        [code insertTag:@"padding" string:[NSString stringWithFormat:@"0 %ldpx", wpPageLinks.leftRightPadding]];
+        [code insertTag:@"display" string:@"inline-block"];
+    }
+}
+
 /*
 
 - (void)updateCSSCode:(IUCSSCode*)code asWPWidgetBody:(WPWidgetBody*)_iu{
@@ -1358,6 +1398,7 @@
         [code renameIdentifier:identifier to:newIdentifier];
     }
 }
+
 - (void)updateCSSCode:(IUCSSCode*)code asWPPageLink:(WPPageLink *)_iu{
     NSArray *identifiers = [code allIdentifiers];
     WPPageLinks *pageLinks = (WPPageLinks*)_iu.parent;
@@ -1368,5 +1409,6 @@
     }
 
 }
-*/
+ */
+
 @end

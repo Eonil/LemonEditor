@@ -11,4 +11,11 @@
 
 @interface WPPageLinks : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
 
+@property (nonatomic) NSInteger leftRightPadding;
+@property (nonatomic) IUAlign align;
+
+- (NSString *)containerIdentifier;
+- (NSString *)itemIdetnfier;
+
+
 @end

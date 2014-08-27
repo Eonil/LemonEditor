@@ -162,6 +162,7 @@ a{
     width:100%;
 }
 
+/* wp css */
 
 .WPMenu > div {
     height: 100%;
@@ -186,8 +187,4 @@ a{
 
 .WPPageLinks > a{
     display: inline;
-}
-
-.WPPageLinks > ul > li {
-    float : left;
 }

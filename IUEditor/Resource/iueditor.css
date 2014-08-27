@@ -293,6 +293,7 @@ p{
     }
 }
 
+/* wp css*/
 .WPMenu > div {
     height: 100%;
 }
@@ -318,6 +319,3 @@ p{
     display: inline;
 }
 
-.WPPageLinks > ul > li {
-    float : left;
-}

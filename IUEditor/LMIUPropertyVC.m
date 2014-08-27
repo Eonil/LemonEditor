@@ -35,7 +35,7 @@
 #import "LMPropertyIUTweetButtonVC.h"
 #import "LMPropertyIUGoogleMapVC.h"
 #import "LMPropertySampleTextVC.h"
-
+#import "LMPropertyWPPageLinksVC.h"
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 
@@ -92,6 +92,7 @@
     //wp property
     LMPropertyWPArticleVC *propertyWPArticleVC;
     LMPropertyWPMenuVC *propertyWPMenuVC;
+    LMPropertyWPPageLinksVC *propertyWPPageLinksVC;
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     LMPropertyTextVC *propertyTextVC;
@@ -168,9 +169,11 @@
 #endif
         propertyWebProgramming = [[LMPropertyWebProgrammingVC alloc] initWithNibName:[LMPropertyWebProgrammingVC class].className bundle:nil];
         
-        //wp
+
+#pragma mark - WP
         propertyWPArticleVC = [[LMPropertyWPArticleVC alloc] initWithNibName:[LMPropertyWPArticleVC class].className bundle:nil];
         propertyWPMenuVC = [[LMPropertyWPMenuVC alloc] initWithNibName:[LMPropertyWPMenuVC class].className bundle:nil];
+        propertyWPPageLinksVC = [[LMPropertyWPPageLinksVC alloc] initWithNibName:[LMPropertyWPPageLinksVC class].className bundle:nil];
         
         pSampleTextVC = [[LMPropertySampleTextVC alloc] initWithNibName:[LMPropertySampleTextVC class].className bundle:nil];
         
@@ -237,6 +240,8 @@
     
     propertyWPArticleVC.controller = controller;
     propertyWPMenuVC.controller = controller;
+    propertyWPPageLinksVC.controller = controller;
+    
     pSampleTextVC.controller = controller;
     
     propertyTextVC.controller = controller;
@@ -355,6 +360,9 @@
     }
     else if ([classString isEqualToString:@"WPMenu"]){
         self.propertyVArray = @[propertyWPMenuVC.view];
+    }
+    else if ([classString isEqualToString:@"WPPageLinks"]){
+        self.propertyVArray = @[propertyWPPageLinksVC.view];
     }
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
