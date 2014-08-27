@@ -31,7 +31,6 @@
     [self outlet:_titleB bind:NSValueBinding property:@"enableTitle"];
     [self outlet:_dateB bind:NSValueBinding property:@"enableDate"];
     [self outlet:_bodyB bind:NSValueBinding property:@"enableBody"];
-    
 }
 
 

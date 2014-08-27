@@ -13,4 +13,6 @@
 @property (nonatomic) BOOL enableTitle;
 @property (nonatomic) BOOL enableDate;
 @property (nonatomic) BOOL enableBody;
+@property (nonatomic) BOOL enableComment;
+
 @end

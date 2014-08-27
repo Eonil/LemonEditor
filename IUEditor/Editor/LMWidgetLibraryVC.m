@@ -96,6 +96,7 @@
 - (void)awakeFromNib{
     if(_project){
         if(_project.projectType != IUProjectTypeWordpress){
+            [_wpButtonCell setTransparent:YES];
             [_wpButtonCell setEnabled:NO];
         }
     }

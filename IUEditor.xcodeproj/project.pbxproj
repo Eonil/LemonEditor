@@ -362,6 +362,7 @@
 		3D2E6BB519653F5800AC7DE5 /* IUTransition.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E6BB119653F5800AC7DE5 /* IUTransition.mp4 */; };
 		3D2FE76A19AD803F0086E0AB /* LMPropertyWPPageLinksVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2FE76819AD803F0086E0AB /* LMPropertyWPPageLinksVC.m */; };
 		3D2FE76B19AD803F0086E0AB /* LMPropertyWPPageLinksVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D2FE76919AD803F0086E0AB /* LMPropertyWPPageLinksVC.xib */; };
+		3D2FE77119ADAD6E0086E0AB /* WPArticleComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2FE77019ADAD6E0086E0AB /* WPArticleComment.m */; };
 		3D33BAD01935A4F600DA4F4A /* LMPreferenceWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D33BACE1935A4F600DA4F4A /* LMPreferenceWC.m */; };
 		3D33BAD11935A4F600DA4F4A /* LMPreferenceWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D33BACF1935A4F600DA4F4A /* LMPreferenceWC.xib */; };
 		3D54D64B18ED5D2E00B5FEC2 /* ResizeNE-SW.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 3D54D64918ED5D2E00B5FEC2 /* ResizeNE-SW.tiff */; };
@@ -1319,6 +1320,8 @@
 		3D2FE76719AD803F0086E0AB /* LMPropertyWPPageLinksVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyWPPageLinksVC.h; path = Editor/LMPropertyWPPageLinksVC.h; sourceTree = "<group>"; };
 		3D2FE76819AD803F0086E0AB /* LMPropertyWPPageLinksVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPropertyWPPageLinksVC.m; path = Editor/LMPropertyWPPageLinksVC.m; sourceTree = "<group>"; };
 		3D2FE76919AD803F0086E0AB /* LMPropertyWPPageLinksVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyWPPageLinksVC.xib; path = Editor/LMPropertyWPPageLinksVC.xib; sourceTree = "<group>"; };
+		3D2FE76F19ADAD6E0086E0AB /* WPArticleComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WPArticleComment.h; path = IU/WPArticleComment.h; sourceTree = "<group>"; };
+		3D2FE77019ADAD6E0086E0AB /* WPArticleComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WPArticleComment.m; path = IU/WPArticleComment.m; sourceTree = "<group>"; };
 		3D33BACD1935A4F600DA4F4A /* LMPreferenceWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPreferenceWC.h; path = Editor/Preference/LMPreferenceWC.h; sourceTree = "<group>"; };
 		3D33BACE1935A4F600DA4F4A /* LMPreferenceWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPreferenceWC.m; path = Editor/Preference/LMPreferenceWC.m; sourceTree = "<group>"; };
 		3D33BACF1935A4F600DA4F4A /* LMPreferenceWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPreferenceWC.xib; path = Editor/Preference/LMPreferenceWC.xib; sourceTree = "<group>"; };
@@ -3591,6 +3594,8 @@
 				69860E4C197625C7001C3F7F /* WPArticleList.m */,
 				69860E51197666FE001C3F7F /* WPArticleDate.h */,
 				69860E52197666FE001C3F7F /* WPArticleDate.m */,
+				3D2FE76F19ADAD6E0086E0AB /* WPArticleComment.h */,
+				3D2FE77019ADAD6E0086E0AB /* WPArticleComment.m */,
 				69860E5719766B1C001C3F7F /* WPMenu.h */,
 				69860E5819766B1C001C3F7F /* WPMenu.m */,
 				69860E5A19766B24001C3F7F /* WPMenuItem.h */,
@@ -4947,6 +4952,7 @@
 				3DED26EC19010B94001A1D67 /* LMPropertyIUWebMovieVC.m in Sources */,
 				3DB3ACDD18EBEF5F0046DFB7 /* PointLayer.m in Sources */,
 				3DBC932E18F24FE000F217BD /* NSFlippedView.m in Sources */,
+				3D2FE77119ADAD6E0086E0AB /* WPArticleComment.m in Sources */,
 				3D19E432198A06EB00A50D35 /* IUMenuItem.m in Sources */,
 				69757B3718DAF1AB0095CBAC /* IUResourceGroup.m in Sources */,
 				3DB3ACE818EBEF9D0046DFB7 /* IUFrameDictionary.m in Sources */,

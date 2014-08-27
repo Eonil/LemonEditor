@@ -31,6 +31,7 @@
         _enableTitle = [aDecoder decodeBoolForKey:@"enableTitle"];
         _enableBody = [aDecoder decodeBoolForKey:@"enableBody"];
         _enableDate = [aDecoder decodeBoolForKey:@"enableDate"];
+        _enableComment = [aDecoder decodeBoolForKey:@"enableComment"];
     }
     @catch (NSException *exception) {
     }
@@ -44,6 +45,7 @@
     [aCoder encodeBool:_enableTitle forKey:@"enableTitle"];
     [aCoder encodeBool:_enableBody forKey:@"enableBody"];
     [aCoder encodeBool:_enableDate forKey:@"enableDate"];
+    [aCoder encodeBool:_enableComment forKey:@"enableComment"];
 }
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
@@ -127,6 +129,12 @@
             }
         }
     }
+}
+
+//TODO: comment
+- (void)setEnableComment:(BOOL)enableComment{
+    _enableComment = enableComment;
+    
 }
 
 - (BOOL)canMoveToOtherParent{
