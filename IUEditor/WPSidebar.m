@@ -27,6 +27,12 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone{
+    WPSidebar *sidebar = [super copyWithZone:zone];
+    sidebar.wordpressName = _wordpressName;
+    return sidebar;
+}
+
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [super encodeWithCoder:aCoder];
     [aCoder encodeFromObject:self withProperties:[WPSidebar properties]];
@@ -44,10 +50,12 @@
     return [NSString stringWithFormat:@"<?php dynamic_sidebar( '%@' ); ?>", self.wordpressName];
 }
 
-- (void)setWidgetCount:(NSInteger)widgetCount{
+/*
+ - (void)setWidgetCount:(NSInteger)widgetCount{
     _widgetCount = widgetCount;
     [self updateHTML];
 }
+*/
 
 - (BOOL)shouldCompileFontInfo{
     return NO;

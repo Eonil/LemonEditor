@@ -12,6 +12,6 @@
 @interface WPSidebar : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
 
 @property (nonatomic) NSString *wordpressName;
-@property (nonatomic) NSInteger widgetCount;
+//@property (nonatomic) NSInteger widgetCount;
 
 @end
