@@ -17,20 +17,20 @@
     //css
     self.positionType = IUPositionTypeRelative;
     
-    [self.css setValue:@(0) forTag:IUCSSTagPixelX];
-    [self.css setValue:@(40) forTag:IUCSSTagPixelY];
-    [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent];
-    [self.css setValue:@(100) forTag:IUCSSTagPercentWidth];
+    [self.css setValue:@(0) forTag:IUCSSTagPixelX forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(40) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
     [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css eradicateTag:IUCSSTagBGColor];
 
 
     //font
-    [self.css setValue:@(14) forTag:IUCSSTagFontSize];
-    [self.css setValue:@(2.0) forTag:IUCSSTagLineHeight];
-    [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign];
-    [self.css setValue:@"HelveticaNeue-Light" forTag:IUCSSTagFontName];
-    [self.css setValue:[NSColor rgbColorRed:51 green:51 blue:51 alpha:1] forTag:IUCSSTagFontColor];
+    [self.css setValue:@(14) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(2.0) forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@"HelveticaNeue-Light" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:[NSColor rgbColorRed:51 green:51 blue:51 alpha:1] forTag:IUCSSTagFontColor forViewport:IUCSSDefaultViewPort];
 
     
     //sample text

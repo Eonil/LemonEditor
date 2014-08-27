@@ -19,23 +19,23 @@
     
     //css
     self.enableCenter = YES;
-    [self.css setValue:@(160) forTag:IUCSSTagPixelY];
-    [self.css setValue:@(800) forTag:IUCSSTagPixelWidth];
-    [self.css setValue:@(40) forTag:IUCSSTagPixelHeight];
+    [self.css setValue:@(160) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(800) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(40) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
     [self.css eradicateTag:IUCSSTagBGColor];
     
     //font
-    [self.css setValue:@(12) forTag:IUCSSTagFontSize];
-    [self.css setValue:@(1.0) forTag:IUCSSTagLineHeight];
-    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign];
-    [self.css setValue:@"Roboto" forTag:IUCSSTagFontName];
-    [self.css setValue:[NSColor rgbColorRed:0 green:120 blue:220 alpha:1] forTag:IUCSSTagFontColor];
+    [self.css setValue:@(12) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(1.0) forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@"Roboto" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:[NSColor rgbColorRed:0 green:120 blue:220 alpha:1] forTag:IUCSSTagFontColor forViewport:IUCSSDefaultViewPort];
     
     //border
-    [self.css setValue:[NSColor rgbColorRed:204 green:204 blue:204 alpha:1] forTag:IUCSSTagBorderTopColor];
-    [self.css setValue:[NSColor rgbColorRed:204 green:204 blue:204 alpha:1] forTag:IUCSSTagBorderBottomColor];
-    [self.css setValue:@(1) forTag:IUCSSTagBorderTopWidth];
-    [self.css setValue:@(1) forTag:IUCSSTagBorderBottomWidth];
+    [self.css setValue:[NSColor rgbColorRed:204 green:204 blue:204 alpha:1] forTag:IUCSSTagBorderTopColor forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:[NSColor rgbColorRed:204 green:204 blue:204 alpha:1] forTag:IUCSSTagBorderBottomColor forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(1) forTag:IUCSSTagBorderTopWidth forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(1) forTag:IUCSSTagBorderBottomWidth forViewport:IUCSSDefaultViewPort];
     
     [self.undoManager enableUndoRegistration];
     return self;

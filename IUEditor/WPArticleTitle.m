@@ -16,18 +16,18 @@
     //css
     self.positionType = IUPositionTypeRelative;
     
-    [self.css setValue:@(40) forTag:IUCSSTagPixelY];
-    [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent];
-    [self.css setValue:@(90) forTag:IUCSSTagPercentWidth];
+    [self.css setValue:@(80) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(90) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
     [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css eradicateTag:IUCSSTagBGColor];
     
     self.enableCenter = YES;
     
-    [self.css setValue:@(24) forTag:IUCSSTagFontSize];
-    [self.css setValue:@(1.5) forTag:IUCSSTagLineHeight];
-    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign];
-    [self.css setValue:@"HelveticaNeue-Light" forTag:IUCSSTagFontName];
+    [self.css setValue:@(21) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(1.5) forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@"HelveticaNeue-Light" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
     
     [self.undoManager enableUndoRegistration];
     return self;

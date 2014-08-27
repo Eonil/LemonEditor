@@ -180,6 +180,7 @@
 }
 
 
+
 - (void)connectWithEditor{
     NSAssert(self.project, @"");
     
@@ -213,6 +214,34 @@
     if([self isConnectedWithEditor]){
         [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
+}
+#pragma mark - default box 
+
+/**
+ 
+ Some convenience methods to create iubox
+ */
++(IUBox *)copyrightBoxWithProject:(IUProject*)project{
+    IUBox *copyright = [[IUBox alloc] initWithProject:project options:nil];
+    [copyright.undoManager disableUndoRegistration];
+    
+    copyright.name = @"Copyright";
+    copyright.text = @"Copyright (C) IUEditor all rights reserved";
+    copyright.enableCenter = YES;
+    [copyright.css setValue:@(40) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
+    [copyright.css eradicateTag:IUCSSTagPixelWidth];
+    [copyright.css eradicateTag:IUCSSTagPixelHeight];
+    [copyright.css eradicateTag:IUCSSTagBGColor];
+    
+    [copyright.css setValue:@"Roboto" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
+    [copyright.css setValue:@(12) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
+    [copyright.css setValue:@(1.5) forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
+    [copyright.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
+    [copyright.css setValue:[NSColor rgbColorRed:102 green:102 blue:102 alpha:1] forTag:IUCSSTagFontColor forViewport:IUCSSDefaultViewPort];
+    
+    
+    [copyright.undoManager enableUndoRegistration];
+    return copyright;
 }
 
 

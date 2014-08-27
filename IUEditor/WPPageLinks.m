@@ -17,20 +17,19 @@
     
     self.positionType = IUPositionTypeRelative;
     self.enableCenter = YES;
-    self.align = IUAlignLeft;
+    self.align = IUAlignRight;
     self.leftRightPadding = 5;
     
-    [self.css setValue:@(60) forTag:IUCSSTagPixelY];
-    [self.css setValue:@(800) forTag:IUCSSTagPixelWidth];
-    [self.css setValue:@(140) forTag:IUCSSTagPixelHeight];
+    [self.css setValue:@(900) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(100) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
     [self.css eradicateTag:IUCSSTagBGColor];
     
-    [self.css setValue:@"Roboto" forTag:IUCSSTagFontName];
-    [self.css setValue:@(12) forTag:IUCSSTagFontSize];
-    [self.css setValue:@(1.0) forTag:IUCSSTagLineHeight];
-    [self.css setValue:@(1.0) forTag:IUCSSTagTextLetterSpacing];
-    [self.css setValue:@(IUAlignRight) forTag:IUCSSTagTextAlign];
-    [self.css setValue:[NSColor rgbColorRed:0 green:120 blue:220 alpha:1] forTag:IUCSSTagFontColor];
+    [self.css setValue:@"Roboto" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(14) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(1.0) forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(1.0) forTag:IUCSSTagTextLetterSpacing forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(IUAlignRight) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:[NSColor rgbColorRed:0 green:120 blue:220 alpha:1] forTag:IUCSSTagFontColor forViewport:IUCSSDefaultViewPort];
 
     
     WPPageLink *pageLink = [[WPPageLink alloc] initWithProject:project options:options];

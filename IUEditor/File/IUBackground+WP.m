@@ -21,7 +21,7 @@
     WPSiteTitle *title = [[WPSiteTitle alloc] initWithProject:self.project options:nil];
     title.htmlID = @"SiteTitle";
     title.name = @"SiteTitle";
-    [title.css setValue:@(60) forTag:IUCSSTagPixelY];
+    [title.css setValue:@(60) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
     title.enableCenter = YES;
 
     [self.header addIU:title error:nil];
@@ -30,6 +30,7 @@
     WPSiteDescription *desc = [[WPSiteDescription alloc] initWithProject:self.project options:nil];
     desc.htmlID = @"SiteDescription";
     desc.name = @"SiteDescription";
+    [desc.css setValue:@(110) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
     [self.header addIU:desc error:nil];
     [self.project.identifierManager registerIUs:@[desc]];
 
@@ -39,7 +40,8 @@
     [self.header addIU:menu error:nil];
     [self.project.identifierManager registerIUs:@[menu]];
     
-    [self.header.css setValue:@(200) forTag:IUCSSTagPixelHeight];
+    [self.header.css setValue:@(200) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
+    
     [self.header.css eradicateTag:IUCSSTagBGColor];
 }
 

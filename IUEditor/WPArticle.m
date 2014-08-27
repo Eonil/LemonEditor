@@ -56,8 +56,8 @@
     [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css eradicateTag:IUCSSTagBGColor];
 
-    [self.css setValue:@(100) forTag:IUCSSTagPercentWidth];
-    [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent];
+    [self.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
     [self setEnableTitle:YES];
     [self setEnableDate:YES];
     [self setEnableBody:YES];

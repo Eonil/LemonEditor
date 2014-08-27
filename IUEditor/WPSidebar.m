@@ -13,11 +13,23 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
+    [self.undoManager disableUndoRegistration];
+    
     _wordpressName = @"IUWidgets";
 //    self.widgetCount = 1;
+    
+    //setting for css
+    [self.css setValue:@(180) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+    self.positionType = IUPositionTypeFloatLeft;
+    [self.css eradicateTag:IUCSSTagPixelHeight];
+    [self.css eradicateTag:IUCSSTagBGColor];
+    
+    //default widget
     WPWidget *widget = [[WPWidget alloc] initWithProject:project options:options];
     [self addIU:widget error:nil];
-    [self.css eradicateTag:IUCSSTagPixelHeight];
+    
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 

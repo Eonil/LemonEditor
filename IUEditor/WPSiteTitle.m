@@ -14,14 +14,14 @@
     self = [super initWithProject:project options:options];
     [self.undoManager disableUndoRegistration];
     
-    [self.css setValue:@(300) forTag:IUCSSTagPixelWidth];
+    [self.css setValue:@(300) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
     [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css eradicateTag:IUCSSTagBGColor];
     
-    
-    [self.css setValue:@(30) forTag:IUCSSTagFontSize];
-    [self.css setValue:@(1.5) forTag:IUCSSTagLineHeight];
-    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign];
+    [self.css setValue:@"Helvetica" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(30) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(1.5) forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
     [self.css setValue:[NSColor rgbColorRed:51 green:51 blue:51 alpha:1] forTag:IUCSSTagFontColor];    
     
     [self.undoManager enableUndoRegistration];

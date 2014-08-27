@@ -14,17 +14,16 @@
     self = [super initWithProject:project options:options];
     [self.undoManager disableUndoRegistration];
 
-    [self.css setValue:@(110) forTag:IUCSSTagPixelY];
-    [self.css setValue:@(450) forTag:IUCSSTagPixelWidth];
+    [self.css setValue:@(450) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
     [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css eradicateTag:IUCSSTagBGColor];
     
     self.enableCenter = YES;
     
-    [self.css setValue:@(12) forTag:IUCSSTagFontSize];
-    [self.css setValue:@(1.5) forTag:IUCSSTagLineHeight];
-    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign];
-    [self.css setValue:[NSColor rgbColorRed:76 green:76 blue:76 alpha:1] forTag:IUCSSTagFontColor];
+    [self.css setValue:@(12) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(1.5) forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:[NSColor rgbColorRed:76 green:76 blue:76 alpha:1] forTag:IUCSSTagFontColor forViewport:IUCSSDefaultViewPort];
     
     [self.undoManager enableUndoRegistration];
     return self;

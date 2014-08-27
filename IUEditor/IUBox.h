@@ -94,6 +94,9 @@ typedef enum _IUOverflowType{
     int IUEditorVersion;
 }
 
+/* default box */
++(IUBox *)copyrightBoxWithProject:(IUProject*)project;
+
 /*
  Following are options
  */

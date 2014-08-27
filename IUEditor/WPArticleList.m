@@ -27,8 +27,7 @@
     
     [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css eradicateTag:IUCSSTagBGColor];
-    [self.css setValue:@(40) forTag:IUCSSTagPixelY];
-    [self.css setValue:@(800) forTag:IUCSSTagPixelWidth];
+    [self.css setValue:@(680) forTag:IUCSSTagPixelWidth];
 
     WPArticle *article = [[WPArticle alloc] initWithProject:project options:options];
     [self addIU:article error:nil];

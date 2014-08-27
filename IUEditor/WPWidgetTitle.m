@@ -12,9 +12,29 @@
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
-    [self setPositionType:IUPositionTypeRelative];
+    if(self){
+        [self.undoManager disableUndoRegistration];
     
-    [self.css eradicateTag:IUCSSTagPixelHeight];
+        //setting for css
+        [self setPositionType:IUPositionTypeRelative];
+        
+        [self.css setValue:@(0) forTag:IUCSSTagPixelX forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(40) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+        [self.css eradicateTag:IUCSSTagPixelHeight];
+        [self.css eradicateTag:IUCSSTagBGColor];
+        
+        //font css
+        [self.css setValue:@(18) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(1.5) forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@"Roboto" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:[NSColor rgbColorRed:0 green:120 blue:220 alpha:1] forTag:IUCSSTagFontColor forViewport:IUCSSDefaultViewPort];
+        
+        
+        [self.undoManager enableUndoRegistration];
+    }
     return self;
 }
 

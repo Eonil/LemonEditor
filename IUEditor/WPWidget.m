@@ -13,13 +13,20 @@
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if (self) {
+        [self.undoManager disableUndoRegistration];
+
+        //setting for css
+        [self.css eradicateTag:IUCSSTagPixelHeight];
+        [self.css eradicateTag:IUCSSTagBGColor];
+
+        //setting children
         self.titleWidget = [[WPWidgetTitle alloc] initWithProject:project options:options];
         [self addIU:self.titleWidget error:nil];
         
         self.bodyWidget = [[WPWidgetBody alloc] initWithProject:project options:options];
         [self addIU:self.bodyWidget error:nil];
         
-        [self.css eradicateTag:IUCSSTagPixelHeight];
+        [self.undoManager enableUndoRegistration];
     }
     return self;
 }

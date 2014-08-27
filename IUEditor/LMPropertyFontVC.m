@@ -255,9 +255,12 @@
             [[_fontB cell] setPlaceholderString:placeholder];
             [_fontB setStringValue:@""];
         }
-        else{
+        else if(iuFontName != nil){
             [[_fontB cell] setPlaceholderString:@""];
             [_fontB setStringValue:iuFontName];
+        }
+        else{
+            [_fontB setStringValue:@""];
         }
         
         
