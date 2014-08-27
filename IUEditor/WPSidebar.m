@@ -20,7 +20,6 @@
     
     //setting for css
     [self.css setValue:@(180) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
-    self.positionType = IUPositionTypeFloatLeft;
     [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css eradicateTag:IUCSSTagBGColor];
     
