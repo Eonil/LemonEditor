@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -200,26 +200,16 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="491">
                         <items>
-                            <menuItem title="Documentation" id="1Mp-wp-LLA">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="performHelp:" target="494" id="n6g-B8-Ioz"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Release Notes" tag="1" enabled="NO" id="8vt-Pq-NBN">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="cv6-XT-ZVA"/>
-                            <menuItem title="Tutorial (Web)" tag="2" id="jHa-Jg-mkb">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="performHelp:" target="494" id="Wrc-ry-YJb"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="IUEditor Homepage" tag="3" id="kCQ-jE-ILK">
+                            <menuItem title="IUEditor Homepage" tag="1" id="kCQ-jE-ILK">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="performHelp:" target="494" id="ayZ-By-5r2"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Tutorial" tag="2" id="jHa-Jg-mkb">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="performHelp:" target="494" id="Wrc-ry-YJb"/>
                                 </connections>
                             </menuItem>
                         </items>

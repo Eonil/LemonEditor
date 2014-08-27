@@ -144,8 +144,16 @@
 
 
 - (IBAction)performHelp:(NSMenuItem *)sender{
+    if (sender.tag == 1) {
+        NSString *tutorial = @"http://www.iueditor.org";
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:tutorial]];
+    }
+    else {
+        NSString *tutorial = @"http://guide.iueditor.org";
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:tutorial]];
+    }
+    /*
     LMHelpWC *hWC = [LMHelpWC sharedHelpWC];
-
     switch (sender.tag) {
         case 0:
             //Documentation
@@ -169,6 +177,7 @@
         default:
             break;
     }
+ */
     
 }
 
