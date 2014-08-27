@@ -32,4 +32,8 @@
 - (BOOL)canRemoveIUByUserInput{
     return NO;
 }
+- (BOOL)shouldCompileFontInfo{
+    return YES;
+}
+
 @end
