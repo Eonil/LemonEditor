@@ -1,24 +1,21 @@
 
 function resizePageContentHeight(){
-	//for page file,
-	//make page content height
-    var height=0;
-    $('.IUPageContent').siblings().each(function(){height += $(this).height()});
-    
-    //@deprecated
-    //remove to set pageContent height
-    
 	//make min height of page content
 	var minHeight=0;
     $('.IUPageContent').children().each(function(){
-		if (minHeight < $(this).height() + $(this).position().top){
-			minHeight = $(this).height() + $(this).position().top;
+		var currentHeight = $(this).height() + $(this).position().top
+		
+		if (minHeight < currentHeight){
+			minHeight = currentHeight;
 		}
     });
+	
+	if(minHeight==0){
+		minHeight=$(window).height()-$('.IUHeader').height();
+	    $('.IUPageContent').css('height', minHeight+'px');
+	}
     $('.IUPageContent').css('min-height', minHeight+'px');
 }
-
-
 
 function resizeCollection(){
 	$('.IUCollection').each(function(){
@@ -36,7 +33,6 @@ function resizeCollection(){
 				minWidth = width;
 			}
 		}		
-		//			var width  = 1/count *100;
 		var width = $(this).width()/count;
 		$(this).children().css('width', width.toFixed(0)+'px');
 	});

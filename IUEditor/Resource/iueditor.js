@@ -118,7 +118,22 @@ function resizePageContentHeightEditor(){
 		//make min height of page content
 		var minHeight=480;
 		$('.IUPageContent').children().each(function(){
-			var newValue = $(this).height()+$(this).position().top;
+			
+			var newValue
+			
+			var heightstr = $(this)[0].style.height;
+			if(heightstr.search('%') >= 0){
+				var percentHeight = parseFloat(heightstr);
+				if(percentHeight >= 100){
+					newValue = 720;
+				}
+				else{
+					newValue = $(this).height()*(percentHeight/100)-10;
+				}
+			}
+			else{
+				newValue = $(this).height()+$(this).position().top;
+			}
 			if (newValue > minHeight){
 				minHeight = newValue;
 			}});
