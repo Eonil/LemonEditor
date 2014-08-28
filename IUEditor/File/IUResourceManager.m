@@ -180,11 +180,11 @@
 
     else if ([JDFileUtil isMovieFileExtension:[path pathExtension]]) {
         [self willChangeValueForKey:@"imageAndVideoFiles"];
-        [self willChangeValueForKey:@"movieFiles"];
+        [self willChangeValueForKey:@"videoFiles"];
         IUResourceGroup *group = _rootGroup.childrenFiles[1];
         IUResourceFile *file = [group addResourceFileWithContentOfPath:path];
         file.originalFilePath = path;
-        [self didChangeValueForKey:@"movieFiles"];
+        [self didChangeValueForKey:@"videoFiles"];
         [self didChangeValueForKey:@"imageAndVideoFiles"];
         
         [[[[NSApp mainWindow] windowController] document] saveDocument:self];
