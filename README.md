@@ -1,6 +1,3 @@
-LemonEditor
-------
-
 <h2>IUEditor v0.3-beta release</h2>
 
 * HomePage :  http://www.iueditor.org/
