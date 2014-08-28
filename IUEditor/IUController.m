@@ -259,12 +259,15 @@
         NSArray *selectedChildren = [allChildren filteredArrayUsingPredicate:predicate];
 
         //check all selected children share parent;
+        //FIXME: is needed?? chidlren 이 다를 때 select이 안됨 why?
+        /*
         IUBox *firstSelectedChild = [selectedChildren firstObject];
         for (IUBox *box in selectedChildren) {
             if (box.parent != firstSelectedChild.parent) {
                 return; // fail to select
             }
         }
+         */
         [self _setSelectedObjects:selectedChildren];
     }
 }
