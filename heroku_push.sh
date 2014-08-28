@@ -2,7 +2,7 @@
 
 #call heroku auth
 set git [lindex $argv 0]
-set timeout 60
+set timeout 90
 
 spawn $git push --force heroku master
 
