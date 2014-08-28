@@ -83,7 +83,9 @@
 - (BOOL)canChangeHeightByUserInput{
     return NO;
 }
-
+- (BOOL)canChangePositionType{
+    return NO;
+}
 - (BOOL)canChangeCenter{
     return NO;
 }
