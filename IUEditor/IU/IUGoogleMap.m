@@ -186,7 +186,6 @@
 - (NSString *)innerCurrentThemeStyle{
     
     if(_themeType != 0){
-    
         NSString *staticStyle = [self.delegate callWebScriptMethod:@"getGoogleMapStaticStyle" withArguments:@[@(_themeType-1)]];
         
         if(staticStyle){
@@ -194,22 +193,6 @@
         }
     }
     return @"";
-    /*
-    NSCharacterSet *notAllowedChars = [NSCharacterSet characterSetWithCharactersInString:@"\"[{}]"];
-    NSString *resultString = [[jsStyle componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
-    
-    NSMutableString *staticStyle = [resultString mutableCopy];
-    [staticStyle replaceOccurrencesOfString:@"," withString:@"|" options:0 range:NSMakeRange(0, staticStyle.length)];
-    [staticStyle replaceOccurrencesOfString:@"featureType" withString:@"&style=feature" options:0 range:NSMakeRange(0, staticStyle.length)];
-    [staticStyle replaceOccurrencesOfString:@"|&style=feature" withString:@"&style=feature" options:0 range:NSMakeRange(0, staticStyle.length)];
-    [staticStyle replaceOccurrencesOfString:@"elementType" withString:@"element" options:0 range:NSMakeRange(0, staticStyle.length)];
-    [staticStyle replaceOccurrencesOfString:@"#" withString:@"0x" options:0 range:NSMakeRange(0, staticStyle.length)];
-
-
-    [staticStyle replaceOccurrencesOfString:@"stylers:" withString:@"" options:0 range:NSMakeRange(0, staticStyle.length)];
-
-    return staticStyle;
-     */
 }
 
 - (NSString *)styleWithIdentifier:(NSString *)identifier{
