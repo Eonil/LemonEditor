@@ -60,9 +60,15 @@
         
         _mqSizes = [[aDecoder decodeObjectForKey:@"mqSizes"] mutableCopy];
         _buildPath = [aDecoder decodeObjectForKey:@"_buildPath"];
-        if(_buildDirectory){
-            _buildDirectory = [aDecoder decodeObjectForKey:@"_buildDirectory"];
+        _buildDirectory = [aDecoder decodeObjectForKey:@"_buildDirectory"];
+
+        if([[NSFileManager defaultManager] fileExistsAtPath:_buildDirectory isDirectory:nil] == NO){
+            //buildDirectory가 사라짐-file이 이동되었다고 생각.
+            //nil로 설정해놓고 path가 설정될때 거기서 default path로 설정
+            //setPath 참고.
+            _buildDirectory = nil;
         }
+        
         _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _backgroundGroup = [aDecoder decodeObjectForKey:@"_backgroundGroup"];
         _classGroup = [aDecoder decodeObjectForKey:@"_classGroup"];
@@ -291,6 +297,13 @@
     return _isConnectedWithEditor;
 }
 
+- (void)setPath:(NSString *)path{
+    _path = path;
+    if(_buildDirectory == nil){
+        _buildDirectory = [path stringByDeletingLastPathComponent];
+    }
+}
+
 
 -(void)dealloc{
     if([self isConnectedWithEditor]){
@@ -395,14 +408,6 @@
     return _buildPath;
 }
 
-- (NSString *)buildDirectory{
-    if(_buildDirectory){
-        return _buildDirectory;
-    }
-    else{
-        return [self.path stringByDeletingLastPathComponent];
-    }
-}
 
 - (NSString*)absoluteBuildPath{
     NSMutableString *str = [_buildPath mutableCopy];

@@ -112,7 +112,8 @@ static NSString *IUClassGroupName = @"class";
  @ important
  name , path are set by IUProjectDocument
  */
-@property   NSString    *name, *path, *author, *favicon;
+@property   (nonatomic) NSString *path;
+@property   NSString    *name, *author, *favicon;
 @property   BOOL enableMinWidth;
 /**
  Users can change build Directory.
