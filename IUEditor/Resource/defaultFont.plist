@@ -59,14 +59,27 @@
         <key>name</key>
         <string>Roboto Light</string>
         <key>link</key>
-        <string>&lt;link href=&apos;http://fonts.googleapis.com/css?family=Roboto:100&apos; rel=&apos;stylesheet&apos; type=&apos;text/css&apos;&gt;</string>
+        <string>&lt;link href=&apos;http://fonts.googleapis.com/css?family=Roboto:300&apos; rel=&apos;stylesheet&apos; type=&apos;text/css&apos;&gt;</string>
         <key>css</key>
-        <string>&apos;Roboto Light&apos;, sans-serif</string>
+        <string>&apos;Roboto-Light&apos;, sans-serif</string>
         <key>editable</key>
         <false/>
         <key>isLoadable</key>
         <true/>
     </dict>
+	<key>Roboto Thin</key>
+	<dict>
+		<key>name</key>
+		<string>Roboto Thin</string>
+		<key>link</key>
+		<string>&lt;link href=&apos;http://fonts.googleapis.com/css?family=Roboto:100&apos; rel=&apos;stylesheet&apos; type=&apos;text/css&apos;&gt;</string>
+		<key>css</key>
+		<string>&apos;Roboto-Thin&apos;, sans-serif</string>
+		<key>editable</key>
+		<false/>
+		<key>isLoadable</key>
+		<true/>
+	</dict>
 	<key>Roboto Condensed</key>
 	<dict>
 		<key>name</key>
@@ -288,31 +301,31 @@
 		<key>isLoadable</key>
 		<true/>
 	</dict>
-    <key>Tinos</key>
-    <dict>
-        <key>name</key>
-        <string>Tinos</string>
-        <key>link</key>
-        <string>&lt;link href=&apos;http://fonts.googleapis.com/css?family=Tinos&apos; rel=&apos;stylesheet&apos; type=&apos;text/css&apos;&gt;</string>
-        <key>css</key>
-        <string>&apos;Tinos&apos;, serif</string>
-        <key>editable</key>
-        <false/>
-        <key>isLoadable</key>
-        <true/>
-    </dict>
-    <key>Josefin Slab</key>
-    <dict>
-        <key>name</key>
-        <string>Josefin Slab</string>
-        <key>link</key>
-        <string>&lt;link href=&apos;http://fonts.googleapis.com/css?family=Josefin+Slab&apos; rel=&apos;stylesheet&apos; type=&apos;text/css&apos;&gt;</string>
-        <key>css</key>
-        <string>&apos;Josefin Slab&apos;, serif</string>
-        <key>editable</key>
-        <false/>
-        <key>isLoadable</key>
-        <true/>
-    </dict>
+	<key>Tinos</key>
+	<dict>
+		<key>name</key>
+		<string>Tinos</string>
+		<key>link</key>
+		<string>&lt;link href=&apos;http://fonts.googleapis.com/css?family=Tinos&apos; rel=&apos;stylesheet&apos; type=&apos;text/css&apos;&gt;</string>
+		<key>css</key>
+		<string>&apos;Tinos&apos;, serif</string>
+		<key>editable</key>
+		<false/>
+		<key>isLoadable</key>
+		<true/>
+	</dict>
+	<key>Josefin Slab</key>
+	<dict>
+		<key>name</key>
+		<string>Josefin Slab</string>
+		<key>link</key>
+		<string>&lt;link href=&apos;http://fonts.googleapis.com/css?family=Josefin+Slab&apos; rel=&apos;stylesheet&apos; type=&apos;text/css&apos;&gt;</string>
+		<key>css</key>
+		<string>&apos;Josefin Slab&apos;, serif</string>
+		<key>editable</key>
+		<false/>
+		<key>isLoadable</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
