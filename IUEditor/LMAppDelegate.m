@@ -69,6 +69,9 @@
     if ([JDEnvUtil isFirstExecution:@"IUEditor"]) {
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://server.iueditor.org/download.php"]];
         [NSURLConnection connectionWithRequest:request delegate:nil];
+        
+        //google group
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://groups.google.com/forum/#!forum/iueditor"]];
     }
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://server.iueditor.org/use.php"]];
     [NSURLConnection connectionWithRequest:request delegate:nil];

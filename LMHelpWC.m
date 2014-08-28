@@ -136,7 +136,7 @@ static LMHelpWC *gHelpWC = nil;
 
 
 #pragma mark -policy delegate
-
+#if 0 // we do not open website at iueditor
 
 - (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
 {
@@ -194,6 +194,6 @@ static LMHelpWC *gHelpWC = nil;
     }
 }
 
-
+#endif
 
 @end
