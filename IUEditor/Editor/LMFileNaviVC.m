@@ -239,9 +239,7 @@
     [_documentController setSelectedObject:[[parent childrenFiles] firstObject]];
     [_documentController rearrangeObjects];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:
-     @{IUNotificationStructureChangeType: IUNotificationStructureChangeRemoving,
-       IUNotificationStructureChangedIU: node}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType:IUNotificationStructureChangeRemoving, IUNotificationStructureChangedIU:node}];
 
 }
 
@@ -281,6 +279,8 @@
         [newDoc connectWithEditor];
         [newDoc setIsConnectedWithEditor];
         [[self.project identifierManager] confirm];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType:IUNotificationStructureAdding, IUNotificationStructureChangedIU:newDoc}];
     }
 }
 
