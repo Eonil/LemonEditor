@@ -182,7 +182,7 @@
                                     <action selector="showHerokuWC:" target="-1" id="NxN-EL-8Ic"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Convert As..." id="JHk-ME-u7H">
+                            <menuItem title="Convert to Django Project" id="JHk-ME-u7H">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="convertProject:" target="-1" id="Dn8-O1-sDT"/>

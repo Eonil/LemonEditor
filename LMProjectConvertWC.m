@@ -10,25 +10,27 @@
 #import "IUDjangoProject.h"
 #import "IUProjectController.h"
 
-#import "LMStartNewDjangoVC.h"
-#import "LMStartNewDefaultVC.h"
-#import "LMStartNewWPVC.h"
-
 @interface LMProjectConvertWC ()
-@property (weak) IBOutlet NSView *mainV;
-@property (weak) IBOutlet NSButton *convertB;
-@property (nonatomic) NSInteger selectedIndex;
+@property (weak) IBOutlet NSView *htmlTabV;
+@property (weak) IBOutlet NSView *djangoTabV;
+
+@property (weak) IBOutlet NSView *htmlConvertV;
+@property (weak) IBOutlet NSView *htmlRemainV;
+
+@property (weak) IBOutlet NSView *djangoConvertV;
+@property (weak) IBOutlet NSView *djangoRemainV;
+
+@property (nonatomic) NSString *targetProjectDirectory;
+@property NSString *buildProjectDirectory;
+@property NSString *resourceProjectDirectory;
+
+@property (weak) IBOutlet NSTabView *tabView;
+
 @end
 
 @implementation LMProjectConvertWC{
-    __weak IBOutlet NSSegmentedControl *segControl;
-    __weak IUProject *project;
-    
-    LMStartNewDefaultVC *newDefaultVC;
-    LMStartNewDjangoVC  *newDjangoVC;
-    LMStartNewWPVC      *newWPVC;
-    
-
+    NSString *outputFilePath;
+    IUProject *_project;
 }
 
 - (id)initWithWindow:(NSWindow *)window
@@ -36,56 +38,76 @@
     self = [super initWithWindow:window];
     if (self) {
         // Initialization code here.
-        
     }
     return self;
 }
 
 - (void)awakeFromNib{
-    newDefaultVC = [[LMStartNewDefaultVC alloc] initWithNibName:@"LMStartNewDefaultVC" bundle:nil];
-    newDefaultVC.nextB = self.convertB;
-
-    newDjangoVC = [[LMStartNewDjangoVC alloc] initWithNibName:@"LMStartNewDjangoVC" bundle:nil];
-    newDjangoVC.nextB = self.convertB;
-    
-    newWPVC = [[LMStartNewWPVC alloc] initWithNibName:@"LMStartNewWPVC" bundle:nil];
-    newWPVC.nextB = self.convertB;
+    //cover to django
+    [_tabView selectTabViewItemAtIndex:1];
 }
 
 
 - (void)setCurrentProject:(IUProject *)currentProject{
-    project = currentProject;
+    _project = currentProject;
     //load nib
     [self window];
+    //    [self setTargetProjectDirectory:@"/Users/jd/Desktop"];
+    if ([[currentProject className] isEqualToString:@"IUProject"]) {
+        [_djangoTabV addSubview:_djangoConvertV];
+        [_htmlTabV addSubview:_htmlRemainV];
+    }
+    else {
+        [_htmlTabV addSubview:_htmlConvertV];
+        [_djangoTabV addSubview:_djangoRemainV];
+    }
 }
 
-- (void)setSelectedIndex:(NSInteger)selectedIndex{
-    _selectedIndex = selectedIndex;
-    [newDjangoVC.view removeFromSuperview];
-    [newWPVC.view removeFromSuperview];
-    [newDefaultVC.view removeFromSuperview];
-
-    switch (selectedIndex) {
-        case 0:
-        {
-            [self.mainV addSubview:newDefaultVC.view];
-            [newDefaultVC show];
-        }
-        break;
-        case 1:
-        {
-            [self.mainV addSubview:newWPVC.view];
-            [newWPVC show];
-            break;
-        }
-        case 2:
-        {
-            [self.mainV addSubview:newDjangoVC.view];
-            [newDjangoVC show];
-        }
-        default:
-        break;
+- (IBAction)convertDjango:(id)sender{
+    if (_targetProjectDirectory == nil || _buildProjectDirectory == nil || _resourceProjectDirectory == nil) {
+        [JDLogUtil alert:@"Please fill all fields"];
+        return;
     }
+    
+    NSString *projectPath = [_targetProjectDirectory stringByAppendingFormat:@"/%@.iu", [_targetProjectDirectory lastPathComponent]];
+    
+    // if file exist in project path, alert and return
+    if ([[NSFileManager defaultManager] fileExistsAtPath:projectPath]) {
+        [JDLogUtil alert:[NSString stringWithFormat:@"File exist in %@", projectPath] title:@"Sorry, File exist in path"];
+        return;
+    }
+    
+    NSDictionary *options = @{   IUProjectKeyGit: @(NO),
+                                 IUProjectKeyHeroku: @(NO),
+                                 IUProjectKeyAppName : [_targetProjectDirectory lastPathComponent],
+                                 IUProjectKeyIUFilePath : projectPath,
+                                 IUProjectKeyType:@(IUProjectTypeDjango),
+                                 IUProjectKeyResourcePath : _resourceProjectDirectory,
+                                 IUProjectKeyBuildPath : _buildProjectDirectory,
+                                 IUProjectKeyConversion :
+                                     _project
+                                 };
+    
+    [(IUProjectController *)[NSDocumentController sharedDocumentController] newDocument:self withOption:options];
+    [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseOK];
+}
+- (IBAction)pressSelectProjectDirectory:(id)sender {
+    NSURL *url = [[JDFileUtil util] openDirectoryByNSOpenPanel];
+    self.targetProjectDirectory = [url path];
+}
+
+- (void)setTargetProjectDirectory:(NSString *)targetProjectDirectory{
+    _targetProjectDirectory = targetProjectDirectory;
+    self.buildProjectDirectory = [_targetProjectDirectory stringByAppendingPathComponent:@"templates"];
+    self.resourceProjectDirectory = [_targetProjectDirectory stringByAppendingPathComponent:@"templates/resource"];
+}
+
+- (IBAction)pressCancelB:(id)sender {
+    [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseAbort];
+}
+
+- (NSString *)outputFilePath{
+    return outputFilePath;
 }
 
 
