@@ -17,6 +17,9 @@
 @property NSString *djangoProjectDir;
 @property NSString *djangoResourceDir;
 @property NSString *djangoTemplateDir;
+
+@property (nonatomic) NSString *fileName;
+
 @end
 
 @implementation LMStartNewDjangoVC
@@ -32,24 +35,23 @@
 
 
 - (void)performNext{
-    if ([_djangoProjectDir length] == 0 ) {
+    if (_djangoProjectDir == nil || [_djangoProjectDir length] == 0 ) {
         [JDLogUtil alert:@"Input project directory path"];
         return;
     }
-    if ([_djangoResourceDir length] == 0 ) {
+    if (_djangoResourceDir == nil || [_djangoResourceDir length] == 0 ) {
         [JDLogUtil alert:@"Input project resource directory path"];
         return;
     }
-    if ([_djangoTemplateDir length] == 0 ) {
+    if (_djangoTemplateDir == nil || [_djangoTemplateDir length] == 0 ) {
         [JDLogUtil alert:@"Input project template directory path"];
         return;
     }
 
-    NSString *fileName = [NSString stringWithFormat:@"%@.iu", [_djangoProjectDir lastPathComponent]];
     NSDictionary *options = @{   IUProjectKeyGit: @(NO),
                                  IUProjectKeyHeroku: @(NO),
                                  IUProjectKeyAppName : [_djangoProjectDir lastPathComponent],
-                                 IUProjectKeyIUFilePath : [_djangoProjectDir stringByAppendingPathComponent:fileName],
+                                 IUProjectKeyIUFilePath : [_djangoProjectDir stringByAppendingPathComponent:self.fileName],
                                  IUProjectKeyType:@(IUProjectTypeDjango),
                                  IUProjectKeyResourcePath : _djangoResourceDir,
                                  IUProjectKeyBuildPath : _djangoTemplateDir
@@ -64,8 +66,21 @@
     [_parentVC show];
 }
 
+- (NSString *)fileName{
+    if(_djangoProjectDir && _djangoProjectDir.length > 0){
+        return [_djangoProjectDir stringByAppendingString:[NSString stringWithFormat:@"/%@.iu", [_djangoProjectDir lastPathComponent]] ];
+    }
+    else{
+        return @"Your Project Name will be presented";
+    }
+}
+
 - (IBAction)performProjectDirSelect:(id)sender {
+    
+    [self willChangeValueForKey:@"fileName"];
     self.djangoProjectDir = [[[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Django Project Directory"] path];
+    [self didChangeValueForKey:@"fileName"];
+    
     self.djangoTemplateDir = @"$IUFileDirectory/templates";
     self.djangoResourceDir = @"$IUFileDirectory/templates/resource";
 }

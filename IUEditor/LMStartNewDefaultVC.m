@@ -25,6 +25,16 @@
 @implementation LMStartNewDefaultVC
 
 - (void)performNext{
+    if(_defaultProjectDir == nil || _defaultProjectDir==0){
+        [JDUIUtil hudAlert:@"Select Project Folder Path" second:2];
+        return;
+    }
+
+    if(_appName == nil || _appName.length==0){
+        [JDUIUtil hudAlert:@"Input Project Name" second:2];
+        return;
+    }
+    
     [self.view.window close];
     
     
@@ -73,8 +83,19 @@
 }
 
 - (NSString *)wholeName{
-    NSString *iuName = [_appName stringByAppendingPathExtension:@"iu"];
-    return [_defaultProjectDir stringByAppendingPathComponent:iuName];
+    if(_appName && _defaultProjectDir){
+        NSString *iuName = [_appName stringByAppendingPathExtension:@"iu"];
+        return [_defaultProjectDir stringByAppendingPathComponent:iuName];
+    }
+    else if(_appName){
+        NSString *iuName = [_appName stringByAppendingPathExtension:@"iu"];
+        return [@"Select Path/" stringByAppendingPathComponent:iuName];
+
+    }
+    else if(_defaultProjectDir){
+        return [_defaultProjectDir stringByAppendingPathComponent:@"NAME.iu"];
+    }
+    return @"Your Project Name will be presented";
 }
 
 @end
