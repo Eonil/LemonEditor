@@ -695,7 +695,7 @@
     }
     
 
-    [iu updateHTML];
+    [self updateHTML];
     [iu bind:@"identifierManager" toObject:self withKeyPath:@"identifierManager" options:nil];
 
     if (self.isConnectedWithEditor) {
