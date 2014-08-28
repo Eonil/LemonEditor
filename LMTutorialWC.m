@@ -16,6 +16,7 @@
 @property   NSArray *tutorial, *tutorialEng, *tutorialKor;
 @property   NSUInteger index;
 
+@property (weak) IBOutlet NSButton *startB;
 
 @end
 
@@ -37,24 +38,34 @@
     NSDictionary *tutorialImageList = [NSDictionary dictionaryWithContentsOfFile:tutorialImagePath];
     
     _tutorialEng = [tutorialImageList objectForKey:@"English"];
-    _tutorialKor = [tutorialImageList objectForKey:@"Korean"];
+//    _tutorialKor = [tutorialImageList objectForKey:@"Korean"];
     
     _index = 0;
     [_tutorialImageV setImage:[NSImage imageNamed:@"Tutorial00.png"]];
+    [self setButtonIntro];
 }
 
 - (void)setButtonOrder{
+    [_startB setHidden:YES];
+    [_prevB setHidden:NO];
+    [_nextB setHidden:NO];
+
     [_prevB setTitle:@"Previous"];
     [_nextB setTitle:@"Next"];
 }
 
 - (void)setButtonLast{
+    [_startB setHidden:YES];
+    [_prevB setHidden:NO];
+    [_nextB setHidden:NO];
+
     [_prevB setTitle:@"Previous"];
     [_nextB setTitle:@"Close"];
 }
 - (void) setButtonIntro{
-    [_prevB setTitle:@"English"];
-    [_nextB setTitle:@"한국어"];
+    [_startB setHidden:NO];
+    [_prevB setHidden:YES];
+    [_nextB setHidden:YES];
 }
 - (IBAction)clickShowCheckButton:(NSButton *)sender {
     [[NSUserDefaults standardUserDefaults] setBool:sender.state forKey:@"iututorial"];

@@ -9,6 +9,7 @@
                 <outlet property="nextB" destination="uRQ-JC-LR4" id="s1n-pa-8gH"/>
                 <outlet property="prevB" destination="lbN-jL-UjE" id="Cfd-06-b8J"/>
                 <outlet property="showCheckBox" destination="MUr-Bd-m0r" id="4Hz-Cv-ZHf"/>
+                <outlet property="startB" destination="2G0-AB-mOt" id="bLU-aG-THI"/>
                 <outlet property="tutorialImageV" destination="Yw4-A5-pvq" id="fIi-Hy-4Rk"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -19,7 +20,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="613" y="186" width="800" height="760"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <value key="minSize" type="size" width="800" height="760"/>
             <value key="maxSize" type="size" width="800" height="760"/>
             <view key="contentView" id="se5-gp-TjO">
@@ -66,6 +67,16 @@
                                         <action selector="clickShowCheckButton:" target="-2" id="hoX-Kv-pNA"/>
                                     </connections>
                                 </button>
+                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2G0-AB-mOt">
+                                    <rect key="frame" x="321" y="58" width="160" height="41"/>
+                                    <buttonCell key="cell" type="square" title="Start Tutorial" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wo9-LJ-xUL">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="pushPrevB:" target="-2" id="jRl-f6-TqY"/>
+                                    </connections>
+                                </button>
                             </subviews>
                         </view>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
@@ -76,7 +87,6 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="468" y="388"/>
         </window>
     </objects>
     <resources>
