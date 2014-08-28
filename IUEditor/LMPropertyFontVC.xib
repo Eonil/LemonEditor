@@ -202,7 +202,7 @@
                                     <segments>
                                         <segment label="B" width="25"/>
                                         <segment label="I" width="24" tag="1"/>
-                                        <segment label="U" width="24"/>
+                                        <segment label="U" width="24" tag="2"/>
                                     </segments>
                                 </segmentedCell>
                                 <connections>

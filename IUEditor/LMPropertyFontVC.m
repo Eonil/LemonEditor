@@ -411,15 +411,27 @@
 
 - (IBAction)fontDecoBPressed:(id)sender {
     
-    BOOL value;
-    value = [sender isSelectedForSegment:0];
-    [self setValue:@(value) forCSSTag:IUCSSTagFontWeight];
-    
-    value = [sender isSelectedForSegment:1];
-    [self setValue:@(value) forCSSTag:IUCSSTagFontStyle];
-    
-    value = [sender isSelectedForSegment:2];
-    [self setValue:@(value) forCSSTag:IUCSSTagTextDecoration];
+   
+    NSInteger index = [sender selectedSegment];
+    switch (index) {
+        case 0:{
+             BOOL value = [sender isSelectedForSegment:index];
+            [self setValue:@(value) forCSSTag:IUCSSTagFontWeight];
+            break;
+        }
+        case 1:{
+            BOOL value = [sender isSelectedForSegment:index];
+            [self setValue:@(value) forCSSTag:IUCSSTagFontStyle];
+            break;
+        }
+        case 2:{
+            BOOL value = [sender isSelectedForSegment:index];
+            [self setValue:@(value) forCSSTag:IUCSSTagTextDecoration];
+            break;
+        }
+        default:
+            break;
+    }
     
 }
 
