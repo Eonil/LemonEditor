@@ -916,7 +916,10 @@
     else {
         IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
         if(file){
-            if(_rule == IUCompileRuleDjango && target == IUTargetOutput){
+            if(target == IUTargetEditor){
+                imgSrc = [file absolutePath];
+            }
+            else if(_rule == IUCompileRuleDjango && target == IUTargetOutput){
                 imgSrc = [@"/" stringByAppendingString:[file relativePath]];
             }
             else{
