@@ -532,18 +532,9 @@
                     nextSheetName = [[[self.pageSheets objectAtIndex:indexOfSheet+1] name] stringByAppendingString:@".html"];
                 }
                 
-                NSString *str = [[@"<script> document.addEventListener('keydown', function(event){ \
-                    if (event.keyCode == 34 || event.keyCode == 39) {\
-                        window.location.replace('IUPRESENTATION_NEXT_PAGE');\
-                    }\
-                    else if (event.keyCode == 33 || event.keyCode == 37) {\
-                        window.location.replace('IUPRESENTATION_PREV_PAGE');\
-                    }});\
-                    $(document).click(function() {\
-                        window.location.replace('IUPRESENTATION_NEXT_PAGE');\
-                    });\
-                    </script>" stringByReplacingOccurrencesOfString:@"IUPRESENTATION_NEXT_PAGE" withString:nextSheetName] stringByReplacingOccurrencesOfString:@"IUPRESENTATION_PREV_PAGE" withString:prevSheetName];
-                outputHTML = [outputHTML stringByAppendingString:str];
+                NSString *scriptPath = [[NSBundle mainBundle] pathForResource:@"iupresentationScript" ofType:@"txt"];
+                NSString *presentStr = [[[NSString stringWithContentsOfFile:scriptPath encoding:NSUTF8StringEncoding error:nil]  stringByReplacingOccurrencesOfString:@"IUPRESENTATION_NEXT_PAGE" withString:nextSheetName] stringByReplacingOccurrencesOfString:@"IUPRESENTATION_PREV_PAGE" withString:prevSheetName];
+                outputHTML = [outputHTML stringByAppendingString:presentStr];
             }
         }
         
