@@ -70,6 +70,11 @@ function reframeCenterIU(iu, isAlreadyChecked){
             var myW = $(this).width();
             $(this).css('left', (parentW-myW)/2 + 'px');
         }
+		else if(pos == 'fixed'){
+			var windowWidth = $(window).width();
+            var myW = $(this).width();
+            $(this).css('left', (windowWidth-myW)/2 + 'px');	
+		}
     });
     
 }
