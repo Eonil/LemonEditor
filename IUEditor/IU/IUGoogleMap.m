@@ -185,12 +185,14 @@
 
 - (NSString *)innerCurrentThemeStyle{
     
-    NSString *staticStyle = [self.delegate callWebScriptMethod:@"getGoogleMapStaticStyle" withArguments:@[@(_themeType-1)]];
+    if(_themeType != 0){
     
-    if(staticStyle){
-        return staticStyle;
+        NSString *staticStyle = [self.delegate callWebScriptMethod:@"getGoogleMapStaticStyle" withArguments:@[@(_themeType-1)]];
+        
+        if(staticStyle){
+            return staticStyle;
+        }
     }
-    
     return @"";
     /*
     NSCharacterSet *notAllowedChars = [NSCharacterSet characterSetWithCharactersInString:@"\"[{}]"];
