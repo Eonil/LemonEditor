@@ -256,6 +256,7 @@
     [commandVC prepareDealloc];
     [resourceVC prepareDealloc];
     [iuInspectorVC prepareDealloc];
+    [appearanceVC prepareDealloc];
 }
 
 

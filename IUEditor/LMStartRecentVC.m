@@ -86,4 +86,8 @@
     
     [self.view.window close];
 }
+
+- (void)doubleClick:(NSEvent *)theEvent{
+    [self pressSelectBtn:theEvent];
+}
 @end

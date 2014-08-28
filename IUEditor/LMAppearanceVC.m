@@ -40,16 +40,7 @@
     [JDLogUtil log:IULogDealloc string:@"ApperanceVC"];
 }
 - (void)prepareDealloc{
-    /*
-    [appearanceFrameVC unbind:@"controller"];
-    [propertyBGImageVC unbind:@"controller"];
-    [propertyBGImageVC unbind:@"resourceManager"];
-    [propertyBorderVC unbind:@"controller"];
-    [appearanceColorVC unbind:@"controller"];
-    [propertyFontVC unbind:@"controller"];
-    [propertyShadowVC unbind:@"controller"];
-    [propertyOverflowVC unbind:@"controller"];
-     */
+    [propertyBGImageVC prepareDealloc];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

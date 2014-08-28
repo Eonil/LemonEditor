@@ -138,6 +138,9 @@
     
     
 }
+- (void)prepareDealloc{
+    [_imageNameComboBox unbind:NSContentBinding];
+}
 
 - (void)dealloc{
     [self removeObserverForCSSTag:IUCSSTagBGSize];

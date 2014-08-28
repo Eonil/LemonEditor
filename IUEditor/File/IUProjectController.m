@@ -93,6 +93,7 @@
     
 }
 
+
 - (void)openDocumentWithContentsOfURL:(NSURL *)url display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument *, BOOL, NSError *))completionHandler{
     if(url){
         [super openDocumentWithContentsOfURL:url display:displayDocument completionHandler:completionHandler];
@@ -102,10 +103,12 @@
 
 - (void)reopenDocumentForURL:(NSURL *)urlOrNil withContentsOfURL:(NSURL *)contentsURL display:(BOOL)displayDocument completionHandler:(void (^)(NSDocument *, BOOL, NSError *))completionHandler{
     if(urlOrNil){
-        [super reopenDocumentForURL:urlOrNil withContentsOfURL:contentsURL display:YES completionHandler:completionHandler];
+        [super reopenDocumentForURL:urlOrNil withContentsOfURL:contentsURL display:displayDocument completionHandler:completionHandler];
     }
     
 }
+
+
 
 
 @end

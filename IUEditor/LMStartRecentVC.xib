@@ -69,7 +69,7 @@
                             <rect key="frame" x="1" y="1" width="698" height="58"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <box autoresizesSubviews="NO" borderWidth="0.0" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="K5C-g3-nwK">
+                                <box autoresizesSubviews="NO" borderWidth="0.0" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="K5C-g3-nwK" customClass="JDClickBox">
                                     <rect key="frame" x="0.0" y="0.0" width="700" height="60"/>
                                     <view key="contentView">
                                         <rect key="frame" x="0.0" y="0.0" width="700" height="60"/>
@@ -134,6 +134,9 @@
                                     </constraints>
                                     <color key="borderColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="fillColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-2" id="BR8-xr-lzG"/>
+                                    </connections>
                                 </box>
                             </subviews>
                         </view>

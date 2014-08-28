@@ -712,6 +712,7 @@
 		3DF437CA19AF1B420049A87E /* icon-social-twitter-outline-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF4372B19AF1B420049A87E /* icon-social-twitter-outline-128.png */; };
 		3DF437CC19AF31620049A87E /* iupresentationScript.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DF437CB19AF31620049A87E /* iupresentationScript.txt */; };
 		3DF437CF19AF69B30049A87E /* iugooglemap_theme.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DF437CE19AF69B30049A87E /* iugooglemap_theme.js */; };
+		3DF437D419AF9FD10049A87E /* JDClickBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF437D319AF9FD10049A87E /* JDClickBox.m */; };
 		3DF8029A18FD0B2500913505 /* IUHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8029918FD0B2500913505 /* IUHTML.m */; };
 		3DF8029D18FE3D6000913505 /* IUWebMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8029C18FE3D6000913505 /* IUWebMovie.m */; };
 		3DF803D818FE62C900913505 /* dotted_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF803C118FE62C900913505 /* dotted_line.png */; };
@@ -1841,6 +1842,8 @@
 		3DF4372B19AF1B420049A87E /* icon-social-twitter-outline-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-social-twitter-outline-128.png"; path = "clipArt/icon-social-twitter-outline-128.png"; sourceTree = "<group>"; };
 		3DF437CB19AF31620049A87E /* iupresentationScript.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iupresentationScript.txt; sourceTree = "<group>"; };
 		3DF437CE19AF69B30049A87E /* iugooglemap_theme.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = iugooglemap_theme.js; sourceTree = "<group>"; };
+		3DF437D219AF9FD10049A87E /* JDClickBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDClickBox.h; path = JD/JDClickBox.h; sourceTree = "<group>"; };
+		3DF437D319AF9FD10049A87E /* JDClickBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDClickBox.m; path = JD/JDClickBox.m; sourceTree = "<group>"; };
 		3DF8029818FD0B2500913505 /* IUHTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUHTML.h; sourceTree = "<group>"; };
 		3DF8029918FD0B2500913505 /* IUHTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUHTML.m; sourceTree = "<group>"; };
 		3DF8029B18FE3D6000913505 /* IUWebMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUWebMovie.h; sourceTree = "<group>"; };
@@ -4074,6 +4077,8 @@
 				694A9864196D197900C1D630 /* JDFormatter.m */,
 				69F59BA3196D97EA00D6EAF5 /* JDShellUtil.h */,
 				69F59BA4196D97EA00D6EAF5 /* JDShellUtil.m */,
+				3DF437D219AF9FD10049A87E /* JDClickBox.h */,
+				3DF437D319AF9FD10049A87E /* JDClickBox.m */,
 			);
 			name = JD;
 			sourceTree = "<group>";
@@ -5523,6 +5528,7 @@
 				CB2AA9C61974D43200DA7CCD /* WPPageLinks.m in Sources */,
 				69CB92B8191B6A2600BEFBED /* LMPropertyIUPageLinkSetVC.m in Sources */,
 				69757B0F18D95BBC0095CBAC /* JDTextFieldCell.m in Sources */,
+				3DF437D419AF9FD10049A87E /* JDClickBox.m in Sources */,
 				6919204A18DCFED000F8522B /* NSObject+JDExtension.m in Sources */,
 				3DED2773190E4148001A1D67 /* IUCarouselItem.m in Sources */,
 				6953852E18ED6EC800CC42E5 /* IUController.m in Sources */,

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -96,6 +96,11 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Open Quickly" keyEquivalent="O" id="mmP-ib-o7D">
+                                <connections>
+                                    <action selector="showRecentFiles:" target="494" id="kMZ-ia-per"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="79">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -182,6 +187,7 @@
                                     <action selector="showHerokuWC:" target="-1" id="NxN-EL-8Ic"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="i21-GJ-HOW"/>
                             <menuItem title="Convert to Django Project" id="JHk-ME-u7H">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -195,16 +201,16 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="491">
                         <items>
-                            <menuItem title="IUEditor Homepage" tag="1" id="kCQ-jE-ILK">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="performHelp:" target="494" id="ayZ-By-5r2"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Tutorial" tag="2" id="jHa-Jg-mkb">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="performHelp:" target="494" id="Wrc-ry-YJb"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Visit IUEditor Website" tag="1" id="kCQ-jE-ILK">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="performHelp:" target="494" id="ayZ-By-5r2"/>
                                 </connections>
                             </menuItem>
                         </items>

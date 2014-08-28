@@ -76,7 +76,7 @@
 }
 
 -(void)dealloc{
-    NSLog(@"IUResrouceGroup Defalloc");
+    [JDLogUtil log:IULogDealloc string:@"IUResrouceGroup"];
 }
 
 -(NSString*)relativePath{
