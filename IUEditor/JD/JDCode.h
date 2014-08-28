@@ -39,4 +39,6 @@
 - (void)replaceCodeString:(NSString *)code toCodeString:(NSString*)replacementString;
 
 - (void)wrapTextWithStartString:(NSString*)startString endString:(NSString*)endString;
+
+- (void)addJSBlockFromString:(NSString *)aString WithIdentifier:(NSString *)blockIdentifier;
 @end

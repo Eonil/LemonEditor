@@ -8,6 +8,7 @@ $(document).ready(function(){
 	}
 	console.log('start : transition code');
                   
+    /*INIT_IUTransition_REPLACEMENT_START*/
 	//Initialize transition
 	$('.IUTransition').each(function(){
         var eventType = $(this).attr('transitionevent');
@@ -24,7 +25,8 @@ $(document).ready(function(){
         var secondObj = $(this).children().filter('.IUItem')[1];
         $(secondObj).css('display', 'none');
 	});
-                  
+    /*INIT_IUTransition_REPLACEMENT_END*/
+    /*INIT_IUMenu_REPLACEMENT_START*/
     //Initialize IUMenu
 	$('.mobile-button').on('click', function(){
 		var menu = $(this).next('ul');
@@ -65,10 +67,13 @@ $(document).ready(function(){
 			}
 		}
 	  });
-	  
+                  
+    /*INIT_IUMenu_REPLACEMENT_END*/
+  
 	 
     /*INIT_JS_REPLACEMENT*/
-                  
+
+    /*INIT_Default_REPLACEMENT_START*/
 	/* Initialize IUFrame.js */
 	resizePageContentHeight();
 	resizeCollection();
@@ -77,6 +82,7 @@ $(document).ready(function(){
 	
 	/* Initialize iu.js*/
 	relocateScrollAnimation();
-            
+    /*INIT_Default_REPLACEMENT_END*/
+                  
     console.log("ready : iuinit.js");
 });

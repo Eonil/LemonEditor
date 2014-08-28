@@ -24,7 +24,7 @@
 #pragma mark output Source
 - (NSString*)outputHTMLSource;
 - (NSString*)outputCSSSource;
-- (NSString*)outputInitJSSource;
+- (JDCode *)outputInitJSCode;
 - (NSArray *)outputArrayClipArt;
 
 -(NSArray*)widthWithCSS;

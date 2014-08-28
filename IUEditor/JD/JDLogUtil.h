@@ -70,7 +70,6 @@
 #define JDSectionWarnLog(sectionName, format, ...)      JDSectionLog(JDLog_Level_Warn, sectionName, format, ##__VA_ARGS__)
 #define JDSectionInfoLog(sectionName, format, ...)      JDSectionLog(JDLog_Level_Info, sectionName, format, ##__VA_ARGS__)
 #define JDSectionDebugLog(sectionName, format, ...)     JDSectionLog(JDLog_Level_Debug, sectionName, format, ##__VA_ARGS__)
-#define JLog JDSectionDebugLog
 #define JDSectionTraceLog(sectionName, format, ...)     JDSectionLog(JDLog_Level_Trace, sectionName, format, ##__VA_ARGS__)
 
 typedef enum {

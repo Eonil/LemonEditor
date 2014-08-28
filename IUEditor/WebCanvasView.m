@@ -175,6 +175,7 @@
     if (frame != [sender mainFrame]){
         return;
     }
+    //FIXME: 동시에 두개 켜지면서 하나가 로딩이 덜된것이 신호가 같이 가는 것 같음. 
     isStartVC = YES;
     [self.VC didFinishLoadFrame];
     LMWC *wc = (LMWC *)[[self window] windowController];

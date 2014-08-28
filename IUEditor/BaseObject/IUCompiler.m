@@ -376,9 +376,15 @@
         for(NSString *filename in sheet.project.defaultOutputJSArray){
             [code addCodeLineWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@\"></script>", filename];
         }
-        
-        [code addCodeLine:@"<script src=\"http://maps.googleapis.com/maps/api/js?v=3.exp\"></script>"];
-        [code addCodeLine:@"<script src=\"http://f.vimeocdn.com/js/froogaloop2.min.js\"></script>"];
+        //init.js
+        [code addCodeLineWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@-init.js\"></script>", sheet.name];
+
+        if([sheet containClass:[IUGoogleMap class]]){
+            [code addCodeLine:@"<script src=\"http://maps.googleapis.com/maps/api/js?v=3.exp\"></script>"];
+        }
+        if([sheet containClass:[IUWebMovie class]]){
+            [code addCodeLine:@"<script src=\"http://f.vimeocdn.com/js/froogaloop2.min.js\"></script>"];
+        }
         
     }
     return code;
@@ -1695,9 +1701,37 @@
 
 #pragma mark - manage JS source
 
--(NSString*)outputJSInitializeSource:(IUSheet *)document{
-    JDCode *jsSource = [self jsCode:document isEdit:NO];
-    return [jsSource string];
+-(JDCode *)outputJSInitializeSource:(IUSheet *)sheet{
+    
+    JDCode *jsCode = [[JDCode alloc] init];
+    [jsCode addCodeLine:@"$(document).ready(function(){"];
+    
+    
+    JDCode *classJSSource = [self jsOnceCodeForSheet:sheet];
+    [jsCode addCodeWithIndent:classJSSource];
+    JDCode *objectJSSource = [self jsCode:sheet isEdit:NO];
+    [jsCode addCodeWithIndent:objectJSSource];
+    [jsCode addNewLine];
+    
+    [jsCode addCodeLine:@"});"];
+    return jsCode;
+}
+
+-(JDCode *)jsOnceCodeForSheet:(IUSheet *)sheet{
+    JDCode *jsCode = [[JDCode alloc] init];
+
+    NSString *iuinitFilePath = [[NSBundle mainBundle] pathForResource:@"iuinit" ofType:@"js"];
+    
+    NSString *initJSStr = [NSString stringWithContentsOfFile:iuinitFilePath encoding:NSUTF8StringEncoding error:nil];;
+    if([sheet containClass:[IUTransition class]]){
+        [jsCode addJSBlockFromString:initJSStr WithIdentifier:@"IUTransition"];
+    }
+    if([sheet containClass:[IUMenuBar class]]){
+        [jsCode addJSBlockFromString:initJSStr WithIdentifier:@"IUMenuBar"];
+    }
+    
+    [jsCode addJSBlockFromString:initJSStr WithIdentifier:@"Default"];
+    return jsCode;
 }
 
 -(JDCode *)jsCode:(IUBox *)iu isEdit:(BOOL)isEdit{

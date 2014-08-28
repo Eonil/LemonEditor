@@ -147,6 +147,18 @@
     [string deleteCharactersInRange:removeRange];
 }
 
+- (void)addJSBlockFromString:(NSString *)aString WithIdentifier:(NSString *)blockIdentifier{
+    NSString *startString = [NSString stringWithFormat:@"/*INIT_%@_REPLACEMENT_START*/", blockIdentifier];
+    NSString *endString = [NSString stringWithFormat:@"/*INIT_%@_REPLACEMENT_END*/", blockIdentifier];
+    
+    NSRange start =[aString rangeOfString:startString];
+    NSRange end =[aString rangeOfString:endString];
+    NSRange addRange = NSMakeRange(start.location+startString.length, end.location - start.location - startString.length);
+    NSString *findBlock = [aString substringWithRange:addRange];
+    
+    [string appendString:findBlock];
+}
+
 - (void)replaceCodeString:(NSString *)code toCodeString:(NSString*)replacementString{
     [string replaceOccurrencesOfString:code withString:replacementString options:0 range:NSMakeRange(0, string.length)];
 }

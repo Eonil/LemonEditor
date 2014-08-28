@@ -206,6 +206,10 @@
     [self enableUpdateJS:self];
     [self updateJS];
     
+    NSString *htmlSource =  [(DOMHTMLElement *)[[[[self webView] mainFrame] DOMDocument] documentElement] outerHTML];
+    JDErrorLog(@"%@", htmlSource);
+
+    
 }
 
 - (void)updateSheetHeight{

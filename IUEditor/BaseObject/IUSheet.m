@@ -94,7 +94,7 @@
     return [self.project.compiler outputHTMLSource:self];
 }
 
-- (NSString*)outputInitJSSource{
+- (JDCode *)outputInitJSCode{
     return [self.project.compiler outputJSInitializeSource:self];
 }
 - (NSArray *)outputArrayClipArt{

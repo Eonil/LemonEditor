@@ -507,11 +507,12 @@
     [self copyCSSJSResourceToBuildPath:buildResourcePath];
     
     NSString *resourceCSSPath = [buildResourcePath stringByAppendingPathComponent:@"css"];
+    NSString *resourceJSPath = [buildResourcePath stringByAppendingPathComponent:@"js"];
 
     IUEventVariable *eventVariable = [[IUEventVariable alloc] init];
-    JDCode *initializeJSSource = [[JDCode alloc] init];
-
     NSMutableArray *clipArtArray = [NSMutableArray array];
+    
+    
     for (IUSheet *sheet in self.allDocuments) {
         //clipart
         [clipArtArray addObjectsFromArray:[sheet outputArrayClipArt]];
@@ -557,13 +558,18 @@
             }
         }
         
-        //js
+        //eventJS
         [eventVariable makeEventDictionary:sheet];
-        [initializeJSSource increaseIndentLevelForEdit];
-        [initializeJSSource addCodeLineWithFormat:@"/* Initialize %@ */\n", sheet.name];
-        [initializeJSSource decreaseIndentLevelForEdit];
-        [initializeJSSource addCodeLine:[sheet outputInitJSSource]];
-        [initializeJSSource addNewLine];
+        
+        
+        //make initialize javascript file - init.js for sheet
+        JDCode *initJSCode = [sheet outputInitJSCode];
+        
+        NSString *initializeJSPath = [[resourceJSPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-init", sheet.name]] stringByAppendingPathExtension:@"js"];
+        if ([initJSCode.string writeToFile:initializeJSPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
+            NSAssert(0, @"write fail");
+        }
+
     }
     //copy clipart to build directory
     if (clipArtArray.count != 0) {
@@ -577,20 +583,6 @@
         }
     }
     
-    //make initialize javascript file
-    NSString *resourceJSPath = [buildResourcePath stringByAppendingPathComponent:@"js"];
-    NSString *iuinitFilePath = [[NSBundle mainBundle] pathForResource:@"iuinit" ofType:@"js"];
-    
-    JDCode *sourceCode = [[JDCode alloc] initWithCodeString: [NSString stringWithContentsOfFile:iuinitFilePath encoding:NSUTF8StringEncoding error:nil]];
-    [sourceCode replaceCodeString:@"/*INIT_JS_REPLACEMENT*/" toCode:initializeJSSource];
-
-
-    NSString *initializeJSPath = [[resourceJSPath stringByAppendingPathComponent:@"iuinit"] stringByAppendingPathExtension:@"js"];
-    NSError *myError;
-    
-    if ([sourceCode.string writeToFile:initializeJSPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
-        NSAssert(0, @"write fail");
-    }
     //make event javascript file
     NSString *eventJSString = [eventVariable outputEventJSSource];
     NSString *eventJSFilePath = [[resourceJSPath stringByAppendingPathComponent:@"iuevent"] stringByAppendingPathExtension:@"js"];
@@ -659,7 +651,7 @@
     return @[@"jquery.event.swipe.js", @"iuframe.js", @"iu.js", @"iucarousel.js", ];
 }
 - (NSArray *)defaultOutputJSArray{
-    return [[self defaultCopyJSArray] arrayByAddingObjectsFromArray:@[ @"iuevent.js", @"iuinit.js"]];
+    return [[self defaultCopyJSArray] arrayByAddingObjectsFromArray:@[ @"iuevent.js"]];
 }
 - (NSArray *)defaultOutputIEJSArray{
     return @[@"jquery.backgroundSize.js", @"respond.min.js"];

@@ -316,12 +316,16 @@
         [_project connectWithEditor];
         [_project setIsConnectedWithEditor];
         
+        [canvasVC disableUpdateCSS:self];
+        [canvasVC disableUpdateJS:self];
         //load sizeView
         for(NSNumber *number in _project.mqSizes){
             NSInteger frameSize = [number integerValue];
             [canvasVC addFrame:frameSize];
         }
         
+        [canvasVC enableUpdateJS:self];
+        [canvasVC enableUpdateCSS:self];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentDocument:) name:IUNotificationMQSelected object:self];
         
         
