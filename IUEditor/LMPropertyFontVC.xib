@@ -44,7 +44,7 @@
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <font key="titleFont" metaFont="system"/>
                             </box>
-                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yle-zg-jre">
+                            <comboBox toolTip="Font name" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yle-zg-jre">
                                 <rect key="frame" x="77" y="3" width="186" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="183" id="GvL-Lg-3yM"/>
@@ -100,7 +100,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="EF9-cy-hVF">
+                            <colorWell toolTip="Font color" translatesAutoresizingMaskIntoConstraints="NO" id="EF9-cy-hVF">
                                 <rect key="frame" x="77" y="86" width="182" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="182" id="IPg-LT-5Wo"/>
@@ -108,7 +108,7 @@
                                 </constraints>
                                 <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                             </colorWell>
-                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T6Q-UK-fkM">
+                            <comboBox toolTip="Line height for text" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T6Q-UK-fkM">
                                 <rect key="frame" x="77" y="32" width="100" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="5bq-BF-9CG"/>
@@ -150,7 +150,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZNa-jN-U2r">
+                            <comboBox toolTip="Font size" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZNa-jN-U2r">
                                 <rect key="frame" x="77" y="58" width="100" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="c9C-6G-Ngo"/>
@@ -165,7 +165,7 @@
                                     <outlet property="formatter" destination="2Xc-jP-M6t" id="Hcl-rX-xEo"/>
                                 </connections>
                             </comboBox>
-                            <button toolTip="Fit box size to image" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hEa-YS-8cD">
+                            <button toolTip="Auto line height" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hEa-YS-8cD">
                                 <rect key="frame" x="182" y="34" width="77" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="77" id="InN-Jv-vJW"/>
@@ -176,7 +176,7 @@
                                     <font key="font" metaFont="system" size="10"/>
                                 </buttonCell>
                             </button>
-                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cw0-rI-yGQ">
+                            <comboBox toolTip="Font spacing" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cw0-rI-yGQ">
                                 <rect key="frame" x="182" y="58" width="80" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="77" id="cST-Hx-xrf"/>
@@ -221,7 +221,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FLi-Cj-znY">
+                            <segmentedControl toolTip="Font Align" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FLi-Cj-znY">
                                 <rect key="frame" x="77" y="8" width="97" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="OSI-Xm-esL"/>

@@ -25,7 +25,7 @@
             <rect key="frame" x="0.0" y="0.0" width="276" height="130"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <box identifier="shadowtitlebox" autoresizesSubviews="NO" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="EHG-kf-12d" userLabel="Title">
+                <box identifier="shadowtitlebox" autoresizesSubviews="NO" toolTip="shadow color" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="EHG-kf-12d" userLabel="Title">
                     <rect key="frame" x="0.0" y="100" width="276" height="30"/>
                     <view key="contentView">
                         <rect key="frame" x="0.0" y="0.0" width="276" height="30"/>
@@ -103,7 +103,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HPX-Mk-5Ql">
+                            <textField toolTip="blur shadow value" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HPX-Mk-5Ql">
                                 <rect key="frame" x="226" y="10" width="34" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="34" id="L3V-Nx-Wdr"/>
@@ -115,7 +115,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <slider toolTip="Shadow Y position to go down." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p9R-Lx-z49">
+                            <slider toolTip="blur shadow value" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p9R-Lx-z49">
                                 <rect key="frame" x="76" y="9" width="138" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="138" id="my9-iB-v8k"/>
@@ -123,7 +123,7 @@
                                 </constraints>
                                 <sliderCell key="cell" controlSize="mini" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" numberOfTickMarks="3" sliderType="linear" id="eHc-T0-eEV"/>
                             </slider>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nDw-yV-JEA">
+                            <textField toolTip="spread shadow value" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nDw-yV-JEA">
                                 <rect key="frame" x="226" y="32" width="34" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="bFy-0n-TNR"/>
@@ -147,7 +147,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <slider toolTip="Shadow Y position to go down." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kVp-4x-uO2">
+                            <slider toolTip="spread shadow value" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kVp-4x-uO2">
                                 <rect key="frame" x="76" y="32" width="138" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="138" id="hpZ-bT-Mln"/>
@@ -155,7 +155,7 @@
                                 </constraints>
                                 <sliderCell key="cell" controlSize="mini" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" numberOfTickMarks="3" sliderType="linear" id="fem-jB-vaC"/>
                             </slider>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ah4-8b-rIy">
+                            <textField toolTip="hotizontal shadow value" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ah4-8b-rIy">
                                 <rect key="frame" x="226" y="54" width="34" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="3Rc-SW-gsO"/>
@@ -179,7 +179,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <slider toolTip="Shadow Y position to go down." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aoe-SB-85S">
+                            <slider toolTip="hotizontal shadow value" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aoe-SB-85S">
                                 <rect key="frame" x="76" y="54" width="138" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="138" id="Hl1-oL-4ch"/>
@@ -187,7 +187,7 @@
                                 </constraints>
                                 <sliderCell key="cell" controlSize="mini" state="on" alignment="left" minValue="-20" maxValue="20" doubleValue="20" tickMarkPosition="above" numberOfTickMarks="3" sliderType="linear" id="QxZ-XM-nJd"/>
                             </slider>
-                            <slider toolTip="Shadow Y position to go down." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wmj-qP-Vvw">
+                            <slider toolTip="vertical shadow value" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wmj-qP-Vvw">
                                 <rect key="frame" x="76" y="77" width="138" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="UOA-hv-fiB"/>
@@ -195,7 +195,7 @@
                                 </constraints>
                                 <sliderCell key="cell" controlSize="mini" continuous="YES" state="on" alignment="left" minValue="-20" maxValue="20" doubleValue="20" tickMarkPosition="above" numberOfTickMarks="3" sliderType="linear" id="9UZ-EK-NBe"/>
                             </slider>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w0y-HD-dSp">
+                            <textField toolTip="vertical shadow value" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w0y-HD-dSp">
                                 <rect key="frame" x="226" y="76" width="34" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="KFZ-yD-HVM"/>

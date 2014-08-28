@@ -96,7 +96,7 @@
                                     <outlet property="formatter" destination="plb-fd-Mgu" id="Ftt-sA-8SU"/>
                                 </connections>
                             </textField>
-                            <slider toolTip="Shadow Y position to go down." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="keC-2C-ntH">
+                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="keC-2C-ntH">
                                 <rect key="frame" x="75" y="40" width="138" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="138" id="eNF-I0-hlA"/>
