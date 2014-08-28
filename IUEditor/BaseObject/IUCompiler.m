@@ -663,7 +663,7 @@
             [code addCodeLineWithFormat:@"%@%@</a>", [self linkHeaderString:menuItem], menuItem.text];
         }
         else{
-            [code addCodeLineWithFormat:@"<a href='#'>%@</a>", menuItem.text];
+            [code addCodeLineWithFormat:@"<a href=''>%@</a>", menuItem.text];
         }
         if(menuItem.children.count > 0){
             [code addCodeLine:@"<div class='closure'></div>"];
