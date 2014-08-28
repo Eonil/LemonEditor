@@ -26,7 +26,7 @@ $(document).ready(function(){
         $(secondObj).css('display', 'none');
 	});
     /*INIT_IUTransition_REPLACEMENT_END*/
-    /*INIT_IUMenu_REPLACEMENT_START*/
+    /*INIT_IUMenuBar_REPLACEMENT_START*/
     //Initialize IUMenu
 	$('.mobile-button').on('click', function(){
 		var menu = $(this).next('ul');
@@ -68,7 +68,7 @@ $(document).ready(function(){
 		}
 	  });
                   
-    /*INIT_IUMenu_REPLACEMENT_END*/
+    /*INIT_IUMenuBar_REPLACEMENT_END*/
   
 	 
     /*INIT_JS_REPLACEMENT*/
