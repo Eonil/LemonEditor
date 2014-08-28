@@ -4,7 +4,9 @@ function resizePageContentHeight(){
 	var minHeight=0;
     $('.IUPageContent').children().each(function(){
 		var currentHeight = $(this).height() + $(this).position().top
-		
+		if($(this).css('display') == 'none'){
+			return true;
+		}
 		if (minHeight < currentHeight){
 			minHeight = currentHeight;
 		}
