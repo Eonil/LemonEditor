@@ -153,8 +153,9 @@
         [cssDict removeObjectForKey:tag];
     }
     
+    [self updateAssembledTagDictionary];
+
     if ([tag isFrameTag] == NO) {
-        [self updateAssembledTagDictionary];
         [self.delegate updateCSS];
     }
 }
