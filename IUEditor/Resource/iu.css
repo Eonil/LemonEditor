@@ -188,3 +188,7 @@ a{
 .WPPageLinks > a{
     display: inline;
 }
+.WPPageLinks > ul{
+    height: 100%;
+}
+

@@ -15,7 +15,6 @@
 @property (nonatomic) IUAlign align;
 
 - (NSString *)containerIdentifier;
-- (NSString *)itemIdetnfier;
 
 
 @end

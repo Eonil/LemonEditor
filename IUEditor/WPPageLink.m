@@ -10,7 +10,81 @@
 
 @implementation WPPageLink
 
+- (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
+    self = [super initWithProject:project options:options];
+    [self.undoManager disableUndoRegistration];
+    
+    self.positionType = IUPositionTypeRelative;
+    
+    [self.css eradicateTag:IUCSSTagPixelWidth];
+    [self.css eradicateTag:IUCSSTagPixelHeight];
+    [self.css eradicateTag:IUCSSTagBGColor];
+    
+    
+    [self.css setValue:@"Roboto" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(14) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(1.0) forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(1.0) forTag:IUCSSTagTextLetterSpacing forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:@(IUAlignRight) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
+    [self.css setValue:[NSColor rgbColorRed:0 green:120 blue:220 alpha:1] forTag:IUCSSTagFontColor forViewport:IUCSSDefaultViewPort];
+
+    
+    [self.undoManager enableUndoRegistration];
+    return self;
+}
+
+- (void)connectWithEditor{
+    [super connectWithEditor];
+    [self.parent.css.assembledTagDictionary addObserver:self forKeyPath:@"height" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:@"height"];
+}
+
+- (void)prepareDealloc{
+    if([self isConnectedWithEditor]){
+        [self.parent.css.assembledTagDictionary removeObserver:self forKeyPath:@"height" context:@"height"];
+    }
+    
+}
+
+
+- (NSString*)sampleInnerHTML{
+    NSString *identifier = self.htmlID;
+        return [NSString stringWithFormat:@"\
+                <ul id='%@' class='page-numbers IUBox'>\
+                <li class='WPPageLink %@'><a class='page-numbers current'>1</a></li>\
+                <li class='WPPageLink %@'><a class='page-numbers' href=''>2</a></li>\
+                <li class='WPPageLink %@'><a class='page-numbers' href=''>3</a></li>\
+                <li class='WPPageLink %@'><a class='next page-numbers' href=''>Next &raquo;</a></li></ul>\
+                ",identifier, identifier, identifier, identifier, identifier];
+
+}
+
+
+- (void)heightDidChange:(NSDictionary *)dictionary{
+    [self updateCSS];
+}
+
+#pragma mark -
+
+- (BOOL)shouldCompileFontInfo{
+    return YES;
+}
+
 - (BOOL)canRemoveIUByUserInput {
+    return NO;
+}
+
+- (BOOL)canChangeXByUserInput{
+    return NO;
+}
+- (BOOL)canChangeYByUserInput{
+    return NO;
+}
+
+- (BOOL)canChangeHeightByUserInput{
+    return NO;
+}
+
+- (BOOL)canChangeCenter{
     return NO;
 }
 

@@ -10,4 +10,10 @@
 
 @interface WPPageLink : IUBox
 
+/**
+ not SampleHTMLProtocol
+ it is only used by WPPageLinks
+ */
+- (NSString *)sampleInnerHTML;
+
 @end

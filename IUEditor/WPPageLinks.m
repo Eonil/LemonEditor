@@ -24,13 +24,6 @@
     [self.css setValue:@(100) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
     [self.css eradicateTag:IUCSSTagBGColor];
     
-    [self.css setValue:@"Roboto" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
-    [self.css setValue:@(14) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
-    [self.css setValue:@(1.0) forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
-    [self.css setValue:@(1.0) forTag:IUCSSTagTextLetterSpacing forViewport:IUCSSDefaultViewPort];
-    [self.css setValue:@(IUAlignRight) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
-    [self.css setValue:[NSColor rgbColorRed:0 green:120 blue:220 alpha:1] forTag:IUCSSTagFontColor forViewport:IUCSSDefaultViewPort];
-
     
     WPPageLink *pageLink = [[WPPageLink alloc] initWithProject:project options:options];
     [self addIU:pageLink error:nil];
@@ -53,16 +46,17 @@
     ?>";
 }
 - (NSString*)sampleInnerHTML{
-    return @"<ul class='page-numbers'>\
-	<li><span class='page-numbers current'>1</span></li>\
-	<li><a class='page-numbers' href='http://127.0.0.1/~jd/wordpress/?paged=2'>2</a></li>\
-	<li><a class='page-numbers' href='http://127.0.0.1/~jd/wordpress/?paged=3'>3</a></li>\
-	<li><a class='next page-numbers' href='http://127.0.0.1/~jd/wordpress/?paged=2'>Next &raquo;</a></li>\
-    </ul>";
-}
-
-- (BOOL)shouldCompileFontInfo{
-    return YES;
+    if(self.children.count == 1){
+        return ((WPPageLink *)self.children[0]).sampleInnerHTML;
+    }
+    else{
+        return @"<ul class='page-numbers'>\
+        <li class='WPPageLink'><span class='page-numbers current'>1</span></li>\
+        <li class='WPPageLink'><a class= 'page-numbers' href='http://127.0.0.1/~jd/wordpress/?paged=2'>2</a></li>\
+        <li class='WPPageLink'><a class='page-numbers' href='http://127.0.0.1/~jd/wordpress/?paged=3'>3</a></li>\
+        <li class='WPPageLink'><a class='next page-numbers' href='http://127.0.0.1/~jd/wordpress/?paged=2'>Next &raquo;</a></li>\
+        </ul>";
+    }
 }
 
 
@@ -74,6 +68,10 @@
         [[self.undoManager prepareWithInvocationTarget:self] setAlign:_align];
         _align = align;
         [self updateCSS];
+        
+        for(WPPageLink *link in self.children){
+            [link updateCSS];
+        }
     }
 }
 
@@ -81,21 +79,19 @@
     if(_leftRightPadding != leftRightPadding){
         [[self.undoManager prepareWithInvocationTarget:self] setLeftRightPadding:_leftRightPadding];
         _leftRightPadding = leftRightPadding;
-        [self updateCSSWithIdentifiers:@[self.itemIdetnfier]];
+        for(WPPageLink *link in self.children){
+            [link updateCSS];
+        }
     }
 }
 
 #pragma mark - css
 
 - (NSArray *)cssIdentifierArray{
-    return [[super cssIdentifierArray] arrayByAddingObjectsFromArray:@[self.containerIdentifier, self.itemIdetnfier]];
+    return [[super cssIdentifierArray] arrayByAddingObjectsFromArray:@[self.containerIdentifier]];
 }
 - (NSString *)containerIdentifier{
     return [self.cssClass stringByAppendingString:@" > ul"];
 }
-- (NSString *)itemIdetnfier{
-    return [self.cssClass stringByAppendingString:@" > ul > li"];
-}
-
 
 @end

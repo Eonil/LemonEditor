@@ -372,26 +372,30 @@
 }
 
 - (void)renameIdentifier:(NSString*)fromIdentifier to:(NSString*)toIdentifier{
-    [_editorCSSDictWithViewPort enumerateKeysAndObjectsUsingBlock:^(id key, NSMutableDictionary* identifierDict, BOOL *stop) {
-        NSDictionary *copyDict = [identifierDict copy];
-        [copyDict enumerateKeysAndObjectsUsingBlock:^(NSString* identifier, id obj, BOOL *stop) {
-            if ([identifier isEqualToString:fromIdentifier]){
-                identifierDict[toIdentifier] = copyDict[identifier];
-                [identifierDict removeObjectForKey:identifier];
-                *stop = YES;
-            }
+    if(_currentTarget == IUTargetEditor || _currentTarget == IUTargetBoth){
+        [_editorCSSDictWithViewPort enumerateKeysAndObjectsUsingBlock:^(id key, NSMutableDictionary* identifierDict, BOOL *stop) {
+            NSDictionary *copyDict = [identifierDict copy];
+            [copyDict enumerateKeysAndObjectsUsingBlock:^(NSString* identifier, id obj, BOOL *stop) {
+                if ([identifier isEqualToString:fromIdentifier]){
+                    identifierDict[toIdentifier] = copyDict[identifier];
+                    [identifierDict removeObjectForKey:identifier];
+                    *stop = YES;
+                }
+            }];
         }];
-    }];
-    [_outputCSSDictWithViewPort enumerateKeysAndObjectsUsingBlock:^(id key, NSMutableDictionary* identifierDict, BOOL *stop) {
-        NSDictionary *copyDict = [identifierDict copy];
-        [copyDict enumerateKeysAndObjectsUsingBlock:^(NSString* identifier, id obj, BOOL *stop) {
-            if ([identifier isEqualToString:fromIdentifier]){
-                identifierDict[toIdentifier] = copyDict[identifier];
-                [identifierDict removeObjectForKey:identifier];
-                *stop = YES;
-            }
+    }
+    if(_currentTarget == IUTargetOutput || _currentTarget == IUTargetBoth){
+        [_outputCSSDictWithViewPort enumerateKeysAndObjectsUsingBlock:^(id key, NSMutableDictionary* identifierDict, BOOL *stop) {
+            NSDictionary *copyDict = [identifierDict copy];
+            [copyDict enumerateKeysAndObjectsUsingBlock:^(NSString* identifier, id obj, BOOL *stop) {
+                if ([identifier isEqualToString:fromIdentifier]){
+                    identifierDict[toIdentifier] = copyDict[identifier];
+                    [identifierDict removeObjectForKey:identifier];
+                    *stop = YES;
+                }
+            }];
         }];
-    }];
+    }
 
 }
 
@@ -1350,15 +1354,8 @@
             [code setInsertingIdentifier:wpPageLinks.containerIdentifier];
             [code insertTag:@"display" string:@"table"];
             [code insertTag:@"table-layout" string:@"fixed"];
-            [code insertTag:@"width" string:@"100%"];
-            
-            [code setInsertingIdentifier:wpPageLinks.itemIdetnfier];
-            [code insertTag:@"display" string:@"table-cell"];
-            [code insertTag:@"text-align" string:@"center"];
+            [code insertTag:@"width" string:@"100%"];            
             break;
-        case IUAlignLeft:
-            [code setInsertingIdentifier:wpPageLinks.itemIdetnfier];
-            [code insertTag:@"float" string:@"left"];
         case IUAlignCenter:
             [code setInsertingIdentifier:wpPageLinks.containerIdentifier];
             [code insertTag:@"text-align" string:@"center"];
@@ -1370,14 +1367,53 @@
         default:
             break;
     }
-    if(wpPageLinks.align != IUAlignJustify){
-        [code setInsertingIdentifier:wpPageLinks.itemIdetnfier];
-        [code insertTag:@"position" string:@"relative"];
+
+}
+
+- (void)updateCSSCode:(IUCSSCode*)code asWPPageLink:(WPPageLink *)_iu{
+    [code setInsertingViewPort:IUCSSDefaultViewPort];
+    [code setInsertingTarget:IUTargetBoth];
+
+    WPPageLinks *pageLinks = (WPPageLinks*)_iu.parent;
+
+    [code setInsertingIdentifier:_iu.cssClass];
+    
+    switch (pageLinks.align) {
+        case IUAlignJustify:
+            [code insertTag:@"display" string:@"table-cell"];
+            [code insertTag:@"text-align" string:@"center"];
+            break;
+        case IUAlignLeft:
+            [code insertTag:@"float" string:@"left"];
+            break;
+        default:
+            break;
+    }
+    if(pageLinks.align != IUAlignJustify){
         
-        [code insertTag:@"padding" string:[NSString stringWithFormat:@"0 %ldpx", wpPageLinks.leftRightPadding]];
+        [code insertTag:@"position" string:@"relative"];
+        [code insertTag:@"margin-right" intFromNumber:[NSNumber numberWithInteger:pageLinks.leftRightPadding] unit:IUUnitPixel];
         [code insertTag:@"display" string:@"inline-block"];
     }
+    
+    for (NSNumber *viewport in [code allViewports]) {
+        NSNumber *heightValue = [pageLinks.css valueByStepForTag:IUCSSTagPixelHeight forViewport:[viewport intValue]];
+        //IUTarget Editor value is equal to IUTargetOutput.
+        if (heightValue) {
+            [code insertTag:@"line-height" floatFromNumber:heightValue unit:IUUnitPixel];
+        }
+    }
+    
+    [code setInsertingTarget:IUTargetOutput];
+
+    NSArray *identifiers = [code allIdentifiers];
+    for (NSString *identifier in identifiers) {
+        NSString *newIdentifier = [identifier stringByReplacingOccurrencesOfString:_iu.htmlID withString:[NSString stringWithFormat:@"%@ > ul > li" , pageLinks.htmlID]];
+        [code renameIdentifier:identifier to:newIdentifier];
+    }
+    
 }
+
 
 /*
 
@@ -1403,17 +1439,7 @@
         [code renameIdentifier:identifier to:newIdentifier];
     }
 }
+*/
 
-- (void)updateCSSCode:(IUCSSCode*)code asWPPageLink:(WPPageLink *)_iu{
-    NSArray *identifiers = [code allIdentifiers];
-    WPPageLinks *pageLinks = (WPPageLinks*)_iu.parent;
-    
-    for (NSString *identifier in identifiers) {
-        NSString *newIdentifier = [identifier stringByReplacingOccurrencesOfString:_iu.htmlID withString:[NSString stringWithFormat:@"%@ > .WPWidgetTitle" , pageLinks.htmlID]];
-        [code renameIdentifier:identifier to:newIdentifier];
-    }
-
-}
- */
 
 @end
