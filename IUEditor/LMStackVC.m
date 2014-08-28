@@ -258,6 +258,10 @@
                 //we remove position tag. if not, iu will be invisible to new position
                 [iu.css eradicateTag:IUCSSTagPixelX];
                 [iu.css eradicateTag:IUCSSTagPixelY];
+
+                [iu.css setValue:@(10) forTag:IUCSSTagPixelX];
+                [iu.css setValue:@(10) forTag:IUCSSTagPixelY];
+                
                                 
                 [newParent insertIU:iu atIndex:newIndex error:nil];
             }
@@ -278,6 +282,9 @@
             if(newIndex < 0){
                 newIndex = 0 ;
             }
+            [newIU.css setValue:@(10) forTag:IUCSSTagPixelX];
+            [newIU.css setValue:@(10) forTag:IUCSSTagPixelY];
+
             [newParent insertIU:newIU atIndex:newIndex error:nil];
             
             NSIndexPath *path = [[item indexPath] indexPathByAddingIndex:newIndex];
