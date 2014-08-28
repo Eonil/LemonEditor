@@ -60,7 +60,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eQk-yr-3Le" userLabel="borderTF">
+                            <textField toolTip="Border size" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eQk-yr-3Le" userLabel="borderTF">
                                 <rect key="frame" x="102" y="4" width="30" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="VfY-8S-Rhy"/>
@@ -88,7 +88,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ9-1e-ySj">
+                            <textField toolTip="Border radius" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ9-1e-ySj">
                                 <rect key="frame" x="193" y="4" width="30" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="Uh0-N5-f22"/>
@@ -135,7 +135,7 @@
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="info" id="t38-l5-Lmp"/>
                             </imageView>
-                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Bx6-hg-VhV">
+                            <colorWell toolTip="Border color" translatesAutoresizingMaskIntoConstraints="NO" id="Bx6-hg-VhV">
                                 <rect key="frame" x="242" y="4" width="18" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="18" id="9mC-IS-tAA"/>
@@ -201,7 +201,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="276" height="130"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zPV-Mp-FE9">
+                            <textField toolTip="Border size for upper side" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zPV-Mp-FE9">
                                 <rect key="frame" x="119" y="96" width="30" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="H6b-RU-FND"/>
@@ -232,7 +232,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uMd-ZN-vr7">
+                            <textField toolTip="Radius for top-left side" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uMd-ZN-vr7">
                                 <rect key="frame" x="25" y="96" width="30" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="amy-QG-mRO"/>
@@ -254,7 +254,7 @@
                                 </constraints>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="100" id="j9w-en-YEW"/>
                             </stepper>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pcy-BM-GwJ">
+                            <textField toolTip="Radius for top-right side" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pcy-BM-GwJ">
                                 <rect key="frame" x="213" y="98" width="30" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="Juy-4r-XxL"/>
@@ -277,7 +277,7 @@
                                 </constraints>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="100" id="OrJ-oI-vVi"/>
                             </stepper>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xHi-NC-1af">
+                            <textField toolTip="Border size for down side" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xHi-NC-1af">
                                 <rect key="frame" x="119" y="20" width="30" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="0cm-He-XdE"/>
@@ -297,7 +297,7 @@
                                 </constraints>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="100" id="Dq5-Zd-75X"/>
                             </stepper>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2WC-gk-47e">
+                            <textField toolTip="Radius for bottom-right side" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2WC-gk-47e">
                                 <rect key="frame" x="25" y="20" width="30" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="6zr-sq-mXL"/>
@@ -317,7 +317,7 @@
                                 </constraints>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="100" id="06w-ak-Etr"/>
                             </stepper>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4em-hr-cgq">
+                            <textField toolTip="Radius for bottom-right side" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4em-hr-cgq">
                                 <rect key="frame" x="213" y="20" width="30" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="kzJ-ZO-nkz"/>
@@ -337,7 +337,7 @@
                                 </constraints>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="100" id="ZEH-Zw-Ycn"/>
                             </stepper>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9ho-jI-YY6">
+                            <textField toolTip="Border size for left side" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9ho-jI-YY6">
                                 <rect key="frame" x="25" y="59" width="30" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="XmF-mq-Cf1"/>
@@ -357,7 +357,7 @@
                                 </constraints>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="100" id="rZW-QS-bgS"/>
                             </stepper>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t8x-MP-oQs">
+                            <textField toolTip="Border size for right side" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t8x-MP-oQs">
                                 <rect key="frame" x="213" y="59" width="30" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="CSj-Od-nXx"/>
@@ -377,7 +377,7 @@
                                 </constraints>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="100" id="swN-CH-MOS"/>
                             </stepper>
-                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="zdN-bv-ZAE">
+                            <colorWell toolTip="Border color" translatesAutoresizingMaskIntoConstraints="NO" id="zdN-bv-ZAE">
                                 <rect key="frame" x="102" y="96" width="18" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="18" id="4th-ZU-qrQ"/>
@@ -387,7 +387,7 @@
                                 </constraints>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </colorWell>
-                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="gj9-l1-xeC">
+                            <colorWell toolTip="Border color" translatesAutoresizingMaskIntoConstraints="NO" id="gj9-l1-xeC">
                                 <rect key="frame" x="102" y="20" width="18" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="5p3-j3-9gS"/>
@@ -395,7 +395,7 @@
                                 </constraints>
                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </colorWell>
-                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="FRe-yY-GmB">
+                            <colorWell toolTip="Border color" translatesAutoresizingMaskIntoConstraints="NO" id="FRe-yY-GmB">
                                 <rect key="frame" x="8" y="59" width="18" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="18" id="5cp-RC-8gK"/>
@@ -431,7 +431,7 @@
                                 <rect key="frame" x="242" y="20" width="18" height="18"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="radius_icon_04" id="hVo-7C-Luy"/>
                             </imageView>
-                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="hd3-du-ZEe">
+                            <colorWell toolTip="Border color" translatesAutoresizingMaskIntoConstraints="NO" id="hd3-du-ZEe">
                                 <rect key="frame" x="242" y="59" width="18" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="1RV-Nn-idw"/>

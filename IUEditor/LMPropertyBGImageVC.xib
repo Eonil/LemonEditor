@@ -31,7 +31,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="276" height="130"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="08X-X7-XQJ">
+                            <segmentedControl toolTip="Image size options. Not avaiable for IUImage" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="08X-X7-XQJ">
                                 <rect key="frame" x="77" y="107" width="184" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="184" id="XKI-y8-ZtL"/>
@@ -92,7 +92,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="4d5-AX-qLx">
+                            <button toolTip="Not repeat image. Not avaiable for IUImage" translatesAutoresizingMaskIntoConstraints="NO" id="4d5-AX-qLx">
                                 <rect key="frame" x="74" y="83" width="96" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="91" id="Tpq-Tj-sh9"/>
@@ -103,7 +103,7 @@
                                     <font key="font" metaFont="smallSystem"/>
                                 </buttonCell>
                             </button>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="WOy-93-Xv0">
+                            <button toolTip="Image position options. Not avaiable for IUImage" translatesAutoresizingMaskIntoConstraints="NO" id="WOy-93-Xv0">
                                 <rect key="frame" x="74" y="29" width="119" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="S1w-dt-kTF"/>
@@ -114,7 +114,7 @@
                                     <font key="font" metaFont="smallSystem"/>
                                 </buttonCell>
                             </button>
-                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wso-ZL-0kP">
+                            <segmentedControl toolTip="Image position. Not avaiable for IUImage" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wso-ZL-0kP">
                                 <rect key="frame" x="77" y="58" width="88" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="88" id="Evf-Jk-aC6"/>
@@ -135,7 +135,7 @@
                                     </segments>
                                 </segmentedCell>
                             </segmentedControl>
-                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YeI-XQ-bvb">
+                            <segmentedControl toolTip="Image position. Not avaiable for IUImage" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YeI-XQ-bvb">
                                 <rect key="frame" x="172" y="58" width="88" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="3Bg-ak-QMk"/>
@@ -156,7 +156,7 @@
                                     </segments>
                                 </segmentedCell>
                             </segmentedControl>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Iwu-ZS-Xkr">
+                            <textField toolTip="Image position options. Not avaiable for IUImage" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Iwu-ZS-Xkr">
                                 <rect key="frame" x="90" y="7" width="50" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="1Sf-wa-uLs"/>
@@ -192,7 +192,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8XQ-9s-BZg">
+                            <textField toolTip="Image position options. Not avaiable for IUImage" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8XQ-9s-BZg">
                                 <rect key="frame" x="184" y="7" width="50" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="NFD-56-wEr"/>
@@ -286,7 +286,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wTP-4i-7vG">
+                            <comboBox toolTip="image file name. for cliparts, clipart/filename. URL should be start with http://" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wTP-4i-7vG">
                                 <rect key="frame" x="77" y="2" width="162" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="T9Z-Rn-9kg"/>
@@ -298,7 +298,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </comboBoxCell>
                             </comboBox>
-                            <button toolTip="Fit box size to image" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1nV-NQ-xS0">
+                            <button toolTip="Fit box size to image size" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1nV-NQ-xS0">
                                 <rect key="frame" x="241" y="4" width="19" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="19" id="3av-6q-DzE"/>
