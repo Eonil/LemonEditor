@@ -170,9 +170,6 @@
         case IUGoogleMapThemeTypePaleDawn:
             theme = [self styleWithIdentifier:@"paledawn"];
             break;
-        case IUGoogleMapThemeTypeShadesOfGrey:
-            theme = [self styleWithIdentifier:@"shadesofgrey"];
-            break;
         case IUGoogleMapThemeTypeSubtleGrayscale:
             theme = [self styleWithIdentifier:@"subtlegrayscale"];
             break;
@@ -189,7 +186,7 @@
         NSString *staticStyle = [self.delegate callWebScriptMethod:@"getGoogleMapStaticStyle" withArguments:@[@(_themeType-1)]];
         
         if(staticStyle){
-            return staticStyle;
+            return [@"&" stringByAppendingString:staticStyle];
         }
     }
     return @"";
@@ -204,7 +201,7 @@
     NSRange start =[themejsStr rangeOfString:startString];
     NSRange end =[themejsStr rangeOfString:endString];
     NSRange addRange = NSMakeRange(start.location+startString.length, end.location - start.location - startString.length);
-    return [themejsStr substringWithRange:addRange];
+    return [[themejsStr substringWithRange:addRange] stringByTrim];
 }
 
 

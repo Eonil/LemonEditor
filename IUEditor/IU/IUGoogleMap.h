@@ -11,7 +11,6 @@ typedef enum{
     IUGoogleMapThemeTypeDefault,
     /*http://snazzymaps.com/*/
     IUGoogleMapThemeTypePaleDawn,
-    IUGoogleMapThemeTypeShadesOfGrey,
     IUGoogleMapThemeTypeSubtleGrayscale,
     IUGoogleMapThemeTypeBlueGray,
     IUGoogleMapThemeTypeGreen,

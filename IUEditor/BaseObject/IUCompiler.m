@@ -1755,12 +1755,9 @@
         [code addCodeLine:@"/* IUGoogleMap initialize */\n"];
         
         //style option
-        [code addCodeLineWithFormat:@"var %@_styles = ", map.htmlID];
-        [code increaseIndentLevelForEdit];
-        [code addCodeLine:[map currentThemeStyle]];
-        [code decreaseIndentLevelForEdit];
-        [code addCodeLine:@";"];
-        
+        if(map.themeType != IUGoogleMapThemeTypeDefault){
+            [code addCodeLineWithFormat:@"var %@_styles = %@; ", map.htmlID, [map currentThemeStyle]];
+        }
         
         //option
         [code addCodeLineWithFormat:@"var %@_options = {", map.htmlID];
@@ -1783,7 +1780,9 @@
         }
         [code addCodeLine:@"mapTypeControl: false,"];
         [code addCodeLine:@"streetViewControl: false,"];
-        [code addCodeLineWithFormat:@"styles: %@_styles", map.htmlID];
+        if(map.themeType != IUGoogleMapThemeTypeDefault){
+            [code addCodeLineWithFormat:@"styles: %@_styles", map.htmlID];
+        }
         
         [code decreaseIndentLevelForEdit];
         [code addCodeLine:@"};"];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -230,14 +230,13 @@
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0lA-1K-IZj" userLabel="theme">
                                 <rect key="frame" x="92" y="104" width="188" height="22"/>
-                                <popUpButtonCell key="cell" type="push" title="Green" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="mSv-1A-Gj3" id="Xau-k5-XkV">
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Xau-k5-XkV">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
                                     <menu key="menu" id="9e6-IU-tnv">
                                         <items>
                                             <menuItem title="Default" id="PVg-VR-KAj"/>
                                             <menuItem title="Pale Dawn" id="1L3-yQ-9zc"/>
-                                            <menuItem title="Shades of Grey" id="mX7-Zy-9au"/>
                                             <menuItem title="Subtle Grayscale" id="x1z-fC-Xzr"/>
                                             <menuItem title="Blue Gray" id="5N4-5e-K2g"/>
                                             <menuItem title="Green" state="on" id="mSv-1A-Gj3"/>
