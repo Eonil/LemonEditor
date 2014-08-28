@@ -711,6 +711,7 @@
 		3DF437C919AF1B420049A87E /* amazon_app_store_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF4372A19AF1B420049A87E /* amazon_app_store_2.png */; };
 		3DF437CA19AF1B420049A87E /* icon-social-twitter-outline-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF4372B19AF1B420049A87E /* icon-social-twitter-outline-128.png */; };
 		3DF437CC19AF31620049A87E /* iupresentationScript.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DF437CB19AF31620049A87E /* iupresentationScript.txt */; };
+		3DF437CF19AF69B30049A87E /* iugooglemap_theme.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DF437CE19AF69B30049A87E /* iugooglemap_theme.js */; };
 		3DF8029A18FD0B2500913505 /* IUHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8029918FD0B2500913505 /* IUHTML.m */; };
 		3DF8029D18FE3D6000913505 /* IUWebMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8029C18FE3D6000913505 /* IUWebMovie.m */; };
 		3DF803D818FE62C900913505 /* dotted_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF803C118FE62C900913505 /* dotted_line.png */; };
@@ -1839,6 +1840,7 @@
 		3DF4372A19AF1B420049A87E /* amazon_app_store_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = amazon_app_store_2.png; path = clipArt/amazon_app_store_2.png; sourceTree = "<group>"; };
 		3DF4372B19AF1B420049A87E /* icon-social-twitter-outline-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-social-twitter-outline-128.png"; path = "clipArt/icon-social-twitter-outline-128.png"; sourceTree = "<group>"; };
 		3DF437CB19AF31620049A87E /* iupresentationScript.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iupresentationScript.txt; sourceTree = "<group>"; };
+		3DF437CE19AF69B30049A87E /* iugooglemap_theme.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = iugooglemap_theme.js; sourceTree = "<group>"; };
 		3DF8029818FD0B2500913505 /* IUHTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUHTML.h; sourceTree = "<group>"; };
 		3DF8029918FD0B2500913505 /* IUHTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUHTML.m; sourceTree = "<group>"; };
 		3DF8029B18FE3D6000913505 /* IUWebMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUWebMovie.h; sourceTree = "<group>"; };
@@ -3666,6 +3668,14 @@
 			name = image;
 			sourceTree = "<group>";
 		};
+		3DF437CD19AF69940049A87E /* iuresource */ = {
+			isa = PBXGroup;
+			children = (
+				3DF437CE19AF69B30049A87E /* iugooglemap_theme.js */,
+			);
+			name = iuresource;
+			sourceTree = "<group>";
+		};
 		3DF8029E18FE3F1A00913505 /* IUHTMLGroup */ = {
 			isa = PBXGroup;
 			children = (
@@ -3811,6 +3821,7 @@
 		690A409E18E170AC00095263 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				3DF437CD19AF69940049A87E /* iuresource */,
 				3DB0AB4F19ACA63C0066FAB7 /* wpResource */,
 				3DA6C65419763480004D6587 /* clipArt */,
 				CBA877EC1963D1A300075294 /* helpResource */,
@@ -4624,6 +4635,7 @@
 				3DF4376319AF1B420049A87E /* circle_arrow-down_download-128.png in Resources */,
 				3DF4375819AF1B420049A87E /* arrow-alt-down.png in Resources */,
 				3DF4376719AF1B420049A87E /* arrow_full_lowerright-128.png in Resources */,
+				3DF437CF19AF69B30049A87E /* iugooglemap_theme.js in Resources */,
 				3DF4374819AF1B420049A87E /* icon-ios7-arrow-right-128.png in Resources */,
 				69C575B518D6F61E0016F050 /* InfoPlist.strings in Resources */,
 				267812B019ADFBD20015A859 /* wp_thumbnail@2x.png in Resources */,

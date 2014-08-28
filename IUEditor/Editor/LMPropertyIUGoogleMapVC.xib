@@ -8,15 +8,12 @@
             <connections>
                 <outlet property="PanControlBtn" destination="HBJ-k9-HD4" id="INW-L2-b9p"/>
                 <outlet property="enableMarkerBtn" destination="Hz7-f7-4R7" id="reZ-pC-y1n"/>
-                <outlet property="landscapeColor" destination="MC5-Nm-bSd" id="Gut-8E-JP4"/>
                 <outlet property="latTF" destination="ZnH-yn-asN" id="xHy-U9-A98"/>
                 <outlet property="longTF" destination="HoT-Ty-cfo" id="NIp-Wi-gJg"/>
                 <outlet property="markTitleTF" destination="ukR-Pi-ugn" id="SwS-nu-gpE"/>
                 <outlet property="markerIconComboBox" destination="2DF-aU-eKN" id="lMS-jA-tWm"/>
-                <outlet property="poiColor" destination="KqN-LC-0p1" id="rYu-hx-BIr"/>
-                <outlet property="roadColor" destination="xhb-Cm-WJ5" id="Tfo-C0-QgF"/>
+                <outlet property="themeTypePopupButton" destination="0lA-1K-IZj" id="zgd-ao-65M"/>
                 <outlet property="view" destination="jqU-gp-lS1" id="8r6-No-reO"/>
-                <outlet property="waterColor" destination="5pa-o9-CvC" id="u7B-bg-hgp"/>
                 <outlet property="zoomControlBtn" destination="a00-T1-gGR" id="vbk-D6-f24"/>
                 <outlet property="zoomLevelStepper" destination="gDg-CB-kpH" id="aGS-Ty-h3q"/>
                 <outlet property="zoomLevelTF" destination="eee-0h-5wG" id="aCt-ew-ERe"/>
@@ -231,16 +228,19 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0lA-1K-IZj">
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0lA-1K-IZj" userLabel="theme">
                                 <rect key="frame" x="92" y="104" width="188" height="22"/>
-                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="PVg-VR-KAj" id="Xau-k5-XkV">
+                                <popUpButtonCell key="cell" type="push" title="Green" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="mSv-1A-Gj3" id="Xau-k5-XkV">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
                                     <menu key="menu" id="9e6-IU-tnv">
                                         <items>
-                                            <menuItem title="Item 1" state="on" id="PVg-VR-KAj"/>
-                                            <menuItem title="Item 2" id="1L3-yQ-9zc"/>
-                                            <menuItem title="Item 3" id="5N4-5e-K2g"/>
+                                            <menuItem title="Default" id="PVg-VR-KAj"/>
+                                            <menuItem title="Pale Dawn" id="1L3-yQ-9zc"/>
+                                            <menuItem title="Shades of Grey" id="mX7-Zy-9au"/>
+                                            <menuItem title="Subtle Grayscale" id="x1z-fC-Xzr"/>
+                                            <menuItem title="Blue Gray" id="5N4-5e-K2g"/>
+                                            <menuItem title="Green" state="on" id="mSv-1A-Gj3"/>
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
@@ -338,89 +338,6 @@
                 <outlet property="titleV" destination="kFu-6f-wFX" id="1bF-TN-KZe"/>
             </connections>
             <point key="canvasLocation" x="597" y="419"/>
-        </customView>
-        <customView id="7ao-Nf-p2N" userLabel="NotYetSupported">
-            <rect key="frame" x="0.0" y="0.0" width="274" height="173"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qEh-U0-1SW">
-                    <rect key="frame" x="76" y="87" width="70" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="17" id="FLY-wf-Arx"/>
-                        <constraint firstAttribute="width" constant="66" id="OwD-RR-Jmj"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="water" id="dip-ah-2KX">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fLL-PA-hhk">
-                    <rect key="frame" x="76" y="69" width="70" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="66" id="CnT-sY-hyK"/>
-                        <constraint firstAttribute="height" constant="17" id="qWr-I7-S2F"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="road" id="7yi-Vd-lpj">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ex9-2g-v0t">
-                    <rect key="frame" x="76" y="35" width="70" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="66" id="Tvt-oR-Izz"/>
-                        <constraint firstAttribute="height" constant="17" id="cR0-ch-ss8"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="landscape" id="JiW-Sy-pPN">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pUX-hp-fp2">
-                    <rect key="frame" x="76" y="19" width="70" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="66" id="grf-fi-JhS"/>
-                        <constraint firstAttribute="height" constant="17" id="yJP-xG-juB"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="poi" id="JAh-rz-Fho">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uAT-Dv-2tf">
-                    <rect key="frame" x="52" y="107" width="70" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="66" id="Hmd-Uc-63z"/>
-                        <constraint firstAttribute="height" constant="17" id="N7B-em-dhQ"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="style" id="Xf4-Qr-QeJ">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5pa-o9-CvC">
-                    <rect key="frame" x="177" y="84" width="44" height="23"/>
-                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </colorWell>
-                <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xhb-Cm-WJ5">
-                    <rect key="frame" x="171" y="63" width="44" height="23"/>
-                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </colorWell>
-                <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MC5-Nm-bSd">
-                    <rect key="frame" x="166" y="37" width="44" height="23"/>
-                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </colorWell>
-                <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KqN-LC-0p1">
-                    <rect key="frame" x="166" y="14" width="44" height="23"/>
-                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </colorWell>
-            </subviews>
-            <point key="canvasLocation" x="1113" y="308.5"/>
         </customView>
     </objects>
     <resources>

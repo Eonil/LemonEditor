@@ -63,11 +63,6 @@
     map.markerIconName = [_markerIconName copy];
     map.markerTitle =[_markerTitle copy];
     
-    //color
-    map.water = [_water copy];
-    map.road = [_road copy];
-    map.landscape = [_landscape copy];
-    map.poi = [_poi copy];
     
     [self.delegate enableUpdateAll:self];
     [self.undoManager enableUndoRegistration];
@@ -145,41 +140,6 @@
     [self updateHTML];
 }
 
-- (void)setWater:(NSColor *)water{
-    if([_water isEqualTo:water]){
-        return;
-    }
-    [[self.undoManager prepareWithInvocationTarget:self] setWater:_water];
-    _water = water;
-    [self updateHTML];
-}
-
-- (void)setRoad:(NSColor *)road{
-    if([_road isEqualTo:road]){
-        return;
-    }
-    [[self.undoManager prepareWithInvocationTarget:self] setRoad:_road];
-    _road = road;
-    [self updateHTML];
-}
-
-- (void)setLandscape:(NSColor *)landscape{
-    if ([_landscape isEqualTo:landscape]) {
-        return;
-    }
-    [[self.undoManager prepareWithInvocationTarget:self] setLandscape:_landscape];
-    _landscape = landscape;
-    [self updateHTML];
-}
-
-- (void)setPoi:(NSColor *)poi{
-    if([_poi isEqualTo:poi]){
-        return;
-    }
-    [[self.undoManager prepareWithInvocationTarget:self] setPoi:_poi];
-    _poi = poi;
-    [self updateHTML];
-}
 
 #pragma mark - size
 - (void)increaseSize:(NSSize)size withParentSize:(NSSize)parentSize{
@@ -187,7 +147,80 @@
     [self updateHTML];
 }
 
+#pragma mark - color theme
+- (void)setThemeType:(IUGoogleMapThemeType)themeType{
+    if(_themeType != themeType){
+        [[self.undoManager prepareWithInvocationTarget:self] setThemeType:_themeType];
+        _themeType = themeType;
+        [self updateHTML];
+    }
+}
+- (NSString *)currentThemeStyle{
+    NSString *theme;
+    switch (_themeType) {
+        case IUGoogleMapThemeTypeDefault:
+            theme = @"";
+            break;
+        case IUGoogleMapThemeTypeBlueGray:
+            theme = [self styleWithIdentifier:@"bluegray"];
+            break;
+        case IUGoogleMapThemeTypeGreen:
+            theme = [self styleWithIdentifier:@"green"];
+            break;
+        case IUGoogleMapThemeTypePaleDawn:
+            theme = [self styleWithIdentifier:@"paledawn"];
+            break;
+        case IUGoogleMapThemeTypeShadesOfGrey:
+            theme = [self styleWithIdentifier:@"shadesofgrey"];
+            break;
+        case IUGoogleMapThemeTypeSubtleGrayscale:
+            theme = [self styleWithIdentifier:@"subtlegrayscale"];
+            break;
+        default:
+            break;
+    }
+    return theme;
+}
 
+
+- (NSString *)innerCurrentThemeStyle{
+    
+    NSString *staticStyle = [self.delegate callWebScriptMethod:@"getGoogleMapStaticStyle" withArguments:@[@(_themeType-1)]];
+    
+    if(staticStyle){
+        return staticStyle;
+    }
+    
+    return @"";
+    /*
+    NSCharacterSet *notAllowedChars = [NSCharacterSet characterSetWithCharactersInString:@"\"[{}]"];
+    NSString *resultString = [[jsStyle componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""];
+    
+    NSMutableString *staticStyle = [resultString mutableCopy];
+    [staticStyle replaceOccurrencesOfString:@"," withString:@"|" options:0 range:NSMakeRange(0, staticStyle.length)];
+    [staticStyle replaceOccurrencesOfString:@"featureType" withString:@"&style=feature" options:0 range:NSMakeRange(0, staticStyle.length)];
+    [staticStyle replaceOccurrencesOfString:@"|&style=feature" withString:@"&style=feature" options:0 range:NSMakeRange(0, staticStyle.length)];
+    [staticStyle replaceOccurrencesOfString:@"elementType" withString:@"element" options:0 range:NSMakeRange(0, staticStyle.length)];
+    [staticStyle replaceOccurrencesOfString:@"#" withString:@"0x" options:0 range:NSMakeRange(0, staticStyle.length)];
+
+
+    [staticStyle replaceOccurrencesOfString:@"stylers:" withString:@"" options:0 range:NSMakeRange(0, staticStyle.length)];
+
+    return staticStyle;
+     */
+}
+
+- (NSString *)styleWithIdentifier:(NSString *)identifier{
+    NSString *googlemapjsPath = [[NSBundle mainBundle] pathForResource:@"iugooglemap_theme" ofType:@"js"];
+    NSString *themejsStr = [NSString stringWithContentsOfFile:googlemapjsPath encoding:NSUTF8StringEncoding error:nil];;
+    NSString *startString = [NSString stringWithFormat:@"//%@-start", identifier];
+    NSString *endString = [NSString stringWithFormat:@"//%@-end", identifier];
+    
+    NSRange start =[themejsStr rangeOfString:startString];
+    NSRange end =[themejsStr rangeOfString:endString];
+    NSRange addRange = NSMakeRange(start.location+startString.length, end.location - start.location - startString.length);
+    return [themejsStr substringWithRange:addRange];
+}
 
 
 @end

@@ -27,10 +27,8 @@
 @property (weak) IBOutlet NSTextField *markTitleTF;
 
 //style
-@property (weak) IBOutlet NSColorWell *waterColor;
-@property (weak) IBOutlet NSColorWell *roadColor;
-@property (weak) IBOutlet NSColorWell *landscapeColor;
-@property (weak) IBOutlet NSColorWell *poiColor;
+@property (weak) IBOutlet NSPopUpButton *themeTypePopupButton;
+
 
 @end
 
@@ -68,11 +66,8 @@
     [self outlet:_markerIconComboBox bind:NSValueBinding property:@"markerIconName"];
     
     //style
-    [self outlet:_waterColor bind:NSValueBinding property:@"water"];
-    [self outlet:_roadColor bind:NSValueBinding property:@"road"];
-    [self outlet:_landscapeColor bind:NSValueBinding property:@"landscape"];
-    [self outlet:_poiColor bind:NSValueBinding property:@"poi"];
-     
+    [self outlet:_themeTypePopupButton bind:NSSelectedIndexBinding property:@"themeType"];
+    
 }
 - (void)prepareDealloc{
     [_markerIconComboBox unbind:NSContentBinding];

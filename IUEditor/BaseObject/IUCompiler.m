@@ -1191,6 +1191,10 @@
         if(map.enableMarkerIcon && map.markerIconName==nil ){
             [mapImagePath appendFormat:@"&markers=size=tiny|%@,%@",map.latitude, map.longitude];
         }
+        //theme
+        if(map.themeType != IUGoogleMapThemeTypeDefault){
+            [mapImagePath appendString:map.innerCurrentThemeStyle];
+        }
         
         //color
         //not supported in editor mode
@@ -1751,23 +1755,11 @@
         [code addCodeLine:@"/* IUGoogleMap initialize */\n"];
         
         //style option
-        [code addCodeLineWithFormat:@"var %@_styles = [", map.htmlID];
+        [code addCodeLineWithFormat:@"var %@_styles = ", map.htmlID];
         [code increaseIndentLevelForEdit];
-        if(map.water){
-            [code addCodeLineWithFormat:@"{featureType:\"water\", stylers:[{color:\"%@\"}]},",[map.water rgbStringWithTransparent]];
-        }
-        if(map.road){
-            [code addCodeLineWithFormat:@"{featureType:\"road\", stylers:[{color:\"%@\"}]},",[map.road rgbStringWithTransparent]];
-        }
-        if(map.landscape){
-            [code addCodeLineWithFormat:@"{featureType:\"landscape\", stylers:[{color:\"%@\"}]},",[map.landscape rgbStringWithTransparent]];
-        }
-        if(map.poi){
-            [code addCodeLineWithFormat:@"{featureType:\"poi\", stylers:[{color:\"%@\"}]},",[map.poi rgbStringWithTransparent]];
-        }
-
+        [code addCodeLine:[map currentThemeStyle]];
         [code decreaseIndentLevelForEdit];
-        [code addCodeLine:@"];"];
+        [code addCodeLine:@";"];
         
         
         //option
@@ -1832,67 +1824,6 @@
     return code;
 }
 
-#if 0
-
-#pragma mark - PHP
--(JDCode *)outputPHP:(IUBox *)iu{
-    JDCode *code = [[JDCode alloc] init];
-#pragma mark - IUPHP
-    if([iu isKindOfClass:[IUPHP class]]){
-        [code addCodeLine:@"<? %@ ?>", iu.code];
-    }
-    
-    return code;
-
-}
-
--(JDCode *)editorPHP:(IUBox*)iu{
-    JDCode *code = [[JDCode alloc] init];
-    
-    
-    
-#pragma mark - IUPHP
-    /*
-    if([iu isKindOfClass:[IUPHP class]]){
-        [code addCodeLine:@"<? %@ ?>"];
-    }
-     */
-#pragma mark - WPContentCollection
-     if([iu isKindOfClass:[WPContentCollection class]]){
-        WPContentCollection *collection = (WPContentCollection *)iu;
-        //start loop
-        [code addCodeLine:@"<? while ( have_posts() ) : the_post(); ?>"];
-        [code increaseIndentLevelForEdit];
-        
-        //content title
-        [code addCodeLine:@"<a href='<?php the_permalink(); ?>'><?php the_title(); ?></a>"];
-        
-        //date & time
-        NSString *dateTime;
-        if(collection.enableDate){
-            [code addCodeLine:@"<?php echo get_the_date(); ?>"];
-        }
-        if (collection.enableTime) {
-            [code addCodeLine:@"<?php echo get_the_time(); ?>"];
-        }
-        if (collection.enableCategory) {
-            [code addCodeLine:@"| Category: <?php the_category(', '); ?>"];
-        }
-        if (collection.enableTag) {
-            [code addCodeLine:@"| Tag: <?php the_tag(', '); ?>"];
-        }
-        
-        //content type sellection disable
-        [code addCodeLine:@"<?php if ( is_home() || is_category() || is_tag() ) { the_excerpt(); } else { the_content();} ?>"];
-        
-        
-        [code decreaseIndentLevelForEdit];
-        [code addCodeLine:@"<?php endwhile; ?> "];
-    }
-    
-    return code;
-}
-#endif
 
 - (void)dealloc{
     [JDLogUtil log:IULogDealloc string:@"IUCompiler"];
