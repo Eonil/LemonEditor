@@ -378,6 +378,8 @@
     _timer = timer;
 }
 
-
+- (BOOL)shouldAddIUByUserInput{
+    return NO;
+}
 
 @end

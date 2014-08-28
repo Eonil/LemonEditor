@@ -174,4 +174,8 @@
     _duration = duration;
 }
 
+- (BOOL)shouldAddIUByUserInput{
+    return NO;
+}
+
 @end

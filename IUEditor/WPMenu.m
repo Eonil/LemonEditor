@@ -119,10 +119,14 @@
     return [returnText copy];
 }
 
+
 -(BOOL)shouldCompileFontInfo{
     return YES;
 }
 
+-(BOOL)shouldAddIUByUserInput{
+    return NO;
+}
 -(NSString*)code{
     return @"<? wp_nav_menu() ?>";
 }

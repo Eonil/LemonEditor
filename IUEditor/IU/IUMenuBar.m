@@ -234,4 +234,8 @@
 - (BOOL)shouldCompileFontInfo{
     return YES;
 }
+
+- (BOOL)shouldAddIUByUserInput{
+    return NO;
+}
 @end
