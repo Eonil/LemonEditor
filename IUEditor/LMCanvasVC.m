@@ -1040,7 +1040,17 @@
     
     if(iu){
         //remove layer
-        if([iu.sheet isKindOfClass:[IUClass class]]){
+        if([iu isKindOfClass:[IUImport class]]){
+            [[self gridView] removeLayerWithIUIdentifier:identifier];
+            [frameDict.dict removeObjectForKey:identifier];
+            
+            for(IUBox *box in iu.allChildren){
+                NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_%@",iu.htmlID, box.htmlID];
+                [[self gridView] removeLayerWithIUIdentifier:modifiedHTMLID];
+                [frameDict.dict removeObjectForKey:modifiedHTMLID];
+            }
+        }
+        else if([iu.sheet isKindOfClass:[IUClass class]]){
             for (IUBox *import in [(IUClass*)iu.sheet references]) {
                 
                 NSMutableArray *allIU = [iu.allChildren mutableCopy];
@@ -1052,11 +1062,6 @@
                     [frameDict.dict removeObjectForKey:modifiedHTMLID];
                 }
                 
-            }
-            
-            if([iu isKindOfClass:[IUImport class]]){
-                [[self gridView] removeLayerWithIUIdentifier:identifier];
-                [frameDict.dict removeObjectForKey:identifier];
             }
             
         }
