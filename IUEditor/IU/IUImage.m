@@ -28,6 +28,10 @@
     
 }
 
+- (BOOL)shouldCompileImagePositionInfo{
+    return NO;
+}
+
 -(id)copyWithZone:(NSZone *)zone{
     [self.undoManager disableUndoRegistration];
     [self.delegate disableUpdateAll:self];

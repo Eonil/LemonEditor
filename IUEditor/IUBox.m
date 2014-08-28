@@ -791,6 +791,11 @@
     return NO;
 }
 
+- (BOOL)shouldCompileImagePositionInfo{
+    return YES;
+}
+
+
 -(BOOL)hasX{
     return YES;
 }

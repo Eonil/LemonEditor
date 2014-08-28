@@ -39,6 +39,8 @@
     }
     return self;
 }
+
+
 - (void)setController:(IUController *)controller{
     [super setController:controller];
     NSDictionary *bgEnableBindingOption = [NSDictionary
@@ -69,12 +71,15 @@
     [self outlet:_sizeSegementControl bind:NSSelectedIndexBinding cssTag:IUCSSTagBGSize];
     [self outlet:_sizeSegementControl bind:NSEnabledBinding property:@"imageName" options:bgEnableBindingOption];
     [self outlet:_sizeSegementControl bind:@"enabled2" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
+    [self outlet:_sizeSegementControl bind:@"enabled3" property:@"shouldCompileImagePositionInfo"];
     
     
     [self outlet:_repeatBtn bind:NSValueBinding cssTag:IUCSSTagBGRepeat options:noRepeatBindingOption];
     [self outlet:_repeatBtn bind:NSEnabledBinding property:@"imageName" options:bgEnableBindingOption];
     [_repeatBtn bind:@"enabled2" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     [self outlet:_repeatBtn bind:@"enabled3" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
+    [self outlet:_repeatBtn bind:@"enabled4" property:@"shouldCompileImagePositionInfo"];
+
 
     [self addObserverForCSSTag:IUCSSTagBGSize options:0 context:@"size"];
     
@@ -88,8 +93,11 @@
 
     [self outlet:_digitPositionBtn bind:NSValueBinding cssTag:IUCSSTagEnableBGCustomPosition];
     [self outlet:_digitPositionBtn bind:NSEnabledBinding property:@"imageName" options:bgEnableBindingOption];
+
+    
     [_digitPositionBtn bind:@"enabled2" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     [self outlet:_digitPositionBtn bind:@"enabled3" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
+    [self outlet:_digitPositionBtn bind:@"enabled4" property:@"shouldCompileImagePositionInfo"];
 
     [self outlet:_xPositionTF bind:NSValueBinding cssTag:IUCSSTagBGXPosition];
     [self outlet:_yPositionTF bind:NSValueBinding cssTag:IUCSSTagBGYPosition];
@@ -117,13 +125,18 @@
 
     [self outlet:_xPositionTF bind:@"enabled2" cssTag:IUCSSTagEnableBGCustomPosition];
     [self outlet:_yPositionTF bind:@"enabled2" cssTag:IUCSSTagEnableBGCustomPosition];
-    
+
     [_xPositionTF bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
     [_yPositionTF bind:@"enabled3" toObject:self withKeyPath:@"fullSize" options:IUBindingNegationAndNotRaise];
+
     
     [self outlet:_xPositionTF bind:@"enabled4" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
     [self outlet:_yPositionTF bind:@"enabled4" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
 
+    [self outlet:_xPositionTF bind:@"enabled5" property:@"shouldCompileImagePositionInfo"];
+    [self outlet:_yPositionTF bind:@"enabled5" property:@"shouldCompileImagePositionInfo"];
+    
+    
 }
 
 - (void)dealloc{
