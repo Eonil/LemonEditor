@@ -1,17 +1,15 @@
 LemonEditor
-===========
+------
 
 <h2>IUEditor v0.3-beta release</h2>
 
 * HomePage :  http://www.iueditor.org/
 * Download page : http://jdlaborg.github.io/LemonEditor/
 
-
+------
 
 <h2>IUEditor Release Note</h2>
-
 <h3>2014-08-28 (V0.3-beta)</h3>
-========
 <h4>New Functions</h4>
 * Undo, Redo
 * new project type : Support Wordpress theme + WPWidgets
@@ -38,7 +36,6 @@ LemonEditor
 
 
 <h3> 2014-07-07 (V0.2-beta) </h3>
-========
 <h4>1’st Release </h4>
 
 
