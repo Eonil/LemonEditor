@@ -40,6 +40,7 @@
     [section addIU:centerBox error:nil];
 
     WPSidebar *sidebar = [[WPSidebar alloc] initWithProject:self.project options:nil];
+    sidebar.positionType = IUPositionTypeFloatLeft;
     [sidebar.css setValue:@(40) forTag:IUCSSTagPixelX forViewport:IUCSSDefaultViewPort];
     [sidebar.css setValue:@(40) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
     [centerBox addIU:sidebar error:nil];
