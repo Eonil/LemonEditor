@@ -11,7 +11,7 @@
 #import "LMNotiMessageWC.h"
 
 static NSString *downloadURL = @"http://server.iueditor.org/message.html";
-static NSString *currentVersion = @"3";
+static NSString *currentVersion = @"0.3";
 
 @interface LMNotiManager ()
 
