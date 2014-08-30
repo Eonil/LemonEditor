@@ -36,8 +36,8 @@
         _port = 8000;
     }
     if (IUEditorVersion < 1) {
-        _buildPath = @"$IUFileDirectory/templates";
-        _buildResourcePath = @"$IUFileDirectory/templates/resource";
+        self.buildPath = @"$IUFileDirectory/templates";
+        self.buildResourcePath = @"$IUFileDirectory/templates/resource";
     }
     IUEditorVersion = 1;
     return self;
@@ -50,6 +50,11 @@
 
 - (BOOL)runnable{
     return YES;
+}
+
+- (void)resetBuildPath{
+    self.buildPath = @"$IUFileDirectory/templates";
+    self.buildResourcePath = @"$IUFileDirectory/templates/resource";
 }
 
 @end

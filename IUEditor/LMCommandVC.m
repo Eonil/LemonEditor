@@ -187,7 +187,7 @@
 
 - (BOOL)runServer:(NSError **)error{
     //get port
-    NSString *filePath = [_docController.project.buildDirectory stringByAppendingPathComponent:@"manage.py"];
+    NSString *filePath = [[_docController.project.path stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"manage.py"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath] == NO) {
         [JDUIUtil hudAlert:@"No manage.py" second:2];
         return NO;

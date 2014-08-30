@@ -318,7 +318,7 @@
     [project build:nil];
 
     IUSheet *node = [[_sheetController selectedObjects] firstObject];
-    NSString *firstPath = [project.buildDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@.html",project.buildPath, [node.name lowercaseString]] ];
+    NSString *firstPath = [project.buildPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@.html",project.buildPath, [node.name lowercaseString]] ];
     
     [[NSWorkspace sharedWorkspace] openFile:firstPath];
 }

@@ -67,8 +67,8 @@
     self.name = [options objectForKey:IUProjectKeyAppName];
     self.path = [options objectForKey:IUProjectKeyIUFilePath];
     
-    _buildPath = @"$IUFileDirectory/$AppName";
-    _buildResourcePath = @"$IUFileDirectory/$AppName/resource";
+    self.buildPath = @"$IUFileDirectory/$AppName";
+    self.buildResourcePath = @"$IUBuildPath/resource";
 
     _pageGroup = [[IUSheetGroup alloc] init];
     _pageGroup.name = IUPageGroupName;
@@ -174,4 +174,8 @@
     return result;
 }
 
+- (void)resetBuildPath{
+    self.buildPath = @"$IUFileDirectory/$AppName";
+    self.buildResourcePath = @"$IUBuildPath/resource";
+}
 @end

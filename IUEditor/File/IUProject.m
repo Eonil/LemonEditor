@@ -35,9 +35,8 @@
 - (void)encodeWithCoder:(NSCoder *)encoder{
     NSAssert(_resourceGroup, @"no resource");
     [encoder encodeObject:_mqSizes forKey:@"mqSizes"];
-    [encoder encodeObject:_buildPath forKey:@"_buildPath"];
-    [encoder encodeObject:_buildResourcePath forKey:@"_buildResourcePath"];
-    [encoder encodeObject:_buildDirectory forKey:@"_buildDirectory"];
+    [encoder encodeObject:self.buildPath forKey:@"_buildPath"];
+    [encoder encodeObject:self.buildResourcePath forKey:@"_buildResourcePath"];
     [encoder encodeObject:_pageGroup forKey:@"_pageGroup"];
     [encoder encodeObject:_backgroundGroup forKey:@"_backgroundGroup"];
     [encoder encodeObject:_classGroup forKey:@"_classGroup"];
@@ -59,7 +58,7 @@
         _compiler.resourceManager = _resourceManager;
         
         _mqSizes = [[aDecoder decodeObjectForKey:@"mqSizes"] mutableCopy];
-        _buildPath = [aDecoder decodeObjectForKey:@"_buildPath"];
+        /*
         _buildDirectory = [aDecoder decodeObjectForKey:@"_buildDirectory"];
 
         if([[NSFileManager defaultManager] fileExistsAtPath:_buildDirectory isDirectory:nil] == NO){
@@ -68,13 +67,16 @@
             //setPath 참고.
             _buildDirectory = nil;
         }
+        */
         
         _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _backgroundGroup = [aDecoder decodeObjectForKey:@"_backgroundGroup"];
         _classGroup = [aDecoder decodeObjectForKey:@"_classGroup"];
         _resourceGroup = [aDecoder decodeObjectForKey:@"_resourceGroup"];
         _name = [aDecoder decodeObjectForKey:@"_name"];
-        _buildResourcePath = [aDecoder decodeObjectForKey:@"_buildResourcePath"];
+        
+        self.buildPath = [aDecoder decodeObjectForKey:@"_buildPath"];
+        self.buildResourcePath = [aDecoder decodeObjectForKey:@"_buildResourcePath"];
         
         _favicon = [aDecoder decodeObjectForKey:@"_favicon"];
         _author = [aDecoder decodeObjectForKey:@"_author"];
@@ -106,8 +108,8 @@
         /* version control code */
         IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
         if (IUEditorVersion < 1) {
-            _buildPath = @"$IUFileDirectory/$AppName_build";
-            _buildResourcePath = @"$IUFileDirectory/$AppName_build/resource";
+            self.buildPath = @"$IUFileDirectory/$AppName_build";
+            self.buildResourcePath = @"$IUBuildPath/resource";
         }
         IUEditorVersion = 1;
     }
@@ -143,14 +145,14 @@
     self.name = [options objectForKey:IUProjectKeyAppName];
     self.path = [options objectForKey:IUProjectKeyIUFilePath];
     
-    _buildPath = [[options objectForKey:IUProjectKeyBuildPath] relativePathFrom:self.path];
-    if (_buildPath == nil) {
-        _buildPath = @"$IUFileDirectory/$AppName_build";
+    self.buildPath = [[options objectForKey:IUProjectKeyBuildPath] relativePathFrom:self.path];
+    if (self.buildPath == nil) {
+        self.buildPath = @"$IUFileDirectory/$AppName_build";
     }
     
-    _buildResourcePath = [[options objectForKey:IUProjectKeyResourcePath] relativePathFrom:self.path];
-    if (_buildResourcePath == nil) {
-        _buildResourcePath = @"$IUFileDirectory/$AppName_build/resource";
+    self.buildResourcePath = [[options objectForKey:IUProjectKeyResourcePath] relativePathFrom:self.path];
+    if (self.buildResourcePath == nil) {
+        self.buildResourcePath = @"$IUBuildPath/resource";
     }
     
     _pageGroup = [project.pageGroup copy];
@@ -202,14 +204,14 @@
     self.name = [options objectForKey:IUProjectKeyAppName];
     self.path = [options objectForKey:IUProjectKeyIUFilePath];
 
-    _buildPath = [[options objectForKey:IUProjectKeyBuildPath] relativePathFrom:self.path];
-    if (_buildPath == nil) {
-        _buildPath = @"$IUFileDirectory/$AppName_build";
+    self.buildPath = [[options objectForKey:IUProjectKeyBuildPath] relativePathFrom:self.path];
+    if (self.buildPath == nil) {
+        self.buildPath = @"$IUFileDirectory/$AppName_build";
     }
     
-    _buildResourcePath = [[options objectForKey:IUProjectKeyResourcePath] relativePathFrom:self.path];
-    if (_buildResourcePath == nil) {
-        _buildResourcePath = @"$IUFileDirectory/$AppName_build/resource";
+    self.buildResourcePath = [[options objectForKey:IUProjectKeyResourcePath] relativePathFrom:self.path];
+    if (self.buildResourcePath == nil) {
+        self.buildResourcePath = @"$IUBuildPath/resource";
     }
 
     _pageGroup = [[IUSheetGroup alloc] init];
@@ -299,9 +301,6 @@
 
 - (void)setPath:(NSString *)path{
     _path = path;
-    if(_buildDirectory == nil){
-        _buildDirectory = [path stringByDeletingLastPathComponent];
-    }
 }
 
 
@@ -404,28 +403,24 @@
     return type;
 }
 
-- (NSString*)buildPath{
-    return _buildPath;
-}
-
 
 - (NSString*)absoluteBuildPath{
-    NSMutableString *str = [_buildPath mutableCopy];
-    [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[self buildDirectory] options:0 range:NSMakeRange(0, [str length])];
+    NSMutableString *str = [self.buildPath mutableCopy];
+    [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[[self path] stringByDeletingLastPathComponent] options:0 range:NSMakeRange(0, [str length])];
     [str replaceOccurrencesOfString:@"$AppName" withString:[self name] options:0 range:NSMakeRange(0, [str length])];
-
+    
     NSString *returnPath = [str stringByExpandingTildeInPath];
     return returnPath;
 }
 
-- (NSString*)buildResourcePath{
-    return _buildResourcePath;
-}
+
 
 - (NSString*)absoluteBuildResourcePath{
-    NSMutableString *str = [_buildResourcePath mutableCopy];
-    [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[self buildDirectory] options:0 range:NSMakeRange(0, [str length])];
+    NSMutableString *str = [self.buildResourcePath mutableCopy];
+    [str replaceOccurrencesOfString:@"$IUBuildPath" withString:[self buildPath] options:0 range:NSMakeRange(0, [str length])];
+    [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[[self path] stringByDeletingLastPathComponent] options:0 range:NSMakeRange(0, [str length])];
     [str replaceOccurrencesOfString:@"$AppName" withString:[self name] options:0 range:NSMakeRange(0, [str length])];
+    
     
     NSString *returnPath = [str stringByExpandingTildeInPath];
     return returnPath;
@@ -860,10 +855,15 @@
 
 - (IUServerInfo*)serverInfo{
     if (_serverInfo.localPath == nil) {
-        _serverInfo.localPath = [self buildDirectory];
+        _serverInfo.localPath = [self buildPath];
         _serverInfo.syncItem = [self.path lastPathComponent];
     }
     return _serverInfo;
+}
+
+- (void)resetBuildPath{
+    self.buildPath = @"$IUFileDirectory/$AppName_build";
+    self.buildResourcePath = @"$IUBuildPath/resource";
 }
 
 @end

@@ -22,6 +22,7 @@
 @property (weak) IBOutlet NSComboBox *faviconComboBox;
 @property (weak) IBOutlet NSTextField *authorTF;
 @property (weak) IBOutlet NSTextField *buildPathTF;
+@property (weak) IBOutlet NSTextField *buildResourcePathTF;
 @property (weak) IBOutlet NSButton *enableMinWidthCheckBox;
 
 //django
@@ -62,10 +63,8 @@
     [_faviconComboBox bind:NSContentBinding toObject:self withKeyPath:@"project.resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
     [_faviconComboBox bind:NSValueBinding toObject:self withKeyPath:@"project.favicon" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_enableMinWidthCheckBox bind:NSValueBinding toObject:self withKeyPath:@"project.enableMinWidth" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    
-    
-    //project build property
-    [_buildPathTF bind:NSValueBinding toObject:self withKeyPath:@"project.buildDirectory" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_buildPathTF bind:NSValueBinding toObject:self withKeyPath:@"project.buildPath" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [_buildResourcePathTF bind:NSValueBinding toObject:self withKeyPath:@"project.buildResourcePath" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     
     
     [viewArray addObject:_defaultView];
@@ -104,9 +103,10 @@
 - (IBAction)pressOKBtn:(id)sender {
     [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseOK];
 }
+
 - (IBAction)findBuildPath:(id)sender {
     NSURL *url = [[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Build Folder"];
-    _project.buildDirectory = [url path];
+    _project.buildPath = [url path];
 }
 
 - (void)cancelOperation:(id)sender{
@@ -132,6 +132,11 @@
     
     return [(NSView*)[viewArray objectAtIndex:row] frame].size.height;
 }
+
+- (IBAction)resetBuildPath:(id)sender {
+    [self.project resetBuildPath];
+}
+
 
 
 @end

@@ -18,7 +18,7 @@
 @property NSString *djangoResourceDir;
 @property NSString *djangoTemplateDir;
 
-@property (nonatomic) NSString *fileName;
+@property (nonatomic) NSString *absoluteIUFilePath;
 
 @end
 
@@ -51,7 +51,7 @@
     NSDictionary *options = @{   IUProjectKeyGit: @(NO),
                                  IUProjectKeyHeroku: @(NO),
                                  IUProjectKeyAppName : [_djangoProjectDir lastPathComponent],
-                                 IUProjectKeyIUFilePath : [_djangoProjectDir stringByAppendingPathComponent:self.fileName],
+                                 IUProjectKeyIUFilePath : self.absoluteIUFilePath,
                                  IUProjectKeyType:@(IUProjectTypeDjango),
                                  IUProjectKeyResourcePath : _djangoResourceDir,
                                  IUProjectKeyBuildPath : _djangoTemplateDir
@@ -66,7 +66,7 @@
     [_parentVC show];
 }
 
-- (NSString *)fileName{
+- (NSString *)absoluteIUFilePath{
     if(_djangoProjectDir && _djangoProjectDir.length > 0){
         return [_djangoProjectDir stringByAppendingString:[NSString stringWithFormat:@"/%@.iu", [_djangoProjectDir lastPathComponent]] ];
     }
@@ -77,9 +77,9 @@
 
 - (IBAction)performProjectDirSelect:(id)sender {
     
-    [self willChangeValueForKey:@"fileName"];
+    [self willChangeValueForKey:@"absoluteIUFilePath"];
     self.djangoProjectDir = [[[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Django Project Directory"] path];
-    [self didChangeValueForKey:@"fileName"];
+    [self didChangeValueForKey:@"absoluteIUFilePath"];
     
     self.djangoTemplateDir = @"$IUFileDirectory/templates";
     self.djangoResourceDir = @"$IUFileDirectory/templates/resource";

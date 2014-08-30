@@ -153,6 +153,10 @@
         NSString *tutorial = @"http://www.iueditor.org";
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:tutorial]];
     }
+    else if (sender.tag == 2){
+        NSString *forum = @"https://groups.google.com/forum/#!topic/iueditor";
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:forum]];
+    }
     else {
         NSString *tutorial = @"http://guide.iueditor.org";
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:tutorial]];

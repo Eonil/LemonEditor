@@ -213,7 +213,7 @@
 
 
 - (void)openProject:(id)sender {
-    [[NSWorkspace sharedWorkspace] openFile:_project.buildDirectory];
+    [[NSWorkspace sharedWorkspace] openFile:[_project.path stringByDeletingLastPathComponent]];
 }
 
 - (void)copyDocument:(NSMenuItem*)sender{
