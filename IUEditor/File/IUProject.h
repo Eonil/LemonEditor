@@ -113,11 +113,7 @@ static NSString *IUClassGroupName = @"class";
 @property   NSString    *name, *author, *favicon;
 @property   BOOL enableMinWidth;
 
-- (NSString*)buildPath;
-- (void)setBuildPath:(NSString*)buildPath;
 
-- (NSString*)buildResourcePath;
-- (void)setBuildResourcePath:(NSString*)buildResourcePath;
 
 - (NSString*)absoluteBuildPath;
 - (NSString*)absoluteBuildResourcePath;

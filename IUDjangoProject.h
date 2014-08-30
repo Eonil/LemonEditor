@@ -11,5 +11,8 @@
 @interface IUDjangoProject : IUProject
 
 @property (nonatomic) NSInteger port;
+@property (nonatomic) NSString *managePyPath;
+
+-(NSString*)absoluteManagePyPath;
 
 @end

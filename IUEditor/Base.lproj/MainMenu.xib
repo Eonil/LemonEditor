@@ -213,7 +213,7 @@
                                     <action selector="performHelp:" target="494" id="tLl-b8-2TC"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Visit IUEditor Website" tag="2" id="kCQ-jE-ILK">
+                            <menuItem title="Visit IUEditor Website" tag="3" id="kCQ-jE-ILK">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="performHelp:" target="494" id="ayZ-By-5r2"/>

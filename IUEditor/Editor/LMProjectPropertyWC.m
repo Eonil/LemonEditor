@@ -109,6 +109,12 @@
     _project.buildPath = [url path];
 }
 
+- (IBAction)findBuildResourcePath:(id)sender {
+    NSURL *url = [[JDFileUtil util] openDirectoryByNSOpenPanelWithTitle:@"Select Build Resource Folder"];
+    _project.buildResourcePath = [url path];
+}
+
+
 - (void)cancelOperation:(id)sender{
     [self pressOKBtn:self];
 }

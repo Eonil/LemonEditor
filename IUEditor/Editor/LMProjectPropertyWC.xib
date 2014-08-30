@@ -145,17 +145,17 @@
         <numberFormatter formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="5dh-cc-kjV"/>
         <userDefaultsController representsSharedInstance="YES" id="PWd-WT-Oxe"/>
         <customView id="ePI-hN-WNQ" userLabel="DjangoView">
-            <rect key="frame" x="0.0" y="0.0" width="792" height="70"/>
+            <rect key="frame" x="0.0" y="0.0" width="792" height="97"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box autoresizesSubviews="NO" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="H9p-d5-Z2h">
-                    <rect key="frame" x="20" y="4" width="752" height="50"/>
+                    <rect key="frame" x="20" y="4" width="752" height="77"/>
                     <view key="contentView">
-                        <rect key="frame" x="1" y="1" width="750" height="48"/>
+                        <rect key="frame" x="1" y="1" width="750" height="75"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LzS-sL-Cbp">
-                                <rect key="frame" x="110" y="12" width="589" height="19"/>
+                                <rect key="frame" x="110" y="39" width="589" height="19"/>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="1Zc-yb-GU1">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -166,7 +166,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="L7f-yz-ACq">
-                                <rect key="frame" x="49" y="15" width="56" height="14"/>
+                                <rect key="frame" x="49" y="42" width="56" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="52" id="eig-lo-08J"/>
                                 </constraints>
@@ -176,20 +176,51 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Afe-Jz-DYd">
+                                <rect key="frame" x="110" y="12" width="589" height="19"/>
+                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="lmY-rh-4nL">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="-2" name="value" keyPath="self.project.managePyPath" id="cdp-IW-Dt3">
+                                        <dictionary key="options">
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XCv-R9-I5r">
+                                <rect key="frame" x="16" y="15" width="89" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="e93-cv-N7J"/>
+                                </constraints>
+                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Manage.py Path" id="26Z-WR-8Ft">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <constraints>
+                        <constraint firstItem="Afe-Jz-DYd" firstAttribute="top" secondItem="LzS-sL-Cbp" secondAttribute="bottom" constant="8" symbolic="YES" id="3CY-Ea-YnW"/>
+                        <constraint firstItem="Afe-Jz-DYd" firstAttribute="leading" secondItem="XCv-R9-I5r" secondAttribute="trailing" constant="7" id="Lts-GP-Rj4"/>
                         <constraint firstItem="L7f-yz-ACq" firstAttribute="centerY" secondItem="LzS-sL-Cbp" secondAttribute="centerY" id="PQg-XZ-aue"/>
                         <constraint firstItem="LzS-sL-Cbp" firstAttribute="leading" secondItem="L7f-yz-ACq" secondAttribute="trailing" constant="7" id="VuI-Wj-Y75"/>
                         <constraint firstItem="L7f-yz-ACq" firstAttribute="leading" secondItem="H9p-d5-Z2h" secondAttribute="leading" constant="52" id="a0g-OA-58y"/>
                         <constraint firstAttribute="trailing" secondItem="LzS-sL-Cbp" secondAttribute="trailing" constant="52" id="ctg-24-rTG"/>
+                        <constraint firstItem="Afe-Jz-DYd" firstAttribute="trailing" secondItem="LzS-sL-Cbp" secondAttribute="trailing" id="oUu-44-60c"/>
                         <constraint firstItem="LzS-sL-Cbp" firstAttribute="top" secondItem="H9p-d5-Z2h" secondAttribute="top" constant="18" id="qZT-Wf-BDQ"/>
+                        <constraint firstItem="XCv-R9-I5r" firstAttribute="centerY" secondItem="Afe-Jz-DYd" secondAttribute="centerY" id="voU-vC-I0y"/>
+                        <constraint firstItem="Afe-Jz-DYd" firstAttribute="leading" secondItem="LzS-sL-Cbp" secondAttribute="leading" id="wYt-KE-Qs6"/>
                     </constraints>
                     <color key="borderColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1AM-3a-LTw">
-                    <rect key="frame" x="35" y="45" width="110" height="17"/>
+                    <rect key="frame" x="35" y="72" width="110" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="3tJ-rv-BVo"/>
                         <constraint firstAttribute="width" constant="110" id="iGP-b2-Jp5"/>
@@ -209,7 +240,7 @@
                 <constraint firstItem="1AM-3a-LTw" firstAttribute="leading" secondItem="ePI-hN-WNQ" secondAttribute="leading" constant="35" id="fR4-N5-piU"/>
                 <constraint firstItem="1AM-3a-LTw" firstAttribute="top" secondItem="ePI-hN-WNQ" secondAttribute="top" constant="8" id="xMF-IJ-4lc"/>
             </constraints>
-            <point key="canvasLocation" x="-369" y="1312"/>
+            <point key="canvasLocation" x="-369" y="1298.5"/>
         </customView>
         <customView id="iKw-Z6-Y5c" userLabel="WordpressView">
             <rect key="frame" x="0.0" y="0.0" width="792" height="275"/>
@@ -506,7 +537,7 @@
                                     <font key="font" metaFont="smallSystem"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="findBuildPath:" target="-2" id="TYd-q2-xeP"/>
+                                    <action selector="findBuildResourcePath:" target="-2" id="3Xw-gu-2vb"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="a7s-vY-vVF">

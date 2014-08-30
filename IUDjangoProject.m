@@ -23,6 +23,7 @@
     self = [super initWithCreation:options error:error];
     if(self){
         _port = 8000;
+        _managePyPath = @"$IUFileDirectory/manage.py";
     }
     return self;
 }
@@ -32,12 +33,17 @@
     /* version control code */
     IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
     _port = [aDecoder decodeIntForKey:@"_port"];
+    _managePyPath = [aDecoder decodeObjectForKey:@"_managePyPath"];
+
     if(_port ==0 ){
         _port = 8000;
     }
     if (IUEditorVersion < 1) {
         self.buildPath = @"$IUFileDirectory/templates";
         self.buildResourcePath = @"$IUFileDirectory/templates/resource";
+    }
+    if ([_managePyPath length] == 0) {
+        _managePyPath = @"$IUFileDirectory/manage.py";
     }
     IUEditorVersion = 1;
     return self;
@@ -46,15 +52,27 @@
 - (void)encodeWithCoder:(NSCoder *)encoder{
     [super encodeWithCoder:encoder];
     [encoder encodeInteger:_port forKey:@"_port"];
+    [encoder encodeObject:_managePyPath forKey:@"_managePyPath"];
 }
 
 - (BOOL)runnable{
     return YES;
 }
 
+-(NSString*)absoluteManagePyPath{
+    NSMutableString *str = [self.managePyPath mutableCopy];
+    [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[[self path] stringByDeletingLastPathComponent] options:0 range:NSMakeRange(0, [str length])];
+    [str replaceOccurrencesOfString:@"$AppName" withString:[self name] options:0 range:NSMakeRange(0, [str length])];
+    
+    NSString *returnPath = [str stringByExpandingTildeInPath];
+    return returnPath;
+}
+
 - (void)resetBuildPath{
     self.buildPath = @"$IUFileDirectory/templates";
     self.buildResourcePath = @"$IUFileDirectory/templates/resource";
+    self.managePyPath = @"$IUFileDirectory/manage.py";
+    self.port = 8000;
 }
 
 @end
