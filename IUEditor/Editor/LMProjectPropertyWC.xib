@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
@@ -16,6 +16,7 @@
                 <outlet property="enableMinWidthCheckBox" destination="8XN-IR-Jb1" id="BhW-Pq-66l"/>
                 <outlet property="faviconComboBox" destination="1VZ-aM-O4C" id="34T-NJ-4Ia"/>
                 <outlet property="heightConstraint" destination="UCe-6c-KbQ" id="8RB-a3-0SR"/>
+                <outlet property="managyPyTF" destination="voU-vC-I0y" id="zqs-0z-R9F"/>
                 <outlet property="tableV" destination="JR0-8f-Z8n" id="gX5-E4-a9L"/>
                 <outlet property="tagTF" destination="eLr-h9-qY0" id="HTF-PQ-kuY"/>
                 <outlet property="themeDescTF" destination="NAQ-Cg-QV5" id="0Cg-pL-sf1"/>
@@ -33,7 +34,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="800" height="358"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="800" height="358"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -183,13 +184,6 @@
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="-2" name="value" keyPath="self.project.managePyPath" id="cdp-IW-Dt3">
-                                        <dictionary key="options">
-                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XCv-R9-I5r">
                                 <rect key="frame" x="16" y="15" width="89" height="14"/>
@@ -360,10 +354,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="573" height="78"/>
+                                            <size key="minSize" width="588" height="78"/>
                                             <size key="maxSize" width="590" height="10000000"/>
                                             <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="573" height="78"/>
+                                            <size key="minSize" width="588" height="78"/>
                                             <size key="maxSize" width="590" height="10000000"/>
                                         </textView>
                                     </subviews>

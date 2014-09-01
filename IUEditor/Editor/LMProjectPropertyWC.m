@@ -28,6 +28,7 @@
 //django
 @property (strong) IBOutlet NSView *djangoView;
 @property (weak) IBOutlet NSTextField *djangoPortTF;
+@property (weak) IBOutlet NSLayoutConstraint *managyPyTF;
 
 //wordpress
 @property (strong) IBOutlet NSView *wordpressView;
@@ -60,7 +61,7 @@
     
     //project property
     [_authorTF bind:NSValueBinding toObject:self withKeyPath:@"project.author" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
-    [_faviconComboBox bind:NSContentBinding toObject:self withKeyPath:@"project.resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];
+    [_faviconComboBox bind:NSContentBinding toObject:self withKeyPath:@"project.resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_faviconComboBox bind:NSValueBinding toObject:self withKeyPath:@"project.favicon" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_enableMinWidthCheckBox bind:NSValueBinding toObject:self withKeyPath:@"project.enableMinWidth" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     [_buildPathTF bind:NSValueBinding toObject:self withKeyPath:@"project.buildPath" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
@@ -73,6 +74,7 @@
         [viewArray addObject:_djangoView];
         
         [_djangoPortTF bind:NSValueBinding toObject:self withKeyPath:@"project.port" options:IUBindingDictNumberAndNotRaisesApplicable];
+        [_managyPyTF bind:NSValueBinding toObject:self withKeyPath:@"project.managePyPath" options:IUBindingDictNumberAndNotRaisesApplicable];
     }
     else if([self.project isKindOfClass:[IUWordpressProject class]]){
         [viewArray addObject:_wordpressView];
