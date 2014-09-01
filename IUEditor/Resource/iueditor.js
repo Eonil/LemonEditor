@@ -209,9 +209,10 @@ function remakeCollection(){
 				minWidth = width;
 			}
 		}
-		$(this).children().find('.collectioncopy').remove();
+		$(this.children).remove('.collectioncopy');
 		//copy children
-		var copy = $($(this).children()[0]).clone(true).addClass('collectioncopy');
+		
+		var copy = $(this.children[0]).clone(true).addClass('collectioncopy');
 		copy.removeAttr('id');
 		copy.find('*').each(function(){
 			$(this).removeAttr('id');
@@ -228,28 +229,7 @@ function remakeCollection(){
 	});
 }
 
-function getGoogleMapStaticStyle(stylesStr) {
-	var styles = eval(stylesStr);
-	var result = [];
-	styles.forEach(function(v, i, a){
-        
-		var style='';
-		if( v.stylers ) { // only if there is a styler object
-			if (v.stylers.length > 0) { // Needs to have a style rule to be valid.
-				style += (v.hasOwnProperty('featureType') ? 'feature:' + v.featureType : 'feature:all') + '|';
-				style += (v.hasOwnProperty('elementType') ? 'element:' + v.elementType : 'element:all') + '|';
-				v.stylers.forEach(function(val, i, a){
-					var propertyname = Object.keys(val)[0];
-					var propertyval = val[propertyname].toString().replace('#', '0x');
-					style += propertyname + ':' + propertyval + '|';
-				});
-			}
-		}
-		result.push('style='+encodeURIComponent(style));
-	});
-    
-	return result.join('&');
-}
+
 
 function getImageHeight(imageSrc){
 	var theImage = new Image();
