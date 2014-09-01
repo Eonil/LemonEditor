@@ -1710,11 +1710,11 @@
     JDCode *jsCode = [[JDCode alloc] init];
     [jsCode addCodeLine:@"$(document).ready(function(){"];
     
+    JDCode *objectJSSource = [self jsCode:sheet isEdit:NO];
+    [jsCode addCodeWithIndent:objectJSSource];
     
     JDCode *classJSSource = [self jsOnceCodeForSheet:sheet];
     [jsCode addCodeWithIndent:classJSSource];
-    JDCode *objectJSSource = [self jsCode:sheet isEdit:NO];
-    [jsCode addCodeWithIndent:objectJSSource];
     [jsCode addNewLine];
     
     [jsCode addCodeLine:@"});"];

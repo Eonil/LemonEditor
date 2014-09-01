@@ -30,7 +30,6 @@
     LMStartWC *startWC;
     LMPreferenceWC *preferenceWC;
     LMNotiManager *notiManager;
-    LMTutorialWC *tutorialWC;
     LMAppWarningWC *warnWC;
 }
 
@@ -101,8 +100,9 @@
     
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"iututorial"] == NO) {
-        tutorialWC = [[LMTutorialWC alloc] initWithWindowNibName:@"LMTutorialWC"];
-        [tutorialWC showWindow:self];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"iututorial"];
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://guide.iueditor.org/"]];
+
     }
     
 #endif
