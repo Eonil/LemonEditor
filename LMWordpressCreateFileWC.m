@@ -13,6 +13,7 @@
 @property NSString *fileDescription;
 @property NSString *pageInfoButtonTitle;
 @property BOOL canCreateFile;
+@property BOOL showPHPInfo;
 @end
 
 @implementation LMWordpressCreateFileWC
@@ -43,10 +44,25 @@
 
     //define can create file
     self.canCreateFile = YES;
-    for (IUPage *page in self.project.pageGroup.childrenFiles){
-        if ([page.name isEqualToString:[_selectedFileName stringByDeletingPathExtension]]) {
-            self.canCreateFile = NO;
+    
+    if (self.fileDescription) {
+        //preset
+        self.showPHPInfo = YES;
+        NSString *compareName = [_selectedFileName stringByDeletingPathExtension];
+        if ([compareName isEqualToString:@"404"]) {
+            compareName = @"_404";
         }
+
+        for (IUPage *page in self.project.pageGroup.childrenFiles){
+            if ([page.name isEqualToString:compareName]) {
+                self.canCreateFile = NO;
+                return;
+            }
+        }
+    }
+    else {
+        //custom
+        self.showPHPInfo = NO;
     }
 }
 
@@ -76,12 +92,17 @@
 }
 
 - (IBAction)create:(id)sender{
+    if (self.showPHPInfo == NO) {
+        // not php
+        [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseContinue];
+        return;
+    }
     NSAssert(self.project && self.sheetController, @"not initialized");
-    NSString *fileName = self.selectedFileName;
+    NSString *fileName = [self.selectedFileName stringByDeletingPathExtension];
     if ([fileName isEqualToString:@"404"]) {
         fileName = @"_404";
     }
-    IUPage *newSheet = [[IUPage alloc] initWithProject:self.project options:@{IUFileName: [self.selectedFileName stringByDeletingPathExtension]}];
+    IUPage *newSheet = [[IUPage alloc] initWithProject:self.project options:@{IUFileName: fileName}];
     IUBackground *defaultBG = self.project.backgroundSheets[0];
     [newSheet setBackground:defaultBG];
     
@@ -94,11 +115,12 @@
 
     [self.sheetController rearrangeObjects];
     [self.sheetController setSelectedObject:newSheet];
-    [self cancel:nil];
+
+    [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseOK];
 }
 
 - (IBAction)cancel:(id)sender{
-    [self.window.sheetParent endSheet:self.window];
+    [self.window.sheetParent endSheet:self.window returnCode:NSModalResponseCancel];
 }
 
 @end

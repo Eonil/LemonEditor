@@ -246,42 +246,51 @@
 
 #pragma mark - cell specivfic action (add, name editing)
 
+- (void)makeNewSheet:(id)sender{
+    NSTableCellView *cellView = (NSTableCellView *)[sender superview];
+    NSString *groupName =  cellView.textField.stringValue;
+    IUSheet *newDoc;
+    [[self.project identifierManager] resetUnconfirmedIUs];
+    if([groupName isEqualToString:IUPageGroupName]){
+        
+        newDoc = [[IUPage alloc] initWithProject:self.project options:nil];
+        [self.project addSheet:newDoc toSheetGroup:self.project.pageGroup];
+        [self.project.identifierManager registerIUs:@[newDoc]];
+        IUBackground *defaultBG = self.project.backgroundSheets[0];
+        [(IUPage*)newDoc setBackground:defaultBG];
+    }
+    else if([groupName isEqualToString:IUClassGroupName]){
+        newDoc = [[IUClass alloc] initWithProject:self.project options:nil];
+        [self.project addSheet:newDoc toSheetGroup:self.project.classGroup];
+        [self.project.identifierManager registerIUs:@[newDoc]];
+    }
+    
+    if(newDoc){
+        [self.documentController rearrangeObjects];
+        [self.documentController setSelectedObject:newDoc];
+    }
+    [newDoc connectWithEditor];
+    [newDoc setIsConnectedWithEditor];
+    [[self.project identifierManager] confirm];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType:IUNotificationStructureAdding, IUNotificationStructureChangedIU:newDoc}];
+}
+
 - (IBAction)performAddSheet:(id)sender{
     if ([self.project isKindOfClass:[IUWordpressProject class]]) {
         wpWC = [[LMWordpressCreateFileWC alloc] initWithWindowNibName:@"LMWordpressCreateFileWC"];
         wpWC.project = (IUWordpressProject*) self.project;
         wpWC.sheetController = self.documentController;
-        [self.view.window beginSheet:wpWC.window completionHandler:nil];
+        [self.view.window beginSheet:wpWC.window completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode == NSModalResponseContinue) {
+                [self makeNewSheet:sender];
+            }
+        }];
     }
     else {
-        NSTableCellView *cellView = (NSTableCellView *)[sender superview];
-        NSString *groupName =  cellView.textField.stringValue;
-        IUSheet *newDoc;
-        [[self.project identifierManager] resetUnconfirmedIUs];
-        if([groupName isEqualToString:IUPageGroupName]){
-            
-            newDoc = [[IUPage alloc] initWithProject:self.project options:nil];
-            [self.project addSheet:newDoc toSheetGroup:self.project.pageGroup];
-            [self.project.identifierManager registerIUs:@[newDoc]];
-            IUBackground *defaultBG = self.project.backgroundSheets[0];
-            [(IUPage*)newDoc setBackground:defaultBG];
-        }
-        else if([groupName isEqualToString:IUClassGroupName]){
-            newDoc = [[IUClass alloc] initWithProject:self.project options:nil];
-            [self.project addSheet:newDoc toSheetGroup:self.project.classGroup];
-            [self.project.identifierManager registerIUs:@[newDoc]];
-        }
-        
-        if(newDoc){
-            [self.documentController rearrangeObjects];
-            [self.documentController setSelectedObject:newDoc];
-        }
-        [newDoc connectWithEditor];
-        [newDoc setIsConnectedWithEditor];
-        [[self.project identifierManager] confirm];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType:IUNotificationStructureAdding, IUNotificationStructureChangedIU:newDoc}];
+        [self makeNewSheet:sender];
     }
+
 }
 
 #pragma mark - name change

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMWordpressCreateFileWC">
@@ -15,7 +15,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="580" height="560"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="580" height="560"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -27,7 +27,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iwd-zs-yIa">
-                                    <rect key="frame" x="110" y="386" width="361" height="19"/>
+                                    <rect key="frame" x="82" y="386" width="417" height="19"/>
                                     <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="KxD-U4-v1z">
                                         <font key="font" metaFont="smallSystem"/>
                                         <segments>
@@ -36,6 +36,7 @@
                                             <segment label="404.php"/>
                                             <segment label="home.php"/>
                                             <segment label="category.php"/>
+                                            <segment label="custom"/>
                                         </segments>
                                     </segmentedCell>
                                     <connections>
@@ -69,6 +70,11 @@
                                     </buttonCell>
                                     <connections>
                                         <action selector="openHierachy:" target="-2" id="3M5-71-yIN"/>
+                                        <binding destination="-2" name="hidden" keyPath="self.showPHPInfo" id="sM7-Wb-AwC">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                            </dictionary>
+                                        </binding>
                                     </connections>
                                 </button>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Db7-AC-dIs">
@@ -85,6 +91,11 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
+                                        <binding destination="-2" name="hidden" keyPath="self.showPHPInfo" id="EBC-ZM-UAH">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                            </dictionary>
+                                        </binding>
                                         <binding destination="-2" name="value" keyPath="self.fileDescription" id="cg7-tg-9Lf"/>
                                     </connections>
                                 </textField>
@@ -99,6 +110,11 @@
                                     </buttonCell>
                                     <connections>
                                         <action selector="openFileInfo:" target="-2" id="lXP-K1-bNW"/>
+                                        <binding destination="-2" name="hidden" keyPath="self.showPHPInfo" id="kCw-vb-Ban">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                            </dictionary>
+                                        </binding>
                                         <binding destination="-2" name="title" keyPath="pageInfoButtonTitle" id="H3v-9B-pdg"/>
                                     </connections>
                                 </button>
@@ -114,6 +130,11 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <connections>
+                                        <binding destination="-2" name="hidden" keyPath="self.showPHPInfo" id="sgD-go-Wgl">
+                                            <dictionary key="options">
+                                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                            </dictionary>
+                                        </binding>
                                         <binding destination="-2" name="value" keyPath="self.selectedFileName" id="CqQ-WT-dIn"/>
                                     </connections>
                                 </textField>
@@ -214,7 +235,6 @@ Gw
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="691" y="262"/>
         </window>
         <collectionViewItem id="CPC-Ct-rwd">
             <connections>
