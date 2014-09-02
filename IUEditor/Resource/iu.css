@@ -7,7 +7,7 @@
 
 a{
     text-decoration:none;
-    display:block;
+/*    display:block; remove this : wp comment*/
 }
 
 .IUPage{
