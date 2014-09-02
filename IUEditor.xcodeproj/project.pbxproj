@@ -989,6 +989,7 @@
 		69F59BA5196D97EA00D6EAF5 /* JDShellUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F59BA4196D97EA00D6EAF5 /* JDShellUtil.m */; };
 		69F59BA9196ED5D100D6EAF5 /* LMConsoleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F59BA7196ED5D100D6EAF5 /* LMConsoleVC.m */; };
 		69F59BAA196ED5D100D6EAF5 /* LMConsoleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69F59BA8196ED5D100D6EAF5 /* LMConsoleVC.xib */; };
+		69F97C9219B550F000BDEFBE /* wpWebTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = 69F97C9119B550F000BDEFBE /* wpWebTemplate.html */; };
 		69FEC48A19483D6D00483C11 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FEC48919483D6D00483C11 /* Quartz.framework */; };
 		69FEF94A1996D3B200AEB283 /* LMWordpressCreateFileWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FEF9481996D3B200AEB283 /* LMWordpressCreateFileWC.m */; };
 		69FEF94B1996D3B200AEB283 /* LMWordpressCreateFileWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69FEF9491996D3B200AEB283 /* LMWordpressCreateFileWC.xib */; };
@@ -2260,6 +2261,7 @@
 		69F59BA6196ED5D000D6EAF5 /* LMConsoleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMConsoleVC.h; path = ../LMConsoleVC.h; sourceTree = "<group>"; };
 		69F59BA7196ED5D100D6EAF5 /* LMConsoleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMConsoleVC.m; path = ../LMConsoleVC.m; sourceTree = "<group>"; };
 		69F59BA8196ED5D100D6EAF5 /* LMConsoleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMConsoleVC.xib; path = ../LMConsoleVC.xib; sourceTree = "<group>"; };
+		69F97C9119B550F000BDEFBE /* wpWebTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = wpWebTemplate.html; sourceTree = "<group>"; };
 		69FEC48919483D6D00483C11 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		69FEF9471996D3B200AEB283 /* LMWordpressCreateFileWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWordpressCreateFileWC.h; sourceTree = SOURCE_ROOT; };
 		69FEF9481996D3B200AEB283 /* LMWordpressCreateFileWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMWordpressCreateFileWC.m; sourceTree = SOURCE_ROOT; };
@@ -3998,6 +4000,7 @@
 				3DED275D190E388F001A1D67 /* JS */,
 				3DED272F1904ECC8001A1D67 /* Video */,
 				69CFCAC218EAA21E00E3048A /* sample.jpg */,
+				69F97C9119B550F000BDEFBE /* wpWebTemplate.html */,
 				696D1C9918E5366400B4AB16 /* webTemplate.html */,
 			);
 			name = webResource;
@@ -5267,6 +5270,7 @@
 				2610CACB1999C1AC004C2F2E /* center_on@2x.png in Resources */,
 				3DF437C419AF1B420049A87E /* circle_arrow-up-128.png in Resources */,
 				3DF4378019AF1B420049A87E /* other_arrow-left_other-128.png in Resources */,
+				69F97C9219B550F000BDEFBE /* wpWebTemplate.html in Resources */,
 				26C85664192060E500118CA5 /* tool_page_nav@2x.png in Resources */,
 				3DED26F219010BB0001A1D67 /* LMPropertyIUImportVC.xib in Resources */,
 				CBA8780E1964084700075294 /* ghost.rtf in Resources */,

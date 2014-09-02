@@ -54,6 +54,8 @@
     if (self) {
         _identifierManager = [[IUIdentifierManager alloc] init];
         _compiler = [[IUCompiler alloc] init];
+        _compiler.webTemplateFileName = @"webTemplate";
+        
         _resourceManager = [[IUResourceManager alloc] init];
         _compiler.resourceManager = _resourceManager;
         

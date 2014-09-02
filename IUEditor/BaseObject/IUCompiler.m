@@ -63,6 +63,7 @@
 -(id)init{
     self = [super init];
     if (self) {
+        self.webTemplateFileName = @"webTemplate";
     }
     return self;
 }
@@ -440,7 +441,7 @@
     if ([sheet isKindOfClass:[IUClass class]]) {
         return [self outputHTML:sheet].string;
     }
-    NSString *templateFilePath = [[NSBundle mainBundle] pathForResource:@"webTemplate" ofType:@"html"];
+    NSString *templateFilePath = [[NSBundle mainBundle] pathForResource:self.webTemplateFileName ofType:@"html"];
     
     JDCode *sourceCode = [[JDCode alloc] initWithCodeString: [NSString stringWithContentsOfFile:templateFilePath encoding:NSUTF8StringEncoding error:nil]];
 
@@ -924,8 +925,11 @@
 #pragma mark - editor body source
 
 -(NSString*)editorSource:(IUSheet*)document mqSizeArray:(NSArray *)mqSizeArray{
-    NSString *templateFilePath = [[NSBundle mainBundle] pathForResource:@"webTemplate" ofType:@"html"];
-    
+    NSString *templateFilePath = [[NSBundle mainBundle] pathForResource:self.webTemplateFileName ofType:@"html"];
+    if (templateFilePath == nil) {
+        NSAssert(0, @"Template file name wrong");
+        return nil;
+    }
     
     NSMutableString *sourceString = [NSMutableString stringWithContentsOfFile:templateFilePath encoding:NSUTF8StringEncoding error:nil];
     

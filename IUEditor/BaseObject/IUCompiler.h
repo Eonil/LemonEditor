@@ -33,6 +33,8 @@ typedef enum _IUCompileRule{
 
 @property (weak, nonatomic) IUResourceManager *resourceManager;
 @property (nonatomic) IUCompileRule    rule;
+@property NSString *webTemplateFileName;
+
 //meta source
 - (JDCode *)wordpressMetaDataSource:(IUWordpressProject *)project;
 

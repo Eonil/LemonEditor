@@ -31,6 +31,7 @@
     _version = [aDecoder decodeObjectForKey:@"_version"];
     _themeDescription = [aDecoder decodeObjectForKey:@"_themeDescription"];
     
+    _compiler.webTemplateFileName = @"wpWebTemplate";
     return self;
 }
 
@@ -57,6 +58,8 @@
     _mqSizes = [NSMutableArray arrayWithArray:@[@(defaultFrameWidth), @320]];
     
     _compiler = [[IUCompiler alloc] init];
+    _compiler.webTemplateFileName = @"wpWebTemplate";
+    
     _resourceManager = [[IUResourceManager alloc] init];
     _compiler.resourceManager = _resourceManager;
     _identifierManager = [[IUIdentifierManager alloc] init];
