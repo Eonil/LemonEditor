@@ -1076,6 +1076,10 @@
             [code insertTag:@"color" color:value];
         }
         [code insertTag:@"line-height" integer:height unit:IUUnitPixel];
+        
+        [code setInsertingIdentifier:[menuItem.htmlID cssClass]];
+        [code setInsertingTarget:IUTargetBoth];
+        [code insertTag:@"height" integer:height unit:IUUnitPixel];
 
         
         //clousre
@@ -1169,7 +1173,11 @@
     }
     
     [code setInsertingViewPort:IUCSSDefaultViewPort];
-
+    [code setInsertingIdentifier:[menuItem.htmlID cssClass]];
+    [code insertTag:@"box-sizing" string:@"border-box"];
+    [code insertTag:@"-moz-box-sizing" string:@"border-box"];
+    [code insertTag:@"-webkit-box-sizing" string:@"border-box"];
+    
     //hover, active
     [code setInsertingIdentifiers:@[menuItem.hoverItemIdentifier, menuItem.activeItemIdentifier]];
     [code setInsertingTarget:IUTargetBoth];
@@ -1180,8 +1188,6 @@
     if(menuItem.fontActive){
         [code insertTag:@"color" color:menuItem.fontActive];
     }
-    
-   
     
 
 }

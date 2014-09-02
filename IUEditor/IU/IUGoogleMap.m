@@ -205,4 +205,8 @@
 }
 
 
+#pragma mark - should
+- (BOOL)shouldAddIUByUserInput{
+    return NO;
+}
 @end
