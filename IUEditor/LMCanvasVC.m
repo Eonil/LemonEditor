@@ -117,8 +117,17 @@
     return (LMCanvasView*)[super view];
 }
 
--(void)changeIUPageHeight:(CGFloat)pageHeight{
+- (void)windowDidResize:(NSNotification *)notification{
+    [[self webView] resizePageContent];
+}
+
+
+-(void)changeIUPageHeight:(CGFloat)pageHeight minHeight:(CGFloat)minHeight{
     [(LMCanvasView*)self.view setHeightOfMainView:pageHeight];
+    if([self.sheet isKindOfClass:[IUPage class]]){
+        IUPage *page = (IUPage *)self.sheet;
+        [page.pageContent.css setValueWithoutUpdateCSS:@(minHeight) forTag:IUCSSTagMinHeight];
+    }
 }
 
 - (void)addFrame:(NSInteger)frameSize{

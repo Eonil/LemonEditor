@@ -107,7 +107,7 @@ function getDictionaryKeys(dictionary){
 	return keyArray;
 }
 
-function resizePageContentHeightEditor(){
+function resizePageContentHeightEditor(windowHeight){
 	//make page content height
 	if($('.IUPageContent').length == 0)
 	{
@@ -116,7 +116,8 @@ function resizePageContentHeightEditor(){
 	}
 	if ($('.IUPageContent')){
 		//make min height of page content
-		var minHeight=480;
+		var headerHeight = $('.IUHeader').height();
+		var minHeight=windowHeight-headerHeight;
 		$('.IUPageContent').children().each(function(){
 			
 			var newValue
@@ -136,24 +137,24 @@ function resizePageContentHeightEditor(){
 			}
 			if (newValue > minHeight){
 				minHeight = newValue;
-			}});
+			}
+		});
         
         
-			var headerHeight = $('.IUHeader').height();
 
-			if(minHeight+headerHeight > 50000){
-				minHeight = 50000-headerHeight;
-			}
-			$('.IUPageContent').css('min-height', minHeight+'px');
-			$('.IUPageContent').css('height', minHeight+'px');
-			console.log('pagecontentminheight :' + minHeight);
-        
-			var pageHeight = minHeight+headerHeight;
-        
-			if (typeof console.resizePageContentHeightFinished != 'undefined'){
-				console.resizePageContentHeightFinished(pageHeight);
-			}
+		if(minHeight+headerHeight > 50000){
+			minHeight = 50000-headerHeight;
 		}
+			
+		$('.IUPageContent').css('height', minHeight+'px');
+		console.log('pagecontentminheight :' + minHeight);
+        
+		var pageHeight = minHeight+headerHeight;
+        
+		if (typeof console.resizePageContentHeightFinished != 'undefined'){
+			console.resizePageContentHeightFinished(pageHeight, minHeight);
+		}
+	}
 	else {
 		console.log('failed!!!!!');
 		//background 가 없으면 page content 도 없는데...
@@ -176,7 +177,6 @@ function getIUUpdatedFrameThread(){
 		document.sharedPercentFrameDict = {};
 		document.sharedFrameDict = {};
 	}
-	resizePageContentHeightEditor();
 }
 
 
@@ -257,7 +257,6 @@ $(window).resize(function(){
 
 $(document).ready(function(){
 	console.log("ready : iueditor.js");
-	resizePageContentHeight();
 	remakeCollection();
 	reframeCenter();
 	resizePageLinkSet();

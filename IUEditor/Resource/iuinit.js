@@ -75,7 +75,6 @@ $(document).ready(function(){
 
     /*INIT_Default_REPLACEMENT_START*/
 	/* Initialize IUFrame.js */
-	resizePageContentHeight();
 	resizeCollection();
 	reframeCenter();
 	resizePageLinkSet();

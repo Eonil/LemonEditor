@@ -28,11 +28,15 @@
 
 - (void)addFrame:(NSInteger)frameSize;
 
+
+- (void)windowDidResize:(NSNotification *)notification;
+
 #pragma mark -
 #pragma mark call by webView
 - (void)didFinishLoadFrame;
 - (void)removeSelectedIUs;
 - (void)insertImage:(NSString *)name atIU:(NSString *)identifier;
+- (void)changeIUPageHeight:(CGFloat)pageHeight minHeight:(CGFloat)minHeight;
 
 //select IUs
 - (BOOL)containsIU:(NSString *)IUID;

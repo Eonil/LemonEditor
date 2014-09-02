@@ -552,6 +552,8 @@
 }
 
 - (void)updateCSSRadiousAndBorderCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
+    //REVIEW: border는 바깥으로 생김. child drop할때 position 계산 때문
+    //IUMENUItem 은 예외 (width고정)
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
     BOOL isborder = NO;
 
@@ -798,7 +800,12 @@
 
 - (void)updateCSSPositionCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
-
+    
+    //min-height only for IUPage
+    if(cssTagDict[IUCSSTagMinHeight]){
+        [code insertTag:@"min-height" floatFromNumber:cssTagDict[IUCSSTagMinHeight] unit:IUUnitPixel];
+    }
+    
     /*  X, Y, Width, Height */
     IUUnit xUnit = [[_iu.css valueByStepForTag:IUCSSTagXUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
     IUUnit yUnit = [[_iu.css valueByStepForTag:IUCSSTagYUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;

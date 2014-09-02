@@ -48,7 +48,6 @@
 
 - (NSPoint)distanceFromIU:(NSString *)iuName to:(NSString *)parentName;
 - (NSSize)frameSize:(NSString *)identifier;
-- (void)changeIUPageHeight:(CGFloat)pageHeight;
 - (NSInteger)countOfLineWithIdentifier:(NSString *)identifier;
 /**
  @brief call javascript function

@@ -1,23 +1,11 @@
-
 function resizePageContentHeight(){
-	//make min height of page content
-	var minHeight=0;
-    $('.IUPageContent').children().each(function(){
-		var currentHeight = $(this).height() + $(this).position().top
-		if($(this).css('display') == 'none'){
-			return true;
-		}
-		if (minHeight < currentHeight){
-			minHeight = currentHeight;
-		}
-    });
-	
-	if(minHeight==0){
-		minHeight=$(window).height()-$('.IUHeader').height();
-	    $('.IUPageContent').css('height', minHeight+'px');
-	}
-    $('.IUPageContent').css('min-height', minHeight+'px');
+	var minHeight = parseFloat($('.IUPageContent').css('min-height'));
+	var windowHeight =  $(window).height();
+	if(windowHeight > minHeight){
+		$('.IUPageContent').css('min-height', windowHeight+'px');
+	} 
 }
+
 
 function resizeCollection(){
 	$('.IUCollection').each(function(){
@@ -101,7 +89,6 @@ function resizePageLinkSet(){
 
 $(window).resize(function(){
 	console.log("resize window : iuframe.js");
-	resizePageContentHeight();
 	resizeCollection();
 	reframeCenter();
 	resizePageLinkSet();

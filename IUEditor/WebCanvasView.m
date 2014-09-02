@@ -262,7 +262,7 @@
     else if(selector == @selector(reportPercentFrame:)){
         return @"reportPercentFrame";
     }
-    else if(selector == @selector(resizePageContentHeightFinished:)){
+    else if(selector == @selector(resizePageContentHeightFinished:minHeight:)){
         return @"resizePageContentHeightFinished";
     }
     else{
@@ -274,16 +274,16 @@
     if (selector == @selector(reportFrameDict:)
         || selector == @selector(doOutputToLog:)
         //|| selector == @selector(reportPercentFrame:)
-        || selector == @selector(resizePageContentHeightFinished:)
+        || selector == @selector(resizePageContentHeightFinished:minHeight:)
         ){
         return NO;
     }
     return YES;
 }
 
-- (void)resizePageContentHeightFinished:(NSNumber *)scriptObj{
+- (void)resizePageContentHeightFinished:(NSNumber *)scriptObj minHeight:(NSNumber *)minHeight{
 //    JDInfoLog(@"document size change to : %f" , [scriptObj floatValue]);
-    [self.VC changeIUPageHeight:[scriptObj floatValue]];
+    [self.VC changeIUPageHeight:[scriptObj floatValue] minHeight:[minHeight floatValue]];
 }
 
 /* Here is our Objective-C implementation for the JavaScript console.log() method.
@@ -405,6 +405,7 @@
     JDTraceLog(@"runJSAfterRefreshCSS");
     [self reframeCenter];
     [self updateFrameDict];
+    [self resizePageContent];
 }
 
 #pragma mark call carousel.JS
@@ -418,7 +419,9 @@
 }
 
 - (void)resizePageContent{
-    [self stringByEvaluatingJavaScriptFromString:@"resizePageContentHeight()"];
+    CGFloat height = [((LMCanvasView *)[self.VC view]).mainScrollView frame].size.height;
+    NSString *js = [NSString stringWithFormat:@"resizePageContentHeightEditor(%f)", height];
+    [self stringByEvaluatingJavaScriptFromString:js];
 }
 
 

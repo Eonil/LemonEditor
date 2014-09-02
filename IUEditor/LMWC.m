@@ -53,7 +53,6 @@
 @property (weak) IBOutlet NSImageView *selectionToolbarImageView;
 @property (weak) IBOutlet NSTextField *selectionToolbarTF;
 @property (weak) IBOutlet NSProgressIndicator *progressToolbarIndicator;
-@property (weak) IBOutlet NSButton *enableAutoPageHeight;
 
 //toolbar
 @property (weak) IBOutlet NSView *topToolbarV;
@@ -496,6 +495,10 @@
     if([_project isKindOfClass:[IUDjangoProject class]]){
         [commandVC stopServer:self];
     }
+}
+
+- (void)windowDidResize:(NSNotification *)notification{
+    [canvasVC windowDidResize:notification];
 }
 
 #pragma mark - tool-bar action
