@@ -588,13 +588,13 @@
 #pragma mark CSS
 
 - (BOOL)isSheetHeightChanged:(NSString *)identifier{
-    if([identifier isEqualToString:[_sheet.htmlID cssClass]]
+    if([identifier isEqualToString:[_sheet cssClass]]
        && [_sheet isKindOfClass:[IUClass class]]){
         return YES;
     }
     else if([_sheet isKindOfClass:[IUBackground class]]){
         IUHeader *header = ((IUBackground *)_sheet).header;
-        if([identifier isEqualToString:[header.htmlID cssClass]]){
+        if([identifier isEqualToString:[header cssClass]]){
             return YES;
         }
         

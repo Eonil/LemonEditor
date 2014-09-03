@@ -118,21 +118,21 @@
 
 - (NSString *)editorDisplayIdentifier{
     if(self.children.count > 0){
-        return [[self.htmlID cssClass] stringByAppendingString:@" > ul"];
+        return [[self cssClass] stringByAppendingString:@" > ul"];
     }
     return nil;
 }
 
 - (NSString *)mobileButtonIdentifier{
-    return [[self.htmlID cssClass] stringByAppendingString:@" > .mobile-button"];
+    return [[self cssClass] stringByAppendingString:@" > .mobile-button"];
 }
 
 - (NSString *)topButtonIdentifier{
-    return [[self.htmlID cssClass] stringByAppendingString:@" .menu-top"];
+    return [[self cssClass] stringByAppendingString:@" .menu-top"];
 }
 
 - (NSString *)bottomButtonIdentifier{
-    return [[self.htmlID cssClass] stringByAppendingString:@" .menu-bottom"];
+    return [[self cssClass] stringByAppendingString:@" .menu-bottom"];
 }
 
 - (NSArray *)cssIdentifierArray{

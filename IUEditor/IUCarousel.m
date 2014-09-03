@@ -180,18 +180,27 @@
 
 
 - (NSString *)pagerWrapperID{
-    return [NSString stringWithFormat:@"%@ > .Pager", [self.htmlID cssClass]];
+    return [NSString stringWithFormat:@"%@ > .Pager", self.cssClass];
 }
 
 - (NSString *)pagerID{
-    return [NSString stringWithFormat:@"%@ > .Pager > li", [self.htmlID cssClass]];
+    return [NSString stringWithFormat:@"%@ > .Pager > li", self.cssClass];
 }
+
+- (NSString *)pagerIDHover{
+    return [NSString stringWithFormat:@"%@ > .Pager > li:hover", self.cssClass];
+}
+
+- (NSString *)pagerIDActive{
+    return [NSString stringWithFormat:@"%@ > .Pager > li:active", self.cssClass];
+}
+
 - (NSString *)prevID{
-    return [NSString stringWithFormat:@"%@ > .Prev", [self.htmlID cssClass]];
+    return [NSString stringWithFormat:@"%@ > .Prev", self.cssClass];
 }
 
 - (NSString *)nextID{
-    return [NSString stringWithFormat:@"%@ > .Next", [self.htmlID cssClass]];
+    return [NSString stringWithFormat:@"%@ > .Next", self.cssClass];
 }
 
 - (NSArray *)cssIdentifierArray{
@@ -202,7 +211,7 @@
         [cssArray addObject:self.nextID];
     }
     if(self.controlType == IUCarouselControlBottom){
-        [cssArray addObjectsFromArray:@[self.pagerID, [self.pagerID cssHoverClass], [self.pagerID cssActiveClass], self.pagerWrapperID]];
+        [cssArray addObjectsFromArray:@[self.pagerID, self.pagerIDHover , self.pagerIDActive, self.pagerWrapperID]];
     }
     
     return cssArray;
@@ -258,7 +267,7 @@
 }
 
 - (void)updateCSSForItemColor{
-    [self updateCSSWithIdentifiers:@[self.pagerID, [self.pagerID cssHover], [self.pagerID cssActive]]];
+    [self updateCSSWithIdentifiers:@[self.pagerID, self.pagerIDHover, self.pagerIDActive]];
 }
 
 #pragma mark - arrow

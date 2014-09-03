@@ -42,6 +42,8 @@ typedef enum{
 //css identifier
 - (NSString *)pagerWrapperID;
 - (NSString *)pagerID;
+- (NSString *)pagerIDHover;
+- (NSString *)pagerIDActive;
 - (NSString *)prevID;
 - (NSString *)nextID;
 

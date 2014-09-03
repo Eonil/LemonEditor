@@ -210,47 +210,47 @@
 
 - (NSString *)editorDisplayIdentifier{
     if(self.children.count > 0){
-        return [[self.htmlID cssClass] stringByAppendingString:@" > ul"];
+        return [self.cssClass stringByAppendingString:@" > ul"];
     }
     return nil;
 }
 
 - (NSString *)itemIdentifier{
-    return [[self.htmlID cssClass] stringByAppendingString:@" > a"];
+    return [self.cssClass stringByAppendingString:@" > a"];
 }
 - (NSString *)hoverItemIdentifier{
-    return [[self.htmlID cssHoverClass] stringByAppendingString:@" > a"];
+    return [self.cssClass stringByAppendingString:@" > a"];
 }
 
 - (NSString *)activeItemIdentifier{
-    return [[self.htmlID cssActiveClass] stringByAppendingString:@" > a"];
+    return [self.cssClass stringByAppendingString:@" > a"];
 }
 - (NSString *)closureIdentifier{
     if(self.children.count > 0){
-        return [[self.htmlID cssClass] stringByAppendingString:@" > div.closure"];
+        return [self.cssClass stringByAppendingString:@" > div.closure"];
     }
     return nil;
 }
 
 - (NSString *)closureHoverIdentifier{
     if(self.children.count > 0){
-        return [[self.htmlID cssHoverClass] stringByAppendingString:@" > div.closure"];
+        return [self.cssClass stringByAppendingString:@" > div.closure:hover"];
     }
     return nil;
 }
 - (NSString *)closureActiveIdentifier{
     if(self.children.count > 0){
-        return [[self.htmlID cssActiveClass] stringByAppendingString:@" > div.closure"];
+        return [self.cssClass stringByAppendingString:@" > div.closure:active"];
     }
     return nil;
 }
 
 - (NSArray *)cssIdentifierArray{
     if(self.children.count > 0){
-        return @[[self.htmlID cssClass], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier], [self closureIdentifier], [self closureHoverIdentifier], [self closureActiveIdentifier], [self editorDisplayIdentifier]];
+        return @[[self cssClass], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier], [self closureIdentifier], [self closureHoverIdentifier], [self closureActiveIdentifier], [self editorDisplayIdentifier]];
     }
     else{
-        return @[[self.htmlID cssClass], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier]];
+        return @[[self cssClass], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier]];
     }
 }
 

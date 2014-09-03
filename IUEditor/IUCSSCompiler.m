@@ -1042,7 +1042,7 @@
         [code setInsertingViewPort:viewport];
         
         //css identifier
-        [code setInsertingIdentifier:[menuItem.htmlID cssClass]];
+        [code setInsertingIdentifier:[menuItem cssClass]];
         [code setInsertingTarget:IUTargetBoth];
         
         
@@ -1084,7 +1084,7 @@
         }
         [code insertTag:@"line-height" integer:height unit:IUUnitPixel];
         
-        [code setInsertingIdentifier:[menuItem.htmlID cssClass]];
+        [code setInsertingIdentifier:[menuItem cssClass]];
         [code setInsertingTarget:IUTargetBoth];
         [code insertTag:@"height" integer:height unit:IUUnitPixel];
 
@@ -1180,7 +1180,7 @@
     }
     
     [code setInsertingViewPort:IUCSSDefaultViewPort];
-    [code setInsertingIdentifier:[menuItem.htmlID cssClass]];
+    [code setInsertingIdentifier:[menuItem cssClass]];
     [code insertTag:@"box-sizing" string:@"border-box"];
     [code insertTag:@"-moz-box-sizing" string:@"border-box"];
     [code insertTag:@"-webkit-box-sizing" string:@"border-box"];
@@ -1207,11 +1207,11 @@
         [code insertTag:@"background-color" color:carousel.deselectColor];
     }
     if(carousel.selectColor){
-        [code setInsertingIdentifier:[carousel.pagerID cssHover]];
+        [code setInsertingIdentifier:[carousel pagerIDHover]];
         [code insertTag:@"background-color" color:carousel.selectColor];
     }
     if(carousel.selectColor){
-        [code setInsertingIdentifier:[carousel.pagerID cssActive]];
+        [code setInsertingIdentifier:[carousel pagerIDActive]];
         [code insertTag:@"background-color" color:carousel.selectColor];
     }
     
