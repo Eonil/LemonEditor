@@ -11,4 +11,5 @@
 
 @interface WPCommentCollection : IUBox <IUSampleHTMLProtocol, IUCodeProtocol>
 
+
 @end

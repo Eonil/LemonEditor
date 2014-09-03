@@ -111,7 +111,12 @@
     _404.name = @"_404";
     _404.htmlID = @"_404";
     [self addSheet:_404 toSheetGroup:_pageGroup];
-    
+
+    IUClass *commentWrapper = [[IUClass alloc] initWithProject:self options:nil];
+    commentWrapper.name = @"commentWrapper";
+    commentWrapper.htmlID = @"commentWrapper";
+    [self addSheet:commentWrapper toSheetGroup:_classGroup];
+
 
     IUClass *class = [[IUClass alloc] initWithProject:self options:nil];
     class.name = @"class";
