@@ -78,6 +78,7 @@ $(document).ready(function(){
 	resizeCollection();
 	reframeCenter();
 	resizePageLinkSet();
+	makefullSizeSection();
 	
 	/* Initialize iu.js*/
 	relocateScrollAnimation();
@@ -85,3 +86,4 @@ $(document).ready(function(){
                   
     console.log("ready : iuinit.js");
 });
+

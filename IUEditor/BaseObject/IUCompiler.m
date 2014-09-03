@@ -43,6 +43,7 @@
 #import "IUTweetButton.h"
 #import "IUGoogleMap.h"
 #import "IUWordpressProject.h"
+#import "IUSection.h"
 
 #import "IUCSSCompiler.h"
 
@@ -1443,6 +1444,13 @@
             }
         }
     }
+#pragma mark IUSection
+    else if([iu isKindOfClass:[IUSection class]]){
+        IUSection *section = (IUSection *)iu;
+        if(section.enableFullSize && isEdit == NO){
+            [retString appendString:@" enableFullSize=\"1\""];
+        }
+    }
     
 #pragma mark IUWebMovie
     else if([iu isKindOfClass:[IUWebMovie class]]){
@@ -1797,17 +1805,18 @@
         [code addCodeLineWithFormat:@"var map_%@ = new google.maps.Map(document.getElementById('%@'), %@_options);", map.htmlID, map.htmlID, map.htmlID];
         
         //marker
-        [code addCodeLineWithFormat:@"var marker_%@ = new google.maps.Marker({", map.htmlID];
-        [code increaseIndentLevelForEdit];
-        [code addCodeLineWithFormat:@"map: map_%@,", map.htmlID];
-        [code addCodeLineWithFormat:@"position: map_%@.getCenter(),", map.htmlID];
-        if(map.markerIconName){
-            NSString *imgSrc = [self imagePathWithImageName:map.markerIconName isEdit:NO];
-            [code addCodeLineWithFormat:@"icon: '%@'", imgSrc];
-        }
-        [code decreaseIndentLevelForEdit];
-        [code addCodeLine:@"});"];
-        
+        if(map.enableMarkerIcon){
+            [code addCodeLineWithFormat:@"var marker_%@ = new google.maps.Marker({", map.htmlID];
+            [code increaseIndentLevelForEdit];
+            [code addCodeLineWithFormat:@"map: map_%@,", map.htmlID];
+            [code addCodeLineWithFormat:@"position: map_%@.getCenter(),", map.htmlID];
+            if(map.markerIconName){
+                NSString *imgSrc = [self imagePathWithImageName:map.markerIconName isEdit:NO];
+                [code addCodeLineWithFormat:@"icon: '%@'", imgSrc];
+            }
+            [code decreaseIndentLevelForEdit];
+            [code addCodeLine:@"});"];
+         }
         //info window
         if(map.markerTitle){
             [code addCodeLineWithFormat:@"var infoWindow_%@ = new google.maps.InfoWindow();", map.htmlID];

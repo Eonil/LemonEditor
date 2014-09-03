@@ -10,4 +10,7 @@
 
 @interface IUSection : IUBox
 
+@property (nonatomic) BOOL enableFullSize;
+
+
 @end

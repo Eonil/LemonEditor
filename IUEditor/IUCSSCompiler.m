@@ -10,6 +10,7 @@
 #import "LMFontController.h"
 #import "IUCSS.h"
 #import "IUProject.h"
+#import "IUSection.h"
 
 #import "IUHeader.h"
 #import "PGPageLinkSet.h"
@@ -644,6 +645,7 @@
 }
 
 - (void)updateCSSApperanceCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
+    [code setInsertingTarget:IUTargetBoth];
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
     
     if (viewport == IUCSSDefaultViewPort) {
@@ -799,12 +801,15 @@
 
 
 - (void)updateCSSPositionCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
+    [code setInsertingTarget:IUTargetBoth];
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
     
     //min-height only for IUPage
     if(cssTagDict[IUCSSTagMinHeight]){
         [code insertTag:@"min-height" floatFromNumber:cssTagDict[IUCSSTagMinHeight] unit:IUUnitPixel];
     }
+    
+   
     
     /*  X, Y, Width, Height */
     IUUnit xUnit = [[_iu.css valueByStepForTag:IUCSSTagXUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
@@ -896,6 +901,15 @@
         IUUnit hUnit = [[_iu.css valueByStepForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
         NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
         [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
+        
+        //fullsize for IUSection
+        if([_iu isKindOfClass:[IUSection class]]){
+            IUSection *section = (IUSection *)_iu;
+            if(section.enableFullSize){
+                [code setInsertingTarget:IUTargetOutput];
+                [code insertTag:@"min-height" floatFromNumber:hValue unit:hUnit];
+            }
+        }
     }
 }
 

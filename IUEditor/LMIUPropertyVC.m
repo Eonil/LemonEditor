@@ -28,6 +28,8 @@
 #import "LMPropertyPGFormVC.h"
 #import "PGSubmitButtonVC.h"
 #import "LMInspectorAltTextVC.h"
+#import "LMPropertyIUSection.h"
+
 #import "LMPropertyWPArticleVC.h"
 #import "LMPropertyWPMenuVC.h"
 #import "LMPropertyIUMenuBarVC.h"
@@ -76,6 +78,7 @@
     LMPropertyIUTweetButtonVC *propertyIUTweetButtonVC;
     
     LMPropertyIUGoogleMapVC *propertyIUGoogleMapVC;
+    LMPropertyIUSection *propertyIUSectionVC;
     
     //pg property
     LMPropertyIUMailLinkVC  *propertyIUMailLinkVC;
@@ -147,6 +150,8 @@
         
         propertyIUTweetButtonVC = [[LMPropertyIUTweetButtonVC alloc] initWithNibName:[LMPropertyIUTweetButtonVC class].className bundle:nil];
         propertyIUGoogleMapVC = [[LMPropertyIUGoogleMapVC alloc] initWithNibName:[LMPropertyIUGoogleMapVC class].className bundle:nil];
+        propertyIUSectionVC = [[LMPropertyIUSection alloc] initWithNibName:[LMPropertyIUSection class].className bundle:nil];
+        
 
         //pg
         propertyPGTextFieldVC = [[LMPropertyIUTextFieldVC alloc] initWithNibName:[LMPropertyIUTextFieldVC class].className bundle:nil];
@@ -219,7 +224,7 @@
     propertyIUPageVC.controller = controller;
     
     propertyAnalyticsVC.controller = controller;
-    
+    propertyIUSectionVC.controller = controller;
 
     propertyIUMenuBarVC.controller = controller;
     propertyIUMenuItemVC.controller = controller;
@@ -357,6 +362,9 @@
     else if ([classString isEqualToString:@"IUBox"]){
         self.propertyVArray = [NSMutableArray arrayWithArray:@[propertyTextVC.view, inspectorLinkVC.view, propertyPGType2VC.view]];
         doubleClickFocusVC = propertyTextVC;
+    }
+    else if([classString isEqualToString:@"IUSection"]){
+        self.propertyVArray = @[propertyIUSectionVC.view];
     }
 
 #pragma mark WP

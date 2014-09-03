@@ -323,6 +323,8 @@
 		3D8D4B2B19179F910002C871 /* LMPropertyIUTextViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D8D4B2919179F910002C871 /* LMPropertyIUTextViewVC.xib */; };
 		3D973F091946F45100FB893F /* IUProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D973F081946F45100FB893F /* IUProjectController.m */; };
 		3D97D45D1950339500826280 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D97D45C1950339500826280 /* Defaults.plist */; };
+		3D9B38D319B6CE27004364B0 /* LMPropertyIUSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B38D119B6CE27004364B0 /* LMPropertyIUSection.m */; };
+		3D9B38D419B6CE27004364B0 /* LMPropertyIUSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B38D219B6CE27004364B0 /* LMPropertyIUSection.xib */; };
 		3D9BC4051993A0E300451F55 /* IUGoogleMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9BC4041993A0E200451F55 /* IUGoogleMap.m */; };
 		3D9BC4091993A12900451F55 /* LMPropertyIUGoogleMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9BC4071993A12900451F55 /* LMPropertyIUGoogleMapVC.m */; };
 		3D9BC40A1993A12900451F55 /* LMPropertyIUGoogleMapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC4081993A12900451F55 /* LMPropertyIUGoogleMapVC.xib */; };
@@ -1398,6 +1400,9 @@
 		3D973F071946F45100FB893F /* IUProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUProjectController.h; sourceTree = "<group>"; };
 		3D973F081946F45100FB893F /* IUProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUProjectController.m; sourceTree = "<group>"; };
 		3D97D45C1950339500826280 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
+		3D9B38D019B6CE27004364B0 /* LMPropertyIUSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUSection.h; path = File/LMPropertyIUSection.h; sourceTree = "<group>"; };
+		3D9B38D119B6CE27004364B0 /* LMPropertyIUSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPropertyIUSection.m; path = File/LMPropertyIUSection.m; sourceTree = "<group>"; };
+		3D9B38D219B6CE27004364B0 /* LMPropertyIUSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyIUSection.xib; path = File/LMPropertyIUSection.xib; sourceTree = "<group>"; };
 		3D9BC4031993A0E200451F55 /* IUGoogleMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUGoogleMap.h; path = IU/IUGoogleMap.h; sourceTree = "<group>"; };
 		3D9BC4041993A0E200451F55 /* IUGoogleMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUGoogleMap.m; path = IU/IUGoogleMap.m; sourceTree = "<group>"; };
 		3D9BC4061993A12900451F55 /* LMPropertyIUGoogleMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUGoogleMapVC.h; path = Editor/LMPropertyIUGoogleMapVC.h; sourceTree = "<group>"; };
@@ -3802,6 +3807,9 @@
 				3D14AE011953D06600E7C2E4 /* LMPropertyTextVC.h */,
 				3D14AE021953D06600E7C2E4 /* LMPropertyTextVC.m */,
 				3D14AE031953D06600E7C2E4 /* LMPropertyTextVC.xib */,
+				3D9B38D019B6CE27004364B0 /* LMPropertyIUSection.h */,
+				3D9B38D119B6CE27004364B0 /* LMPropertyIUSection.m */,
+				3D9B38D219B6CE27004364B0 /* LMPropertyIUSection.xib */,
 			);
 			name = DefaultGroup;
 			sourceTree = "<group>";
@@ -5297,6 +5305,7 @@
 				3DED26A11900D33A001A1D67 /* ic_background.png in Resources */,
 				690A825E190A047300DDBA86 /* LMPropertyIUTextFieldVC.xib in Resources */,
 				3DF4379C19AF1B420049A87E /* mail-24-128.png in Resources */,
+				3D9B38D419B6CE27004364B0 /* LMPropertyIUSection.xib in Resources */,
 				3DF437BF19AF1B420049A87E /* ArrowLeft-128.png in Resources */,
 				3DF803E518FE62C900913505 /* stack_transition.png in Resources */,
 				26EFF422194AEF9E00317C3E /* help@2x.png in Resources */,
@@ -5524,6 +5533,7 @@
 				690A409918E1665E00095263 /* LMGeneralObject.m in Sources */,
 				3DA6C65E197668D9004D6587 /* LMProjectPropertyWC.m in Sources */,
 				693FDA6319B68D4D00A0F47F /* WPCommentCollection.m in Sources */,
+				3D9B38D319B6CE27004364B0 /* LMPropertyIUSection.m in Sources */,
 				3DED2759190A1DA6001A1D67 /* IUEvent.m in Sources */,
 				69CFCA9B18E9396C00E3048A /* IUHeader.m in Sources */,
 				69FEF94A1996D3B200AEB283 /* LMWordpressCreateFileWC.m in Sources */,

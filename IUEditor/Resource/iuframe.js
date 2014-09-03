@@ -1,11 +1,10 @@
-function resizePageContentHeight(){
-	var minHeight = parseFloat($('.IUPageContent').css('min-height'));
+function makefullSizeSection(){
+    var respc = $('[enableFullSize="1"]').toArray();
 	var windowHeight =  $(window).height();
-	if(windowHeight > minHeight){
-		$('.IUPageContent').css('min-height', windowHeight+'px');
-	} 
+	$.each(respc, function(){
+		$(this).css('height', windowHeight+'px');
+	});
 }
-
 
 function resizeCollection(){
 	$('.IUCollection').each(function(){
@@ -93,7 +92,8 @@ $(window).resize(function(){
 	reframeCenter();
 	resizePageLinkSet();
 	relocateScrollAnimation();
-				 
+	makefullSizeSection();
+
 });
 
 $(document).ready(function(){
