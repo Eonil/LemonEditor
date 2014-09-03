@@ -828,6 +828,14 @@
 		693F247A1977929C00451500 /* LMPropertyWPMenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693F24781977929C00451500 /* LMPropertyWPMenuVC.xib */; };
 		693F24801977F67E00451500 /* JDSyncUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 693F247F1977F67E00451500 /* JDSyncUtil.m */; };
 		693F24821977F81400451500 /* JDUploadSCP.sh in Resources */ = {isa = PBXBuildFile; fileRef = 693F24811977F81400451500 /* JDUploadSCP.sh */; };
+		693FDA6319B68D4D00A0F47F /* WPCommentCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA6219B68D4D00A0F47F /* WPCommentCollection.m */; };
+		693FDA6619B6905000A0F47F /* WPCommentAvator.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA6519B6905000A0F47F /* WPCommentAvator.m */; };
+		693FDA6919B691F900A0F47F /* WPCommentReplySaying.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA6819B691F900A0F47F /* WPCommentReplySaying.m */; };
+		693FDA6C19B6921000A0F47F /* WPCommentID.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA6B19B6921000A0F47F /* WPCommentID.m */; };
+		693FDA6F19B6923200A0F47F /* WPCommentDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA6E19B6923200A0F47F /* WPCommentDate.m */; };
+		693FDA7219B6924200A0F47F /* WPCommentEditLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA7119B6924200A0F47F /* WPCommentEditLink.m */; };
+		693FDA7519B6925900A0F47F /* WPCommentContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA7419B6925900A0F47F /* WPCommentContent.m */; };
+		693FDA7819B6929100A0F47F /* WPCommentReplyBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA7719B6929100A0F47F /* WPCommentReplyBtn.m */; };
 		694A985F196D13E000C1D630 /* JDNetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A985E196D13E000C1D630 /* JDNetworkUtil.m */; };
 		694A9862196D184400C1D630 /* JDIntegerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9861196D184400C1D630 /* JDIntegerTextField.m */; };
 		694A9865196D197900C1D630 /* JDFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9864196D197900C1D630 /* JDFormatter.m */; };
@@ -1994,6 +2002,22 @@
 		693F247E1977F67E00451500 /* JDSyncUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDSyncUtil.h; sourceTree = "<group>"; };
 		693F247F1977F67E00451500 /* JDSyncUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDSyncUtil.m; sourceTree = "<group>"; };
 		693F24811977F81400451500 /* JDUploadSCP.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = JDUploadSCP.sh; sourceTree = "<group>"; };
+		693FDA6119B68D4D00A0F47F /* WPCommentCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentCollection.h; sourceTree = "<group>"; };
+		693FDA6219B68D4D00A0F47F /* WPCommentCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentCollection.m; sourceTree = "<group>"; };
+		693FDA6419B6905000A0F47F /* WPCommentAvator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentAvator.h; sourceTree = "<group>"; };
+		693FDA6519B6905000A0F47F /* WPCommentAvator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentAvator.m; sourceTree = "<group>"; };
+		693FDA6719B691F900A0F47F /* WPCommentReplySaying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentReplySaying.h; sourceTree = "<group>"; };
+		693FDA6819B691F900A0F47F /* WPCommentReplySaying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentReplySaying.m; sourceTree = "<group>"; };
+		693FDA6A19B6921000A0F47F /* WPCommentID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentID.h; sourceTree = "<group>"; };
+		693FDA6B19B6921000A0F47F /* WPCommentID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentID.m; sourceTree = "<group>"; };
+		693FDA6D19B6923200A0F47F /* WPCommentDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentDate.h; sourceTree = "<group>"; };
+		693FDA6E19B6923200A0F47F /* WPCommentDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentDate.m; sourceTree = "<group>"; };
+		693FDA7019B6924200A0F47F /* WPCommentEditLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentEditLink.h; sourceTree = "<group>"; };
+		693FDA7119B6924200A0F47F /* WPCommentEditLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentEditLink.m; sourceTree = "<group>"; };
+		693FDA7319B6925900A0F47F /* WPCommentContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentContent.h; sourceTree = "<group>"; };
+		693FDA7419B6925900A0F47F /* WPCommentContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentContent.m; sourceTree = "<group>"; };
+		693FDA7619B6929100A0F47F /* WPCommentReplyBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentReplyBtn.h; sourceTree = "<group>"; };
+		693FDA7719B6929100A0F47F /* WPCommentReplyBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentReplyBtn.m; sourceTree = "<group>"; };
 		694A985D196D13E000C1D630 /* JDNetworkUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDNetworkUtil.h; path = ../JDNetworkUtil.h; sourceTree = "<group>"; };
 		694A985E196D13E000C1D630 /* JDNetworkUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDNetworkUtil.m; path = ../JDNetworkUtil.m; sourceTree = "<group>"; };
 		694A9860196D184400C1D630 /* JDIntegerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDIntegerTextField.h; sourceTree = "<group>"; };
@@ -3935,6 +3959,22 @@
 				6923AB4819A2A9BC0084FFAC /* WPWidgetBody.m */,
 				699C2AA419AAA7C50075C2E6 /* WPPageLink.h */,
 				699C2AA519AAA7C50075C2E6 /* WPPageLink.m */,
+				693FDA6119B68D4D00A0F47F /* WPCommentCollection.h */,
+				693FDA6219B68D4D00A0F47F /* WPCommentCollection.m */,
+				693FDA6419B6905000A0F47F /* WPCommentAvator.h */,
+				693FDA6519B6905000A0F47F /* WPCommentAvator.m */,
+				693FDA6719B691F900A0F47F /* WPCommentReplySaying.h */,
+				693FDA6819B691F900A0F47F /* WPCommentReplySaying.m */,
+				693FDA6A19B6921000A0F47F /* WPCommentID.h */,
+				693FDA6B19B6921000A0F47F /* WPCommentID.m */,
+				693FDA6D19B6923200A0F47F /* WPCommentDate.h */,
+				693FDA6E19B6923200A0F47F /* WPCommentDate.m */,
+				693FDA7019B6924200A0F47F /* WPCommentEditLink.h */,
+				693FDA7119B6924200A0F47F /* WPCommentEditLink.m */,
+				693FDA7319B6925900A0F47F /* WPCommentContent.h */,
+				693FDA7419B6925900A0F47F /* WPCommentContent.m */,
+				693FDA7619B6929100A0F47F /* WPCommentReplyBtn.h */,
+				693FDA7719B6929100A0F47F /* WPCommentReplyBtn.m */,
 			);
 			name = WPGroup;
 			sourceTree = "<group>";
@@ -5331,10 +5371,12 @@
 				69761BC318F04ECD00C4EDC6 /* LMPropertyBGImageVC.m in Sources */,
 				694A985F196D13E000C1D630 /* JDNetworkUtil.m in Sources */,
 				3DA72903192B5ABC00203764 /* IUTextController.m in Sources */,
+				693FDA6619B6905000A0F47F /* WPCommentAvator.m in Sources */,
 				3DF8029D18FE3D6000913505 /* IUWebMovie.m in Sources */,
 				3DB3ACDE18EBEF5F0046DFB7 /* BorderLayer.m in Sources */,
 				3DB3ACD318EBEF4F0046DFB7 /* WebCanvasView.m in Sources */,
 				69D79B3D19138FC60020608D /* LMStartNewDefaultVC.m in Sources */,
+				693FDA7519B6925900A0F47F /* WPCommentContent.m in Sources */,
 				69B260EB1959502A007D905C /* LMPreferenceDjangoVC.m in Sources */,
 				69DE5CCE1961430E0050D020 /* LMNotiManager.m in Sources */,
 				692CBE15199871FD00CAF1D1 /* IUPage+WP.m in Sources */,
@@ -5366,6 +5408,7 @@
 				691EE6DE1992DB320080E23A /* IUCSSWPCompiler.m in Sources */,
 				6985CBA018E31558008DBF50 /* IUSheetGroup.m in Sources */,
 				3DB3ACFD18EC1F700046DFB7 /* LMCanvasVC.m in Sources */,
+				693FDA6919B691F900A0F47F /* WPCommentReplySaying.m in Sources */,
 				6923AB4919A2A9BC0084FFAC /* WPWidgetBody.m in Sources */,
 				6979FC0718ED34E20060C3B4 /* LMAppearanceFrameVC.m in Sources */,
 				3D14886318F6AE5700E8EE4C /* LMCenterClipView.m in Sources */,
@@ -5410,10 +5453,12 @@
 				CBA877EA1963D0F400075294 /* LMTutorialWC.m in Sources */,
 				69CFCAB218E95A0C00E3048A /* LMResourceVC.m in Sources */,
 				69757B1518D95BBC0095CBAC /* NSTextField+DragAndDrop.m in Sources */,
+				693FDA6F19B6923200A0F47F /* WPCommentDate.m in Sources */,
 				3DED273A1904F271001A1D67 /* IUImageUtil.m in Sources */,
 				3D095C801990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.m in Sources */,
 				69C5760B18D6FE020016F050 /* IUClass.m in Sources */,
 				699C2AA619AAA7C50075C2E6 /* WPPageLink.m in Sources */,
+				693FDA7219B6924200A0F47F /* WPCommentEditLink.m in Sources */,
 				3DA416BD1935ABB400559028 /* LMFontController.m in Sources */,
 				3D748C81192095A1005665A3 /* LMPropertyIUPageVC.m in Sources */,
 				3DED271D1904ADD9001A1D67 /* LMEventVariableTrigger.m in Sources */,
@@ -5459,6 +5504,7 @@
 				69C5764018D729830016F050 /* IUSheetController.m in Sources */,
 				06EA0FFC197F8C880068C683 /* ClipArt.m in Sources */,
 				3DB0AB3F19AAE93B0066FAB7 /* LMAppWarningWC.m in Sources */,
+				693FDA7819B6929100A0F47F /* WPCommentReplyBtn.m in Sources */,
 				69AB7EAC19062598009E5195 /* IUTransition.m in Sources */,
 				58FF6B8E1946EA2B009A86F9 /* PGSubmitButtonVC.m in Sources */,
 				3DA416B81935A6BE00559028 /* LMPreferenceFontVC.m in Sources */,
@@ -5473,9 +5519,11 @@
 				693849E41914D711005C0546 /* NSIndexPath+JDExtension.m in Sources */,
 				6905BE7A199FEE0400DF0B70 /* WPWidget.m in Sources */,
 				3DF8046A18FF790400913505 /* LMPropertyShadowVC.m in Sources */,
+				693FDA6C19B6921000A0F47F /* WPCommentID.m in Sources */,
 				69C575BE18D6F61E0016F050 /* LMAppDelegate.m in Sources */,
 				690A409918E1665E00095263 /* LMGeneralObject.m in Sources */,
 				3DA6C65E197668D9004D6587 /* LMProjectPropertyWC.m in Sources */,
+				693FDA6319B68D4D00A0F47F /* WPCommentCollection.m in Sources */,
 				3DED2759190A1DA6001A1D67 /* IUEvent.m in Sources */,
 				69CFCA9B18E9396C00E3048A /* IUHeader.m in Sources */,
 				69FEF94A1996D3B200AEB283 /* LMWordpressCreateFileWC.m in Sources */,
