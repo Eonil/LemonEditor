@@ -1436,10 +1436,10 @@
             //image tag attributes
             if(iuImage.imageName){
                 NSString *imgSrc = [self imagePathWithImageName:iuImage.imageName isEdit:isEdit];
-                [retString appendFormat:@" src='%@'", imgSrc];
+                [retString appendFormat:@" src=\"%@\"", imgSrc];
             }
             if(iuImage.altText){
-                [retString appendFormat:@" alt='%@'", iuImage.altText];
+                [retString appendFormat:@" alt=\"%@\"", iuImage.altText];
             }
         }
     }
