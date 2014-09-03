@@ -264,6 +264,8 @@
         
         box.overflowType = _overflowType;
         box.positionType = _positionType;
+        box.enableCenter = _enableCenter;
+        
         box.css = newCSS;
         newCSS.delegate  = box;
         box.event = newEvent;
