@@ -80,6 +80,11 @@
     iu.animation = [_animation copy];
     iu.duration = _duration;
     
+    if(iu.children.count > 0){
+        iu.firstItem = self.children[0];
+        iu.secondItem = self.children[1];
+    }
+    
     [self.delegate enableUpdateAll:self];
     [[self undoManager] enableUndoRegistration];
 
