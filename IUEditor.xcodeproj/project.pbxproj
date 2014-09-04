@@ -258,6 +258,10 @@
 		26CA36D5198760B70004D888 /* cs_tablet_03.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CA36CA198760B70004D888 /* cs_tablet_03.png */; };
 		26CA36D6198760B70004D888 /* cs_thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CA36CB198760B70004D888 /* cs_thumbnail.png */; };
 		26CA36D7198760B70004D888 /* cs_thumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26CA36CC198760B70004D888 /* cs_thumbnail@2x.png */; };
+		26EDAD3C19B8701C00045FCF /* tool_centerbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EDAD3A19B8701C00045FCF /* tool_centerbox.png */; };
+		26EDAD3D19B8701C00045FCF /* tool_centerbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EDAD3B19B8701C00045FCF /* tool_centerbox@2x.png */; };
+		26EDAD4019B872D800045FCF /* stack_centerbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EDAD3E19B872D800045FCF /* stack_centerbox.png */; };
+		26EDAD4119B872D800045FCF /* stack_centerbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EDAD3F19B872D800045FCF /* stack_centerbox@2x.png */; };
 		26EFF41D194AECB900317C3E /* auto_resize.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EFF41B194AECB900317C3E /* auto_resize.png */; };
 		26EFF41E194AECB900317C3E /* auto_resize@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EFF41C194AECB900317C3E /* auto_resize@2x.png */; };
 		26EFF421194AEF9E00317C3E /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 26EFF41F194AEF9E00317C3E /* help.png */; };
@@ -1322,6 +1326,10 @@
 		26CA36CA198760B70004D888 /* cs_tablet_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cs_tablet_03.png; sourceTree = "<group>"; };
 		26CA36CB198760B70004D888 /* cs_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cs_thumbnail.png; sourceTree = "<group>"; };
 		26CA36CC198760B70004D888 /* cs_thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cs_thumbnail@2x.png"; sourceTree = "<group>"; };
+		26EDAD3A19B8701C00045FCF /* tool_centerbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tool_centerbox.png; sourceTree = "<group>"; };
+		26EDAD3B19B8701C00045FCF /* tool_centerbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tool_centerbox@2x.png"; sourceTree = "<group>"; };
+		26EDAD3E19B872D800045FCF /* stack_centerbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stack_centerbox.png; sourceTree = "<group>"; };
+		26EDAD3F19B872D800045FCF /* stack_centerbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack_centerbox@2x.png"; sourceTree = "<group>"; };
 		26EFF41B194AECB900317C3E /* auto_resize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = auto_resize.png; sourceTree = "<group>"; };
 		26EFF41C194AECB900317C3E /* auto_resize@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "auto_resize@2x.png"; sourceTree = "<group>"; };
 		26EFF41F194AEF9E00317C3E /* help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help.png; sourceTree = "<group>"; };
@@ -3148,6 +3156,8 @@
 				26B2884419ACBA7D00A38D19 /* stack_wparticle@2x.png */,
 				26B2884519ACBA7D00A38D19 /* stack_wpmenu.png */,
 				26B2884619ACBA7D00A38D19 /* stack_wpmenu@2x.png */,
+				26EDAD3E19B872D800045FCF /* stack_centerbox.png */,
+				26EDAD3F19B872D800045FCF /* stack_centerbox@2x.png */,
 				3D9BC40F1994AAE400451F55 /* stack_map.png */,
 				3D9BC4101994AAE400451F55 /* stack_map@2x.png */,
 				2640BCBA19331936004A1E4B /* stack_text.png */,
@@ -3897,6 +3907,8 @@
 		690A40A018E170B700095263 /* classImage */ = {
 			isa = PBXGroup;
 			children = (
+				26EDAD3A19B8701C00045FCF /* tool_centerbox.png */,
+				26EDAD3B19B8701C00045FCF /* tool_centerbox@2x.png */,
 				26B2885319ACBEE000A38D19 /* wp_sitedesc.png */,
 				26B2885419ACBEE000A38D19 /* wp_sitedesc@2x.png */,
 				26B2885519ACBEE000A38D19 /* wp_sitetitle.png */,
@@ -4591,6 +4603,7 @@
 				3DF437B819AF1B420049A87E /* Noun_Project_100Icon_10px_grid-06-128.png in Resources */,
 				3DF4377E19AF1B420049A87E /* Cloud_Arrow_Up-128.png in Resources */,
 				698BEA9F19664CD20019C1C3 /* record_stop@2x.png in Resources */,
+				26EDAD4119B872D800045FCF /* stack_centerbox@2x.png in Resources */,
 				3DF4377919AF1B420049A87E /* arrow-left-128.png in Resources */,
 				3DAEEE00193C3D2500196A81 /* iuinit.js in Resources */,
 				260C02E519A373B10022D8F1 /* pf_tablet_01.png in Resources */,
@@ -4824,6 +4837,7 @@
 				3DF8044C18FE62FC00913505 /* tool_view@2x.png in Resources */,
 				2642096219A4780900411666 /* upload.png in Resources */,
 				3DF4378819AF1B420049A87E /* CircledPlus-128.png in Resources */,
+				26EDAD3D19B8701C00045FCF /* tool_centerbox@2x.png in Resources */,
 				3DF4379319AF1B420049A87E /* pin-128.png in Resources */,
 				3DED265E1900D313001A1D67 /* panel_right@2x.png in Resources */,
 				3DED268E1900D329001A1D67 /* stack_movie@2x.png in Resources */,
@@ -4876,6 +4890,7 @@
 				3DF8044718FE62FC00913505 /* tool_mail.png in Resources */,
 				3DED268D1900D329001A1D67 /* stack_render@2x.png in Resources */,
 				3DF4375E19AF1B420049A87E /* arrow54-128.png in Resources */,
+				26EDAD3C19B8701C00045FCF /* tool_centerbox.png in Resources */,
 				698BEAA319667D1C0019C1C3 /* width_mobile@2x.png in Resources */,
 				260C02E919A373B10022D8F1 /* pf_thumbnail@2x.png in Resources */,
 				267812AC19ADFB770015A859 /* wpblog_tablet_02.png in Resources */,
@@ -5071,6 +5086,7 @@
 				69BD0C87197D649600CB4815 /* sftp_upload.sh in Resources */,
 				3DED26C71900F65C001A1D67 /* ic_image@2x.png in Resources */,
 				26CA36D0198760B70004D888 /* cs_pc_01.png in Resources */,
+				26EDAD4019B872D800045FCF /* stack_centerbox.png in Resources */,
 				262D4A941947FAF0006F5FBE /* border_icon_01.png in Resources */,
 				265FCC011953D08F00BD9068 /* reload.png in Resources */,
 				693F24821977F81400451500 /* JDUploadSCP.sh in Resources */,

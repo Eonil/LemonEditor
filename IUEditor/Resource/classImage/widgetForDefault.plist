@@ -24,11 +24,11 @@
 		<key>className</key>
 		<string>IUCenterBox</string>
 		<key>classImage</key>
-		<string>tool_view</string>
+		<string>tool_centerbox</string>
 		<key>navImage</key>
-		<string>stack_view</string>
+		<string>stack_centerbox</string>
 		<key>shortDesc</key>
-		<string>Box Object (center) : &lt;div&gt;, &lt;h1&gt; or &lt;h2&gt; </string>
+		<string>Centered Box Object</string>
 		<key>longDesc</key>
 		<string></string>
 		<key>widgetClass</key>
