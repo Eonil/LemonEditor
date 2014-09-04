@@ -77,20 +77,15 @@
 
 }
 
-- (void)prepareDealloc{
+
+
+- (void)disconnectWithEditor{
     if([self isConnectedWithEditor]){
         [self.parent.css.assembledTagDictionary removeObserver:self forKeyPath:@"height" context:@"height"];
-    }
-
-}
-
-- (void)dealloc{
-    if([self isConnectedWithEditor]){
         [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     }
 }
-
-
 
 
 -(void)selectionChanged:(NSNotification*)noti{

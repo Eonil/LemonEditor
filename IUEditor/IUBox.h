@@ -109,11 +109,10 @@ typedef enum _IUOverflowType{
  */
 -(id)initWithProject:(IUProject*)project options:(NSDictionary*)options;
 - (void)connectWithEditor;
+- (void)disconnectWithEditor;
 
 - (BOOL)isConnectedWithEditor;
 - (void)setIsConnectedWithEditor;
-
-- (void)prepareDealloc;
 
 -(IUSheet *)sheet;
 
@@ -235,6 +234,7 @@ typedef enum _IUOverflowType{
 - (BOOL)canChangePositionFixed;
 - (BOOL)canChangePositionFixedBottom;
 - (BOOL)canChangeCenter;
+- (BOOL)canChangeInitialPosition;
 
 
 //Property

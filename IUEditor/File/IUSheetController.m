@@ -45,7 +45,7 @@
 - (void)dealloc{
     [JDLogUtil log:IULogDealloc string:@"IUSheetController"];
     for (IUSheet *sheet in self.project.allDocuments) {
-        [sheet prepareDealloc];
+        [sheet disconnectWithEditor];
     }
 }
 - (BOOL)setSelectionIndexPaths:(NSArray *)indexPaths{

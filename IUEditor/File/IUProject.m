@@ -511,7 +511,6 @@
     NSString *resourceCSSPath = [buildResourcePath stringByAppendingPathComponent:@"css"];
     NSString *resourceJSPath = [buildResourcePath stringByAppendingPathComponent:@"js"];
 
-    IUEventVariable *eventVariable = [[IUEventVariable alloc] init];
     NSMutableArray *clipArtArray = [NSMutableArray array];
     
     
@@ -561,7 +560,17 @@
         }
         
         //eventJS
+        //todo: optimize :(event variable 없을경우에는 안들어가게)
+        IUEventVariable *eventVariable = [[IUEventVariable alloc] init];
         [eventVariable makeEventDictionary:sheet];
+        //make event javascript file
+        NSString *eventJSString = [eventVariable outputEventJSSource];
+        NSString *eventJSFilePath = [[resourceJSPath stringByAppendingPathComponent:@"%@-event"] stringByAppendingPathExtension:@"js"];
+        [[NSFileManager defaultManager] removeItemAtPath:eventJSFilePath error:nil];
+        if ([eventJSString writeToFile:eventJSFilePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
+            NSAssert(0, @"write fail");
+        }
+        
         
         
         //make initialize javascript file - init.js for sheet
@@ -585,13 +594,6 @@
         }
     }
     
-    //make event javascript file
-    NSString *eventJSString = [eventVariable outputEventJSSource];
-    NSString *eventJSFilePath = [[resourceJSPath stringByAppendingPathComponent:@"iuevent"] stringByAppendingPathExtension:@"js"];
-    [[NSFileManager defaultManager] removeItemAtPath:eventJSFilePath error:nil];
-    if ([eventJSString writeToFile:eventJSFilePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
-        NSAssert(0, @"write fail");
-    }
     
    
     
@@ -653,7 +655,7 @@
     return @[@"jquery.event.swipe.js", @"iuframe.js", @"iu.js", @"iucarousel.js", ];
 }
 - (NSArray *)defaultOutputJSArray{
-    return [[self defaultCopyJSArray] arrayByAddingObjectsFromArray:@[ @"iuevent.js"]];
+    return [self defaultCopyJSArray];
 }
 - (NSArray *)defaultOutputIEJSArray{
     return @[@"jquery.backgroundSize.js", @"respond.min.js"];

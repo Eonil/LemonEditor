@@ -197,22 +197,21 @@
         [box connectWithEditor];
     }
     
-    
     [[self undoManager] enableUndoRegistration];
     
-
 }
-- (void)prepareDealloc{
-    if([self isConnectedWithEditor]){
-        for (IUBox *box in self.children) {
-            [box prepareDealloc];
-        }
+- (void)disconnectWithEditor{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    for (IUBox *box in self.children) {
+        [box disconnectWithEditor];
     }
+    _isConnectedWithEditor = NO;
+    
 }
 
 - (void)dealloc{
     if([self isConnectedWithEditor]){
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self disconnectWithEditor];
     }
 }
 #pragma mark - default box 
@@ -730,8 +729,9 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType: IUNotificationStructureChangeRemoving, IUNotificationStructureChangedIU: iu}];
         }
     
-        [self updateHTML];
-        return YES;
+    [iu disconnectWithEditor];
+    [self updateHTML];
+    return YES;
 }
 
 -(BOOL)removeAllIU{
@@ -1140,6 +1140,10 @@
     }
     return YES;
 }
+- (BOOL)canChangeInitialPosition{
+    return YES;
+}
+
 
 - (BOOL)canChangeOverflow{
     return YES;

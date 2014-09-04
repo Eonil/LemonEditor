@@ -61,10 +61,6 @@
     
 }
 
-- (void)prepareDealloc{
-    
-}
-
 - (void)setPrototypeClass:(IUClass *)prototypeClass{
     
     if([prototypeClass isEqualTo:_prototypeClass]){

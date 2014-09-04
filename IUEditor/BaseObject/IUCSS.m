@@ -112,13 +112,18 @@
                 cssDict = [NSMutableDictionary dictionary];
                 [_cssFrameDict setObject:cssDict forKey:@(width)];
             }
+            
             if (value == nil) {
                 [cssDict removeObjectForKey:tag];
-                [_assembledTagDictionaryForEditWidth removeObjectForKey:tag];
+                if(width == _editWidth){
+                    [_assembledTagDictionaryForEditWidth removeObjectForKey:tag];
+                }
             }
             else {
                 cssDict[tag] = value;
-                [_assembledTagDictionaryForEditWidth setObject:value forKey:tag];
+                if(width == _editWidth){
+                    [_assembledTagDictionaryForEditWidth setObject:value forKey:tag];
+                }
             }
             
         }

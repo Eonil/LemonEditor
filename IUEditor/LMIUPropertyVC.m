@@ -359,7 +359,7 @@
     else if ([classString isEqualToString:@"IUPage"]){
        self.propertyVArray = [NSMutableArray arrayWithArray:@[propertyIUPageVC.view, propertyAnalyticsVC.view]];
     }
-    else if ([classString isEqualToString:@"IUBox"]){
+    else if ([classString isEqualToString:@"IUBox"] || [classString isEqualTo:@"IUCenterBox"]){
         self.propertyVArray = [NSMutableArray arrayWithArray:@[propertyTextVC.view, inspectorLinkVC.view, propertyPGType2VC.view]];
         doubleClickFocusVC = propertyTextVC;
     }

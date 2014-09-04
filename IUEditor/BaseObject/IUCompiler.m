@@ -378,7 +378,8 @@
         for(NSString *filename in sheet.project.defaultOutputJSArray){
             [code addCodeLineWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@\"></script>", filename];
         }
-        //init.js
+        //each js for sheet
+        [code addCodeLineWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@-event.js\"></script>", sheet.name];
         [code addCodeLineWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@-init.js\"></script>", sheet.name];
 
         if([sheet containClass:[IUGoogleMap class]]){

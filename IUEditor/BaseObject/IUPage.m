@@ -96,9 +96,10 @@
     [[self undoManager] enableUndoRegistration];
 }
 
-- (void)prepareDealloc{
+- (void)disconnectWithEditor{
+    [super disconnectWithEditor];
     if([self isConnectedWithEditor]){
-        [_pageContent prepareDealloc];
+        [_pageContent disconnectWithEditor];
     }
 }
 
