@@ -42,6 +42,17 @@
 #define IULogText @"Text"
 #define IULogDealloc @"Dealloc"
 
+
+//IUVersion
+
+#define IU_VERSION_EQUAL_TO(v)                  ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define IU_VERSION_GREATER_THAN(v)              ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define IU_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define IU_VERSION_LESS_THAN(v)                 ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define IU_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+
+//binding option
 #define IUBindingDictNotRaisesApplicable @{NSRaisesForNotApplicableKeysBindingOption:@(NO)}
 #define IUBindingNegationAndNotRaise  @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:NSNegateBooleanTransformerName}
 #define IUBindingDictNotRaisesApplicableAndContinuousUpdate @{NSContinuouslyUpdatesValueBindingOption: @(YES), NSRaisesForNotApplicableKeysBindingOption:@(NO)}

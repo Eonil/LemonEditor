@@ -46,7 +46,9 @@
     [encoder encodeObject:_author forKey:@"_author"];
     [encoder encodeObject:_serverInfo forKey:@"serverInfo"];
     [encoder encodeBool:_enableMinWidth forKey:@"_enableMinWidth"];
-    [encoder encodeInt:1 forKey:@"IUEditorVersion"];
+    
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [encoder encodeObject:version forKey:@"IUProjectVersion"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -71,9 +73,9 @@
         }
         */
         
-        _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _backgroundGroup = [aDecoder decodeObjectForKey:@"_backgroundGroup"];
         _classGroup = [aDecoder decodeObjectForKey:@"_classGroup"];
+        _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _resourceGroup = [aDecoder decodeObjectForKey:@"_resourceGroup"];
         _name = [aDecoder decodeObjectForKey:@"_name"];
         
@@ -84,7 +86,6 @@
         _author = [aDecoder decodeObjectForKey:@"_author"];
         _enableMinWidth = [aDecoder decodeBoolForKey:@"_enableMinWidth"];
         
-        //version code
         if ([[_pageGroup.name lowercaseString] isEqualToString:@"pages"]){
             _pageGroup.name = IUPageGroupName;
         }
@@ -108,14 +109,31 @@
         }
 
         /* version control code */
-        IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
-        if (IUEditorVersion < 1) {
-            self.buildPath = @"$IUFileDirectory/$AppName_build";
-            self.buildResourcePath = @"$IUBuildPath/resource";
+        //REVIEW : sync with project version
+        NSString *projectVersion = [aDecoder decodeObjectForKey:@"IUProjectVersion"];
+        if(projectVersion == nil || projectVersion.length ==0){
+            int IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
+            if (IUEditorVersion < 1) {
+                self.buildPath = @"$IUFileDirectory/$AppName_build";
+                self.buildResourcePath = @"$IUBuildPath/resource";
+            }
+            _IUProjectVersion = @"0.3";
         }
-        IUEditorVersion = 1;
+        else{
+            //REVIEW: save 할때 현재 build버전으로 바꿈
+            _IUProjectVersion = projectVersion;
+        }
+        
+        [self updateVersionControlValues];
     }
     return self;
+}
+
+- (void)updateVersionControlValues{
+    for(IUSheet *sheet in self.allDocuments){
+        [sheet updateVersionControlValues];
+    }
+    
 }
 - (id)init{
     self = [super init];
@@ -184,7 +202,6 @@
     // create build directory
     [[NSFileManager defaultManager] createDirectoryAtPath:self.absoluteBuildPath withIntermediateDirectories:YES attributes:nil error:nil];
 
-    IUEditorVersion = 1;
     return self;
 }
 
@@ -255,7 +272,6 @@
     // create build directory
     [[NSFileManager defaultManager] createDirectoryAtPath:self.absoluteBuildPath withIntermediateDirectories:YES attributes:nil error:nil];
     
-    IUEditorVersion = 1;
     return self;
 }
 

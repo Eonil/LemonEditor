@@ -90,7 +90,6 @@ typedef enum _IUOverflowType{
 @interface IUBox : NSObject <NSCoding, IUCSSDelegate, NSCopying>{
     NSMutableArray *_m_children;
     
-    int IUEditorVersion;
 }
 
 /* default box */
@@ -108,6 +107,7 @@ typedef enum _IUOverflowType{
  IUFileName : define filename
  */
 -(id)initWithProject:(IUProject*)project options:(NSDictionary*)options;
+- (void)updateVersionControlValues;
 - (void)connectWithEditor;
 - (void)disconnectWithEditor;
 

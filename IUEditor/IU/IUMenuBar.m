@@ -47,9 +47,18 @@
     return self;
 }
 
+- (void)updateVersionControlValues{
+    
+    [super updateVersionControlValues];
+    if(IU_VERSION_GREATER_THAN(self.project.IUProjectVersion)){
+        [self.css setValue:nil forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+    }
+}
+
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [super encodeWithCoder:aCoder];
     [aCoder encodeFromObject:self withProperties:[[IUMenuBar class] properties]];
+    
 }
 
 - (id)copyWithZone:(NSZone *)zone{
@@ -230,7 +239,16 @@
     return NO;
 }
 
+- (BOOL)canChangeWidthByUserInput{
+    if( self.css.editWidth <= IUMobileSize){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}
+
 - (BOOL)hasWidth{
-    return NO;
+    return YES;
 }
 @end

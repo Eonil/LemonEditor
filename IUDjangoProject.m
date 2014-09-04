@@ -30,22 +30,26 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
-    /* version control code */
-    IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
     _port = [aDecoder decodeIntForKey:@"_port"];
     _managePyPath = [aDecoder decodeObjectForKey:@"_managePyPath"];
 
     if(_port ==0 ){
         _port = 8000;
     }
-    if (IUEditorVersion < 1) {
-        self.buildPath = @"$IUFileDirectory/templates";
-        self.buildResourcePath = @"$IUFileDirectory/templates/resource";
+    /* version control code */
+    //REVIEW : sync with project version
+    NSString *projectVersion = [aDecoder decodeObjectForKey:@"IUProjectVersion"];
+    if(projectVersion == nil || projectVersion.length ==0){
+        
+        int IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
+        if (IUEditorVersion < 1) {
+            self.buildPath = @"$IUFileDirectory/templates";
+            self.buildResourcePath = @"$IUFileDirectory/templates/resource";
+        }
     }
     if ([_managePyPath length] == 0) {
         _managePyPath = @"$IUFileDirectory/manage.py";
     }
-    IUEditorVersion = 1;
     return self;
 }
 

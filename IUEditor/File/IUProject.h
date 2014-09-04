@@ -69,8 +69,12 @@ static NSString *IUClassGroupName = @"class";
     NSString  *_path;
     NSMutableArray *_mqSizes;
     
-    int   IUEditorVersion;
 }
+/**
+ IUProject version control
+ */
+@property  NSString *IUProjectVersion;
+
 
 //create project
 + (id)projectWithContentsOfPath:(NSString*)path;

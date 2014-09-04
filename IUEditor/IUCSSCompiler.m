@@ -1100,7 +1100,13 @@
         
         [code setInsertingIdentifier:[menuItem cssClass]];
         [code setInsertingTarget:IUTargetBoth];
-        [code insertTag:@"height" integer:height unit:IUUnitPixel];
+
+        if(viewport <= IUMobileSize && menuItem.children.count > 0){
+            [code insertTag:@"height" string:@"initial"];
+        }
+        else{
+            [code insertTag:@"height" integer:height unit:IUUnitPixel];
+        }
 
         
         //clousre

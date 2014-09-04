@@ -74,12 +74,20 @@
         
         [[self undoManager] enableUndoRegistration];
 
-        
-        /* version control code */
-        IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
     }
     return self;
 }
+
+- (void)updateVersionControlValues{
+    [[self undoManager] disableUndoRegistration];
+
+    for(IUBox *iu in self.children){
+        [iu updateVersionControlValues];
+    }
+    
+    [[self undoManager] enableUndoRegistration];
+}
+
 
 -(void)encodeWithCoder:(NSCoder *)aCoder{
     if ([self.htmlID length] == 0) {
@@ -93,7 +101,6 @@
     [aCoder encodeObject:self.event forKey:@"event"];
     [aCoder encodeObject:_m_children forKey:@"children"];
     
-    [aCoder encodeInt:1 forKey:@"IUEditorVersion"];
 }
 
 -(id)init{
@@ -106,7 +113,6 @@
         _m_children = [NSMutableArray array];
         
         changedCSSWidths = [NSMutableSet set];
-        IUEditorVersion = 1;
     }
     return self;
 }
@@ -172,8 +178,6 @@
         self.name = self.htmlID;
         [[self undoManager] enableUndoRegistration];
         
-        // version control
-        IUEditorVersion = 1;
     }
     
     return self;

@@ -97,10 +97,10 @@
 }
 
 - (void)disconnectWithEditor{
-    [super disconnectWithEditor];
     if([self isConnectedWithEditor]){
         [_pageContent disconnectWithEditor];
     }
+    [super disconnectWithEditor];
 }
 
 - (BOOL)hasHeight{

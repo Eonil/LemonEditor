@@ -23,7 +23,7 @@
         
         [self.css setValue:[NSColor grayColor] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
         [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagFontColor forViewport:IUCSSDefaultViewPort];
-        [self.css setValue:@(100) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(130) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
 
         [self.css setValue:nil forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
         
@@ -43,14 +43,26 @@
         
         [aDecoder decodeToObject:self withProperties:[[IUMenuItem class] propertiesWithOutProperties:@[@"isOpened"]]];
         
+       
+        
         [[self undoManager] enableUndoRegistration];
     }
     return self;
 }
 
+- (void)updateVersionControlValues{
+    [super updateVersionControlValues];
+    if(IU_VERSION_GREATER_THAN(self.project.IUProjectVersion)){
+        [self.css eradicateTag:IUCSSTagWidthUnitIsPercent];
+        [self.css setValue:@(0) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(130) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+    }
+}
+
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [super encodeWithCoder:aCoder];
     [aCoder encodeFromObject:self withProperties:[[IUMenuItem class]  propertiesWithOutProperties:@[@"isOpened"]]];
+
 }
 
 - (id)copyWithZone:(NSZone *)zone{
@@ -85,6 +97,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     }
+    [super disconnectWithEditor];
 }
 
 
@@ -302,7 +315,20 @@
     }
     return NO;
 }
+- (BOOL)canChangeWidthByUserInput{
+    if(self.css.editWidth <= IUMobileSize){
+        return NO;
+    }
+    else{
+        return YES;
+    }
+}
 - (BOOL)shouldExtendParent{
-    return NO;
+    if(self.css.editWidth <= IUMobileSize){
+        return YES;
+    }
+    else{
+        return NO;
+    }
 }
 @end
