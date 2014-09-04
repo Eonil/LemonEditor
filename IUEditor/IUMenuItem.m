@@ -23,7 +23,8 @@
         
         [self.css setValue:[NSColor grayColor] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
         [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagFontColor forViewport:IUCSSDefaultViewPort];
-        [self.css setValue:@(1) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(100) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+
         [self.css setValue:nil forTag:IUCSSTagLineHeight forViewport:IUCSSDefaultViewPort];
         
         self.bgActive = [NSColor blackColor];
@@ -219,11 +220,11 @@
     return [self.cssClass stringByAppendingString:@" > a"];
 }
 - (NSString *)hoverItemIdentifier{
-    return [self.cssClass stringByAppendingString:@" > a"];
+    return [self.cssHoverClass stringByAppendingString:@" > a"];
 }
 
 - (NSString *)activeItemIdentifier{
-    return [self.cssClass stringByAppendingString:@" > a"];
+    return [self.cssActiveClass stringByAppendingString:@" > a"];
 }
 - (NSString *)closureIdentifier{
     if(self.children.count > 0){
@@ -234,13 +235,13 @@
 
 - (NSString *)closureHoverIdentifier{
     if(self.children.count > 0){
-        return [self.cssClass stringByAppendingString:@" > div.closure:hover"];
+        return [self.cssHoverClass stringByAppendingString:@" > div.closure:hover"];
     }
     return nil;
 }
 - (NSString *)closureActiveIdentifier{
     if(self.children.count > 0){
-        return [self.cssClass stringByAppendingString:@" > div.closure:active"];
+        return [self.cssActiveClass stringByAppendingString:@" > div.closure:active"];
     }
     return nil;
 }
@@ -278,10 +279,12 @@
     return NO;
 }
 - (BOOL)hasWidth{
-    return YES;
-}
-- (BOOL)canChangeWidthByUserInput{
-    return NO;
+    if(self.depth ==1){
+        return YES;
+    }
+    else{
+        return NO;
+    }
 }
 - (BOOL)canChangeHeightByUserInput{
     return NO;
@@ -304,5 +307,7 @@
     }
     return NO;
 }
-
+- (BOOL)shouldExtendParent{
+    return NO;
+}
 @end

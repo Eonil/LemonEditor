@@ -964,24 +964,30 @@
         [((LMCanvasView *)[self view]) startDraggingFromGridView];
     }
     for(IUBox *obj in self.controller.selectedObjects){
-        if([self isParentMove:obj]){
+        if([self isParentMove:obj] || [self isParentExtend:obj]){
             [obj.parent startDragSession];
         }
-        else{
-            [obj startDragSession];
-        }
+        [obj startDragSession];
+        
     }
 }
 
 - (void)endDragSession:(id)sender{
     for(IUBox *obj in self.controller.selectedObjects){
-        if([self isParentMove:obj]){
+        if([self isParentMove:obj] || [self isParentExtend:obj]){
             [obj.parent endDragSession];
         }
-        else{
-            [obj endDragSession];
-        }
+        
+        [obj endDragSession];
+        
     }
+}
+
+- (BOOL)isParentExtend:(IUBox *)iu{
+    if([iu respondsToSelector:@selector(shouldExtendParent)]){
+        return [[iu performSelector:@selector(shouldExtendParent)] boolValue];
+    }
+    return NO;
 }
 
 - (void)extendIUToTotalDiffSize:(NSSize)totalSize{
@@ -989,7 +995,7 @@
     for(IUBox *obj in self.controller.selectedObjects){
         IUBox *moveObj= obj;
         
-        if([self isParentMove:obj]){
+        if([self isParentExtend:obj]){
             moveObj = obj.parent;
         }
         

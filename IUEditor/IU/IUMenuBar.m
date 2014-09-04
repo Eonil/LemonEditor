@@ -25,9 +25,6 @@
         self.iconColor = [NSColor whiteColor];
         [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
         
-        if (self.hasWidth) {
-            [self.css setValue:@(420) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
-        }
         if (self.hasHeight) {
             [self.css setValue:@(50) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
         }
@@ -169,12 +166,6 @@
         }
     }
     
-    CGFloat width = (CGFloat)((CGFloat)100/(CGFloat)self.children.count);
-    for(IUMenuItem *item in self.children){
-        [item.css setValue:@(width) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
-        [item updateCSS];
-    }
-    
     [self updateHTML];
 
 }
@@ -236,6 +227,10 @@
 }
 
 - (BOOL)shouldAddIUByUserInput{
+    return NO;
+}
+
+- (BOOL)hasWidth{
     return NO;
 }
 @end

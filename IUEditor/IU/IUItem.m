@@ -29,6 +29,9 @@
 - (BOOL)shouldMoveParent{
     return YES;
 }
+- (BOOL)shouldExtendParent{
+    return YES;
+}
 
 - (BOOL)canChangePositionType{
     return NO;

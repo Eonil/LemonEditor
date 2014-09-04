@@ -11,6 +11,7 @@
 @interface IUItem : IUBox
 
 - (BOOL)shouldMoveParent;
+- (BOOL)shouldExtendParent;
 - (BOOL)shouldSelectParentFirst;
 
 @end
