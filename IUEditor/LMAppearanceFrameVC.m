@@ -50,7 +50,7 @@
 @property (weak) IBOutlet NSButton *helpMenu;
 @property (weak) IBOutlet NSPopUpButton *positionPopupBtn;
 
-@property (nonatomic) BOOL enableVerticalPercent, enablePosition;
+@property (nonatomic) BOOL enablePosition;
 
 
 - (IBAction)helpMenu:(id)sender;
@@ -67,7 +67,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _enableVerticalPercent = YES;
         _enablePosition = YES;
         enableObservation = YES;
         [self loadView];
@@ -197,8 +196,6 @@
     [self outlet:_xStepper bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
     [self outlet:_pxStepper bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
     
-    [_yUnitBtn bind:@"enabled3" toObject:self withKeyPath:@"enableVerticalPercent" options:IUBindingDictNotRaisesApplicable];
-    [_hUnitBtn bind:@"enabled3" toObject:self withKeyPath:@"enableVerticalPercent" options:IUBindingDictNotRaisesApplicable];
 }
 
 - (void)dealloc{
@@ -233,7 +230,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    
+
     if(enableObservation){
         if ([[keyPath pathExtension] isSameTag:IUCSSTagPixelX]) {
             [self setValueForTag:IUCSSTagPixelX toTextfield:_xTF toStepper:_xStepper];
@@ -259,23 +256,10 @@
         else if ([[keyPath pathExtension] isSameTag:IUCSSTagPercentHeight]) {
             [self setValueForTag:IUCSSTagPercentHeight toTextfield:_phTF toStepper:_phStepper];
         }
-        else if ([keyPath isEqualToString:@"controller.selectedObjects"]){
-            [self checkForIUPageContent];
-        }
     }
 }
 
-- (void)checkForIUPageContent{
-    BOOL isPageContentChildren = NO;
-    for (IUBox *iu in self.controller.selectedObjects) {
-        if([iu.parent isKindOfClass:[IUPageContent class]]){
-            isPageContentChildren = YES;
-            break;
-        }
-    }
 
-    self.enableVerticalPercent = !isPageContentChildren;
-}
 
 - (void)setValueForTag:(IUCSSTag)tag toTextfield:(NSTextField*)textfield toStepper:(NSStepper *)stepper{
     id value = [self valueForCSSTag:tag];

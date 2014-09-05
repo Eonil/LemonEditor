@@ -12,7 +12,6 @@
 @interface LMDefaultPropertyVC : NSViewController
 
 @property (nonatomic, weak) IUController      *controller;
-@property (weak) id selection;
 
 //dealloc
 - (void)prepareDealloc;

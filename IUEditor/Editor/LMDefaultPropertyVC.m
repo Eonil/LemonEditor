@@ -36,16 +36,7 @@
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if([keyPath isEqualToString:@"selection"]){
-        if(_controller.selectedObjects.count == 0){
-            self.selection = nil;
-        }
-        else{
-            self.selection = _controller.selection;
-        }
-        
-    }
-    
+
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
