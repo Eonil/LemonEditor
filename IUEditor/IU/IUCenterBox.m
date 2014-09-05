@@ -55,4 +55,8 @@
     return NO;
 }
 
+- (BOOL)enableCenter{
+    //always YES
+    return YES;
+}
 @end
