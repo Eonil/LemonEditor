@@ -9,21 +9,16 @@
 #import "WPCommentCollection.h"
 
 #import "WPCommentAvator.h"
-#import "WPCommentID.h"
-#import "WPCommentContent.h"
-#import "WPCommentDate.h"
-#import "WPCommentEditLink.h"
 #import "WPCommentReplyBtn.h"
-#import "WPCommentReplySaying.h"
 #import "PGForm.h"
 #import "PGSubmitButton.h"
+
+#import "WPCommentObject.h"
 
 @interface WPCommentCollection()
 
 @property (nonatomic) WPCommentAvator *avatar;
-@property (nonatomic) WPCommentID *cID;
 @property (nonatomic) IUBox *saying;
-@property (nonatomic) WPCommentContent *content;
 @end
 
 @implementation WPCommentCollection
@@ -31,41 +26,44 @@
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if (self) {
-        _avatar = [[WPCommentAvator alloc] initWithProject:project options:options];
-        [self addIU:_avatar error:nil];
-        
-        _cID = [[WPCommentID alloc] initWithProject:project options:options];
-        [self addIU:_cID error:nil];
-        
-        _saying = [[WPCommentID alloc] initWithProject:project options:options];
-        [self addIU:_saying error:nil];
-
-        _content = [[WPCommentContent alloc] initWithProject:project options:options];
-        [self addIU:_content error:nil];
-        
-        WPCommentDate *date = [[WPCommentDate alloc] initWithProject:project options:options];
-        [self addIU:date error:nil];
-        
-        
+        self.positionType = IUPositionTypeRelative;
         /* WPCommentForm */
+        WPCommentObject *authorObj = [[WPCommentObject alloc] initWithProject:project options:options];
+        authorObj.objType = WPCommentObjectTypeAuthor;
+        [authorObj.css eradicateTag:IUCSSTagPixelHeight];
+        [authorObj.css eradicateTag:IUCSSTagPixelWidth];
+        authorObj.positionType = IUPositionTypeRelative;
+        [self addIU:authorObj error:nil];
         
-        
+        WPCommentObject *dateObj = [[WPCommentObject alloc] initWithProject:project options:options];
+        dateObj.objType = WPCommentObjectTypeDate;
+        [dateObj.css eradicateTag:IUCSSTagPixelHeight];
+        [dateObj.css eradicateTag:IUCSSTagPixelWidth];
+        dateObj.positionType = IUPositionTypeRelative;
+        [self addIU:dateObj error:nil];
+
+        WPCommentObject *commentObj = [[WPCommentObject alloc] initWithProject:project options:options];
+        commentObj.objType = WPCommentObjectTypeContent;
+        [commentObj.css eradicateTag:IUCSSTagPixelHeight];
+        [commentObj.css eradicateTag:IUCSSTagPixelWidth];
+        commentObj.positionType = IUPositionTypeRelative;
+        [self addIU:commentObj error:nil];
     }
     return self;
 }
 
+
 - (NSString*)prefixCode{
-    return @"<?php\
-    $args = array(\
-    // args here\
-    );\
-    \
-    $comments_query = new WP_Comment_Query;\
-    $comments = $comments_query->query( $args );\
-    // Comment Loop\
-    if ( $comments ) {\
-    foreach ( $comments as $comment ) {\
-    ";
+    return @"<?php\n\
+    $args = array(\n\
+    // args here\n\
+    );\n\
+    \n\
+    $comments_query = new WP_Comment_Query;\n\
+    $comments = array_reverse($comments_query->query( $args ));\n\
+    // Comment Loop\n\
+    if ( $comments ) {\n\
+    foreach ( $comments as $comment ) { ?>\n";
 }
 
 - (BOOL)shouldCompileChildrenForOutput{
@@ -73,11 +71,11 @@
 }
 
 - (NSString*)postfixCode{
-    return @"<?\
-            }\
-        } else {\
-        echo 'No comments found.';\
-    }\
+    return @"<?\n\
+            }\n\
+        } else {\n\
+        echo 'No comments found.';\n\
+    }\n\
     ?>";
 }
 

@@ -10,6 +10,7 @@
 #import "WPArticleTitle.h"
 #import "WPArticleDate.h"
 #import "WPArticleBody.h"
+#import "WPCommentCollection.h"
 
 #import "IUIdentifierManager.h"
 #import "IUProject.h"
@@ -61,6 +62,7 @@
     [self setEnableTitle:YES];
     [self setEnableDate:YES];
     [self setEnableBody:YES];
+    [self setEnableComment:YES];
     
     [self.undoManager enableUndoRegistration];
     
@@ -134,6 +136,24 @@
 //TODO: comment
 - (void)setEnableComment:(BOOL)enableComment{
     _enableComment = enableComment;
+    if (enableComment) {
+        if (self.isConnectedWithEditor) {
+            [self.project.identifierManager resetUnconfirmedIUs];
+        }
+        WPCommentCollection *comment = [[WPCommentCollection alloc] initWithProject:self.project options:nil];
+        [self addIU:comment error:nil];
+        if (self.isConnectedWithEditor) {
+            [self.project.identifierManager confirm];
+        }
+    }
+    else {
+        for (IUBox *box in self.children) {
+            if ([box isKindOfClass:[WPCommentCollection class]]) {
+                [self removeIU:box];
+            }
+        }
+    }
+
     
 }
 

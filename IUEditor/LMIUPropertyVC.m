@@ -38,6 +38,7 @@
 #import "LMPropertyIUGoogleMapVC.h"
 #import "LMPropertySampleTextVC.h"
 #import "LMPropertyWPPageLinksVC.h"
+#import "LMPropertyWPCommentObjectVC.h"
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 
@@ -49,6 +50,7 @@
 #import "LMPropertyProgrammingType2VC.h"
 #import "LMPropertyWebProgrammingVC.h"
 #import "IUProject.h"
+
 
 
 @interface LMIUPropertyVC (){
@@ -96,6 +98,7 @@
     LMPropertyWPArticleVC *propertyWPArticleVC;
     LMPropertyWPMenuVC *propertyWPMenuVC;
     LMPropertyWPPageLinksVC *propertyWPPageLinksVC;
+    LMPropertyWPCommentObjectVC *pCommentObjectVC;
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     LMPropertyTextVC *propertyTextVC;
@@ -182,6 +185,8 @@
         
         pSampleTextVC = [[LMPropertySampleTextVC alloc] initWithNibName:[LMPropertySampleTextVC class].className bundle:nil];
         
+        pCommentObjectVC = [[LMPropertyWPCommentObjectVC alloc] initWithNibName:[LMPropertyWPCommentObjectVC class].className bundle:nil];
+        
         [self loadView];
     }
     return self;
@@ -246,6 +251,7 @@
     propertyWPArticleVC.controller = controller;
     propertyWPMenuVC.controller = controller;
     propertyWPPageLinksVC.controller = controller;
+    pCommentObjectVC.controller = controller;
     
     pSampleTextVC.controller = controller;
     
@@ -376,6 +382,9 @@
     }
     else if ([classString isEqualToString:@"WPPageLinks"]){
         self.propertyVArray = @[propertyWPPageLinksVC.view];
+    }
+    else if ([classString isEqualToString:@"WPCommentObject"]){
+        self.propertyVArray = @[pCommentObjectVC.view];
     }
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION

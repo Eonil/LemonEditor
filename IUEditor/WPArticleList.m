@@ -22,9 +22,6 @@
     self = [super initWithProject:project options:options];
     [self.undoManager disableUndoRegistration];
     
-    self.positionType = IUPositionTypeRelative;
-    self.enableCenter = YES;
-    
     [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css eradicateTag:IUCSSTagBGColor];
     [self.css setValue:@(680) forTag:IUCSSTagPixelWidth];

@@ -48,6 +48,9 @@
     WPArticleList *list = [[WPArticleList alloc] initWithProject:self.project options:nil];
     [list.css setValue:@(-40) forTag:IUCSSTagPixelX forViewport:IUCSSDefaultViewPort];
     [list.css setValue:@(0) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
+    list.positionType = IUPositionTypeRelative;
+    list.enableCenter = YES;
+
     [centerBox addIU:list error:nil];
     
     WPPageLinks *links = [[WPPageLinks alloc] initWithProject:self.project options:nil];

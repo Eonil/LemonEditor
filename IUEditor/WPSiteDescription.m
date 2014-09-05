@@ -13,7 +13,6 @@
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     [self.undoManager disableUndoRegistration];
-
     [self.css setValue:@(450) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
     [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css eradicateTag:IUCSSTagBGColor];
