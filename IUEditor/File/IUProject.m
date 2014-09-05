@@ -531,8 +531,41 @@
     
     
     for (IUSheet *sheet in self.allDocuments) {
+        
+        NSError *myError;
+
         //clipart
         [clipArtArray addObjectsFromArray:[sheet outputArrayClipArt]];
+        
+        //eventJS
+        //todo: optimize :(event variable 없을경우에는 안들어가게)
+        IUEventVariable *eventVariable = [[IUEventVariable alloc] init];
+        [eventVariable makeEventDictionary:sheet];
+
+        
+        //make event javascript file
+        NSString *eventFileName = [NSString stringWithFormat:@"%@-event", sheet.name];
+        NSString *eventJSFilePath = [[resourceJSPath stringByAppendingPathComponent:eventFileName] stringByAppendingPathExtension:@"js"];
+        [[NSFileManager defaultManager] removeItemAtPath:eventJSFilePath error:nil];
+        if([eventVariable hasEvent]){
+            NSString *eventJSString = [eventVariable outputEventJSSource];
+            sheet.hasEvent = YES;
+            if ([eventJSString writeToFile:eventJSFilePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
+                NSAssert(0, @"write fail");
+            }
+        }
+        else{
+            sheet.hasEvent = NO;
+        }
+        
+        //make initialize javascript file - init.js for sheet
+        JDCode *initJSCode = [sheet outputInitJSCode];
+        
+        NSString *initializeJSPath = [[resourceJSPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-init", sheet.name]] stringByAppendingPathExtension:@"js"];
+        if ([initJSCode.string writeToFile:initializeJSPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
+            NSAssert(0, @"write fail");
+        }
+
         
         //html
         NSString *outputHTML = [sheet outputHTMLSource];
@@ -559,7 +592,6 @@
         NSString *htmlPath = [self absoluteBuildPathForSheet:sheet];
 
         //note : writeToFile: automatically overwrite
-        NSError *myError;
         if ([outputHTML writeToFile:htmlPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
             NSAssert(0, @"write fail");
         }
@@ -575,28 +607,7 @@
             }
         }
         
-        //eventJS
-        //todo: optimize :(event variable 없을경우에는 안들어가게)
-        IUEventVariable *eventVariable = [[IUEventVariable alloc] init];
-        [eventVariable makeEventDictionary:sheet];
-        //make event javascript file
-        NSString *eventJSString = [eventVariable outputEventJSSource];
-        NSString *eventJSFilePath = [[resourceJSPath stringByAppendingPathComponent:@"%@-event"] stringByAppendingPathExtension:@"js"];
-        [[NSFileManager defaultManager] removeItemAtPath:eventJSFilePath error:nil];
-        if ([eventJSString writeToFile:eventJSFilePath atomically:YES encoding:NSUTF8StringEncoding error:error] == NO){
-            NSAssert(0, @"write fail");
-        }
         
-        
-        
-        //make initialize javascript file - init.js for sheet
-        JDCode *initJSCode = [sheet outputInitJSCode];
-        
-        NSString *initializeJSPath = [[resourceJSPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@-init", sheet.name]] stringByAppendingPathExtension:@"js"];
-        if ([initJSCode.string writeToFile:initializeJSPath atomically:YES encoding:NSUTF8StringEncoding error:&myError] == NO){
-            NSAssert(0, @"write fail");
-        }
-
     }
     //copy clipart to build directory
     if (clipArtArray.count != 0) {

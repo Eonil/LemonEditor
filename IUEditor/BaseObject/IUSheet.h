@@ -18,6 +18,11 @@
 @property CGFloat ghostX, ghostY, ghostOpacity;
 @property NSString *ghostImageName;
 
+/**
+ It is for build option, not saved
+ */
+@property BOOL hasEvent;
+
 #pragma mark editor source
 -(NSString*)editorSource;
 

@@ -100,6 +100,13 @@
     }
 }
 
+- (BOOL)hasEvent{
+    if(_variablesDict.count > 0){
+        return YES;
+    }
+    return NO;
+}
+
 
 - (NSString *)outputEventJSSource{
     NSArray *variableArray = _variablesDict.allKeys;

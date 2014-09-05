@@ -12,6 +12,7 @@
 @interface IUEventVariable : NSObject
 
 - (void)makeEventDictionary:(IUSheet *)document;
+- (BOOL)hasEvent;
 - (NSString *)outputEventJSSource;
 
 @end
