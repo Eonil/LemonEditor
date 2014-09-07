@@ -165,7 +165,7 @@ typedef enum _IUOverflowType{
 - (void)updateCSSWithIdentifiers:(NSArray *)identifiers;
 
 //HTML
--(NSString*)html;
+//-(NSString*)html; //DEPRECATED;
 - (void)updateHTML;
 
 //children

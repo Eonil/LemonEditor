@@ -507,17 +507,14 @@
 //source
 #pragma mark HTML
 
--(NSString*)html{
-    return [self.project.compiler editorHTML:self].string;
-}
-
 
 - (void)updateHTML{
     if (self.delegate && [self.delegate isUpdateHTMLEnabled]) {
         
         [self.delegate disableUpdateJS:self];
+        NSString *editorHTML = [self.project.compiler editorHTML:self].string;
         
-        [self.delegate IUHTMLIdentifier:self.htmlID HTML:self.html withParentID:self.parent.htmlID];
+        [self.delegate IUHTMLIdentifier:self.htmlID HTML:editorHTML withParentID:self.parent.htmlID];
 
         if([self.sheet isKindOfClass:[IUClass class]]){
             for(IUBox *box in ((IUClass *)self.sheet).references){

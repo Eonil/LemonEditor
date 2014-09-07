@@ -8,5 +8,11 @@
 
 #import "IUBox.h"
 
+typedef enum _WPCommentFormType {
+    WPCommentFormTypeName,
+    WPCommentFormTypeEmail,
+    WPCommentFormTypeWebsite,
+}WPCommentFormType;
+
 @interface WPCommentForm : IUBox
 @end

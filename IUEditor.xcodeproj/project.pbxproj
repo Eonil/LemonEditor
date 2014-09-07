@@ -839,9 +839,6 @@
 		693FDA6619B6905000A0F47F /* WPCommentAvator.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA6519B6905000A0F47F /* WPCommentAvator.m */; };
 		693FDA7819B6929100A0F47F /* WPCommentReplyBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA7719B6929100A0F47F /* WPCommentReplyBtn.m */; };
 		693FDA7B19B78B8900A0F47F /* WPCommentForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA7A19B78B8900A0F47F /* WPCommentForm.m */; };
-		693FDA7E19B7A40A00A0F47F /* WPCommentFormName.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA7D19B7A40A00A0F47F /* WPCommentFormName.m */; };
-		693FDA8119B7A41F00A0F47F /* WPCommentFormEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA8019B7A41F00A0F47F /* WPCommentFormEmail.m */; };
-		693FDA8719B7A8FA00A0F47F /* WPCommentFormWebsite.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA8619B7A8FA00A0F47F /* WPCommentFormWebsite.m */; };
 		693FDA8A19B7A91100A0F47F /* WPCommentFormContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA8919B7A91100A0F47F /* WPCommentFormContent.m */; };
 		693FDA8D19B7B53200A0F47F /* WPCommentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA8C19B7B53200A0F47F /* WPCommentObject.m */; };
 		693FDA9919B7DC1A00A0F47F /* LMPropertyWPCommentObjectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 693FDA9719B7DC1A00A0F47F /* LMPropertyWPCommentObjectVC.m */; };
@@ -2029,12 +2026,6 @@
 		693FDA7719B6929100A0F47F /* WPCommentReplyBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentReplyBtn.m; sourceTree = "<group>"; };
 		693FDA7919B78B8900A0F47F /* WPCommentForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentForm.h; sourceTree = "<group>"; };
 		693FDA7A19B78B8900A0F47F /* WPCommentForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentForm.m; sourceTree = "<group>"; };
-		693FDA7C19B7A40A00A0F47F /* WPCommentFormName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentFormName.h; sourceTree = "<group>"; };
-		693FDA7D19B7A40A00A0F47F /* WPCommentFormName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentFormName.m; sourceTree = "<group>"; };
-		693FDA7F19B7A41F00A0F47F /* WPCommentFormEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentFormEmail.h; sourceTree = "<group>"; };
-		693FDA8019B7A41F00A0F47F /* WPCommentFormEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentFormEmail.m; sourceTree = "<group>"; };
-		693FDA8519B7A8FA00A0F47F /* WPCommentFormWebsite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentFormWebsite.h; sourceTree = "<group>"; };
-		693FDA8619B7A8FA00A0F47F /* WPCommentFormWebsite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentFormWebsite.m; sourceTree = "<group>"; };
 		693FDA8819B7A91100A0F47F /* WPCommentFormContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentFormContent.h; sourceTree = "<group>"; };
 		693FDA8919B7A91100A0F47F /* WPCommentFormContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentFormContent.m; sourceTree = "<group>"; };
 		693FDA8B19B7B53200A0F47F /* WPCommentObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentObject.h; sourceTree = "<group>"; };
@@ -4002,12 +3993,6 @@
 				693FDA7719B6929100A0F47F /* WPCommentReplyBtn.m */,
 				693FDA7919B78B8900A0F47F /* WPCommentForm.h */,
 				693FDA7A19B78B8900A0F47F /* WPCommentForm.m */,
-				693FDA7C19B7A40A00A0F47F /* WPCommentFormName.h */,
-				693FDA7D19B7A40A00A0F47F /* WPCommentFormName.m */,
-				693FDA7F19B7A41F00A0F47F /* WPCommentFormEmail.h */,
-				693FDA8019B7A41F00A0F47F /* WPCommentFormEmail.m */,
-				693FDA8519B7A8FA00A0F47F /* WPCommentFormWebsite.h */,
-				693FDA8619B7A8FA00A0F47F /* WPCommentFormWebsite.m */,
 				693FDA8819B7A91100A0F47F /* WPCommentFormContent.h */,
 				693FDA8919B7A91100A0F47F /* WPCommentFormContent.m */,
 			);
@@ -5407,14 +5392,12 @@
 				69CE50D21996F11600C464A8 /* LMStartNewWPVC.m in Sources */,
 				69965420190F9F1D000379DA /* LMPropertyIUCollectionVC.m in Sources */,
 				691F91A91973C2EA00A4CFFF /* IUWordpressProject.m in Sources */,
-				693FDA7E19B7A40A00A0F47F /* WPCommentFormName.m in Sources */,
 				3DB3ACCC18EBEF3D0046DFB7 /* InnerSizeBox.m in Sources */,
 				3D9BC4091993A12900451F55 /* LMPropertyIUGoogleMapVC.m in Sources */,
 				69D15F7318E898B10046FBB0 /* IUBackground.m in Sources */,
 				3D1BACC919330240004C554F /* IUText.m in Sources */,
 				3DED26E719010B82001A1D67 /* LMPropertyIUMovieVC.m in Sources */,
 				69761BC318F04ECD00C4EDC6 /* LMPropertyBGImageVC.m in Sources */,
-				693FDA8719B7A8FA00A0F47F /* WPCommentFormWebsite.m in Sources */,
 				694A985F196D13E000C1D630 /* JDNetworkUtil.m in Sources */,
 				3DA72903192B5ABC00203764 /* IUTextController.m in Sources */,
 				693FDA6619B6905000A0F47F /* WPCommentAvator.m in Sources */,
@@ -5423,7 +5406,6 @@
 				3DB3ACD318EBEF4F0046DFB7 /* WebCanvasView.m in Sources */,
 				69D79B3D19138FC60020608D /* LMStartNewDefaultVC.m in Sources */,
 				69B260EB1959502A007D905C /* LMPreferenceDjangoVC.m in Sources */,
-				693FDA8119B7A41F00A0F47F /* WPCommentFormEmail.m in Sources */,
 				69DE5CCE1961430E0050D020 /* LMNotiManager.m in Sources */,
 				692CBE15199871FD00CAF1D1 /* IUPage+WP.m in Sources */,
 				CBC65118197E8CA80012E4EF /* LMPropertyAnalyticsVC.m in Sources */,

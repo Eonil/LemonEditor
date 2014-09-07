@@ -8,6 +8,7 @@
 
 #import "WPSidebar.h"
 #import "WPWidget.h"
+#import "IUProject.h"
 
 @implementation WPSidebar
 
@@ -79,7 +80,8 @@
             [retInnerHTML appendString:widget.sampleHTML];
         }
         else{
-            [retInnerHTML appendString:widget.html];
+            NSString *string =  [self.project.compiler editorHTML:self].string;
+            [retInnerHTML appendString:string];
         }
     }
     return retInnerHTML;
