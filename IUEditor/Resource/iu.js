@@ -71,6 +71,17 @@ function transitionAnimation(eventObject){
    	}
 }
 
+function showCollectionView(iu, index){
+	$('#'+iu).children().each(function(i){
+		if(i != index){
+			$(this).css('display', 'none');
+		}
+		else{
+			$(this).css('display', 'block');
+		}
+	});
+}
+
 $(document).ready(function(){
     console.log('iu.js')
 });

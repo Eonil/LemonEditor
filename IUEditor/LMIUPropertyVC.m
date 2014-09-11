@@ -29,6 +29,7 @@
 #import "PGSubmitButtonVC.h"
 #import "LMInspectorAltTextVC.h"
 #import "LMPropertyIUSection.h"
+#import "LMPropertyIUCollectionViewVC.h"
 
 #import "LMPropertyWPArticleVC.h"
 #import "LMPropertyWPMenuVC.h"
@@ -39,6 +40,7 @@
 #import "LMPropertySampleTextVC.h"
 #import "LMPropertyWPPageLinksVC.h"
 #import "LMPropertyWPCommentObjectVC.h"
+
 
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
 
@@ -86,6 +88,8 @@
     LMPropertyIUMailLinkVC  *propertyIUMailLinkVC;
     LMPropertyIUTextFieldVC *propertyPGTextFieldVC;
     LMPropertyIUCollectionVC  *propertyIUCollectionVC;
+    LMPropertyIUCollectionViewVC *propertyIUCollectionViewVC;
+    
     LMPropertyPGFormVC *propertyPGFormVC;
     PGSubmitButtonVC *propertyPGSubmitButtonVC;
     
@@ -159,6 +163,8 @@
         //pg
         propertyPGTextFieldVC = [[LMPropertyIUTextFieldVC alloc] initWithNibName:[LMPropertyIUTextFieldVC class].className bundle:nil];
         propertyIUCollectionVC = [[LMPropertyIUCollectionVC alloc] initWithNibName:[LMPropertyIUCollectionVC class].className bundle:nil];
+        propertyIUCollectionViewVC = [[LMPropertyIUCollectionViewVC alloc] initWithNibName:[LMPropertyIUCollectionViewVC class].className bundle:nil];
+        
         propertyPGTextViewVC = [[LMPropertyIUTextViewVC alloc] initWithNibName:[LMPropertyIUTextViewVC class].className bundle:nil];
         
         propertyPGPageLinkSetVC = [[LMPropertyIUPageLinkSetVC alloc] initWithNibName:[LMPropertyIUPageLinkSetVC class].className bundle:nil];
@@ -197,6 +203,7 @@
     _project = project;
     [inspectorLinkVC setProject:project];
     [propertyIUImportVC setProject:project];
+    [propertyIUCollectionViewVC setProject:project];
     [propertyPGFormVC setProject:project];
 }
 
@@ -241,6 +248,8 @@
     propertyPGTextViewVC.controller = controller;
     propertyPGPageLinkSetVC.controller = controller;
     propertyPGTextFieldVC.controller = controller;
+    
+    propertyIUCollectionViewVC.controller = controller;
     
     propertyPGFormVC.controller = controller;
     propertyPGSubmitButtonVC.controller = controller;
@@ -330,6 +339,9 @@
     }
     else if ([classString isEqualToString:@"IUImport"]) {
         self.propertyVArray = @[propertyIUImportVC.view, propertyPGType2VC.view];
+    }
+    else if([classString isEqualToString:@"IUCollectionView"]){
+        self.propertyVArray = @[propertyIUImportVC.view, propertyIUCollectionViewVC.view];
     }
     else if ([classString isEqualToString:@"IUMailLink"]) {
         self.propertyVArray = @[propertyIUMailLinkVC.view];

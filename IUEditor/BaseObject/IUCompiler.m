@@ -44,6 +44,7 @@
 #import "IUGoogleMap.h"
 #import "IUWordpressProject.h"
 #import "IUSection.h"
+#import "IUCollectionView.h"
 
 #import "IUCSSCompiler.h"
 
@@ -689,6 +690,24 @@
         [code addCodeLine:@"</li>"];
         
     }
+#pragma mark IUCollectionView
+    else if([iu isKindOfClass:[IUCollectionView class]]){
+        IUCollectionView *collectionView = (IUCollectionView *)iu;
+        if (_rule == IUCompileRuleDjango ) {
+            [code addCodeLineWithFormat:@"<div %@>", [self HTMLAttributes:collectionView option:nil isEdit:NO]];
+            IUCollection *iuCollection = ((IUCollectionView*)iu).collection;
+            if(iuCollection){
+                [code addCodeLineWithFormat:@"    {%% for object in %@ %%}", iuCollection.collectionVariable];
+                [code addCodeLineWithFormat:@"        {%% include '%@.html' %%}", collectionView.prototypeClass.name];
+                [code addCodeLine:@"    {% endfor %}"];
+            }
+            [code addCodeLineWithFormat:@"</div>"];
+        }
+        else {
+            [code addCodeWithIndent:[self outputHTMLAsBox:collectionView option:nil]];
+        }
+    }
+    
 #pragma mark IUCollection
     else if ([iu isKindOfClass:[IUCollection class]]){
         IUCollection *iuCollection = (IUCollection*)iu;
@@ -1755,13 +1774,29 @@
 
 -(JDCode *)jsCode:(IUBox *)iu isEdit:(BOOL)isEdit{
     JDCode *code = [[JDCode alloc] init];
-    [code increaseIndentLevelForEdit];
     if([iu isKindOfClass:[IUCarousel class]]){
         [code addCodeLine:@"\n"];
         [code addCodeLine:@"/* IUCarousel initialize */\n"];
         [code addCodeLineWithFormat:@"initCarousel('%@')", iu.htmlID];
         for (IUBox *child in iu.children) {
             [code addCodeWithIndent:[self jsCode:child isEdit:isEdit]];
+        }
+    }
+    else if([iu isKindOfClass:[IUCollectionView class]]){
+        IUCollectionView *collectionView = (IUCollectionView *)iu;
+        if(collectionView){
+            [code addCodeLine:@"/* IUCollectionView initialize */\n"];
+
+            NSString *itemIdentifier = collectionView.collection.prototypeClass.htmlID;
+            [code addCodeLineWithFormat:@"$('.%@').click(function(){", itemIdentifier];
+            [code increaseIndentLevelForEdit];
+            [code addCodeLine:@"var index = $(this).index();"];
+            [code addCodeLineWithFormat:@"showCollectionView('%@', index);", collectionView.htmlID];
+            [code decreaseIndentLevelForEdit];
+            [code addCodeLine:@"})"];
+            [code addCodeLineWithFormat:@"showCollectionView('%@', 0);", collectionView.htmlID];
+            [code addCodeLineWithFormat:@"$('.%@').css('cursor', 'pointer')", itemIdentifier];
+
         }
     }
     else if([iu isKindOfClass:[IUGoogleMap class]]){
@@ -1835,7 +1870,6 @@
         }
 
     }
-    [code decreaseIndentLevelForEdit];
     return code;
 }
 

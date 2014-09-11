@@ -346,6 +346,9 @@
 		3D9BC42D1998C7EC00451F55 /* Event.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC42C1998C7EC00451F55 /* Event.zip */; };
 		3D9BC42F1998DB3A00451F55 /* agency.iu.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC42E1998DB3A00451F55 /* agency.iu.zip */; };
 		3D9BC4311999F19700451F55 /* iueditor.iu.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC4301999F19700451F55 /* iueditor.iu.zip */; };
+		3DA334EB19C14CFE00B6ABA6 /* IUCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA334EA19C14CFE00B6ABA6 /* IUCollectionView.m */; };
+		3DA334F219C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA334F019C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m */; };
+		3DA334F319C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA334F119C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib */; };
 		3DA416B81935A6BE00559028 /* LMPreferenceFontVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */; };
 		3DA416B91935A6BE00559028 /* LMPreferenceFontVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */; };
 		3DA416BD1935ABB400559028 /* LMFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416BC1935ABB400559028 /* LMFontController.m */; };
@@ -1431,6 +1434,11 @@
 		3D9BC42C1998C7EC00451F55 /* Event.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Event.zip; sourceTree = "<group>"; };
 		3D9BC42E1998DB3A00451F55 /* agency.iu.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = agency.iu.zip; sourceTree = "<group>"; };
 		3D9BC4301999F19700451F55 /* iueditor.iu.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = iueditor.iu.zip; sourceTree = "<group>"; };
+		3DA334E919C14CFE00B6ABA6 /* IUCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUCollectionView.h; path = IU/IUCollectionView.h; sourceTree = "<group>"; };
+		3DA334EA19C14CFE00B6ABA6 /* IUCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUCollectionView.m; path = IU/IUCollectionView.m; sourceTree = "<group>"; };
+		3DA334EF19C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUCollectionViewVC.h; path = Editor/PropertyView/LMPropertyIUCollectionViewVC.h; sourceTree = "<group>"; };
+		3DA334F019C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPropertyIUCollectionViewVC.m; path = Editor/PropertyView/LMPropertyIUCollectionViewVC.m; sourceTree = "<group>"; };
+		3DA334F119C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyIUCollectionViewVC.xib; path = Editor/PropertyView/LMPropertyIUCollectionViewVC.xib; sourceTree = "<group>"; };
 		3DA416B51935A6BE00559028 /* LMPreferenceFontVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPreferenceFontVC.h; path = Editor/Preference/LMPreferenceFontVC.h; sourceTree = "<group>"; };
 		3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPreferenceFontVC.m; path = Editor/Preference/LMPreferenceFontVC.m; sourceTree = "<group>"; };
 		3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPreferenceFontVC.xib; path = Editor/Preference/LMPreferenceFontVC.xib; sourceTree = "<group>"; };
@@ -2874,6 +2882,8 @@
 				69AB7EAB19062598009E5195 /* IUTransition.m */,
 				3D9BC4031993A0E200451F55 /* IUGoogleMap.h */,
 				3D9BC4041993A0E200451F55 /* IUGoogleMap.m */,
+				3DA334E919C14CFE00B6ABA6 /* IUCollectionView.h */,
+				3DA334EA19C14CFE00B6ABA6 /* IUCollectionView.m */,
 			);
 			name = ComplexGroup;
 			sourceTree = "<group>";
@@ -3858,6 +3868,9 @@
 				3D9BC4061993A12900451F55 /* LMPropertyIUGoogleMapVC.h */,
 				3D9BC4071993A12900451F55 /* LMPropertyIUGoogleMapVC.m */,
 				3D9BC4081993A12900451F55 /* LMPropertyIUGoogleMapVC.xib */,
+				3DA334EF19C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.h */,
+				3DA334F019C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m */,
+				3DA334F119C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib */,
 			);
 			name = ComplexGroup;
 			sourceTree = "<group>";
@@ -4856,6 +4869,7 @@
 				262F50721946C06E003C1801 /* tab_off@2x.png in Resources */,
 				3DF803DA18FE62C900913505 /* panel_left.png in Resources */,
 				3DF8044718FE62FC00913505 /* tool_mail.png in Resources */,
+				3DA334F319C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib in Resources */,
 				3DED268D1900D329001A1D67 /* stack_render@2x.png in Resources */,
 				3DF4375E19AF1B420049A87E /* arrow54-128.png in Resources */,
 				26EDAD3C19B8701C00045FCF /* tool_centerbox.png in Resources */,
@@ -5439,6 +5453,7 @@
 				691EE6DE1992DB320080E23A /* IUCSSWPCompiler.m in Sources */,
 				6985CBA018E31558008DBF50 /* IUSheetGroup.m in Sources */,
 				3DB3ACFD18EC1F700046DFB7 /* LMCanvasVC.m in Sources */,
+				3DA334EB19C14CFE00B6ABA6 /* IUCollectionView.m in Sources */,
 				6923AB4919A2A9BC0084FFAC /* WPWidgetBody.m in Sources */,
 				6979FC0718ED34E20060C3B4 /* LMAppearanceFrameVC.m in Sources */,
 				3D14886318F6AE5700E8EE4C /* LMCenterClipView.m in Sources */,
@@ -5471,6 +5486,7 @@
 				69860E4D197625C7001C3F7F /* WPArticleList.m in Sources */,
 				69C5762C18D70B850016F050 /* LMWC.m in Sources */,
 				69757B2518D95FDA0095CBAC /* NSMutableDictionary+IUTag.m in Sources */,
+				3DA334F219C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m in Sources */,
 				69757B0418D95BBC0095CBAC /* JDEnvUtil.m in Sources */,
 				3DB3ACE018EBEF5F0046DFB7 /* GuideLineLayer.m in Sources */,
 				3DFB86481961628800A20960 /* LMPropertyWebProgrammingVC.m in Sources */,

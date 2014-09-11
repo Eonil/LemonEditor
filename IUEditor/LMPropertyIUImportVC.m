@@ -29,16 +29,8 @@
     return self;
 }
 
-- (void)awakeFromNib{
-    [self addObserver:self forKeyPath:@"controller.selectedObjects"
-              options:0 context:@"selection"];
-    
-
-}
-
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self removeObserver:self forKeyPath:@"controller.selectedObjects" context:@"selection"];
 }
 
 - (void)structureChanged:(NSNotification*)noti{
@@ -47,11 +39,6 @@
     [_prototypeB addItemsWithTitles:[[_project classSheets] valueForKey:@"name"]];
 }
 
-
-
-- (void)setController:(IUController *)controller{
-    [super setController:controller];
-}
 
 
 - (void)setProject:(IUProject*)project{
@@ -70,7 +57,7 @@
     }
 }
 
-- (void)selectionContextDidChange:(NSDictionary *)change{
+- (void)selectionDidChange:(NSDictionary *)change{
     id protoType = [self valueForProperty:@"prototypeClass"];
     
     if(protoType == nil || protoType == NSNoSelectionMarker

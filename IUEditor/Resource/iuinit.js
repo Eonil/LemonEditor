@@ -69,7 +69,6 @@ $(document).ready(function(){
 	  });
                   
     /*INIT_IUMenuBar_REPLACEMENT_END*/
-  
 	 
     /*INIT_JS_REPLACEMENT*/
 
