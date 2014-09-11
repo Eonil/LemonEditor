@@ -259,8 +259,8 @@
                 [iu.css eradicateTag:IUCSSTagPixelX];
                 [iu.css eradicateTag:IUCSSTagPixelY];
 
-                [iu.css setValue:@(10) forTag:IUCSSTagPixelX];
-                [iu.css setValue:@(10) forTag:IUCSSTagPixelY];
+                [iu.css setValue:@(0) forTag:IUCSSTagPixelX];
+                [iu.css setValue:@(0) forTag:IUCSSTagPixelY];
                 
                                 
                 [newParent insertIU:iu atIndex:newIndex error:nil];
