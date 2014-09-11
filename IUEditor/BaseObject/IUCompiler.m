@@ -269,15 +269,30 @@
 - (NSArray *)outputClipArtArray:(IUSheet *)document{
     NSMutableArray *array = [NSMutableArray array];
     for (IUBox *box in document.allChildren){
-        NSString *imageName = box.imageName;
+        NSMutableArray *imageNames = [NSMutableArray array];
+        if(box.imageName){
+            [imageNames addObject:box.imageName];
+        }
         
-        if(imageName){
-            if([[imageName pathComponents][0] isEqualToString:@"clipArt"]){
-                NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"clipArtList" ofType:@"plist"];
-                NSDictionary *clipArtDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-                
-                if([clipArtDict objectForKey:[imageName lastPathComponent]] != nil){
-                    [array addObject:imageName];
+        if([box isKindOfClass:[IUCarousel class]]){
+            IUCarousel *carousel = (IUCarousel *)box;
+            if(carousel.leftArrowImage){
+                [imageNames addObject:carousel.leftArrowImage];
+            }
+            if(carousel.rightArrowImage){
+                [imageNames addObject:carousel.rightArrowImage];
+            }
+        }
+        
+        if(imageNames.count >0){
+            for(NSString *imageName in imageNames){
+                if([[imageName pathComponents][0] isEqualToString:@"clipArt"]){
+                    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"clipArtList" ofType:@"plist"];
+                    NSDictionary *clipArtDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+                    
+                    if([clipArtDict objectForKey:[imageName lastPathComponent]] != nil){
+                        [array addObject:imageName];
+                    }
                 }
             }
         }
@@ -373,8 +388,6 @@
     else{
         [code addCodeLine:@"<script src='http://code.jquery.com/jquery-1.10.2.js'></script>"];
         [code addCodeLine:@"<script src='http://code.jquery.com/ui/1.9.2/jquery-ui.js'></script>"];
-//        [code addCodeLine:@"<script src=\"http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js\"></script>"];
-
         
         for(NSString *filename in sheet.project.defaultOutputJSArray){
             [code addCodeLineWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@\"></script>", filename];

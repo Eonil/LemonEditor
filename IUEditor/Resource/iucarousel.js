@@ -46,7 +46,7 @@ function initCarousel(carouselID){
 		nextCarousel(carouselID);
 	});
 	
-	carousel.find('.IUCarouselItem').on( "swipeleft",function(){
+	carousel.find('.IUCarouselItem').on( "swipeleft", function(){
 		nextCarousel(carouselID);
 	});
 	

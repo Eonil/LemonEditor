@@ -192,7 +192,7 @@
 }
 
 - (NSString *)pagerIDActive{
-    return [NSString stringWithFormat:@"%@ > .Pager > li:active", self.cssClass];
+    return [NSString stringWithFormat:@"%@ > .Pager > li.active", self.cssClass];
 }
 
 - (NSString *)prevID{

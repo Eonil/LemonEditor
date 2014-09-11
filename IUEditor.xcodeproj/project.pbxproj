@@ -349,6 +349,7 @@
 		3DA334EB19C14CFE00B6ABA6 /* IUCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA334EA19C14CFE00B6ABA6 /* IUCollectionView.m */; };
 		3DA334F219C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA334F019C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m */; };
 		3DA334F319C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA334F119C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib */; };
+		3DA334F519C1A0C100B6ABA6 /* jquery.event.move.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DA334F419C1A0C100B6ABA6 /* jquery.event.move.js */; };
 		3DA416B81935A6BE00559028 /* LMPreferenceFontVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */; };
 		3DA416B91935A6BE00559028 /* LMPreferenceFontVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */; };
 		3DA416BD1935ABB400559028 /* LMFontController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA416BC1935ABB400559028 /* LMFontController.m */; };
@@ -1439,6 +1440,7 @@
 		3DA334EF19C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUCollectionViewVC.h; path = Editor/PropertyView/LMPropertyIUCollectionViewVC.h; sourceTree = "<group>"; };
 		3DA334F019C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPropertyIUCollectionViewVC.m; path = Editor/PropertyView/LMPropertyIUCollectionViewVC.m; sourceTree = "<group>"; };
 		3DA334F119C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyIUCollectionViewVC.xib; path = Editor/PropertyView/LMPropertyIUCollectionViewVC.xib; sourceTree = "<group>"; };
+		3DA334F419C1A0C100B6ABA6 /* jquery.event.move.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.event.move.js; sourceTree = "<group>"; };
 		3DA416B51935A6BE00559028 /* LMPreferenceFontVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPreferenceFontVC.h; path = Editor/Preference/LMPreferenceFontVC.h; sourceTree = "<group>"; };
 		3DA416B61935A6BE00559028 /* LMPreferenceFontVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPreferenceFontVC.m; path = Editor/Preference/LMPreferenceFontVC.m; sourceTree = "<group>"; };
 		3DA416B71935A6BE00559028 /* LMPreferenceFontVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPreferenceFontVC.xib; path = Editor/Preference/LMPreferenceFontVC.xib; sourceTree = "<group>"; };
@@ -3539,6 +3541,7 @@
 		3DED2768190E3956001A1D67 /* plugins */ = {
 			isa = PBXGroup;
 			children = (
+				3DA334F419C1A0C100B6ABA6 /* jquery.event.move.js */,
 				3DB0AB4B19AB5CD90066FAB7 /* jquery.event.swipe.js */,
 				3DED2769190E3956001A1D67 /* jquery.easing.1.3.js */,
 				3DED276A190E3956001A1D67 /* jquery.fitvids.js */,
@@ -4709,6 +4712,7 @@
 				2608C1E0193DE6BC00DD1B42 /* info@2x.png in Resources */,
 				69CE50D31996F11600C464A8 /* LMStartNewWPVC.xib in Resources */,
 				3DF803EE18FE62C900913505 /* grid.png in Resources */,
+				3DA334F519C1A0C100B6ABA6 /* jquery.event.move.js in Resources */,
 				2628C9231919C8C800D9D8CD /* tab_secondary_on@2x.png in Resources */,
 				3DF8043718FE62FC00913505 /* tool_image.png in Resources */,
 				3DF437AF19AF1B420049A87E /* map_location_pin_map-marker-128.png in Resources */,
