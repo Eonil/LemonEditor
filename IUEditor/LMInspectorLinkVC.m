@@ -144,6 +144,9 @@
 
 - (IBAction)clickEnableURLCheckButton:(id)sender {
     [self updateLinkEnableState];
+    if([_urlCheckButton state] == 0){
+        [self setValue:nil forIUProperty:@"link"];
+    }
 }
 
 - (IBAction)clickLinkPopupButton:(id)sender {
