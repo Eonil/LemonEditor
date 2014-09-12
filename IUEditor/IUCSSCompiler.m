@@ -372,6 +372,22 @@
     }
 }
 
+- (void)removeTag:(NSString*)tag identifier:(NSString*)identifier viewport:(NSInteger)viewport{
+    
+    NSDictionary *dictWithIdentifier = _editorCSSDictWithViewPort[@(viewport)];
+    if(dictWithIdentifier){
+        NSMutableDictionary *tagDict = [dictWithIdentifier objectForKey:identifier];
+        [tagDict removeObjectForKey:tag];
+    }
+    
+    dictWithIdentifier = _outputCSSDictWithViewPort[@(viewport)];
+    if(dictWithIdentifier){
+        NSMutableDictionary *tagDict = [dictWithIdentifier objectForKey:identifier];
+        [tagDict removeObjectForKey:tag];
+    }
+    
+}
+
 - (void)renameIdentifier:(NSString*)fromIdentifier to:(NSString*)toIdentifier{
     if(_currentTarget == IUTargetEditor || _currentTarget == IUTargetBoth){
         [_editorCSSDictWithViewPort enumerateKeysAndObjectsUsingBlock:^(id key, NSMutableDictionary* identifierDict, BOOL *stop) {
@@ -1042,6 +1058,7 @@
         
     }
 
+    [code removeTag:@"width" identifier:menuBar.cssClass viewport:IUCSSDefaultViewPort];
     
 }
 

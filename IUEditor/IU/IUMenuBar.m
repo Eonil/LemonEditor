@@ -247,7 +247,6 @@
         return NO;
     }
 }
-
 - (BOOL)hasWidth{
     return YES;
 }
