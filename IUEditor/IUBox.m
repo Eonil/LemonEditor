@@ -1049,11 +1049,17 @@
     if([self hasWidth] && [self canChangeWidthByUserInput] && size.width != CGFLOAT_INVALID){
         NSInteger currentWidth = originalSize.width;
         currentWidth += size.width;
+        if(currentWidth < 0){
+            currentWidth = 0;
+        }
         [_css setValueWithoutUpdateCSS:@(currentWidth) forTag:IUCSSTagPixelWidth];
 
         CGFloat percentWidth = originalPercentSize.width;
         if(parentSize.width!=0){
             percentWidth += (size.width / parentSize.width) *100;
+        }
+        if(percentWidth < 0){
+            percentWidth =0;
         }
         [_css setValueWithoutUpdateCSS:@(percentWidth) forTag:IUCSSTagPercentWidth];
      
@@ -1061,11 +1067,17 @@
     if([self hasHeight] && [self canChangeHeightByUserInput]  && size.height != CGFLOAT_INVALID){
         NSInteger currentHeight = originalSize.height;
         currentHeight += size.height;
+        if(currentHeight < 0){
+            currentHeight =0;
+        }
         [_css setValueWithoutUpdateCSS:@(currentHeight) forTag:IUCSSTagPixelHeight];
         
         CGFloat percentHeight = originalPercentSize.height;
         if(parentSize.height!=0){
             percentHeight += (size.height / parentSize.height) *100;
+        }
+        if(percentHeight < 0){
+            percentHeight = 0;
         }
         [_css setValueWithoutUpdateCSS:@(percentHeight) forTag:IUCSSTagPercentHeight];        
     }
