@@ -71,7 +71,15 @@
     }
     return self;
 }
-
+- (BOOL)hasMinHeight{
+    for(IUBox *box in self.children){
+        if([box isKindOfClass:[IUSection class]] == NO){
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 
 #pragma mark - should
 

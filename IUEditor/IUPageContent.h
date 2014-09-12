@@ -10,4 +10,6 @@
 
 @interface IUPageContent : IUBox
 
+- (BOOL)hasMinHeight;
+
 @end

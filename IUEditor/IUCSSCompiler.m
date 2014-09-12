@@ -18,6 +18,7 @@
 #import "IUMenuItem.h"
 #import "IUCarousel.h"
 #import "PGTextView.h"
+#import "IUPageContent.h"
 
 #import "WPMenu.h"
 
@@ -824,12 +825,6 @@
 - (void)updateCSSPositionCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
     [code setInsertingTarget:IUTargetBoth];
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
-    
-    //min-height only for IUPage
-    if(cssTagDict[IUCSSTagMinHeight]){
-        [code insertTag:@"min-height" floatFromNumber:cssTagDict[IUCSSTagMinHeight] unit:IUUnitPixel];
-    }
-    
    
     
     /*  X, Y, Width, Height */
@@ -923,14 +918,6 @@
         NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
         [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
         
-        //fullsize for IUSection
-        if([_iu isKindOfClass:[IUSection class]]){
-            IUSection *section = (IUSection *)_iu;
-            if(section.enableFullSize){
-                [code setInsertingTarget:IUTargetOutput];
-                [code insertTag:@"min-height" floatFromNumber:hValue unit:hUnit];
-            }
-        }
     }
 }
 
@@ -974,6 +961,29 @@
         }
     }
     return imgSrc;
+}
+
+- (void)updateCSSCode:(IUCSSCode*)code asIUPageContent:(IUPageContent*)pageContent{
+    NSArray *editWidths = [pageContent.css allViewports];
+    
+    for (NSNumber *viewportNumber in editWidths) {
+        int viewport = [viewportNumber intValue];
+        [code setInsertingViewPort:viewport];
+        NSDictionary *cssTagDict = [pageContent.css tagDictionaryForViewport:viewport];
+        
+        if(cssTagDict[IUCSSTagMinHeight]){
+            
+            if(pageContent.hasMinHeight){
+                [code setInsertingTarget:IUTargetBoth];
+            }
+            else{
+                [code setInsertingTarget:IUTargetEditor];
+            }
+            [code insertTag:@"min-height" floatFromNumber:cssTagDict[IUCSSTagMinHeight] unit:IUUnitPixel];
+        }
+    }
+
+    
 }
 
 
