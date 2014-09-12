@@ -1434,6 +1434,10 @@
         [retString appendString:@" horizontalCenter='1'"];
     }
     
+    if(iu.link && [self hasLink:iu] && [iu.link isKindOfClass:[IUBox class]]){
+        [retString appendString:@" iulink=\"1\""];
+    }
+    
     //event variable
     if(isEdit == NO){
         if (iu.opacityMove) {

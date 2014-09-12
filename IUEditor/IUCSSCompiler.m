@@ -481,7 +481,12 @@
 - (void)updateCSSHoverCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
 
-    [code setInsertingIdentifier:_iu.cssHoverClass];
+    if([_iu.link isKindOfClass:[IUBox class]]){
+        [code setInsertingIdentifiers:@[_iu.cssHoverClass, _iu.cssActiveClass]];
+    }
+    else{
+        [code setInsertingIdentifier:_iu.cssHoverClass];
+    }
 
     if ([cssTagDict[IUCSSTagHoverBGImagePositionEnable] boolValue]) {
         [code insertTag:@"background-position-x" floatFromNumber:cssTagDict[IUCSSTagHoverBGImageX] unit:IUUnitPixel];

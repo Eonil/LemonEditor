@@ -56,23 +56,20 @@ $(document).ready(function(){
 	});
 	
 	$('.IUMenuBar a[href]').each(function() {
-		var url = window.location.pathname;
-        var urlRegExp = new RegExp(url == '/' ? window.location.origin + '/?$' : url.replace(/\/$/,''));
-		if(urlRegExp.test(this.href)){
-	      $(this).parent().addClass('active');
-	  	}
-		else{
-			if ($(this).parent().hasClass('active')) {
-				$(this).parent().removeClass('active');
-			}
-		}
-	  });
+		activateLink(this, 'parent');
+	 });
                   
     /*INIT_IUMenuBar_REPLACEMENT_END*/
 	 
     /*INIT_JS_REPLACEMENT*/
 
     /*INIT_Default_REPLACEMENT_START*/
+	
+	$("[iulink='1']").each(function(){
+		var link = $(this).parent().get(0);
+		activateLink(link, 'child');
+	});
+	
 	/* Initialize IUFrame.js */
 	resizeCollection();
 	reframeCenter();

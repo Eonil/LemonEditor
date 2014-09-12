@@ -1279,7 +1279,7 @@
     return [NSString stringWithFormat:@"%@:hover", self.cssClass];
 }
 - (NSString*)cssActiveClass{
-    return [NSString stringWithFormat:@"%@:active", self.cssClass];
+    return [NSString stringWithFormat:@"%@.active", self.cssClass];
 }
 
 - (NSString*)cssClassStringForHTML{

@@ -82,6 +82,32 @@ function showCollectionView(iu, index){
 	});
 }
 
+function activateLink(iu, location){
+	var url = window.location.pathname;
+    var urlRegExp = new RegExp(url == '/' ? window.location.origin + '/?$' : url.replace(/\/$/,''));
+	if(urlRegExp.test(iu.href)){
+		if(location=='parent'){
+			$(iu).parent().addClass('active');
+		}
+		else if(location=='child'){
+			$(iu).children().first().addClass('active');
+		}
+  	}
+	else{
+		if(location=='parent'){
+			if ($(iu).parent().hasClass('active')) {
+				$(iu).parent().removeClass('active');
+			}
+		}		
+		else if(location=='child'){
+			if ($(iu).children().first().hasClass('active')) {
+				$(iu).children().first().removeClass('active');
+			}
+		}
+
+	}
+}
+
 $(document).ready(function(){
     console.log('iu.js')
 });
