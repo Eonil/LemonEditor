@@ -475,7 +475,7 @@
                                     <constraint firstAttribute="height" constant="15" id="Vvb-lj-Te1"/>
                                     <constraint firstAttribute="width" constant="9" id="jHg-WB-Vhe"/>
                                 </constraints>
-                                <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="100" id="hGx-Cg-5r6"/>
+                                <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" minValue="-1000" maxValue="1000" id="hGx-Cg-5r6"/>
                             </stepper>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k3r-Cs-kH8">
                                 <rect key="frame" x="167" y="63" width="70" height="19"/>
@@ -507,7 +507,7 @@
                                     <constraint firstAttribute="height" constant="15" id="Byq-gt-1QH"/>
                                     <constraint firstAttribute="width" constant="9" id="plT-GC-ib3"/>
                                 </constraints>
-                                <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="1000" id="fLP-OJ-RDX"/>
+                                <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" minValue="-1000" maxValue="1000" id="fLP-OJ-RDX"/>
                             </stepper>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="URU-9R-z5r">
                                 <rect key="frame" x="63" y="10" width="70" height="19"/>
@@ -539,7 +539,7 @@
                                     <constraint firstAttribute="width" constant="9" id="REQ-i6-m0J"/>
                                     <constraint firstAttribute="height" constant="15" id="okh-7r-qIY"/>
                                 </constraints>
-                                <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="100" id="VvZ-L5-k9J"/>
+                                <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" minValue="-1000" maxValue="1000" id="VvZ-L5-k9J"/>
                             </stepper>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EA9-nx-ZKo">
                                 <rect key="frame" x="166" y="10" width="70" height="19"/>
@@ -571,7 +571,7 @@
                                     <constraint firstAttribute="width" constant="9" id="5hf-ed-19b"/>
                                     <constraint firstAttribute="height" constant="15" id="yFR-LW-c6f"/>
                                 </constraints>
-                                <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="1000" id="vyC-VS-kck"/>
+                                <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" minValue="-1000" maxValue="1000" id="vyC-VS-kck"/>
                             </stepper>
                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ank-4C-ytM" userLabel="rightArrowImage">
                                 <rect key="frame" x="63" y="31" width="187" height="22"/>
