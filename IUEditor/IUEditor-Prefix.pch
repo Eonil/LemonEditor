@@ -116,4 +116,18 @@
 
 #define CGFLOAT_INVALID CGFLOAT_MIN
 
+//keycode
+#define IUKeyCodeEnter 36
+#define IUKeyCodeESC 53
+#define IUKeyCodeOne 18
+#define IUKeyCodeTwo 19
+#define IUKeyCodeThree 20
+#define IUKeyCodeC 8
+#define IUKeyCodeV 9
+#define IUKeyCodeArrowLeft 123
+#define IUKeyCodeArrowRight 124
+#define IUKeyCodeArrowDown 125
+#define IUKeyCodeArrowUp 126
+
+
 #endif

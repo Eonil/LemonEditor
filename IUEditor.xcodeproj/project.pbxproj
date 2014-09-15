@@ -346,6 +346,8 @@
 		3D9BC42D1998C7EC00451F55 /* Event.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC42C1998C7EC00451F55 /* Event.zip */; };
 		3D9BC42F1998DB3A00451F55 /* agency.iu.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC42E1998DB3A00451F55 /* agency.iu.zip */; };
 		3D9BC4311999F19700451F55 /* iueditor.iu.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3D9BC4301999F19700451F55 /* iueditor.iu.zip */; };
+		3D9F5C3A19C6E37300D63B84 /* JDResponderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9F5C3919C6E37300D63B84 /* JDResponderView.m */; };
+		3D9F5C3D19C6F3CD00D63B84 /* JDReponderCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9F5C3C19C6F3CD00D63B84 /* JDReponderCollectionView.m */; };
 		3DA334EB19C14CFE00B6ABA6 /* IUCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA334EA19C14CFE00B6ABA6 /* IUCollectionView.m */; };
 		3DA334F219C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA334F019C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m */; };
 		3DA334F319C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA334F119C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib */; };
@@ -723,7 +725,7 @@
 		3DF437CA19AF1B420049A87E /* icon-social-twitter-outline-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF4372B19AF1B420049A87E /* icon-social-twitter-outline-128.png */; };
 		3DF437CC19AF31620049A87E /* iupresentationScript.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3DF437CB19AF31620049A87E /* iupresentationScript.txt */; };
 		3DF437CF19AF69B30049A87E /* iugooglemap_theme.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DF437CE19AF69B30049A87E /* iugooglemap_theme.js */; };
-		3DF437D419AF9FD10049A87E /* JDClickBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF437D319AF9FD10049A87E /* JDClickBox.m */; };
+		3DF437D419AF9FD10049A87E /* JDResponderBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF437D319AF9FD10049A87E /* JDResponderBox.m */; };
 		3DF8029A18FD0B2500913505 /* IUHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8029918FD0B2500913505 /* IUHTML.m */; };
 		3DF8029D18FE3D6000913505 /* IUWebMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8029C18FE3D6000913505 /* IUWebMovie.m */; };
 		3DF803D818FE62C900913505 /* dotted_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DF803C118FE62C900913505 /* dotted_line.png */; };
@@ -1435,6 +1437,10 @@
 		3D9BC42C1998C7EC00451F55 /* Event.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Event.zip; sourceTree = "<group>"; };
 		3D9BC42E1998DB3A00451F55 /* agency.iu.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = agency.iu.zip; sourceTree = "<group>"; };
 		3D9BC4301999F19700451F55 /* iueditor.iu.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = iueditor.iu.zip; sourceTree = "<group>"; };
+		3D9F5C3819C6E37300D63B84 /* JDResponderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDResponderView.h; path = JD/JDResponderView.h; sourceTree = "<group>"; };
+		3D9F5C3919C6E37300D63B84 /* JDResponderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDResponderView.m; path = JD/JDResponderView.m; sourceTree = "<group>"; };
+		3D9F5C3B19C6F3CC00D63B84 /* JDReponderCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDReponderCollectionView.h; path = JD/JDReponderCollectionView.h; sourceTree = "<group>"; };
+		3D9F5C3C19C6F3CD00D63B84 /* JDReponderCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDReponderCollectionView.m; path = JD/JDReponderCollectionView.m; sourceTree = "<group>"; };
 		3DA334E919C14CFE00B6ABA6 /* IUCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUCollectionView.h; path = IU/IUCollectionView.h; sourceTree = "<group>"; };
 		3DA334EA19C14CFE00B6ABA6 /* IUCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUCollectionView.m; path = IU/IUCollectionView.m; sourceTree = "<group>"; };
 		3DA334EF19C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUCollectionViewVC.h; path = Editor/PropertyView/LMPropertyIUCollectionViewVC.h; sourceTree = "<group>"; };
@@ -1877,8 +1883,8 @@
 		3DF4372B19AF1B420049A87E /* icon-social-twitter-outline-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-social-twitter-outline-128.png"; path = "clipArt/icon-social-twitter-outline-128.png"; sourceTree = "<group>"; };
 		3DF437CB19AF31620049A87E /* iupresentationScript.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iupresentationScript.txt; sourceTree = "<group>"; };
 		3DF437CE19AF69B30049A87E /* iugooglemap_theme.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = iugooglemap_theme.js; sourceTree = "<group>"; };
-		3DF437D219AF9FD10049A87E /* JDClickBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDClickBox.h; path = JD/JDClickBox.h; sourceTree = "<group>"; };
-		3DF437D319AF9FD10049A87E /* JDClickBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDClickBox.m; path = JD/JDClickBox.m; sourceTree = "<group>"; };
+		3DF437D219AF9FD10049A87E /* JDResponderBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDResponderBox.h; path = JD/JDResponderBox.h; sourceTree = "<group>"; };
+		3DF437D319AF9FD10049A87E /* JDResponderBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDResponderBox.m; path = JD/JDResponderBox.m; sourceTree = "<group>"; };
 		3DF8029818FD0B2500913505 /* IUHTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUHTML.h; sourceTree = "<group>"; };
 		3DF8029918FD0B2500913505 /* IUHTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUHTML.m; sourceTree = "<group>"; };
 		3DF8029B18FE3D6000913505 /* IUWebMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUWebMovie.h; sourceTree = "<group>"; };
@@ -4156,8 +4162,12 @@
 				694A9864196D197900C1D630 /* JDFormatter.m */,
 				69F59BA3196D97EA00D6EAF5 /* JDShellUtil.h */,
 				69F59BA4196D97EA00D6EAF5 /* JDShellUtil.m */,
-				3DF437D219AF9FD10049A87E /* JDClickBox.h */,
-				3DF437D319AF9FD10049A87E /* JDClickBox.m */,
+				3DF437D219AF9FD10049A87E /* JDResponderBox.h */,
+				3DF437D319AF9FD10049A87E /* JDResponderBox.m */,
+				3D9F5C3819C6E37300D63B84 /* JDResponderView.h */,
+				3D9F5C3919C6E37300D63B84 /* JDResponderView.m */,
+				3D9F5C3B19C6F3CC00D63B84 /* JDReponderCollectionView.h */,
+				3D9F5C3C19C6F3CD00D63B84 /* JDReponderCollectionView.m */,
 			);
 			name = JD;
 			sourceTree = "<group>";
@@ -5454,6 +5464,7 @@
 				69757B0018D95BBC0095CBAC /* CALayer+JDExtension.m in Sources */,
 				69757B0718D95BBC0095CBAC /* JDHerokuUtil.m in Sources */,
 				69CFDF161963D48900341B07 /* LMTutorialManager.m in Sources */,
+				3D9F5C3A19C6E37300D63B84 /* JDResponderView.m in Sources */,
 				691EE6DE1992DB320080E23A /* IUCSSWPCompiler.m in Sources */,
 				6985CBA018E31558008DBF50 /* IUSheetGroup.m in Sources */,
 				3DB3ACFD18EC1F700046DFB7 /* LMCanvasVC.m in Sources */,
@@ -5491,6 +5502,7 @@
 				69C5762C18D70B850016F050 /* LMWC.m in Sources */,
 				69757B2518D95FDA0095CBAC /* NSMutableDictionary+IUTag.m in Sources */,
 				3DA334F219C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m in Sources */,
+				3D9F5C3D19C6F3CD00D63B84 /* JDReponderCollectionView.m in Sources */,
 				69757B0418D95BBC0095CBAC /* JDEnvUtil.m in Sources */,
 				3DB3ACE018EBEF5F0046DFB7 /* GuideLineLayer.m in Sources */,
 				3DFB86481961628800A20960 /* LMPropertyWebProgrammingVC.m in Sources */,
@@ -5629,7 +5641,7 @@
 				CB2AA9C61974D43200DA7CCD /* WPPageLinks.m in Sources */,
 				69CB92B8191B6A2600BEFBED /* LMPropertyIUPageLinkSetVC.m in Sources */,
 				69757B0F18D95BBC0095CBAC /* JDTextFieldCell.m in Sources */,
-				3DF437D419AF9FD10049A87E /* JDClickBox.m in Sources */,
+				3DF437D419AF9FD10049A87E /* JDResponderBox.m in Sources */,
 				6919204A18DCFED000F8522B /* NSObject+JDExtension.m in Sources */,
 				3DED2773190E4148001A1D67 /* IUCarouselItem.m in Sources */,
 				6953852E18ED6EC800CC42E5 /* IUController.m in Sources */,

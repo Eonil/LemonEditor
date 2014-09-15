@@ -31,6 +31,8 @@
     LMStartNewDjangoVC          *djangoVC;
     LMStartNewPresentationVC    *presentationVC;
     LMStartNewWPVC              *wpVC;
+    int selectedIndex;
+    BOOL isFirstView;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -46,6 +48,10 @@
         djangoVC.parentVC = self;
         presentationVC.parentVC = self;
         wpVC.parentVC = self;
+        
+        selectedIndex = 0;
+        isFirstView = YES;
+
     }
     return self;
 }
@@ -60,7 +66,7 @@
     djangoVC.nextB = _nextB;
     presentationVC.nextB = _nextB;
     wpVC.nextB = _nextB;
-
+    
     [self show];
 }
 
@@ -77,17 +83,11 @@
     [_nextB setTarget:self];
     [_nextB setEnabled:YES];
     [_prevB setEnabled:NO];
-}
-
-- (IBAction)pressProjectTypeB:(NSButton*)sender {
-    self.typeDefaultB.state = 0;
-    self.typeWPB.state = 0;
-    self.typeDjangoB.state = 0;
     
-    sender.state = 1;
+    isFirstView = YES;
 }
 - (void)pressNextBtn{
-
+    
     if (_typeDefaultB.state) {
         [self.contentV addSubview:defaultVC.view];
         [defaultVC show];
@@ -100,13 +100,76 @@
         [self.contentV addSubview:djangoVC.view];
         [djangoVC show];
     }
+    
+    isFirstView = NO;
 }
-- (void)pressPrevBtn{
 
+- (void)pressPrevBtn{
+    
     [_nextB setTarget:self];
     [_nextB setEnabled:YES];
     [_prevB setEnabled:NO];
 }
+
+
+
+- (IBAction)pressProjectTypeB:(NSButton*)sender {
+    
+    if([sender isEqualTo:_typeDefaultB]){
+        selectedIndex = 0;
+    }
+    else if([sender isEqualTo:_typeWPB]){
+        selectedIndex = 1;
+    }
+    else if([sender isEqualTo:_typeDjangoB]){
+        selectedIndex = 2;
+    }
+    [self updateSelectItem];
+}
+
+- (void)updateSelectItem{
+    _typeDefaultB.state = 0;
+    _typeWPB.state = 0;
+    _typeDjangoB.state = 0;
+    
+    
+    switch (selectedIndex) {
+        case 0:
+            _typeDefaultB.state =1;
+            break;
+        case 1:
+            _typeWPB.state=1;
+            break;
+        case 2:
+            _typeDjangoB.state=1;
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)keyDown:(NSEvent *)theEvent{
+    unsigned short keyCode = theEvent.keyCode;//keyCode is hardware-independent
+    if(isFirstView){
+        if(keyCode == IUKeyCodeEnter){
+            [self pressNextBtn];
+        }
+        else if(keyCode == IUKeyCodeArrowRight || keyCode == IUKeyCodeArrowLeft){
+            [self moveProjectType:keyCode];
+        }
+    }
+}
+
+- (void)moveProjectType:(unsigned short)keyCode{
+    if(keyCode == IUKeyCodeArrowRight && selectedIndex < 2){
+        selectedIndex++;
+    }
+    else if(keyCode == IUKeyCodeArrowLeft && selectedIndex > 0){
+        selectedIndex--;
+    }
+    [self updateSelectItem];
+}
+
 
 
 @end

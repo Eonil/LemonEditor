@@ -69,7 +69,7 @@
                             <rect key="frame" x="1" y="1" width="698" height="58"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <box autoresizesSubviews="NO" borderWidth="0.0" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="K5C-g3-nwK" customClass="JDClickBox">
+                                <box autoresizesSubviews="NO" borderWidth="0.0" title="Box" boxType="custom" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="K5C-g3-nwK" customClass="JDResponderBox">
                                     <rect key="frame" x="0.0" y="0.0" width="700" height="60"/>
                                     <view key="contentView">
                                         <rect key="frame" x="0.0" y="0.0" width="700" height="60"/>
@@ -161,6 +161,9 @@
             </constraints>
             <color key="borderColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
             <color key="fillColor" red="1" green="0.97727272727272729" blue="0.97727272727272729" alpha="1" colorSpace="calibratedRGB"/>
+            <connections>
+                <outlet property="delegate" destination="-2" id="aXp-mZ-jRZ"/>
+            </connections>
             <point key="canvasLocation" x="-929" y="325"/>
         </box>
         <collectionViewItem id="bMn-1f-MGA">
@@ -228,7 +231,7 @@
                                         <rect key="frame" x="1" y="1" width="700" height="358"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <collectionView selectable="YES" id="rRB-Yh-6qo">
+                                            <collectionView selectable="YES" id="rRB-Yh-6qo" customClass="JDReponderCollectionView">
                                                 <rect key="frame" x="0.0" y="0.0" width="700" height="358"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -236,6 +239,7 @@
                                                     <binding destination="1Xx-xq-Q4a" name="content" keyPath="arrangedObjects" id="lUQ-o5-UMk"/>
                                                     <binding destination="1Xx-xq-Q4a" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="lUQ-o5-UMk" id="9Ue-iy-rZG"/>
                                                     <outlet property="itemPrototype" destination="79e-C5-HBB" id="hmR-oG-c8O"/>
+                                                    <outlet property="viewController" destination="-2" id="Zuq-ux-f8Q"/>
                                                 </connections>
                                             </collectionView>
                                         </subviews>

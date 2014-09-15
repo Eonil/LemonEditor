@@ -148,7 +148,7 @@
                                     <rect key="frame" x="1" y="1" width="798" height="358"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <collectionView focusRingType="none" selectable="YES" id="FNX-sH-U2d">
+                                        <collectionView focusRingType="none" selectable="YES" id="FNX-sH-U2d" customClass="JDReponderCollectionView">
                                             <rect key="frame" x="0.0" y="0.0" width="798" height="358"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -156,6 +156,7 @@
                                                 <binding destination="RVG-Eq-af1" name="content" keyPath="arrangedObjects" id="3Jb-CY-VBk"/>
                                                 <binding destination="RVG-Eq-af1" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="3Jb-CY-VBk" id="lpO-WD-h2p"/>
                                                 <outlet property="itemPrototype" destination="BkE-rX-9NW" id="klV-Mr-mv3"/>
+                                                <outlet property="viewController" destination="-2" id="BrR-y4-54U"/>
                                             </connections>
                                         </collectionView>
                                     </subviews>

@@ -87,8 +87,16 @@
     }
 }
 
-
+- (void)keyDown:(NSEvent *)theEvent{
+    unsigned short keyCode = theEvent.keyCode;//keyCode is hardware-independent
+    if(keyCode == IUKeyCodeEnter){
+        [self pressSelectBtn:theEvent];
+    }
+    else if (keyCode >= IUKeyCodeOne && keyCode <= IUKeyCodeThree){
+        [[self.view window] keyDown:theEvent];
+    }
     
+}
 
 
 @end

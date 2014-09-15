@@ -15,6 +15,13 @@
 @property (weak) IBOutlet NSButton *prevB;
 @property (weak) IBOutlet NSButton *nextB;
 
+
+@property   NSMutableArray *recentDocs;
+@property (strong) IBOutlet NSArrayController *recentAC;
+@property (weak) IBOutlet NSCollectionView *recentCollectV;
+@property (nonatomic) NSIndexSet   *selectedIndexes;
+
+
 @end
 
 @implementation LMStartRecentVC{
@@ -33,9 +40,9 @@
      for (NSURL *url in recentDocURLs){
          NSDate *date = [[[NSFileManager defaultManager] attributesOfItemAtPath:[url path] error:nil] fileModificationDate];
          [_recentDocs addObject:[@{@"image": [NSImage imageNamed:@"new_default"],
-                                          @"name" : [url lastPathComponent],
-                                          @"path": [url path],
-                                          @"date": [dateFormat stringFromDate:date]
+                                    @"name" : [url lastPathComponent],
+                                    @"path": [url path],
+                                    @"date": [dateFormat stringFromDate:date]
                                           //@"selection": @(NO),
                                           } mutableCopy]];
             }
@@ -88,4 +95,16 @@
 - (void)doubleClick:(NSEvent *)theEvent{
     [self pressSelectBtn:theEvent];
 }
+
+
+- (void)keyDown:(NSEvent *)theEvent{
+    unsigned short keyCode = theEvent.keyCode;//keyCode is hardware-independent
+    if(keyCode == IUKeyCodeEnter){
+        [self pressSelectBtn:theEvent];
+    }
+    else if (keyCode >= IUKeyCodeOne && keyCode <= IUKeyCodeThree){
+        [[self.view window] keyDown:theEvent];
+    }
+}
+
 @end

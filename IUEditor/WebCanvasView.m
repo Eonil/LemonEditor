@@ -86,12 +86,12 @@
                  */
                 
                 // 'C'
-                if (keyCode == 8) {
+                if (keyCode == IUKeyCodeC) {
                     [self.VC copy:self];
                     return YES;
                 }
                 // 'V'
-                if (keyCode == 9) {
+                if (keyCode == IUKeyCodeC) {
                     [self.VC paste:self];
                     return YES;
                 }
@@ -100,14 +100,14 @@
 
                 if([self isEditable]){
                     //ESC key
-                    if(keyCode == 53){
+                    if(keyCode == IUKeyCodeESC){
                         [self setEditable:NO];
                         return YES;
                     }
                 }
                 else{
                     //arrow key
-                    if(keyCode < 127 && keyCode > 122){
+                    if(keyCode <= IUKeyCodeArrowUp && keyCode >= IUKeyCodeArrowLeft){
                         [self moveIUByKeyEvent:keyCode];
                         return YES;
                     }
@@ -121,16 +121,16 @@
 - (void)moveIUByKeyEvent:(unsigned short)keyCode{
     NSPoint diffPoint;
     switch (keyCode) {
-        case 126: //up
+        case IUKeyCodeArrowUp: //up
             diffPoint = NSMakePoint(0, -1.0);
             break;
-        case 123: // left
+        case IUKeyCodeArrowLeft: // left
             diffPoint = NSMakePoint(-1.0, 0);
             break;
-        case 124: // right
+        case IUKeyCodeArrowRight: // right
             diffPoint = NSMakePoint(1.0, 0);
             break;
-        case 125: // down;
+        case IUKeyCodeArrowDown: // down;
             diffPoint = NSMakePoint(0, 1.0);
             break;
         default:

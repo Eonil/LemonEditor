@@ -7,12 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "JDResponderBox.h"
 
-@interface LMStartRecentVC : NSViewController
+@interface LMStartRecentVC : NSViewController 
 
-@property   NSMutableArray *recentDocs;
-@property (strong) IBOutlet NSArrayController *recentAC;
-@property (weak) IBOutlet NSCollectionView *recentCollectV;
-@property (nonatomic) NSIndexSet   *selectedIndexes;
 
 @end

@@ -75,4 +75,37 @@ static LMStartWC *gStartWindow = nil;
     [_menuSelectB selectCellAtRow:0 column:type];
     [_tabView selectTabViewItemAtIndex:type];
 }
+
+- (void)keyDown:(NSEvent *)theEvent{
+    
+    unsigned short keyCode = theEvent.keyCode;//keyCode is hardware-independent
+    
+    if(keyCode == IUKeyCodeOne){
+        [self selectStartViewOfType:LMStartWCTypeTemplate];
+    }
+    else if(keyCode == IUKeyCodeTwo){
+        [self selectStartViewOfType:LMStartWCTypeDefault];
+    }
+    else if(keyCode == IUKeyCodeThree){
+        [self selectStartViewOfType:LMStartWCTypeRecent];
+    }
+    else{
+        LMStartWCType type =  (LMStartWCType)[_tabView indexOfTabViewItem:[_tabView selectedTabViewItem]];
+        
+        switch (type) {
+            case LMStartWCTypeTemplate:
+                [_templateVC keyDown:theEvent];
+                break;
+            case LMStartWCTypeDefault:
+                [_newVC keyDown:theEvent];
+                break;
+            case LMStartWCTypeRecent:
+                [_recentVC keyDown:theEvent];
+                break;
+            default:
+                break;
+        }
+    }
+    
+}
 @end
