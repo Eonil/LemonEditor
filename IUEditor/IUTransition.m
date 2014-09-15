@@ -81,8 +81,8 @@
     iu.duration = _duration;
     
     if(iu.children.count > 0){
-        iu.firstItem = self.children[0];
-        iu.secondItem = self.children[1];
+        iu.firstItem = iu.children[0];
+        iu.secondItem = iu.children[1];
     }
     
     [self.delegate enableUpdateAll:self];
