@@ -747,10 +747,9 @@
         [code addCodeLine:@"</div>"];
         
         //control
-        if(carousel.disableArrowControl == NO){
-            [code addCodeLine:@"<div class='Next'></div>"];
-            [code addCodeLine:@"<div class='Prev'></div>"];
-        }
+        [code addCodeLine:@"<div class='Next'></div>"];
+        [code addCodeLine:@"<div class='Prev'></div>"];
+        
         
         if(carousel.controlType == IUCarouselControlBottom){
             [code addCodeLine:@"<ul class='Pager'>"];
@@ -1122,10 +1121,9 @@
             [code addCodeWithIndent:[self editorHTML:item]];
         }        
         //control
-        if(carousel.disableArrowControl == NO){
-            [code addCodeLine:@"<div class='Next'></div>"];
-            [code addCodeLine:@"<div class='Prev'></div>"];
-        }
+        [code addCodeLine:@"<div class='Next'></div>"];
+        [code addCodeLine:@"<div class='Prev'></div>"];
+        
         if(carousel.controlType == IUCarouselControlBottom){
             [code addCodeLine:@"<ul class='Pager'>"];
             [code increaseIndentLevelForEdit];

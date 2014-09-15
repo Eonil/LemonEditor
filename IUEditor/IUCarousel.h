@@ -24,7 +24,6 @@ typedef enum{
 @property (nonatomic) BOOL autoplay;
 @property (nonatomic) NSInteger timer;
 
-@property (nonatomic) BOOL disableArrowControl;
 @property (nonatomic) NSString *leftArrowImage, *rightArrowImage;
 @property (nonatomic) int leftX, leftY, rightX, rightY;
 

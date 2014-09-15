@@ -74,7 +74,7 @@
     [self outlet:_timeStpper bind:NSValueBinding property:@"timer" options:numberBindingOption];
     
     //prev, next
-    [self outlet:_arrowControlMatrix bind:NSSelectedIndexBinding property:@"disableArrowControl"];
+    [self outlet:_arrowControlMatrix bind:NSSelectedIndexBinding cssTag:IUCSSTagCarouselArrowDisable];
 
     //image
     [_leftImageComboBox bind:NSContentBinding toObject:self withKeyPath:@"resourceManager.imageFiles" options:IUBindingDictNotRaisesApplicable];

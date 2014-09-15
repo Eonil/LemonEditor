@@ -158,6 +158,11 @@ static NSString * IUCSSTagHoverBGColor  = @"hoverBGColor";
 static NSString * IUCSSTagHoverTextColorEnable  = @"hoverTextColorEnable";
 static NSString * IUCSSTagHoverTextColor  = @"hoverTextColor";
 
+
+//iubox unique tag
+static NSString *IUCSSTagCarouselArrowDisable = @"carouselDisable";
+
+
 #define isSameTag isEqualToString
 
 @interface NSString (IUTag)

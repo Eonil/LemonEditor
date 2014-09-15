@@ -57,6 +57,18 @@
     
 }
 
+- (void)updateVersionControlValues{
+    [super updateVersionControlValues];
+    if(IU_VERSION_GREATER_THAN(self.project.IUProjectVersion)){
+        [[self undoManager] disableUndoRegistration];
+
+        [self.css setValue:@(NO) forTag:IUCSSTagCarouselArrowDisable forViewport:IUCSSDefaultViewPort];
+        
+        [[self undoManager] enableUndoRegistration];
+
+    }
+}
+
 - (id)copyWithZone:(NSZone *)zone{
     IUCarousel *carousel = [super copyWithZone:zone];
     
@@ -68,7 +80,6 @@
     carousel.autoplay = _autoplay;
     carousel.timer = _timer;
     //arrow
-    carousel.disableArrowControl = _disableArrowControl;
     carousel.leftArrowImage = [_leftArrowImage copy];
     carousel.rightArrowImage = [_rightArrowImage copy];
     carousel.leftX = _leftX;
@@ -206,12 +217,8 @@
 - (NSArray *)cssIdentifierArray{
     NSMutableArray *cssArray = [[super cssIdentifierArray] mutableCopy];
     
-    if(self.disableArrowControl == NO){
-        [cssArray addObject:self.prevID];
-        [cssArray addObject:self.nextID];
-    }
     if(self.controlType == IUCarouselControlBottom){
-        [cssArray addObjectsFromArray:@[self.pagerID, self.pagerIDHover , self.pagerIDActive, self.pagerWrapperID]];
+        [cssArray addObjectsFromArray:@[self.pagerID, self.pagerIDHover , self.pagerIDActive, self.pagerWrapperID, self.prevID, self.nextID]];
     }
     
     return cssArray;
@@ -271,17 +278,6 @@
 }
 
 #pragma mark - arrow
-- (void)setDisableArrowControl:(BOOL)disableArrowControl{
-    
-    if(_disableArrowControl == disableArrowControl){
-        return;
-    }
-    
-    [[self.undoManager prepareWithInvocationTarget:self] setDisableArrowControl:_disableArrowControl];
-    
-    _disableArrowControl = disableArrowControl;
-    [self updateHTML];
-}
 
 - (void)setLeftArrowImage:(NSString *)leftArrowImage{
     

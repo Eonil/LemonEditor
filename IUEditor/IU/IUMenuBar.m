@@ -51,7 +51,12 @@
     
     [super updateVersionControlValues];
     if(IU_VERSION_GREATER_THAN(self.project.IUProjectVersion)){
+        [[self undoManager] disableUndoRegistration];
+
         [self.css setValue:nil forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+        
+        [[self undoManager] enableUndoRegistration];
+
     }
 }
 

@@ -1359,6 +1359,24 @@
             [code insertTag:@"width" floatFromNumber:@(arrowImage.size.width) unit:IUCSSUnitPixel];
         }
     }
+    
+    NSArray *editWidths = [carousel.css allViewports];
+    for (NSNumber *viewportNumber in editWidths) {
+        int viewport = [viewportNumber intValue];
+        
+        [code setInsertingViewPort:viewport];
+        [code setInsertingIdentifiers:@[carousel.prevID, carousel.nextID]];
+        
+        BOOL carouseldisable = [[carousel.css valueByStepForTag:IUCSSTagCarouselArrowDisable forViewport:viewport] boolValue];
+        
+        if(carouseldisable){
+            [code insertTag:@"display" string:@"none"];
+        }
+        else{
+            [code insertTag:@"display" string:@"inherit"];
+        }
+    }
+
 }
 
 #pragma mark - WP Widgets
