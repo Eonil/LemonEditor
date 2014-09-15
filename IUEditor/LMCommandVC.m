@@ -183,6 +183,9 @@
         NSAssert(0, @"not coded");
     }
     
+    //save document after build
+    [[[[NSApp mainWindow] windowController] document] saveDocument:self];
+    
 }
 
 - (BOOL)runServer:(NSError **)error{
