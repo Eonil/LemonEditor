@@ -399,7 +399,7 @@
         [code addCodeLineWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@-init.js\"></script>", sheet.name];
 
         if([sheet containClass:[IUGoogleMap class]]){
-            [code addCodeLine:@"<script src=\"http://maps.googleapis.com/maps/api/js?v=3.exp\"></script>"];
+            [code addCodeLine:@"<script src=\"http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true\"></script>"];
         }
         if([sheet containClass:[IUWebMovie class]]){
             [code addCodeLine:@"<script src=\"http://f.vimeocdn.com/js/froogaloop2.min.js\"></script>"];
@@ -1757,9 +1757,12 @@
 -(JDCode *)outputJSInitializeSource:(IUSheet *)sheet{
     
     JDCode *jsCode = [[JDCode alloc] init];
+    
+    [jsCode addCode:[self defaultInitJSCode:sheet]];
+    
     [jsCode addCodeLine:@"$(document).ready(function(){"];
     
-    JDCode *objectJSSource = [self jsCode:sheet isEdit:NO];
+    JDCode *objectJSSource = [self readyJSCode:sheet isEdit:NO];
     [jsCode addCodeWithIndent:objectJSSource];
     
     JDCode *classJSSource = [self jsOnceCodeForSheet:sheet];
@@ -1775,7 +1778,8 @@
 
     NSString *iuinitFilePath = [[NSBundle mainBundle] pathForResource:@"iuinit" ofType:@"js"];
     
-    NSString *initJSStr = [NSString stringWithContentsOfFile:iuinitFilePath encoding:NSUTF8StringEncoding error:nil];;
+    NSString *initJSStr = [NSString stringWithContentsOfFile:iuinitFilePath encoding:NSUTF8StringEncoding error:nil];
+    
     if([sheet containClass:[IUTransition class]]){
         [jsCode addJSBlockFromString:initJSStr WithIdentifier:@"IUTransition"];
     }
@@ -1787,14 +1791,31 @@
     return jsCode;
 }
 
--(JDCode *)jsCode:(IUBox *)iu isEdit:(BOOL)isEdit{
+-(JDCode *)defaultInitJSCode:(IUBox *)iu{
+    
+    JDCode *code = [[JDCode alloc] init];
+    
+    if([iu isKindOfClass:[IUGoogleMap class]]){
+        IUGoogleMap *map = (IUGoogleMap *)iu;
+        [code addCodeLineWithFormat:@"var map_%@;", map.htmlID];
+    }
+    else if ([iu isKindOfClass:[IUBox class]]) {
+        for (IUBox *child in iu.children) {
+            [code addCodeWithIndent:[self defaultInitJSCode:child]];
+        }
+        
+    }
+    return code;
+}
+
+-(JDCode *)readyJSCode:(IUBox *)iu isEdit:(BOOL)isEdit{
     JDCode *code = [[JDCode alloc] init];
     if([iu isKindOfClass:[IUCarousel class]]){
         [code addCodeLine:@"\n"];
         [code addCodeLine:@"/* IUCarousel initialize */\n"];
         [code addCodeLineWithFormat:@"initCarousel('%@')", iu.htmlID];
         for (IUBox *child in iu.children) {
-            [code addCodeWithIndent:[self jsCode:child isEdit:isEdit]];
+            [code addCodeWithIndent:[self readyJSCode:child isEdit:isEdit]];
         }
     }
     else if([iu isKindOfClass:[IUCollectionView class]]){
@@ -1816,7 +1837,6 @@
     }
     else if([iu isKindOfClass:[IUGoogleMap class]]){
         IUGoogleMap *map = (IUGoogleMap *)iu;
-        [code addCodeLine:@"\n"];
         [code addCodeLine:@"/* IUGoogleMap initialize */\n"];
         
         //style option
@@ -1855,7 +1875,7 @@
         
         
         //map
-        [code addCodeLineWithFormat:@"var map_%@ = new google.maps.Map(document.getElementById('%@'), %@_options);", map.htmlID, map.htmlID, map.htmlID];
+        [code addCodeLineWithFormat:@"map_%@ = new google.maps.Map(document.getElementById('%@'), %@_options);", map.htmlID, map.htmlID, map.htmlID];
         
         //marker
         if(map.enableMarkerIcon){
@@ -1877,11 +1897,21 @@
             [code addCodeLineWithFormat:@"google.maps.event.addListener(marker_%@, 'click', function() { infoWindow_%@.open(map_%@, marker_%@); });", map.htmlID, map.htmlID, map.htmlID, map.htmlID];
         }
         
+        //resize
+        [code addCodeLine:@"google.maps.event.addDomListener(window, \"resize\", function() {"];
+        [code increaseIndentLevelForEdit];
+        [code addCodeLineWithFormat:@"var center = new google.maps.LatLng(%@, %@);", map.latitude, map.longitude];
+        [code addCodeLineWithFormat:@"google.maps.event.trigger(map_%@, \"resize\");", map.htmlID];
+        [code addCodeLineWithFormat:@"map_%@.setCenter(center);", map.htmlID];
+        [code decreaseIndentLevelForEdit];
+        [code addCodeLine:@"});"];
+        
+        
     }
     
     else if ([iu isKindOfClass:[IUBox class]]) {
         for (IUBox *child in iu.children) {
-            [code addCodeWithIndent:[self jsCode:child isEdit:isEdit]];
+            [code addCodeWithIndent:[self readyJSCode:child isEdit:isEdit]];
         }
 
     }

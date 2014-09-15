@@ -8,6 +8,7 @@
 
 #import "IUEventVariable.h"
 #import "IUSheet.h"
+#import "IUGoogleMap.h"
 
 @interface IUEventVariable()
 
@@ -76,6 +77,7 @@
         if(visibleVariable){
             NSMutableDictionary *visibleDict = [NSMutableDictionary dictionary];
             [visibleDict setObject:obj.htmlID forKey:IUEventTagVisibleID];
+            [visibleDict setObject:obj forKey:IUEventTagVisibleIU];
             [visibleDict setObject:obj.event.eqVisible forKey:IUEventTagVisibleEquation];
             [visibleDict setObject:@(obj.event.eqVisibleDuration) forKey:IUEventTagVisibleDuration];
             [visibleDict setObject:@(obj.event.directionType) forKey:IUEventTagVisibleType];
@@ -88,6 +90,7 @@
         if(frameVariable){
             NSMutableDictionary *frameDict = [NSMutableDictionary dictionary];
             [frameDict setObject:obj.htmlID forKey:IUEventTagFrameID];
+            [frameDict setObject:obj forKey:IUEventTagFrameIU];
             [frameDict setObject:obj.event.eqFrame forKey:IUEventTagFrameEquation];
             [frameDict setObject:@(obj.event.eqFrameDuration) forKey:IUEventTagFrameDuration];
             [frameDict setObject:@(obj.event.eqFrameWidth) forKey:IUEventTagFrameWidth];
@@ -105,6 +108,24 @@
         return YES;
     }
     return NO;
+}
+
+- (JDCode *)checkForIUGoogleMap:(IUBox *)iu{
+    JDCode *code = [[JDCode alloc] init];
+   
+    NSArray *array = [[NSArray arrayWithObject:iu] arrayByAddingObjectsFromArray:iu.allChildren];
+   
+    for(IUBox *box in array){
+        if([box isKindOfClass:[IUGoogleMap class]]){
+            //redraw
+            IUGoogleMap *map = (IUGoogleMap *)box;
+            [code addCodeLineWithFormat:@"var center = new google.maps.LatLng(%@, %@);", map.latitude, map.longitude];
+            [code addCodeLineWithFormat:@"google.maps.event.trigger(map_%@, 'resize');", map.htmlID];
+            [code addCodeLineWithFormat:@"map_%@.setCenter(center);", map.htmlID];
+        }
+    }
+
+    return code;
 }
 
 
@@ -182,6 +203,7 @@
                             [innerJS addCodeLineWithFormat:@"\"%@\", 1, %@);", typeStr, reframe];
                         }
                         [innerJS addCodeLineWithFormat:@"$(\"#%@\").data(\"run%@\", 1);", visibleID, fnName];
+                        [innerJS addCode:[self checkForIUGoogleMap:[receiverDict objectForKey:IUEventTagVisibleIU]]];
                         
                         [fnCode addCodeWithIndent:innerJS];
                         [fnCode addCodeLine:@"}"];
@@ -249,6 +271,8 @@
                         else{
                             [innerJS addCodeWithFormat:@", 1, %@);", reframe];
                         }
+                        [innerJS addCode:[self checkForIUGoogleMap:[receiverDict objectForKey:IUEventTagFrameIU]]];
+
                         
                         [fnCode addCodeWithIndent:innerJS];
                         
