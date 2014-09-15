@@ -93,7 +93,7 @@
 }
 
 - (void)expandAll{
-    NSLog([self.outlineV description], nil );
+    JDTraceLog([self.outlineV description], nil );
     id item = [self.outlineV itemAtRow:1];
     [self.outlineV expandItem:item];
     item = [self.outlineV itemAtRow:3];

@@ -35,7 +35,6 @@
 }
 
 -(NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender {
-    NSLog(@"draggingEntered");
     [self setState:YES];
     return NSDragOperationEvery;
 }

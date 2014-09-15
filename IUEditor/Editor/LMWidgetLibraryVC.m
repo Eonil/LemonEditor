@@ -113,7 +113,7 @@
     IUBox *obj = [[NSClassFromString(className) alloc] initWithProject:_project options:nil];
     if (obj == nil) {
     //    NSAssert(0, @"");
-        NSLog(@"objISNil");
+        JDErrorLog(@"objISNil");
     }
     
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:obj];

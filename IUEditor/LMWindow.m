@@ -70,8 +70,14 @@
 #pragma mark - close
 
 - (void)performClose:(id)sender{
+
+    if([[(LMWC *)self.delegate document] isDocumentEdited] == NO){
+        [self close];
+        return;
+    }
     
     [closeWC setProjectName:[(LMWC *)[self windowController] projectName]];
+    
     [self setAlphaValue:0.9];
     [self setIgnoresMouseEvents:YES];
     

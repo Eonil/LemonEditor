@@ -270,7 +270,7 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
     NSData *propertyListData = [NSPropertyListSerialization dataWithPropertyList:self.metaDataDict format:NSPropertyListXMLFormat_v1_0 options:0 error:&plistError];
     if (propertyListData == nil || plistError != nil)
     {
-        NSLog(@"Could not create metadata plist data: %@", [plistError localizedDescription]);
+        JDErrorLog(@"Could not create metadata plist data: %@", [plistError localizedDescription]);
         return nil;
     }
     

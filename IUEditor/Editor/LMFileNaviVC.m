@@ -53,9 +53,6 @@
 
 #pragma mark -selection
 
--(void)selectionIndexPathsDidChange{
-    JDTraceLog( @"selection");
-}
 
 -(void)selectionDidChange:(NSDictionary*)dict{
     [self willChangeValueForKey:@"selection"];

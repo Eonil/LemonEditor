@@ -418,7 +418,7 @@
 }
 
 - (IBAction)helpMenu:(id)sender {
-    NSLog(@"this is help menu");
+    JDTraceLog(@"this is help menu");
     helpWC = [LMHelpWC sharedHelpWC];
     [helpWC showHelpWindowWithKey:@"positionProperty"];
 }

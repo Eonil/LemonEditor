@@ -163,7 +163,7 @@
             NSString *filename = [filePath lastPathComponent];
             NSImage *image = [NSImage imageNamed:filename];
             if (image) {
-                NSLog(@"%@ is already existed", filename);
+                JDDebugLog(@"%@ is already existed", filename);
             }
             
             

@@ -69,9 +69,7 @@
     }
     NSMutableDictionary *selected = [_recentDocs objectAtIndex:[selectedIndexes firstIndex]];
     selected[@"selection"] = @(YES);
-    
-//    NSLog([selectedIndexes description]);
-    
+        
 }
 - (IBAction)pressPreviewBtn:(id)sender {
     //not yet
