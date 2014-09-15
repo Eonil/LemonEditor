@@ -495,11 +495,18 @@
     }
     
     if ([cssTagDict[IUCSSTagHoverBGColorEnable] boolValue]){
-        NSString *colorStr = [cssTagDict[IUCSSTagHoverBGColor] cssBGColorString];
-        if ([colorStr length] == 0) {
-            colorStr = @"black";
+
+        NSString *outputColor = [cssTagDict[IUCSSTagHoverBGColor] cssBGColorString];
+        NSString *editorColor = [cssTagDict[IUCSSTagHoverBGColor] rgbaString];
+        if ([outputColor length] == 0) {
+            outputColor = @"black";
+            editorColor = @"black";
         }
-        [code insertTag:@"background-color" string:colorStr];
+        [code setInsertingTarget:IUTargetOutput];
+        [code insertTag:@"background-color" string:outputColor];
+        
+        [code setInsertingTarget:IUTargetEditor];
+        [code insertTag:@"background-color" string:editorColor];
     }
     
     
