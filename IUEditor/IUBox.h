@@ -107,7 +107,6 @@ typedef enum _IUOverflowType{
  IUFileName : define filename
  */
 -(id)initWithProject:(IUProject*)project options:(NSDictionary*)options;
-- (void)updateVersionControlValues;
 - (void)connectWithEditor;
 - (void)disconnectWithEditor;
 

@@ -54,6 +54,23 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     if (self) {
+        /* version control code */
+        //REVIEW : sync with project version
+        NSString *projectVersion = [aDecoder decodeObjectForKey:@"IUProjectVersion"];
+        if(projectVersion == nil || projectVersion.length ==0){
+            int IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
+            if (IUEditorVersion < 1) {
+                self.buildPath = @"$IUFileDirectory/$AppName_build";
+                self.buildResourcePath = @"$IUBuildPath/resource";
+            }
+            _IUProjectVersion = @"0.3";
+        }
+        else{
+            //REVIEW: save 할때 현재 build버전으로 바꿈
+            _IUProjectVersion = projectVersion;
+        }
+        
+        
         _identifierManager = [[IUIdentifierManager alloc] init];
         _compiler = [[IUCompiler alloc] init];
         _compiler.webTemplateFileName = @"webTemplate";
@@ -108,33 +125,11 @@
             _serverInfo = [[IUServerInfo alloc] init];
         }
 
-        /* version control code */
-        //REVIEW : sync with project version
-        NSString *projectVersion = [aDecoder decodeObjectForKey:@"IUProjectVersion"];
-        if(projectVersion == nil || projectVersion.length ==0){
-            int IUEditorVersion = [aDecoder decodeIntForKey:@"IUEditorVersion"];
-            if (IUEditorVersion < 1) {
-                self.buildPath = @"$IUFileDirectory/$AppName_build";
-                self.buildResourcePath = @"$IUBuildPath/resource";
-            }
-            _IUProjectVersion = @"0.3";
-        }
-        else{
-            //REVIEW: save 할때 현재 build버전으로 바꿈
-            _IUProjectVersion = projectVersion;
-        }
-        
-        [self updateVersionControlValues];
+      
     }
     return self;
 }
 
-- (void)updateVersionControlValues{
-    for(IUSheet *sheet in self.allDocuments){
-        [sheet updateVersionControlValues];
-    }
-    
-}
 - (id)init{
     self = [super init];
     if(self){

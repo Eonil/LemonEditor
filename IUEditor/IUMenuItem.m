@@ -50,8 +50,8 @@
     return self;
 }
 
-- (void)updateVersionControlValues{
-    [super updateVersionControlValues];
+- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
+    [super awakeAfterUsingCoder:aDecoder];
     if(IU_VERSION_GREATER_THAN(self.project.IUProjectVersion)){
         [[self undoManager] disableUndoRegistration];
 
@@ -62,6 +62,7 @@
         [[self undoManager] enableUndoRegistration];
 
     }
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{

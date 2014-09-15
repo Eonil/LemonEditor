@@ -74,18 +74,9 @@
         
         [[self undoManager] enableUndoRegistration];
 
+
     }
     return self;
-}
-
-- (void)updateVersionControlValues{
-    [[self undoManager] disableUndoRegistration];
-
-    for(IUBox *iu in self.children){
-        [iu updateVersionControlValues];
-    }
-    
-    [[self undoManager] enableUndoRegistration];
 }
 
 

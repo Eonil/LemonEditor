@@ -57,17 +57,23 @@
     
 }
 
-- (void)updateVersionControlValues{
-    [super updateVersionControlValues];
+- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
+    [super awakeAfterUsingCoder:aDecoder];
+    
     if(IU_VERSION_GREATER_THAN(self.project.IUProjectVersion)){
         [[self undoManager] disableUndoRegistration];
-
-        [self.css setValue:@(NO) forTag:IUCSSTagCarouselArrowDisable forViewport:IUCSSDefaultViewPort];
+        
+        BOOL disable = [[aDecoder decodeObjectForKey:@"disableArrowControl"] boolValue];
+        [self.css setValue:@(disable) forTag:IUCSSTagCarouselArrowDisable forViewport:IUCSSDefaultViewPort];
         
         [[self undoManager] enableUndoRegistration];
-
+        
     }
+    
+    return self;
 }
+
+
 
 - (id)copyWithZone:(NSZone *)zone{
     IUCarousel *carousel = [super copyWithZone:zone];

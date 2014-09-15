@@ -32,6 +32,7 @@
         _background = [aDecoder decodeObjectForKey:@"background"];
         [_pageContent bind:@"delegate" toObject:self withKeyPath:@"delegate" options:nil];
         
+        
         [self.undoManager enableUndoRegistration];
     }
     return self;
