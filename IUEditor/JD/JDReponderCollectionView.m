@@ -26,4 +26,8 @@
     // Drawing code here.
 }
 
+- (void)keyDown:(NSEvent *)theEvent{
+    [super keyDown:theEvent];
+    [viewController keyDown:theEvent];
+}
 @end

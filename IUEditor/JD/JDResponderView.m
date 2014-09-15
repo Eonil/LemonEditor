@@ -25,5 +25,38 @@
     
     // Drawing code here.
 }
+- (BOOL)acceptsFirstResponder{
+    return YES;
+}
+
+- (void)setViewController:(NSViewController *)newController
+{
+    if (viewController)
+    {
+        NSResponder *controllerNextResponder = [viewController nextResponder];
+        [super setNextResponder:controllerNextResponder];
+        [viewController setNextResponder:nil];
+    }
+    
+    viewController = newController;
+    
+    if (newController)
+    {
+        NSResponder *ownNextResponder = [self nextResponder];
+        [super setNextResponder: viewController];
+        [viewController setNextResponder:ownNextResponder];
+    }
+}
+
+- (void)setNextResponder:(NSResponder *)newNextResponder
+{
+    if (viewController)
+    {
+        [viewController setNextResponder:newNextResponder];
+        return;
+    }
+    
+    [super setNextResponder:newNextResponder];
+}
 
 @end

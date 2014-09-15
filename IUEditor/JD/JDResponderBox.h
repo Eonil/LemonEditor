@@ -8,12 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-@protocol JDClickBoxProtocol <NSObject>
+@protocol JDResponderBoxProtocol <NSObject>
 - (void)doubleClick:(NSEvent *)event;
 @end
 
-@interface JDClickBox : NSBox
+@interface JDResponderBox : NSBox
 
-@property IBOutlet id <JDClickBoxProtocol> delegate;
+@property IBOutlet id <JDResponderBoxProtocol> delegate;
 
 @end

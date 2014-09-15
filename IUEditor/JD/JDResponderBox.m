@@ -6,9 +6,9 @@
 //  Copyright (c) 2014년 JDLab. All rights reserved.
 //
 
-#import "JDClickBox.h"
+#import "JDResponderBox.h"
 
-@implementation JDClickBox
+@implementation JDResponderBox
 
 - (instancetype)initWithFrame:(NSRect)frame
 {
@@ -34,6 +34,15 @@
             if([self.delegate respondsToSelector:@selector(doubleClick:)]){
                 [self.delegate performSelector:@selector(doubleClick:) withObject:theEvent];
             }
+        }
+    }
+}
+- (void)keyDown:(NSEvent *)theEvent{
+    [super keyDown:theEvent];
+    if(self.delegate){
+        if([self.delegate respondsToSelector:@selector(keyDown:)]){
+            [self.delegate performSelector:@selector(keyDown:) withObject:theEvent];
+
         }
     }
 }

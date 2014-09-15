@@ -103,6 +103,8 @@
     [_prevB setEnabled:YES];
     [_nextB setAction:@selector(performNext)];
     [_prevB setAction:@selector(performPrev)];
+    
 }
+
 
 @end

@@ -8,6 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface JDReponderCollectionView : NSCollectionView
+@protocol JDReponderCollectionViewProtocol <NSObject>
+- (void)keyDown:(NSEvent *)event;
+@end
+
+@interface JDReponderCollectionView : NSCollectionView{
+    IBOutlet  NSViewController <JDReponderCollectionViewProtocol> *viewController;
+}
 
 @end
