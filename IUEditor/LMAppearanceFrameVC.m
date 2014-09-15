@@ -302,6 +302,12 @@
             }
             else{
                 [textfield setStringValue:[value stringValue]];
+                if([value floatValue] < 0){
+                    [textfield setTextColor:[NSColor redColor]];
+                }
+                else{
+                    [textfield setTextColor:[NSColor blackColor]];
+                }
             }
         }
     }
