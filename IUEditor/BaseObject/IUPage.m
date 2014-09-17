@@ -9,16 +9,16 @@
 #import "IUPage.h"
 #import "IUBackground.h"
 #import "IUPageContent.h"
+#import "IUImport.h"
+#import "IUProject.h"
 
 @implementation IUPage{
     IUPageContent *_pageContent;
-    __weak IUBackground *_background;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [super encodeWithCoder:aCoder];
     [aCoder encodeObject:_pageContent forKey:@"pageContent"];
-    [aCoder encodeObject:_background forKey:@"background"];
     [aCoder encodeFromObject:self withProperties:[IUPage properties]];
 }
 
@@ -29,7 +29,6 @@
         
         [aDecoder decodeToObject:self withProperties:[IUPage properties]];
         _pageContent = [aDecoder decodeObjectForKey:@"pageContent"];
-        _background = [aDecoder decodeObjectForKey:@"background"];
         [_pageContent bind:@"delegate" toObject:self withKeyPath:@"delegate" options:nil];
         
         
@@ -37,7 +36,12 @@
     }
     return self;
 }
-
+- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
+    self = [super awakeAfterUsingCoder:aDecoder];
+    //background
+    //_background = [aDecoder decodeObjectForKey:@"background"];
+    return self;
+}
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
@@ -57,10 +61,87 @@
         [self.css eradicateTag:IUCSSTagPercentHeight];
 
         
-        [self.undoManager enableUndoRegistration];
         self.positionType = IUPositionTypeRelative;
+        
+        IUPageLayout layout = [[options objectForKey:kIUPageLayout] intValue];
+        [self makePageLayout:layout project:project];
+        
+        [self.undoManager enableUndoRegistration];
+
+
     }
     return self;
+}
+
+- (void)makePageLayout:(IUPageLayout)layoutCode project:(IUProject *)project{
+    
+    //memory allocation
+    _pageContent = [[IUPageContent alloc] initWithProject:project options:nil];
+    _pageContent.htmlID = @"pageContent";
+    _pageContent.name = @"pageContent";
+    
+    if(layoutCode == IUPageLayoutSideBar || layoutCode == IUPageLayoutSideBar2
+       || layoutCode == IUPageLayoutSideBarOnly){
+        _sidebar = [[IUSidebar alloc] initWithProject:project options:nil];
+        _sidebar.name = @"sidebar";
+        _sidebar.prototypeClass = [project classWithName:@"sidebar"];
+
+    }
+    
+    if(layoutCode == IUPageLayoutDefault ||
+       layoutCode == IUPageLayoutSideBar ||
+       layoutCode == IUPageLayoutSideBar2){
+        
+        _header = [[IUHeader alloc] initWithProject:project options:nil];
+        _header.name = @"header";
+        _header.prototypeClass = [project classWithName:@"header"];
+        
+        _footer = [[IUFooter alloc] initWithProject:project options:nil];
+        _footer.name = @"footer";
+        _footer.prototypeClass = [project classWithName:@"footer"];
+    }
+    
+    //initialize css
+    [self initializeLayoutCSS:layoutCode];
+    
+    //순서대로 넣어야함
+    if(_header){
+        [self addIU:_header error:nil];
+    }
+    if(_sidebar){
+        [self addIU:_sidebar error:nil];
+    }
+    if(_pageContent){
+        [self addIU:_pageContent error:nil];
+    }
+    if(_footer){
+        [self addIU:_footer error:nil];
+    }
+}
+
+- (void)initializeLayoutCSS:(IUPageLayout)layoutCode{
+    
+    switch (layoutCode) {
+        case IUPageLayoutDefault:
+            //do nothing - default css 
+            break;
+        case IUPageLayoutSideBarOnly:
+            _sidebar.positionType = IUPositionTypeFloatLeft;
+            [_sidebar.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+            [_sidebar.css setValue:@(15) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+            [_sidebar.css setValue:@(YES) forTag:IUCSSTagHeightUnitIsPercent forViewport:IUCSSDefaultViewPort];
+            [_sidebar.css setValue:@(100) forTag:IUCSSTagPercentHeight forViewport:IUCSSDefaultViewPort];
+            
+            _pageContent.positionType = IUPositionTypeFloatRight;
+            [_pageContent.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+            [_pageContent.css setValue:@(85) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+            [_pageContent.css setValue:@(YES) forTag:IUCSSTagHeightUnitIsPercent forViewport:IUCSSDefaultViewPort];
+            [_pageContent.css setValue:@(100) forTag:IUCSSTagPercentHeight forViewport:IUCSSDefaultViewPort];
+            
+        default:
+            break;
+    }
+    
 }
 
 - (id)copyWithZone:(NSZone *)zone{
@@ -75,8 +156,6 @@
     page.metaImage = [_metaImage copy];
     page.extraCode = [_extraCode copy];
     page.googleCode = [_googleCode copy];
-    
-    [page setBackground:_background];
     
     [self.delegate enableUpdateAll:self];
     [[self undoManager] enableUndoRegistration];
@@ -120,22 +199,12 @@
     return NO;
 }
 
-- (NSMutableArray *)allIdentifierChildren{
-    NSMutableArray *array =  [self allChildren];
-    [array removeObject:_background];
-    [array removeObjectsInArray:[_background allChildren]];
-    return array;
-}
-
-
--(IUBackground*)background{
-    return _background;
-}
 
 -(IUPageContent *)pageContent{
     return _pageContent;
 }
 
+/*
 -(void)setBackground:(IUBackground *)background{
     NSAssert(background.children, @"no children");
     NSAssert(background, @"no background"); // background can't be nil
@@ -170,30 +239,18 @@
     else {
 //        [self insertIU:background atIndex:0 error:nil];
     }
-    _background = background;
 //    _background.parent = self;
     _background.delegate = self.delegate;
     _pageContent.delegate = self.delegate;
     
 
 }
+ */
 
 - (void)setDelegate:(id<IUSourceDelegate>)delegate{
     [super setDelegate:delegate];
-    if(_background){
-        _background.delegate = delegate;
-    }
     if(_pageContent){
         _pageContent.delegate = delegate;
-    }
-}
-
-- (NSArray*)children{
-    if (_pageContent && _background) {
-        return @[_pageContent, _background];
-    }
-    else {
-        return nil;
     }
 }
 

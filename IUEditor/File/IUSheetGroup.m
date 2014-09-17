@@ -69,4 +69,12 @@
     [_children insertObject:sheet atIndex:newIndex];
 }
 
+- (id)sheetWithHtmlID:(NSString *)identifier{
+    for(IUBox *child in _children){
+        if([child.htmlID isEqualToString:identifier]){
+            return child;
+        }
+    }
+    return nil;
+}
 @end

@@ -628,32 +628,6 @@
         }
         [code addCodeLine:@"</div>"];
     }
-#pragma mark IUPage
-    else if ([iu isKindOfClass:[IUPage class]]) {
-        IUPage *page = (IUPage*)iu;
-        if (page.background) {
-            [code addCodeLineWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:NO]];
-            for (IUBox *obj in page.background.children) {
-                [code addCodeWithIndent:[self outputHTML:obj]];
-            }
-            if (iu.children.count) {
-                for (IUBox *child in iu.children) {
-                    if (child == page.background) {
-                        continue;
-                    }
-                    JDCode *childCode = [self outputHTML:child];
-                    if (childCode) {
-                        [code addCodeWithIndent:childCode];
-                    }
-                }
-            }
-            [code addCodeLine:@"</div>"];
-        }
-        else {
-            [code addCodeWithIndent:[self outputHTMLAsBox:iu option:nil]];
-
-        }
-    }
 #pragma mark IUMenuBar
     else if([iu isKindOfClass:[IUMenuBar class]]){
         IUMenuBar *menuBar =(IUMenuBar *)iu;
@@ -1032,29 +1006,8 @@
     }
 
     JDCode *code = [[JDCode alloc] init];
-#pragma mark IUPage
-    if ([iu isKindOfClass:[IUPage class]]) {
-        IUPage *page = (IUPage*)iu;
-        if (page.background) {
-            [code addCodeLineWithFormat:@"<div %@ >", [self HTMLAttributes:iu option:nil isEdit:YES]];
-            for (IUBox *obj in page.background.children) {
-                [code addCodeWithIndent:[self editorHTML:obj]];
-            }
-            if (iu.children.count) {
-                for (IUBox *child in iu.children) {
-                    if (child == page.background) {
-                        continue;
-                    }
-                    [code addCodeWithIndent:[self editorHTML:child]];
-                }
-            }
-            [code addCodeLine:@"</div>"];
-        }
-        else {
-            [code addCodeWithIndent:[self editorHTMLAsBOX:iu]];
-        }
-    }
-    else if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol) ]){
+
+    if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol) ]){
         IUBox <IUSampleHTMLProtocol> *sampleProtocolIU = (id)iu;
         if ([sampleProtocolIU respondsToSelector:@selector(sampleInnerHTML)]) {
             NSString *sampleInnerHTML = [sampleProtocolIU sampleInnerHTML];

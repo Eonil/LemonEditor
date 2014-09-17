@@ -16,9 +16,60 @@
     self = [super initWithProject:project options:options];
     if(self){
         _referenceImports = [NSMutableArray array];
+        
+        [self initializeDefaultCSSWithProject:project option:options];
     }
     return self;
 }
+
+- (void)initializeDefaultCSSWithProject:(IUProject *)project option:(NSDictionary *)option{
+    NSString *type = [option objectForKey:kClassType];
+    
+    
+    IUBox *titleBox = [[IUBox alloc] initWithProject:project options:option];
+    [titleBox.css setValue:@(140) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+    [titleBox.css setValue:@(34) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
+    [titleBox.css setValue:@(43) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
+    [titleBox.css setValue:@(24) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
+    [titleBox.css setValue:@(IUAlignCenter) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
+    [titleBox.css setValue:[NSColor rgbColorRed:153 green:153 blue:153 alpha:1] forTag:IUCSSTagFontColor forViewport:IUCSSDefaultViewPort];
+    [titleBox.css setValue:nil forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
+    [titleBox.css setValue:@"Helvetica" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
+    
+    titleBox.positionType = IUPositionTypeAbsolute;
+    titleBox.enableCenter = YES;
+    
+    
+    if([type isEqualToString:IUClassHeader]){
+        [self.css eradicateTag:IUCSSTagPixelWidth];
+        [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(120) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:[NSColor rgbColorRed:50 green:50 blue:50 alpha:1] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
+        
+       
+        titleBox.textType = IUTextTypeH1;
+        titleBox.text = @"Header Area";
+        
+        [self addIU:titleBox error:nil];
+        
+    }
+    else if([type isEqualToString:IUClassFooter]){
+        [self.css eradicateTag:IUCSSTagPixelWidth];
+        [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(120) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
+        
+        titleBox.text = @"Footer Area";
+        [self addIU:titleBox error:nil];
+
+        
+    }
+    else if([type isEqualToString:IUClassSidebar]){
+        
+    }
+}
+
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self =  [super initWithCoder:aDecoder];
     if(self){

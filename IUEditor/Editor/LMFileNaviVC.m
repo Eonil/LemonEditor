@@ -17,6 +17,8 @@
 #import "IUWordpressProject.h"
 #import "LMWordpressCreateFileWC.h"
 
+#import "LMNewPageWC.h"
+
 @interface LMFileNaviVC ()
 @property (weak) IBOutlet NSOutlineView *outlineV;
 @end
@@ -28,6 +30,7 @@
     NSArray *_draggingIndexPaths;
     IUSheet  *_draggingItem;
     LMWordpressCreateFileWC *wpWC;
+    LMNewPageWC *pageWC;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -88,14 +91,8 @@
         
         IUSheetGroup *doc = (IUSheetGroup*) item.representedObject;
         if ([doc isKindOfClass:[IUSheetGroup class]]) {
-            
-            if ([doc.name isEqualToString:IUBackgroundGroupName]) {
-                folder = [outlineView makeViewWithIdentifier:@"folderNoAdd" owner:self];
-            }
-            else{
-                folder = [outlineView makeViewWithIdentifier:@"folder" owner:self];
+            folder = [outlineView makeViewWithIdentifier:@"folder" owner:self];
 
-            }
         }
     
         [folder.textField setStringValue:doc.name];
@@ -109,9 +106,6 @@
             IUSheet *node = [item representedObject];
             if([node.group.name isEqualToString:IUPageGroupName]){
                 cellIdentifier = @"pageFile";
-            }
-            else if([node.group.name isEqualToString:IUBackgroundGroupName]){
-                cellIdentifier = @"backgroundFile";
             }
             else if ([node.group.name isEqualToString:IUClassGroupName]){
                 cellIdentifier = @"classFile";
@@ -243,18 +237,17 @@
 
 #pragma mark - cell specivfic action (add, name editing)
 
-- (void)makeNewSheet:(id)sender{
+- (void)makeNewSheet:(id)sender layoutCode:(IUPageLayout)layoutCode{
     NSTableCellView *cellView = (NSTableCellView *)[sender superview];
     NSString *groupName =  cellView.textField.stringValue;
     IUSheet *newDoc;
     [[self.project identifierManager] resetUnconfirmedIUs];
     if([groupName isEqualToString:IUPageGroupName]){
         
-        newDoc = [[IUPage alloc] initWithProject:self.project options:nil];
+        NSDictionary *options = @{kIUPageLayout: @(layoutCode)};
+        newDoc = [[IUPage alloc] initWithProject:self.project options:options];
         [self.project addSheet:newDoc toSheetGroup:self.project.pageGroup];
         [self.project.identifierManager registerIUs:@[newDoc]];
-        IUBackground *defaultBG = self.project.backgroundSheets[0];
-        [(IUPage*)newDoc setBackground:defaultBG];
     }
     else if([groupName isEqualToString:IUClassGroupName]){
         newDoc = [[IUClass alloc] initWithProject:self.project options:nil];
@@ -274,19 +267,39 @@
 }
 
 - (IBAction)performAddSheet:(id)sender{
-    if ([self.project isKindOfClass:[IUWordpressProject class]]) {
-        wpWC = [[LMWordpressCreateFileWC alloc] initWithWindowNibName:@"LMWordpressCreateFileWC"];
-        wpWC.project = (IUWordpressProject*) self.project;
-        wpWC.sheetController = self.documentController;
-        [self.view.window beginSheet:wpWC.window completionHandler:^(NSModalResponse returnCode) {
-            if (returnCode == NSModalResponseContinue) {
-                [self makeNewSheet:sender];
+    
+    if(pageWC == nil){
+        pageWC = [[LMNewPageWC alloc] initWithWindowNibName:[LMNewPageWC class].className];
+    }
+    
+    [self.view.window beginSheet:pageWC.window completionHandler:^(NSModalResponse returnCode) {
+        if(returnCode == NSModalResponseCancel){
+            return ;
+        }
+        
+        IUPageLayout layoutCode = (int)returnCode - NSModalResponseOK;
+        
+        
+        if ([self.project isKindOfClass:[IUWordpressProject class]]) {
+            if(wpWC == nil){
+                wpWC = [[LMWordpressCreateFileWC alloc] initWithWindowNibName:@"LMWordpressCreateFileWC"];
             }
-        }];
-    }
-    else {
-        [self makeNewSheet:sender];
-    }
+            wpWC.project = (IUWordpressProject*) self.project;
+            wpWC.sheetController = self.documentController;
+            [self.view.window beginSheet:wpWC.window completionHandler:^(NSModalResponse returnCode) {
+                if (returnCode == NSModalResponseContinue) {
+                    [self makeNewSheet:sender layoutCode:layoutCode];
+                }
+            }];
+        }
+        else {
+            [self makeNewSheet:sender layoutCode:layoutCode];
+        }
+        
+    }];
+    
+    
+  
 
 }
 

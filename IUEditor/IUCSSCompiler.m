@@ -12,7 +12,6 @@
 #import "IUProject.h"
 #import "IUSection.h"
 
-#import "IUHeader.h"
 #import "PGPageLinkSet.h"
 #import "IUMenuBar.h"
 #import "IUMenuItem.h"

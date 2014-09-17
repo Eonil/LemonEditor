@@ -28,6 +28,10 @@
     if(self){
         self.positionType = IUPositionTypeRelative;
         [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+        
+        
         
         IUSection *section = [[IUSection alloc] initWithProject:project options:options];
         [section.css setValue:nil forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
@@ -87,9 +91,6 @@
     return NO;
 }
 -(BOOL)hasY{
-    return NO;
-}
--(BOOL)hasWidth{
     return NO;
 }
 -(BOOL)hasHeight{

@@ -103,8 +103,6 @@
         fileName = @"_404";
     }
     IUPage *newSheet = [[IUPage alloc] initWithProject:self.project options:@{IUFileName: fileName}];
-    IUBackground *defaultBG = self.project.backgroundSheets[0];
-    [newSheet setBackground:defaultBG];
     
     [[self.project identifierManager] resetUnconfirmedIUs];
     [self.project addSheet:newSheet toSheetGroup:self.project.pageGroup];

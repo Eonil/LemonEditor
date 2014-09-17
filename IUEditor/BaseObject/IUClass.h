@@ -8,6 +8,11 @@
 
 #import "IUSheet.h"
 
+static NSString *kClassType = @"classType";
+static NSString *IUClassHeader = @"headerClass";
+static NSString *IUClassFooter = @"footerClass";
+static NSString *IUClassSidebar = @"sidebarClass";
+
 @class IUImport;
 
 @interface IUClass : IUSheet

@@ -24,6 +24,9 @@
 
 @end
 
+@interface JDPathTransFormer : NSValueTransformer
+
+@end
 
 @interface JDNameTransformer : NSValueTransformer
 

@@ -70,6 +70,27 @@
 
 @end
 
+@implementation JDPathTransFormer
+
++ (Class)transformedValueClass
+{
+    return [NSString self];
+}
+
++ (BOOL)allowsReverseTransformation
+{
+    return NO;
+}
+
+- (id)transformedValue:(id)beforeObject
+{
+    if (beforeObject == nil) return nil;
+    id resourcePath = [[NSBundle mainBundle] resourcePath];
+    return [resourcePath stringByAppendingPathComponent:beforeObject];
+}
+
+@end
+
 
 @implementation JDNilToEmptyStringTransformer
 

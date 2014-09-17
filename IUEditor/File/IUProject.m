@@ -38,7 +38,6 @@
     [encoder encodeObject:self.buildPath forKey:@"_buildPath"];
     [encoder encodeObject:self.buildResourcePath forKey:@"_buildResourcePath"];
     [encoder encodeObject:_pageGroup forKey:@"_pageGroup"];
-    [encoder encodeObject:_backgroundGroup forKey:@"_backgroundGroup"];
     [encoder encodeObject:_classGroup forKey:@"_classGroup"];
     [encoder encodeObject:_resourceGroup forKey:@"_resourceGroup"];
     [encoder encodeObject:_name forKey:@"_name"];
@@ -66,6 +65,10 @@
             _IUProjectVersion = @"0.3";
         }
         else{
+            if(IU_VERSION_GREATER_THAN(projectVersion)){
+                [self makeDefaultClasses];
+            }
+            
             //REVIEW: save 할때 현재 build버전으로 바꿈
             _IUProjectVersion = projectVersion;
         }
@@ -90,7 +93,6 @@
         }
         */
         
-        _backgroundGroup = [aDecoder decodeObjectForKey:@"_backgroundGroup"];
         _classGroup = [aDecoder decodeObjectForKey:@"_classGroup"];
         _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _resourceGroup = [aDecoder decodeObjectForKey:@"_resourceGroup"];
@@ -108,9 +110,6 @@
         }
         if ([[_classGroup.name lowercaseString] isEqualToString:@"classes"]) {
             _classGroup.name = IUClassGroupName;
-        }
-        if ([[_backgroundGroup.name lowercaseString] isEqualToString:@"backgrounds"]) {
-            _backgroundGroup.name = IUBackgroundGroupName;
         }
         
         //TODO:  css,js 파일은 내부에서그냥카피함. 따로 나중에 추가기능을 allow할때까지는 resource group으로 관리 안함.
@@ -172,10 +171,7 @@
     
     _pageGroup = [project.pageGroup copy];
     _pageGroup.project = self;
-    
-    _backgroundGroup = [project.backgroundGroup copy];
-    _backgroundGroup.project = self;
-    
+        
     _classGroup = [project.classGroup copy];
     _classGroup.project = self;
 
@@ -232,21 +228,13 @@
     _pageGroup.name = IUPageGroupName;
     _pageGroup.project = self;
     
-    _backgroundGroup = [[IUSheetGroup alloc] init];
-    _backgroundGroup.name = IUBackgroundGroupName;
-    _backgroundGroup.project = self;
-    
     _classGroup = [[IUSheetGroup alloc] init];
     _classGroup.name = IUClassGroupName;
     _classGroup.project = self;
     
-    IUBackground *bg = [[IUBackground alloc] initWithProject:self options:nil];
-    bg.name = @"background";
-    bg.htmlID = @"background";
-    [self addSheet:bg toSheetGroup:_backgroundGroup];
+    [self makeDefaultClasses];
     
     IUPage *pg = [[IUPage alloc] initWithProject:self options:nil];
-    [pg setBackground:bg];
     pg.name = @"index";
     pg.htmlID = @"index";
     [self addSheet:pg toSheetGroup:_pageGroup];
@@ -268,6 +256,27 @@
     [[NSFileManager defaultManager] createDirectoryAtPath:self.absoluteBuildPath withIntermediateDirectories:YES attributes:nil error:nil];
     
     return self;
+}
+
+- (void)makeDefaultClasses{
+    NSDictionary *headerDict = @{kClassType: IUClassHeader};
+    IUClass *header = [[IUClass alloc] initWithProject:self options:headerDict];
+    header.name = @"header";
+    header.htmlID = @"header";
+    [self addSheet:header toSheetGroup:_classGroup];
+    
+    NSDictionary *footerDict = @{kClassType: IUClassFooter};
+    IUClass *footer = [[IUClass alloc] initWithProject:self options:footerDict];
+    footer.name = @"footer";
+    footer.htmlID = @"footer";
+    [self addSheet:footer toSheetGroup:_classGroup];
+    
+    NSDictionary *sidebarDict = @{kClassType: IUClassSidebar};
+    IUClass *sidebar = [[IUClass alloc] initWithProject:self options:sidebarDict];
+    sidebar.name = @"sidebar";
+    sidebar.htmlID = @"sidebar";
+    [self addSheet:sidebar toSheetGroup:_classGroup];
+    
 }
 
 
@@ -644,7 +653,7 @@
 }
 
 - (NSArray *)childrenFiles{
-    return @[_pageGroup, _backgroundGroup, _classGroup, _resourceGroup];
+    return @[_pageGroup, _classGroup, _resourceGroup];
 }
 
 - (IUResourceGroup*)resourceNode{
@@ -763,7 +772,6 @@
 - (NSArray*)allDocuments{
     NSMutableArray *array = [NSMutableArray array];
     [array addObjectsFromArray:self.pageSheets];
-    [array addObjectsFromArray:self.backgroundSheets];
     [array addObjectsFromArray:self.classSheets];
     return array;
 }
@@ -772,11 +780,11 @@
     NSAssert(_pageGroup, @"pg");
     return _pageGroup.childrenFiles;
 }
-- (NSArray*)backgroundSheets{
-    return _backgroundGroup.childrenFiles;
-}
 - (NSArray*)classSheets{
     return _classGroup.childrenFiles;
+}
+- (IUClass *)classWithName:(NSString *)name{
+    return [_classGroup sheetWithHtmlID:name];
 }
 
 - (BOOL)runnable{
@@ -798,9 +806,6 @@
 - (IUSheetGroup*)pageGroup{
     return _pageGroup;
 }
-- (IUSheetGroup*)backgroundGroup{
-    return _backgroundGroup;
-}
 - (IUSheetGroup*)classGroup{
     return _classGroup;
 }
@@ -812,11 +817,6 @@
     if([sheetGroup isEqualTo:_pageGroup]){
         [self willChangeValueForKey:@"pageGroup"];
         [self willChangeValueForKey:@"pageSheets"];
-
-    }
-    else if([sheetGroup isEqualTo:_backgroundGroup]){
-        [self willChangeValueForKey:@"backgroundGroup"];
-        [self willChangeValueForKey:@"backgroundSheets"];
 
     }
     else if([sheetGroup isEqualTo:_classGroup]){
@@ -832,11 +832,6 @@
         [self didChangeValueForKey:@"pageSheets"];
 
     }
-    else if([sheetGroup isEqualTo:_backgroundGroup]){
-        [self didChangeValueForKey:@"backgroundGroup"];
-        [self didChangeValueForKey:@"backgroundSheets"];
-
-    }
     else if([sheetGroup isEqualTo:_classGroup]){
         [self didChangeValueForKey:@"classGroup"];
         [self didChangeValueForKey:@"classSheets"];
@@ -850,11 +845,6 @@
         [self willChangeValueForKey:@"pageSheets"];
         
     }
-    else if([sheetGroup isEqualTo:_backgroundGroup]){
-        [self willChangeValueForKey:@"backgroundGroup"];
-        [self willChangeValueForKey:@"backgroundSheets"];
-        
-    }
     else if([sheetGroup isEqualTo:_classGroup]){
         [self willChangeValueForKey:@"classGroup"];
         [self willChangeValueForKey:@"classSheets"];
@@ -865,11 +855,6 @@
     if([sheetGroup isEqualTo:_pageGroup]){
         [self didChangeValueForKey:@"pageGroup"];
         [self didChangeValueForKey:@"pageSheets"];
-        
-    }
-    else if([sheetGroup isEqualTo:_backgroundGroup]){
-        [self didChangeValueForKey:@"backgroundGroup"];
-        [self didChangeValueForKey:@"backgroundSheets"];
         
     }
     else if([sheetGroup isEqualTo:_classGroup]){

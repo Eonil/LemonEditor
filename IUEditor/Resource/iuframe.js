@@ -27,6 +27,18 @@ function resizeCollection(){
 	});
 }
 
+function resizeSideBar(){
+	var windowHeight =  $(window).height();
+	var headerHeight = $('.IUHeader').height();
+	var footerHeight = $('.IUFooter').height();
+	var sideBarHeight=windowHeight-headerHeight-footerHeight;
+	
+	$('.IUSideBar').each(function(){
+		$(this).css('height', sideBarHeight+'px');
+		
+	});
+}
+
 function reframeCenterIU(iu, isAlreadyChecked){
 	var ius = [];
 	if(isAlreadyChecked == true){
@@ -93,6 +105,7 @@ $(window).resize(function(){
 	resizePageLinkSet();
 	relocateScrollAnimation();
 	makefullSizeSection();
+	resizeSideBar();
 
 });
 

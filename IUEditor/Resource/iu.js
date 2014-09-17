@@ -271,8 +271,6 @@ function resizeCollection(){
 	});
 }
 
-$(window).resize(function(){
-});
 
 $(window).scroll(function(){
     if (typeof isEditor != 'undefined' && isEditor == true){

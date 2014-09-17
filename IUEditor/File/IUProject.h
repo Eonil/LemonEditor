@@ -13,6 +13,8 @@
 #import "IUFileProtocol.h"
 #import "IUServerInfo.h"
 
+@class IUClass;
+
 typedef enum _IUGitType{
     IUGitTypeNone = 0,
     IUGitTypeSource = 1,
@@ -51,13 +53,11 @@ static NSString *IUCSSResourceGroupName = @"css";
 
 //iupage groupname
 static NSString *IUPageGroupName = @"page";
-static NSString *IUBackgroundGroupName = @"background";
 static NSString *IUClassGroupName = @"class";
 
 
 @interface IUProject : NSObject <IUFile, IUResourcePathProtocol, NSCoding, NSFileManagerDelegate>{
     IUSheetGroup *_pageGroup;
-    IUSheetGroup *_backgroundGroup;
     IUSheetGroup *_classGroup;
     IUResourceGroup *_resourceGroup;
     IUServerInfo *_serverInfo;
@@ -133,8 +133,8 @@ static NSString *IUClassGroupName = @"class";
 
 - (NSArray*)allDocuments;
 - (NSArray*)pageSheets;
-- (NSArray*)backgroundSheets;
 - (NSArray*)classSheets;
+- (IUClass *)classWithName:(NSString *)name;
 
 /* get all IU in project */
 - (NSSet*)allIUs;
@@ -143,7 +143,6 @@ static NSString *IUClassGroupName = @"class";
 
 // return groups
 - (IUSheetGroup*)pageGroup;
-- (IUSheetGroup*)backgroundGroup;
 - (IUSheetGroup*)classGroup;
 - (IUResourceGroup *)resourceGroup;
 

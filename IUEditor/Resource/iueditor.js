@@ -117,7 +117,8 @@ function resizePageContentHeightEditor(windowHeight){
 	if ($('.IUPageContent')){
 		//make min height of page content
 		var headerHeight = $('.IUHeader').height();
-		var minHeight=windowHeight-headerHeight;
+		var footerHeight = $('.IUFooter').height();
+		var minHeight=windowHeight-headerHeight-footerHeight;
 		$('.IUPageContent').children().each(function(){
 			
 			var newValue
@@ -142,14 +143,14 @@ function resizePageContentHeightEditor(windowHeight){
         
         
 
-		if(minHeight+headerHeight > 50000){
+		if(minHeight+headerHeight+footerHeight > 50000){
 			minHeight = 50000-headerHeight;
 		}
 			
 		$('.IUPageContent').css('height', minHeight+'px');
 		console.log('pagecontentminheight :' + minHeight);
         
-		var pageHeight = minHeight+headerHeight;
+		var pageHeight = minHeight+headerHeight+footerHeight;
         
 		if (typeof console.resizePageContentHeightFinished != 'undefined'){
 			console.resizePageContentHeightFinished(pageHeight, minHeight);
@@ -260,7 +261,8 @@ $(document).ready(function(){
 	remakeCollection();
 	reframeCenter();
 	resizePageLinkSet();
-	getIUUpdatedFrameThread();            
+	getIUUpdatedFrameThread();     
+	resizeSideBar();       
 	console.log("endof : iueditor.js");
 
 });

@@ -77,28 +77,19 @@
     _pageGroup.name = IUPageGroupName;
     _pageGroup.project = self;
     
-    _backgroundGroup = [[IUSheetGroup alloc] init];
-    _backgroundGroup.name = IUBackgroundGroupName;
-    _backgroundGroup.project = self;
     
     _classGroup = [[IUSheetGroup alloc] init];
     _classGroup.name = IUClassGroupName;
     _classGroup.project = self;
     
-    IUBackground *bg = [[IUBackground alloc] initWithProject:self options:nil];
-    [bg WPInitialize];
-    [self addSheet:bg toSheetGroup:_backgroundGroup];
-    
     
     IUPage *home = [[IUPage alloc] initWithProject:self options:nil];
-    [home setBackground:bg];
     [home WPInitializeAsHome];
     home.name = @"home";
     home.htmlID = @"home";
     [self addSheet:home toSheetGroup:_pageGroup];
     
     IUPage *index = [[IUPage alloc] initWithProject:self options:nil];
-    [index setBackground:bg];
     [index WPInitializeAsIndex];
     index.name = @"index";
     index.htmlID = @"index";
@@ -106,7 +97,6 @@
 
 
     IUPage *_404 = [[IUPage alloc] initWithProject:self options:nil];
-    [_404 setBackground:bg];
     [_404 WPInitializeAs404];
     _404.name = @"_404";
     _404.htmlID = @"_404";

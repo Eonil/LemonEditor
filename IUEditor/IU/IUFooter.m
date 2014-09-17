@@ -1,14 +1,14 @@
 //
-//  IUHeader.m
+//  IUFooter.m
 //  IUEditor
 //
-//  Created by JD on 3/31/14.
-//  Copyright (c) 2014 JDLab. All rights reserved.
+//  Created by seungmi on 2014. 9. 17..
+//  Copyright (c) 2014년 JDLab. All rights reserved.
 //
 
-#import "IUHeader.h"
+#import "IUFooter.h"
 
-@implementation IUHeader
+@implementation IUFooter
 
 -(id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
@@ -67,4 +67,5 @@
 - (BOOL)canCopy{
     return NO;
 }
+
 @end
