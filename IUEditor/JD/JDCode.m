@@ -168,4 +168,14 @@
     [string appendString:endString];
 }
 
+- (void)wrapChildTextWithStartString:(NSString*)startString endString:(NSString*)endString{
+    NSRange startTagRange = [string rangeOfString:@">"];
+    NSInteger startIndex = startTagRange.location + startTagRange.length;
+    [string insertString:startString atIndex:startIndex];
+    
+    NSRange endTagRange = [string rangeOfString:@"<" options:NSBackwardsSearch];
+    NSInteger endIndex = endTagRange.location;
+    [string insertString:endString atIndex:endIndex];
+}
+
 @end

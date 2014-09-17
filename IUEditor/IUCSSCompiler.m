@@ -447,10 +447,41 @@
             func(self, selector, code, iu);
         }
     }
+    
+    [self updateLinkCSSCode:code asIUBox:iu];
+
 
     return code;
 }
 
+
+- (BOOL)hasLink:(IUBox *)iu{
+    if([iu isKindOfClass:[PGPageLinkSet class]]
+       || [iu isKindOfClass:[IUMenuBar class]]
+       || [iu isKindOfClass:[IUMenuItem class]]){
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)updateLinkCSSCode:(IUCSSCode *)code asIUBox:(IUBox *)iu{
+    
+    //REVIEW: a tag는 밑으로 들어감. 상위에 있을 경우에 %사이즈를 먹어버림.
+    //밑에 child 혹은 p tag 가 없을 경우에는 a tag의 사이즈가 0이 되기 때문에 size를 만들어줌
+
+    if(iu.link && [self hasLink:iu] && iu.children.count==0 ){
+        if(iu.text == nil || iu.text.length ==0){
+            [code setInsertingIdentifier:[iu.cssClass stringByAppendingString:@" a"]];
+            [code setInsertingTarget:IUTargetBoth];
+            
+            [code insertTag:@"display" string:@"block"];
+            [code insertTag:@"width" string:@"100%"];
+            [code insertTag:@"height" string:@"100%"];
+        }
+    }
+    
+}
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu {
     NSArray *editWidths = [_iu.css allViewports];

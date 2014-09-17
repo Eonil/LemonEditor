@@ -894,7 +894,8 @@
 #pragma mark - link
     if (iu.link && [self hasLink:iu]) {
         NSString *linkStr = [self linkHeaderString:iu];
-        [code wrapTextWithStartString:linkStr endString:@"</a>"];
+        //REVIEW: a tag는 밑으로 들어감. 상위에 있을 경우에 %사이즈를 먹어버림.
+        [code wrapChildTextWithStartString:linkStr endString:@"</a>"];
     }
     return code;
     
