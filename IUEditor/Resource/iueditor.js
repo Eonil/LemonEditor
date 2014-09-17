@@ -262,7 +262,6 @@ $(document).ready(function(){
 	reframeCenter();
 	resizePageLinkSet();
 	getIUUpdatedFrameThread();     
-	resizeSideBar();       
 	console.log("endof : iueditor.js");
 
 });

@@ -1435,6 +1435,12 @@
             }
         }
     }
+#pragma mark IUSidebar
+    else if([iu isKindOfClass:[IUSidebar class]]){
+        IUSidebar *sidebar  = (IUSidebar *)iu;
+        [retString appendFormat:@"sidebarType=\"%d\"", sidebar.type];
+        
+    }
 #pragma mark IUSection
     else if([iu isKindOfClass:[IUSection class]]){
         IUSection *section = (IUSection *)iu;

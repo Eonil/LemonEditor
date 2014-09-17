@@ -29,14 +29,45 @@ function resizeCollection(){
 
 function resizeSideBar(){
 	var windowHeight =  $(window).height();
+	var documentHeight = $( document ).height();
+	var height;
+	if(windowHeight > documentHeight){
+		height = windowHeight;
+	}
+	else{
+		height = documentHeight;
+	}
+	
 	var headerHeight = $('.IUHeader').height();
 	var footerHeight = $('.IUFooter').height();
-	var sideBarHeight=windowHeight-headerHeight-footerHeight;
 	
-	$('.IUSideBar').each(function(){
+	$('.IUSidebar').each(function(){
+		var type = $(this).attr('sidebarType');
+		var sideBarHeight;
+		if(type==0){
+			sideBarHeight = height;
+		}
+		else{
+			sideBarHeight = height-headerHeight-footerHeight;
+		}
 		$(this).css('height', sideBarHeight+'px');
-		
+		console.log('sidebar height:'+sideBarHeight);
 	});
+}
+
+function makeBottomLocation(){
+	var windowHeight =  $(window).height();
+	var footerHeight = $('.IUFooter').height();
+	var footerTop =  $('.IUFooter').position().top;
+	var footerBottom = footerTop + footerHeight;
+	if(footerBottom < windowHeight){
+		$('.IUFooter').css('bottom','0px');
+		$('.IUFooter').css('position','fixed');
+	}
+	else{
+		$('.IUFooter').css('bottom','');
+		$('.IUFooter').css('position','');
+	}
 }
 
 function reframeCenterIU(iu, isAlreadyChecked){
@@ -104,13 +135,14 @@ $(window).resize(function(){
 	reframeCenter();
 	resizePageLinkSet();
 	relocateScrollAnimation();
-	makefullSizeSection();
 	resizeSideBar();
+	makeBottomLocation();
+	makefullSizeSection();
 
 });
 
 $(document).ready(function(){
-	console.log("ready : iuframe.js");
+    console.log("ready : iuframe.js");
 });
 
 

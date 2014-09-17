@@ -237,23 +237,15 @@
 
 #pragma mark - cell specivfic action (add, name editing)
 
-- (void)makeNewSheet:(id)sender layoutCode:(IUPageLayout)layoutCode{
-    NSTableCellView *cellView = (NSTableCellView *)[sender superview];
-    NSString *groupName =  cellView.textField.stringValue;
-    IUSheet *newDoc;
+- (void)makeNewPageWithlayoutCode:(IUPageLayout)layoutCode{
+ 
     [[self.project identifierManager] resetUnconfirmedIUs];
-    if([groupName isEqualToString:IUPageGroupName]){
-        
-        NSDictionary *options = @{kIUPageLayout: @(layoutCode)};
-        newDoc = [[IUPage alloc] initWithProject:self.project options:options];
-        [self.project addSheet:newDoc toSheetGroup:self.project.pageGroup];
-        [self.project.identifierManager registerIUs:@[newDoc]];
-    }
-    else if([groupName isEqualToString:IUClassGroupName]){
-        newDoc = [[IUClass alloc] initWithProject:self.project options:nil];
-        [self.project addSheet:newDoc toSheetGroup:self.project.classGroup];
-        [self.project.identifierManager registerIUs:@[newDoc]];
-    }
+    
+    NSDictionary *options = @{kIUPageLayout: @(layoutCode)};
+    IUPage *newDoc = [[IUPage alloc] initWithProject:self.project options:options];
+    [self.project addSheet:newDoc toSheetGroup:self.project.pageGroup];
+    [self.project.identifierManager registerIUs:@[newDoc]];
+    
     
     if(newDoc){
         [self.documentController rearrangeObjects];
@@ -266,41 +258,67 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType:IUNotificationStructureAdding, IUNotificationStructureChangedIU:newDoc}];
 }
 
+
+- (void)makeNewClass{
+    
+    [[self.project identifierManager] resetUnconfirmedIUs];
+
+    IUClass *newDoc = [[IUClass alloc] initWithProject:self.project options:nil];
+    [self.project addSheet:newDoc toSheetGroup:self.project.classGroup];
+    [self.project.identifierManager registerIUs:@[newDoc]];
+    
+    if(newDoc){
+        [self.documentController rearrangeObjects];
+        [self.documentController setSelectedObject:newDoc];
+    }
+    [newDoc connectWithEditor];
+    [newDoc setIsConnectedWithEditor];
+    [[self.project identifierManager] confirm];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationStructureDidChange object:self.project userInfo:@{IUNotificationStructureChangeType:IUNotificationStructureAdding, IUNotificationStructureChangedIU:newDoc}];
+}
 - (IBAction)performAddSheet:(id)sender{
     
-    if(pageWC == nil){
-        pageWC = [[LMNewPageWC alloc] initWithWindowNibName:[LMNewPageWC class].className];
+    NSTableCellView *cellView = (NSTableCellView *)[sender superview];
+    NSString *groupName =  cellView.textField.stringValue;
+    [[self.project identifierManager] resetUnconfirmedIUs];
+    if([groupName isEqualToString:IUPageGroupName]){
+        
+        if(pageWC == nil){
+            pageWC = [[LMNewPageWC alloc] initWithWindowNibName:[LMNewPageWC class].className];
+        }
+        
+        [self.view.window beginSheet:pageWC.window completionHandler:^(NSModalResponse returnCode) {
+            if(returnCode == NSModalResponseCancel){
+                return ;
+            }
+            
+            IUPageLayout layoutCode = (int)returnCode - NSModalResponseOK;
+            
+            
+            if ([self.project isKindOfClass:[IUWordpressProject class]]) {
+                if(wpWC == nil){
+                    wpWC = [[LMWordpressCreateFileWC alloc] initWithWindowNibName:@"LMWordpressCreateFileWC"];
+                }
+                wpWC.project = (IUWordpressProject*) self.project;
+                wpWC.sheetController = self.documentController;
+                [self.view.window beginSheet:wpWC.window completionHandler:^(NSModalResponse returnCode) {
+                    if (returnCode == NSModalResponseContinue) {
+                        [self makeNewPageWithlayoutCode:layoutCode];
+                    }
+                }];
+            }
+            else {
+                [self makeNewPageWithlayoutCode:layoutCode];
+            }
+            
+        }];
+        
+    }
+    else if([groupName isEqualToString:IUClassGroupName]){
+        [self makeNewClass];
     }
     
-    [self.view.window beginSheet:pageWC.window completionHandler:^(NSModalResponse returnCode) {
-        if(returnCode == NSModalResponseCancel){
-            return ;
-        }
-        
-        IUPageLayout layoutCode = (int)returnCode - NSModalResponseOK;
-        
-        
-        if ([self.project isKindOfClass:[IUWordpressProject class]]) {
-            if(wpWC == nil){
-                wpWC = [[LMWordpressCreateFileWC alloc] initWithWindowNibName:@"LMWordpressCreateFileWC"];
-            }
-            wpWC.project = (IUWordpressProject*) self.project;
-            wpWC.sheetController = self.documentController;
-            [self.view.window beginSheet:wpWC.window completionHandler:^(NSModalResponse returnCode) {
-                if (returnCode == NSModalResponseContinue) {
-                    [self makeNewSheet:sender layoutCode:layoutCode];
-                }
-            }];
-        }
-        else {
-            [self makeNewSheet:sender layoutCode:layoutCode];
-        }
-        
-    }];
-    
-    
-  
-
 }
 
 #pragma mark - name change

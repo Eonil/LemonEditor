@@ -31,15 +31,17 @@
         _pageContent = [aDecoder decodeObjectForKey:@"pageContent"];
         [_pageContent bind:@"delegate" toObject:self withKeyPath:@"delegate" options:nil];
         
-        
         [self.undoManager enableUndoRegistration];
     }
     return self;
 }
 - (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
     self = [super awakeAfterUsingCoder:aDecoder];
-    //background
-    //_background = [aDecoder decodeObjectForKey:@"background"];
+
+    if( IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, self.project.IUProjectVersion) ){
+        [self addIU:_pageContent error:nil];
+    }
+    
     return self;
 }
 
@@ -126,11 +128,40 @@
             //do nothing - default css 
             break;
         case IUPageLayoutSideBarOnly:
-            _sidebar.positionType = IUPositionTypeFloatLeft;
             [_sidebar.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
             [_sidebar.css setValue:@(15) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
-            [_sidebar.css setValue:@(YES) forTag:IUCSSTagHeightUnitIsPercent forViewport:IUCSSDefaultViewPort];
-            [_sidebar.css setValue:@(100) forTag:IUCSSTagPercentHeight forViewport:IUCSSDefaultViewPort];
+            _sidebar.type = IUSidebarTypeFull;
+            
+            _pageContent.positionType = IUPositionTypeFloatRight;
+            [_pageContent.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+            [_pageContent.css setValue:@(85) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+            [_pageContent.css setValue:@(YES) forTag:IUCSSTagHeightUnitIsPercent forViewport:IUCSSDefaultViewPort];
+            [_pageContent.css setValue:@(100) forTag:IUCSSTagPercentHeight forViewport:IUCSSDefaultViewPort];
+            break;
+        case IUPageLayoutSideBar:
+            //sidebar가 header, footer 사이에
+            _sidebar.type = IUSidebarTypeInside;
+            [_sidebar.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+            [_sidebar.css setValue:@(15) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+            
+            _pageContent.positionType = IUPositionTypeFloatRight;
+            [_pageContent.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+            [_pageContent.css setValue:@(85) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+            [_pageContent.css setValue:@(YES) forTag:IUCSSTagHeightUnitIsPercent forViewport:IUCSSDefaultViewPort];
+            [_pageContent.css setValue:@(100) forTag:IUCSSTagPercentHeight forViewport:IUCSSDefaultViewPort];
+            _footer.positionType = IUPositionTypeFloatLeft;
+            
+            break;
+        case IUPageLayoutSideBar2:
+            //sidebar가 header, footer 왼쪽에
+            _sidebar.type = IUSidebarTypeFull;
+            [_sidebar.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+            [_sidebar.css setValue:@(15) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+
+            _header.positionType = IUPositionTypeFloatRight;
+            [_header.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+            [_header.css setValue:@(85) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+
             
             _pageContent.positionType = IUPositionTypeFloatRight;
             [_pageContent.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
@@ -138,6 +169,10 @@
             [_pageContent.css setValue:@(YES) forTag:IUCSSTagHeightUnitIsPercent forViewport:IUCSSDefaultViewPort];
             [_pageContent.css setValue:@(100) forTag:IUCSSTagPercentHeight forViewport:IUCSSDefaultViewPort];
             
+            _footer.positionType = IUPositionTypeFloatRight;
+            [_footer.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+            [_footer.css setValue:@(85) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+
         default:
             break;
     }
@@ -246,6 +281,7 @@
 
 }
  */
+
 
 - (void)setDelegate:(id<IUSourceDelegate>)delegate{
     [super setDelegate:delegate];

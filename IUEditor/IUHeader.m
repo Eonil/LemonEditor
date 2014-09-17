@@ -29,6 +29,12 @@
     return self;
 }
 
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    
+    return self;
+}
+
 -(BOOL)canRemoveIUByUserInput{
     return NO;
 }
@@ -66,5 +72,17 @@
 
 - (BOOL)canCopy{
     return NO;
+}
+
+- (NSArray*)children{
+    if (self.prototypeClass == nil) {
+        //for version converting for document befor IU_VERSION_LAYOUT
+        if(_m_children.count > 0){
+            return _m_children;
+        }
+        
+        return [NSArray array];
+    }
+    return @[self.prototypeClass.children];
 }
 @end

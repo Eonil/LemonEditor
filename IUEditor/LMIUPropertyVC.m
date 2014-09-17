@@ -337,6 +337,12 @@
     else if ([classString isEqualToString:@"IUWebMovie"]) {
         self.propertyVArray = @[propertyIUWebMovieVC.view];
     }
+    else if ([classString isEqualToString:@"IUHeader"]
+             || [classString isEqualToString:@"IUHeader"]
+             || [classString isEqualToString:@"IUFooter"]
+             ) {
+       self.propertyVArray = @[propertyIUImportVC.view];
+    }
     else if ([classString isEqualToString:@"IUImport"]) {
         self.propertyVArray = @[propertyIUImportVC.view, propertyPGType2VC.view];
     }

@@ -8,6 +8,13 @@
 
 #import "IUImport.h"
 
+typedef enum{
+    IUSidebarTypeFull,
+    IUSidebarTypeInside,
+}IUSidebarType;
+
 @interface IUSidebar : IUImport
+
+@property IUSidebarType type;
 
 @end

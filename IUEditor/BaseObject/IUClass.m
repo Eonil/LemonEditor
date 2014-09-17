@@ -66,7 +66,17 @@
         
     }
     else if([type isEqualToString:IUClassSidebar]){
+        [self.css eradicateTag:IUCSSTagPixelWidth];
+        [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(YES) forTag:IUCSSTagHeightUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(100) forTag:IUCSSTagPercentHeight forViewport:IUCSSDefaultViewPort];
+        [titleBox.css setValue:@(12) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
+
+        titleBox.text = @"Sidebar Area";
         
+        [self addIU:titleBox error:nil];
+
     }
 }
 

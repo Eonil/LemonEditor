@@ -43,13 +43,22 @@
 #define IULogDealloc @"Dealloc"
 
 
-//IUVersion
+//IUVersion codeName
+#define IU_VERSION_BETA2 @"0.3"
+#define IU_VERSION_LAYOUT @"0.3.3.1"
 
+//IUVersion Control
 #define IU_VERSION_EQUAL_TO(v)                  ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define IU_VERSION_GREATER_THAN(v)              ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #define IU_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define IU_VERSION_LESS_THAN(v)                 ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define IU_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+#define IU_VERSION_V1_EQUAL_TO_V2(v1, v2)                  ([v1 compare:v2 options:NSNumericSearch] == NSOrderedSame)
+#define IU_VERSION_V1_GREATER_THAN_V2(v1, v2)              ([v1 compare:v2 options:NSNumericSearch] == NSOrderedDescending)
+#define IU_VERSION_V1_GREATER_THAN_OR_EQUAL_TO_V2(v1, v2)  ([v1 compare:v2 options:NSNumericSearch] != NSOrderedAscending)
+#define IU_VERSION_V1_LESS_THAN_V2(v1, v2)                 ([v1 compare:v2 options:NSNumericSearch] == NSOrderedAscending)
+#define IU_VERSION_V1_LESS_THAN_OR_EQUAL_TO_V2(v1, v2)     ([v1 compare:v2 options:NSNumericSearch] != NSOrderedDescending)
 
 
 //binding option

@@ -287,6 +287,11 @@
     [self.delegate enableUpdateAll:self];
     return box;
 }
+- (void)copyCSSFromIU:(IUBox *)box{
+    IUCSS *newCSS = [box.css copy];
+    _css = newCSS;
+    _css.delegate = self;
+}
 
 - (BOOL)canCopy{
     return YES;
@@ -771,7 +776,6 @@
     IUBox *box = [_m_children objectAtIndex:index];
     return [self removeIU:box];
 }
-
 
 
 #pragma mark - Frame

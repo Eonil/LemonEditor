@@ -65,10 +65,6 @@
             _IUProjectVersion = @"0.3";
         }
         else{
-            if(IU_VERSION_GREATER_THAN(projectVersion)){
-                [self makeDefaultClasses];
-            }
-            
             //REVIEW: save 할때 현재 build버전으로 바꿈
             _IUProjectVersion = projectVersion;
         }
@@ -82,17 +78,6 @@
         _compiler.resourceManager = _resourceManager;
         
         _mqSizes = [[aDecoder decodeObjectForKey:@"mqSizes"] mutableCopy];
-        /*
-        _buildDirectory = [aDecoder decodeObjectForKey:@"_buildDirectory"];
-
-        if([[NSFileManager defaultManager] fileExistsAtPath:_buildDirectory isDirectory:nil] == NO){
-            //buildDirectory가 사라짐-file이 이동되었다고 생각.
-            //nil로 설정해놓고 path가 설정될때 거기서 default path로 설정
-            //setPath 참고.
-            _buildDirectory = nil;
-        }
-        */
-        
         _classGroup = [aDecoder decodeObjectForKey:@"_classGroup"];
         _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _resourceGroup = [aDecoder decodeObjectForKey:@"_resourceGroup"];
@@ -125,6 +110,29 @@
         }
 
       
+    }
+    return self;
+}
+
+- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
+    if( IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, _IUProjectVersion) ){
+        [self makeDefaultClasses];
+        
+        IUSheetGroup *backgroundGroup = [aDecoder decodeObjectForKey:@"_backgroundGroup"];
+        IUBackground *background = backgroundGroup.childrenFiles[0];
+        IUBox *oldHeader = background.children[0];
+        
+        IUClass *headerClass = [_classGroup sheetWithHtmlID:@"header"];
+        [headerClass removeAllIU];
+        
+        for(IUBox *child in oldHeader.children){
+            IUBox *copychild = [child copy];
+            [headerClass addIU:copychild error:nil];
+        }
+        [headerClass copyCSSFromIU:oldHeader];
+        [headerClass.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [headerClass.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+
     }
     return self;
 }

@@ -75,6 +75,8 @@ $(document).ready(function(){
 	reframeCenter();
 	resizePageLinkSet();
 	makefullSizeSection();
+	resizeSideBar();
+	makeBottomLocation();
 	
 	/* Initialize iu.js*/
 	relocateScrollAnimation();

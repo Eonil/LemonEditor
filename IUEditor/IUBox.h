@@ -162,6 +162,8 @@ typedef enum _IUOverflowType{
 - (NSArray *)cssIdentifierArray;
 - (void)updateCSS;
 - (void)updateCSSWithIdentifiers:(NSArray *)identifiers;
+//copy only css;
+- (void)copyCSSFromIU:(IUBox *)box;
 
 //HTML
 //-(NSString*)html; //DEPRECATED;

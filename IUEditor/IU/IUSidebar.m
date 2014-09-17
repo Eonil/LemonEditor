@@ -10,6 +10,22 @@
 
 @implementation IUSidebar
 
+-(id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
+    self = [super initWithProject:project options:options];
+    if(self){
+        [self.undoManager disableUndoRegistration];
+        
+        [self.css eradicateTag:IUCSSTagPixelWidth];
+        [self.css eradicateTag:IUCSSTagBGColor];
+        
+        self.positionType = IUPositionTypeFloatLeft;
+        self.overflowType = IUOverflowTypeVisible;
+        
+        [self.undoManager enableUndoRegistration];
+    }
+    return self;
+}
+
 -(BOOL)canRemoveIUByUserInput{
     return NO;
 }

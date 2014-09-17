@@ -289,7 +289,7 @@
 /* Here is our Objective-C implementation for the JavaScript console.log() method.
  */
 - (void)doOutputToLog:(NSString*)theMessage {
-    JDInfoLog(@"LOG: %@", theMessage);
+    JDErrorLog(@"LOG: %@", theMessage);
 }
 
 
@@ -404,6 +404,7 @@
 - (void)runJSAfterRefreshCSS{
     JDTraceLog(@"runJSAfterRefreshCSS");
     [self reframeCenter];
+    [self evaluateWebScript:@"resizeSideBar()"];
     [self updateFrameDict];
     [self resizePageContent];
 }
