@@ -91,7 +91,7 @@
                     return YES;
                 }
                 // 'V'
-                if (keyCode == IUKeyCodeC) {
+                if (keyCode == IUKeyCodeV) {
                     [self.VC paste:self];
                     return YES;
                 }
