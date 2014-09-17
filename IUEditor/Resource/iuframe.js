@@ -36,7 +36,7 @@ function reframeCenterIU(iu, isAlreadyChecked){
 	    if($(iu).attr('horizontalCenter')=='1'){
 			ius.push($(iu));
 		}
-		ius = $(iu).children('[horizontalCenter="1"]');
+		ius = $(iu).find('[horizontalCenter="1"]');
 	}
     //if flow layout, margin auto
     //if absolute layout, set left
@@ -45,7 +45,7 @@ function reframeCenterIU(iu, isAlreadyChecked){
         $(this).css('margin-left', 'auto');
         $(this).css('margin-right', 'auto');
         $(this).css('left','');
-        var pos = $(iu).css('position');
+        var pos = $(this).css('position');
         if (pos == 'absolute'){
             var parentW;
             var parent = $(this).parent();
