@@ -23,7 +23,7 @@
     [self.css eradicateTag:IUCSSTagPixelHeight];
     [self.css eradicateTag:IUCSSTagBGColor];
     
-    self.enableCenter = YES;
+    self.enableHCenter = YES;
     
     [self.css setValue:@(24) forTag:IUCSSTagFontSize];
     [self.css setValue:@(1.5) forTag:IUCSSTagLineHeight];

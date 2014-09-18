@@ -884,14 +884,16 @@
     switch (_iu.positionType) {
         case IUPositionTypeAbsoluteBottom:{
             enablebottom = YES;
-            if(_iu.enableCenter == NO){
+            if(_iu.enableHCenter == NO){
                 leftTag = @"left";
             }
             break;
         }
         case IUPositionTypeAbsolute:{
-            topTag = @"top";
-            if(_iu.enableCenter == NO){
+            if(_iu.enableVCenter == NO){
+                topTag = @"top";
+            }
+            if(_iu.enableHCenter == NO){
                 leftTag = @"left";
             }
             break;
@@ -899,7 +901,7 @@
         case IUPositionTypeRelative:{
             [code insertTag:@"position" string:@"relative"];
             topTag = @"margin-top";
-            if(_iu.enableCenter == NO){
+            if(_iu.enableHCenter == NO){
                 leftTag = @"left";
             }
             break;
@@ -928,7 +930,10 @@
         case IUPositionTypeFixed:{
             [code insertTag:@"position" string:@"fixed"];
             [code insertTag:@"z-index" string:@"10"];
-            topTag = @"top"; leftTag = @"left"; break;
+            if(_iu.enableVCenter == NO){
+                topTag = @"top"; 
+            }
+            leftTag = @"left"; break;
         }
         default:
             break;

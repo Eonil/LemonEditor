@@ -21,6 +21,7 @@
                 <outlet property="pxTF" destination="ze4-DS-FcM" id="beK-Dg-QQd"/>
                 <outlet property="pyStepper" destination="tHP-Sn-QbS" id="m8R-32-bZy"/>
                 <outlet property="pyTF" destination="AJN-a2-BIm" id="s8V-FG-462"/>
+                <outlet property="verticalCenterBtn" destination="PV4-h3-2d7" id="gEN-mp-ZwO"/>
                 <outlet property="view" destination="W2Z-Yo-bpM" id="zqF-ET-qCV"/>
                 <outlet property="wStepper" destination="1AX-8F-rIh" id="zEl-79-MWX"/>
                 <outlet property="wTF" destination="dde-if-4FG" id="f9d-yf-Xcp"/>
@@ -515,6 +516,17 @@
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </box>
+                            <button toolTip="Fit box size to image" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PV4-h3-2d7" userLabel="verticalCenter">
+                                <rect key="frame" x="265" y="7" width="19" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="RIk-lv-3RM"/>
+                                    <constraint firstAttribute="width" constant="19" id="yfT-cg-aly"/>
+                                </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="center_off" imagePosition="overlaps" alignment="center" alternateImage="center_on" imageScaling="proportionallyDown" inset="2" id="QnL-1n-c6b">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                     </view>
                     <constraints>

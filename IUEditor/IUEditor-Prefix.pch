@@ -44,7 +44,7 @@
 
 
 //IUVersion codeName
-#define IU_VERSION_BETA2 @"0.3"
+#define IU_VERSION_BETA2 @"0.3.3"
 #define IU_VERSION_LAYOUT @"0.3.3.1"
 
 //IUVersion Control

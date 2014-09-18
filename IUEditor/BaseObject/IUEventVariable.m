@@ -194,7 +194,7 @@
                         
                         JDCode *innerJS = [JDCode code];
                         [innerJS addCodeWithFormat:@"$(\"#%@\").show(", visibleID];
-                        NSString *reframe = [NSString stringWithFormat:@"function(){reframeCenterIU('#%@' ,false)}", visibleID];
+                        NSString *reframe = [NSString stringWithFormat:@"function(){reframeCenterIU('#%@')}", visibleID];
 
                         if(duration > 0){
                             [innerJS addCodeLineWithFormat:@"\"%@\", %ld, %@);", typeStr, duration*100, reframe];
@@ -264,7 +264,7 @@
                         [innerJS addCodeWithFormat:@"width:\"%.2fpx\", height:\"%.2fpx\"}", width, height];
                         
                         NSInteger duration = [[receiverDict objectForKey:IUEventTagFrameDuration] integerValue];
-                        NSString *reframe = [NSString stringWithFormat:@"function(){reframeCenterIU('#%@' ,false)}", frameID];
+                        NSString *reframe = [NSString stringWithFormat:@"function(){reframeCenterIU('#%@')}", frameID];
                         if(duration > 0){
                             [innerJS addCodeWithFormat:@", %ld, %@);", duration*100, reframe];
                         }

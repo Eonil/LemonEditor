@@ -16,7 +16,7 @@
     [self.undoManager disableUndoRegistration];
     
     self.positionType = IUPositionTypeRelative;
-    self.enableCenter = YES;
+    self.enableHCenter = YES;
     self.align = IUAlignRight;
     self.leftRightPadding = 5;
     

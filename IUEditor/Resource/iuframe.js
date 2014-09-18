@@ -56,17 +56,24 @@ function resizeSideBar(){
 }
 
 
-function reframeCenterIU(iu, isAlreadyChecked){
+function reframeCenterIU(iu){
 	var ius = [];
-	if(isAlreadyChecked == true){
-		ius.push(iu);
+	if($(iu).attr('horizontalCenter')=='1'){
+		ius.push($(iu));
 	}
-	else{
-	    if($(iu).attr('horizontalCenter')=='1'){
-			ius.push($(iu));
-		}
-		ius = $(iu).find('[horizontalCenter="1"]');
+	ius.push($(iu).find('[horizontalCenter="1"]'));
+	arrangeHCenter(ius);
+	
+	//vertical center
+	if($(iu).attr('verticalCenter')=='1'){
+		ius.push($(iu));
 	}
+	ius = $(iu).find('[verticalCenter="1"]');
+	
+	arrangeVCenter(ius);
+}
+
+function arrangeHCenter(ius){
     //if flow layout, margin auto
     //if absolute layout, set left
 
@@ -94,14 +101,40 @@ function reframeCenterIU(iu, isAlreadyChecked){
             $(this).css('left', (windowWidth-myW)/2 + 'px');	
 		}
     });
-    
+}
+
+function arrangeVCenter(ius){
+	$.each(ius, function(){
+        $(this).css('margin-top', 'auto');
+        $(this).css('margin-bottom', 'auto');
+        $(this).css('top','');
+        var pos = $(this).css('position');
+        if (pos == 'absolute'){
+            var parentH;
+            var parent = $(this).parent();
+            if(parent.prop('tagName') == 'A'){
+                parentH = parent.parent().height();
+            }
+            else{
+                parentH = $(this).parent().height();
+            }
+            
+            var myH = $(this).height();
+            $(this).css('top', (parentH-myH)/2 + 'px');
+        }
+		else if(pos == 'fixed'){
+			var windowHeight = $(window).height();
+            var myH = $(this).height();
+            $(this).css('top', (windowHeight-myH)/2 + 'px');	
+		}
+    });
 }
 
 function reframeCenter(){
-    var respc = $('[horizontalCenter="1"]').toArray();
-    $.each(respc, function( i, iu ){
-        reframeCenterIU(iu, true);
-    });
+    var respc = $('[horizontalCenter="1"]');
+	arrangeHCenter(respc);
+    respc = $('[verticalCenter="1"]');
+	arrangeVCenter(respc)
 }
 
 function resizePageLinkSet(){

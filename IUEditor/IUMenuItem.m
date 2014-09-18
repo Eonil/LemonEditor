@@ -52,7 +52,7 @@
 
 - (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
     [super awakeAfterUsingCoder:aDecoder];
-    if(IU_VERSION_GREATER_THAN(self.project.IUProjectVersion)){
+    if(IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_BETA2, self.project.IUProjectVersion)){
         [[self undoManager] disableUndoRegistration];
 
         [self.css eradicateTag:IUCSSTagWidthUnitIsPercent];
@@ -321,6 +321,11 @@
     }
     return NO;
 }
+
+- (BOOL)canChangeWidthUnitByUserInput{
+    return NO;
+}
+
 - (BOOL)canChangeWidthByUserInput{
     if(self.css.editWidth <= IUMobileSize){
         return NO;

@@ -50,7 +50,7 @@
         [titleBox.css setValue:@"Helvetica" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
 
         titleBox.positionType = IUPositionTypeAbsolute;
-        titleBox.enableCenter = YES;
+        titleBox.enableHCenter = YES;
         titleBox.text = @"Content Area";
         
         [section addIU:titleBox error:nil];
@@ -66,7 +66,7 @@
         [contentBox.css setValue:@"Helvetica" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
         
         contentBox.positionType = IUPositionTypeAbsolute;
-        contentBox.enableCenter = YES;
+        contentBox.enableHCenter = YES;
         contentBox.text = @"Double-click to edit text\n\nThis box has absolute-center position.\nFor free movement, see the position at the right.";
         
         [section addIU:contentBox error:nil];

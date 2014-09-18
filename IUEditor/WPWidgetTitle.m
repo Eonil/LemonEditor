@@ -38,7 +38,7 @@
     return self;
 }
 
-- (BOOL)canChangeCenter{
+- (BOOL)canChangeHCenter{
     return NO;
 }
 

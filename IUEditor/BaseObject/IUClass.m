@@ -37,7 +37,7 @@
     [titleBox.css setValue:@"Helvetica" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
     
     titleBox.positionType = IUPositionTypeAbsolute;
-    titleBox.enableCenter = YES;
+    titleBox.enableHCenter = YES;
     
     
     if([type isEqualToString:IUClassHeader]){

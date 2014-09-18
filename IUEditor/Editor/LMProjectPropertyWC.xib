@@ -34,7 +34,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="800" height="358"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="800" height="358"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -354,10 +354,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="573" height="78"/>
+                                            <size key="minSize" width="588" height="78"/>
                                             <size key="maxSize" width="590" height="10000000"/>
                                             <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="573" height="78"/>
+                                            <size key="minSize" width="588" height="78"/>
                                             <size key="maxSize" width="590" height="10000000"/>
                                         </textView>
                                     </subviews>

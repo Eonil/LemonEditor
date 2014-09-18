@@ -22,7 +22,7 @@
     title.htmlID = @"SiteTitle";
     title.name = @"SiteTitle";
     [title.css setValue:@(60) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
-    title.enableCenter = YES;
+    title.enableHCenter = YES;
 
     [self.header addIU:title error:nil];
     [self.project.identifierManager registerIUs:@[title]];

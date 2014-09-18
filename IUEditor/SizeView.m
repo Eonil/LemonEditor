@@ -294,6 +294,10 @@
         [JDUIUtil hudAlert:@"It's too large, we support up to 30000px!" second:2];
         return ;
     }
+    if(newWidth == 0){
+        [JDUIUtil hudAlert:@"It's wrong size, input the positive number" second:2];
+        return ;
+    }
     
     NSNumber *widthNumber = [NSNumber numberWithInteger:newWidth];
     if([_sizeArray containsObject:widthNumber]){

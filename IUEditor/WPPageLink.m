@@ -86,7 +86,7 @@
 - (BOOL)canChangePositionType{
     return NO;
 }
-- (BOOL)canChangeCenter{
+- (BOOL)canChangeHCenter{
     return NO;
 }
 

@@ -45,6 +45,7 @@
 @property (weak) IBOutlet NSButton *hUnitBtn;
 
 @property (weak) IBOutlet NSButton *centerBtn;
+@property (weak) IBOutlet NSButton *verticalCenterBtn;
 
 
 @property (weak) IBOutlet NSButton *helpMenu;
@@ -123,7 +124,8 @@
     [self outlet:_hUnitBtn bind:NSValueBinding cssTag:IUCSSTagHeightUnitIsPercent];
     
     [self outlet:_positionPopupBtn bind:NSSelectedIndexBinding property:@"positionType"];
-    [self outlet:_centerBtn bind:NSValueBinding property:@"enableCenter"];
+    [self outlet:_centerBtn bind:NSValueBinding property:@"enableHCenter"];
+    [self outlet:_verticalCenterBtn bind:NSValueBinding property:@"enableVCenter"];
 
     //enabled option 1
     [self outlet:_xTF bind:NSEnabledBinding property:@"hasX"];
@@ -153,7 +155,8 @@
 
     
     [self outlet:_positionPopupBtn bind:NSEnabledBinding property:@"canChangePositionType"];
-    [self outlet:_centerBtn bind:NSEnabledBinding property:@"canChangeCenter"];
+    [self outlet:_centerBtn bind:NSEnabledBinding property:@"canChangeHCenter"];
+    [self outlet:_verticalCenterBtn bind:NSEnabledBinding property:@"canChangeVCenter"];
 
     
     //enabled option 2
@@ -195,6 +198,7 @@
     [self outlet:_xUnitBtn bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
     [self outlet:_xStepper bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
     [self outlet:_pxStepper bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
+     [self outlet:_wUnitBtn bind:@"enabled3" property:@"canChangeWidthUnitByUserInput" options:IUBindingNegationAndNotRaise];
     
 }
 

@@ -31,8 +31,8 @@
     
     IUBox *centerBox = [[IUBox alloc] initWithProject:self.project options:nil];
     centerBox.name = @"CenterBox";
-    centerBox.enableCenter = YES;
-    centerBox.positionType = IUPositionTypeRelative;
+    centerBox.enableHCenter = YES;
+    centerBox.enableHCenter = IUPositionTypeRelative;
     [centerBox.css setValue:@(0) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
     [centerBox.css setValue:@(960) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
     [centerBox.css eradicateTag:IUCSSTagPixelHeight];
@@ -49,7 +49,7 @@
     [list.css setValue:@(-40) forTag:IUCSSTagPixelX forViewport:IUCSSDefaultViewPort];
     [list.css setValue:@(0) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
     list.positionType = IUPositionTypeRelative;
-    list.enableCenter = YES;
+    list.enableHCenter = YES;
 
     [centerBox addIU:list error:nil];
     
@@ -89,7 +89,7 @@
     image.htmlID = @"image404";
     image.name = @"image404";
     image.imageName = @"clipArt/warning.png";
-    image.enableCenter = YES;
+    image.enableHCenter = YES;
     [image.css setValue:@(110) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
     [image.css setValue:@(140) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
     [image.css setValue:@(140) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
@@ -102,7 +102,7 @@
     text404.name = @"text404";
     text404.text = @"Sorry, but the page you are looking for has not been found.\nTry checking the URL for errors, then hit the refresh button.";
     //frame
-    text404.enableCenter = YES;
+    text404.enableHCenter = YES;
     [text404 setPositionType:IUPositionTypeAbsolute];
     
     [text404.css setValue:@(270) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];

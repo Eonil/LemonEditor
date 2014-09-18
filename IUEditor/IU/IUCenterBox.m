@@ -38,7 +38,7 @@
             i++;
         }
         
-        self.enableCenter = YES;
+        self.enableHCenter = YES;
         
         [[self undoManager] enableUndoRegistration];
         
@@ -47,7 +47,7 @@
     return self;
 }
 
-- (BOOL)canChangeCenter{
+- (BOOL)canChangeHCenter{
     return NO;
 }
 
@@ -55,7 +55,7 @@
     return NO;
 }
 
-- (BOOL)enableCenter{
+- (BOOL)enableHCenter{
     //always YES
     return YES;
 }

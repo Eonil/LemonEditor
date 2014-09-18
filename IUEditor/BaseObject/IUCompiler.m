@@ -1388,8 +1388,11 @@
     if(isEdit && iu.shouldAddIUByUserInput) {
         [retString appendString:@" hasChildren"];
     }
-    if(iu.enableCenter){
+    if(iu.enableHCenter){
         [retString appendString:@" horizontalCenter='1'"];
+    }
+    if(iu.enableVCenter){
+        [retString appendString:@" verticalCenter='1'"];
     }
     
     if(iu.link && [self hasLink:iu] && [iu.link isKindOfClass:[IUBox class]]){

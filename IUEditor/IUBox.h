@@ -204,6 +204,7 @@ typedef enum _IUOverflowType{
 @property (readonly) BOOL canChangeXByUserInput;
 @property (readonly) BOOL canChangeYByUserInput;
 @property (readonly) BOOL canChangeWidthByUserInput;
+@property (readonly) BOOL canChangeWidthUnitByUserInput;
 @property (readonly) BOOL canChangeHeightByUserInput;
 
 - (BOOL)hasX;
@@ -225,7 +226,7 @@ typedef enum _IUOverflowType{
 
 //Position
 @property (nonatomic) IUPositionType positionType;
-@property (nonatomic) BOOL enableCenter;
+@property (nonatomic) BOOL enableHCenter, enableVCenter;
 - (BOOL)canChangePositionType;
 - (BOOL)canChangePositionAbsolute;
 - (BOOL)canChangePositionRelative;
@@ -234,7 +235,8 @@ typedef enum _IUOverflowType{
 - (BOOL)canChangePositionAbsoluteBottom;
 - (BOOL)canChangePositionFixed;
 - (BOOL)canChangePositionFixedBottom;
-- (BOOL)canChangeCenter;
+- (BOOL)canChangeHCenter;
+- (BOOL)canChangeVCenter;
 - (BOOL)canChangeInitialPosition;
 
 

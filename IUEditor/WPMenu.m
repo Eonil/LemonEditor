@@ -18,7 +18,7 @@
     self.align = IUAlignLeft;
     
     //css
-    self.enableCenter = YES;
+    self.enableHCenter = YES;
     [self.css setValue:@(160) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
     [self.css setValue:@(800) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
     [self.css setValue:@(40) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];

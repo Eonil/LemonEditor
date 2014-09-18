@@ -83,8 +83,16 @@
  */
 - (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
     [super awakeAfterUsingCoder:aDecoder];
+    [self.undoManager disableUndoRegistration];
+    
     _m_children = [aDecoder decodeObjectForKey:@"children"];
     
+    
+    //version Control
+    if(IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, self.project.IUProjectVersion)){
+        _enableHCenter = [aDecoder decodeInt32ForKey:@"enableCenter"];
+    }
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 
@@ -229,7 +237,7 @@
     
     copyright.name = @"Copyright";
     copyright.text = @"Copyright (C) IUEditor all rights reserved";
-    copyright.enableCenter = YES;
+    copyright.enableHCenter = YES;
     [copyright.css setValue:@(40) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
     [copyright.css eradicateTag:IUCSSTagPixelWidth];
     [copyright.css eradicateTag:IUCSSTagPixelHeight];
@@ -266,7 +274,8 @@
         
         box.overflowType = _overflowType;
         box.positionType = _positionType;
-        box.enableCenter = _enableCenter;
+        box.enableHCenter = _enableHCenter;
+        box.enableVCenter = _enableVCenter;
         
         box.css = newCSS;
         newCSS.delegate  = box;
@@ -373,8 +382,8 @@
         [[self.undoManager prepareWithInvocationTarget:self] setXPosMove:_xPosMove];
         _xPosMove = xPosMove;
         
-        if(xPosMove !=0 && _enableCenter==YES){
-            self.enableCenter = NO;
+        if(xPosMove !=0 && _enableHCenter==YES){
+            self.enableHCenter = NO;
         }
     }
 }
@@ -490,7 +499,7 @@
 
 - (void)changeMQSelect:(NSNotification *)notification{
     
-    [self willChangeValueForKey:@"canChangeCenter"];
+    [self willChangeValueForKey:@"canChangeHCenter"];
 
     NSInteger selectedSize = [[notification.userInfo valueForKey:IUNotificationMQSize] integerValue];
     NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
@@ -503,7 +512,7 @@
     }
     [_css setMaxWidth:maxSize];
     
-    [self didChangeValueForKey:@"canChangeCenter"];
+    [self didChangeValueForKey:@"canChangeHCenter"];
         
     
 }
@@ -823,18 +832,24 @@
 }
 
 - (BOOL)canChangeXByUserInput{
-    if(self.enableCenter){
+    if(self.enableHCenter){
         return NO;
     }
     return YES;
 }
 - (BOOL)canChangeYByUserInput{
+    if(self.enableVCenter){
+        return NO;
+    }
     return YES;
 }
 - (BOOL)canChangeWidthByUserInput{
     return YES;
 }
 - (BOOL)canChangeHeightByUserInput{
+    return YES;
+}
+- (BOOL)canChangeWidthUnitByUserInput{
     return YES;
 }
 
@@ -1149,13 +1164,23 @@
     return YES;
 }
 
-- (BOOL)canChangeCenter{
+- (BOOL)canChangeHCenter{
     if(_positionType == IUPositionTypeFloatLeft || _positionType == IUPositionTypeFloatRight
        || _css.editWidth != IUCSSDefaultViewPort){
         return NO;
     }
     return YES;
 }
+
+- (BOOL)canChangeVCenter{
+    if(_positionType == IUPositionTypeAbsolute ||
+       _positionType == IUPositionTypeFixed){
+        return YES;
+    }
+    return NO;
+}
+
+
 - (BOOL)canChangeInitialPosition{
     return YES;
 }
@@ -1184,11 +1209,35 @@
     if (positionType == IUPositionTypeFloatLeft || positionType == IUPositionTypeFloatRight
         || _positionType == IUPositionTypeFloatLeft || _positionType == IUPositionTypeFloatRight) {
         if(positionType == IUPositionTypeFloatLeft || positionType == IUPositionTypeFloatRight){
-            self.enableCenter = NO;
+            self.enableHCenter = NO;
         }
         disableCenterFlag = YES;
-        [self willChangeValueForKey:@"canChangeCenter"];
+        [self willChangeValueForKey:@"canChangeHCenter"];
 
+    }
+    
+    BOOL disableVCenterFlag = NO;
+    if(positionType == IUPositionTypeFloatLeft || positionType == IUPositionTypeFloatRight
+       || positionType == IUPositionTypeRelative
+       || positionType == IUPositionTypeAbsoluteBottom
+       || positionType == IUPositionTypeFixedBottom
+       || _positionType == IUPositionTypeFloatLeft
+       || _positionType == IUPositionTypeFloatRight
+       || _positionType == IUPositionTypeRelative
+       || _positionType == IUPositionTypeAbsoluteBottom
+       || _positionType == IUPositionTypeFixedBottom){
+        
+        if( _positionType == IUPositionTypeFloatLeft
+           || _positionType == IUPositionTypeFloatRight
+           || _positionType == IUPositionTypeRelative
+           || _positionType == IUPositionTypeAbsoluteBottom
+           || _positionType == IUPositionTypeFixedBottom){
+            self.enableVCenter = NO;
+        }
+        
+        [self willChangeValueForKey:@"canChangeVCenter"];
+        disableVCenterFlag= YES;
+        
     }
     
     
@@ -1204,9 +1253,13 @@
         [self didChangeValueForKey:@"hasY"];
     }
     if (disableCenterFlag){
-        [self didChangeValueForKey:@"canChangeCenter"];
+        [self didChangeValueForKey:@"canChangeHCenter"];
 
     }
+    if (disableVCenterFlag){
+        [self didChangeValueForKey:@"canChangeVCenter"];
+    }
+    
     
     if(_positionType == IUPositionTypeRelative ||
        _positionType == IUPositionTypeFloatLeft ||
@@ -1219,16 +1272,30 @@
     }
 
 }
+- (void)setEnableHCenter:(BOOL)enableHCenter{
 
-- (void)setEnableCenter:(BOOL)enableCenter{
-    if(_enableCenter != enableCenter){
+    if(_enableHCenter != enableHCenter){
         [self willChangeValueForKey:@"canChangeXByUserInput"];
-        [[self.undoManager prepareWithInvocationTarget:self] setEnableCenter:_enableCenter];
-        _enableCenter = enableCenter;
+        [[self.undoManager prepareWithInvocationTarget:self] setEnableHCenter:_enableHCenter];
+        _enableHCenter = enableHCenter;
         [self updateHTML];
         [self didChangeValueForKey:@"canChangeXByUserInput"];
     }
 }
+
+
+- (void)setEnableVCenter:(BOOL)enableVCenter{
+    
+    if(_enableVCenter != enableVCenter){
+        [self willChangeValueForKey:@"canChangeYByUserInput"];
+        [[self.undoManager prepareWithInvocationTarget:self] setEnableVCenter:_enableVCenter];
+        _enableVCenter = enableVCenter;
+        [self updateHTML];
+        [self didChangeValueForKey:@"canChangeYByUserInput"];
+    }
+}
+
+
 
 - (void)setOverflowType:(IUOverflowType)overflowType{
     _overflowType = overflowType;
