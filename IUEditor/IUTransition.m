@@ -26,16 +26,22 @@
         [[self undoManager] disableUndoRegistration];
         
         [aDecoder decodeToObject:self withProperties:[IUTransition propertiesWithOutProperties:@[@"firstItem", @"secondItem"]]];
-        
-        if(self.children.count > 1){
-            _firstItem = self.children[0];
-            _secondItem = self.children[1];
-        }
-        else{
-            assert(0);
-        }
+     
         
         [[self undoManager] enableUndoRegistration];
+    }
+    return self;
+}
+
+- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
+    [super awakeAfterUsingCoder:aDecoder];
+    
+    if(self.children.count > 1){
+        _firstItem = self.children[0];
+        _secondItem = self.children[1];
+    }
+    else{
+        assert(0);
     }
     return self;
 }

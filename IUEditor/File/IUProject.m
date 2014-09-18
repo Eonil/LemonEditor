@@ -79,9 +79,8 @@
         _compiler.resourceManager = _resourceManager;
         
         _mqSizes = [[aDecoder decodeObjectForKey:@"mqSizes"] mutableCopy];
-        _classGroup = [aDecoder decodeObjectForKey:@"_classGroup"];
-        
         _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
+        _classGroup = [aDecoder decodeObjectForKey:@"_classGroup"];
         _resourceGroup = [aDecoder decodeObjectForKey:@"_resourceGroup"];
         _name = [aDecoder decodeObjectForKey:@"_name"];
         
@@ -117,6 +116,8 @@
 }
 
 -(id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
+    
+    [super awakeAfterUsingCoder:aDecoder];
 
     if( IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, _IUProjectVersion) ){
         [self makeDefaultClasses];

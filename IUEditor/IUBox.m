@@ -65,7 +65,6 @@
         _css = [aDecoder decodeObjectForKey:@"css"];
         _css.delegate = self;
         _event = [aDecoder decodeObjectForKey:@"event"];
-        _m_children=[aDecoder decodeObjectForKey:@"children"];
         changedCSSWidths = [NSMutableSet set];
         if ([self.htmlID length] == 0) {
             self.htmlID = [NSString randomStringWithLength:8];
@@ -78,7 +77,16 @@
     }
     return self;
 }
-
+/**
+ Review: _m_children의 decode는 순서가 꼬이기 때문에 initWithCoder가 아닌 awkaAfterUsingCoder로 하도록한다.
+ (self가 다 할당되기전에 children이 먼저 할당 되면서 발생하는 문제 제거)
+ */
+- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
+    [super awakeAfterUsingCoder:aDecoder];
+    _m_children = [aDecoder decodeObjectForKey:@"children"];
+    
+    return self;
+}
 
 -(void)encodeWithCoder:(NSCoder *)aCoder{
     if ([self.htmlID length] == 0) {
