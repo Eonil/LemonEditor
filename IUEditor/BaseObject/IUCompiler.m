@@ -762,7 +762,7 @@
     }
 #pragma mark IUImage
     else if([iu isKindOfClass:[IUImage class]]){
-        [code addCodeLineWithFormat:@"<img %@ >", [self HTMLAttributes:iu option:nil isEdit:NO]];
+        [code addCodeLineWithFormat:@"<img %@ />", [self HTMLAttributes:iu option:nil isEdit:NO]];
     }
 
 #pragma mark IUHTML
@@ -868,8 +868,14 @@
 #pragma mark - link
     if (iu.link && [self hasLink:iu]) {
         NSString *linkStr = [self linkHeaderString:iu];
-        //REVIEW: a tag는 밑으로 들어감. 상위에 있을 경우에 %사이즈를 먹어버림.
-        [code wrapChildTextWithStartString:linkStr endString:@"</a>"];
+        if([iu isKindOfClass:[IUImage class]]){
+            //닫는 태그가 없는 종류들은 a tag를 바깥으로 붙임.
+            [code wrapTextWithStartString:linkStr endString:@"</a>"];
+        }
+        else{
+            //REVIEW: a tag는 밑으로 들어감. 상위에 있을 경우에 %사이즈를 먹어버림.
+            [code wrapChildTextWithStartString:linkStr endString:@"</a>"];
+        }
     }
     return code;
     
