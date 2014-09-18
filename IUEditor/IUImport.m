@@ -108,7 +108,7 @@
     if (_prototypeClass == nil) {
         return [NSArray array];
     }
-    return @[_prototypeClass.children];
+    return @[_prototypeClass];
 }
 
 - (BOOL)shouldAddIUByUserInput{

@@ -79,6 +79,8 @@
         
         _mqSizes = [[aDecoder decodeObjectForKey:@"mqSizes"] mutableCopy];
         _classGroup = [aDecoder decodeObjectForKey:@"_classGroup"];
+        [self updateVersionControlForBackgroundWithCoder:aDecoder];
+        
         _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _resourceGroup = [aDecoder decodeObjectForKey:@"_resourceGroup"];
         _name = [aDecoder decodeObjectForKey:@"_name"];
@@ -114,7 +116,12 @@
     return self;
 }
 
-- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
+/**
+ background 사용했던 iudocument class로 전환
+ class가 호출된다음에 호출되어야함.
+ */
+- (void)updateVersionControlForBackgroundWithCoder:(NSCoder *)aDecoder{
+
     if( IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, _IUProjectVersion) ){
         [self makeDefaultClasses];
         
@@ -134,7 +141,6 @@
         [headerClass.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
 
     }
-    return self;
 }
 
 - (id)init{

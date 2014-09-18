@@ -38,8 +38,33 @@
 - (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
     self = [super awakeAfterUsingCoder:aDecoder];
 
+    //version control
     if( IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, self.project.IUProjectVersion) ){
+        _header = [[IUHeader alloc] initWithProject:self.project options:nil];
+        _header.name = @"header";
+        IUClass *headerClass = [self.project classWithName:@"header"];
+        _header.prototypeClass = headerClass;
+        
+        for(NSNumber *viewportNumber in headerClass.css.allViewports){
+            int viewport = [viewportNumber intValue];
+            NSDictionary *dict = [headerClass.css tagDictionaryForViewport:viewport];
+            if(dict){
+                if([dict objectForKey:IUCSSTagPixelHeight]){
+                    CGFloat height = [[dict objectForKey:IUCSSTagPixelHeight] floatValue];
+                    [_header.css setValue:@(height) forTag:IUCSSTagPixelHeight forViewport:viewport];
+                }
+            }
+        }
+        [self addIU:_header error:nil];
+
         [self addIU:_pageContent error:nil];
+        
+        _footer = [[IUFooter alloc] initWithProject:self.project options:nil];
+        _footer.name = @"footer";
+        _footer.prototypeClass = [self.project classWithName:@"footer"];
+        [self addIU:_footer error:nil];
+
+
     }
     
     return self;
@@ -238,49 +263,6 @@
 -(IUPageContent *)pageContent{
     return _pageContent;
 }
-
-/*
--(void)setBackground:(IUBackground *)background{
-    NSAssert(background.children, @"no children");
-    NSAssert(background, @"no background"); // background can't be nil
-    IUBackground *myBackground = self.background;
-    
-    if (myBackground == background) {
-        return;
-    }
-    if (myBackground == nil && background ) {
-        _background = background;
-        NSArray *children = [self.children copy];
-        _pageContent = [[IUPageContent alloc] initWithProject:self.project options:nil];
-        _pageContent.htmlID = @"pageContent";
-        _pageContent.name = @"pageContent";
-        _pageContent.parent = self;
-        
-        for (IUBox *iu in children) {
-            if (iu == (IUBox*)myBackground) {
-                continue;
-            }
-            IUBox *temp = iu;
-            [self removeIU:temp];
-            [_pageContent addIU:temp error:nil];
-        }
-    }
-    else if (myBackground && background == nil){
-        NSArray *children = _pageContent.children;
-        for (IUBox *iu in children) {
-            [_pageContent removeIU:iu];
-        }
-    }
-    else {
-//        [self insertIU:background atIndex:0 error:nil];
-    }
-//    _background.parent = self;
-    _background.delegate = self.delegate;
-    _pageContent.delegate = self.delegate;
-    
-
-}
- */
 
 
 - (void)setDelegate:(id<IUSourceDelegate>)delegate{

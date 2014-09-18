@@ -83,6 +83,6 @@
         
         return [NSArray array];
     }
-    return @[self.prototypeClass.children];
+    return @[self.prototypeClass];
 }
 @end
