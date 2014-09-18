@@ -388,5 +388,21 @@
 		<key>navImage</key>
 		<string>stack_header</string>
 	</dict>
+    <dict>
+        <key>isWidget</key>
+        <false/>
+        <key>className</key>
+        <string>IUFooter</string>
+        <key>navImage</key>
+        <string>stack_footer</string>
+    </dict>
+    <dict>
+        <key>isWidget</key>
+        <false/>
+        <key>className</key>
+        <string>IUSidebar</string>
+        <key>navImage</key>
+        <string>stack_sidebar</string>
+    </dict>
 </array>
 </plist>
