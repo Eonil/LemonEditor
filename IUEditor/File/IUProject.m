@@ -720,7 +720,7 @@
 /** default js array
  */
 - (NSArray *)defaultEditorJSArray{
-    return @[@"iueditor.js", @"iuframe.js", @"iu.js", @"iugooglemap_theme.js"];
+    return @[@"iueditor.js", @"iuframe.js", @"iugooglemap_theme.js"];
 }
 
 - (NSArray *)defaultCopyJSArray{

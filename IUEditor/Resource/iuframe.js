@@ -55,20 +55,6 @@ function resizeSideBar(){
 	});
 }
 
-function makeBottomLocation(){
-	var windowHeight =  $(window).height();
-	var footerHeight = $('.IUFooter').height();
-	var footerTop =  $('.IUFooter').position().top;
-	var footerBottom = footerTop + footerHeight;
-	if(footerBottom < windowHeight){
-		$('.IUFooter').css('bottom','0px');
-		$('.IUFooter').css('position','fixed');
-	}
-	else{
-		$('.IUFooter').css('bottom','');
-		$('.IUFooter').css('position','');
-	}
-}
 
 function reframeCenterIU(iu, isAlreadyChecked){
 	var ius = [];
@@ -128,21 +114,3 @@ function resizePageLinkSet(){
         console.log('setting width'+$(this).id+' width : '+width);
 	});
 }
-
-$(window).resize(function(){
-	console.log("resize window : iuframe.js");
-	resizeCollection();
-	reframeCenter();
-	resizePageLinkSet();
-	relocateScrollAnimation();
-	resizeSideBar();
-	makeBottomLocation();
-	makefullSizeSection();
-
-});
-
-$(document).ready(function(){
-    console.log("ready : iuframe.js");
-});
-
-

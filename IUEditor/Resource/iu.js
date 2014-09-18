@@ -1,4 +1,6 @@
-//for ie
+//this file only used in output file from IUEditor
+
+//for ie console defined
 var alertFallback = false;
 if (typeof console === "undefined" || typeof console.log === "undefined") {
     console = {};
@@ -249,34 +251,35 @@ function moveScrollAnimation(){
 	});
 }
 
-function resizeCollection(){
-	$('.IUCollection').each(function(){
-		//find current count
-		var responsive = $(this).attr('responsive');
-		responsiveArray = eval(responsive);
-		count = $(this).attr('defaultItemCount');
-		viewportWidth = $(window).width();
-		var minWidth = 9999;
-		for (var index in responsiveArray){
-			dict = responsiveArray[index];
-			width = dict.width;
-			if (viewportWidth<width && minWidth > width){
-				count = dict.count;
-				minWidth = width;
-			}
-		}		
-		//			var width  = 1/count *100;
-		var width = $(this).width()/count;
-		$(this).children().css('width', width.toFixed(0)+'px');
-	});
+function makeBottomLocation(){
+	var windowHeight =  $(window).height();
+	var footerHeight = $('.IUFooter').height();
+	var footerTop =  $('.IUFooter').position().top;
+	var footerBottom = footerTop + footerHeight;
+	if(footerBottom < windowHeight){
+		$('.IUFooter').css('bottom','0px');
+		$('.IUFooter').css('position','fixed');
+	}
+	else{
+		$('.IUFooter').css('bottom','');
+		$('.IUFooter').css('position','');
+	}
 }
+$(window).resize(function(){
+	//iu.js
+	makeBottomLocation();
+	
+	//iuframe.js
+	resizeCollection();
+	reframeCenter();
+	resizePageLinkSet();
+	relocateScrollAnimation();
+	resizeSideBar();
+	makefullSizeSection();
+});
 
 
 $(window).scroll(function(){
-    if (typeof isEditor != 'undefined' && isEditor == true){
-		return;
-	}
 	onWebMovieAutoPlay();
-    moveScrollAnimation();             
-	
+    moveScrollAnimation();             	
 });

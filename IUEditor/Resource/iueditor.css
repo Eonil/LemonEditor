@@ -31,6 +31,10 @@ p{
     z-index:10;
 }
 
+.IUFooter{
+	z-index:10;
+}
+
 .IUPageContent{
     position:relative;
     min-height:100px;

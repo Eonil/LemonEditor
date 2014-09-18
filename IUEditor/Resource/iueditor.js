@@ -144,7 +144,7 @@ function resizePageContentHeightEditor(windowHeight){
         
 
 		if(minHeight+headerHeight+footerHeight > 50000){
-			minHeight = 50000-headerHeight;
+			minHeight = 50000-headerHeight-footerHeight;
 		}
 			
 		$('.IUPageContent').css('height', minHeight+'px');
@@ -252,7 +252,15 @@ function getImageWidth(imageSrc){
 
 
 $(window).resize(function(){
-	remakeCollection();
+	//iuframe.js
+	resizeCollection();
+	reframeCenter();
+	resizePageLinkSet();
+	relocateScrollAnimation();
+	resizeSideBar();
+	makefullSizeSection();
+	
+	//iueditor.js
 	getIUUpdatedFrameThread();
 });
 
