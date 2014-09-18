@@ -15,6 +15,7 @@
 #import "JDUIUtil.h"
 #import "IUBackground.h"
 #import "IUClass.h"
+#import "IUFooter.h"
 #import "IUEventVariable.h"
 #import "IUResourceManager.h"
 #import "IUIdentifierManager.h"
@@ -79,7 +80,6 @@
         
         _mqSizes = [[aDecoder decodeObjectForKey:@"mqSizes"] mutableCopy];
         _classGroup = [aDecoder decodeObjectForKey:@"_classGroup"];
-        [self updateVersionControlForBackgroundWithCoder:aDecoder];
         
         _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _resourceGroup = [aDecoder decodeObjectForKey:@"_resourceGroup"];
@@ -116,11 +116,7 @@
     return self;
 }
 
-/**
- background 사용했던 iudocument class로 전환
- class가 호출된다음에 호출되어야함.
- */
-- (void)updateVersionControlForBackgroundWithCoder:(NSCoder *)aDecoder{
+-(id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
 
     if( IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, _IUProjectVersion) ){
         [self makeDefaultClasses];
@@ -139,8 +135,39 @@
         [headerClass copyCSSFromIU:oldHeader];
         [headerClass.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
         [headerClass.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+        
+        for(IUPage *page in _pageGroup.childrenFiles){
+             IUHeader *header = [[IUHeader alloc] initWithProject:self options:nil];
+            header.name = @"header";
+            header.prototypeClass = headerClass;
+            
+            for(NSNumber *viewportNumber in headerClass.css.allViewports){
+                int viewport = [viewportNumber intValue];
+                NSDictionary *dict = [headerClass.css tagDictionaryForViewport:viewport];
+                if(dict){
+                    if([dict objectForKey:IUCSSTagPixelHeight]){
+                        CGFloat height = [[dict objectForKey:IUCSSTagPixelHeight] floatValue];
+                        [header.css setValue:@(height) forTag:IUCSSTagPixelHeight forViewport:viewport];
+                        [headerClass.css setValue:@(height) forTag:IUCSSTagPixelHeight forViewport:viewport];
+                    }
+                }
+            }
+            [page insertIU:header atIndex:0 error:nil];
+            page.header = header;
+
+            
+            IUFooter *footer = [[IUFooter alloc] initWithProject:self options:nil];
+            footer.name = @"footer";
+            footer.prototypeClass = [self classWithName:@"footer"];
+            [footer.css setValue:@(0) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
+            
+            [page addIU:footer error:nil];
+            page.footer = footer;
+
+        }
 
     }
+    return self;
 }
 
 - (id)init{
