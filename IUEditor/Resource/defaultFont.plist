@@ -327,5 +327,18 @@
 		<key>isLoadable</key>
 		<true/>
 	</dict>
+    <key>Inconsolata</key>
+    <dict>
+        <key>name</key>
+        <string>Inconsolata</string>
+        <key>link</key>
+        <string>&lt;link href=&apos;http://fonts.googleapis.com/css?family=Inconsolata&apos; rel=&apos;stylesheet&apos; type=&apos;text/css&apos;&gt;</string>
+        <key>css</key>
+        <string>&apos;Inconsolata&apos;, sans-serif</string>
+        <key>editable</key>
+        <false/>
+        <key>isLoadable</key>
+        <true/>
+    </dict>
 </dict>
 </plist>
