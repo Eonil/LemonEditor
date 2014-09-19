@@ -199,6 +199,10 @@
 
 -(void)insertImage:(NSString *)name atIU:(NSString *)identifier{
     IUBox *currentIU = [self.controller IUBoxByIdentifier:identifier];
+    if (currentIU == nil && [identifier containsString:@"ImportedBy_"]) {
+        NSString *realID = [[identifier componentsSeparatedByString:@"_"] objectAtIndex:2];
+        currentIU = [self.controller IUBoxByIdentifier:realID];
+    }
     [currentIU setImageName:name];
 }
 
