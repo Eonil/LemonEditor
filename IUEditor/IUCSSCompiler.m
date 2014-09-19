@@ -121,7 +121,9 @@
     if (color.colorSpace != [NSColorSpace deviceRGBColorSpace]) {
         color = [color colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
     }
-    [self insertTag:tag string:[color rgbString]];
+    
+    NSString *colorString = [NSString stringWithFormat:@"%@; /* fallback */ %@: %@",[color rgbString], tag, [color rgbaString]];
+    [self insertTag:tag string:colorString];
 
 }
 
