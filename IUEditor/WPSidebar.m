@@ -80,7 +80,7 @@
             [retInnerHTML appendString:widget.sampleHTML];
         }
         else{
-            NSString *string =  [self.project.compiler editorHTML:self].string;
+            NSString *string =  [self.project.compiler htmlCode:self target:IUTargetEditor].string;
             [retInnerHTML appendString:string];
         }
     }

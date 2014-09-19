@@ -456,22 +456,12 @@
 }
 
 
-- (BOOL)hasLink:(IUBox *)iu{
-    if([iu isKindOfClass:[PGPageLinkSet class]]
-       || [iu isKindOfClass:[IUMenuBar class]]
-       || [iu isKindOfClass:[IUMenuItem class]]){
-        return NO;
-    }
-    
-    return YES;
-}
-
 - (void)updateLinkCSSCode:(IUCSSCode *)code asIUBox:(IUBox *)iu{
     
     //REVIEW: a tag는 밑으로 들어감. 상위에 있을 경우에 %사이즈를 먹어버림.
     //밑에 child 혹은 p tag 가 없을 경우에는 a tag의 사이즈가 0이 되기 때문에 size를 만들어줌
 
-    if(iu.link && [self hasLink:iu] && iu.children.count==0 ){
+    if(iu.link && [_compiler hasLink:iu] && iu.children.count==0 ){
         if(iu.text == nil || iu.text.length ==0){
             [code setInsertingIdentifier:[iu.cssClass stringByAppendingString:@" a"]];
             [code setInsertingTarget:IUTargetBoth];
@@ -590,7 +580,7 @@
     if (cssTagDict[IUCSSTagLineHeight]) {
         [code insertTag:@"line-height" floatFromNumber:cssTagDict[IUCSSTagLineHeight]];
     }
-    if(_rule == IUCompileRuleDjango){
+    if(_compiler.rule == IUCompileRuleDjango){
         if(cssTagDict[IUCSSTagEllipsis]){
             [code setInsertingTarget:IUTargetOutput];
             NSInteger line =  [cssTagDict[IUCSSTagEllipsis] integerValue];
@@ -791,11 +781,11 @@
     else{
         //REVIEW: image전체로 bg image tag 검사하면 안됨, media query 지원 못하게 됨.
         if(cssTagDict[IUCSSTagImage]){
-            NSString *imgSrc = [[self imagePathWithImageName:cssTagDict[IUCSSTagImage] target:IUTargetEditor] CSSURLString];
+            NSString *imgSrc = [[_compiler imagePathWithImageName:cssTagDict[IUCSSTagImage] target:IUTargetEditor] CSSURLString];
             if(imgSrc){
                 [code insertTag:@"background-image" string:imgSrc target:IUTargetEditor];
             }
-            NSString *outputImgSrc = [[self imagePathWithImageName:cssTagDict[IUCSSTagImage] target:IUTargetOutput] CSSURLString];
+            NSString *outputImgSrc = [[_compiler imagePathWithImageName:cssTagDict[IUCSSTagImage] target:IUTargetOutput] CSSURLString];
             if(outputImgSrc){
                 [code insertTag:@"background-image" string:outputImgSrc target:IUTargetOutput];
             }
@@ -965,47 +955,6 @@
     }
 }
 
-
-
-- (NSString *)imagePathWithImageName:(NSString *)imageName target:(IUTarget)target{
-    NSAssert (target != IUTargetBoth, @"IUTarget cannot both");
-    
-    NSString *imgSrc;
-    if ([imageName isHTTPURL]) {
-        return imageName;
-    }
-    
-    //clipart
-    //path : clipart/arrow_right.png
-    else if([[imageName pathComponents][0] isEqualToString:@"clipArt"]){
-        if(target == IUTargetEditor){
-            imgSrc = [[NSBundle mainBundle] pathForImageResource:[imageName lastPathComponent]];
-        }
-        else{
-            if(_rule == IUCompileRuleDjango){
-                imgSrc = [@"/resource/" stringByAppendingString:imageName];
-            }
-            else{
-                imgSrc = [@"resource/" stringByAppendingString:imageName];
-            }
-        }
-    }
-    else {
-        IUResourceFile *file = [_resourceManager resourceFileWithName:imageName];
-        if(file){
-            if(target == IUTargetEditor){
-                imgSrc = [file absolutePath];
-            }
-            else if(_rule == IUCompileRuleDjango && target == IUTargetOutput){
-                imgSrc = [@"/" stringByAppendingString:[file relativePath]];
-            }
-            else{
-                imgSrc = [file relativePath];
-            }
-        }
-    }
-    return imgSrc;
-}
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUPageContent:(IUPageContent*)pageContent{
     NSArray *editWidths = [pageContent.css allViewports];
@@ -1344,12 +1293,12 @@
         [code insertTag:@"left" integer:carousel.leftX unit:IUUnitPixel];
         [code insertTag:@"top" integer:carousel.leftY unit:IUUnitPixel];
         
-        NSString *imgSrc = [self imagePathWithImageName:imageName target:IUTargetEditor];
+        NSString *imgSrc = [_compiler imagePathWithImageName:imageName target:IUTargetEditor];
         if(imgSrc){
             [code insertTag:@"background" string:[imgSrc CSSURLString] target:IUTargetEditor];
         }
         
-        NSString *outputImgSrc = [[self imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
+        NSString *outputImgSrc = [[_compiler imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
         if(outputImgSrc){
             [code insertTag:@"background" string:outputImgSrc target:IUTargetOutput];
         }
@@ -1378,12 +1327,12 @@
         [code insertTag:@"right" integer:carousel.rightX unit:IUUnitPixel];
         [code insertTag:@"top" integer:carousel.rightY unit:IUUnitPixel];
         
-        NSString * imgSrc = [self imagePathWithImageName:imageName target:IUTargetEditor];
+        NSString * imgSrc = [_compiler imagePathWithImageName:imageName target:IUTargetEditor];
         if(imgSrc){
             [code insertTag:@"background" string:[imgSrc CSSURLString] target:IUTargetEditor];
         }
         
-         NSString *outputImgSrc = [[self imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
+         NSString *outputImgSrc = [[_compiler imagePathWithImageName:imageName target:IUTargetOutput] CSSURLString];
         if(outputImgSrc){
             [code insertTag:@"background" string:outputImgSrc target:IUTargetOutput];
         }

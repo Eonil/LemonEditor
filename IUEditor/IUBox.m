@@ -527,7 +527,7 @@
     if (self.delegate && [self.delegate isUpdateHTMLEnabled]) {
         
         [self.delegate disableUpdateJS:self];
-        NSString *editorHTML = [self.project.compiler editorHTML:self].string;
+        NSString *editorHTML = [self.project.compiler htmlCode:self target:IUTargetEditor].string;
         
         [self.delegate IUHTMLIdentifier:self.htmlID HTML:editorHTML withParentID:self.parent.htmlID];
 

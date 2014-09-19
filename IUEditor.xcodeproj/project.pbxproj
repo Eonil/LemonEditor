@@ -357,6 +357,7 @@
 		3D9F5C4919C7E5C900D63B84 /* pageLayout.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D9F5C4819C7E5C900D63B84 /* pageLayout.plist */; };
 		3D9F5C4C19C92C9E00D63B84 /* IUFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9F5C4B19C92C9E00D63B84 /* IUFooter.m */; };
 		3D9F5C4F19C92CC200D63B84 /* IUSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9F5C4E19C92CC200D63B84 /* IUSidebar.m */; };
+		3D9F5C5219CBCE6B00D63B84 /* IUHTMLCompiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9F5C5119CBCE6B00D63B84 /* IUHTMLCompiler.m */; };
 		3DA334EB19C14CFE00B6ABA6 /* IUCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA334EA19C14CFE00B6ABA6 /* IUCollectionView.m */; };
 		3DA334F219C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA334F019C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m */; };
 		3DA334F319C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA334F119C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib */; };
@@ -1462,6 +1463,8 @@
 		3D9F5C4B19C92C9E00D63B84 /* IUFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUFooter.m; path = IU/IUFooter.m; sourceTree = "<group>"; };
 		3D9F5C4D19C92CC200D63B84 /* IUSidebar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUSidebar.h; path = IU/IUSidebar.h; sourceTree = "<group>"; };
 		3D9F5C4E19C92CC200D63B84 /* IUSidebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUSidebar.m; path = IU/IUSidebar.m; sourceTree = "<group>"; };
+		3D9F5C5019CBCE6B00D63B84 /* IUHTMLCompiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUHTMLCompiler.h; sourceTree = "<group>"; };
+		3D9F5C5119CBCE6B00D63B84 /* IUHTMLCompiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUHTMLCompiler.m; sourceTree = "<group>"; };
 		3DA334E919C14CFE00B6ABA6 /* IUCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUCollectionView.h; path = IU/IUCollectionView.h; sourceTree = "<group>"; };
 		3DA334EA19C14CFE00B6ABA6 /* IUCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUCollectionView.m; path = IU/IUCollectionView.m; sourceTree = "<group>"; };
 		3DA334EF19C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUCollectionViewVC.h; path = Editor/PropertyView/LMPropertyIUCollectionViewVC.h; sourceTree = "<group>"; };
@@ -4342,6 +4345,8 @@
 				69604768198FE56400605FA2 /* IUCSSCompiler.m */,
 				691EE6DC1992DB320080E23A /* IUCSSWPCompiler.h */,
 				691EE6DD1992DB320080E23A /* IUCSSWPCompiler.m */,
+				3D9F5C5019CBCE6B00D63B84 /* IUHTMLCompiler.h */,
+				3D9F5C5119CBCE6B00D63B84 /* IUHTMLCompiler.m */,
 				69ABB14818D733ED0065D584 /* IUCompiler.h */,
 				69ABB14918D733ED0065D584 /* IUCompiler.m */,
 				69D5B68F18F247C100E9FB11 /* LMCompilerResourceSource.h */,
@@ -5611,6 +5616,7 @@
 				697F99DB1998259500E86A2B /* IUBackground+WP.m in Sources */,
 				69757AC218D7EB680095CBAC /* IUBox.m in Sources */,
 				3DB3ACF618EC1E120046DFB7 /* LMCanvasView.m in Sources */,
+				3D9F5C5219CBCE6B00D63B84 /* IUHTMLCompiler.m in Sources */,
 				3DED26F119010BB0001A1D67 /* LMPropertyIUImportVC.m in Sources */,
 				69A45DE018F6702C00C551D9 /* LMPropertyBorderVC.m in Sources */,
 				3D825BC9195940E0001CC3C2 /* LMInspectorAltTextVC.m in Sources */,

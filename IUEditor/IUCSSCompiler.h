@@ -10,12 +10,6 @@
 #import "IUBox.h"
 #import "IUCompiler.h"
 
-typedef enum _IUTarget{
-    IUTargetEditor = 1,
-    IUTargetOutput = 2,
-    IUTargetBoth = 3,
-} IUTarget;
-
 
 @interface IUCSSCode : NSObject
 - (NSDictionary*)stringTagDictionaryWithIdentifierForEditorViewport:(int)viewport;
@@ -29,7 +23,8 @@ typedef enum _IUTarget{
 - (id)initWithResourceManager:(IUResourceManager*)resourceManager;
 - (IUCSSCode*)cssCodeForIU:(IUBox*)iu;
 
-@property IUCompileRule    rule;
+@property IUCompiler *compiler;
+
 @end
 
 
