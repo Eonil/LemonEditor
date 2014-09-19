@@ -51,8 +51,6 @@
 @property (weak) IBOutlet NSButton *helpMenu;
 @property (weak) IBOutlet NSPopUpButton *positionPopupBtn;
 
-@property (nonatomic) BOOL enablePosition;
-
 
 - (IBAction)helpMenu:(id)sender;
 
@@ -68,7 +66,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _enablePosition = YES;
         enableObservation = YES;
         [self loadView];
     }
@@ -78,10 +75,6 @@
 
 - (void)setController:(IUController *)controller{
     [super setController:controller];
-    
-    //observing
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:nil];
-
 
     //binding
     NSDictionary *percentHiddeBindingOption = [NSDictionary
@@ -186,7 +179,6 @@
     [self outlet:_pwStepper bind:@"enabled2" property:@"canChangeWidthByUserInput"];
     [self outlet:_phStepper bind:@"enabled2" property:@"canChangeHeightByUserInput"];
     
-    [_positionPopupBtn bind:@"enabled2" toObject:self withKeyPath:@"enablePosition" options:IUBindingDictNotRaisesApplicable];
     [self outlet:_centerBtn bind:@"enabled2" property:@"xPosMove" options:IUBindingNegationAndNotRaise];
 
     
@@ -214,23 +206,11 @@
                                  ];
     
     [self removeObserver:self forKeyPaths:removeObservers];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:nil]; 
     [JDLogUtil log:IULogDealloc string:@"LMAppearanceFrameVC"];
 }
 
 #pragma mark - MQSize
 
-- (void)changeMQSelect:(NSNotification *)notification{
-    NSInteger selectedSize = [[notification.userInfo valueForKey:IUNotificationMQSize] integerValue];
-    NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
-    if(selectedSize == maxSize){
-        self.enablePosition = YES;
-    }
-    else{
-        self.enablePosition = NO;
-    }
-    
-}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
