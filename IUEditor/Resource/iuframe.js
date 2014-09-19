@@ -61,14 +61,15 @@ function reframeCenterIU(iu){
 	if($(iu).attr('horizontalCenter')=='1'){
 		ius.push($(iu));
 	}
-	ius.push($(iu).find('[horizontalCenter="1"]'));
+	ius = $.merge(ius, $(iu).find('[horizontalCenter="1"]').toArray());
 	arrangeHCenter(ius);
 	
 	//vertical center
+	ius = [];
 	if($(iu).attr('verticalCenter')=='1'){
 		ius.push($(iu));
 	}
-	ius = $(iu).find('[verticalCenter="1"]');
+	ius = $.merge(ius, $(iu).find('[verticalCenter="1"]').toArray());
 	
 	arrangeVCenter(ius);
 }
@@ -131,10 +132,8 @@ function arrangeVCenter(ius){
 }
 
 function reframeCenter(){
-    var respc = $('[horizontalCenter="1"]');
-	arrangeHCenter(respc);
-    respc = $('[verticalCenter="1"]');
-	arrangeVCenter(respc)
+	arrangeHCenter($('[horizontalCenter="1"]').toArray());
+	arrangeVCenter($('[verticalCenter="1"]').toArray());
 }
 
 function resizePageLinkSet(){
