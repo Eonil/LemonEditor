@@ -864,7 +864,6 @@
     
     [[self gridView] updateLayerRect:gridFrameDict];
     
-    
     NSArray *keys = [gridFrameDict allKeys];
     for(NSString *key in keys){
         if([frameDict.dict objectForKey:key]){
@@ -873,8 +872,15 @@
         [frameDict.dict setObject:[gridFrameDict objectForKey:key] forKey:key];
     }
     //draw guide line
-    for (NSString *IUID in self.controller.selectedIdentifiers){
-        [[self gridView] drawGuideLine:[frameDict lineToDrawSamePositionWithIU:IUID]];
+    for (IUBox *iu in self.controller.selectedObjects){
+        if (self.controller.importIUInSelectionChain){
+            NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_%@",self.controller.importIUInSelectionChain.htmlID, iu.htmlID];
+            [[self gridView] drawGuideLine:[frameDict lineToDrawSamePositionWithIU:modifiedHTMLID]];
+
+        }
+        else{
+            [[self gridView] drawGuideLine:[frameDict lineToDrawSamePositionWithIU:iu.htmlID]];
+        }
     }
     
 }
