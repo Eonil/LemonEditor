@@ -306,7 +306,7 @@
 }
 
 
-- (JDCode *)htmlCodeAsIUMenubar:(IUMenuBar *)menuBar target:(IUTarget)target attributeDict:(NSMutableDictionary *)attributeDict{
+- (JDCode *)htmlCodeAsIUMenuBar:(IUMenuBar *)menuBar target:(IUTarget)target attributeDict:(NSMutableDictionary *)attributeDict{
     JDCode *code = [[JDCode alloc] init];
     [code addCodeLineWithFormat:@"<div %@>", [self attributeString:attributeDict]];
     NSString *title = menuBar.mobileTitle;

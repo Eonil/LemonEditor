@@ -1,8 +1,20 @@
 function makefullSizeSection(){
     var respc = $('[enableFullSize="1"]').toArray();
 	var windowHeight =  $(window).height();
+	
+	var sectionHeight = windowHeight;
+	if($('.IUHeader').css('position') == 'fixed'){
+		var headerHeight = $('.IUHeader').height();
+		sectionHeight -= headerHeight;
+	}
+	
+	if($('.IUFooter').css('position') == 'fixed'){
+		var footerHeight = $('.IUFooter').height();
+		sectionHeight -= footerHeight;
+	}
+	
 	$.each(respc, function(){
-		$(this).css('height', windowHeight+'px');
+		$(this).css('height', sectionHeight+'px');
 	});
 }
 
