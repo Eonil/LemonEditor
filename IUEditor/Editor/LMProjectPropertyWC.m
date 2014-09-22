@@ -28,7 +28,7 @@
 //django
 @property (strong) IBOutlet NSView *djangoView;
 @property (weak) IBOutlet NSTextField *djangoPortTF;
-@property (weak) IBOutlet NSLayoutConstraint *managyPyTF;
+@property (weak) IBOutlet NSTextField *managyPyTF;
 
 //wordpress
 @property (strong) IBOutlet NSView *wordpressView;
@@ -74,7 +74,7 @@
         [viewArray addObject:_djangoView];
         
         [_djangoPortTF bind:NSValueBinding toObject:self withKeyPath:@"project.port" options:IUBindingDictNumberAndNotRaisesApplicable];
-        [_managyPyTF bind:NSValueBinding toObject:self withKeyPath:@"project.managePyPath" options:IUBindingDictNumberAndNotRaisesApplicable];
+        [_managyPyTF bind:NSValueBinding toObject:self withKeyPath:@"project.managePyPath" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
     }
     else if([self.project isKindOfClass:[IUWordpressProject class]]){
         [viewArray addObject:_wordpressView];

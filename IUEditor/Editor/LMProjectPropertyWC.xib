@@ -16,7 +16,7 @@
                 <outlet property="enableMinWidthCheckBox" destination="8XN-IR-Jb1" id="BhW-Pq-66l"/>
                 <outlet property="faviconComboBox" destination="1VZ-aM-O4C" id="34T-NJ-4Ia"/>
                 <outlet property="heightConstraint" destination="UCe-6c-KbQ" id="8RB-a3-0SR"/>
-                <outlet property="managyPyTF" destination="voU-vC-I0y" id="zqs-0z-R9F"/>
+                <outlet property="managyPyTF" destination="Afe-Jz-DYd" id="MUy-mj-Owf"/>
                 <outlet property="tableV" destination="JR0-8f-Z8n" id="gX5-E4-a9L"/>
                 <outlet property="tagTF" destination="eLr-h9-qY0" id="HTF-PQ-kuY"/>
                 <outlet property="themeDescTF" destination="NAQ-Cg-QV5" id="0Cg-pL-sf1"/>
