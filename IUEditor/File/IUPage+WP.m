@@ -32,7 +32,7 @@
     IUBox *centerBox = [[IUBox alloc] initWithProject:self.project options:nil];
     centerBox.name = @"CenterBox";
     centerBox.enableHCenter = YES;
-    centerBox.enableHCenter = IUPositionTypeRelative;
+    centerBox.positionType = IUPositionTypeRelative;
     [centerBox.css setValue:@(0) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
     [centerBox.css setValue:@(960) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
     [centerBox.css eradicateTag:IUCSSTagPixelHeight];
