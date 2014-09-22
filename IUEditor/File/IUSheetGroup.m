@@ -37,9 +37,15 @@
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [self init];
     [aDecoder decodeToObject:self withProperties:[IUSheetGroup properties]];
+    return self;
+}
+
+- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
+    self = [super awakeAfterUsingCoder:aDecoder];
     _children = [[aDecoder decodeObjectForKey:@"_children"] mutableCopy];
     return self;
 }
+
 
 -(void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeFromObject:self withProperties:[IUSheetGroup properties]];

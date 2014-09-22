@@ -79,8 +79,8 @@
         _compiler.resourceManager = _resourceManager;
         
         _mqSizes = [[aDecoder decodeObjectForKey:@"mqSizes"] mutableCopy];
-        _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _classGroup = [aDecoder decodeObjectForKey:@"_classGroup"];
+        _pageGroup = [aDecoder decodeObjectForKey:@"_pageGroup"];
         _resourceGroup = [aDecoder decodeObjectForKey:@"_resourceGroup"];
         _name = [aDecoder decodeObjectForKey:@"_name"];
         

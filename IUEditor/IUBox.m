@@ -89,8 +89,10 @@
     
     
     //version Control
-    if(IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, self.project.IUProjectVersion)){
-        _enableHCenter = [aDecoder decodeInt32ForKey:@"enableCenter"];
+    if(self.project){
+        if(IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, self.project.IUProjectVersion)){
+            _enableHCenter = [aDecoder decodeInt32ForKey:@"enableCenter"];
+        }
     }
     [self.undoManager enableUndoRegistration];
     return self;
@@ -348,7 +350,7 @@
         //not assigned to document
         return _tempProject;
     }
-    NSAssert(0, @"project");
+    //FIXME: decoder할때 project가 없을때가 있음 확인요
     return nil;
 }
 

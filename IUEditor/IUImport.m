@@ -14,6 +14,11 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
+    return self;
+}
+
+- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
+    self = [super awakeAfterUsingCoder:aDecoder];
     [self.undoManager disableUndoRegistration];
     
     if(self){
@@ -22,6 +27,7 @@
     
     [self.undoManager enableUndoRegistration];
     return self;
+
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{

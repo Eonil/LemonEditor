@@ -340,5 +340,18 @@
         <key>isLoadable</key>
         <true/>
     </dict>
+    <key>Libre Baskerville</key>
+    <dict>
+        <key>name</key>
+        <string>Libre Baskerville</string>
+        <key>link</key>
+        <string>&lt;link href=&apos;http://fonts.googleapis.com/css?family=Libre+Baskerville&apos; rel=&apos;stylesheet&apos; type=&apos;text/css&apos;&gt;</string>
+        <key>css</key>
+        <string>&apos;Libre Baskerville&apos;, serif</string>
+        <key>editable</key>
+        <false/>
+        <key>isLoadable</key>
+        <true/>
+    </dict>
 </dict>
 </plist>

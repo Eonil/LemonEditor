@@ -79,20 +79,21 @@
 
     }
 }
+- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
+    self =  [super awakeAfterUsingCoder:aDecoder];
+    [self.undoManager disableUndoRegistration];
 
--(id)initWithCoder:(NSCoder *)aDecoder{
-    self =  [super initWithCoder:aDecoder];
-    if(self){
-        _referenceImports = [[aDecoder decodeObjectForKey:@"referenceImport"] mutableCopy];
-        NSArray *copy = [_referenceImports copy];
-        NSInteger index = [copy count] - 1;
-        for (id object in [copy reverseObjectEnumerator]) {
-            if ([_referenceImports indexOfObject:object inRange:NSMakeRange(0, index)] != NSNotFound) {
-                [_referenceImports removeObjectAtIndex:index];
-            }
-            index--;
+    _referenceImports = [[aDecoder decodeObjectForKey:@"referenceImport"] mutableCopy];
+    NSArray *copy = [_referenceImports copy];
+    NSInteger index = [copy count] - 1;
+    for (id object in [copy reverseObjectEnumerator]) {
+        if ([_referenceImports indexOfObject:object inRange:NSMakeRange(0, index)] != NSNotFound) {
+            [_referenceImports removeObjectAtIndex:index];
         }
+        index--;
     }
+
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 -(void)encodeWithCoder:(NSCoder *)aCoder{
