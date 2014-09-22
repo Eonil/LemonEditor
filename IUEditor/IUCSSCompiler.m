@@ -958,6 +958,7 @@
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUPageContent:(IUPageContent*)pageContent{
     NSArray *editWidths = [pageContent.css allViewports];
+    [code setInsertingIdentifier:pageContent.cssClass];
     
     for (NSNumber *viewportNumber in editWidths) {
         int viewport = [viewportNumber intValue];

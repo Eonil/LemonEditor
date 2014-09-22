@@ -85,6 +85,7 @@
     return NO;
 }
 
+
 #pragma mark - should
 
 -(BOOL)hasX{

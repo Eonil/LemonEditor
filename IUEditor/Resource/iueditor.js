@@ -119,23 +119,28 @@ function resizePageContentHeightEditor(windowHeight){
 		var headerHeight = $('.IUHeader').height();
 		var footerHeight = $('.IUFooter').height();
 		var minHeight=windowHeight-headerHeight-footerHeight;
+		var pageContentHeight = 0;
 		$('.IUPageContent').children().each(function(){
 			
-			var newValue
+			var height;
 			
 			var heightstr = $(this)[0].style.height;
 			if(heightstr.search('%') >= 0){
 				var percentHeight = parseFloat(heightstr);
 				if(percentHeight >= 100){
-					newValue = 720;
+					height = 720;
 				}
 				else{
-					newValue = $(this).height()*(percentHeight/100)-10;
+					height = $(this).height()*(percentHeight/100)-10;
 				}
 			}
 			else{
-				newValue = $(this).height()+$(this).position().top;
+				height = $(this).height()
 			}
+			
+			var newValue = height + $(this).position().top;
+			
+			
 			if (newValue > minHeight){
 				minHeight = newValue;
 			}
@@ -148,9 +153,10 @@ function resizePageContentHeightEditor(windowHeight){
 		}
 			
 		$('.IUPageContent').css('height', minHeight+'px');
-		console.log('pagecontentminheight :' + minHeight);
-        
+		$('.IUPageContent').css('min-height', minHeight+'px');
+		
 		var pageHeight = minHeight+headerHeight+footerHeight;
+		
         
 		if (typeof console.resizePageContentHeightFinished != 'undefined'){
 			console.resizePageContentHeightFinished(pageHeight, minHeight);
@@ -259,6 +265,7 @@ $(window).resize(function(){
 	relocateScrollAnimation();
 	resizeSideBar();
 	makefullSizeSection();
+	
 	
 	//iueditor.js
 	getIUUpdatedFrameThread();
