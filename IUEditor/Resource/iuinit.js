@@ -72,11 +72,11 @@ $(document).ready(function(){
 	
 	/* Initialize IUFrame.js */
 	resizeCollection();
-	reframeCenter();
 	resizePageLinkSet();
 	makefullSizeSection();
 	resizeSideBar();
 	makeBottomLocation();
+	reframeCenter();
 	
 	/* Initialize iu.js*/
 	relocateScrollAnimation();

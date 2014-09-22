@@ -827,7 +827,7 @@
         //info window
         if(map.markerTitle){
             [code addCodeLineWithFormat:@"var infoWindow_%@ = new google.maps.InfoWindow();", map.htmlID];
-            [code addCodeLineWithFormat:@"infoWindow_%@.setContent('%@');", map.htmlID, map.markerTitle];
+            [code addCodeLineWithFormat:@"infoWindow_%@.setContent('<p>%@</p>');", map.htmlID, map.markerTitle];
             [code addCodeLineWithFormat:@"google.maps.event.addListener(marker_%@, 'click', function() { infoWindow_%@.open(map_%@, marker_%@); });", map.htmlID, map.htmlID, map.htmlID, map.htmlID];
         }
         

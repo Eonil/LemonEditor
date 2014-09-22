@@ -215,6 +215,14 @@
 }
 
 
+/**
+@brief code를 return값으로 돌려주지 않고 parameter로 code를 넘겨서 해당 값으로 저장해서 준다.
+ 
+@param iu code가 만들어질 iu
+@param target editor or build type
+@param code code를 덧붙일때 사용함. 보통 child html콜할때 사용.
+ 
+ */
 - (void)htmlCode:(IUBox *)iu target:(IUTarget)target code:(JDCode *)code{
     
     NSArray *classPedigree = [[iu class] classPedigreeTo:[IUBox class]];
