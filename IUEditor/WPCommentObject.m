@@ -15,6 +15,17 @@
     [self updateHTML];
 }
 
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeFromObject:self withProperties:[WPCommentObject properties]];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    [aDecoder decodeToObject:self withProperties:[WPCommentObject properties]];
+    return self;
+}
+
 - (NSString*)sampleInnerHTML{
     switch (self.objType) {
         case WPCommentObjectTypeContent:

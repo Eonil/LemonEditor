@@ -11,6 +11,7 @@
 #import "WPArticleDate.h"
 #import "WPArticleBody.h"
 #import "WPCommentCollection.h"
+#import "WPCommentFormCollection.h"
 
 #import "IUIdentifierManager.h"
 #import "IUProject.h"
@@ -63,6 +64,7 @@
     [self setEnableDate:YES];
     [self setEnableBody:YES];
     [self setEnableComment:YES];
+    [self setEnableCommentForm:YES];
     
     [self.undoManager enableUndoRegistration];
     
@@ -106,6 +108,27 @@
     else {
         for (IUBox *box in self.children) {
             if ([box isKindOfClass:[WPArticleDate class]]) {
+                [self removeIU:box];
+            }
+        }
+    }
+}
+
+- (void)setEnableCommentForm:(BOOL)enableCommentForm{
+    _enableCommentForm = enableCommentForm;
+    if (enableCommentForm) {
+        if (self.isConnectedWithEditor) {
+            [self.project.identifierManager resetUnconfirmedIUs];
+        }
+        WPCommentFormCollection *formCollection = [[WPCommentFormCollection alloc] initWithProject:self.project options:nil];
+        [self addIU:formCollection error:nil];
+        if (self.isConnectedWithEditor) {
+            [formCollection confirmIdentifier];
+        }
+    }
+    else {
+        for (IUBox *box in self.children) {
+            if ([box isKindOfClass:[WPCommentFormCollection class]]) {
                 [self removeIU:box];
             }
         }

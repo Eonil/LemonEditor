@@ -14,5 +14,6 @@
 @property (nonatomic) BOOL enableDate;
 @property (nonatomic) BOOL enableBody;
 @property (nonatomic) BOOL enableComment;
+@property (nonatomic) BOOL enableCommentForm;
 
 @end

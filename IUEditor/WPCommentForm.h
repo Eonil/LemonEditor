@@ -7,12 +7,18 @@
 //
 
 #import "IUBox.h"
+#import "IUProtocols.h"
 
 typedef enum _WPCommentFormType {
-    WPCommentFormTypeName,
+    WPCommentFormTypeAuthor,
     WPCommentFormTypeEmail,
     WPCommentFormTypeWebsite,
+    WPCommentFormTypeContent,
 }WPCommentFormType;
 
-@interface WPCommentForm : IUBox
+
+@interface WPCommentForm : IUBox <IUSampleHTMLProtocol, IUCodeProtocol>
+
+@property (nonatomic) WPCommentFormType formType;
+
 @end
