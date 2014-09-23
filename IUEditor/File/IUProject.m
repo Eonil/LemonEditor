@@ -579,6 +579,10 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:buildDirectoryPath] == NO) {
         [[NSFileManager defaultManager] createDirectoryAtPath:buildDirectoryPath withIntermediateDirectories:YES attributes:nil error:error];
     }
+    if ([[NSFileManager defaultManager] fileExistsAtPath:buildResourcePath] == YES) {
+        [[NSFileManager defaultManager] removeItemAtPath:buildResourcePath error:nil];
+    }
+    
     
     [[NSFileManager defaultManager] setDelegate:self];
     [[NSFileManager defaultManager] copyItemAtPath:_resourceGroup.absolutePath toPath:buildResourcePath error:error];
