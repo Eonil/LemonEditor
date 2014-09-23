@@ -10,6 +10,6 @@
 #import "IUProtocols.h"
 
 
-@interface WPArticleList : IUBox <IUCodeProtocol>
+@interface WPArticleList : IUBox <IUPHPCodeProtocol>
 
 @end

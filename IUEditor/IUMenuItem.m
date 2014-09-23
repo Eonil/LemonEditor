@@ -309,7 +309,7 @@
 - (BOOL)canChangeOverflow{
     return NO;
 }
-- (BOOL)shouldAddIUByUserInput{
+- (BOOL)canAddIUByUserInput{
     return NO;
 }
 - (BOOL)canRemoveIUByUserInput{

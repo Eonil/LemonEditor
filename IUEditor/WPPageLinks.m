@@ -94,4 +94,9 @@
     return [self.cssClass stringByAppendingString:@" > ul"];
 }
 
+- (BOOL)shouldCompileChildrenForOutput{
+    return NO;
+}
+
+
 @end

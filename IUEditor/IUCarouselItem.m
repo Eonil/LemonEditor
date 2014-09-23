@@ -39,7 +39,7 @@
     return NO;
 }
 
-- (BOOL)shouldAddIUByUserInput{
+- (BOOL)canAddIUByUserInput{
     return YES;
 }
 -(BOOL)canRemoveIUByUserInput{

@@ -124,10 +124,11 @@
     return YES;
 }
 
--(BOOL)shouldAddIUByUserInput{
+-(BOOL)canAddIUByUserInput{
     return NO;
 }
 -(NSString*)code{
     return @"<? wp_nav_menu() ?>";
 }
+
 @end

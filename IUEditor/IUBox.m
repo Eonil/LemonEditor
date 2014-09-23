@@ -674,11 +674,15 @@
 
 #pragma mark should
 
--(BOOL)shouldAddIUByUserInput{
+-(BOOL)canAddIUByUserInput{
     return YES;
 }
 
 - (BOOL)canRemoveIUByUserInput{
+    return YES;
+}
+
+-(BOOL)shouldCompileChildrenForOutput{
     return YES;
 }
 

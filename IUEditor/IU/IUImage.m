@@ -49,7 +49,7 @@
 #pragma mark - 
 #pragma mark IUImage
 
-- (BOOL)shouldAddIUByUserInput{
+- (BOOL)canAddIUByUserInput{
     return NO;
 }
 

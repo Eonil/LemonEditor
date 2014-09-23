@@ -53,7 +53,7 @@
     return html;
 }
 
--(BOOL)shouldAddIUByUserInput{
+-(BOOL)canAddIUByUserInput{
     return NO;
 }
 

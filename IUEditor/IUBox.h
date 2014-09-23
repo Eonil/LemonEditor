@@ -175,7 +175,8 @@ typedef enum _IUOverflowType{
 - (NSMutableArray *)allIdentifierChildren;
 
 
--(BOOL)shouldAddIUByUserInput;
+-(BOOL)canAddIUByUserInput;
+-(BOOL)shouldCompileChildrenForOutput;
 
 -(BOOL)insertIU:(IUBox *)iu atIndex:(NSInteger)index  error:(NSError**)error;
 -(BOOL)addIU:(IUBox *)iu error:(NSError**)error;

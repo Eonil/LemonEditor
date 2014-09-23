@@ -63,4 +63,8 @@
     return YES;
 }
 
+- (BOOL)shouldCompileChildrenForOutput{
+    return YES;
+}
+
 @end

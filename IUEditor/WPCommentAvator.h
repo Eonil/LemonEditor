@@ -9,7 +9,7 @@
 #import "IUBox.h"
 #import "IUProtocols.h"
 
-@interface WPCommentAvator : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
+@interface WPCommentAvator : IUBox <IUPHPCodeProtocol, IUSampleHTMLProtocol>
 
 @property NSInteger avatarSize;
 

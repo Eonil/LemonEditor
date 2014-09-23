@@ -196,7 +196,7 @@
     NSPasteboard *pBoard = info.draggingPasteboard;
     if([[pBoard types] containsObject:@"stackVC"]){
         IUBox *newParent = [item representedObject];    
-        if ([newParent shouldAddIUByUserInput] == NO) {
+        if ([newParent canAddIUByUserInput] == NO) {
             return NSDragOperationNone;
         }
         
@@ -219,7 +219,7 @@
     if(item){
         IUBox *newParent = [item representedObject];
         
-        if([newParent shouldAddIUByUserInput] == NO){
+        if([newParent canAddIUByUserInput] == NO){
             return NSDragOperationNone;
         }
         else{

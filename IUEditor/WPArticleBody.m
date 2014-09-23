@@ -87,5 +87,8 @@
     return NO;
 }
 
+- (BOOL)shouldCompileChildrenForOutput{
+    return NO;
+}
 
 @end

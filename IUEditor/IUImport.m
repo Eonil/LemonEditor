@@ -113,7 +113,7 @@
     return @[_prototypeClass];
 }
 
-- (BOOL)shouldAddIUByUserInput{
+- (BOOL)canAddIUByUserInput{
     return NO;
 }
 

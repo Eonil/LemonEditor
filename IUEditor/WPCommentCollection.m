@@ -59,7 +59,7 @@
 }
 
 
-- (NSString*)prefixCode{
+- (NSString*)code{
     return @"<?php\n\
     $args = array(\n\
     // args here\n\
@@ -72,11 +72,7 @@
     foreach ( $comments as $comment ) { ?>\n";
 }
 
-- (BOOL)shouldCompileChildrenForOutput{
-    return YES; //default is YES
-}
-
-- (NSString*)postfixCode{
+- (NSString*)codeAfterChildren{
     return @"<?\n\
             }\n\
         } else {\n\

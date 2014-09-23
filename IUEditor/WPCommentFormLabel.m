@@ -58,4 +58,9 @@
     return YES;
 }
 
+- (BOOL)shouldCompileChildrenForOutput{
+    return NO;
+}
+
+
 @end

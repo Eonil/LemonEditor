@@ -9,7 +9,7 @@
 #import "IUBox.h"
 #import "IUProtocols.h"
 
-@interface WPSidebar : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
+@interface WPSidebar : IUBox <IUPHPCodeProtocol, IUSampleHTMLProtocol>
 
 @property (nonatomic) NSString *wordpressName;
 //@property (nonatomic) NSInteger widgetCount;

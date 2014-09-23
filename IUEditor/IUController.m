@@ -85,7 +85,7 @@
                 NSAssert(0, @"pasteTarget");
                 return;
             }
-            if ([pasteTarget shouldAddIUByUserInput]) {
+            if ([pasteTarget canAddIUByUserInput]) {
                 break;
             }
             pasteTarget = pasteTarget.parent;

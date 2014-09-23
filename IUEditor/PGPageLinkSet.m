@@ -113,7 +113,7 @@
 }
 #pragma mark - shouldXXX
 
-- (BOOL)shouldAddIUByUserInput{
+- (BOOL)canAddIUByUserInput{
     return NO;
 }
 

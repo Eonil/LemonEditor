@@ -9,6 +9,6 @@
 #import "IUBox.h"
 #import "IUProtocols.h"
 
-@interface WPArticleComment : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
+@interface WPArticleComment : IUBox <IUPHPCodeProtocol, IUSampleHTMLProtocol>
 
 @end

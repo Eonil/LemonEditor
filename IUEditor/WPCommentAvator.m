@@ -10,4 +10,8 @@
 
 @implementation WPCommentAvator
 
+- (BOOL)shouldCompileChildrenForOutput{
+    return YES;
+}
+
 @end

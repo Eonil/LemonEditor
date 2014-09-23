@@ -149,7 +149,7 @@
     
     //target별 attribute
     if(target == IUTargetEditor){
-        if(iu.shouldAddIUByUserInput){
+        if(iu.canAddIUByUserInput){
             [attributeDict setObject:[NSNull null] forKey:@"hasChildren"];
         }
     }
@@ -904,35 +904,45 @@
  }
 
  
- */
 
 
 - (JDCode *)htmlCodeAsWPPageLink:(WPPageLink *)wpPageLink target:(IUTarget)target attributeDict:(NSMutableDictionary *)attributeDict{
     return nil;
 }
+ */
 
+/*
+ If IU conforms IUSampleHTMLProtocol,
+    If IU is responds sampleInnerHTML
+ 
+ */
 
 - (JDCode *)htmlCodeAsIUBox:(IUBox *)iu target:(IUTarget)target attributeDict:(NSMutableDictionary *)attributeDict{
     JDCode *code = [[JDCode alloc] init];
     
     //TODO: WP
     //wp- to be removed
-    if(target == IUTargetEditor){
-        if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol) ]){
-            IUBox <IUSampleHTMLProtocol> *sampleProtocolIU = (id)iu;
-            if ([sampleProtocolIU respondsToSelector:@selector(sampleInnerHTML)]) {
-                NSString *sampleInnerHTML = [sampleProtocolIU sampleInnerHTML];
-                [code addCodeLineWithFormat:@"<div %@ >%@</div>", [self attributeString:attributeDict], sampleInnerHTML];
-            }
-            else if ([sampleProtocolIU respondsToSelector:@selector(sampleHTML)]) {
-                [code addCodeLine: sampleProtocolIU.sampleHTML];
-            }
-            else {
-                assert(0);
+    if (target == IUTargetEditor && [iu conformsToProtocol:@protocol(IUSampleHTMLProtocol)]){
+        IUBox <IUSampleHTMLProtocol> *sampleProtocolIU = (id)iu;
+        if ([sampleProtocolIU respondsToSelector:@selector(sampleInnerHTML)]) {
+            NSString *sampleInnerHTML = [sampleProtocolIU sampleInnerHTML];
+            [code addCodeLineWithFormat:@"<div %@ >%@</div>", [self attributeString:attributeDict], sampleInnerHTML];
+            for (IUBox *child in iu.children) {
+                JDCode *childCode = [[JDCode alloc] init];
+                [self htmlCode:child target:target code:childCode];
+                if (childCode) {
+                    [code addCodeWithIndent:childCode];
+                }
             }
         }
+        else if ([sampleProtocolIU respondsToSelector:@selector(sampleHTML)]) {
+            [code addCodeLine: sampleProtocolIU.sampleHTML];
+        }
+        else {
+            assert(0);
+        }
+        return code;
     }
-    
     
     NSString *tag = @"div";
     if ([iu isKindOfClass:[PGForm class]]) {
@@ -989,9 +999,13 @@
                 assert(0);
             }
         }
+        else if ([iu conformsToProtocol:@protocol(IUPHPCodeProtocol)] && _compiler.rule == IUCompileRuleWordpress){
+            NSString *phpCode = [((IUBox <IUPHPCodeProtocol>*)iu) code];
+            [code addCodeLine:phpCode];
+        }
     }
     
-    if(iu.text && iu.text.length > 0){
+    if(iu.text && iu.text.length > 0 && [iu conformsToProtocol:@protocol(IUPHPCodeProtocol)] == NO){
         [code addNewLine];
         NSString *htmlText = [iu.text stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
         htmlText = [htmlText stringByReplacingOccurrencesOfString:@"  " withString:@" &nbsp;"];
@@ -1000,13 +1014,18 @@
         [code decreaseIndentLevelForEdit];
     }
     
-    
-    for (IUBox *child in iu.children) {
-        JDCode *childCode = [[JDCode alloc] init];
-        [self htmlCode:child target:target code:childCode];
-        if (childCode) {
-            [code addCodeWithIndent:childCode];
+    if (target == IUTargetEditor || ( target == IUTargetOutput && [iu shouldCompileChildrenForOutput] )) {
+        for (IUBox *child in iu.children) {
+            JDCode *childCode = [[JDCode alloc] init];
+            [self htmlCode:child target:target code:childCode];
+            if (childCode) {
+                [code addCodeWithIndent:childCode];
+            }
         }
+    }
+    
+    if (target == IUTargetOutput && [iu conformsToProtocol:@protocol(IUPHPCodeProtocol)] && _compiler.rule == IUCompileRuleWordpress) {
+        
     }
     
     

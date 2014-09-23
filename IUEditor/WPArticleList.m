@@ -33,11 +33,12 @@
     return self;
 }
 
-- (NSString*)prefixCode{
+- (NSString*)code{
     return @"<? while ( have_posts() ) : the_post(); ?>";
 }
 
-- (NSString*)postfixCode{
+- (NSString*)codeAfterChildren{
     return @"<? endwhile ?>";
 }
+
 @end

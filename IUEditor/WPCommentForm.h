@@ -17,7 +17,7 @@ typedef enum _WPCommentFormType {
 }WPCommentFormType;
 
 
-@interface WPCommentForm : IUBox <IUSampleHTMLProtocol, IUCodeProtocol>
+@interface WPCommentForm : IUBox <IUSampleHTMLProtocol, IUPHPCodeProtocol>
 
 @property (nonatomic) WPCommentFormType formType;
 

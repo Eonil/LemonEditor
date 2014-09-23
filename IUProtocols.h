@@ -15,12 +15,18 @@
 - (NSString*)sampleHTML;
 @end
 
-@protocol IUCodeProtocol
+/**
+ IUCode Protocol Coding Order
+ 
+ (NSString*)code
+ [children]
+ (NSString*)codeAfterChildren
+ */
+@protocol IUPHPCodeProtocol
+
 @optional
-- (NSString*)prefixCode;
-- (NSString*)postfixCode;
 - (NSString*)code;
-- (BOOL)shouldCompileChildrenForOutput; // default : YES
+- (NSString*)codeAfterChildren;
 @end
 
 @protocol IUWordpressCodeProtocol

@@ -19,7 +19,7 @@ typedef enum _WPCommentFormFieldType{
     WPCommentFormFieldContentLabel,
 } WPCommentFormFieldType;
 
-@interface WPCommentFormField : IUBox <IUSampleHTMLProtocol, IUCodeProtocol>
+@interface WPCommentFormField : IUBox <IUSampleHTMLProtocol, IUPHPCodeProtocol>
 
 @property (nonatomic) WPCommentFormFieldType fieldType;
 

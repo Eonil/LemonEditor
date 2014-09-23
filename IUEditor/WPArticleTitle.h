@@ -10,6 +10,6 @@
 #import "IUProtocols.h"
 
 
-@interface WPArticleTitle : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
+@interface WPArticleTitle : IUBox <IUPHPCodeProtocol, IUSampleHTMLProtocol>
 
 @end

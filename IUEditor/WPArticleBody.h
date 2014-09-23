@@ -9,7 +9,7 @@
 #import "IUBox.h"
 #import "IUProtocols.h"
 
-@interface WPArticleBody : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
+@interface WPArticleBody : IUBox <IUPHPCodeProtocol, IUSampleHTMLProtocol>
 
 @property (nonatomic) NSString *sampleText;
 

@@ -243,7 +243,7 @@
     return YES;
 }
 
-- (BOOL)shouldAddIUByUserInput{
+- (BOOL)canAddIUByUserInput{
     return NO;
 }
 

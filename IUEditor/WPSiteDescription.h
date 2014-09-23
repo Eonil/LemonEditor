@@ -10,6 +10,6 @@
 #import "IUProtocols.h"
 
 
-@interface WPSiteDescription : IUBox <IUSampleHTMLProtocol, IUCodeProtocol>
+@interface WPSiteDescription : IUBox <IUSampleHTMLProtocol, IUPHPCodeProtocol>
 
 @end

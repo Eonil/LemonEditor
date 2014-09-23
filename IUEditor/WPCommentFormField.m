@@ -74,4 +74,5 @@
 - (BOOL)shouldCompileFontInfo{
     return YES;
 }
+
 @end

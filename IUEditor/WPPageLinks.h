@@ -9,7 +9,7 @@
 #import "IUBox.h"
 #import "IUProtocols.h"
 
-@interface WPPageLinks : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
+@interface WPPageLinks : IUBox <IUPHPCodeProtocol, IUSampleHTMLProtocol>
 
 @property (nonatomic) NSInteger leftRightPadding;
 @property (nonatomic) IUAlign align;

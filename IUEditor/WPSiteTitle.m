@@ -36,8 +36,16 @@
     return @"<h1><a href=\"<?php echo home_url(); ?>\"><?bloginfo()?></a></h1>";
 }
 
+- (BOOL)canAddIUByUserInput{
+    return NO;
+}
+
 - (BOOL)shouldCompileFontInfo{
     return YES;
+}
+
+- (BOOL)shouldCompileChildrenForOutput{
+    return NO;
 }
 
 @end

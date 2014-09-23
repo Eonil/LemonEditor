@@ -389,7 +389,7 @@
     _timer = timer;
 }
 
-- (BOOL)shouldAddIUByUserInput{
+- (BOOL)canAddIUByUserInput{
     return NO;
 }
 

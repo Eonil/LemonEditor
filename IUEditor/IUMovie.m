@@ -64,7 +64,7 @@
     [self removeObserver:self forKeyPaths:@[@"posterPath"]];
 }
 
-- (BOOL)shouldAddIUByUserInput{
+- (BOOL)canAddIUByUserInput{
     return NO;
 }
 

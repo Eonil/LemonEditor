@@ -9,7 +9,7 @@
 #import "IUBox.h"
 #import "IUProtocols.h"
 
-@interface WPMenu : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
+@interface WPMenu : IUBox <IUPHPCodeProtocol, IUSampleHTMLProtocol>
 @property (nonatomic) NSInteger itemCount;
 @property (nonatomic) NSInteger leftRightPadding;
 @property (nonatomic) IUAlign align;

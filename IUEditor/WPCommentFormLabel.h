@@ -10,7 +10,7 @@
 #import "IUProtocols.h"
 #import "WPCommentForm.h"
 
-@interface WPCommentFormLabel : IUBox <IUSampleHTMLProtocol, IUCodeProtocol>
+@interface WPCommentFormLabel : IUBox <IUSampleHTMLProtocol, IUPHPCodeProtocol>
 
 @property (nonatomic) WPCommentFormType formType;
 

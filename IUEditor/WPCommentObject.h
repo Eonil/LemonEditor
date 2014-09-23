@@ -17,7 +17,7 @@ typedef enum _WPCommentObjectType{
     WPCommentObjectTypeURL,
 }WPCommentObjectType;
 
-@interface WPCommentObject : IUBox <IUCodeProtocol, IUSampleHTMLProtocol>
+@interface WPCommentObject : IUBox <IUPHPCodeProtocol, IUSampleHTMLProtocol>
 
 @property (nonatomic) WPCommentObjectType objType;
 @property (nonatomic) BOOL                linkToURL;

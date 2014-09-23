@@ -15,7 +15,7 @@ typedef enum _WPCommentFormCellType{
     WPCommentFormCellTypeTextArea
 }WPCommentFormCellType;
 
-@interface WPCommentFormCell : IUBox <IUSampleHTMLProtocol, IUCodeProtocol>
+@interface WPCommentFormCell : IUBox <IUSampleHTMLProtocol, IUPHPCodeProtocol>
 
 @property (nonatomic) WPCommentFormCellType cellType;
 @property (nonatomic) WPCommentFormType formType;
