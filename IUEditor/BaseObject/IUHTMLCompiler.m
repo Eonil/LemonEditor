@@ -49,7 +49,6 @@
 #pragma mark - general function
 
 - (NSString *)linkHeaderString:(IUBox *)iu{
-    
     //find link url
     NSString *linkStr;
     if([iu.link isKindOfClass:[NSString class]]){
@@ -78,20 +77,21 @@
         }
     }
     
+    JDCode *code = [[JDCode alloc] init];
+
     
-    //make a tag
-    NSString *str;
+    [code addCodeWithFormat:@"<a href='%@' ", linkURL];
     if(iu.linkTarget){
-        str = [NSString stringWithFormat:@"<a href='%@' target='_blank'>", linkURL];
+        [code addCodeWithFormat:@" target='_blank'"];
     }
-    else{
-        str = [NSString stringWithFormat:@"<a href='%@'>", linkURL];
+    if(iu.divLink){
+        [code addCodeWithFormat:@" divlink='1'"];
     }
     
-    return str;
+    [code addCodeWithFormat:@">"];
+    
+    return code.string;
 }
-
-
 
 
 -(NSArray *)htmlClassForIU:(IUBox *)iu target:(IUTarget)target{
@@ -160,7 +160,12 @@
         if (iu.xPosMove) {
             [attributeDict setObject:@(iu.xPosMove) forKey:@"xPosMove"];
         }
-        if(iu.link && [_compiler hasLink:iu] && [iu.link isKindOfClass:[IUBox class]]){
+        
+        //active class를 add 하기 위한 attribute
+        if(iu.link && [_compiler hasLink:iu] && [iu.link isKindOfClass:[IUBox class]]
+           //image class는 a tag가 바깥으로 붙고, active상태를 이용하지 않음.
+           && [iu isKindOfClass:[IUImage class]] == NO){
+        
             [attributeDict setObject:@"1" forKey:@"iulink"];
         }
         

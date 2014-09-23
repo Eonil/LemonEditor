@@ -66,10 +66,22 @@ $(document).ready(function(){
     /*INIT_Default_REPLACEMENT_START*/
 	
 	$("[iulink='1']").each(function(){
-		var link = $(this).parent().get(0);
-		activateLink(link, 'child');
+		var link = $(this).children().get(0);
+		activateLink(link, 'parent');
 	});
 	
+    $("[divlink='1']").click(function(evn){
+		var link =  this.href.split('#')[0];
+		var url = window.location.pathname;
+	    var urlRegExp = new RegExp(url == '/' ? window.location.origin + '/?$' : url.replace(/\/$/,''));
+		if(urlRegExp.test(link)){
+		    evn.preventDefault();
+			var div =  this.href.split('#')[1];
+			var linkIU = $('#'+div);
+	        $('html,body').scrollTo(linkIU.position().left, linkIU.position().top); 			
+		}
+    });
+    
 	/* Initialize IUFrame.js */
 	resizeCollection();
 	resizePageLinkSet();

@@ -86,14 +86,15 @@ function showCollectionView(iu, index){
 
 function activateLink(iu, location){
 	var url = window.location.pathname;
+	var links =  iu.href.split('#');
     var urlRegExp = new RegExp(url == '/' ? window.location.origin + '/?$' : url.replace(/\/$/,''));
-	if(urlRegExp.test(iu.href)){
+	if(urlRegExp.test(links[0]) && links.length==1 ){
 		if(location=='parent'){
 			$(iu).parent().addClass('active');
 		}
 		else if(location=='child'){
 			$(iu).children().first().addClass('active');
-		}
+		}	
   	}
 	else{
 		if(location=='parent'){
@@ -105,8 +106,7 @@ function activateLink(iu, location){
 			if ($(iu).children().first().hasClass('active')) {
 				$(iu).children().first().removeClass('active');
 			}
-		}
-
+		}		
 	}
 }
 

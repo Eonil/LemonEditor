@@ -741,7 +741,7 @@
 }
 
 - (NSArray *)defaultCopyJSArray{
-    return @[@"jquery.event.move.js",@"jquery.event.swipe.js", @"iuframe.js", @"iu.js", @"iucarousel.js", ];
+    return @[@"jquery.event.move.js",@"jquery.event.swipe.js", @"jquery.scrollto.js",@"iuframe.js", @"iu.js", @"iucarousel.js"];
 }
 - (NSArray *)defaultOutputJSArray{
     return [self defaultCopyJSArray];
