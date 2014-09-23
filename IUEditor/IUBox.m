@@ -21,6 +21,7 @@
 #import "IUProject.h"
 #import "IUItem.h"
 #import "IUImport.h"
+#import "IUPage.h"
 
 @interface IUBox()
 @end
@@ -204,6 +205,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMQSize:) name:IUNotificationMQAdded object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMQSize:) name:IUNotificationMQRemoved object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(structureChanged:) name:IUNotificationStructureDidChange object:self.project];
     
     
     for (IUBox *box in self.children) {
@@ -476,7 +478,20 @@
 }
 
 
-#pragma mark - mq
+#pragma mark - noti
+- (CalledByNoti)structureChanged:(NSNotification*)noti{
+    NSDictionary *userInfo = noti.userInfo;
+    
+    if ([userInfo[IUNotificationStructureChangeType] isEqualToString:IUNotificationStructureChangeRemoving]
+        && [userInfo[IUNotificationStructureChangedIU] isKindOfClass:[IUPage class]]) {
+        if([self.link isEqualTo:userInfo[IUNotificationStructureChangedIU]]){
+            //disable undoManager;
+            _link = nil;
+            _divLink = nil;
+            [self updateCSS];
+        }
+    }
+}
 
 - (void)addMQSize:(NSNotification *)notification{
     NSInteger size = [[notification.userInfo objectForKey:IUNotificationMQSize] integerValue];
