@@ -1052,7 +1052,10 @@
     }
     
     if (target == IUTargetOutput && [iu conformsToProtocol:@protocol(IUPHPCodeProtocol)] && _compiler.rule == IUCompileRuleWordpress) {
-        
+        if ([iu respondsToSelector:@selector(codeAfterChildren)]) {
+            NSString *phpCode = [((IUBox <IUPHPCodeProtocol>*)iu) codeAfterChildren];
+            [code addCodeLine:phpCode];
+        }
     }
     
     
