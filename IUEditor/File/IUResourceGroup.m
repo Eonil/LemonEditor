@@ -49,6 +49,9 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
+    
+    [self.undoManager disableUndoRegistration];
+
     array = [[aDecoder decodeObjectForKey:@"array"] mutableCopy];
     
     NSMutableArray *removedGroup = [NSMutableArray array];
@@ -63,7 +66,14 @@
     
     _name = [aDecoder decodeObjectForKey:@"_name"];
     _parent = [aDecoder decodeObjectForKey:@"_parent"];
+    
+    [self.undoManager enableUndoRegistration];
     return self;
+}
+
+#pragma mark - Undo Manager
+- (NSUndoManager *)undoManager{
+    return [[[[NSApp mainWindow] windowController] document] undoManager];
 }
 
 - (BOOL)removeResourceFile:(IUResourceFile*)file{

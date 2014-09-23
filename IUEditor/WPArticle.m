@@ -29,6 +29,8 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
+    [self.undoManager disableUndoRegistration];
+    
     @try {
         _enableTitle = [aDecoder decodeBoolForKey:@"enableTitle"];
         _enableBody = [aDecoder decodeBoolForKey:@"enableBody"];
@@ -39,6 +41,8 @@
     }
     @finally {
     }
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 

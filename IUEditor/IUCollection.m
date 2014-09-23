@@ -38,8 +38,10 @@
     self = [super initWithProject:project options:options];
     if(self){
         [self.undoManager disableUndoRegistration];
+        
         self.defaultItemCount = 1;
         self.responsiveSetting = [NSArray array];
+        
         [self.undoManager enableUndoRegistration];
     }
     return self;

@@ -24,21 +24,26 @@
     return self;
 }
 
-- (NSArray *)children{
-    return nil;
-}
 
 - (id)copyWithZone:(NSZone *)zone{
+    [self.undoManager disableUndoRegistration];
+    
     IUResourceFile *file = [[IUResourceFile allocWithZone:zone] initWithName:_name];
     file.originalFilePath = self.absolutePath;
     [file setParent:self.parent];
+    
+    [self.undoManager enableUndoRegistration];
     return file;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
+    [self.undoManager disableUndoRegistration];
+    
     _name = [aDecoder decodeObjectForKey:@"_name"];
     _parent = [aDecoder decodeObjectForKey:@"_parent"];
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 
@@ -46,6 +51,16 @@
     [aCoder encodeObject:_name forKey:@"_name"];
     [aCoder encodeObject:_parent forKey:@"_parent"];
 }
+
+#pragma mark - Undo Manager
+- (NSUndoManager *)undoManager{
+    return [[[[NSApp mainWindow] windowController] document] undoManager];
+}
+
+- (NSArray *)children{
+    return nil;
+}
+
 
 -(NSString*)absolutePath{
     if ([self.parent isKindOfClass:[IUProject class]]) {

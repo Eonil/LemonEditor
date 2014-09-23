@@ -17,15 +17,21 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
+    [self.undoManager disableUndoRegistration];
     //REVIEW: old file conversion - absolute포함되어있음
     self.positionType = IUPositionTypeRelative;
 
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if(self){
+        
+        [self.undoManager disableUndoRegistration];
+        
+        
         self.positionType = IUPositionTypeRelative;
         [self.css setValue:[NSColor whiteColor] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
         [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
@@ -71,7 +77,7 @@
         
         [section addIU:contentBox error:nil];
         
-        
+        [self.undoManager enableUndoRegistration];
     }
     return self;
 }

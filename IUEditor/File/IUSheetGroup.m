@@ -30,19 +30,23 @@
     return group;
 }
 
-- (void)setChildren:(NSArray*)children{
-    _children = [children mutableCopy];
-}
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [self init];
+    [self.undoManager disableUndoRegistration];
+    
     [aDecoder decodeToObject:self withProperties:[IUSheetGroup properties]];
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 
 - (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
     self = [super awakeAfterUsingCoder:aDecoder];
+    [self.undoManager disableUndoRegistration];
     _children = [[aDecoder decodeObjectForKey:@"_children"] mutableCopy];
+    
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 
@@ -50,6 +54,17 @@
 -(void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeFromObject:self withProperties:[IUSheetGroup properties]];
     [aCoder encodeObject:_children forKey:@"_children"];
+}
+
+
+#pragma mark - Undo Manager
+- (NSUndoManager *)undoManager{
+    return [[[[NSApp mainWindow] windowController] document] undoManager];
+}
+
+
+- (void)setChildren:(NSArray*)children{
+    _children = [children mutableCopy];
 }
 
 - (NSArray*)childrenFiles{

@@ -40,11 +40,15 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
+    [[self.delegate undoManager] disableUndoRegistration];
+    
     _cssFrameDict = [aDecoder decodeObjectForKey:@"cssFrameDict"];
     self.editWidth = IUCSSDefaultViewPort;
     _assembledTagDictionaryForEditWidth = [NSMutableDictionary dictionary];
 
     [self updateAssembledTagDictionary];
+    
+    [[self.delegate undoManager] enableUndoRegistration];
     return self;
 }
 

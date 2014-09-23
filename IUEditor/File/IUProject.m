@@ -54,6 +54,9 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     if (self) {
+        
+        [self.undoManager disableUndoRegistration];
+        
         /* version control code */
         //REVIEW : sync with project version
         NSString *projectVersion = [aDecoder decodeObjectForKey:@"IUProjectVersion"];
@@ -109,6 +112,8 @@
             //version control
             _serverInfo = [[IUServerInfo alloc] init];
         }
+        
+        [self.undoManager enableUndoRegistration];
 
       
     }
@@ -116,7 +121,7 @@
 }
 
 -(id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
-    
+    [self.undoManager disableUndoRegistration];
     [super awakeAfterUsingCoder:aDecoder];
 
     if( IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, _IUProjectVersion) ){
@@ -168,6 +173,7 @@
         }
 
     }
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 
@@ -186,6 +192,8 @@
  */
 -(id)initWithProject:(IUProject*)project options:(NSDictionary*)options error:(NSError**)error{
     self = [super init];
+    
+    [self.undoManager disableUndoRegistration];
     
     _mqSizes = [project.mqSizes mutableCopy];
     
@@ -234,6 +242,8 @@
     
     // create build directory
     [[NSFileManager defaultManager] createDirectoryAtPath:self.absoluteBuildPath withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    [self.undoManager enableUndoRegistration];
 
     return self;
 }
@@ -362,6 +372,12 @@
 - (BOOL)isConnectedWithEditor{
     return _isConnectedWithEditor;
 }
+
+#pragma mark - Undo Manager
+- (NSUndoManager *)undoManager{
+    return [[[[NSApp mainWindow] windowController] document] undoManager];
+}
+
 
 - (void)setPath:(NSString *)path{
     _path = path;

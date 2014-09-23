@@ -17,6 +17,8 @@
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if(self){
+        [self.undoManager disableUndoRegistration];
+        
         self.zoomLevel = 14;
         self.latitude = @"37.790896";
         self.longitude = @"-122.401502";
@@ -26,6 +28,7 @@
         [self.css setValue:@(400) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
         [self.css setValue:@(400) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
         
+        [self.undoManager enableUndoRegistration];
     }
     return self;
 }

@@ -30,4 +30,7 @@ typedef enum _IUResourceType{
 -(IUResourceType)type;
 -(NSString*)name;
 
+
+- (NSUndoManager *)undoManager;
+
 @end

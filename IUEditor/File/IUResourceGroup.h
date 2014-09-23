@@ -24,4 +24,7 @@
 - (IUResourceFile*)addResourceFileWithContentOfPath:(NSString*)filePath;
 - (BOOL)addResourceGroup:(IUResourceGroup*)group;
 - (BOOL)removeResourceFile:(IUResourceFile*)file;
+
+- (NSUndoManager *)undoManager;
+
 @end

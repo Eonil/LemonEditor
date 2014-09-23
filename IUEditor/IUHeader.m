@@ -29,11 +29,6 @@
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder{
-    self = [super initWithCoder:aDecoder];
-    
-    return self;
-}
 
 -(BOOL)canRemoveIUByUserInput{
     return NO;

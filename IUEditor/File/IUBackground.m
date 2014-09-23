@@ -18,6 +18,7 @@
 -(id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if(self){
+        [self.undoManager disableUndoRegistration];
         [self.css setValue:nil forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
         
         NSNumber *num = [options objectForKey:kIUBackgroundOptionEmpty];
@@ -27,13 +28,16 @@
             [self addIU:_header error:nil];
         }
         NSAssert(self.children, @"");
+        [self.undoManager enableUndoRegistration];
     }
     return self;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
+    [self.undoManager disableUndoRegistration];
     [aDecoder decodeToObject:self withProperties:[IUBackground properties]];
+    [self.undoManager enableUndoRegistration];
     return self;
 }
 

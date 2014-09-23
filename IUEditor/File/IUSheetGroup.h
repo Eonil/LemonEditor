@@ -23,4 +23,6 @@
 - (void)changeIndex:(IUSheet *)sheet toIndex:(NSUInteger)newIndex;
 - (id)sheetWithHtmlID:(NSString *)identifier;
 
+- (NSUndoManager *)undoManager;
+
 @end

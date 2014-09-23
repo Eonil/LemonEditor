@@ -153,6 +153,7 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
 }
 
 - (void)showLemonSheet{
+    [self.undoManager disableUndoRegistration];
     
     if(isLoaded && [self lemonWindowController]){
         [[self lemonWindowController] reloadNavigation];
@@ -162,6 +163,8 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
         [[self lemonWindowController] selectFirstDocument];
         isLoaded = YES;
     }
+    
+    [self.undoManager enableUndoRegistration];
     
 }
 
@@ -175,9 +178,11 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
     
     
     if(_project && [filePath isEqualToString:_project.path] == NO){
-        
+        [self.undoManager disableUndoRegistration];
         _project.name = appName;
         _project.path = filePath;
+        
+        [self.undoManager enableUndoRegistration];
         
         [self showLemonSheet];
         
@@ -331,6 +336,7 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
 
 - (BOOL)readFromFileWrapper:(NSFileWrapper *)fileWrapper ofType:(NSString *)typeName error:(NSError **)outError
 {
+    [self.undoManager disableUndoRegistration];
 
     BOOL readSuccess= NO;
     NSDictionary *fileWrappers = [fileWrapper fileWrappers];
@@ -345,6 +351,7 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
             [self changeProjectPath:[self fileURL]];
             readSuccess = YES;
         }
+        
 
     }
     
@@ -362,6 +369,9 @@ static NSString *MetaDataKey = @"value2";            // special string value in 
     
     
     [self setDocumentFileWrapper:fileWrapper];
+
+    
+    [self.undoManager enableUndoRegistration];
 
     return readSuccess;
 

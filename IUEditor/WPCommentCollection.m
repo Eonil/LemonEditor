@@ -26,6 +26,10 @@
 - (id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if (self) {
+        
+        [self.undoManager disableUndoRegistration];
+        
+        
         self.positionType = IUPositionTypeRelative;
         /* WPCommentForm */
         WPCommentObject *authorObj = [[WPCommentObject alloc] initWithProject:project options:options];
@@ -48,6 +52,8 @@
         [commentObj.css eradicateTag:IUCSSTagPixelWidth];
         commentObj.positionType = IUPositionTypeRelative;
         [self addIU:commentObj error:nil];
+        
+        [self.undoManager enableUndoRegistration];
     }
     return self;
 }

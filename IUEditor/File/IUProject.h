@@ -161,4 +161,7 @@ static NSString *IUClassGroupName = @"class";
 @property NSString *buildPath;
 @property NSString *buildResourcePath;
 - (void)resetBuildPath;
+
+//undo manager
+- (NSUndoManager *)undoManager;
 @end

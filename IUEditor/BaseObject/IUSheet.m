@@ -14,7 +14,10 @@
 -(id)initWithProject:(IUProject *)project options:(NSDictionary *)options{
     self = [super initWithProject:project options:options];
     if(self){
+        [self.undoManager disableUndoRegistration];
         _ghostOpacity = 0.5;
+        
+        [self.undoManager enableUndoRegistration];
     }
     return self;
 }
