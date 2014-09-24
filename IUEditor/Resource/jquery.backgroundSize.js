@@ -327,7 +327,6 @@ function getStyleSheetPropertyValue(selectorText, propertyName) {
 }
 
 $(document).ready(function(){
-     console.log("ready : imageBG-ie")
 	 $('.IUBox').each(function(){
 		 var id = '.'+$(this).attr('id');
 		 var size = getStyleSheetPropertyValue(id, 'background-size');

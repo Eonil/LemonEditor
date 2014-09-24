@@ -151,11 +151,3 @@ function activeCarousel(carouselID){
 
 }
 
-$(window).resize(function(){
-	
-});
-
-$(document).ready(function(){
-	console.log('iucarousel.js')
-});
-

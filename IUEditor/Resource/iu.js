@@ -207,6 +207,7 @@ function relocateScrollAnimation(){
 	}
 }
 
+
 function moveScrollAnimation(){
 	//disable small size view port
 	var viewportWidth = $(window).width();
@@ -221,6 +222,7 @@ function moveScrollAnimation(){
 		
 	var scrollY = $(document).scrollTop();
 	var screenH = $(window).height();
+		
 		
 	//move horizontally
 	$('[opacitymove]').each(function(){
@@ -241,6 +243,8 @@ function moveScrollAnimation(){
 			$(this).css('opacity', percent);
 		}
 	});
+	
+	
 	$('[xPosMove]').each(function(){
 		var start = parseFloat($(this).attr('start'));
 		var xMove = parseFloat($(this).attr('xPosMove'));
@@ -275,22 +279,27 @@ function moveScrollAnimation(){
 		else{
 			$(this).css('left', current+'px');
 		}
+		
 	});
+	
+	
 }
 
 
 function makeBottomLocation(){
-	var windowHeight =  $(window).height();
-	var footerHeight = $('.IUFooter').height();
-	var footerTop =  $('.IUFooter').position().top;
-	var footerBottom = footerTop + footerHeight;
-	if(footerBottom < windowHeight){
-		$('.IUFooter').css('bottom','0px');
-		$('.IUFooter').css('position','fixed');
-	}
-	else{
-		$('.IUFooter').css('bottom','');
-		$('.IUFooter').css('position','');
+	if($('.IUFooter').length > 0){
+		var windowHeight =  $(window).height();
+		var footerHeight = $('.IUFooter').height();
+		var footerTop =  $('.IUFooter').position().top;
+		var footerBottom = footerTop + footerHeight;
+		if(footerBottom < windowHeight){
+			$('.IUFooter').css('bottom','0px');
+			$('.IUFooter').css('position','fixed');
+		}
+		else{
+			$('.IUFooter').css('bottom','');
+			$('.IUFooter').css('position','');
+		}
 	}
 }
 $(window).resize(function(){
@@ -306,9 +315,20 @@ $(window).resize(function(){
 	makefullSizeSection();
 });
 
+var scrollTimer = null;
 
 $(window).scroll(function(){
+    if(scrollTimer){
+           window.clearTimeout(timer);
+    }
+	scrollTimer = window.setTimeout(handleScroll, 50);	   	
+});
+
+function handleScroll(){
+	scrollTimer = null;
+	
+    // actual callback
 	onWebMovieAutoPlay();
     moveScrollAnimation();          
-	activateDivLink();    	
-});
+	activateDivLink(); 
+}
