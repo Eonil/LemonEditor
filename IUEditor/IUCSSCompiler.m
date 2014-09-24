@@ -342,6 +342,23 @@
                 }
             }
             else{
+                if ([tag isEqualToString:@"display"] && [value isEqualToString:@"inherit"]) {
+                    continue;
+                }
+                if ([tag containsString:@"border"]) {
+                    if ([tag containsString:@"width"] && [value isEqualToString:@"0.00px"]) {
+                        continue;
+                    }
+                    if ([tag containsString:@"color"] && [value containsString:@"rgba(0,0,0,1.00)"]) {
+                        continue;
+                    }
+                }
+                if ([tag isEqualToString:@"background-repeat"] && [value containsString:@"no-repeat"]) {
+                    continue;
+                }
+                if ([tag isEqualToString:@"display"] && [value isEqualToString:@"inherit"]) {
+                    continue;
+                }
                 tagDictForReturn[tag] = value;
             }
         }
