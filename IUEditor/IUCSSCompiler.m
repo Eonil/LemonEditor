@@ -624,7 +624,6 @@
     //REVIEW: border는 바깥으로 생김. child drop할때 position 계산 때문
     //IUMENUItem 은 예외 (width고정)
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
-    BOOL isborder = NO;
 
     [code setInsertingTarget:IUTargetBoth];
 
@@ -633,18 +632,13 @@
         [code insertTag:@"border-top-width" floatValue:width unit:IUUnitPixel];
         id value = [_iu.css valueByStepForTag:IUCSSTagBorderTopColor forViewport:viewport];
         [code insertTag:@"border-top-color" color:value];
-        if(width >0){
-            isborder = YES;
-        }
     }
+
     if (cssTagDict[IUCSSTagBorderLeftWidth]) {
         CGFloat width = [cssTagDict[IUCSSTagBorderLeftWidth] floatValue];
         [code insertTag:@"border-left-width" floatValue:width unit:IUUnitPixel];
         id value = [_iu.css valueByStepForTag:IUCSSTagBorderLeftColor forViewport:viewport];
         [code insertTag:@"border-left-color" color:value];
-        if(width >0){
-            isborder = YES;
-        }
 
     }
     if (cssTagDict[IUCSSTagBorderRightWidth]) {
@@ -652,9 +646,6 @@
         [code insertTag:@"border-right-width" floatValue:width unit:IUUnitPixel];
         id value = [_iu.css valueByStepForTag:IUCSSTagBorderRightColor forViewport:viewport];
         [code insertTag:@"border-right-color" color:value];
-        if(width >0){
-            isborder = YES;
-        }
 
     }
     if (cssTagDict[IUCSSTagBorderBottomWidth]) {
@@ -662,14 +653,6 @@
         [code insertTag:@"border-bottom-width" floatValue:width unit:IUUnitPixel];
         id value = [_iu.css valueByStepForTag:IUCSSTagBorderBottomColor forViewport:viewport];
         [code insertTag:@"border-bottom-color" color:value];
-        if(width >0){
-            isborder = YES;
-        }
-    }
-    
-    if(isborder){
-        //REVIEW: input tag default border-width 2px
-        [code insertTag:@"border-style" string:@"solid"];
     }
 
     if (cssTagDict[IUCSSTagBorderRadiusTopLeft]) {

@@ -3,6 +3,7 @@
     display:block;
     overflow:hidden;
     background-repeat: no-repeat;
+    border-style: solid;
 }
 
 a{
