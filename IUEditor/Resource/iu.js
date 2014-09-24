@@ -315,20 +315,9 @@ $(window).resize(function(){
 	makefullSizeSection();
 });
 
-var scrollTimer = null;
 
 $(window).scroll(function(){
-    if(scrollTimer){
-           window.clearTimeout(timer);
-    }
-	scrollTimer = window.setTimeout(handleScroll, 50);	   	
-});
-
-function handleScroll(){
-	scrollTimer = null;
-	
-    // actual callback
 	onWebMovieAutoPlay();
     moveScrollAnimation();          
 	activateDivLink(); 
-}
+});

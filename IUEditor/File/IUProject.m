@@ -549,6 +549,11 @@
         [[JDFileUtil util] overwriteBundleItem:filename toDirectory:resourceJSPath];
     }
     
+#if DEBUG
+    [[JDFileUtil util] overwriteBundleItem:@"stressTest.js" toDirectory:resourceJSPath];
+
+#endif
+    
     //copy js for IE
     NSString *ieJSPath = [resourceJSPath stringByAppendingPathComponent:@"ie"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:ieJSPath] == NO) {

@@ -359,6 +359,7 @@
 		3D9F5C4F19C92CC200D63B84 /* IUSidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9F5C4E19C92CC200D63B84 /* IUSidebar.m */; };
 		3D9F5C5219CBCE6B00D63B84 /* IUHTMLCompiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9F5C5119CBCE6B00D63B84 /* IUHTMLCompiler.m */; };
 		3D9F5C5419D15BEF00D63B84 /* jquery.scrollto.js in Resources */ = {isa = PBXBuildFile; fileRef = 3D9F5C5319D15BEF00D63B84 /* jquery.scrollto.js */; };
+		3D9F5C5719D2B38D00D63B84 /* stressTest.js in Resources */ = {isa = PBXBuildFile; fileRef = 3D9F5C5619D2B38D00D63B84 /* stressTest.js */; };
 		3DA334EB19C14CFE00B6ABA6 /* IUCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA334EA19C14CFE00B6ABA6 /* IUCollectionView.m */; };
 		3DA334F219C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA334F019C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m */; };
 		3DA334F319C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA334F119C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib */; };
@@ -1471,6 +1472,7 @@
 		3D9F5C5019CBCE6B00D63B84 /* IUHTMLCompiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUHTMLCompiler.h; sourceTree = "<group>"; };
 		3D9F5C5119CBCE6B00D63B84 /* IUHTMLCompiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUHTMLCompiler.m; sourceTree = "<group>"; };
 		3D9F5C5319D15BEF00D63B84 /* jquery.scrollto.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = jquery.scrollto.js; path = ../jquery.scrollto.js; sourceTree = "<group>"; };
+		3D9F5C5619D2B38D00D63B84 /* stressTest.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = stressTest.js; sourceTree = "<group>"; };
 		3DA334E919C14CFE00B6ABA6 /* IUCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUCollectionView.h; path = IU/IUCollectionView.h; sourceTree = "<group>"; };
 		3DA334EA19C14CFE00B6ABA6 /* IUCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUCollectionView.m; path = IU/IUCollectionView.m; sourceTree = "<group>"; };
 		3DA334EF19C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUCollectionViewVC.h; path = Editor/PropertyView/LMPropertyIUCollectionViewVC.h; sourceTree = "<group>"; };
@@ -2882,6 +2884,14 @@
 			name = DefaultWindow;
 			sourceTree = "<group>";
 		};
+		3D9F5C5519D2B37900D63B84 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				3D9F5C5619D2B38D00D63B84 /* stressTest.js */,
+			);
+			name = test;
+			sourceTree = "<group>";
+		};
 		3DA416BA1935AB9400559028 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -3575,6 +3585,7 @@
 		3DED275D190E388F001A1D67 /* JS */ = {
 			isa = PBXGroup;
 			children = (
+				3D9F5C5519D2B37900D63B84 /* test */,
 				698503E8199953A500576DBF /* jquery-1.10.2.js */,
 				698503E9199953A500576DBF /* jquery-ui-1.9.2.js */,
 				3D19E42119874A7400A50D35 /* ie8 */,
@@ -4987,6 +4998,7 @@
 				2627FEB6199B74850085BDEF /* autoheight_on@2x.png in Resources */,
 				698BEAA519667D230019C1C3 /* width_pc.png in Resources */,
 				CBA8781B1964401500075294 /* IUFBLike.rtf in Resources */,
+				3D9F5C5719D2B38D00D63B84 /* stressTest.js in Resources */,
 				267812AB19ADFB770015A859 /* wpblog_tablet_01.png in Resources */,
 				69C575C318D6F61E0016F050 /* Images.xcassets in Resources */,
 				3DF4374919AF1B420049A87E /* info-128.png in Resources */,

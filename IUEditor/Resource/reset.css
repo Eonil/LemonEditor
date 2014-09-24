@@ -40,10 +40,6 @@ a {
     cursor:pointer;
 }
 
-body {
-    line-height:1;
-}
-
 article,aside,details,figcaption,figure,
 footer,header,hgroup,menu,nav,section { 
     display:block;
@@ -117,4 +113,20 @@ hr {
 input, select {
     vertical-align:middle;
     border-style:none;
+}
+
+body {
+    line-height:1;
+    /* repaint text - font problem*/
+    -webkit-animation-delay: 0.1s;
+    -webkit-animation-name: fontfix;
+    -webkit-animation-duration: 0.1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+}
+
+/* repaint text - font problem*/
+@-webkit-keyframes fontfix {
+    from { opacity: 1; }
+    to   { opacity: 1; }
 }

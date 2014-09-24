@@ -429,6 +429,9 @@
         if([sheet containClass:[IUWebMovie class]]){
             [code addCodeLine:@"<script src=\"http://f.vimeocdn.com/js/froogaloop2.min.js\"></script>"];
         }
+#if DEBUG
+        [code addCodeLine:@"<script type=\"text/javascript\" src=\"resource/js/stressTest.js\"></script>"];
+#endif
         
     }
     return code;

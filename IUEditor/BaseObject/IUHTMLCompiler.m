@@ -453,8 +453,7 @@
         }
     }else{
         //image tag attributes
-        if(image.imageName){
-            //FIXME
+        if(image.imageName && image.imageName.length > 0){
             NSString *imgSrc = [_compiler imagePathWithImageName:image.imageName target:target];
             attributeDict[@"src"] = imgSrc;
 
