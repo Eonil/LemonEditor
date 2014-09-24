@@ -52,7 +52,7 @@
     if (self) {
         [[self undoManager] disableUndoRegistration];
 
-        [aDecoder decodeToObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"delegate", @"textType"]]];
+        [aDecoder decodeToObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"delegate", @"textType", @"linkCaller"]]];
         
         //VERSION COMPABILITY: texttype decode int issue
         @try {
@@ -106,7 +106,7 @@
 #endif 
         self.htmlID = [NSString randomStringWithLength:8];
     }
-    [aCoder encodeFromObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"identifierManager", @"textController"]]];
+    [aCoder encodeFromObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"identifierManager", @"textController", @"linkCaller"]]];
     [aCoder encodeObject:self.css forKey:@"css"];
     [aCoder encodeObject:self.event forKey:@"event"];
     [aCoder encodeObject:_m_children forKey:@"children"];

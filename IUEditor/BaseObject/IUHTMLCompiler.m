@@ -168,6 +168,11 @@
         
             [attributeDict setObject:@"1" forKey:@"iulink"];
         }
+        if(iu.linkCaller){
+            [attributeDict setObject:[NSNull null] forKey:@"iudivlink"];
+            [attributeDict setObject:((IUBox *)iu.linkCaller).htmlID forKey:@"linkcaller"];
+
+        }
         
     }
     
@@ -213,7 +218,30 @@
     return attributeString;
 }
 
+/**
+ @brief 
+ check code before build
+ */
+- (void)checkBeforeBuildCode:(IUBox *)iu target:(IUTarget)target{
+    
+    NSMutableArray *wholeIU = [NSMutableArray array];
+    [wholeIU addObject:iu];
+    [wholeIU addObjectsFromArray:iu.allChildren];
+    
+    for(IUBox *box in wholeIU){
+        if(target == IUTargetOutput){
+            if(box.divLink){
+                IUBox *target = (IUBox *)box.divLink;
+                target.linkCaller = box;
+            }
+        }
+    }
+}
+
 - (JDCode *)wholeHTMLCode:(IUBox *)iu target:(IUTarget)target{
+    
+    [self checkBeforeBuildCode:iu target:target];
+    
     JDCode *code = [[JDCode alloc] init];
     [self htmlCode:iu target:target code:code];
     return code;

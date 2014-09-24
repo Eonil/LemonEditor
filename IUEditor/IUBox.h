@@ -254,6 +254,13 @@ typedef enum _IUOverflowType{
 @property (nonatomic) id link, divLink;
 @property BOOL linkTarget;
 
+/**
+ linkCaller use to active state for link caller
+ it is allocated before build code
+ - (void)checkBeforeBuildCode:(IUBox *)iu target:(IUTarget)target{
+ */
+@property id linkCaller;
+
 
 //0 for default, 1 for H1, 2 for H2
 @property IUTextType textType;
@@ -265,4 +272,6 @@ typedef enum _IUOverflowType{
 
 //can move to other parent?
 - (BOOL)canMoveToOtherParent;
+
+
 @end

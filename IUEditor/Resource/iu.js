@@ -110,10 +110,37 @@ function activateLink(iu, location){
 	}
 }
 
-$(document).ready(function(){
-    console.log('iu.js')
-});
-
+function activateDivLink(){
+	if($('[iudivlink]').length <=0) return;
+	
+	var dict={};
+	$('[iudivlink]').each(function(){
+		var pos = $(this).position().top;
+		var caller = $(this).attr('linkcaller');
+		dict[caller] = pos;
+	});
+	
+	var sortable = [];
+	for(var caller in dict){
+		sortable.push([caller, dict[caller]]);
+	}
+	sortable.sort(function(a, b){return a[1] - b[1]});
+	
+	var scrollY = $(document).scrollTop();
+	var currentCaller;
+	for(var caller in dict){
+		var position = dict[caller];
+		if(position < scrollY){
+			currentCaller = caller;
+		}
+		
+		if ($('#'+caller).hasClass('active')) {
+			$('#'+caller).removeClass('active');
+		}
+	}
+	
+	$('#'+currentCaller).addClass('active');
+}
 
 function onWebMovieAutoPlay(){
 	//autoplay when appear
@@ -251,6 +278,7 @@ function moveScrollAnimation(){
 	});
 }
 
+
 function makeBottomLocation(){
 	var windowHeight =  $(window).height();
 	var footerHeight = $('.IUFooter').height();
@@ -281,5 +309,6 @@ $(window).resize(function(){
 
 $(window).scroll(function(){
 	onWebMovieAutoPlay();
-    moveScrollAnimation();             	
+    moveScrollAnimation();          
+	activateDivLink();    	
 });
