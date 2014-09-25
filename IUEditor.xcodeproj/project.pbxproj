@@ -360,6 +360,7 @@
 		3D9F5C5219CBCE6B00D63B84 /* IUHTMLCompiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9F5C5119CBCE6B00D63B84 /* IUHTMLCompiler.m */; };
 		3D9F5C5419D15BEF00D63B84 /* jquery.scrollto.js in Resources */ = {isa = PBXBuildFile; fileRef = 3D9F5C5319D15BEF00D63B84 /* jquery.scrollto.js */; };
 		3D9F5C5719D2B38D00D63B84 /* stressTest.js in Resources */ = {isa = PBXBuildFile; fileRef = 3D9F5C5619D2B38D00D63B84 /* stressTest.js */; };
+		3D9F5C5A19D406E600D63B84 /* JDComboBoxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9F5C5919D406E600D63B84 /* JDComboBoxCell.m */; };
 		3DA334EB19C14CFE00B6ABA6 /* IUCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA334EA19C14CFE00B6ABA6 /* IUCollectionView.m */; };
 		3DA334F219C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA334F019C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.m */; };
 		3DA334F319C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA334F119C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.xib */; };
@@ -1474,6 +1475,8 @@
 		3D9F5C5119CBCE6B00D63B84 /* IUHTMLCompiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUHTMLCompiler.m; sourceTree = "<group>"; };
 		3D9F5C5319D15BEF00D63B84 /* jquery.scrollto.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = jquery.scrollto.js; path = ../jquery.scrollto.js; sourceTree = "<group>"; };
 		3D9F5C5619D2B38D00D63B84 /* stressTest.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = stressTest.js; sourceTree = "<group>"; };
+		3D9F5C5819D406E600D63B84 /* JDComboBoxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDComboBoxCell.h; path = JD/JDComboBoxCell.h; sourceTree = "<group>"; };
+		3D9F5C5919D406E600D63B84 /* JDComboBoxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDComboBoxCell.m; path = JD/JDComboBoxCell.m; sourceTree = "<group>"; };
 		3DA334E919C14CFE00B6ABA6 /* IUCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUCollectionView.h; path = IU/IUCollectionView.h; sourceTree = "<group>"; };
 		3DA334EA19C14CFE00B6ABA6 /* IUCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUCollectionView.m; path = IU/IUCollectionView.m; sourceTree = "<group>"; };
 		3DA334EF19C16F7200B6ABA6 /* LMPropertyIUCollectionViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUCollectionViewVC.h; path = Editor/PropertyView/LMPropertyIUCollectionViewVC.h; sourceTree = "<group>"; };
@@ -4258,6 +4261,8 @@
 				3D9F5C3919C6E37300D63B84 /* JDResponderView.m */,
 				3D9F5C3B19C6F3CC00D63B84 /* JDReponderCollectionView.h */,
 				3D9F5C3C19C6F3CD00D63B84 /* JDReponderCollectionView.m */,
+				3D9F5C5819D406E600D63B84 /* JDComboBoxCell.h */,
+				3D9F5C5919D406E600D63B84 /* JDComboBoxCell.m */,
 			);
 			name = JD;
 			sourceTree = "<group>";
@@ -5723,6 +5728,7 @@
 				3DED27221904AE1A001A1D67 /* LMEventVariableReceiverVC.m in Sources */,
 				69B37F0D18DFDEE800DE620F /* LMFileNaviVC.m in Sources */,
 				CB2AA9C91975030A00DA7CCD /* WPArticle.m in Sources */,
+				3D9F5C5A19D406E600D63B84 /* JDComboBoxCell.m in Sources */,
 				690A82561909EB1B00DDBA86 /* PGTextField.m in Sources */,
 				69BE6A4C1987E1DA00F84850 /* LMHerokuWC.m in Sources */,
 				690A409518E1645B00095263 /* LMWidgetLibraryVC.m in Sources */,

@@ -94,6 +94,24 @@
         if(IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, self.project.IUProjectVersion)){
             _enableHCenter = [aDecoder decodeInt32ForKey:@"enableCenter"];
         }
+        
+        if(IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_FONTFIX, self.project.IUProjectVersion)){
+            NSMutableDictionary *dict = _css.assembledTagDictionary;
+            if([dict[IUCSSTagFontWeight] boolValue]){
+                [_css eradicateTag:IUCSSTagFontWeight];
+                [_css setValue:@"700" forTag:IUCSSTagFontWeight forViewport:IUCSSDefaultViewPort];
+            }
+            NSString *fontName = dict[IUCSSTagFontName];
+            if(fontName && [fontName containsString:@"Roboto"]){
+                [_css eradicateTag:IUCSSTagFontName];
+                [_css setValue:@"Roboto" forTag:IUCSSTagFontName forViewport:IUCSSDefaultViewPort];
+                if([fontName containsString:@"Light"] || [fontName containsString:@"Thin"]){
+                    [_css eradicateTag:IUCSSTagFontWeight];
+                    [_css setValue:@"300" forTag:IUCSSTagFontWeight forViewport:IUCSSDefaultViewPort];
+                }
+            }
+        }
+        
     }
     [self.undoManager enableUndoRegistration];
     return self;

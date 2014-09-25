@@ -248,29 +248,21 @@
     return code;
 }
 
--(JDCode *)webfontImportSourceForEdit{
-    
-    JDCode *code = [[JDCode alloc] init];
-    LMFontController *fontController = [LMFontController sharedFontController];
-    for(NSDictionary *dict  in fontController.fontDict.allValues){
-        if([[dict objectForKey:LMFontNeedLoad] boolValue]){
-            NSString *fontHeader = [dict objectForKey:LMFontHeaderLink];
-            [code addCodeLine:fontHeader];
-        }
-    }
-    
-    return code;
-}
 
 -(JDCode *)webfontImportSourceForOutput:(IUPage *)page{
-    NSMutableArray *fontNameArray = [NSMutableArray array];
+    NSMutableArray *fontArray = [NSMutableArray array];
 
     for (IUBox *box in page.allChildren){
         
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
         NSString *fontName = box.css.assembledTagDictionary[IUCSSTagFontName];
-        if(fontName && fontName.length >0 && [fontNameArray containsString:fontName] == NO){
-            [fontNameArray addObject:fontName];
+        if(fontName && fontName.length >0 ){
+            if(box.css.assembledTagDictionary[IUCSSTagFontWeight]){
+                [fontArray addObject:@{IUCSSTagFontName:fontName, IUCSSTagFontWeight:box.css.assembledTagDictionary[IUCSSTagFontWeight]}];
+            }
+            else{
+                [fontArray addObject:@{IUCSSTagFontName:fontName}];
+            }
         }
 #else
         if([box isKindOfClass:[IUText class]]){
@@ -289,15 +281,8 @@
 #endif
     }
 
-    JDCode *code = [[JDCode alloc] init];
     LMFontController *fontController = [LMFontController sharedFontController];
-    
-    for(NSString *fontName in fontNameArray){
-        if([fontController isNeedHeader:fontName]){
-            [code addCodeLine:[fontController headerForFontName:fontName]];
-        }
-    }
-    return code;
+    return [fontController headerCodeForFont:fontArray];
 }
 
 - (NSArray *)outputClipArtArray:(IUSheet *)document{
@@ -555,7 +540,7 @@
     JDCode *sourceCode = [[JDCode alloc] initWithCodeString:sourceString];
     
     
-    JDCode *webFontCode = [self webfontImportSourceForEdit];
+    JDCode *webFontCode = [[LMFontController sharedFontController] headerCodeForAllFont];
     [sourceCode replaceCodeString:@"<!--WEBFONT_Insert-->" toCode:webFontCode];
     
     JDCode *jsCode = [self javascriptHeaderForSheet:document isEdit:YES];

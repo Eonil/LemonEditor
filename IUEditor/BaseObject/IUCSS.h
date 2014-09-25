@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class IUProject;
+
 @protocol IUCSSDelegate
 @required
 - (void)updateCSS;
 - (BOOL)CSSShouldChangeValue:(id)value forTag:(IUCSSTag)tag forWidth:(NSInteger)width;
 - (NSUndoManager *)undoManager;
+- (IUProject *)project;
 @end
 
 

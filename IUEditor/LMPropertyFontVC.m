@@ -27,6 +27,8 @@
 @property (weak) IBOutlet NSComboBox *letterSpacingComboBox;
 
 @property (weak) IBOutlet NSButton *autoHeightBtn;
+@property (weak) IBOutlet NSMatrix *fontWeightMatrix;
+@property (weak) IBOutlet NSButtonCell *lightWeightButtonCell;
 
 @property (weak) LMFontController *fontController;
 @property (strong) IBOutlet NSDictionaryController *fontListDC;
@@ -218,14 +220,11 @@
         if([self isSelectedObjectText]){
             [_fontStyleB setEnabled:YES];
             if([[self.controller selectedObjects] count] ==1 ){
-                BOOL weight = [[self valueForCSSTag:IUCSSTagFontWeight] boolValue];
-                [_fontStyleB setSelected:weight forSegment:0];
-
                 BOOL italic = [[self valueForCSSTag:IUCSSTagFontStyle] boolValue];
-                [_fontStyleB setSelected:italic forSegment:1];
+                [_fontStyleB setSelected:italic forSegment:0];
                 
                 BOOL underline = [[self valueForCSSTag:IUCSSTagTextDecoration] boolValue];
-                [_fontStyleB setSelected:underline forSegment:2];
+                [_fontStyleB setSelected:underline forSegment:1];
             }
         }
         else{
@@ -302,6 +301,30 @@
             [_lineHeightB setStringValue:[NSString stringWithFormat:@"%.1f", lineheight]];
         }
         
+        
+        //set font weight
+        if([self valueForCSSTag:IUCSSTagFontWeight] == NSMultipleValuesMarker){
+            [_fontWeightMatrix selectCellAtRow:0 column:1];
+        }
+        else{
+            NSString *fontWeight = [self valueForCSSTag:IUCSSTagFontWeight];
+            if ([fontWeight isEqualToString:@"300"]) {
+                [_fontWeightMatrix selectCellAtRow:0 column:0];
+            }
+            else if ([fontWeight isEqualToString:@"400"]) {
+                [_fontWeightMatrix selectCellAtRow:0 column:1];
+            }
+            else if ([fontWeight isEqualToString:@"700"]) {
+                [_fontWeightMatrix selectCellAtRow:0 column:2];
+            }
+            else{
+                [_fontWeightMatrix selectCellAtRow:0 column:1];
+            }
+            
+        }
+        
+        [self checkFontWeight:iuFontName];
+        
         //enable font type box
         [_fontB setEnabled:YES];
         [_fontSizeComboBox setEnabled:YES];
@@ -312,6 +335,8 @@
         [_textAlignB setEnabled:YES];
         [_letterSpacingComboBox setEditable:YES];
         [_letterSpacingComboBox setEnabled:YES];
+        [_fontWeightMatrix setEnabled:YES];
+
 
     }
     else{
@@ -326,7 +351,7 @@
         [_fontStyleB setEnabled:NO];
         [_letterSpacingComboBox setEditable:NO];
         [_letterSpacingComboBox setEnabled:NO];
-
+        [_fontWeightMatrix setEnabled:NO];
     }
     
 }
@@ -351,9 +376,39 @@
     }
 }
 
+- (IBAction)selectFontWeightMatrix:(id)sender {
+    switch ([_fontWeightMatrix selectedColumn]) {
+        case 0:
+            [self updateFontWeight:@"300"];
+            break;
+        case 1:
+            [self updateFontWeight:@"400"];
+            break;
+        case 2:
+            [self updateFontWeight:@"700"];
+            break;
+        default:
+            break;
+    }
+}
+
 - (void)updateFontName:(NSString *)fontName{
     currentFontName = fontName;
     [self setValue:currentFontName forCSSTag:IUCSSTagFontName];
+    [self checkFontWeight:fontName];
+}
+- (void)checkFontWeight:(NSString *)fontName{
+    BOOL hasLightWeight = [_fontController hasLight:fontName];
+    [_lightWeightButtonCell setEnabled:hasLightWeight];
+
+    if(hasLightWeight == NO && [_fontWeightMatrix selectedColumn] == 0){
+        [_fontWeightMatrix selectCellAtRow:0 column:1];
+        [self updateFontWeight:@"400"];
+    }
+}
+
+- (void)updateFontWeight:(NSString *)fontWeight{
+    [self setValue:fontWeight forCSSTag:IUCSSTagFontWeight];
 }
 
 - (void)updateFontSize:(NSInteger)fontSize{
@@ -415,16 +470,11 @@
     NSInteger index = [sender selectedSegment];
     switch (index) {
         case 0:{
-             BOOL value = [sender isSelectedForSegment:index];
-            [self setValue:@(value) forCSSTag:IUCSSTagFontWeight];
-            break;
-        }
-        case 1:{
             BOOL value = [sender isSelectedForSegment:index];
             [self setValue:@(value) forCSSTag:IUCSSTagFontStyle];
             break;
         }
-        case 2:{
+        case 1:{
             BOOL value = [sender isSelectedForSegment:index];
             [self setValue:@(value) forCSSTag:IUCSSTagTextDecoration];
             break;

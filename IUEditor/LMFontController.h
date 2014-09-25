@@ -7,12 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JDCode.h"
 
 static NSString *LMFontName = @"name";
+static NSString *LMFontCheckGoogleAPI = @"isGoogleFonts";
+static NSString *LMFontGoogleAPIFamilyName = @"googleApiFamily";
+static NSString *LMFontLightType = @"hasLight";
+static NSString *LMFontBoldTypeTag = @"boldType";
 static NSString *LMFontHeaderLink = @"link";
-static NSString *LMFontFamilyName = @"css";
+static NSString *LMFontFamilyName = @"font-family";
 static NSString *LMFontNeedLoad = @"isLoadable";
 static NSString *LMFontEditable = @"editalbe";
+
+typedef enum{
+    LMFontBoldTypeDefault,
+    LMFontBoldTypeWebFont,
+}LMFontBoldType;
 
 @interface LMFontController : NSObject
 
@@ -23,7 +33,10 @@ static NSString *LMFontEditable = @"editalbe";
 - (void)saveFontList;
 
 - (NSString *)cssForFontName:(NSString *)fontName;
-- (NSString *)headerForFontName:(NSString *)fontName;
-- (BOOL)isNeedHeader:(NSString *)fontName;
+- (BOOL)hasLight:(NSString *)fontName;
+
+
+- (JDCode *)headerCodeForAllFont;
+- (JDCode *)headerCodeForFont:(NSArray *)fontArray;
 
 @end

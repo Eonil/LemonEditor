@@ -46,6 +46,7 @@
 //IUVersion codeName
 #define IU_VERSION_BETA2 @"0.3.3"
 #define IU_VERSION_LAYOUT @"0.3.3.1"
+#define IU_VERSION_FONTFIX @"0.3.3.2"
 
 //IUVersion Control
 #define IU_VERSION_EQUAL_TO(v)                  ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] compare:v options:NSNumericSearch] == NSOrderedSame)

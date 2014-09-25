@@ -574,8 +574,8 @@
     if ([cssTagDict[IUCSSTagTextLetterSpacing] floatValue]) {
         [code insertTag:@"letter-spacing" floatFromNumber:cssTagDict[IUCSSTagTextLetterSpacing] unit:IUUnitPixel];
     }
-    if ([cssTagDict[IUCSSTagFontWeight] boolValue]) {
-        [code insertTag:@"font-weight" string:@"bold"];
+    if (cssTagDict[IUCSSTagFontWeight]) {
+        [code insertTag:@"font-weight" string:cssTagDict[IUCSSTagFontWeight]];
     }
     if ([cssTagDict[IUCSSTagFontStyle] boolValue]) {
         [code insertTag:@"font-style" string:@"italic"];
