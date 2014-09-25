@@ -97,10 +97,17 @@
         
         if(IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_FONTFIX, self.project.IUProjectVersion)){
             NSMutableDictionary *dict = _css.assembledTagDictionary;
-            if([dict[IUCSSTagFontWeight] boolValue]){
+            if(dict[IUCSSTagFontWeight]){
+                BOOL bold = [dict[IUCSSTagFontWeight] boolValue];
                 [_css eradicateTag:IUCSSTagFontWeight];
-                [_css setValue:@"700" forTag:IUCSSTagFontWeight forViewport:IUCSSDefaultViewPort];
+                if(bold){
+                    [_css setValue:@"700" forTag:IUCSSTagFontWeight forViewport:IUCSSDefaultViewPort];
+                }
+                else{
+                    [_css setValue:@"400" forTag:IUCSSTagFontWeight forViewport:IUCSSDefaultViewPort];
+                }
             }
+            
             NSString *fontName = dict[IUCSSTagFontName];
             if(fontName && [fontName containsString:@"Roboto"]){
                 [_css eradicateTag:IUCSSTagFontName];
