@@ -42,7 +42,7 @@
     return NO;
 }
 
-- (NSString*)cssClass{
+- (NSString*)cssIdentifier{
     return [NSString stringWithFormat:@".%@ > .WPWidget > .WPWidgetTitle", self.parent.parent.htmlID];
 }
 

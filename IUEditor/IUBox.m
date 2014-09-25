@@ -571,10 +571,10 @@
  
  */
 - (NSArray *)cssIdentifierArray{
-    NSMutableArray *array = [NSMutableArray arrayWithArray:@[[self cssClass], [self cssHoverClass]]];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:@[[self cssIdentifier], [self cssHoverClass]]];
     
     if(_pgContentVariable){
-        [array addObject:[[self cssClass] stringByAppendingString:@">p"]];
+        [array addObject:[[self cssIdentifier] stringByAppendingString:@">p"]];
     }
     
     return array;
@@ -1363,14 +1363,14 @@
 
 #endif
 
-- (NSString*)cssClass{
+- (NSString*)cssIdentifier{
     return [@"." stringByAppendingString:self.htmlID];
 }
 - (NSString*)cssHoverClass{
-    return [NSString stringWithFormat:@"%@:hover", self.cssClass];
+    return [NSString stringWithFormat:@"%@:hover", self.cssIdentifier];
 }
 - (NSString*)cssActiveClass{
-    return [NSString stringWithFormat:@"%@.active", self.cssClass];
+    return [NSString stringWithFormat:@"%@.active", self.cssIdentifier];
 }
 
 - (NSString*)cssClassStringForHTML{

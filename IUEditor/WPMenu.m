@@ -86,10 +86,10 @@
 
 #pragma mark - css
 - (NSString *)containerIdentifier{
-    return [self.cssClass stringByAppendingString:@" > div > ul"];
+    return [self.cssIdentifier stringByAppendingString:@" > div > ul"];
 }
 - (NSString *)itemIdetnfier{
-    return [self.cssClass stringByAppendingString:@" > div > ul > li"];
+    return [self.cssIdentifier stringByAppendingString:@" > div > ul > li"];
 }
 
 #pragma mark - default

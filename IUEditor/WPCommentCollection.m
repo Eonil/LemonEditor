@@ -31,6 +31,10 @@
         
         
         self.positionType = IUPositionTypeRelative;
+        [self.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
+        [self.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
+        [self.css eradicateTag:IUCSSTagPixelHeight];
+
         /* WPCommentForm */
         WPCommentObject *authorObj = [[WPCommentObject alloc] initWithProject:project options:options];
         authorObj.objType = WPCommentObjectTypeAuthor;

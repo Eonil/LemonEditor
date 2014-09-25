@@ -9,6 +9,7 @@
 #import "WPCommentFormCollection.h"
 #import "WPCommentFormField.h"
 #import "WPCommentForm.h"
+#import "WPCommentFormSubmitBtn.h"
 
 @implementation WPCommentFormCollection {
 }
@@ -63,6 +64,10 @@
     [self addIU:commentAfter error:nil];
     commentAfter.name = @"Comment after";
     
+    WPCommentFormSubmitBtn *submitBtn = [[WPCommentFormSubmitBtn alloc] initWithProject:project options:nil];
+    submitBtn.label = @"Comment";
+    submitBtn.name = @"Submit";
+    [self addIU:submitBtn error:nil];
 
     return self;
 }
@@ -90,6 +95,15 @@
     return nil;
 }
 
+- (WPCommentFormSubmitBtn*)submitBtn{
+    for (IUBox *box in self.children) {
+        if ([box isKindOfClass:[WPCommentFormSubmitBtn class]]) {
+            return (WPCommentFormSubmitBtn*)box;
+        }
+    }
+    return nil;
+}
+
 
 - (NSString*)code{
     NSMutableString *str = [NSMutableString string];
@@ -111,7 +125,12 @@
         [str appendFormat:@"'comment_notes_after' => \"%@\",\n", commentAfter.code];
     }
     
-
+    
+    WPCommentFormSubmitBtn *submit = [self submitBtn];
+    if (submit) {
+        [str appendFormat:@"'label_submit' => '%@',\n", submit.label];
+        [str appendFormat:@"'id_submit' => '%@',\n", submit.htmlID];
+    }
 
     /* make field */
     [str appendString:@"'fields' => apply_filters( 'comment_form_default_fields', array("];

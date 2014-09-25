@@ -594,7 +594,7 @@
 #pragma mark CSS
 
 - (BOOL)isSheetHeightChanged:(NSString *)identifier{
-    if([identifier isEqualToString:[_sheet cssClass]]
+    if([identifier isEqualToString:[_sheet cssIdentifier]]
        && [_sheet isKindOfClass:[IUClass class]]){
         return YES;
     }    

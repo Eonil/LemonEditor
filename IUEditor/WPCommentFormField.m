@@ -47,6 +47,7 @@
             return [NSString stringWithFormat: @"<p class='comment-notes %@' id = '%@'>Your email address will not be published. Required fields are marked <span class='required'>*</span></p>", self.cssClassStringForHTML, self.htmlID];
         case WPCommentFormFieldCommentAfter:
             return [NSString stringWithFormat: @"<p class='form-allowed-tags %@' id='%@'>You may use these <abbr title='HyperText Markup Language'>HTML</abbr> tags and attributes:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>", self.cssClassStringForHTML, self.htmlID];
+
         default:
             NSAssert(0, @"Wrong");
             return nil;
@@ -63,7 +64,6 @@
             return [NSString stringWithFormat: @"<p class='comment-notes %@'>Your email address will not be published. Required fields are marked <span class='required'>*</span></p>", self.cssClassStringForHTML];
         case WPCommentFormFieldCommentAfter:
             return [NSString stringWithFormat: @"<p class='form-allowed-tags %@'>You may use these <abbr title='HyperText Markup Language'>HTML</abbr> tags and attributes:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>", self.cssClassStringForHTML];
-
         default:
             NSAssert(0, @"Wrong");
             return nil;

@@ -4,6 +4,12 @@
     overflow:hidden;
     background-repeat: no-repeat;
     border-style: solid;
+    border-width: 0px;
+}
+
+input {
+    border-width: 1px;
+    border-color: gray;
 }
 
 a{

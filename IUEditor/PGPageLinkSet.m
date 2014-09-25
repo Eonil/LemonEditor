@@ -137,16 +137,16 @@
 }
 
 - (NSString *)clipIdentifier{
-    return [self.cssClass stringByAppendingString:@" > div"];
+    return [self.cssIdentifier stringByAppendingString:@" > div"];
 }
 - (NSString *)activeIdentifier{
-    return [self.cssClass stringByAppendingString:@" selected > div > ul > a > li"];
+    return [self.cssIdentifier stringByAppendingString:@" selected > div > ul > a > li"];
 }
 - (NSString *)hoverIdentifier{
-    return [self.cssClass stringByAppendingString:@" > div > ul > a > li:hover"];
+    return [self.cssIdentifier stringByAppendingString:@" > div > ul > a > li:hover"];
 }
 - (NSString *)itemIdentifier{
-    return [self.cssClass stringByAppendingString:@" > div > ul > a > li"];
+    return [self.cssIdentifier stringByAppendingString:@" > div > ul > a > li"];
 }
 
 @end

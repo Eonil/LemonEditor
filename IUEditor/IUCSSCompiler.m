@@ -480,7 +480,7 @@
 
     if(iu.link && [_compiler hasLink:iu] && iu.children.count==0 ){
         if(iu.text == nil || iu.text.length ==0){
-            [code setInsertingIdentifier:[iu.cssClass stringByAppendingString:@" a"]];
+            [code setInsertingIdentifier:[iu.cssIdentifier stringByAppendingString:@" a"]];
             [code setInsertingTarget:IUTargetBoth];
             
             [code insertTag:@"display" string:@"block"];
@@ -498,7 +498,7 @@
         int viewport = [viewportNumber intValue];
         
         /* insert to editor and output, with default css identifier. */
-        [code setInsertingIdentifier:_iu.cssClass];
+        [code setInsertingIdentifier:_iu.cssIdentifier];
         [code setInsertingTarget:IUTargetBoth];
 
         /* width can vary to data */
@@ -958,7 +958,7 @@
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUPageContent:(IUPageContent*)pageContent{
     NSArray *editWidths = [pageContent.css allViewports];
-    [code setInsertingIdentifier:pageContent.cssClass];
+    [code setInsertingIdentifier:pageContent.cssIdentifier];
     
     for (NSNumber *viewportNumber in editWidths) {
         int viewport = [viewportNumber intValue];
@@ -1067,7 +1067,7 @@
         
     }
 
-    [code removeTag:@"width" identifier:menuBar.cssClass viewport:IUCSSDefaultViewPort];
+    [code removeTag:@"width" identifier:menuBar.cssIdentifier viewport:IUCSSDefaultViewPort];
     
 }
 
@@ -1082,7 +1082,7 @@
         [code setInsertingViewPort:viewport];
         
         //css identifier
-        [code setInsertingIdentifier:[menuItem cssClass]];
+        [code setInsertingIdentifier:[menuItem cssIdentifier]];
         [code setInsertingTarget:IUTargetBoth];
         
         
@@ -1124,7 +1124,7 @@
         }
         [code insertTag:@"line-height" integer:height unit:IUUnitPixel];
         
-        [code setInsertingIdentifier:[menuItem cssClass]];
+        [code setInsertingIdentifier:[menuItem cssIdentifier]];
         [code setInsertingTarget:IUTargetBoth];
 
         if(viewport <= IUMobileSize && menuItem.children.count > 0){
@@ -1226,7 +1226,7 @@
     }
     
     [code setInsertingViewPort:IUCSSDefaultViewPort];
-    [code setInsertingIdentifier:[menuItem cssClass]];
+    [code setInsertingIdentifier:[menuItem cssIdentifier]];
     [code insertTag:@"box-sizing" string:@"border-box"];
     [code insertTag:@"-moz-box-sizing" string:@"border-box"];
     [code insertTag:@"-webkit-box-sizing" string:@"border-box"];
@@ -1453,7 +1453,7 @@
 
     WPPageLinks *pageLinks = (WPPageLinks*)_iu.parent;
 
-    [code setInsertingIdentifier:_iu.cssClass];
+    [code setInsertingIdentifier:_iu.cssIdentifier];
     
     switch (pageLinks.align) {
         case IUAlignJustify:

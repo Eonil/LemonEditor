@@ -867,6 +867,7 @@
 		694A9865196D197900C1D630 /* JDFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A9864196D197900C1D630 /* JDFormatter.m */; };
 		694E3CDB18FCF739005077B3 /* IUCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 694E3CDA18FCF739005077B3 /* IUCarousel.m */; };
 		694E3CE118FCFDA6005077B3 /* IUItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 694E3CE018FCFDA6005077B3 /* IUItem.m */; };
+		6950F31E19D3802D00F1A347 /* WPCommentFormSubmitBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 6950F31D19D3802D00F1A347 /* WPCommentFormSubmitBtn.m */; };
 		6953852E18ED6EC800CC42E5 /* IUController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6953852D18ED6EC800CC42E5 /* IUController.m */; };
 		6954812818D7640A00CA02F1 /* IUPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6954812718D7640A00CA02F1 /* IUPage.m */; };
 		69604769198FE56400605FA2 /* IUCSSCompiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 69604768198FE56400605FA2 /* IUCSSCompiler.m */; };
@@ -2093,6 +2094,8 @@
 		694E3CDA18FCF739005077B3 /* IUCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUCarousel.m; sourceTree = "<group>"; };
 		694E3CDF18FCFDA6005077B3 /* IUItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUItem.h; path = IU/IUItem.h; sourceTree = "<group>"; };
 		694E3CE018FCFDA6005077B3 /* IUItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUItem.m; path = IU/IUItem.m; sourceTree = "<group>"; };
+		6950F31C19D3802D00F1A347 /* WPCommentFormSubmitBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPCommentFormSubmitBtn.h; sourceTree = "<group>"; };
+		6950F31D19D3802D00F1A347 /* WPCommentFormSubmitBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPCommentFormSubmitBtn.m; sourceTree = "<group>"; };
 		6953852C18ED6EC800CC42E5 /* IUController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUController.h; sourceTree = "<group>"; };
 		6953852D18ED6EC800CC42E5 /* IUController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUController.m; sourceTree = "<group>"; };
 		6954812618D7640A00CA02F1 /* IUPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUPage.h; path = BaseObject/IUPage.h; sourceTree = "<group>"; };
@@ -4091,6 +4094,8 @@
 				693FDA6519B6905000A0F47F /* WPCommentAvator.m */,
 				693FDA7619B6929100A0F47F /* WPCommentReplyBtn.h */,
 				693FDA7719B6929100A0F47F /* WPCommentReplyBtn.m */,
+				6950F31C19D3802D00F1A347 /* WPCommentFormSubmitBtn.h */,
+				6950F31D19D3802D00F1A347 /* WPCommentFormSubmitBtn.m */,
 				69C5EFDC19C0FA5000919A44 /* WPCommentFormCollection.h */,
 				69C5EFDD19C0FA5000919A44 /* WPCommentFormCollection.m */,
 				69C5EFE219C1186E00919A44 /* wpCommentTemplate */,
@@ -5629,6 +5634,7 @@
 				690A826B190A25D500DDBA86 /* IUDjangoProject.m in Sources */,
 				692D9902199D807000A7E1C1 /* WPSidebar.m in Sources */,
 				3DA6F30E1963B810004DF0AA /* LMHelpVideoPopoverVC.m in Sources */,
+				6950F31E19D3802D00F1A347 /* WPCommentFormSubmitBtn.m in Sources */,
 				3DB0AB3B19AAE84D0066FAB7 /* Reachability.m in Sources */,
 				3D5B5AF31990B8B900EF6F12 /* IUTweetButton.m in Sources */,
 				CB9BD6381914DC62002C9369 /* LMStartNewDjangoVC.m in Sources */,

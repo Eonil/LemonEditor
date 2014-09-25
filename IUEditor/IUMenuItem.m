@@ -225,13 +225,13 @@
 
 - (NSString *)editorDisplayIdentifier{
     if(self.children.count > 0){
-        return [self.cssClass stringByAppendingString:@" > ul"];
+        return [self.cssIdentifier stringByAppendingString:@" > ul"];
     }
     return nil;
 }
 
 - (NSString *)itemIdentifier{
-    return [self.cssClass stringByAppendingString:@" > a"];
+    return [self.cssIdentifier stringByAppendingString:@" > a"];
 }
 - (NSString *)hoverItemIdentifier{
     return [self.cssHoverClass stringByAppendingString:@" > a"];
@@ -242,7 +242,7 @@
 }
 - (NSString *)closureIdentifier{
     if(self.children.count > 0){
-        return [self.cssClass stringByAppendingString:@" > div.closure"];
+        return [self.cssIdentifier stringByAppendingString:@" > div.closure"];
     }
     return nil;
 }
@@ -262,10 +262,10 @@
 
 - (NSArray *)cssIdentifierArray{
     if(self.children.count > 0){
-        return @[[self cssClass], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier], [self closureIdentifier], [self closureHoverIdentifier], [self closureActiveIdentifier], [self editorDisplayIdentifier]];
+        return @[[self cssIdentifier], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier], [self closureIdentifier], [self closureHoverIdentifier], [self closureActiveIdentifier], [self editorDisplayIdentifier]];
     }
     else{
-        return @[[self cssClass], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier]];
+        return @[[self cssIdentifier], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier]];
     }
 }
 

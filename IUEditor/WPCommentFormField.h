@@ -13,7 +13,6 @@ typedef enum _WPCommentFormFieldType{
     WPCommentFormFieldLeaveAReply,
     WPCommentFormFieldCommentBefore,
     WPCommentFormFieldCommentAfter,
-    WPCommentFormFieldSubmitBtn,
     WPCommentFormFieldAuthorLabel,
     WPCommentFormFieldEmailLabel,
     WPCommentFormFieldContentLabel,

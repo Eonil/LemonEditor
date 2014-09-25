@@ -265,7 +265,7 @@ typedef enum _IUOverflowType{
 //0 for default, 1 for H1, 2 for H2
 @property IUTextType textType;
 
-- (NSString*)cssClass;
+- (NSString*)cssIdentifier;
 - (NSString*)cssHoverClass;
 - (NSString*)cssActiveClass;
 - (NSString*)cssClassStringForHTML;

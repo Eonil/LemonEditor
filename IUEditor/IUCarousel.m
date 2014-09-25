@@ -197,27 +197,27 @@
 
 
 - (NSString *)pagerWrapperID{
-    return [NSString stringWithFormat:@"%@ > .Pager", self.cssClass];
+    return [NSString stringWithFormat:@"%@ > .Pager", self.cssIdentifier];
 }
 
 - (NSString *)pagerID{
-    return [NSString stringWithFormat:@"%@ > .Pager > li", self.cssClass];
+    return [NSString stringWithFormat:@"%@ > .Pager > li", self.cssIdentifier];
 }
 
 - (NSString *)pagerIDHover{
-    return [NSString stringWithFormat:@"%@ > .Pager > li:hover", self.cssClass];
+    return [NSString stringWithFormat:@"%@ > .Pager > li:hover", self.cssIdentifier];
 }
 
 - (NSString *)pagerIDActive{
-    return [NSString stringWithFormat:@"%@ > .Pager > li.active", self.cssClass];
+    return [NSString stringWithFormat:@"%@ > .Pager > li.active", self.cssIdentifier];
 }
 
 - (NSString *)prevID{
-    return [NSString stringWithFormat:@"%@ > .Prev", self.cssClass];
+    return [NSString stringWithFormat:@"%@ > .Prev", self.cssIdentifier];
 }
 
 - (NSString *)nextID{
-    return [NSString stringWithFormat:@"%@ > .Next", self.cssClass];
+    return [NSString stringWithFormat:@"%@ > .Next", self.cssIdentifier];
 }
 
 - (NSArray *)cssIdentifierArray{

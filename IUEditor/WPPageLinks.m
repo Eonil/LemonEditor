@@ -91,7 +91,7 @@
     return [[super cssIdentifierArray] arrayByAddingObjectsFromArray:@[self.containerIdentifier]];
 }
 - (NSString *)containerIdentifier{
-    return [self.cssClass stringByAppendingString:@" > ul"];
+    return [self.cssIdentifier stringByAppendingString:@" > ul"];
 }
 
 - (BOOL)shouldCompileChildrenForOutput{
