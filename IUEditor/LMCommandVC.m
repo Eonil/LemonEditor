@@ -296,12 +296,12 @@
 
 - (void)shellUtil:(JDShellUtil*)util standardOutputDataReceived:(NSData*)data{
     NSString *log = [[NSString alloc] initWithData:data encoding:4];
-    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleLog object:self.view userInfo:@{@"Log": log}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleLog object:self.view.window userInfo:@{@"Log": log}];
 }
 
 - (void)shellUtil:(JDShellUtil*)util standardErrorDataReceived:(NSData*)data{
     NSString *log = [[NSString alloc] initWithData:data encoding:4];
-    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleLog object:self.view userInfo:@{@"Log": log}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationConsoleLog object:self.view.window userInfo:@{@"Log": log}];
 }
 
 
