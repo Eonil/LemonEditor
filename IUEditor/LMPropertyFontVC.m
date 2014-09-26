@@ -402,14 +402,19 @@
 }
 - (void)checkFontWeight:(NSString *)fontName{
     BOOL hasLightWeight = [_fontController hasLight:fontName];
-    if(hasLightWeight == NO && [[_fontWeightMatrix selectedCell] isEqualTo:_lightWeightButtonCell]){
-        [_fontWeightMatrix selectCellAtRow:0 column:1];
-        [self updateFontWeight:@"400"];
+    
+    if(hasLightWeight == NO){
+        [_lightWeightButtonCell setState:NSOffState];
+
+//        [[[_fontWeightMatrix cells] objectAtIndex:0] setEnabled:NO];
+        if([[_fontWeightMatrix selectedCell] isEqualTo:_lightWeightButtonCell]){
+            [_fontWeightMatrix selectCellAtRow:0 column:1];
+            [self updateFontWeight:@"400"];
+        }
     }
     
     [_lightWeightButtonCell setEnabled:hasLightWeight];
-    [_lightWeightButtonCell setSelectable:hasLightWeight];
-    
+    [_lightWeightButtonCell setTransparent:!hasLightWeight];
 }
 
 - (void)updateFontWeight:(NSString *)fontWeight{
