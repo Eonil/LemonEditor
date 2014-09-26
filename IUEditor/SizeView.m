@@ -307,14 +307,23 @@
     
     [self addFrame:newWidth];
     [self.addFramePopover close];
-
-    InnerSizeBox *maxBox = (InnerSizeBox *)boxManageView.subviews[0];
-    InnerSizeBox *oldMaxBox = (InnerSizeBox *)boxManageView.subviews[1];
+    
+    NSInteger currentIndex = [[self sortedArray] indexOfObject:widthNumber];
+    
+    NSNumber *max = [self.sortedArray firstObject];
+    NSNumber *oldMax = [self.sortedArray objectAfterObject:max];
+    NSNumber *largerSize;
+    
+    if(currentIndex != 0){
+        largerSize = [self.sortedArray objectAtIndex:currentIndex-1];
+    }
+    
 //notification
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQAdded object:self
                                                       userInfo:@{IUNotificationMQSize:@(newWidth),
-                                                                 IUNotificationMQOldMaxSize:@(oldMaxBox.frameWidth),
-                                                                 IUNotificationMQMaxSize:@(maxBox.frameWidth)}];
+                                                                 IUNotificationMQOldMaxSize:oldMax,
+                                                                 IUNotificationMQMaxSize:max,
+                                                                 IUNotificationMQLargerSize:largerSize}];
     
 }
 

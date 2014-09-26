@@ -519,13 +519,29 @@
 }
 
 - (void)addMQSize:(NSNotification *)notification{
+    
     NSInteger size = [[notification.userInfo objectForKey:IUNotificationMQSize] integerValue];
     NSInteger oldMaxSize = [[notification.userInfo valueForKey:IUNotificationMQOldMaxSize] integerValue];
     NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
+    
+    if ([notification.userInfo valueForKey:IUNotificationMQLargerSize]) {
+        NSInteger nextSize = [[notification.userInfo valueForKey:IUNotificationMQLargerSize] integerValue];
+        if(nextSize != maxSize){
+            //media query 바로 위에 size를 copy함
+            // 760이 있을때  750 size 를 copy
+            [_css copySizeFrom:nextSize to:size];
+        }
+    }
 
+    //max size가 변하면 max css를 현재 css로 카피시킴.
+    //960을만들고 1280을 나중에 만들면
+    //1280으로 그냥 다옮겨가면서 960css 가 망가지게 됨.
+    //방지하기 위한 용도
     if(size == maxSize){
         [_css copyMaxSizeToSize:oldMaxSize];
     }
+    
+    [_css checkSizeDict:size];
     [_css setMaxWidth:maxSize];
     
 }
