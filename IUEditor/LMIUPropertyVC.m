@@ -340,6 +340,7 @@
     else if ([classString isEqualToString:@"IUHeader"]
              || [classString isEqualToString:@"IUHeader"]
              || [classString isEqualToString:@"IUFooter"]
+             || [classString isEqualToString:@"IUSidebar"]
              ) {
        self.propertyVArray = @[propertyIUImportVC.view];
     }

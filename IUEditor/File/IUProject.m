@@ -313,24 +313,33 @@
 }
 
 - (void)makeDefaultClasses{
-    NSDictionary *headerDict = @{kClassType: IUClassHeader};
-    IUClass *header = [[IUClass alloc] initWithProject:self options:headerDict];
-    header.name = @"header";
-    header.htmlID = @"header";
-    [self addSheet:header toSheetGroup:_classGroup];
+
+    IUClass *header = [self classWithName:@"header"];
+    if(header == nil){
+        NSDictionary *headerDict = @{kClassType: IUClassHeader};
+        IUClass *header = [[IUClass alloc] initWithProject:self options:headerDict];
+        header.name = @"header";
+        header.htmlID = @"header";
+        [self addSheet:header toSheetGroup:_classGroup];
+    }
     
-    NSDictionary *footerDict = @{kClassType: IUClassFooter};
-    IUClass *footer = [[IUClass alloc] initWithProject:self options:footerDict];
-    footer.name = @"footer";
-    footer.htmlID = @"footer";
-    [self addSheet:footer toSheetGroup:_classGroup];
+    IUClass *footer = [self classWithName:@"footer"];
+    if(footer == nil){
+        NSDictionary *footerDict = @{kClassType: IUClassFooter};
+        IUClass *footer = [[IUClass alloc] initWithProject:self options:footerDict];
+        footer.name = @"footer";
+        footer.htmlID = @"footer";
+        [self addSheet:footer toSheetGroup:_classGroup];
+    }
     
-    NSDictionary *sidebarDict = @{kClassType: IUClassSidebar};
-    IUClass *sidebar = [[IUClass alloc] initWithProject:self options:sidebarDict];
-    sidebar.name = @"sidebar";
-    sidebar.htmlID = @"sidebar";
-    [self addSheet:sidebar toSheetGroup:_classGroup];
-    
+    IUClass *sidebar = [self classWithName:@"sidebar"];
+    if(sidebar == nil){
+        NSDictionary *sidebarDict = @{kClassType: IUClassSidebar};
+        IUClass *sidebar = [[IUClass alloc] initWithProject:self options:sidebarDict];
+        sidebar.name = @"sidebar";
+        sidebar.htmlID = @"sidebar";
+        [self addSheet:sidebar toSheetGroup:_classGroup];
+    }
 }
 
 
