@@ -7,6 +7,7 @@
 //
 
 #import "IUSidebar.h"
+#import "IUPageContent.h"
 
 @implementation IUSidebar
 
@@ -24,6 +25,20 @@
         [self.undoManager enableUndoRegistration];
     }
     return self;
+}
+
+- (void)increaseSize:(NSSize)size withParentSize:(NSSize)parentSize{
+    [super increaseSize:size withParentSize:parentSize];
+    CGFloat width = [self.css.assembledTagDictionary[IUCSSTagPercentWidth] floatValue];
+    CGFloat pageContentWidth = 100-width;
+    
+    for(IUBox *box in self.parent.children){
+        if([box isKindOfClass:[IUPageContent class]]){
+            [box.css setValueWithoutUpdateCSS:@(pageContentWidth) forTag:IUCSSTagPercentWidth];
+            [box updateCSS];
+        }
+    }
+    
 }
 
 -(BOOL)canRemoveIUByUserInput{
@@ -60,9 +75,6 @@
     return NO;
 }
 
-- (BOOL)canChangeWidthByUserInput{
-    return NO;
-}
 
 - (BOOL)canCopy{
     return NO;
