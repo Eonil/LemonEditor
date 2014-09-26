@@ -377,6 +377,8 @@
 }
 
 - (IBAction)selectFontWeightMatrix:(id)sender {
+    [self checkFontWeight:currentFontName];
+    
     switch ([_fontWeightMatrix selectedColumn]) {
         case 0:
             [self updateFontWeight:@"300"];
@@ -390,6 +392,7 @@
         default:
             break;
     }
+    
 }
 
 - (void)updateFontName:(NSString *)fontName{
@@ -399,12 +402,14 @@
 }
 - (void)checkFontWeight:(NSString *)fontName{
     BOOL hasLightWeight = [_fontController hasLight:fontName];
-    [_lightWeightButtonCell setEnabled:hasLightWeight];
-
-    if(hasLightWeight == NO && [_fontWeightMatrix selectedColumn] == 0){
+    if(hasLightWeight == NO && [[_fontWeightMatrix selectedCell] isEqualTo:_lightWeightButtonCell]){
         [_fontWeightMatrix selectCellAtRow:0 column:1];
         [self updateFontWeight:@"400"];
     }
+    
+    [_lightWeightButtonCell setEnabled:hasLightWeight];
+    [_lightWeightButtonCell setSelectable:hasLightWeight];
+    
 }
 
 - (void)updateFontWeight:(NSString *)fontWeight{

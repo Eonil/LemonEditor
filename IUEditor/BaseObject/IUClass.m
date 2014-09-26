@@ -7,6 +7,7 @@
 //
 
 #import "IUClass.h"
+#import "IUProject.h"
 
 @implementation IUClass{
     NSMutableArray *_referenceImports;
@@ -81,6 +82,9 @@
         [self addIU:titleBox error:nil];
 
     }
+    
+    [self.project.identifierManager registerIUs:@[titleBox]];
+
 }
 - (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
     self =  [super awakeAfterUsingCoder:aDecoder];

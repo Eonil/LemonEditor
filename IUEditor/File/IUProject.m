@@ -105,7 +105,6 @@
         //[self initializeCSSJSResource];
 
         [_resourceManager setResourceGroup:_resourceGroup];
-        [_identifierManager registerIUs:self.allDocuments];
         
         _serverInfo = [aDecoder decodeObjectForKey:@"serverInfo"];
         if (_serverInfo == nil) {
@@ -173,6 +172,9 @@
         }
 
     }
+    
+    [_identifierManager registerIUs:self.allDocuments];
+    
     [self.undoManager enableUndoRegistration];
     return self;
 }
