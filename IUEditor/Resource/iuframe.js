@@ -1,3 +1,15 @@
+function isIUinWindow(iu){
+	var screenH = $(window).height();
+	
+	if($(iu).position().top + $(iu).height < 0){
+		return false;
+	}
+	if($(iu).position().top > screenH){
+		return false;
+	}
+	
+	return true;
+}
 function makefullSizeSection(){
     var respc = $('[enableFullSize="1"]').toArray();
 	var windowHeight =  $(window).height();
@@ -37,6 +49,31 @@ function resizeCollection(){
 		var width = $(this).width()/count;
 		$(this).children().css('width', width.toFixed(0)+'px');
 	});
+}
+
+function relocateScrollAnimation(){
+	//move : current viewport pc type
+	if(isMobile()==false){
+		$('[xPosMove]').each(function(){
+			var xPosMove = $(this).attr('xPosMove');
+            var start;
+            
+			if ($(this).css('float') == 'left'){
+                start = parseFloat($(this).css('margin-left')) - xPosMove;
+                $(this).css('margin-left', start + 'px');
+            }
+            else if($(this).css('float') == 'right'){
+               start = parseFloat($(this).css('margin-right')) - xPosMove;
+               $(this).css('margin-right', start + 'px');
+            }
+            else{
+				start = parseFloat($(this).css('left')) - xPosMove;
+				$(this).css('left', start + 'px');
+			};
+            $(this).attr('start', start);
+
+		});
+	}
 }
 
 function resizeSideBar(){

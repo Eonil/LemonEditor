@@ -162,7 +162,9 @@ static LMFontController *gFontController = nil;
     }
     
     JDCode *code = [[JDCode alloc] init];
-    [code addCodeWithFormat:@"<link href='http://fonts.googleapis.com/css?family=%@' rel='stylesheet' type='text/css'>", googleFont];
+    if(googleFont.length > 0){
+        [code addCodeWithFormat:@"<link href='http://fonts.googleapis.com/css?family=%@' rel='stylesheet' type='text/css'>", googleFont];
+    }
     for(NSString *link in linkDict.allValues){
         [code addCodeLine:link];
     }
