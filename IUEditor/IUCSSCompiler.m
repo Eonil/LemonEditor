@@ -916,12 +916,12 @@
         case IUPositionTypeFixedBottom:{
             enablebottom = YES;
             [code insertTag:@"position" string:@"fixed"];
-            [code insertTag:@"z-index" string:@"10"];
+            [code insertTag:@"z-index" string:@"11"];
             leftTag = @"left"; break;
         }
         case IUPositionTypeFixed:{
             [code insertTag:@"position" string:@"fixed"];
-            [code insertTag:@"z-index" string:@"10"];
+            [code insertTag:@"z-index" string:@"11"];
             if(_iu.enableVCenter == NO){
                 topTag = @"top"; 
             }
