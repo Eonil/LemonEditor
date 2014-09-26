@@ -112,6 +112,9 @@
     [self.webView resizePageContent];
     [[self webView] updateFrameDict];
 }
+- (void)extendMainViewToFullSize{
+    [self setHeightOfMainView:[[self mainScrollView] frame].size.height];
+}
 
 #pragma mark -
 #pragma mark mouseEvent

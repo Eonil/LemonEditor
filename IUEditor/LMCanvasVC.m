@@ -231,15 +231,8 @@
     //not page class
     //page will be set report from javscript
     if([_sheet isKindOfClass:[IUClass class]]){
-        CGFloat currentHeight =  [[_sheet.css assembledTagDictionary][IUCSSTagPixelHeight] floatValue];
-        [(LMCanvasView *)self.view setHeightOfMainView:currentHeight];
+        [(LMCanvasView*)self.view extendMainViewToFullSize];
     }
-    else if([_sheet isKindOfClass:[IUBackground class]]){
-        IUBackground *background = (IUBackground *)_sheet;
-        CGFloat currentHeight = [[background.header.css assembledTagDictionary][IUCSSTagPixelHeight] floatValue];
-        [(LMCanvasView *)self.view setHeightOfMainView:currentHeight];
-    }
-    
 }
 
 - (void)setSheet:(IUSheet *)sheet{

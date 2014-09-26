@@ -28,6 +28,7 @@
 - (void)receiveMouseEvent:(NSEvent *)theEvent;
 
 - (void)setHeightOfMainView:(CGFloat)height;
+- (void)extendMainViewToFullSize;
 
 - (void)startDraggingFromGridView;
 
