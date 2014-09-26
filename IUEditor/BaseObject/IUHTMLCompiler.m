@@ -708,7 +708,7 @@
         //add prefix, <ImportedBy_[IUName]_ to all id html (including chilren)
         JDCode *importCode = [[JDCode alloc] init];
         [self htmlCode:import.prototypeClass target:target code:importCode];
-        NSString *idReplacementString = [NSString stringWithFormat:@" id=\"ImportedBy_%@_", import.htmlID];
+        NSString *idReplacementString = [NSString stringWithFormat:@" id=\"%@%@_",kIUImportEditorPrefix, import.htmlID];
         
         [importCode replaceCodeString:@" id=\"" toCodeString:idReplacementString];
         [code addCodeWithIndent:importCode];

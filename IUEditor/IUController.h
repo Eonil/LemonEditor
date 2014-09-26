@@ -26,6 +26,10 @@
 -(NSArray*)selectedIdentifiersWithImportIdentifier;
 
 -(id)IUBoxByIdentifier:(NSString *)identifier;
+/**
+ brief: check import id
+ */
+-(id)tryIUBoxByIdentifier:(NSString *)identifier;
 -(NSSet *)IUBoxesByIdentifiers:(NSArray *)identifiers;
 
 -(IUImport*)importIUInSelectionChain;

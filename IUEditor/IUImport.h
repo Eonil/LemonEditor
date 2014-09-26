@@ -9,7 +9,15 @@
 #import "IUBox.h"
 #import "IUClass.h"
 
+#define kIUImportEditorPrefix @"ImportedBy_"
+
 
 @interface IUImport : IUBox
 @property (nonatomic, weak) IUClass  *prototypeClass;
+
+/**
+ @brief ImportedBy_importID_iu.htmlID
+ */
+- (NSString *)htmlIDInImport:(IUBox *)iu;
+
 @end

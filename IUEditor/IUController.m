@@ -204,13 +204,13 @@
     IUSheet *document = [self.content firstObject];
     
     NSString *firstIdentifier = [identifiers firstObject];
-    if ([firstIdentifier containsString:@"ImportedBy_"]) { // it's imported!
+    if ([firstIdentifier containsString:kIUImportEditorPrefix]) { // it's imported!
         /*
          if one is imported, but other is not, just return
          */
 
         for (NSString *identifier in identifiers) {
-            if ([identifier containsString:@"ImportedBy_"] == NO) {
+            if ([identifier containsString:kIUImportEditorPrefix] == NO) {
                 return;
             }
         }
@@ -304,9 +304,10 @@
     IUImport *import = self.importIUInSelectionChain;
     if (import) {
         NSMutableArray *retArray = [NSMutableArray array];
-        NSArray *htmlIDs = [self.selectedObjects valueForKeyPath:@"htmlID"];
-        for (NSString *htmlID in htmlIDs) {
-            [retArray addObject:[NSString stringWithFormat:@"ImportedBy_%@_%@", import.htmlID, htmlID]];
+        for(IUBox *iu in self.selectedObjects){
+            NSString *currentID = [import htmlIDInImport:iu];
+            [retArray addObject:currentID];
+
         }
         return retArray;
     }
@@ -322,6 +323,16 @@
         return nil;
     }
     return [findIUs anyObject];
+}
+
+-(id)tryIUBoxByIdentifier:(NSString *)identifier{
+    id findIUs = [self IUBoxByIdentifier:identifier];
+    if(findIUs == nil && [identifier containsString:kIUImportEditorPrefix]) {
+        NSString *realID = [[identifier componentsSeparatedByString:@"_"] objectAtIndex:2];
+        id currentIU = [self IUBoxByIdentifier:realID];
+        return currentIU;
+    }
+    return nil;
 }
 
 -(NSSet *)IUBoxesByIdentifiers:(NSArray *)identifiers{
@@ -398,5 +409,6 @@
     }
     return className;
 }
+
 
 @end

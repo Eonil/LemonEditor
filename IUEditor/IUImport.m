@@ -78,12 +78,11 @@
     if(prototypeClass == nil){
         //remove layers
         for(IUBox *box in _prototypeClass.allChildren){
-            NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_%@",self.htmlID, box.htmlID];
-            [self.delegate IURemoved:modifiedHTMLID withParentID:self.htmlID];
+            NSString *currentID = [self htmlIDInImport:box];
+            [self.delegate IURemoved:currentID withParentID:self.htmlID];
         }
         
-        NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_class",self.htmlID];
-        [self.delegate IURemoved:modifiedHTMLID withParentID:self.htmlID];
+        [self.delegate IURemoved:[self htmlIDInImport:_prototypeClass] withParentID:self.htmlID];
 
     }
     
@@ -100,6 +99,17 @@
     [self didChangeValueForKey:@"children"];
 }
 
+- (NSString *)htmlIDInImport:(IUBox *)iu{
+    if([_prototypeClass.allChildren containsObject:iu]){
+        NSString *importHTMLID = [NSString stringWithFormat:@"%@%@_%@",kIUImportEditorPrefix, self.htmlID, iu.htmlID];
+        return importHTMLID;
+    }
+    else if(_prototypeClass == iu){
+        NSString *importHTMLID = [NSString stringWithFormat:@"%@%@_class",kIUImportEditorPrefix, self.htmlID];
+        return importHTMLID;
+    }
+    return nil;
+}
 
 - (void)setDelegate:(id<IUSourceDelegate>)delegate{
     [super setDelegate:delegate];

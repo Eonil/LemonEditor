@@ -160,11 +160,7 @@
 #pragma mark - Drag & drop
 
 - (BOOL)makeNewIUByDragAndDrop:(IUBox *)newIU atPoint:(NSPoint)point atIU:(NSString *)parentIUID{
-    IUBox *parentIU = [self.controller IUBoxByIdentifier:parentIUID];
-    if ([parentIUID containsString:@"ImportedBy_"]) {
-        NSString *realID = [[parentIUID componentsSeparatedByString:@"_"] objectAtIndex:2];
-        parentIU = [self.controller IUBoxByIdentifier:realID];
-    }
+    IUBox *parentIU = [self.controller tryIUBoxByIdentifier:parentIUID];
     
     //postion을 먼저 정한 후에 add 함
     if([newIU canChangeInitialPosition]){
@@ -174,9 +170,9 @@
     
     [parentIU addIU:newIU error:nil];
     
-    if ([parentIUID containsString:@"ImportedBy_"]) {
+    if ([parentIUID containsString:kIUImportEditorPrefix]) {
         NSString *parentIdentifier = [[parentIUID componentsSeparatedByString:@"_" ] objectAtIndex:1];
-        NSString *finalString = [NSString stringWithFormat:@"ImportedBy_%@_%@", parentIdentifier, newIU.htmlID];
+        NSString *finalString = [NSString stringWithFormat:@"%@%@_%@", kIUImportEditorPrefix, parentIdentifier, newIU.htmlID];
         [self.controller trySetSelectedObjectsByIdentifiers:@[finalString]];
     }
     else {
@@ -198,11 +194,7 @@
 }
 
 -(void)insertImage:(NSString *)name atIU:(NSString *)identifier{
-    IUBox *currentIU = [self.controller IUBoxByIdentifier:identifier];
-    if (currentIU == nil && [identifier containsString:@"ImportedBy_"]) {
-        NSString *realID = [[identifier componentsSeparatedByString:@"_"] objectAtIndex:2];
-        currentIU = [self.controller IUBoxByIdentifier:realID];
-    }
+    IUBox *currentIU = [self.controller tryIUBoxByIdentifier:identifier];
     [currentIU setImageName:name];
 }
 
@@ -867,8 +859,8 @@
     //draw guide line
     for (IUBox *iu in self.controller.selectedObjects){
         if (self.controller.importIUInSelectionChain){
-            NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_%@",self.controller.importIUInSelectionChain.htmlID, iu.htmlID];
-            [[self gridView] drawGuideLine:[frameDict lineToDrawSamePositionWithIU:modifiedHTMLID]];
+            NSString *currentID =  [self.controller.importIUInSelectionChain htmlIDInImport:iu];
+            [[self gridView] drawGuideLine:[frameDict lineToDrawSamePositionWithIU:currentID]];
 
         }
         else{
@@ -903,8 +895,8 @@
         
         NSSize parentSize;
         if (self.controller.importIUInSelectionChain){
-            NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_%@",self.controller.importIUInSelectionChain.htmlID, moveObj.htmlID];
-            parentSize = [[self webView] parentBlockElementSize:modifiedHTMLID];
+            NSString *currentID =  [self.controller.importIUInSelectionChain htmlIDInImport:moveObj];
+            parentSize = [[self webView] parentBlockElementSize:currentID];
         }
         else {
             parentSize = [[self webView] parentBlockElementSize:moveObj.htmlID];
@@ -998,8 +990,8 @@
         
         NSSize parentSize;
         if (self.controller.importIUInSelectionChain){
-            NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_%@",self.controller.importIUInSelectionChain.htmlID, moveObj.htmlID];
-            parentSize = [[self webView] parentBlockElementSize:modifiedHTMLID];
+            NSString *currentID =  [self.controller.importIUInSelectionChain htmlIDInImport:moveObj];
+            parentSize = [[self webView] parentBlockElementSize:currentID];
         }
         else {
             parentSize = [[self webView] parentBlockElementSize:moveObj.htmlID];
@@ -1057,9 +1049,9 @@
             [frameDict.dict removeObjectForKey:identifier];
             
             for(IUBox *box in iu.allChildren){
-                NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_%@",iu.htmlID, box.htmlID];
-                [[self gridView] removeLayerWithIUIdentifier:modifiedHTMLID];
-                [frameDict.dict removeObjectForKey:modifiedHTMLID];
+                NSString *currentID =  [(IUImport *)iu htmlIDInImport:box];
+                [[self gridView] removeLayerWithIUIdentifier:currentID];
+                [frameDict.dict removeObjectForKey:currentID];
             }
         }
         else if([iu.sheet isKindOfClass:[IUClass class]]){
@@ -1069,9 +1061,9 @@
                 [allIU addObject:iu];
                 
                 for(IUBox *box in allIU){
-                    NSString *modifiedHTMLID = [NSString stringWithFormat:@"ImportedBy_%@_%@",import.htmlID, box.htmlID];
-                    [[self gridView] removeLayerWithIUIdentifier:modifiedHTMLID];
-                    [frameDict.dict removeObjectForKey:modifiedHTMLID];
+                    NSString *currentID =  [(IUImport *)import htmlIDInImport:box];
+                    [[self gridView] removeLayerWithIUIdentifier:currentID];
+                    [frameDict.dict removeObjectForKey:currentID];
                 }
                 
             }
