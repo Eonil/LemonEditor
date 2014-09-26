@@ -944,6 +944,9 @@
         IUUnit wUnit = [[_iu.css valueByStepForTag:IUCSSTagWidthUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
         NSNumber *wValue = (wUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentWidth] : cssTagDict[IUCSSTagPixelWidth];
         [code insertTag:@"width" floatFromNumber:wValue unit:wUnit];
+        if(wUnit == IUUnitPercent && cssTagDict[IUCSSTagMinPixelWidth]){
+            [code insertTag:@"min-width" intFromNumber:cssTagDict[IUCSSTagMinPixelWidth] unit:IUUnitPixel];
+        }
     }
     
     if (_iu.hasHeight) {
@@ -952,6 +955,10 @@
         NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
         [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
         
+        if(hUnit == IUUnitPercent && cssTagDict[IUCSSTagMinPixelHeight]){
+            [code insertTag:@"min-height" intFromNumber:cssTagDict[IUCSSTagMinPixelHeight] unit:IUUnitPixel];
+        }
+
     }
 }
 

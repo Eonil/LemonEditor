@@ -108,20 +108,15 @@
     //순서대로 넣어야함
     if(_header){
         [self addIU:_header error:nil];
-        [self.project.identifierManager registerIUs:@[_header]];
     }
     if(_sidebar){
         [self addIU:_sidebar error:nil];
-        [self.project.identifierManager registerIUs:@[_sidebar]];
     }
     if(_pageContent){
         [self addIU:_pageContent error:nil];
-        [self.project.identifierManager registerIUs:@[_pageContent]];
     }
     if(_footer){
         [self addIU:_footer error:nil];
-        [self.project.identifierManager registerIUs:@[_footer]];
-
     }
 }
 

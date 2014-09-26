@@ -44,8 +44,8 @@ static NSString * IUEventTagFrameHeight   = @"eqFrameHeight";
 ///////CSSTag
 #define IUCSSTag NSString*
 
+//frame
 static NSString * IUCSSTagMinHeight = @"min-height";
-
 
 static NSString * IUCSSTagXUnitIsPercent   = @"xUnit";
 static NSString * IUCSSTagYUnitIsPercent   = @"yUnit";
@@ -62,6 +62,8 @@ static NSString * IUCSSTagPercentY        = @"percentTop";
 static NSString * IUCSSTagPercentWidth    = @"percentWidth";
 static NSString * IUCSSTagPercentHeight   = @"percentHeight";
 
+static NSString * IUCSSTagMinPixelWidth = @"minPixelWidth";
+static NSString * IUCSSTagMinPixelHeight = @"minPixelHeight";
 
 //background-image css
 static NSString * IUCSSTagImage = @"background-image";

@@ -26,6 +26,10 @@
 @property (weak) IBOutlet NSTextField *pwTF;
 @property (weak) IBOutlet NSTextField *phTF;
 
+//min pixel textfield
+@property (weak) IBOutlet NSTextField *minWTF;
+@property (weak) IBOutlet NSTextField *minHTF;
+
 //pixel stepper
 @property (weak) IBOutlet NSStepper *xStepper;
 @property (weak) IBOutlet NSStepper *yStepper;
@@ -38,7 +42,11 @@
 @property (weak) IBOutlet NSStepper *pwStepper;
 @property (weak) IBOutlet NSStepper *phStepper;
 
+//min pixel stepper
+@property (weak) IBOutlet NSStepper *minWStepper;
+@property (weak) IBOutlet NSStepper *minHStepper;
 
+//unit button
 @property (weak) IBOutlet NSButton *xUnitBtn;
 @property (weak) IBOutlet NSButton *yUnitBtn;
 @property (weak) IBOutlet NSButton *wUnitBtn;
@@ -89,6 +97,8 @@
     [self addObserverForCSSTag:IUCSSTagPercentY options:0 context:nil];
     [self addObserverForCSSTag:IUCSSTagPercentWidth options:0 context:nil];
     [self addObserverForCSSTag:IUCSSTagPercentHeight options:0 context:nil];
+    [self addObserverForCSSTag:IUCSSTagMinPixelHeight options:0 context:nil];
+    [self addObserverForCSSTag:IUCSSTagMinPixelWidth options:0 context:nil];
     
     [self outlet:_xTF bind:NSHiddenBinding cssTag:IUCSSTagXUnitIsPercent];
     [self outlet:_xStepper bind:NSHiddenBinding cssTag:IUCSSTagXUnitIsPercent];
@@ -104,11 +114,18 @@
     [self outlet:_wStepper bind:NSHiddenBinding cssTag:IUCSSTagWidthUnitIsPercent];
     [self outlet:_pwTF bind:NSHiddenBinding cssTag:IUCSSTagWidthUnitIsPercent options:percentHiddeBindingOption];
     [self outlet:_pwStepper bind:NSHiddenBinding cssTag:IUCSSTagWidthUnitIsPercent options:percentHiddeBindingOption];
+    [self outlet:_minWStepper bind:NSHiddenBinding cssTag:IUCSSTagWidthUnitIsPercent options:percentHiddeBindingOption];
+    [self outlet:_minWTF bind:NSHiddenBinding cssTag:IUCSSTagWidthUnitIsPercent options:percentHiddeBindingOption];
+
     
     [self outlet:_hTF bind:NSHiddenBinding cssTag:IUCSSTagHeightUnitIsPercent];
     [self outlet:_hStepper bind:NSHiddenBinding cssTag:IUCSSTagHeightUnitIsPercent];
     [self outlet:_phTF bind:NSHiddenBinding cssTag:IUCSSTagHeightUnitIsPercent options:percentHiddeBindingOption];
     [self outlet:_phStepper bind:NSHiddenBinding cssTag:IUCSSTagHeightUnitIsPercent options:percentHiddeBindingOption];
+    [self outlet:_minHTF bind:NSHiddenBinding cssTag:IUCSSTagHeightUnitIsPercent options:percentHiddeBindingOption];
+    [self outlet:_minHStepper bind:NSHiddenBinding cssTag:IUCSSTagHeightUnitIsPercent options:percentHiddeBindingOption];
+
+
     
     
     [self outlet:_xUnitBtn bind:NSValueBinding cssTag:IUCSSTagXUnitIsPercent];
@@ -145,7 +162,13 @@
     [self outlet:_pyStepper bind:NSEnabledBinding property:@"hasY"];
     [self outlet:_pwStepper bind:NSEnabledBinding property:@"hasWidth"];
     [self outlet:_phStepper bind:NSEnabledBinding property:@"hasHeight"];
+    
+    [self outlet:_minWTF bind:NSEnabledBinding property:@"hasWidth"];
+    [self outlet:_minWStepper bind:NSEnabledBinding property:@"hasWidth"];
 
+    [self outlet:_minHTF bind:NSEnabledBinding property:@"hasHeight"];
+    [self outlet:_minHStepper bind:NSEnabledBinding property:@"hasHeight"];
+    
     
     [self outlet:_positionPopupBtn bind:NSEnabledBinding property:@"canChangePositionType"];
     [self outlet:_centerBtn bind:NSEnabledBinding property:@"canChangeHCenter"];
@@ -178,6 +201,14 @@
     [self outlet:_pyStepper bind:@"enabled2" property:@"canChangeYByUserInput"];
     [self outlet:_pwStepper bind:@"enabled2" property:@"canChangeWidthByUserInput"];
     [self outlet:_phStepper bind:@"enabled2" property:@"canChangeHeightByUserInput"];
+    
+    [self outlet:_minWTF bind:@"enabled2" property:@"canChangeWidthByUserInput"];
+    [self outlet:_minWStepper bind:@"enabled2" property:@"canChangeWidthByUserInput"];
+    
+    [self outlet:_minHTF bind:@"enabled2" property:@"canChangeHeightByUserInput"];
+    [self outlet:_minHStepper bind:@"enabled2" property:@"canChangeHeightByUserInput"];
+
+    
     
     [self outlet:_centerBtn bind:@"enabled2" property:@"xPosMove" options:IUBindingNegationAndNotRaise];
 
@@ -240,6 +271,13 @@
         else if ([[keyPath pathExtension] isSameTag:IUCSSTagPercentHeight]) {
             [self setValueForTag:IUCSSTagPercentHeight toTextfield:_phTF toStepper:_phStepper];
         }
+        else if ([[keyPath pathExtension] isSameTag:IUCSSTagMinPixelWidth]) {
+            [self setValueForTag:IUCSSTagMinPixelWidth toTextfield:_minWTF toStepper:_minWStepper];
+        }
+        else if ([[keyPath pathExtension] isSameTag:IUCSSTagMinPixelHeight]) {
+            [self setValueForTag:IUCSSTagMinPixelHeight toTextfield:_minHTF toStepper:_minHStepper];
+        }
+
     }
 }
 
@@ -334,6 +372,14 @@
         tag = IUCSSTagPercentHeight;
         stepper = _phStepper;
     }
+    else if (control == _minWTF){
+        tag = IUCSSTagMinPixelWidth;
+        stepper = _minWStepper;
+    }
+    else if (control == _minHTF){
+        tag = IUCSSTagMinPixelHeight;
+        stepper = _minHStepper;
+    }
     
     [self setCSSFrameValue:[control stringValue] forTag:tag];
     [self setValue:[control stringValue] toStepper:stepper];
@@ -376,6 +422,14 @@
     else if (sender == _phStepper) {
         tag = IUCSSTagPercentHeight;
         textField = _phTF;
+    }
+    else if (sender == _minWStepper){
+        tag = IUCSSTagMinPixelWidth;
+        textField = _minWTF;
+    }
+    else if (sender == _minHStepper){
+        tag = IUCSSTagMinPixelHeight;
+        textField = _minHTF;
     }
     
     [self setCSSFrameValue:[sender stringValue] forTag:tag];
