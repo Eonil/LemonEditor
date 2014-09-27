@@ -35,11 +35,6 @@
     [_controller addObserver:self forKeyPath:@"selection" options:NSKeyValueObservingOptionNew context:nil];
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-}
-
 - (void)dealloc{
     if(_controller){
         [_controller removeObserver:self forKeyPath:@"selection"];
