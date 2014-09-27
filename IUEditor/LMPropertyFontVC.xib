@@ -7,7 +7,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="LMPropertyFontVC">
             <connections>
                 <outlet property="autoHeightBtn" destination="hEa-YS-8cD" id="mbM-TR-vK7"/>
-                <outlet property="fontB" destination="Yle-zg-jre" id="3NT-fU-1xD"/>
+                <outlet property="fontCB" destination="Yle-zg-jre" id="K28-jg-TUo"/>
                 <outlet property="fontColorWell" destination="EF9-cy-hVF" id="LtQ-n0-TiY"/>
                 <outlet property="fontListDC" destination="HyI-eC-WGG" id="aDA-tm-S9h"/>
                 <outlet property="fontSizeB" destination="nc6-kb-J7I" id="P78-EQ-Hrb"/>
