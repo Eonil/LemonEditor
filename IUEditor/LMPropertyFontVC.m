@@ -105,25 +105,19 @@
 - (BOOL)isSelectedObjectText{
     BOOL isText = YES;
     
-    
     for(IUBox *box in self.controller.selectedObjects){
-#if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
-        if([box isKindOfClass:[IUText class]] == NO){
-            isText = NO;
-            break;
-        }
-#else
         if([box isMemberOfClass:[IUBox class]] == NO){
             isText = NO;
             break;
         }
-#endif
-        
     }
     return isText;
 }
 
-- (BOOL)isSelectedObjectFontType{
+/**
+ Check Font should be enabled for current IUController selection
+ */
+- (BOOL)isEnableForCurrentSelection{
     BOOL isTextType = YES;
     
     
@@ -215,7 +209,7 @@
 #else
 - (void)fontContextDidChange:(NSDictionary *)change{
     
-    if([self isSelectedObjectFontType]){
+    if([self isEnableForCurrentSelection]){
         
         if([self isSelectedObjectText]){
             [_fontStyleB setEnabled:YES];
