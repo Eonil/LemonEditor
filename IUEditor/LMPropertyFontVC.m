@@ -69,8 +69,8 @@
     observingList = @[
                       [self pathForCSSTag:IUCSSTagFontName],
                       [self pathForCSSTag:IUCSSTagFontWeight],
-                      [self pathForCSSTag:IUCSSTagFontStyle],
-                      [self pathForCSSTag:IUCSSTagTextDecoration],
+                      [self pathForCSSTag:IUCSSTagFontItalic],
+                      [self pathForCSSTag:IUCSSTagFontDecoration],
                       [self pathForCSSTag:IUCSSTagFontSize],
                       [self pathForCSSTag:IUCSSTagLineHeight],
                       [self pathForProperty:@"shouldCompileFontInfo"],
@@ -214,10 +214,10 @@
         if([self isSelectedObjectText]){
             [_fontStyleB setEnabled:YES];
             if([[self.controller selectedObjects] count] ==1 ){
-                BOOL italic = [[self valueForCSSTag:IUCSSTagFontStyle] boolValue];
+                BOOL italic = [[self valueForCSSTag:IUCSSTagFontItalic] boolValue];
                 [_fontStyleB setSelected:italic forSegment:0];
                 
-                BOOL underline = [[self valueForCSSTag:IUCSSTagTextDecoration] boolValue];
+                BOOL underline = [[self valueForCSSTag:IUCSSTagFontDecoration] boolValue];
                 [_fontStyleB setSelected:underline forSegment:1];
             }
         }
@@ -475,12 +475,12 @@
     switch (index) {
         case 0:{
             BOOL value = [sender isSelectedForSegment:index];
-            [self setValue:@(value) forCSSTag:IUCSSTagFontStyle];
+            [self setValue:@(value) forCSSTag:IUCSSTagFontItalic];
             break;
         }
         case 1:{
             BOOL value = [sender isSelectedForSegment:index];
-            [self setValue:@(value) forCSSTag:IUCSSTagTextDecoration];
+            [self setValue:@(value) forCSSTag:IUCSSTagFontDecoration];
             break;
         }
         default:

@@ -577,10 +577,10 @@
     if (cssTagDict[IUCSSTagFontWeight]) {
         [code insertTag:@"font-weight" string:cssTagDict[IUCSSTagFontWeight]];
     }
-    if ([cssTagDict[IUCSSTagFontStyle] boolValue]) {
+    if ([cssTagDict[IUCSSTagFontItalic] boolValue]) {
         [code insertTag:@"font-style" string:@"italic"];
     }
-    if ([cssTagDict[IUCSSTagTextDecoration] boolValue]) {
+    if ([cssTagDict[IUCSSTagFontDecoration] boolValue]) {
         [code insertTag:@"text-decoration" string:@"underline"];
     }
     if (cssTagDict[IUCSSTagTextAlign]) {

@@ -479,21 +479,21 @@
 }
 
 - (void)setItalic:(BOOL)italic{
-    [self setTextTag:IUCSSTagFontStyle value:@(italic)];
+    [self setTextTag:IUCSSTagFontItalic value:@(italic)];
 
     
 }
 - (BOOL)italic{
-    return [self.css.assembledTagDictionary[IUCSSTagFontStyle] boolValue];
+    return [self.css.assembledTagDictionary[IUCSSTagFontItalic] boolValue];
 
 }
 
 - (void)setUnderline:(BOOL)underline{
     
-    [self setTextTag:IUCSSTagTextDecoration value:@(underline)];
+    [self setTextTag:IUCSSTagFontDecoration value:@(underline)];
 }
 - (BOOL)underline{
-    return [self.css.assembledTagDictionary[IUCSSTagTextDecoration] boolValue];
+    return [self.css.assembledTagDictionary[IUCSSTagFontDecoration] boolValue];
 
 }
 
