@@ -17,7 +17,7 @@
 
 @interface LMPropertyFontVC ()
 
-@property (weak) IBOutlet NSComboBox *fontB;
+@property (weak) IBOutlet NSComboBox *fontCB;
 @property (weak) IBOutlet NSComboBox *fontSizeComboBox;
 @property (weak) IBOutlet NSColorWell *fontColorWell;
 
@@ -81,14 +81,14 @@
     
     _fontController = [LMFontController sharedFontController];
     [_fontListDC bind:NSContentDictionaryBinding toObject:_fontController withKeyPath:@"fontDict" options:nil];
-    [_fontB bind:NSContentBinding toObject:_fontListDC withKeyPath:@"arrangedObjects.key" options:IUBindingDictNotRaisesApplicable];
+    [_fontCB bind:NSContentBinding toObject:_fontListDC withKeyPath:@"arrangedObjects.key" options:IUBindingDictNotRaisesApplicable];
     
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
     [self outlet:_fontColorWell bind:NSValueBinding cssTag:IUCSSTagFontColor];
 #endif 
     
     //combobox delegate
-    _fontB.delegate = self;
+    _fontCB.delegate = self;
     _fontSizeComboBox.delegate = self;
     _fontSizeComboBox.dataSource = self;
     _lineHeightB.delegate = self;
@@ -101,7 +101,7 @@
     [self removeObserver:self forKeyPaths:observingList];
 }
 
-
+/*
 - (BOOL)isSelectedObjectText{
     BOOL isText = YES;
     
@@ -113,7 +113,7 @@
     }
     return isText;
 }
-
+*/
 /**
  Check Font should be enabled for current IUController selection
  */
@@ -210,21 +210,24 @@
 - (void)fontContextDidChange:(NSDictionary *)change{
     
     if([self isEnableForCurrentSelection]){
+        [_fontStyleB setEnabled:YES];
         
-        if([self isSelectedObjectText]){
-            [_fontStyleB setEnabled:YES];
-            if([[self.controller selectedObjects] count] ==1 ){
-                BOOL italic = [[self valueForCSSTag:IUCSSTagFontItalic] boolValue];
-                [_fontStyleB setSelected:italic forSegment:0];
-                
-                BOOL underline = [[self valueForCSSTag:IUCSSTagFontDecoration] boolValue];
-                [_fontStyleB setSelected:underline forSegment:1];
-            }
+        id italicValue = [self valueForCSSTag:IUCSSTagFontItalic];
+        if ([italicValue respondsToSelector:@selector(boolValue)]) {
+            [_fontStyleB setSelected:[italicValue boolValue] forSegment:0];
         }
-        else{
-            [_fontStyleB setEnabled:NO];
+        else {
+            [_fontStyleB setSelected:NO forSegment:0];
         }
         
+        id underlineValue = [self valueForCSSTag:IUCSSTagFontDecoration];
+        if ([underlineValue respondsToSelector:@selector(boolValue)]) {
+            [_fontStyleB setSelected:[underlineValue boolValue] forSegment:1];
+        }
+        else {
+            [_fontStyleB setSelected:NO forSegment:1];
+        }
+
         //set current value
         for(IUBox *box in self.controller.selectedObjects){
             NSString *fontName = [box.css valueByStepForTag:IUCSSTagFontName forViewport:box.css.editWidth];
@@ -240,9 +243,14 @@
         }
         
         //set font name
-       
         NSString *iuFontName = [self valueForCSSTag:IUCSSTagFontName];
-
+        if ([iuFontName isKindOfClass:[NSString class]]) {
+            [_fontCB setStringValue:iuFontName];
+        }
+        else {
+            [_fontCB setStringValue:@""];
+        }
+/*
         if(iuFontName == NSMultipleValuesMarker){
             NSString *placeholder = [NSString stringWithValueMarker:NSMultipleValuesMarker];
             [[_fontB cell] setPlaceholderString:placeholder];
@@ -255,7 +263,7 @@
         else{
             [_fontB setStringValue:@""];
         }
-        
+        */
         
         //set Font size
         if([self valueForCSSTag:IUCSSTagFontSize] == NSMultipleValuesMarker){
@@ -320,7 +328,7 @@
         [self checkFontWeight:iuFontName];
         
         //enable font type box
-        [_fontB setEnabled:YES];
+        [_fontCB setEnabled:YES];
         [_fontSizeComboBox setEnabled:YES];
         [_fontSizeComboBox setEditable:YES];
         [_fontColorWell setEnabled:YES];
@@ -335,7 +343,7 @@
     }
     else{
         //disable font type box
-        [_fontB setEnabled:NO];
+        [_fontCB setEnabled:NO];
         [_fontSizeComboBox setEnabled:NO];
         [_fontSizeComboBox setEditable:NO];
         [_fontColorWell setEnabled:NO];
@@ -352,8 +360,8 @@
 
 - (void)comboBoxSelectionDidChange:(NSNotification *)notification{
     NSComboBox *currentComboBox = notification.object;
-    if([currentComboBox isEqualTo:_fontB]){
-        [self updateFontName:[_fontB objectValueOfSelectedItem]];
+    if([currentComboBox isEqualTo:_fontCB]){
+        [self updateFontName:[_fontCB objectValueOfSelectedItem]];
     }
     else if([currentComboBox isEqualTo:_fontSizeComboBox]){
         NSInteger index = [_fontSizeComboBox indexOfSelectedItem];
@@ -430,7 +438,7 @@
 }
 
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
-    if([control isEqualTo:_fontB]){
+    if([control isEqualTo:_fontCB]){
         [self updateFontName:[fieldEditor string]];
     }
     else if([control isEqualTo:_fontSizeComboBox]){
