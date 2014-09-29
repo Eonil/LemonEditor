@@ -163,10 +163,16 @@
     IUBox *parentIU = [self.controller tryIUBoxByIdentifier:parentIUID];
     
     //postion을 먼저 정한 후에 add 함
-    if([newIU canChangeInitialPosition]){
-        NSPoint position = [self distanceFromIU:parentIUID toPointFromWebView:point];
-        [newIU setPosition:position];
+    
+    NSPoint position = [self distanceFromIU:parentIUID toPointFromWebView:point];
+    if ([newIU canChangeXByUserInput] == NO) {
+        position.x = 0;
     }
+    if([newIU canChangeYByUserInput] == NO){
+        position.y = 0;
+    }
+    [newIU setPosition:position];
+
     
     [parentIU addIU:newIU error:nil];
     
@@ -859,7 +865,7 @@
     //draw guide line
     for (IUBox *iu in self.controller.selectedObjects){
         if (self.controller.importIUInSelectionChain){
-            NSString *currentID =  [self.controller.importIUInSelectionChain htmlIDInImport:iu];
+            NSString *currentID =  [self.controller.importIUInSelectionChain modifieldHtmlIDOfChild:iu];
             [[self gridView] drawGuideLine:[frameDict lineToDrawSamePositionWithIU:currentID]];
 
         }
@@ -895,7 +901,7 @@
         
         NSSize parentSize;
         if (self.controller.importIUInSelectionChain){
-            NSString *currentID =  [self.controller.importIUInSelectionChain htmlIDInImport:moveObj];
+            NSString *currentID =  [self.controller.importIUInSelectionChain modifieldHtmlIDOfChild:moveObj];
             parentSize = [[self webView] parentBlockElementSize:currentID];
         }
         else {
@@ -990,7 +996,7 @@
         
         NSSize parentSize;
         if (self.controller.importIUInSelectionChain){
-            NSString *currentID =  [self.controller.importIUInSelectionChain htmlIDInImport:moveObj];
+            NSString *currentID =  [self.controller.importIUInSelectionChain modifieldHtmlIDOfChild:moveObj];
             parentSize = [[self webView] parentBlockElementSize:currentID];
         }
         else {
@@ -1049,7 +1055,7 @@
             [frameDict.dict removeObjectForKey:identifier];
             
             for(IUBox *box in iu.allChildren){
-                NSString *currentID =  [(IUImport *)iu htmlIDInImport:box];
+                NSString *currentID =  [(IUImport *)iu modifieldHtmlIDOfChild:box];
                 [[self gridView] removeLayerWithIUIdentifier:currentID];
                 [frameDict.dict removeObjectForKey:currentID];
             }
@@ -1061,7 +1067,7 @@
                 [allIU addObject:iu];
                 
                 for(IUBox *box in allIU){
-                    NSString *currentID =  [(IUImport *)import htmlIDInImport:box];
+                    NSString *currentID =  [(IUImport *)import modifieldHtmlIDOfChild:box];
                     [[self gridView] removeLayerWithIUIdentifier:currentID];
                     [frameDict.dict removeObjectForKey:currentID];
                 }
