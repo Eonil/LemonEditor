@@ -641,28 +641,28 @@
     if (cssTagDict[IUCSSTagBorderTopWidth]) {
         CGFloat width = [cssTagDict[IUCSSTagBorderTopWidth] floatValue];
         [code insertTag:@"border-top-width" floatValue:width unit:IUUnitPixel];
-        id value = [_iu.css valueByStepForTag:IUCSSTagBorderTopColor forViewport:viewport];
+        id value = [_iu.css effectiveValueForTag:IUCSSTagBorderTopColor forViewport:viewport];
         [code insertTag:@"border-top-color" color:value];
     }
 
     if (cssTagDict[IUCSSTagBorderLeftWidth]) {
         CGFloat width = [cssTagDict[IUCSSTagBorderLeftWidth] floatValue];
         [code insertTag:@"border-left-width" floatValue:width unit:IUUnitPixel];
-        id value = [_iu.css valueByStepForTag:IUCSSTagBorderLeftColor forViewport:viewport];
+        id value = [_iu.css effectiveValueForTag:IUCSSTagBorderLeftColor forViewport:viewport];
         [code insertTag:@"border-left-color" color:value];
 
     }
     if (cssTagDict[IUCSSTagBorderRightWidth]) {
         CGFloat width = [cssTagDict[IUCSSTagBorderRightWidth] floatValue];
         [code insertTag:@"border-right-width" floatValue:width unit:IUUnitPixel];
-        id value = [_iu.css valueByStepForTag:IUCSSTagBorderRightColor forViewport:viewport];
+        id value = [_iu.css effectiveValueForTag:IUCSSTagBorderRightColor forViewport:viewport];
         [code insertTag:@"border-right-color" color:value];
 
     }
     if (cssTagDict[IUCSSTagBorderBottomWidth]) {
         CGFloat width = [cssTagDict[IUCSSTagBorderBottomWidth] floatValue];
         [code insertTag:@"border-bottom-width" floatValue:width unit:IUUnitPixel];
-        id value = [_iu.css valueByStepForTag:IUCSSTagBorderBottomColor forViewport:viewport];
+        id value = [_iu.css effectiveValueForTag:IUCSSTagBorderBottomColor forViewport:viewport];
         [code insertTag:@"border-bottom-color" color:value];
     }
 
@@ -737,7 +737,7 @@
         [code insertTag:@"display" string:@"inherit"];
     }
 
-    value = [_iu.css valueByStepForTag:IUCSSTagEditorDisplay forViewport:viewport];
+    value = [_iu.css effectiveValueForTag:IUCSSTagEditorDisplay forViewport:viewport];
     if (value && [value boolValue] == NO) {
         [code insertTag:@"display" string:@"none" target:IUTargetEditor];
     }
@@ -873,8 +873,8 @@
    
     
     /*  X, Y, Width, Height */
-    IUUnit xUnit = [[_iu.css valueByStepForTag:IUCSSTagXUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
-    IUUnit yUnit = [[_iu.css valueByStepForTag:IUCSSTagYUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+    IUUnit xUnit = [[_iu.css effectiveValueForTag:IUCSSTagXUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+    IUUnit yUnit = [[_iu.css effectiveValueForTag:IUCSSTagYUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
     
     NSNumber *xValue = (xUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentX] : cssTagDict[IUCSSTagPixelX];
     NSNumber *yValue = (yUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentY] : cssTagDict[IUCSSTagPixelY];
@@ -957,7 +957,7 @@
     }
     if (_iu.hasWidth) {
 
-        IUUnit wUnit = [[_iu.css valueByStepForTag:IUCSSTagWidthUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+        IUUnit wUnit = [[_iu.css effectiveValueForTag:IUCSSTagWidthUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
         NSNumber *wValue = (wUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentWidth] : cssTagDict[IUCSSTagPixelWidth];
         [code insertTag:@"width" floatFromNumber:wValue unit:wUnit];
         if(wUnit == IUUnitPercent && cssTagDict[IUCSSTagMinPixelWidth]){
@@ -968,7 +968,7 @@
     if (_iu.hasHeight) {
     
         
-        IUUnit hUnit = [[_iu.css valueByStepForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+        IUUnit hUnit = [[_iu.css effectiveValueForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
         NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
         [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
         
@@ -999,7 +999,7 @@
             //IUHeader의 높이는 prototypeclass의 높이와 일치시킨다.
             NSDictionary *cssTagDict = [header.prototypeClass.css tagDictionaryForViewport:viewport];
             
-            IUUnit hUnit = [[header.prototypeClass.css valueByStepForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+            IUUnit hUnit = [[header.prototypeClass.css effectiveValueForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
             NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
             [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
             
@@ -1024,7 +1024,7 @@
             if(footer.prototypeClass){
                 NSDictionary *cssTagDict = [footer.prototypeClass.css tagDictionaryForViewport:viewport];
                 
-                IUUnit hUnit = [[footer.prototypeClass.css valueByStepForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+                IUUnit hUnit = [[footer.prototypeClass.css effectiveValueForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
                 NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
                 [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
                 
@@ -1093,7 +1093,7 @@
     [code setInsertingIdentifier:pageLinkSet.itemIdentifier];
     for (NSNumber *viewPort in [pageLinkSet.css allViewports]) {
         [code setInsertingViewPort:[viewPort intValue]];
-        id height = [pageLinkSet.css valueByStepForTag:IUCSSTagPixelHeight forViewport:[viewPort intValue]];
+        id height = [pageLinkSet.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:[viewPort intValue]];
         [code insertTag:@"height" floatFromNumber:height unit:IUUnitPixel];
         [code insertTag:@"width" floatFromNumber:height unit:IUUnitPixel];
         [code insertTag:@"line-height" floatFromNumber:height unit:IUUnitPixel];
@@ -1109,7 +1109,7 @@
     for (NSNumber *viewportNumber in editWidths) {
         int viewport = [viewportNumber intValue];
         [code setInsertingViewPort:viewport];
-        int height = [[menuBar.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport] intValue];
+        int height = [[menuBar.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport] intValue];
         
         if(viewport < IUMobileSize){
             
@@ -1170,20 +1170,20 @@
         //set height for depth
         id value;
         if(menuItem.depth == 1){
-            value = [menuItem.parent.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport];
+            value = [menuItem.parent.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport];
         }
         else if(menuItem.depth == 2){
-            value = [menuItem.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport];
+            value = [menuItem.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport];
 
             if(value == nil){
-                value = [menuItem.parent.parent.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport];
+                value = [menuItem.parent.parent.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport];
             }
         }
         else{
-            value = [menuItem.parent.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport];
+            value = [menuItem.parent.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport];
 
             if(value== nil){
-                value = [menuItem.parent.parent.parent.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport];
+                value = [menuItem.parent.parent.parent.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport];
             }
         }
         
@@ -1194,11 +1194,11 @@
         [code setInsertingIdentifier:menuItem.itemIdentifier];
         [code setInsertingTarget:IUTargetBoth];
         
-        value = [menuItem.css valueByStepForTag:IUCSSTagBGColor forViewport:viewport];
+        value = [menuItem.css effectiveValueForTag:IUCSSTagBGColor forViewport:viewport];
         if(value){
             [code insertTag:@"background-color" color:value];
         }
-        value = [menuItem.css valueByStepForTag:IUCSSTagFontColor forViewport:viewport];
+        value = [menuItem.css effectiveValueForTag:IUCSSTagFontColor forViewport:viewport];
         if(value){
             [code insertTag:@"color" color:value];
         }
@@ -1219,7 +1219,7 @@
         //clousre
         if(menuItem.closureIdentifier){
             [code setInsertingIdentifier:menuItem.closureIdentifier];
-            value = [menuItem.css valueByStepForTag:IUCSSTagFontColor forViewport:viewport];
+            value = [menuItem.css effectiveValueForTag:IUCSSTagFontColor forViewport:viewport];
             
             if(value){
                 NSString *color = [[(NSColor *)value rgbString] stringByAppendingString:@" !important"];
@@ -1345,7 +1345,7 @@
     
     [code setInsertingIdentifier:carousel.pagerWrapperID];
     if(carousel.pagerPosition){
-        NSInteger currentWidth  = [[carousel.css valueByStepForTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort] integerValue];
+        NSInteger currentWidth  = [[carousel.css effectiveValueForTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort] integerValue];
         
         if(carousel.pagerPosition < 50){
             [code insertTag:@"text-align" string:@"left"];
@@ -1442,7 +1442,7 @@
         [code setInsertingViewPort:viewport];
         [code setInsertingIdentifiers:@[carousel.prevID, carousel.nextID]];
         
-        BOOL carouseldisable = [[carousel.css valueByStepForTag:IUCSSTagCarouselArrowDisable forViewport:viewport] boolValue];
+        BOOL carouseldisable = [[carousel.css effectiveValueForTag:IUCSSTagCarouselArrowDisable forViewport:viewport] boolValue];
         
         if(carouseldisable){
             [code insertTag:@"display" string:@"none"];
@@ -1495,7 +1495,7 @@
     
     [code setInsertingIdentifier:wpmenu.itemIdetnfier];
     for (NSNumber *viewport in [code allViewports]) {
-        NSNumber *heightValue = [wpmenu.css valueByStepForTag:IUCSSTagPixelHeight forViewport:[viewport intValue]];
+        NSNumber *heightValue = [wpmenu.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:[viewport intValue]];
         //IUTarget Editor value is equal to IUTargetOutput.
         if (heightValue) {
             [code insertTag:@"line-height" floatFromNumber:heightValue unit:IUUnitPixel];
@@ -1555,7 +1555,7 @@
     }
     
     for (NSNumber *viewport in [code allViewports]) {
-        NSNumber *heightValue = [pageLinks.css valueByStepForTag:IUCSSTagPixelHeight forViewport:[viewport intValue]];
+        NSNumber *heightValue = [pageLinks.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:[viewport intValue]];
         //IUTarget Editor value is equal to IUTargetOutput.
         if (heightValue) {
             [code insertTag:@"line-height" floatFromNumber:heightValue unit:IUUnitPixel];

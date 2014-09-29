@@ -36,7 +36,7 @@
 /**
  @brief find viewport tag, if there not, return default value for tag
  */
--(id)valueByStepForTag:(IUCSSTag)tag forViewport:(NSInteger)width;
+-(id)effectiveValueForTag:(IUCSSTag)tag forViewport:(NSInteger)width;
 
 
 //remove tag of all tag dictionay in width

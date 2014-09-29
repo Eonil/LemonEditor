@@ -28,13 +28,14 @@
     return self;
 }
 
-
+/*
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqualToString:@"selectedObjects"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationSelectionDidChange object:self userInfo:@{@"selectedObjects": self.selectedObjects}];
     }
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
+ */
 
 - (id)selection{
     if ([self.selectedObjects count] == 1) {
@@ -179,10 +180,14 @@
     //paste repeat count zero
     _pasteRepeatCount = 0;
 
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationSelectionWillChange object:self userInfo:@{@"selectedObjects": self.selectedObjects}];
     [self willChangeValueForKey:@"selectedTextRange"];
     _selectedTextRange = NSMakeRange(0, 0);
     BOOL result = [super setSelectionIndexPaths:indexPaths];
     [self didChangeValueForKey:@"selectedTextRange"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationSelectionDidChange object:self userInfo:@{@"selectedObjects": self.selectedObjects}];
+
     return result;
 }
 
@@ -190,10 +195,13 @@
     //paste repeat count zero
     _pasteRepeatCount = 0;
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationSelectionWillChange object:self userInfo:@{@"selectedObjects": self.selectedObjects}];
+    
     [self willChangeValueForKey:@"selectedTextRange"];
     _selectedTextRange = NSMakeRange(0, 0);
     BOOL result = [super setSelectionIndexPath:indexPath];
     [self didChangeValueForKey:@"selectedTextRange"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationSelectionDidChange object:self userInfo:@{@"selectedObjects": self.selectedObjects}];
     return result;
 }
 

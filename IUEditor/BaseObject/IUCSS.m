@@ -143,7 +143,7 @@
     }
 }
 
--(id)valueByStepForTag:(IUCSSTag)tag forViewport:(NSInteger)width{
+-(id)effectiveValueForTag:(IUCSSTag)tag forViewport:(NSInteger)width{
     if( _cssFrameDict[@(width)]){
         id value = [_cssFrameDict[@(width)] objectForKey:tag];
         if(value){
