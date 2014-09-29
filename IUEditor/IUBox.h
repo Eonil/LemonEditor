@@ -208,10 +208,10 @@ typedef enum _IUOverflowType{
 @property (readonly) BOOL canChangeWidthUnitByUserInput;
 @property (readonly) BOOL canChangeHeightByUserInput;
 
-- (BOOL)hasX;
-- (BOOL)hasY;
-- (BOOL)hasWidth;
-- (BOOL)hasHeight;
+- (BOOL)shouldCompileX;
+- (BOOL)shouldCompileY;
+- (BOOL)shouldCompileWidth;
+- (BOOL)shouldCompileHeight;
 - (BOOL)shouldCompileFontInfo;
 - (BOOL)shouldCompileImagePositionInfo;
 
@@ -244,7 +244,7 @@ typedef enum _IUOverflowType{
 //Property
 - (BOOL)canCopy;
 - (BOOL)canChangeOverflow;
-- (BOOL)canSelectAtFirst;
+- (BOOL)canSelectedWhenOpenProject;
 @property (nonatomic) IUOverflowType overflowType;
 @property (nonatomic) BOOL lineHeightAuto;
 

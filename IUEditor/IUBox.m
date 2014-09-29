@@ -174,12 +174,8 @@
         [_css setValue:@(0) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
         [_css setValue:@(0) forTag:IUCSSTagHeightUnitIsPercent forViewport:IUCSSDefaultViewPort];
         
-        if (self.hasWidth) {
-            [_css setValue:@(100) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
-        }
-        if (self.hasHeight) {
-            [_css setValue:@(60) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
-        }
+        [_css setValue:@(100) forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
+        [_css setValue:@(60) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
         
         //background
         [_css setValue:[NSColor randomLightMonoColor] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
@@ -342,7 +338,7 @@
 - (BOOL)canCopy{
     return YES;
 }
-- (BOOL)canSelectAtFirst{
+- (BOOL)canSelectedWhenOpenProject{
     return YES;
 }
 #pragma mark - Undo Manager
@@ -880,20 +876,20 @@
 }
 
 
--(BOOL)hasX{
+-(BOOL)shouldCompileX{
     return YES;
 }
 
--(BOOL)hasY{
+-(BOOL)shouldCompileY{
     if (self.positionType == IUPositionTypeAbsoluteBottom) {
         return NO;
     }
     return YES;
 }
--(BOOL)hasWidth{
+-(BOOL)shouldCompileWidth{
     return YES;
 }
--(BOOL)hasHeight{
+-(BOOL)shouldCompileHeight{
     return YES;
 }
 - (BOOL)centerChangeable{
@@ -1098,7 +1094,7 @@
 
 - (void)movePosition:(NSPoint)point withParentSize:(NSSize)parentSize{
     //Set Pixel
-    if([self hasX] && [self canChangeXByUserInput]){
+    if([self shouldCompileX] && [self canChangeXByUserInput]){
         NSInteger currentX = originalPoint.x + point.x;
         
         [_css setValueWithoutUpdateCSS:@(currentX) forTag:IUCSSTagPixelX];
@@ -1114,7 +1110,7 @@
         }
     }
     
-    if([self hasY] && [self canChangeYByUserInput]){
+    if([self canChangeYByUserInput]){
         
         NSInteger currentY = originalPoint.y + point.y;
         [_css setValueWithoutUpdateCSS:@(currentY) forTag:IUCSSTagPixelY];
@@ -1133,7 +1129,7 @@
 }
 
 - (void)increaseSize:(NSSize)size withParentSize:(NSSize)parentSize{
-    if([self hasWidth] && [self canChangeWidthByUserInput] && size.width != CGFLOAT_INVALID){
+    if([self canChangeWidthByUserInput] && size.width != CGFLOAT_INVALID){
         NSInteger currentWidth = originalSize.width;
         currentWidth += size.width;
         if(currentWidth < 0){
@@ -1151,7 +1147,7 @@
         [_css setValueWithoutUpdateCSS:@(percentWidth) forTag:IUCSSTagPercentWidth];
      
     }
-    if([self hasHeight] && [self canChangeHeightByUserInput]  && size.height != CGFLOAT_INVALID){
+    if([self canChangeHeightByUserInput]  && size.height != CGFLOAT_INVALID){
         NSInteger currentHeight = originalSize.height;
         currentHeight += size.height;
         if(currentHeight < 0){
@@ -1315,11 +1311,11 @@
         [self.css setValue:@(0) forTag:IUCSSTagPixelY];
         [self.css setValue:@(0) forTag:IUCSSTagPercentY];
         [self.css setValue:@(NO) forTag:IUCSSTagYUnitIsPercent];
-        [self willChangeValueForKey:@"hasY"];
+        [self willChangeValueForKey:@"shouldCompileY"];
     }
     _positionType = positionType;
     if (absoluteBottomFlag) {
-        [self didChangeValueForKey:@"hasY"];
+        [self didChangeValueForKey:@"shouldCompileY"];
     }
     if (disableCenterFlag){
         [self didChangeValueForKey:@"canChangeHCenter"];

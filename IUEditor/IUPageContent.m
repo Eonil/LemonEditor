@@ -94,13 +94,13 @@
 
 #pragma mark - should
 
--(BOOL)hasX{
+-(BOOL)shouldCompileX{
     return NO;
 }
--(BOOL)hasY{
+-(BOOL)shouldCompileY{
     return NO;
 }
--(BOOL)hasHeight{
+-(BOOL)shouldCompileHeight{
     return NO;
 }
 

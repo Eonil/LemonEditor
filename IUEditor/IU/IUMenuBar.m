@@ -25,7 +25,7 @@
         self.iconColor = [NSColor whiteColor];
         [self.css setValue:@(IUAlignLeft) forTag:IUCSSTagTextAlign forViewport:IUCSSDefaultViewPort];
         
-        if (self.hasHeight) {
+        if (self.shouldCompileHeight) {
             [self.css setValue:@(50) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
         }
         
@@ -255,7 +255,7 @@
         return NO;
     }
 }
-- (BOOL)hasWidth{
+- (BOOL)shouldCompileWidth{
     return YES;
 }
 @end

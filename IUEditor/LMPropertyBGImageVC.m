@@ -62,8 +62,8 @@
     
     [self outlet:_fitButton bind:NSEnabledBinding cssTag:IUCSSTagWidthUnitIsPercent options:IUBindingNegationAndNotRaise];
     [self outlet:_fitButton bind:@"enabled2" cssTag:IUCSSTagHeightUnitIsPercent options:IUBindingNegationAndNotRaise];
-    [self outlet:_fitButton bind:@"enabled3" property:@"hasWidth"];
-    [self outlet:_fitButton bind:@"enabled4" property:@"hasHeight"];
+    [self outlet:_fitButton bind:@"enabled3" property:@"shouldCompileWidth"];
+    [self outlet:_fitButton bind:@"enabled4" property:@"shouldCompileHeight"];
     [self outlet:_fitButton bind:@"enabled5" cssTag:IUCSSTagBGGradient options:IUBindingNegationAndNotRaise];
     
 #pragma mark - size, repeat

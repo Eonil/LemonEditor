@@ -217,19 +217,19 @@
     [super disconnectWithEditor];
 }
 
-- (BOOL)hasHeight{
+- (BOOL)shouldCompileHeight{
     return NO;
 }
 
-- (BOOL)hasWidth{
+- (BOOL)shouldCompileWidth{
     return NO;
 }
 
-- (BOOL)hasY{
+- (BOOL)shouldCompileY{
     return NO;
 }
 
-- (BOOL)hasX{
+- (BOOL)shouldCompileX{
     return NO;
 }
 
