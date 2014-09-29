@@ -302,9 +302,9 @@
         box.enableHCenter = _enableHCenter;
         box.enableVCenter = _enableVCenter;
         
-        _css = newCSS;
+        box.css = newCSS;
         newCSS.delegate  = box;
-        _event = newEvent;
+        box.event = newEvent;
         
         box.delegate = self.delegate;
         [box setTempProject:self.project];
@@ -385,7 +385,15 @@
     _tempProject = project;
 }
 
+- (void)setCss:(IUCSS *)css{
+    _css = css;
+}
+
 #pragma mark - Event
+
+- (void)setEvent:(IUEvent *)event{
+    _event = event;
+}
 
 - (void)setOpacityMove:(float)opacityMove{
     if(_opacityMove != opacityMove){

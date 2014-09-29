@@ -36,7 +36,6 @@
 
     self.editWidth = IUCSSDefaultViewPort;
     
-    [self updateAssembledTagDictionary];
     return self;
 }
 
@@ -65,7 +64,6 @@
     css.cssFrameDict = [self.cssFrameDict deepCopy];
     css.editWidth = self.editWidth;
     css.maxWidth = self.maxWidth;
-    css.assembledTagDictionaryForEditWidth = [self.assembledTagDictionaryForEditWidth deepCopy];
     return css;
 }
 
