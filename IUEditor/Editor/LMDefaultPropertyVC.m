@@ -78,10 +78,6 @@
     [self setValue:value forKeyPath:[self pathForCSSTag:tag]];
 }
 
-- (void)setValueWithouUpdateCSS:(id)value forCSSTag:(IUCSSTag)tag{
-    [self setValue:value forKeyPath:[self pathForCSSTagWOUpdateCSS:tag]];
-}
-
 - (void)setValue:(id)value forIUProperty:(IUPropertyTag)property{
     [self setValue:value forKeyPath:[self pathForProperty:property]];
 }
@@ -107,9 +103,6 @@
 
 #pragma mark - keyPath
 //REVIEW: self.selection not working (proxy multiple 전달 안됨)
-- (NSString *)pathForCSSTagWOUpdateCSS:(IUCSSTag)tag{
-    return [@"self.controller.selection.css.assembledTagDictionaryWOUpdateCSS." stringByAppendingString:tag];
-}
 - (NSString *)pathForCSSTag:(IUCSSTag)tag{
     return [@"self.controller.selection.css.assembledTagDictionary." stringByAppendingString:tag];
 }

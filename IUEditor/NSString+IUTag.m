@@ -17,8 +17,8 @@
 }
 
 -(BOOL)isFrameTag{
-    if ([self isSameTag:IUCSSTagPixelWidth] || [self isSameTag:IUCSSTagPixelHeight] || [self isSameTag:IUCSSTagPercentHeight] || [self isSameTag:IUCSSTagPercentWidth]
-        || [self isSameTag:IUCSSTagPixelX] || [self isSameTag:IUCSSTagPercentX] || [self isSameTag:IUCSSTagPixelY] || [self isSameTag:IUCSSTagPercentY]) {
+    if ([self isEqualToTag:IUCSSTagPixelWidth] || [self isEqualToTag:IUCSSTagPixelHeight] || [self isEqualToTag:IUCSSTagPercentHeight] || [self isEqualToTag:IUCSSTagPercentWidth]
+        || [self isEqualToTag:IUCSSTagPixelX] || [self isEqualToTag:IUCSSTagPercentX] || [self isEqualToTag:IUCSSTagPixelY] || [self isEqualToTag:IUCSSTagPercentY]) {
         return YES;
     }
     return NO;
@@ -26,9 +26,9 @@
 
 
 - (BOOL)isHoverTag{
-    if ([self isSameTag:IUCSSTagHoverBGImagePositionEnable] || [self isSameTag:IUCSSTagHoverBGImageX] || [self isSameTag:IUCSSTagHoverBGImageY]
-        || [self isSameTag:IUCSSTagHoverBGColorEnable]|| [self isSameTag:IUCSSTagHoverBGColor]|| [self isSameTag:IUCSSTagHoverTextColorEnable]
-        || [self isSameTag:IUCSSTagHoverTextColor]) {
+    if ([self isEqualToTag:IUCSSTagHoverBGImagePositionEnable] || [self isEqualToTag:IUCSSTagHoverBGImageX] || [self isEqualToTag:IUCSSTagHoverBGImageY]
+        || [self isEqualToTag:IUCSSTagHoverBGColorEnable]|| [self isEqualToTag:IUCSSTagHoverBGColor]|| [self isEqualToTag:IUCSSTagHoverTextColorEnable]
+        || [self isEqualToTag:IUCSSTagHoverTextColor]) {
         return YES;
     }
     return NO;

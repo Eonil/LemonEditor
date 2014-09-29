@@ -109,7 +109,7 @@
 
 -(void)selectionChanged:(NSNotification*)noti{
     
-    if(self.children.count > 0 && self.css.editWidth > IUMobileSize){
+    if(self.children.count > 0 && self.css.editViewPort > IUMobileSize){
         NSMutableSet *set = [NSMutableSet setWithArray:[self.allChildren arrayByAddingObject:self]];
         [set intersectSet:[NSSet setWithArray:[noti userInfo][@"selectedObjects"]]];
         
@@ -337,7 +337,7 @@
 }
 
 - (BOOL)canChangeWidthByUserInput{
-    if(self.css.editWidth <= IUMobileSize){
+    if(self.css.editViewPort <= IUMobileSize){
         return NO;
     }
     else{
@@ -345,7 +345,7 @@
     }
 }
 - (BOOL)shouldExtendParent{
-    if(self.css.editWidth <= IUMobileSize){
+    if(self.css.editViewPort <= IUMobileSize){
         return YES;
     }
     else{

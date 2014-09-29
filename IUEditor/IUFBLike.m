@@ -78,10 +78,10 @@
 - (void)IUFBSourceContextDidChange:(NSDictionary *)change{
     NSString *showFaces;
     if(self.showFriendsFace){
-        [self.css setValue:@(80) forTag:IUCSSTagPixelHeight forViewport:self.css.editWidth];
+        [self.css setValue:@(80) forTag:IUCSSTagPixelHeight forViewport:self.css.editViewPort];
         showFaces = @"true";
     }else{
-        [self.css setValue:@(45) forTag:IUCSSTagPixelHeight forViewport:self.css.editWidth];
+        [self.css setValue:@(45) forTag:IUCSSTagPixelHeight forViewport:self.css.editViewPort];
         showFaces = @"false";
     }
     

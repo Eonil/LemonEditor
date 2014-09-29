@@ -173,13 +173,13 @@
 
         //set current value
         for(IUBox *box in self.controller.selectedObjects){
-            NSString *fontName = [box.css effectiveValueForTag:IUCSSTagFontName forViewport:box.css.editWidth];
+            NSString *fontName = [box.css effectiveValueForTag:IUCSSTagFontName forViewport:box.css.editViewPort];
             if(fontName == nil){
                 fontName = currentFontName;
                 [self setValue:currentFontName forCSSTag:IUCSSTagFontName];
             }
             
-            NSString *fontSize = [box.css effectiveValueForTag:IUCSSTagFontSize forViewport:box.css.editWidth];
+            NSString *fontSize = [box.css effectiveValueForTag:IUCSSTagFontSize forViewport:box.css.editViewPort];
             if(fontSize == nil){
                 [self setValue:@(currentFontSize) forCSSTag:IUCSSTagFontSize];
             }

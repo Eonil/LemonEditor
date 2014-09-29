@@ -34,7 +34,7 @@
     _cssFrameDict = [[NSMutableDictionary alloc] init];
     _assembledTagDictionaryForEditWidth = [NSMutableDictionary dictionary];
 
-    self.editWidth = IUCSSDefaultViewPort;
+    self.editViewPort = IUCSSDefaultViewPort;
     
     return self;
 }
@@ -48,7 +48,7 @@
     [[self.delegate undoManager] disableUndoRegistration];
     
     _cssFrameDict = [aDecoder decodeObjectForKey:@"cssFrameDict"];
-    self.editWidth = IUCSSDefaultViewPort;
+    self.editViewPort = IUCSSDefaultViewPort;
     _assembledTagDictionaryForEditWidth = [NSMutableDictionary dictionary];
 
     [self updateAssembledTagDictionary];
@@ -62,8 +62,8 @@
 - (id)copyWithZone:(NSZone *)zone{
     IUCSS *css = [[[self class] allocWithZone:zone] init];
     css.cssFrameDict = [self.cssFrameDict deepCopy];
-    css.editWidth = self.editWidth;
-    css.maxWidth = self.maxWidth;
+    css.editViewPort = self.editViewPort;
+    css.maxViewPort = self.maxViewPort;
     return css;
 }
 
@@ -125,13 +125,13 @@
             
             if (value == nil) {
                 [cssDict removeObjectForKey:tag];
-                if(width == _editWidth){
+                if(width == _editViewPort){
                     [_assembledTagDictionaryForEditWidth removeObjectForKey:tag];
                 }
             }
             else {
                 cssDict[tag] = value;
-                if(width == _editWidth){
+                if(width == _editViewPort){
                     [_assembledTagDictionaryForEditWidth setObject:value forKey:tag];
                 }
             }
@@ -194,14 +194,14 @@
         [_assembledTagDictionaryForEditWidth removeAllObjects];
     }
     
-    if(_editWidth != IUCSSDefaultViewPort && _cssFrameDict[@(_editWidth)]){
-        [_assembledTagDictionaryForEditWidth addEntriesFromDictionary:_cssFrameDict[@(_editWidth)]];
+    if(_editViewPort != IUCSSDefaultViewPort && _cssFrameDict[@(_editViewPort)]){
+        [_assembledTagDictionaryForEditWidth addEntriesFromDictionary:_cssFrameDict[@(_editViewPort)]];
         
     }
 }
 
--(void)setEditWidth:(NSInteger)editWidth{
-    _editWidth = editWidth;
+-(void)setEditWidth:(NSInteger)editViewPort{
+    _editViewPort = editViewPort;
     [self updateAssembledTagDictionary];
 }
 
@@ -216,22 +216,17 @@
 }
 
 -(void)setValue:(id)value forTag:(IUCSSTag)tag{
-    [self setValue:value forTag:tag forViewport:_editWidth];
+    [self setValue:value forTag:tag forViewport:_editViewPort];
 }
 -(void)setValueWithoutUpdateCSS:(id)value forTag:(NSString *)tag{
-    [self setValueWithoutUpdateCSS:value forTag:tag forViewport:_editWidth];
+    [self setValueWithoutUpdateCSS:value forTag:tag forViewport:_editViewPort];
 
 }
 
 -(void)setValue:(id)value forKeyPath:(NSString *)keyPath{
     if ([keyPath containsString:@"assembledTagDictionary."]) {
         NSString *tag = [keyPath substringFromIndex:23];
-        [self setValue:value forTag:tag forViewport:_editWidth];
-        return;
-    }
-    else if ([keyPath containsString:@"assembledTagDictionaryWOUpdateCSS."]) {
-        NSString *tag = [keyPath substringFromIndex:@"assembledTagDictionaryWOUpdateCSS.".length];
-        [self setValueWithoutUpdateCSS:value forTag:tag forViewport:_editWidth];
+        [self setValue:value forTag:tag forViewport:_editViewPort];
         return;
     }
     else {
@@ -240,7 +235,7 @@
     }
 }
 
-- (BOOL)isSameBorder{
+- (BOOL)isAllBordersEqual{
     int borderTop = [[self.assembledTagDictionary objectForKey:IUCSSTagBorderTopWidth] intValue];
     int borderBottom = [[self.assembledTagDictionary objectForKey:IUCSSTagBorderBottomWidth] intValue];
     int borderLeft = [[self.assembledTagDictionary objectForKey:IUCSSTagBorderLeftWidth] intValue];
@@ -253,7 +248,7 @@
     }
     return NO;
 }
-- (BOOL)isSameRadius{
+- (BOOL)isAllRadiusEqual{
     int borderTLRadius = [[self.assembledTagDictionary objectForKey:IUCSSTagBorderRadiusTopLeft] intValue];
     int borderTRRadius = [[self.assembledTagDictionary objectForKey:IUCSSTagBorderRadiusTopRight] intValue];
     int borderBLRadius = [[self.assembledTagDictionary objectForKey:IUCSSTagBorderRadiusBottomLeft] intValue];
@@ -270,12 +265,12 @@
 -(id)valueForKeyPath:(NSString *)keyPath{
     if ([keyPath containsString:@"assembledTagDictionary."]) {
         NSString *tag = [keyPath substringFromIndex:23];
-        if ([tag isSameTag:IUCSSTagBorderWidth]) {
+        if ([tag isEqualToTag:IUCSSTagBorderWidth]) {
             NSNumber* value = [self.assembledTagDictionary objectForKey:IUCSSTagBorderWidth];
             if(value == nil){
                 return @(0);
             }
-            if([self isSameBorder]){
+            if([self isAllBordersEqual]){
                 return value;
             }
             else{
@@ -283,12 +278,12 @@
             }
         }
         //radius multiple
-        if ([tag isSameTag:IUCSSTagBorderRadius]) {
+        if ([tag isEqualToTag:IUCSSTagBorderRadius]) {
             NSNumber* value = [self.assembledTagDictionary objectForKey:IUCSSTagBorderRadius];
             if(value == nil){
                 return @(0);
             }
-            if([self isSameRadius]){
+            if([self isAllRadiusEqual]){
                 return value;
             }
             else{

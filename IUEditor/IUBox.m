@@ -537,7 +537,7 @@
         [_css copyMaxSizeToSize:oldMaxSize];
     }
     
-    [_css setMaxWidth:maxSize];
+    [_css setMaxViewPort:maxSize];
     
 }
 
@@ -545,7 +545,7 @@
     NSInteger size = [[notification.userInfo objectForKey:IUNotificationMQSize] integerValue];
     NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
     [_css removeTagDictionaryForViewport:size];
-    [_css setMaxWidth:maxSize];
+    [_css setMaxViewPort:maxSize];
 
 }
 
@@ -558,12 +558,12 @@
     NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
 
     if (selectedSize == maxSize) {
-        [_css setEditWidth:IUCSSDefaultViewPort];
+        [_css setEditViewPort:IUCSSDefaultViewPort];
     }
     else {
-        [_css setEditWidth:selectedSize];
+        [_css setEditViewPort:selectedSize];
     }
-    [_css setMaxWidth:maxSize];
+    [_css setMaxViewPort:maxSize];
     
     [self didChangeValueForKey:@"canChangeHCenter"];
         
@@ -644,7 +644,7 @@
         }
         
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
-        NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editWidth];
+        NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editViewPort];
         for (NSString *identifier in dictionaryWithIdentifier) {
             [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];
         }
@@ -669,7 +669,7 @@
 - (void)updateCSSWithIdentifiers:(NSArray *)identifiers{
     if (self.delegate) {
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
-        NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editWidth];
+        NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editViewPort];
         
         for (NSString *identifier in identifiers) {
             [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];
@@ -1173,11 +1173,11 @@
 
     NSSize pixelSize;
     NSInteger currentWidth;
-    if(_css.editWidth == IUCSSDefaultViewPort){
-        currentWidth = _css.maxWidth;
+    if(_css.editViewPort == IUCSSDefaultViewPort){
+        currentWidth = _css.maxViewPort;
     }
     else{
-        currentWidth = _css.editWidth;
+        currentWidth = _css.editViewPort;
     }
     
     if([self percentUnitAtCSSTag:IUCSSTagWidthUnitIsPercent]){
@@ -1233,7 +1233,7 @@
 
 - (BOOL)canChangeHCenter{
     if(_positionType == IUPositionTypeFloatLeft || _positionType == IUPositionTypeFloatRight
-       || _css.editWidth != IUCSSDefaultViewPort){
+       || _css.editViewPort != IUCSSDefaultViewPort){
         return NO;
     }
     return YES;

@@ -168,7 +168,7 @@ static NSString * IUCSSTagHoverTextColor  = @"hoverTextColor";
 static NSString *IUCSSTagCarouselArrowDisable = @"carouselDisable";
 
 
-#define isSameTag isEqualToString
+#define isEqualToTag isEqualToString
 
 @interface NSString (IUTag)
 - (NSString*)pixelString;
