@@ -215,11 +215,13 @@ typedef enum _IUOverflowType{
 - (BOOL)shouldCompileFontInfo;
 - (BOOL)shouldCompileImagePositionInfo;
 
+- (void)setX:(float)x;
+- (void)setY:(float)y;
+
 - (void)setPixelFrame:(NSRect)frame;
 - (void)setPercentFrame:(NSRect)frame;
-- (void)setPosition:(NSPoint)position;
-- (void)startDragSession;
-- (void)endDragSession;
+- (void)startFrameMoveWithUndoManager;
+- (void)endFrameMoveWithUndoManager;
 - (void)movePosition:(NSPoint)point withParentSize:(NSSize)parentSize;
 - (void)increaseSize:(NSSize)size withParentSize:(NSSize)parentSize;
 - (NSSize)currentApproximatePixelSize;

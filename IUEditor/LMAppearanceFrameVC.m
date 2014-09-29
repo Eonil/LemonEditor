@@ -72,6 +72,7 @@
 
 @end
 
+
 @implementation LMAppearanceFrameVC{
     LMHelpWC *helpWC;
     BOOL enableObservation;
@@ -87,6 +88,11 @@
     return self;
 }
 
+
+/*
+ Bind Enable/Hidden for main field (NSTextField)
+ If user enter '-' mark, eleminate css tag. So, value can not be boud with text field
+ */
 
 - (void)setController:(IUController *)controller{
     [super setController:controller];
@@ -167,90 +173,58 @@
 
 
     
-    
-    //enabled option 1
-    [self outlet:_xTF bind:NSEnabledBinding property:@"shouldCompileX"];
-    [self outlet:_yTF bind:NSEnabledBinding property:@"shouldCompileY"];
-    [self outlet:_wTF bind:NSEnabledBinding property:@"shouldCompileWidth"];
-    [self outlet:_hTF bind:NSEnabledBinding property:@"shouldCompileHeight"];
 
-    [self outlet:_pxTF bind:NSEnabledBinding property:@"shouldCompileX"];
-    [self outlet:_pyTF bind:NSEnabledBinding property:@"shouldCompileY"];
-    [self outlet:_pwTF bind:NSEnabledBinding property:@"shouldCompileWidth"];
-    [self outlet:_phTF bind:NSEnabledBinding property:@"shouldCompileHeight"];
-
-    [self outlet:_xUnitBtn bind:NSEnabledBinding property:@"shouldCompileX"];
-    [self outlet:_yUnitBtn bind:NSEnabledBinding property:@"shouldCompileY"];
-    [self outlet:_wUnitBtn bind:NSEnabledBinding property:@"shouldCompileWidth"];
-    [self outlet:_hUnitBtn bind:NSEnabledBinding property:@"shouldCompileHeight"];
-
-    [self outlet:_xStepper bind:NSEnabledBinding property:@"shouldCompileX"];
-    [self outlet:_yStepper bind:NSEnabledBinding property:@"shouldCompileY"];
-    [self outlet:_wStepper bind:NSEnabledBinding property:@"shouldCompileWidth"];
-    [self outlet:_hStepper bind:NSEnabledBinding property:@"shouldCompileHeight"];
-
-    [self outlet:_pxStepper bind:NSEnabledBinding property:@"shouldCompileX"];
-    [self outlet:_pyStepper bind:NSEnabledBinding property:@"shouldCompileY"];
-    [self outlet:_pwStepper bind:NSEnabledBinding property:@"shouldCompileWidth"];
-    [self outlet:_phStepper bind:NSEnabledBinding property:@"shouldCompileHeight"];
-    
-    [self outlet:_minWTF bind:NSEnabledBinding property:@"shouldCompileWidth"];
-    [self outlet:_minWStepper bind:NSEnabledBinding property:@"shouldCompileWidth"];
-
-    [self outlet:_minHTF bind:NSEnabledBinding property:@"shouldCompileHeight"];
-    [self outlet:_minHStepper bind:NSEnabledBinding property:@"shouldCompileHeight"];
-    
-    
     [self outlet:_positionPopupBtn bind:NSEnabledBinding property:@"canChangePositionType"];
     [self outlet:_centerBtn bind:NSEnabledBinding property:@"canChangeHCenter"];
     [self outlet:_verticalCenterBtn bind:NSEnabledBinding property:@"canChangeVCenter"];
 
     
-    //enabled option 2
+    [self outlet:_xTF bind:NSEnabledBinding property:@"canChangeXByUserInput"];
+    [self outlet:_yTF bind:NSEnabledBinding property:@"canChangeYByUserInput"];
+    [self outlet:_wTF bind:NSEnabledBinding property:@"canChangeWidthByUserInput"];
+    [self outlet:_hTF bind:NSEnabledBinding property:@"canChangeHeightByUserInput"];
     
-    [self outlet:_xTF bind:@"enabled2" property:@"canChangeXByUserInput"];
-    [self outlet:_yTF bind:@"enabled2" property:@"canChangeYByUserInput"];
-    [self outlet:_wTF bind:@"enabled2" property:@"canChangeWidthByUserInput"];
-    [self outlet:_hTF bind:@"enabled2" property:@"canChangeHeightByUserInput"];
+    [self outlet:_pxTF bind:NSEnabledBinding property:@"canChangeXByUserInput"];
+    [self outlet:_pyTF bind:NSEnabledBinding property:@"canChangeYByUserInput"];
+    [self outlet:_pwTF bind:NSEnabledBinding property:@"canChangeWidthByUserInput"];
+    [self outlet:_phTF bind:NSEnabledBinding property:@"canChangeHeightByUserInput"];
     
-    [self outlet:_pxTF bind:@"enabled2" property:@"canChangeXByUserInput"];
-    [self outlet:_pyTF bind:@"enabled2" property:@"canChangeYByUserInput"];
-    [self outlet:_pwTF bind:@"enabled2" property:@"canChangeWidthByUserInput"];
-    [self outlet:_phTF bind:@"enabled2" property:@"canChangeHeightByUserInput"];
+    [self outlet:_xUnitBtn bind:NSEnabledBinding property:@"canChangeXByUserInput"];
+    [self outlet:_yUnitBtn bind:NSEnabledBinding property:@"canChangeYByUserInput"];
+    [self outlet:_wUnitBtn bind:NSEnabledBinding property:@"canChangeWidthByUserInput"];
+    [self outlet:_hUnitBtn bind:NSEnabledBinding property:@"canChangeHeightByUserInput"];
     
-    [self outlet:_xUnitBtn bind:@"enabled2" property:@"canChangeXByUserInput"];
-    [self outlet:_yUnitBtn bind:@"enabled2" property:@"canChangeYByUserInput"];
-    [self outlet:_wUnitBtn bind:@"enabled2" property:@"canChangeWidthByUserInput"];
-    [self outlet:_hUnitBtn bind:@"enabled2" property:@"canChangeHeightByUserInput"];
+    [self outlet:_xStepper bind:NSEnabledBinding property:@"canChangeXByUserInput"];
+    [self outlet:_yStepper bind:NSEnabledBinding property:@"canChangeYByUserInput"];
+    [self outlet:_wStepper bind:NSEnabledBinding property:@"canChangeWidthByUserInput"];
+    [self outlet:_hStepper bind:NSEnabledBinding property:@"canChangeHeightByUserInput"];
     
-    [self outlet:_xStepper bind:@"enabled2" property:@"canChangeXByUserInput"];
-    [self outlet:_yStepper bind:@"enabled2" property:@"canChangeYByUserInput"];
-    [self outlet:_wStepper bind:@"enabled2" property:@"canChangeWidthByUserInput"];
-    [self outlet:_hStepper bind:@"enabled2" property:@"canChangeHeightByUserInput"];
+    [self outlet:_pxStepper bind:NSEnabledBinding property:@"canChangeXByUserInput"];
+    [self outlet:_pyStepper bind:NSEnabledBinding property:@"canChangeYByUserInput"];
+    [self outlet:_pwStepper bind:NSEnabledBinding property:@"canChangeWidthByUserInput"];
+    [self outlet:_phStepper bind:NSEnabledBinding property:@"canChangeHeightByUserInput"];
     
-    [self outlet:_pxStepper bind:@"enabled2" property:@"canChangeXByUserInput"];
-    [self outlet:_pyStepper bind:@"enabled2" property:@"canChangeYByUserInput"];
-    [self outlet:_pwStepper bind:@"enabled2" property:@"canChangeWidthByUserInput"];
-    [self outlet:_phStepper bind:@"enabled2" property:@"canChangeHeightByUserInput"];
+    [self outlet:_minWTF bind:NSEnabledBinding property:@"canChangeWidthByUserInput"];
+    [self outlet:_minWStepper bind:NSEnabledBinding property:@"canChangeWidthByUserInput"];
     
-    [self outlet:_minWTF bind:@"enabled2" property:@"canChangeWidthByUserInput"];
-    [self outlet:_minWStepper bind:@"enabled2" property:@"canChangeWidthByUserInput"];
-    
-    [self outlet:_minHTF bind:@"enabled2" property:@"canChangeHeightByUserInput"];
-    [self outlet:_minHStepper bind:@"enabled2" property:@"canChangeHeightByUserInput"];
-
-    [self outlet:_centerBtn bind:@"enabled2" property:@"xPosMove" options:IUBindingNegationAndNotRaise];
+    [self outlet:_minHTF bind:NSEnabledBinding property:@"canChangeHeightByUserInput"];
+    [self outlet:_minHStepper bind:NSEnabledBinding property:@"canChangeHeightByUserInput"];
 
     
-    
+    [self outlet:_centerBtn bind:NSEnabledBinding property:@"xPosMove" options:IUBindingNegationAndNotRaise];
+
     //enabled option 3
-    
+    /* commented on 9.29. 2014
+     1) 'center' property is missing
+     2) Ambiguous : 'canChange[Property]ByUserInput should NO if 'center' is YES
+     
     [self outlet:_xTF bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
     [self outlet:_pxTF bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
     [self outlet:_xUnitBtn bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
     [self outlet:_xStepper bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
     [self outlet:_pxStepper bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
-     [self outlet:_wUnitBtn bind:@"enabled3" property:@"canChangeWidthUnitByUserInput" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+    [self outlet:_wUnitBtn bind:@"enabled3" property:@"canChangeWidthUnitByUserInput" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+     */
     
 }
 
@@ -272,12 +246,6 @@
         [self setValue:nil forCSSTag:IUCSSTagMinPixelHeight];
     }
 }
-
-
-- (void)dealloc{
-    [JDLogUtil log:IULogDealloc string:@"LMAppearanceFrameVC"];
-}
-
 
 - (IBAction)helpMenu:(id)sender {
     JDTraceLog(@"this is help menu");

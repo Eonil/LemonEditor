@@ -138,9 +138,9 @@
             break;
     }
     
-    [self.VC startDragSession:self];
+    [self.VC startFrameMoveWithUndoManager:self];
     [self.VC moveIUToDiffPoint:diffPoint totalDiffPoint:diffPoint];
-    [self.VC endDragSession:self];
+    [self.VC endFrameMoveWithUndoManager:self];
 }
 
 #pragma mark - load

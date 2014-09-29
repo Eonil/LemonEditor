@@ -246,7 +246,7 @@
                     if(currentIUID){
                         isSelected = YES;
                     }
-                    [((LMCanvasVC *)(self.delegate)) startDragSession:self];
+                    [((LMCanvasVC *)(self.delegate)) startFrameMoveWithUndoManager:self];
                     startDragPoint = convertedPoint;
                     middleDragPoint = startDragPoint;
                 }
@@ -350,7 +350,7 @@
     }
     if(isDragged){
         isDragged = NO;
-        [((LMCanvasVC *)(self.delegate)) endDragSession:self];
+        [((LMCanvasVC *)(self.delegate)) endFrameMoveWithUndoManager:self];
     }
     if(isSelectDragged){
         isSelectDragged = NO;
