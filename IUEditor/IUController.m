@@ -327,7 +327,10 @@
 
 -(id)tryIUBoxByIdentifier:(NSString *)identifier{
     id findIUs = [self IUBoxByIdentifier:identifier];
-    if(findIUs == nil && [identifier containsString:kIUImportEditorPrefix]) {
+    if(findIUs){
+        return findIUs;
+    }
+    else if(findIUs == nil && [identifier containsString:kIUImportEditorPrefix]) {
         NSString *realID = [[identifier componentsSeparatedByString:@"_"] objectAtIndex:2];
         id currentIU = [self IUBoxByIdentifier:realID];
         return currentIU;
