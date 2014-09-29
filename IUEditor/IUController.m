@@ -315,11 +315,10 @@
     if (import) {
         NSMutableArray *retArray = [NSMutableArray array];
         for(IUBox *iu in self.selectedObjects){
-            NSString *currentID = [import htmlIDInImport:iu];
+            NSString *currentID = [import modifieldHtmlIDOfChild:iu];
             if(currentID){
                 [retArray addObject:currentID];
             }
-
         }
         return retArray;
     }

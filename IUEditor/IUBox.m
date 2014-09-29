@@ -132,8 +132,8 @@
         self.htmlID = [NSString randomStringWithLength:8];
     }
     [aCoder encodeFromObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"identifierManager", @"textController", @"linkCaller"]]];
-    [aCoder encodeObject:self.css forKey:@"css"];
-    [aCoder encodeObject:self.event forKey:@"event"];
+    [aCoder encodeObject:_css forKey:@"css"];
+    [aCoder encodeObject:_event forKey:@"event"];
     [aCoder encodeObject:_m_children forKey:@"children"];
     
 }
@@ -302,9 +302,9 @@
         box.enableHCenter = _enableHCenter;
         box.enableVCenter = _enableVCenter;
         
-        box.css = newCSS;
+        _css = newCSS;
         newCSS.delegate  = box;
-        box.event = newEvent;
+        _event = newEvent;
         
         box.delegate = self.delegate;
         [box setTempProject:self.project];
@@ -385,15 +385,7 @@
     _tempProject = project;
 }
 
-- (void)setCss:(IUCSS *)css{
-    _css = css;
-}
-
 #pragma mark - Event
-
-- (void)setEvent:(IUEvent *)event{
-    _event = event;
-}
 
 - (void)setOpacityMove:(float)opacityMove{
     if(_opacityMove != opacityMove){
@@ -1244,10 +1236,6 @@
     return NO;
 }
 
-
-- (BOOL)canChangeInitialPosition{
-    return YES;
-}
 
 
 - (BOOL)canChangeOverflow{

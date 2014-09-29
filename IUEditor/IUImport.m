@@ -78,11 +78,11 @@
     if(prototypeClass == nil && _prototypeClass != nil){
         //remove layers
         for(IUBox *box in _prototypeClass.allChildren){
-            NSString *currentID = [self htmlIDInImport:box];
+            NSString *currentID = [self modifieldHtmlIDOfChild:box];
             [self.delegate IURemoved:currentID withParentID:self.htmlID];
         }
         
-        [self.delegate IURemoved:[self htmlIDInImport:_prototypeClass] withParentID:self.htmlID];
+        [self.delegate IURemoved:[self modifieldHtmlIDOfChild:_prototypeClass] withParentID:self.htmlID];
 
     }
     
@@ -104,7 +104,7 @@
     [self didChangeValueForKey:@"children"];
 }
 
-- (NSString *)htmlIDInImport:(IUBox *)iu{
+- (NSString *)modifieldHtmlIDOfChild:(IUBox *)iu{
     if([_prototypeClass.allChildren containsObject:iu]){
         NSString *importHTMLID = [NSString stringWithFormat:@"%@%@_%@",kIUImportEditorPrefix, self.htmlID, iu.htmlID];
         return importHTMLID;

@@ -238,7 +238,6 @@ typedef enum _IUOverflowType{
 - (BOOL)canChangePositionFixedBottom;
 - (BOOL)canChangeHCenter;
 - (BOOL)canChangeVCenter;
-- (BOOL)canChangeInitialPosition;
 
 
 //Property

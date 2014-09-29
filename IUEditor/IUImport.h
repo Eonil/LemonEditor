@@ -18,6 +18,6 @@
 /**
  @brief ImportedBy_importID_iu.htmlID
  */
-- (NSString *)htmlIDInImport:(IUBox *)iu;
+- (NSString *)modifieldHtmlIDOfChild:(IUBox *)iu;
 
 @end

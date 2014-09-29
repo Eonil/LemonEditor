@@ -47,11 +47,15 @@
     return self;
 }
 
-- (BOOL)canChangeHCenter{
+- (BOOL)canChangeXByUserInput{
     return NO;
 }
 
-- (BOOL)canChangeInitialPosition{
+- (BOOL)canChangeYByUserInput{
+    return NO;
+}
+
+- (BOOL)canChangeHCenter{
     return NO;
 }
 
