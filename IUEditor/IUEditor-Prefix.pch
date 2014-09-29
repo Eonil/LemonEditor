@@ -76,6 +76,7 @@
 #pragma mark Notifications
 
 
+#define IUNotificationSelectionWillChange @"IUNotificationSelectionWillChange" //called when selection is changed
 #define IUNotificationSelectionDidChange @"IUNotificationSelectionDidChange" //called when selection is changed
 
 
