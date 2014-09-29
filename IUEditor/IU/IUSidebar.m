@@ -52,18 +52,18 @@
     return NO;
 }
 
-- (BOOL)hasX{
+- (BOOL)shouldCompileX{
     return NO;
 }
 
-- (BOOL)hasY{
+- (BOOL)shouldCompileY{
     return NO;
 }
 
-- (BOOL)hasWidth{
+- (BOOL)shouldCompileWidth{
     return YES;
 }
-- (BOOL)hasHeight{
+- (BOOL)shouldCompileHeight{
     return NO;
 }
 

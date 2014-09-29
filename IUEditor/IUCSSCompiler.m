@@ -946,16 +946,16 @@
         default:
             break;
     }
-    if (_iu.hasY && topTag) {
+    if (_iu.shouldCompileY && topTag) {
         [code insertTag:topTag floatFromNumber:yValue unit:yUnit];
     }
-    if (_iu.hasX && leftTag) {
+    if (_iu.shouldCompileX && leftTag) {
         [code insertTag:leftTag floatFromNumber:xValue unit:xUnit];
     }
     if (enablebottom){
         [code insertTag:@"bottom" integer:0 unit:IUCSSUnitPixel];
     }
-    if (_iu.hasWidth) {
+    if (_iu.shouldCompileWidth) {
 
         IUUnit wUnit = [[_iu.css effectiveValueForTag:IUCSSTagWidthUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
         NSNumber *wValue = (wUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentWidth] : cssTagDict[IUCSSTagPixelWidth];
@@ -965,8 +965,7 @@
         }
     }
     
-    if (_iu.hasHeight) {
-    
+    if (_iu.shouldCompileHeight) {
         
         IUUnit hUnit = [[_iu.css effectiveValueForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
         NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];

@@ -169,36 +169,36 @@
     
     
     //enabled option 1
-    [self outlet:_xTF bind:NSEnabledBinding property:@"hasX"];
-    [self outlet:_yTF bind:NSEnabledBinding property:@"hasY"];
-    [self outlet:_wTF bind:NSEnabledBinding property:@"hasWidth"];
-    [self outlet:_hTF bind:NSEnabledBinding property:@"hasHeight"];
+    [self outlet:_xTF bind:NSEnabledBinding property:@"shouldCompileX"];
+    [self outlet:_yTF bind:NSEnabledBinding property:@"shouldCompileY"];
+    [self outlet:_wTF bind:NSEnabledBinding property:@"shouldCompileWidth"];
+    [self outlet:_hTF bind:NSEnabledBinding property:@"shouldCompileHeight"];
 
-    [self outlet:_pxTF bind:NSEnabledBinding property:@"hasX"];
-    [self outlet:_pyTF bind:NSEnabledBinding property:@"hasY"];
-    [self outlet:_pwTF bind:NSEnabledBinding property:@"hasWidth"];
-    [self outlet:_phTF bind:NSEnabledBinding property:@"hasHeight"];
+    [self outlet:_pxTF bind:NSEnabledBinding property:@"shouldCompileX"];
+    [self outlet:_pyTF bind:NSEnabledBinding property:@"shouldCompileY"];
+    [self outlet:_pwTF bind:NSEnabledBinding property:@"shouldCompileWidth"];
+    [self outlet:_phTF bind:NSEnabledBinding property:@"shouldCompileHeight"];
 
-    [self outlet:_xUnitBtn bind:NSEnabledBinding property:@"hasX"];
-    [self outlet:_yUnitBtn bind:NSEnabledBinding property:@"hasY"];
-    [self outlet:_wUnitBtn bind:NSEnabledBinding property:@"hasWidth"];
-    [self outlet:_hUnitBtn bind:NSEnabledBinding property:@"hasHeight"];
+    [self outlet:_xUnitBtn bind:NSEnabledBinding property:@"shouldCompileX"];
+    [self outlet:_yUnitBtn bind:NSEnabledBinding property:@"shouldCompileY"];
+    [self outlet:_wUnitBtn bind:NSEnabledBinding property:@"shouldCompileWidth"];
+    [self outlet:_hUnitBtn bind:NSEnabledBinding property:@"shouldCompileHeight"];
 
-    [self outlet:_xStepper bind:NSEnabledBinding property:@"hasX"];
-    [self outlet:_yStepper bind:NSEnabledBinding property:@"hasY"];
-    [self outlet:_wStepper bind:NSEnabledBinding property:@"hasWidth"];
-    [self outlet:_hStepper bind:NSEnabledBinding property:@"hasHeight"];
+    [self outlet:_xStepper bind:NSEnabledBinding property:@"shouldCompileX"];
+    [self outlet:_yStepper bind:NSEnabledBinding property:@"shouldCompileY"];
+    [self outlet:_wStepper bind:NSEnabledBinding property:@"shouldCompileWidth"];
+    [self outlet:_hStepper bind:NSEnabledBinding property:@"shouldCompileHeight"];
 
-    [self outlet:_pxStepper bind:NSEnabledBinding property:@"hasX"];
-    [self outlet:_pyStepper bind:NSEnabledBinding property:@"hasY"];
-    [self outlet:_pwStepper bind:NSEnabledBinding property:@"hasWidth"];
-    [self outlet:_phStepper bind:NSEnabledBinding property:@"hasHeight"];
+    [self outlet:_pxStepper bind:NSEnabledBinding property:@"shouldCompileX"];
+    [self outlet:_pyStepper bind:NSEnabledBinding property:@"shouldCompileY"];
+    [self outlet:_pwStepper bind:NSEnabledBinding property:@"shouldCompileWidth"];
+    [self outlet:_phStepper bind:NSEnabledBinding property:@"shouldCompileHeight"];
     
-    [self outlet:_minWTF bind:NSEnabledBinding property:@"hasWidth"];
-    [self outlet:_minWStepper bind:NSEnabledBinding property:@"hasWidth"];
+    [self outlet:_minWTF bind:NSEnabledBinding property:@"shouldCompileWidth"];
+    [self outlet:_minWStepper bind:NSEnabledBinding property:@"shouldCompileWidth"];
 
-    [self outlet:_minHTF bind:NSEnabledBinding property:@"hasHeight"];
-    [self outlet:_minHStepper bind:NSEnabledBinding property:@"hasHeight"];
+    [self outlet:_minHTF bind:NSEnabledBinding property:@"shouldCompileHeight"];
+    [self outlet:_minHStepper bind:NSEnabledBinding property:@"shouldCompileHeight"];
     
     
     [self outlet:_positionPopupBtn bind:NSEnabledBinding property:@"canChangePositionType"];

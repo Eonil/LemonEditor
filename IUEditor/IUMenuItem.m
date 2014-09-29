@@ -138,7 +138,7 @@
 
 #pragma mark - count
 
-- (BOOL)canSelectAtFirst{
+- (BOOL)canSelectedWhenOpenProject{
     return NO;
 }
 
@@ -286,19 +286,20 @@
 
 #pragma mark - shouldXXX
 
-- (BOOL)hasX{
+- (BOOL)shouldCompileX{
     return NO;
 }
-- (BOOL)hasY{
+- (BOOL)shouldCompileY{
     return NO;
 }
-- (BOOL)hasHeight{
+
+- (BOOL)shouldCompileHeight{
     if(self.depth == 2){
         return YES;
     }
     return NO;
 }
-- (BOOL)hasWidth{
+- (BOOL)shouldCompileWidth{
     if(self.depth ==1){
         return YES;
     }
