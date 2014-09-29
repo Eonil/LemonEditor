@@ -920,9 +920,12 @@
 
 #pragma mark setFrame
 
-- (void)setPosition:(NSPoint)position{
-    [_css setValueWithoutUpdateCSS:@(position.x) forTag:IUCSSTagPixelX];
-    [_css setValueWithoutUpdateCSS:@(position.y) forTag:IUCSSTagPixelY];
+- (void)setX:(float)x{
+    [_css setValueWithoutUpdateCSS:@(x) forTag:IUCSSTagPixelX];
+}
+
+- (void)setY:(float)y{
+    [_css setValueWithoutUpdateCSS:@(y) forTag:IUCSSTagPixelY];
 }
 
 - (void)setPercentFrame:(NSRect)frame{
@@ -1002,7 +1005,7 @@
     
     return NSMakeSize(currentPWidth, currentPHeight);
 }
-- (void)startDragSession{
+- (void)startFrameMoveWithUndoManager{
     
     undoFrameDict = [NSMutableDictionary dictionary];
     
@@ -1040,7 +1043,7 @@
     
 }
 
-- (void)endDragSession{
+- (void)endFrameMoveWithUndoManager{
     [[self undoManager] beginUndoGrouping];
     [[self.undoManager prepareWithInvocationTarget:self] undoFrameWithDictionary:undoFrameDict];
     [[self undoManager] endUndoGrouping];
@@ -1094,7 +1097,7 @@
 
 - (void)movePosition:(NSPoint)point withParentSize:(NSSize)parentSize{
     //Set Pixel
-    if([self shouldCompileX] && [self canChangeXByUserInput]){
+    if([self canChangeXByUserInput]){
         NSInteger currentX = originalPoint.x + point.x;
         
         [_css setValueWithoutUpdateCSS:@(currentX) forTag:IUCSSTagPixelX];

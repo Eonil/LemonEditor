@@ -235,10 +235,10 @@
     NSArray *selectedObjects = self.controller.selectedObjects;
     
     for (IUBox *box in selectedObjects) {
-        [box startDragSession];
+        [box startFrameMoveWithUndoManager];
         [box.css setValue:@(width) forTag:IUCSSTagPixelWidth];
         [box.css setValue:@(height) forTag:IUCSSTagPixelHeight];
-        [box endDragSession];
+        [box endFrameMoveWithUndoManager];
         [box updateCSS];
     }
 }

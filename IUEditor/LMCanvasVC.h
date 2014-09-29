@@ -78,8 +78,8 @@
 - (void)moveIUToDiffPoint:(NSPoint)point totalDiffPoint:(NSPoint)totalPoint;
 - (void)extendIUToTotalDiffSize:(NSSize)totalSize;
 - (BOOL)checkExtendSelectedIU:(NSSize)size;
-- (void)startDragSession:(id)sender;
-- (void)endDragSession:(id)sender;
+- (void)startFrameMoveWithUndoManager:(id)sender;
+- (void)endFrameMoveWithUndoManager:(id)sender;
 
 
 - (BOOL)makeNewIUByDragAndDrop:(IUBox *)newIU atPoint:(NSPoint)point atIU:(NSString *)parentIUID;

@@ -165,14 +165,12 @@
     //postion을 먼저 정한 후에 add 함
     
     NSPoint position = [self distanceFromIU:parentIUID toPointFromWebView:point];
-    if ([newIU canChangeXByUserInput] == NO) {
-        position.x = 0;
+    if ([newIU canChangeXByUserInput]) {
+        [newIU setX:position.x];
     }
     if([newIU canChangeYByUserInput] == NO){
-        position.y = 0;
+        [newIU setY:position.y];
     }
-    [newIU setPosition:position];
-
     
     [parentIU addIU:newIU error:nil];
     
@@ -954,26 +952,26 @@
     return  NO;
 }
 
-- (void)startDragSession:(id)sender{
+- (void)startFrameMoveWithUndoManager:(id)sender{
     if([sender isKindOfClass:[GridView class]]){
         [((LMCanvasView *)[self view]) startDraggingFromGridView];
     }
     for(IUBox *obj in self.controller.selectedObjects){
         if([self isParentMove:obj] || [self isParentExtend:obj]){
-            [obj.parent startDragSession];
+            [obj.parent startFrameMoveWithUndoManager];
         }
-        [obj startDragSession];
+        [obj startFrameMoveWithUndoManager];
         
     }
 }
 
-- (void)endDragSession:(id)sender{
+- (void)endFrameMoveWithUndoManager:(id)sender{
     for(IUBox *obj in self.controller.selectedObjects){
         if([self isParentMove:obj] || [self isParentExtend:obj]){
-            [obj.parent endDragSession];
+            [obj.parent endFrameMoveWithUndoManager];
         }
         
-        [obj endDragSession];
+        [obj endFrameMoveWithUndoManager];
         
     }
 }

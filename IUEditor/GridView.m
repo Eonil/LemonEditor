@@ -121,7 +121,7 @@
     startPoint = convertedPoint;
     middlePoint = convertedPoint;
     
-    [((LMCanvasVC *)(self.delegate)) startDragSession:self];
+    [((LMCanvasVC *)(self.delegate)) startFrameMoveWithUndoManager:self];
 
 }
 
@@ -166,7 +166,7 @@
     }
     if(isDragged){
         isDragged = NO;
-        [((LMCanvasVC *)(self.delegate)) endDragSession:self];
+        [((LMCanvasVC *)(self.delegate)) endFrameMoveWithUndoManager:self];
     }
 }
 
