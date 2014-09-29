@@ -693,8 +693,15 @@
 #pragma mark children
 
 - (NSMutableArray *)allIdentifierChildren{
-    return [self allChildren];
-}
+    if (self.children) {
+        NSMutableArray *array = [NSMutableArray array];
+        for (IUBox *iu in self.children) {
+            [array addObject:iu];
+            [array addObjectsFromArray:iu.allIdentifierChildren];
+        }
+        return array;
+    }
+    return nil;}
 
 
 -(NSMutableArray*)allChildren{
