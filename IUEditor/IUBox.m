@@ -680,12 +680,6 @@
     }
 }
 
-//delegation
--(BOOL)CSSShouldChangeValue:(id)value forTag:(IUCSSTag)tag forWidth:(NSInteger)width{
-    return YES;
-}
-
-#pragma mark - manage IU
 
 
 #pragma mark children
