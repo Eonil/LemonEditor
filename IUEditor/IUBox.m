@@ -621,7 +621,7 @@
 //updateCSS는 delegate에 화면을 업데이트 하는 함수인데 함수가 다시 _css에 값을 세팅하고 있음.
 - (void)updateCSS{
     if (self.delegate) {
-        
+        /*
         if(_lineHeightAuto && self.shouldCompileFontInfo){
             
             if(_css.effectiveTagDictionary[IUCSSTagPixelHeight]){
@@ -644,9 +644,10 @@
                 [_css setValueWithoutUpdateCSS:@(lineheight) forTag:IUCSSTagLineHeight];
             }
         }
+        */
         
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
-        NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editViewPort];
+        NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifier:(int)_css.editViewPort];
         for (NSString *identifier in dictionaryWithIdentifier) {
             [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];
         }
@@ -671,7 +672,7 @@
 - (void)updateCSSWithIdentifiers:(NSArray *)identifiers{
     if (self.delegate) {
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
-        NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifierForEditorViewport:(int)_css.editViewPort];
+        NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifier:(int)_css.editViewPort];
         
         for (NSString *identifier in identifiers) {
             [self.delegate IUClassIdentifier:identifier CSSUpdated:dictionaryWithIdentifier[identifier]];

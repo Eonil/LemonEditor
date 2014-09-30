@@ -12,7 +12,7 @@
 
 
 @interface IUCSSCode : NSObject
-- (NSDictionary*)stringTagDictionaryWithIdentifierForEditorViewport:(int)viewport;
+- (NSDictionary*)stringTagDictionaryWithIdentifier:(int)viewport;
 - (NSDictionary*)stringTagDictionaryWithIdentifierForOutputViewport:(int)viewport;
 - (NSArray*)allViewports;
 - (NSArray*)allIdentifiers;

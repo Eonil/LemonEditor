@@ -272,7 +272,7 @@
     return allViewports;
 }
 
-- (NSDictionary*)stringTagDictionaryWithIdentifierForEditorViewport:(int)viewport{
+- (NSDictionary*)stringTagDictionaryWithIdentifier:(int)viewport{
     NSMutableDictionary *returnDict = [NSMutableDictionary dictionary];
     NSDictionary *sourceDictWithViewPort = _editorCSSDictWithViewPort;
     NSDictionary *sourceDictWithIdentifier = sourceDictWithViewPort[@(IUCSSDefaultViewPort)];
