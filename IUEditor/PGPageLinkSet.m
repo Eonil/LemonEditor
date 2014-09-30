@@ -117,6 +117,9 @@
     return NO;
 }
 
+- (BOOL)shouldCompileFontInfo{
+    return YES;
+}
 
 #pragma mark - css
 
