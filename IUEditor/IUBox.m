@@ -618,7 +618,8 @@
 }
 
 
-//FIXME: 구조 오류. updateCSS는 delegate에 화면을 업데이트 하는 함수인데 함수가 다시 _css에 값을 세팅하고 있음.
+//FIXME: Structre Error!!!
+//updateCSS는 delegate에 화면을 업데이트 하는 함수인데 함수가 다시 _css에 값을 세팅하고 있음.
 - (void)updateCSS{
     if (self.delegate) {
         
