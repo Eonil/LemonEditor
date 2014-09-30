@@ -60,7 +60,7 @@
 - (id)awakeAfterUsingCoder:(NSCoder *)aDecoder{
     [super awakeAfterUsingCoder:aDecoder];
     
-    if(IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_BETA2, self.project.IUProjectVersion)){
+    if(self.project && IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_BETA2, self.project.IUProjectVersion)){
         [[self undoManager] disableUndoRegistration];
         
         BOOL disable = [[aDecoder decodeObjectForKey:@"disableArrowControl"] boolValue];

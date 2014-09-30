@@ -51,7 +51,7 @@
     
     [super awakeAfterUsingCoder:aDecoder];
     
-    if(IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_BETA2, self.project.IUProjectVersion)){
+    if(self.project && IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_BETA2, self.project.IUProjectVersion)){
         [[self undoManager] disableUndoRegistration];
 
         [self.css setValue:nil forTag:IUCSSTagPixelWidth forViewport:IUCSSDefaultViewPort];
