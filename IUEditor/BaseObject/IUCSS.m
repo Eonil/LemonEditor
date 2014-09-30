@@ -113,7 +113,6 @@
 }
 
 -(void)setValueWithoutUpdateCSS:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width{
-    if ([_delegate CSSShouldChangeValue:value forTag:tag forWidth:width]){
         NSMutableDictionary *cssDict = _cssDictWithViewPort[@(width)];
         
         id currentValue = [cssDict objectForKey:tag];
@@ -142,8 +141,6 @@
             }
             
         }
-        
-    }
 }
 
 -(id)effectiveValueForTag:(IUCSSTag)tag forViewport:(NSInteger)width{

@@ -375,11 +375,6 @@
     }
     return NO;
 }
-#pragma mark - iu css delegate
--(BOOL)CSSShouldChangeValue:(id)value forTag:(NSString *)tag forWidth:(NSInteger)width{
-    return YES;
-}
-
 
 -(void)setEditWidth:(NSInteger)width{
     for(NSString *identifier in _cssDict.allKeys){
