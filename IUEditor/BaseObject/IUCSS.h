@@ -55,5 +55,5 @@
 - (void)checkSizeDict:(NSInteger)width;
 
 //observable.
-@property (readonly) NSMutableDictionary *assembledTagDictionary;
+@property (readonly) NSDictionary *effectiveTagDictionary;
 @end

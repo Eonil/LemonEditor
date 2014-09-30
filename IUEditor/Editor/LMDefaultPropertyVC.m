@@ -104,7 +104,7 @@
 #pragma mark - keyPath
 //REVIEW: self.selection not working (proxy multiple 전달 안됨)
 - (NSString *)pathForCSSTag:(IUCSSTag)tag{
-    return [@"self.controller.selection.css.assembledTagDictionary." stringByAppendingString:tag];
+    return [@"self.controller.selection.css.effectiveTagDictionary." stringByAppendingString:tag];
 }
 - (NSString *)pathForProperty:(IUPropertyTag)property{
     return [@"self.controller.selection." stringByAppendingString:property];

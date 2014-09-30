@@ -87,7 +87,7 @@
     
     [self updateCSS];
         
-    NSString *currentPixel = [[NSString alloc] initWithFormat:@"%.0f", [self.css.assembledTagDictionary[IUCSSTagPixelHeight] floatValue]];
+    NSString *currentPixel = [[NSString alloc] initWithFormat:@"%.0f", [self.css.effectiveTagDictionary[IUCSSTagPixelHeight] floatValue]];
     
     NSString *source;
 

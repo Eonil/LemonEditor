@@ -255,10 +255,10 @@
     for (IUBox *box in page.allChildren){
         
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
-        NSString *fontName = box.css.assembledTagDictionary[IUCSSTagFontName];
+        NSString *fontName = box.css.effectiveTagDictionary[IUCSSTagFontName];
         if(fontName && fontName.length >0 ){
-            if(box.css.assembledTagDictionary[IUCSSTagFontWeight]){
-                [fontArray addObject:@{IUCSSTagFontName:fontName, IUCSSTagFontWeight:box.css.assembledTagDictionary[IUCSSTagFontWeight]}];
+            if(box.css.effectiveTagDictionary[IUCSSTagFontWeight]){
+                [fontArray addObject:@{IUCSSTagFontName:fontName, IUCSSTagFontWeight:box.css.effectiveTagDictionary[IUCSSTagFontWeight]}];
             }
             else{
                 [fontArray addObject:@{IUCSSTagFontName:fontName}];
@@ -273,7 +273,7 @@
             }
         }
         else{
-            NSString *fontName = [box.css valueForKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagFontName]];
+            NSString *fontName = [box.css valueForKeyPath:[@"effectiveTagDictionary" stringByAppendingPathExtension:IUCSSTagFontName]];
             if([fontNameArray containsString:fontName] == NO){
                 [fontNameArray addObject:fontName];
             }

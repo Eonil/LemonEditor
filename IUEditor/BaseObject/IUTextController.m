@@ -74,7 +74,7 @@
 - (NSArray *)fontNameArray{
     NSMutableArray *fontArray = [NSMutableArray array];
     for(IUCSS *css in _cssDict.allValues){
-        NSString *fontName = [css valueForKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagFontName]];
+        NSString *fontName = [css valueForKeyPath:[@"effectiveTagDictionary" stringByAppendingPathExtension:IUCSSTagFontName]];
         if(fontName != nil && [fontArray containsString:fontName] == NO){
             [fontArray addObject:fontName];
         }
@@ -458,7 +458,7 @@
     [self setTextTag:IUCSSTagFontName value:fontName];
 }
 - (NSString *)fontName{
-    return self.css.assembledTagDictionary[IUCSSTagFontName];
+    return self.css.effectiveTagDictionary[IUCSSTagFontName];
 
 }
 
@@ -467,14 +467,14 @@
 }
 
 - (NSColor *)fontColor{
-    return self.css.assembledTagDictionary[IUCSSTagFontColor];
+    return self.css.effectiveTagDictionary[IUCSSTagFontColor];
 }
 
 - (void)setBold:(BOOL)bold{
     [self setTextTag:IUCSSTagFontWeight value:@(bold)];
 }
 - (BOOL)bold{
-    return [self.css.assembledTagDictionary[IUCSSTagFontWeight] boolValue];
+    return [self.css.effectiveTagDictionary[IUCSSTagFontWeight] boolValue];
 
 }
 
@@ -484,7 +484,7 @@
     
 }
 - (BOOL)italic{
-    return [self.css.assembledTagDictionary[IUCSSTagFontItalic] boolValue];
+    return [self.css.effectiveTagDictionary[IUCSSTagFontItalic] boolValue];
 
 }
 
@@ -493,7 +493,7 @@
     [self setTextTag:IUCSSTagFontDecoration value:@(underline)];
 }
 - (BOOL)underline{
-    return [self.css.assembledTagDictionary[IUCSSTagFontDecoration] boolValue];
+    return [self.css.effectiveTagDictionary[IUCSSTagFontDecoration] boolValue];
 
 }
 
@@ -502,7 +502,7 @@
 }
 
 - (int)fontSize{
-    return [self.css.assembledTagDictionary[IUCSSTagFontSize] intValue];
+    return [self.css.effectiveTagDictionary[IUCSSTagFontSize] intValue];
 }
 
 - (void)setLink:(NSString *)link{
@@ -510,7 +510,7 @@
 }
 
 - (NSString *)link{
-    return self.css.assembledTagDictionary[IUCSSTagTextLink];
+    return self.css.effectiveTagDictionary[IUCSSTagTextLink];
 }
 
 

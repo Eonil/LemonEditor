@@ -29,7 +29,7 @@
 
 - (void)increaseSize:(NSSize)size withParentSize:(NSSize)parentSize{
     [super increaseSize:size withParentSize:parentSize];
-    CGFloat width = [self.css.assembledTagDictionary[IUCSSTagPercentWidth] floatValue];
+    CGFloat width = [self.css.effectiveTagDictionary[IUCSSTagPercentWidth] floatValue];
     CGFloat pageContentWidth = 100-width;
     
     for(IUBox *box in self.parent.children){
