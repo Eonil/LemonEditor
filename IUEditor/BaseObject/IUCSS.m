@@ -48,6 +48,7 @@
     _cssDictWithViewPort = [aDecoder decodeObjectForKey:@"cssDictWithViewPort"];
     
     //////////////////////////////////////////////////////////////////////////////////////
+    //FIXME: project에 달려있는 version check해서 들어가야할듯.
     //version control code
     
     if (_cssDictWithViewPort == nil) {
@@ -159,10 +160,15 @@
 }
 
 
-- (void)copyMaxSizeToSize:(NSInteger)width{
-    [self copySizeFrom:IUCSSDefaultViewPort to:width];
+/**
+ @brief
+ media query를 조금더 부드럽게 하기위해서 새로운 size를 만들때 하나위의  css 를 카피함.
+ 없을 경우에는 frame dict만 만들어 놓음.
+ */
+- (void)copyCSSMaxViewPortDictTo:(NSInteger)width{
+    [self copyCSSDictFrom:IUCSSDefaultViewPort to:width];
 }
-- (void)copySizeFrom:(NSInteger)fromWidth to:(NSInteger)toWidth{
+- (void)copyCSSDictFrom:(NSInteger)fromWidth to:(NSInteger)toWidth{
     if(_cssDictWithViewPort[@(toWidth)] == nil){
         if(_cssDictWithViewPort[@(fromWidth)]){
             NSMutableDictionary *cssDict = [_cssDictWithViewPort[@(fromWidth)] mutableCopy];

@@ -285,6 +285,10 @@
 
 #pragma mark -
 #pragma mark manage IUs
+-(NSUInteger)countOfSelectedIUs{
+    return [self.controller.selectedObjects count];
+}
+
 - (BOOL)containsIU:(NSString *)IUID{
     if ([self.controller.selectedIdentifiersWithImportIdentifier containsObject:IUID]){
         return YES;
