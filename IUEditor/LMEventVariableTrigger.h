@@ -9,6 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "LMDefaultPropertyVC.h"
 
-@interface LMEventVariableTrigger : LMDefaultPropertyVC
+@interface LMEventVariableTrigger : LMDefaultPropertyVC <NSTextFieldDelegate>
 
 @end

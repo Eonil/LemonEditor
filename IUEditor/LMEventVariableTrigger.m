@@ -53,4 +53,19 @@
     [popover showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMinXEdge];
 }
 
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
+    if([control isEqualTo:_variableTF]){
+        NSString *currentName = [_variableTF stringValue];
+        if([JavascriptReservedKeywords containsString:currentName]
+           || [JqueryReservedKeywords containsString:currentName]){
+            [JDUIUtil hudAlert:@"This variable is a reserved keyword, Use another word" second:2];
+            return NO;
+        }
+    }
+
+    
+    return YES;
+}
+
+
 @end
