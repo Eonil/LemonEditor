@@ -37,12 +37,10 @@
 - (void)updateJS;
 
 //html update
--(void)IUHTMLIdentifier:(NSString*)identifier textHTML:(NSString *)html withParentID:(NSString *)parentID nearestID:(NSString *)nID index:(NSUInteger)index;
 -(void)IUHTMLIdentifier:(NSString *)identifier HTML:(NSString *)html withParentID:(NSString *)parentID;
 
 -(void)IUClassIdentifier:(NSString *)classIdentifier addClass:(NSString *)className;
 -(void)IUClassIdentifier:(NSString *)classIdentifier removeClass:(NSString *)className;
--(void)updateTextRangeFromID:(NSString *)fromID toID:(NSString *)toID;
 
 -(void)IURemoved:(NSString*)identifier withParentID:(NSString *)parentID;
 
@@ -218,8 +216,6 @@ typedef enum _IUOverflowType{
 - (void)setX:(float)x;
 - (void)setY:(float)y;
 
-- (void)setPixelFrame:(NSRect)frame;
-- (void)setPercentFrame:(NSRect)frame;
 - (void)startFrameMoveWithUndoManager;
 - (void)endFrameMoveWithUndoManager;
 - (void)movePosition:(NSPoint)point withParentSize:(NSSize)parentSize;

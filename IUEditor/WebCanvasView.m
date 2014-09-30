@@ -259,9 +259,6 @@
     else if(selector == @selector(reportFrameDict:)){
         return @"reportFrameDict";
     }
-    else if(selector == @selector(reportPercentFrame:)){
-        return @"reportPercentFrame";
-    }
     else if(selector == @selector(resizePageContentHeightFinished:minHeight:)){
         return @"resizePageContentHeightFinished";
     }
@@ -273,7 +270,6 @@
 + (BOOL)isSelectorExcludedFromWebScript:(SEL)selector {
     if (selector == @selector(reportFrameDict:)
         || selector == @selector(doOutputToLog:)
-        //|| selector == @selector(reportPercentFrame:)
         || selector == @selector(resizePageContentHeightFinished:minHeight:)
         ){
         return NO;
@@ -371,26 +367,6 @@
     JDTraceLog( @"reportSharedFrameDict");
 }
 
-- (void)reportPercentFrame:(WebScriptObject *)scriptObj{
-    NSMutableDictionary *scriptDict = [self convertWebScriptObjectToNSDictionary:scriptObj];
-    NSMutableDictionary *iuFrameDict = [NSMutableDictionary dictionary];
-    
-    NSArray *keys = [scriptDict allKeys];
-    for(NSString *key in keys){
-        NSDictionary *innerDict = [scriptDict objectForKey:key];
-        
-        CGFloat left = [[innerDict objectForKey:@"left"] floatValue];
-        CGFloat top = [[innerDict objectForKey:@"top"] floatValue];
-        CGFloat w = [[innerDict objectForKey:@"width"] floatValue];
-        CGFloat h = [[innerDict objectForKey:@"height"] floatValue];
-        
-        NSRect iuFrame = NSMakeRect(left, top, w, h);
-        [iuFrameDict setObject:[NSValue valueWithRect:iuFrame] forKey:key];
-    }
-    
-    [self.VC updateIUPercentFrameDictionary:iuFrameDict];
-}
-
 - (void)updateFrameDict{
     //reportFrameDict(after call setIUCSSStyle)
     [self stringByEvaluatingJavaScriptFromString:@"getIUUpdatedFrameThread()"];
@@ -409,7 +385,7 @@
     [self resizePageContent];
 }
 
-#pragma mark call carousel.JS
+#pragma mark callJS
 
 - (id)callWebScriptMethod:(NSString *)function withArguments:(NSArray *)args{
     return [[self windowScriptObject] callWebScriptMethod:function withArguments:args];
@@ -439,6 +415,7 @@
     [[NSUserDefaults standardUserDefaults] setBool:flag forKey:@"textEditMode"];
 
 }
+<<<<<<< HEAD
 
 - (BOOL)removeLastCharacter{
     DOMRange *range = [self selectedDOMRange];

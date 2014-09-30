@@ -19,7 +19,6 @@
 - (NSString*)identifierForTextController;
 - (void)updateTextHTML;
 - (void)updateTextCSS:(IUCSS *)textCSS identifier:(NSString *)identifier;
-- (void)updateTextRangeFromID:(NSString *)fromID toID:(NSString *)toID;
 - (void)removeTextCSSIdentifier:(NSString *)identifier;
 
 @end

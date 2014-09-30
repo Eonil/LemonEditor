@@ -19,9 +19,6 @@
 #import "InnerSizeBox.h"
 #import "IUSection.h"
 #import "IUImport.h"
-#if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
-#import "IUText.h"
-#endif
 
 #import "LMHelpWC.h"
 
@@ -168,7 +165,7 @@
     if ([newIU canChangeXByUserInput]) {
         [newIU setX:position.x];
     }
-    if([newIU canChangeYByUserInput] == NO){
+    if([newIU canChangeYByUserInput]){
         [newIU setY:position.y];
     }
     
@@ -273,10 +270,10 @@
 }
 
 - (void)ghostImageContextDidChange:(NSDictionary *)change{
+    
     NSString *ghostImageName = _sheet.ghostImageName;
     IUResourceFile *resourceNode = [_resourceManager resourceFileWithName:ghostImageName];
     NSImage *ghostImage = [[NSImage alloc] initWithContentsOfFile:resourceNode.absolutePath];
-    
     [[self gridView] setGhostImage:ghostImage];
     
     NSPoint ghostPosition = NSMakePoint(_sheet.ghostX, _sheet.ghostY);
@@ -288,9 +285,6 @@
 
 #pragma mark -
 #pragma mark manage IUs
--(NSUInteger)countOfSelectedIUs{
-    return [self.controller.selectedObjects count];
-}
 - (BOOL)containsIU:(NSString *)IUID{
     if ([self.controller.selectedIdentifiersWithImportIdentifier containsObject:IUID]){
         return YES;
@@ -300,25 +294,8 @@
     }
 }
 - (BOOL)isEditable{
-#if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
-    if([self countOfSelectedIUs] == 1){
-        IUBox *currentIU = self.controller.selectedObjects[0];
-        if([currentIU isKindOfClass:[IUText class]]){
-            return YES;
-        }
-    }
-#endif
     return NO;
 }
-
-- (NSString *)selectedIUIdentifier{
-    if([self countOfSelectedIUs] == 1){
-        IUBox *currentIU = self.controller.selectedObjects[0];
-        return currentIU.htmlID;
-    }
-    return nil;
-}
-
 
 -(void)selectedObjectsDidChange:(NSDictionary*)change{
     [JDLogUtil log:IULogAction key:@"CanvasVC:observed" string:[self.controller.selectedIdentifiers description]];
@@ -331,7 +308,6 @@
             NSRect frame = [[frameDict.dict objectForKey:IUID] rectValue];
             [[self gridView] addSelectionLayerWithIdentifier:IUID withFrame:frame];
             [[self gridView] addTextPointLayer:IUID withFrame:frame];
-            [[self webView] changeDOMRange:frame.origin];
         }
     }
     
@@ -404,55 +380,8 @@
     }
 }
 
-#pragma mark setText
 
-#if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
-
-- (void)updateNewline:(NSRange)range identifier:(NSString *)identifier htmlNode:(DOMHTMLElement *)node{
-    
-    IUBox *iu = [self.controller IUBoxByIdentifier:identifier];
-    NSAssert(iu != nil);
-    if([iu isKindOfClass:[IUText class]]){
-        IUText *textIU = (IUText *)iu;
-        [textIU updateNewLine:range htmlNode:node];
-    }
-}
- 
-
-- (void)selectTextRange:(NSRange)range identifier:(NSString *)identifier htmlNode:(DOMHTMLElement *)node{
-
-    IUBox *iu = [self.controller IUBoxByIdentifier:identifier];
-    NSAssert(iu != nil);
-    if([iu isKindOfClass:[IUText class]]){
-        IUText *textIU = (IUText *)iu;
-        [textIU selectTextRange:range htmlNode:node];
-    }
-
-}
-#endif
-
-/*
-//text
-- (void)selectTextRange:(NSRange)range identifier:(NSString *)identifier{
-    self.controller.selectedTextRange = range;
-}
-
-- (void)insertString:(NSString *)string identifier:(NSString *)identifier withRange:(NSRange)range{
-    [JDLogUtil log:IULogText string:[NSString stringWithFormat:@"insert - %@ , (%lu, %lu)", string, range.location, range.length]];
-    IUBox *iu = [self.controller IUBoxByIdentifier:identifier];
-    NSAssert(iu != nil);
-    [iu insertText:string withRange:range];
-}
-
-- (void)deleteStringRange:(NSRange)range identifier:(NSString *)identifier{
-    [JDLogUtil log:IULogText string:[NSString stringWithFormat:@"delete (%lu, %lu)", range.location, range.length]];
-    IUBox *iu = [self.controller IUBoxByIdentifier:identifier];
-    [iu deleteTextInRange:range];
-}
- */
-
-#pragma mark -
-#pragma mark IUDelegate
+#pragma mark - JS
 
 - (id)callWebScriptMethod:(NSString *)function withArguments:(NSArray *)args{
     return [[self webView] callWebScriptMethod:function withArguments:args];
@@ -460,6 +389,8 @@
 - (id)evaluateWebScript:(NSString *)script{
     return [[self webView] evaluateWebScript:script];
 }
+
+#pragma mark - frame
 
 - (NSPoint)distanceFromIU:(NSString *)parentName to:(NSString *)iuName{
     NSRect iuFrame = [[frameDict.dict objectForKey:iuName] rectValue];
@@ -484,30 +415,10 @@
     return distance;
 }
 
-#pragma mark -
-#pragma mark link attributes
-
--(void)IURemoveLink:(NSString *)identifier{
-    /*
-     
-     => IUView
-     IUParent-IUNode
-     => DOMNode View
-     IUParent - LINKNode - IUNode
-             (remove link)
-     */
-    DOMHTMLElement *selectHTMLElement = [self getHTMLElementbyID:identifier];
-    DOMNode *linkNode = selectHTMLElement.parentNode;
-    if([linkNode isKindOfClass:[DOMHTMLAnchorElement class]] == NO){
-        JDWarnLog(@"[IU:%@] don't have link", identifier);
-        return;
-    }
-    //replace nodes
-    DOMNode *linkParentNode = linkNode.parentNode;
-    [linkParentNode replaceChild:selectHTMLElement oldChild:linkNode];
-    
-}
-
+#pragma mark - class
+/**
+ 현재 text 수정중인 IU에만 class를 추가할수있도록 사용할예정.
+ */
 -(void)IUClassIdentifier:(NSString *)classIdentifier addClass:(NSString *)className{
     DOMNodeList *list = [self.DOMDoc.documentElement getElementsByClassName:classIdentifier];
     for (int i=0; i<list.length; i++) {
@@ -526,11 +437,6 @@
     }
 }
 
--(void)updateTextRangeFromID:(NSString *)fromID toID:(NSString *)toID{    
-    [self.webView selectTextFromID:fromID toID:toID];
-}
-
-
 #pragma mark -
 #pragma mark HTML
 
@@ -539,14 +445,6 @@
     return selectNode;
     
 }
-- (DOMNodeList *)getHTMLElementsByClassname:(NSString *)classname{
-    return [self.DOMDoc getElementsByClassName:classname];
-}
-
-- (DOMNodeList *)querySelectorAll:(NSString *)selector{
-    return [self.DOMDoc querySelectorAll:selector];
-}
-
 - (NSString *)tagWithHTML:(NSString *)html{
     NSString *subHTML = [html substringFromIndex:[html rangeOfString:@"<"].location];
     NSArray *separatedHTML = [subHTML componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -565,14 +463,6 @@
     return nil;
 }
 
--(void)IUHTMLIdentifier:(NSString*)identifier textHTML:(NSString *)html withParentID:(NSString *)parentID nearestID:(NSString *)nID index:(NSUInteger)index{
-    
-    [self IUHTMLIdentifier:identifier HTML:html withParentID:parentID];
-    [[self webView] selectTextRange:[self getHTMLElementbyID:nID] index:index];
-
-}
-
-
 -(void)IUHTMLIdentifier:(NSString*)identifier HTML:(NSString *)html withParentID:(NSString *)parentID{
     
     DOMHTMLElement *currentElement = [self getHTMLElementbyID:identifier];
@@ -590,7 +480,6 @@
         [selectHTMLElement appendChild:newElement];
         
         [newElement setOuterHTML:html];
-        
 
     }
     
@@ -613,7 +502,7 @@
  @brief get element line count by only selected iu
  */
 -(NSInteger)countOfLineWithIdentifier:(NSString *)identifier{
-    DOMNodeList *list = [self getHTMLElementsByClassname:identifier];
+    DOMNodeList *list = [self.DOMDoc getElementsByClassName:identifier];
     if(list.length > 0){
         DOMHTMLElement *element = (DOMHTMLElement *)[list item:0];
         DOMNodeList *brList  = [element getElementsByTagName:@"br"];
@@ -628,7 +517,7 @@
 }
 
 -(void)updateCSS:(NSString *)css selector:(NSString *)selector{
-    DOMNodeList *list = [self querySelectorAll:selector];
+    DOMNodeList *list = [self.DOMDoc querySelectorAll:selector];
     int length= list.length;
     for(int i=0; i<length; i++){
         DOMHTMLElement *element = (DOMHTMLElement *)[list item:i];
@@ -842,30 +731,6 @@
 
 #pragma mark frameDict
 
-- (void)updateIUFrameDictionary:(NSMutableDictionary *)iuFrameDict{
-    JDTraceLog(@"report updated frame dict");
-
-    for(NSString *identifier in iuFrameDict.allKeys){
-        NSRect pixelFrame = [[iuFrameDict objectForKey:identifier] rectValue];
-        IUBox *iu = [self.controller IUBoxByIdentifier:identifier];
-        [iu setPixelFrame:pixelFrame];
-    }
-}
-
-- (void)updateIUPercentFrameDictionary:(NSMutableDictionary *)iuFrameDict{
- 
-    for(NSString *identifier in iuFrameDict.allKeys){
-        NSRect percentFrame = [[iuFrameDict objectForKey:identifier] rectValue];
-        IUBox *iu = [self.controller IUBoxByIdentifier:identifier];
-        [iu setPercentFrame:percentFrame];
-        
-        JDTraceLog(@"(%@ : %.1f,%.1f,%.1f,%.1f)",identifier,
-                  percentFrame.origin.x, percentFrame.origin.y,
-                  percentFrame.size.width, percentFrame.size.height);
-    }
-
-}
-
 
 - (void)updateGridFrameDictionary:(NSMutableDictionary *)gridFrameDict{
     
@@ -892,11 +757,6 @@
     
 }
 
-#pragma mark updatedText
-- (void)updateHTMLText:(NSString *)insertText atIU:(NSString *)iuID{
-    
-    JDTraceLog(@"[IU:%@], %@", iuID, insertText);
-}
 
 #pragma mark moveIU
 //drag & drop after select IU
@@ -913,7 +773,6 @@
         if([self isParentMove:obj]){
             moveObj = obj.parent;
         }
-        
         
         NSSize parentSize;
         if (self.controller.importIUInSelectionChain){
@@ -1160,6 +1019,7 @@
 - (void)performRightClick:(NSString*)IUID withEvent:(NSEvent*)event{
     
     /*
+     TO Be removed:20140930
     //make help menu
     NSMenu *menu = [[NSMenu alloc] init];
     NSMenuItem *helpItem = [[NSMenuItem alloc] init];
