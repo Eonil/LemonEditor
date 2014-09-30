@@ -41,7 +41,6 @@
 //select IUs
 - (BOOL)containsIU:(NSString *)IUID;
 - (BOOL)isEditable;
-- (NSString *)selectedIUIdentifier;
 - (NSUInteger)countOfSelectedIUs;
 - (void)deselectedAllIUs;
 - (void)addSelectedIU:(NSString *)IU;
@@ -49,18 +48,6 @@
 - (void)setSelectedIU:(NSString *)IU;
 - (void)selectIUInRect:(NSRect)frame;
 
-//text
-#if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
-
-- (void)updateNewline:(NSRange)range identifier:(NSString *)identifier htmlNode:(DOMHTMLElement *)node;
-- (void)selectTextRange:(NSRange)range identifier:(NSString *)identifier htmlNode:(DOMHTMLElement *)node;
-
-#endif
-/*
-- (void)selectTextRange:(NSRange)range identifier:(NSString *)identifier;
-- (void)insertString:(NSString *)string identifier:(NSString *)identifier withRange:(NSRange)range;
-- (void)deleteStringRange:(NSRange)range identifier:(NSString *)identifier;
-*/
 #pragma mark -
 #pragma mark be set by IU
 //load page
@@ -70,9 +57,6 @@
 
 #pragma mark -
 #pragma mark set IU
-
-- (void)updateIUPercentFrameDictionary:(NSMutableDictionary *)iuFrameDict;
-- (void)updateIUFrameDictionary:(NSMutableDictionary *)iuFrameDict;
 - (void)updateGridFrameDictionary:(NSMutableDictionary *)gridFrameDict;
 
 - (void)moveIUToDiffPoint:(NSPoint)point totalDiffPoint:(NSPoint)totalPoint;

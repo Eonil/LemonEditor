@@ -10,6 +10,7 @@
 #import "LMCanvasVC.h"
 
 @implementation LMCanvasView{
+    /* current state of mouse + current state of iu (extend or move)*/
     BOOL isSelected, isDragged, isSelectDragged, isMouseDown;
     NSPoint startDragPoint, middleDragPoint, endDragPoint;
     NSUInteger keyModifierFlags;
@@ -55,7 +56,6 @@
 
 -(void) dealloc{
     [self.mainView removeObserver:self forKeyPath:@"frame"];
-    
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSViewBoundsDidChangeNotification object:[self.mainScrollView contentView]];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IUNotificationMQSelected object:[self sizeView]];
@@ -112,6 +112,10 @@
     [self.webView resizePageContent];
     [[self webView] updateFrameDict];
 }
+
+/**
+ IUClass 일 경우 scroll 없이 전체 화면을 사용함.
+ */
 - (void)extendMainViewToFullSize{
     [self setHeightOfMainView:[[self mainScrollView] frame].size.height];
 }
@@ -128,19 +132,6 @@
         }
     }
     return NO;
-}
-
-- (BOOL)canRemoveIU:(NSEvent *)theEvent IUID:(NSString *)IUID{
-    
-    if( ( [theEvent modifierFlags] & NSCommandKeyMask )){
-        return NO;
-    }
-    
-    if( [((LMCanvasVC *)self.delegate) containsIU:IUID] == YES &&
-        [((LMCanvasVC *)self.delegate) countOfSelectedIUs] == 1){
-        return NO;
-    }
-    return YES;
 }
 
 //exclude top-botoom view
@@ -180,15 +171,6 @@
                 if(key == NSDeleteCharacter){
                     [((LMCanvasVC *)self.delegate) removeSelectedIUs];
                     return YES;
-                }
-            }
-            else{
-                //editor mode 이고 delete key가 들어오면
-                //한글의composition state 중이면서 캐릭터가 내부에 저장되지 않았으면 delete key 무효화
-                if(key == NSDeleteCharacter){
-                    if([[self webView] removeLastCharacter] == YES){
-                        return NO;
-                    }
                 }
             }
         }
@@ -256,7 +238,6 @@
 #if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
                     if([((LMCanvasVC *)self.delegate) isEditable]){
                         [[self webView] setEditable:YES];
-                        [[self webView] changeDOMRange:convertedPoint];
                     }
                     else {
                         NSString *alertText= [currentIUID stringByAppendingString:@" is not text-editable\nPlease use IUText box"];
@@ -266,12 +247,16 @@
                 }
             }
             else if (theEvent.type == NSRightMouseDown){
-                /* currently, right mouse button down is disable
+                /**
+                 To be removed : 2014.09.30
+                 : manual로 사용하고 있었는데 현재 필요가 없음.
+                 currently, right mouse button down is disable
                 NSString *currentIUID = [self.webView IUAtPoint:convertedPoint];
                 [((LMCanvasVC *)self.delegate) performRightClick:currentIUID withEvent:theEvent];
                  */
             }
         }
+        /* mouse dragged */
         if (theEvent.type == NSLeftMouseDragged && isMouseDown){
             JDTraceLog( @"mouse dragged");
             endDragPoint = convertedPoint;
@@ -285,6 +270,7 @@
             
             middleDragPoint = endDragPoint;
         }
+        /* mouse up */
         else if ( theEvent.type == NSLeftMouseUp ){
             JDTraceLog( @"NSLeftMouseUp");
             isMouseDown = NO;
@@ -292,10 +278,6 @@
             
         }
     }
-    else {
-        JDTraceLog( @"gridview select");
-    }
-
     
     if(isSelectDragged){
         [[NSCursor crosshairCursor] push];

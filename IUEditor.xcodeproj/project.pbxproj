@@ -294,7 +294,6 @@
 		3D19E432198A06EB00A50D35 /* IUMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D19E431198A06EB00A50D35 /* IUMenuItem.m */; };
 		3D19E43C198A104300A50D35 /* LMPropertyIUMenuItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D19E43A198A104300A50D35 /* LMPropertyIUMenuItemVC.m */; };
 		3D19E43D198A104300A50D35 /* LMPropertyIUMenuItemVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D19E43B198A104300A50D35 /* LMPropertyIUMenuItemVC.xib */; };
-		3D1BACC919330240004C554F /* IUText.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1BACC819330240004C554F /* IUText.m */; };
 		3D2E6B8E19640DED00AC7DE5 /* SelectionBorderLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D2E6B8D19640DED00AC7DE5 /* SelectionBorderLayer.m */; };
 		3D2E6BA11965212700AC7DE5 /* help.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E6BA01965212700AC7DE5 /* help.plist */; };
 		3D2E6BA919653F3A00AC7DE5 /* EventFrame.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E6BA419653F3A00AC7DE5 /* EventFrame.mp4 */; };
@@ -1389,8 +1388,6 @@
 		3D19E439198A104300A50D35 /* LMPropertyIUMenuItemVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMPropertyIUMenuItemVC.h; sourceTree = "<group>"; };
 		3D19E43A198A104300A50D35 /* LMPropertyIUMenuItemVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMPropertyIUMenuItemVC.m; sourceTree = "<group>"; };
 		3D19E43B198A104300A50D35 /* LMPropertyIUMenuItemVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LMPropertyIUMenuItemVC.xib; sourceTree = "<group>"; };
-		3D1BACC719330240004C554F /* IUText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUText.h; path = IU/IUText.h; sourceTree = "<group>"; };
-		3D1BACC819330240004C554F /* IUText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUText.m; path = IU/IUText.m; sourceTree = "<group>"; };
 		3D2E6B8C19640DED00AC7DE5 /* SelectionBorderLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionBorderLayer.h; path = Editor/SelectionBorderLayer.h; sourceTree = "<group>"; };
 		3D2E6B8D19640DED00AC7DE5 /* SelectionBorderLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectionBorderLayer.m; path = Editor/SelectionBorderLayer.m; sourceTree = "<group>"; };
 		3D2E6BA01965212700AC7DE5 /* help.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = help.plist; path = IUEditor/Editor/Help/help.plist; sourceTree = "<group>"; };
@@ -4162,8 +4159,6 @@
 				69D15F6A18E73E690046FBB0 /* NSString+IUTag.m */,
 				6967425118F7D077008B7111 /* IUIdentifierManager.h */,
 				6967425218F7D077008B7111 /* IUIdentifierManager.m */,
-				3D1BACC719330240004C554F /* IUText.h */,
-				3D1BACC819330240004C554F /* IUText.m */,
 			);
 			name = IU;
 			sourceTree = "<group>";
@@ -5528,7 +5523,6 @@
 				3DB3ACCC18EBEF3D0046DFB7 /* InnerSizeBox.m in Sources */,
 				3D9BC4091993A12900451F55 /* LMPropertyIUGoogleMapVC.m in Sources */,
 				69D15F7318E898B10046FBB0 /* IUBackground.m in Sources */,
-				3D1BACC919330240004C554F /* IUText.m in Sources */,
 				3DED26E719010B82001A1D67 /* LMPropertyIUMovieVC.m in Sources */,
 				69761BC318F04ECD00C4EDC6 /* LMPropertyBGImageVC.m in Sources */,
 				694A985F196D13E000C1D630 /* JDNetworkUtil.m in Sources */,

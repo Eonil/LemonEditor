@@ -438,7 +438,6 @@
         
     }
     
-    [self.textDelegate updateTextRangeFromID:startId toID:endId];
 }
 
 - (void)setDefaultTextAttribute:(IUCSS *)css{

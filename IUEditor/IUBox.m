@@ -924,40 +924,12 @@
     [_css setValueWithoutUpdateCSS:@(y) forTag:IUCSSTagPixelY];
 }
 
-- (void)setPercentFrame:(NSRect)frame{
-    CGFloat x = frame.origin.x;
-    CGFloat xExist =[_css.effectiveTagDictionary[IUCSSTagPercentX] floatValue];
-    if (x != xExist) {
-        [_css setValueWithoutUpdateCSS:@(frame.origin.x) forTag:IUCSSTagPercentX];
-    }
-    if (frame.origin.x != [_css.effectiveTagDictionary[IUCSSTagPercentY] floatValue]) {
-        [_css setValueWithoutUpdateCSS:@(frame.origin.y) forTag:IUCSSTagPercentY];
-    }
-    if (frame.origin.x != [_css.effectiveTagDictionary[IUCSSTagPercentHeight] floatValue]) {
-        [_css setValueWithoutUpdateCSS:@(frame.size.height) forTag:IUCSSTagPercentHeight];
-    }
-    if (frame.origin.x != [_css.effectiveTagDictionary[IUCSSTagPercentWidth] floatValue]) {
-        [_css setValueWithoutUpdateCSS:@(frame.size.width) forTag:IUCSSTagPercentWidth];
-    }
-}
-
-- (void)setPixelFrame:(NSRect)frame{
-    [_css setValueWithoutUpdateCSS:@(frame.origin.x) forTag:IUCSSTagPixelX];
-    [_css setValueWithoutUpdateCSS:@(frame.origin.y) forTag:IUCSSTagPixelY];
-    [_css setValueWithoutUpdateCSS:@(frame.size.height) forTag:IUCSSTagPixelHeight];
-    [_css setValueWithoutUpdateCSS:@(frame.size.width) forTag:IUCSSTagPixelWidth];
-}
-
 -(BOOL)percentUnitAtCSSTag:(IUCSSTag)tag{
     BOOL unit = [_css.effectiveTagDictionary[tag] boolValue];
     return unit;
 }
 
 #pragma mark move by drag & drop
-
-
-
-
 /*
  drag 중간의 diff size로 하면 css에 의한 오차가 생김.
  drag session이 시작될때부터 위치에서의 diff size로 계산해야 오차가 발생 안함.
