@@ -96,7 +96,7 @@
         }
         
         if(IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_FONTFIX, self.project.IUProjectVersion)){
-            NSMutableDictionary *dict = _css.effectiveTagDictionary;
+            NSDictionary *dict = _css.effectiveTagDictionary;
             if(dict[IUCSSTagFontWeight]){
                 BOOL bold = [dict[IUCSSTagFontWeight] boolValue];
                 [_css eradicateTag:IUCSSTagFontWeight];
@@ -618,33 +618,48 @@
 }
 
 
-//FIXME: Structre Error!!!
+- (void)updateCSSValuesBeforeUpdateEditor{
+    if(_lineHeightAuto && self.shouldCompileFontInfo){
+        if(_css.effectiveTagDictionary[IUCSSTagPixelHeight]){
+            
+            NSInteger brCount = [self.delegate countOfLineWithIdentifier:self.htmlID];
+            CGFloat height = [_css.effectiveTagDictionary[IUCSSTagPixelHeight] floatValue];
+            CGFloat fontSize = [_css.effectiveTagDictionary[IUCSSTagFontSize] floatValue];
+            CGFloat lineheight;
+            
+            if(height < 0.1 || height < fontSize || brCount <0.1 || fontSize <0.1){
+                lineheight = 1.0;
+            }
+            else{
+                lineheight = ((height/brCount)/fontSize);
+            }
+            
+            if(brCount > 3 && lineheight > 50){
+                lineheight = 50;
+            }
+            [_css setValueWithoutUpdateCSS:@(lineheight) forTag:IUCSSTagLineHeight];
+        }
+    }
+}
+/*FIXME: Structre Error!!!
+
 //updateCSS는 delegate에 화면을 업데이트 하는 함수인데 함수가 다시 _css에 값을 세팅하고 있음.
+//2014.09.30
+updateCSS가 화면을 업데이트 하는 함수라기보다는 현재 css를 적용시킨다는 말이 맞는것같음???
+아니면 구분을 지어야할듯.
+ 
+updateCSS를 updateCanvasForCSS, updateCSSValues로 두개를 호출하게.
+ 
+현재상황에서는 css가 변할때마다 변화해야 하는 값들을 넣어주어야함.
+(media query를 support하기때문에 css값이지만 jquery+property에 의해서 정해지는 값)
+e.g. 만약 css로 옮긴다면)
+->css로 넘어가면 js를 호출할수가 없음(연결선을 빼야함->css.delegate->iu->iu.delegate)까지 연장해야함(가능)
+->iu property를 delegate쪽으로 빼야함.(이것도 struture error)
+ */
 - (void)updateCSS{
     if (self.delegate) {
-        /*
-        if(_lineHeightAuto && self.shouldCompileFontInfo){
-            if(_css.effectiveTagDictionary[IUCSSTagPixelHeight]){
-                
-                NSInteger brCount = [self.delegate countOfLineWithIdentifier:self.htmlID];
-                CGFloat height = [_css.effectiveTagDictionary[IUCSSTagPixelHeight] floatValue];
-                CGFloat fontSize = [_css.effectiveTagDictionary[IUCSSTagFontSize] floatValue];
-                CGFloat lineheight;
-                                
-                if(height < 0.1 || height < fontSize || brCount <0.1 || fontSize <0.1){
-                    lineheight = 1.0;
-                }
-                else{
-                    lineheight = ((height/brCount)/fontSize);
-                }
-                
-                if(brCount > 3 && lineheight > 50){
-                    lineheight = 50;
-                }
-                [_css setValueWithoutUpdateCSS:@(lineheight) forTag:IUCSSTagLineHeight];
-            }
-        }
-        */
+        
+        [self updateCSSValuesBeforeUpdateEditor];
         
         IUCSSCode *cssCode = [self.project.compiler cssCodeForIU:self];
         NSDictionary *dictionaryWithIdentifier = [cssCode stringTagDictionaryWithIdentifier:(int)_css.editViewPort];
@@ -924,12 +939,40 @@
     [_css setValueWithoutUpdateCSS:@(y) forTag:IUCSSTagPixelY];
 }
 
+- (void)setPercentFrame:(NSRect)frame{
+    CGFloat x = frame.origin.x;
+    CGFloat xExist =[_css.effectiveTagDictionary[IUCSSTagPercentX] floatValue];
+    if (x != xExist) {
+        [_css setValueWithoutUpdateCSS:@(frame.origin.x) forTag:IUCSSTagPercentX];
+    }
+    if (frame.origin.x != [_css.effectiveTagDictionary[IUCSSTagPercentY] floatValue]) {
+        [_css setValueWithoutUpdateCSS:@(frame.origin.y) forTag:IUCSSTagPercentY];
+    }
+    if (frame.origin.x != [_css.effectiveTagDictionary[IUCSSTagPercentHeight] floatValue]) {
+        [_css setValueWithoutUpdateCSS:@(frame.size.height) forTag:IUCSSTagPercentHeight];
+    }
+    if (frame.origin.x != [_css.effectiveTagDictionary[IUCSSTagPercentWidth] floatValue]) {
+        [_css setValueWithoutUpdateCSS:@(frame.size.width) forTag:IUCSSTagPercentWidth];
+    }
+}
+
+- (void)setPixelFrame:(NSRect)frame{
+    [_css setValueWithoutUpdateCSS:@(frame.origin.x) forTag:IUCSSTagPixelX];
+    [_css setValueWithoutUpdateCSS:@(frame.origin.y) forTag:IUCSSTagPixelY];
+    [_css setValueWithoutUpdateCSS:@(frame.size.height) forTag:IUCSSTagPixelHeight];
+    [_css setValueWithoutUpdateCSS:@(frame.size.width) forTag:IUCSSTagPixelWidth];
+}
+
 -(BOOL)percentUnitAtCSSTag:(IUCSSTag)tag{
     BOOL unit = [_css.effectiveTagDictionary[tag] boolValue];
     return unit;
 }
 
 #pragma mark move by drag & drop
+
+
+
+
 /*
  drag 중간의 diff size로 하면 css에 의한 오차가 생김.
  drag session이 시작될때부터 위치에서의 diff size로 계산해야 오차가 발생 안함.
