@@ -60,7 +60,7 @@
     NSMutableArray *fontArray = [NSMutableArray array];
     
     
-    NSString *fontName = [self.css valueForKeyPath:[@"assembledTagDictionary" stringByAppendingPathExtension:IUCSSTagFontName]];
+    NSString *fontName = [self.css valueForKeyPath:[@"effectiveTagDictionary" stringByAppendingPathExtension:IUCSSTagFontName]];
     if([fontArray containsString:fontName] == NO){
         [fontArray addObject:fontName];
     }
@@ -103,7 +103,7 @@
 }
 
 - (void)updateTextCSS:(IUCSS *)textCSS identifier:(NSString *)identifier{
-    NSString *cssStr = [self.project.compiler fontCSSContentFromAttributes:textCSS.assembledTagDictionary];
+    NSString *cssStr = [self.project.compiler fontCSSContentFromAttributes:textCSS.effectiveTagDictionary];
     NSString *textIdentifier = [NSString stringWithFormat:@".%@", identifier];
     [self.delegate IUClassIdentifier:textIdentifier CSSUpdated:cssStr forWidth:textCSS.editViewPort];
 }

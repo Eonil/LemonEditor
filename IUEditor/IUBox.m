@@ -96,7 +96,7 @@
         }
         
         if(IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_FONTFIX, self.project.IUProjectVersion)){
-            NSMutableDictionary *dict = _css.assembledTagDictionary;
+            NSMutableDictionary *dict = _css.effectiveTagDictionary;
             if(dict[IUCSSTagFontWeight]){
                 BOOL bold = [dict[IUCSSTagFontWeight] boolValue];
                 [_css eradicateTag:IUCSSTagFontWeight];
@@ -452,10 +452,10 @@
 
 - (void)setImageName:(NSString *)imageName{
  
-    NSString *currentImage = _css.assembledTagDictionary[IUCSSTagImage];
+    NSString *currentImage = _css.effectiveTagDictionary[IUCSSTagImage];
     if([currentImage isEqualToString:imageName] == NO){
         
-        [[[self undoManager] prepareWithInvocationTarget:self] setImageName:_css.assembledTagDictionary[IUCSSTagImage]];
+        [[[self undoManager] prepareWithInvocationTarget:self] setImageName:_css.effectiveTagDictionary[IUCSSTagImage]];
         
         [self willChangeValueForKey:@"imageName"];
         [_css setValue:imageName forTag:IUCSSTagImage];
@@ -463,7 +463,7 @@
     }
 }
 - (NSString *)imageName{
-    return _css.assembledTagDictionary[IUCSSTagImage];
+    return _css.effectiveTagDictionary[IUCSSTagImage];
 }
 
 
@@ -622,11 +622,11 @@
         
         if(_lineHeightAuto && self.shouldCompileFontInfo){
             
-            if(_css.assembledTagDictionary[IUCSSTagPixelHeight]){
+            if(_css.effectiveTagDictionary[IUCSSTagPixelHeight]){
                 
                 NSInteger brCount = [self.delegate countOfLineWithIdentifier:self.htmlID];
-                CGFloat height = [_css.assembledTagDictionary[IUCSSTagPixelHeight] floatValue];
-                CGFloat fontSize = [_css.assembledTagDictionary[IUCSSTagFontSize] floatValue];
+                CGFloat height = [_css.effectiveTagDictionary[IUCSSTagPixelHeight] floatValue];
+                CGFloat fontSize = [_css.effectiveTagDictionary[IUCSSTagFontSize] floatValue];
                 CGFloat lineheight;
                                 
                 if(height < 0.1 || height < fontSize || brCount <0.1 || fontSize <0.1){
@@ -929,17 +929,17 @@
 
 - (void)setPercentFrame:(NSRect)frame{
     CGFloat x = frame.origin.x;
-    CGFloat xExist =[_css.assembledTagDictionary[IUCSSTagPercentX] floatValue];
+    CGFloat xExist =[_css.effectiveTagDictionary[IUCSSTagPercentX] floatValue];
     if (x != xExist) {
         [_css setValueWithoutUpdateCSS:@(frame.origin.x) forTag:IUCSSTagPercentX];
     }
-    if (frame.origin.x != [_css.assembledTagDictionary[IUCSSTagPercentY] floatValue]) {
+    if (frame.origin.x != [_css.effectiveTagDictionary[IUCSSTagPercentY] floatValue]) {
         [_css setValueWithoutUpdateCSS:@(frame.origin.y) forTag:IUCSSTagPercentY];
     }
-    if (frame.origin.x != [_css.assembledTagDictionary[IUCSSTagPercentHeight] floatValue]) {
+    if (frame.origin.x != [_css.effectiveTagDictionary[IUCSSTagPercentHeight] floatValue]) {
         [_css setValueWithoutUpdateCSS:@(frame.size.height) forTag:IUCSSTagPercentHeight];
     }
-    if (frame.origin.x != [_css.assembledTagDictionary[IUCSSTagPercentWidth] floatValue]) {
+    if (frame.origin.x != [_css.effectiveTagDictionary[IUCSSTagPercentWidth] floatValue]) {
         [_css setValueWithoutUpdateCSS:@(frame.size.width) forTag:IUCSSTagPercentWidth];
     }
 }
@@ -952,7 +952,7 @@
 }
 
 -(BOOL)percentUnitAtCSSTag:(IUCSSTag)tag{
-    BOOL unit = [_css.assembledTagDictionary[tag] boolValue];
+    BOOL unit = [_css.effectiveTagDictionary[tag] boolValue];
     return unit;
 }
 
@@ -968,10 +968,10 @@
  */
 
 - (NSPoint)currentPosition{
-    NSInteger currentX = [_css.assembledTagDictionary[IUCSSTagPixelX] integerValue];
+    NSInteger currentX = [_css.effectiveTagDictionary[IUCSSTagPixelX] integerValue];
     NSInteger currentY = 0;
-    if([_css.assembledTagDictionary objectForKey:IUCSSTagPixelY]){
-        currentY = [_css.assembledTagDictionary[IUCSSTagPixelY] integerValue];
+    if([_css.effectiveTagDictionary objectForKey:IUCSSTagPixelY]){
+        currentY = [_css.effectiveTagDictionary[IUCSSTagPixelY] integerValue];
     }
     else if(self.positionType == IUPositionTypeRelative || self.positionType == IUPositionTypeFloatRight ||
             self.positionType == IUPositionTypeFloatLeft){
@@ -983,24 +983,24 @@
 - (NSPoint)currentPercentPosition{
     NSInteger currentX = 0;
     NSInteger currentY = 0;
-    if([_css.assembledTagDictionary objectForKey:IUCSSTagPercentX]){
-        currentX = [_css.assembledTagDictionary[IUCSSTagPercentX] integerValue];
+    if([_css.effectiveTagDictionary objectForKey:IUCSSTagPercentX]){
+        currentX = [_css.effectiveTagDictionary[IUCSSTagPercentX] integerValue];
     }
-    if([_css.assembledTagDictionary objectForKey:IUCSSTagPercentY]){
-        currentY = [_css.assembledTagDictionary[IUCSSTagPercentY] integerValue];
+    if([_css.effectiveTagDictionary objectForKey:IUCSSTagPercentY]){
+        currentY = [_css.effectiveTagDictionary[IUCSSTagPercentY] integerValue];
     }
     return NSMakePoint(currentX, currentY);
 }
 - (NSSize)currentSize{
-    NSInteger currentWidth = [_css.assembledTagDictionary[IUCSSTagPixelWidth] integerValue];
-    NSInteger currentHeight = [_css.assembledTagDictionary[IUCSSTagPixelHeight] integerValue];
+    NSInteger currentWidth = [_css.effectiveTagDictionary[IUCSSTagPixelWidth] integerValue];
+    NSInteger currentHeight = [_css.effectiveTagDictionary[IUCSSTagPixelHeight] integerValue];
     
     return NSMakeSize(currentWidth, currentHeight);
 }
 
 - (NSSize)currentPercentSize{
-    NSInteger currentPWidth = [_css.assembledTagDictionary[IUCSSTagPercentWidth] floatValue];
-    NSInteger currentPHeight = [_css.assembledTagDictionary[IUCSSTagPercentHeight] floatValue];
+    NSInteger currentPWidth = [_css.effectiveTagDictionary[IUCSSTagPercentWidth] floatValue];
+    NSInteger currentPHeight = [_css.effectiveTagDictionary[IUCSSTagPercentHeight] floatValue];
     
     return NSMakeSize(currentPWidth, currentPHeight);
 }
@@ -1008,31 +1008,31 @@
     
     undoFrameDict = [NSMutableDictionary dictionary];
     
-    if(_css.assembledTagDictionary[IUCSSTagPixelX]){
-        undoFrameDict[IUCSSTagPixelX] = _css.assembledTagDictionary[IUCSSTagPixelX];
+    if(_css.effectiveTagDictionary[IUCSSTagPixelX]){
+        undoFrameDict[IUCSSTagPixelX] = _css.effectiveTagDictionary[IUCSSTagPixelX];
     }
-    if(_css.assembledTagDictionary[IUCSSTagPixelY]){
-        undoFrameDict[IUCSSTagPixelY] = _css.assembledTagDictionary[IUCSSTagPixelY];
+    if(_css.effectiveTagDictionary[IUCSSTagPixelY]){
+        undoFrameDict[IUCSSTagPixelY] = _css.effectiveTagDictionary[IUCSSTagPixelY];
     }
-    if(_css.assembledTagDictionary[IUCSSTagPixelWidth]){
-        undoFrameDict[IUCSSTagPixelWidth] = _css.assembledTagDictionary[IUCSSTagPixelWidth];
+    if(_css.effectiveTagDictionary[IUCSSTagPixelWidth]){
+        undoFrameDict[IUCSSTagPixelWidth] = _css.effectiveTagDictionary[IUCSSTagPixelWidth];
     }
-    if(_css.assembledTagDictionary[IUCSSTagPixelHeight]){
-        undoFrameDict[IUCSSTagPixelHeight] = _css.assembledTagDictionary[IUCSSTagPixelHeight];
+    if(_css.effectiveTagDictionary[IUCSSTagPixelHeight]){
+        undoFrameDict[IUCSSTagPixelHeight] = _css.effectiveTagDictionary[IUCSSTagPixelHeight];
     }
 
     
-    if(_css.assembledTagDictionary[IUCSSTagPercentX]){
-        undoFrameDict[IUCSSTagPercentX] = _css.assembledTagDictionary[IUCSSTagPercentX];
+    if(_css.effectiveTagDictionary[IUCSSTagPercentX]){
+        undoFrameDict[IUCSSTagPercentX] = _css.effectiveTagDictionary[IUCSSTagPercentX];
     }
-    if(_css.assembledTagDictionary[IUCSSTagPercentY]){
-        undoFrameDict[IUCSSTagPercentY] = _css.assembledTagDictionary[IUCSSTagPercentY];
+    if(_css.effectiveTagDictionary[IUCSSTagPercentY]){
+        undoFrameDict[IUCSSTagPercentY] = _css.effectiveTagDictionary[IUCSSTagPercentY];
     }
-    if(_css.assembledTagDictionary[IUCSSTagPercentWidth]){
-        undoFrameDict[IUCSSTagPercentWidth] = _css.assembledTagDictionary[IUCSSTagPercentWidth];
+    if(_css.effectiveTagDictionary[IUCSSTagPercentWidth]){
+        undoFrameDict[IUCSSTagPercentWidth] = _css.effectiveTagDictionary[IUCSSTagPercentWidth];
     }
-    if(_css.assembledTagDictionary[IUCSSTagPercentHeight]){
-        undoFrameDict[IUCSSTagPercentHeight] = _css.assembledTagDictionary[IUCSSTagPercentHeight];
+    if(_css.effectiveTagDictionary[IUCSSTagPercentHeight]){
+        undoFrameDict[IUCSSTagPercentHeight] = _css.effectiveTagDictionary[IUCSSTagPercentHeight];
     }
 
     originalSize = [self currentSize];
@@ -1051,31 +1051,31 @@
 - (void)undoFrameWithDictionary:(NSMutableDictionary *)dictionary{
     NSMutableDictionary *currentFrameDict = [NSMutableDictionary dictionary];
     
-    if(_css.assembledTagDictionary[IUCSSTagPixelX]){
-        currentFrameDict[IUCSSTagPixelX] = _css.assembledTagDictionary[IUCSSTagPixelX];
+    if(_css.effectiveTagDictionary[IUCSSTagPixelX]){
+        currentFrameDict[IUCSSTagPixelX] = _css.effectiveTagDictionary[IUCSSTagPixelX];
     }
-    if(_css.assembledTagDictionary[IUCSSTagPixelY]){
-        currentFrameDict[IUCSSTagPixelY] = _css.assembledTagDictionary[IUCSSTagPixelY];
+    if(_css.effectiveTagDictionary[IUCSSTagPixelY]){
+        currentFrameDict[IUCSSTagPixelY] = _css.effectiveTagDictionary[IUCSSTagPixelY];
     }
-    if(_css.assembledTagDictionary[IUCSSTagPixelWidth]){
-        currentFrameDict[IUCSSTagPixelWidth] = _css.assembledTagDictionary[IUCSSTagPixelWidth];
+    if(_css.effectiveTagDictionary[IUCSSTagPixelWidth]){
+        currentFrameDict[IUCSSTagPixelWidth] = _css.effectiveTagDictionary[IUCSSTagPixelWidth];
     }
-    if(_css.assembledTagDictionary[IUCSSTagPixelHeight]){
-        currentFrameDict[IUCSSTagPixelHeight] = _css.assembledTagDictionary[IUCSSTagPixelHeight];
+    if(_css.effectiveTagDictionary[IUCSSTagPixelHeight]){
+        currentFrameDict[IUCSSTagPixelHeight] = _css.effectiveTagDictionary[IUCSSTagPixelHeight];
     }
     
     
-    if(_css.assembledTagDictionary[IUCSSTagPercentX]){
-        currentFrameDict[IUCSSTagPercentX] = _css.assembledTagDictionary[IUCSSTagPercentX];
+    if(_css.effectiveTagDictionary[IUCSSTagPercentX]){
+        currentFrameDict[IUCSSTagPercentX] = _css.effectiveTagDictionary[IUCSSTagPercentX];
     }
-    if(_css.assembledTagDictionary[IUCSSTagPercentY]){
-        currentFrameDict[IUCSSTagPercentY] = _css.assembledTagDictionary[IUCSSTagPercentY];
+    if(_css.effectiveTagDictionary[IUCSSTagPercentY]){
+        currentFrameDict[IUCSSTagPercentY] = _css.effectiveTagDictionary[IUCSSTagPercentY];
     }
-    if(_css.assembledTagDictionary[IUCSSTagPercentWidth]){
-        currentFrameDict[IUCSSTagPercentWidth] = _css.assembledTagDictionary[IUCSSTagPercentWidth];
+    if(_css.effectiveTagDictionary[IUCSSTagPercentWidth]){
+        currentFrameDict[IUCSSTagPercentWidth] = _css.effectiveTagDictionary[IUCSSTagPercentWidth];
     }
-    if(_css.assembledTagDictionary[IUCSSTagPercentHeight]){
-        currentFrameDict[IUCSSTagPercentHeight] = _css.assembledTagDictionary[IUCSSTagPercentHeight];
+    if(_css.effectiveTagDictionary[IUCSSTagPercentHeight]){
+        currentFrameDict[IUCSSTagPercentHeight] = _css.effectiveTagDictionary[IUCSSTagPercentHeight];
     }
     
     [[self.undoManager prepareWithInvocationTarget:self] undoFrameWithDictionary:currentFrameDict];

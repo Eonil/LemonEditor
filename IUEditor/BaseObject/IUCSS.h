@@ -54,5 +54,5 @@
 - (void)copySizeFrom:(NSInteger)fromWidth to:(NSInteger)toWidth;
 
 //observable.
-@property (readonly) NSMutableDictionary *assembledTagDictionary;
+@property (readonly) NSDictionary *effectiveTagDictionary;
 @end

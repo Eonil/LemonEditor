@@ -522,9 +522,9 @@
         //not text - text field / text view
         [_fontStyleB setEnabled:NO];
         
-        [_fontB bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontName] options:IUBindingDictNotRaisesApplicable];
-        [_fontSizeComboBox bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontSize] options:IUBindingDictNotRaisesApplicable];
-        [_fontColorWell bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.assembledTagDictionary." stringByAppendingString:IUCSSTagFontColor] options:IUBindingDictNotRaisesApplicable];
+        [_fontB bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.effectiveTagDictionary." stringByAppendingString:IUCSSTagFontName] options:IUBindingDictNotRaisesApplicable];
+        [_fontSizeComboBox bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.effectiveTagDictionary." stringByAppendingString:IUCSSTagFontSize] options:IUBindingDictNotRaisesApplicable];
+        [_fontColorWell bind:NSValueBinding toObject:self withKeyPath:[@"self.selection.css.effectiveTagDictionary." stringByAppendingString:IUCSSTagFontColor] options:IUBindingDictNotRaisesApplicable];
         
     }
     
