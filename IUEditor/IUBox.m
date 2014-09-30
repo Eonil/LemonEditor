@@ -525,7 +525,7 @@
         if(nextSize != maxSize){
             //media query 바로 위에 size를 copy함
             // 760이 있을때  750 size 를 copy
-            [_css copySizeFrom:nextSize to:size];
+            [_css copyCSSDictFrom:nextSize to:size];
         }
     }
 
@@ -534,10 +534,10 @@
     //1280으로 그냥 다옮겨가면서 960css 가 망가지게 됨.
     //방지하기 위한 용도
     if(size == maxSize){
-        [_css copyMaxSizeToSize:oldMaxSize];
+        [_css copyCSSMaxViewPortDictTo:oldMaxSize];
     }
     
-    [_css checkSizeDict:size];
+    [_css checkCSSDictForViewport:size];
     [_css setMaxViewPort:maxSize];
     
 }
