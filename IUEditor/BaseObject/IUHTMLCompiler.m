@@ -574,12 +574,57 @@
         }
     }
 
+    [code addCodeLineWithFormat:@"<div %@ >", [self attributeString:attributeDict]];
+
     if(target == IUTargetOutput){
-        [code addCodeWithIndent:[self htmlCodeAsIUHTML:webmovie target:target attributeDict:attributeDict]];
+        if(webmovie.movieType == IUWebMovieTypeVimeo){
+            [code addCodeWithFormat:@"<iframe src=\"http://player.vimeo.com/video/%@?api=1&player_id=%@_vimeo", webmovie.movieID, webmovie.htmlID];
+            
+        }
+        else if (webmovie.movieType == IUWebMovieTypeYoutube){
+            [code addCodeLineWithFormat:@"<object width=\"100%\" height=\"100%\">"];
+            
+            [code addCodeLineWithFormat:@"<param name=\"movie\" value=\"https://youtube.googleapis.com/%@?version=2&fs=1\"</param>", [webmovie.movieLink lastPathComponent]];
+            [code addCodeLineWithFormat:@"<param name=\"allowFullScreen\" value=\"true\"></param>"];
+            [code addCodeLineWithFormat:@"<param name=\"allowScriptAccess\" value=\"always\"></param>"];
+            
+            
+            [code addCodeWithFormat:@"<embed id='%@_youtube'", webmovie.htmlID];
+            [code addCodeWithFormat:@" src=\"http://www.youtube.com/v/%@?version=3&enablejsapi=1", [webmovie.movieLink lastPathComponent]];
+            
+            if([[webmovie.movieLink lastPathComponent] containsString:@"list"]){
+                [code addString:@"&listType=playlist"];
+            }
+            [code addCodeWithFormat:@"&autohide=1&playerapiid=%@_youtube", webmovie.htmlID];
+        }
+        
+        if(webmovie.movieType == IUWebMovieTypeYoutube || webmovie.movieType == IUWebMovieTypeVimeo){
+            
+            if(webmovie.playType == IUWebMoviePlayTypeAutoplay){
+                [code addString:@"&autoplay=1"];
+            }
+            if(webmovie.enableLoop){
+                [code addString:@"&loop=1"];
+            }
+            [code addString:@"\""];
+            //end of video src embeded
+            
+            [code addString:@" webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder=\"0\" width=\"100%\" height=\"100%\" "];
+            
+            if (webmovie.movieType == IUWebMovieTypeVimeo){
+                [code addString:@"></iframe>"];
+            }
+            else if(webmovie.movieType == IUWebMovieTypeYoutube){
+                [code addString:@"type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\""];
+                [code addString:@"></embed>"];
+                [code addString:@"</object>"];
+            }
+
+
+        }
     }
     else if(target == IUTargetEditor){
         
-        [code addCodeLineWithFormat:@"<div %@ >", [self attributeString:attributeDict]];
         NSString *thumbnailPath;
         if(webmovie.thumbnail){
             thumbnailPath = [NSString stringWithString:webmovie.thumbnailPath];
@@ -596,10 +641,12 @@
          background-repeat:no-repeat; \
          background-position:center; \
          position:absolute;  width:100%%; height:100%%; \"></div>", videoPlayImagePath];
-        [code addCodeLine:@"</div>"];
 
     }
     
+    
+    [code addCodeLine:@"</div>"];
+
 
     
     return code;
@@ -734,6 +781,7 @@
     
     return code;
 }
+
 
 - (JDCode *)htmlCodeAsIUGoogleMap:(IUGoogleMap *)map target:(IUTarget)target attributeDict:(NSMutableDictionary *)attributeDict{
     JDCode *code = [[JDCode alloc] init];

@@ -75,7 +75,7 @@
 
 - (void)connectWithEditor{
     [super connectWithEditor];
-    [self updateWebMovieSource];
+    [self classifyWebMovieSource];
 }
 
 #pragma mark - should setting
@@ -93,7 +93,7 @@
     [[self.undoManager prepareWithInvocationTarget:self] setMovieLink:_movieLink];
     _movieLink = movieLink;
     if(self.isConnectedWithEditor){
-        [self updateWebMovieSource];
+        [self classifyWebMovieSource];
     }
 }
 
@@ -102,7 +102,7 @@
         [[self.undoManager prepareWithInvocationTarget:self] setPlayType:_playType];
         _playType = playType;
     }
-    [self updateWebMovieSource];
+    [self classifyWebMovieSource];
 }
 
 - (void)setEnableLoop:(BOOL)enableLoop{
@@ -110,13 +110,11 @@
         [[self.undoManager prepareWithInvocationTarget:self] setEnableLoop:_enableLoop];
         _enableLoop = enableLoop;
     }
-    [self updateWebMovieSource];
+    [self classifyWebMovieSource];
 }
 
 #pragma mark - webmovie
-- (void)updateWebMovieSource{
-    NSMutableString *movieCode = [NSMutableString string];
-    NSMutableString *attribute = [NSMutableString string];
+- (void)classifyWebMovieSource{
     
     //vimeo
     if([_movieLink containsString:@"vimeo"]){
@@ -124,10 +122,6 @@
         //<iframe src="//player.vimeo.com/video/VIDEO_ID" width="WIDTH" height="HEIGHT" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
         _movieID = [[_movieLink lastPathComponent] substringWithRange:NSMakeRange(0, 9)];
-        
-        
-        [movieCode appendFormat:@"<iframe src=\"http://player.vimeo.com/video/%@?api=1&player_id=%@_vimeo", _movieID, self.htmlID];
-        [attribute appendString:@" webkitallowfullscreen mozallowfullscreen"];
 
         _movieType = IUWebMovieTypeVimeo;
     }
@@ -136,53 +130,15 @@
         //http://youtu.be/EM06XSULpgc?list=RDEM06XSULpgc
         //<iframe width="560" height="315" src="//www.youtube.com/embed/Sl-BDzmORX0?list=RDHCzBybJtuKWjA" frameborder="0" allowfullscreen></iframe>
         _movieID = [[_movieLink lastPathComponent] substringWithRange:NSMakeRange(0, 11)];
-        
-        [movieCode appendString:@"<object width=\"100%\" height=\"100%\">"];
-        
-        [movieCode appendFormat:@"<param name=\"movie\" value=\"https://youtube.googleapis.com/%@?version=2&fs=1\"</param>", [_movieLink lastPathComponent]];
-        [movieCode appendString:@"<param name=\"allowFullScreen\" value=\"true\"></param>"];
-        [movieCode appendString:@"<param name=\"allowScriptAccess\" value=\"always\"></param>"];
-        
-        
-        [movieCode appendFormat:@"<embed id='%@_youtube'", self.htmlID];
-        [movieCode appendFormat:@" src=\"http://www.youtube.com/v/%@?version=3&enablejsapi=1", [_movieLink lastPathComponent]];
-        if([[_movieLink lastPathComponent] containsString:@"list"]){
-            [movieCode appendString:@"&listType=playlist"];
-        }
-        [movieCode appendFormat:@"&autohide=1&playerapiid=%@_youtube", self.htmlID];
         _movieType = IUWebMovieTypeYoutube;
 
     }
     else{
         _movieType = IUWebMovieTypeUnknown;
-        self.innerHTML = @"";
         return;
     }
     
-    if(_playType == IUWebMoviePlayTypeAutoplay){
-        [movieCode appendString:@"&autoplay=1"];
-    }
-    if(_enableLoop){
-        [movieCode appendString:@"&loop=1"];
-    }
-    
-    [movieCode appendString:@"\""];
-    
-    [movieCode appendString:attribute];
-    [movieCode appendString:@" allowfullscreen frameborder=\"0\" width=\"100%\" height=\"100%\" "];
-    
-    if(_movieType == IUWebMovieTypeVimeo){
-        [movieCode appendString:@"></iframe>"];
-    }
-    else if(_movieType == IUWebMovieTypeYoutube){
-        [movieCode appendString:@"type=\"application/x-shockwave-flash\" allowscriptaccess=\"always\""];
-        [movieCode appendString:@"></embed>"];
-        [movieCode appendString:@"</object>"];
-
-    }
-    
     [self updateThumbnailOfWebMovie];
-    self.innerHTML = movieCode;
 }
 
 
@@ -206,6 +162,7 @@
         _thumbnailPath = youtubePath;
         _thumbnail = YES;
         
+        [self updateHTML];
     }
     // 2. vimeo
     else if (_movieType == IUWebMovieTypeVimeo){
