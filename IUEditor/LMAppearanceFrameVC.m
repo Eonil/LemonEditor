@@ -233,9 +233,11 @@
                                  [self pathForCSSTag:IUCSSTagPercentX],
                                  [self pathForCSSTag:IUCSSTagPercentY],
                                  [self pathForCSSTag:IUCSSTagPercentWidth],
-                                 [self pathForCSSTag:IUCSSTagPercentHeight]
+                                 [self pathForCSSTag:IUCSSTagPercentHeight],
+                                 [self pathForCSSTag:IUCSSTagMinPixelHeight],
+                                 [self pathForCSSTag:IUCSSTagMinPixelWidth],
                                  ];
-    
+        
     [self removeObserver:self forKeyPaths:removeObservers];
     [JDLogUtil log:IULogDealloc string:@"LMAppearanceFrameVC"];
 }

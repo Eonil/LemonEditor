@@ -828,13 +828,11 @@
             [code addCodeLineWithFormat:@"<a href=/%@/{{%@_prev}}><li>&#60;</li></a>",linkStr, pageLinkSet.pageCountVariable];
             [code addCodeLine:@"{% endif %}"];
             [code addCodeLineWithFormat:@"        {%% for i in %@ %%}", pageLinkSet.pageCountVariable];
+              
+            [code addCodeLineWithFormat:@"        <a href=/%@/{{i}}>", linkStr];
+            [code addCodeLine:@"            <li> {{i}} </li>"];
+            [code addCodeLine:@"        </a>"];
             
-            
-            if(linkStr){
-                [code addCodeLineWithFormat:@"        <a href=/%@/{{i}}>", linkStr];
-                [code addCodeLine:@"            <li> {{i}} </li>"];
-                [code addCodeLine:@"        </a>"];
-            }
             [code addCodeLine:@"        {% endfor %}"];
             [code addCodeLineWithFormat:@"{%%if %@_next%%}", pageLinkSet.pageCountVariable];
             [code addCodeLineWithFormat:@"<a href=/%@/{{%@_next}}><li>&#62;</li></a>",linkStr, pageLinkSet.pageCountVariable];
