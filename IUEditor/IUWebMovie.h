@@ -21,7 +21,7 @@ typedef enum{
     
 }IUWebMovieType;
 
-@interface IUWebMovie : IUHTML
+@interface IUWebMovie : IUBox
 
 @property BOOL      thumbnail;
 @property NSString *thumbnailID;
