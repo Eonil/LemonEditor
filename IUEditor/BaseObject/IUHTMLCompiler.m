@@ -814,31 +814,42 @@
 - (JDCode *)htmlCodeAsPGPageLinkSet:(PGPageLinkSet *)pageLinkSet target:(IUTarget)target attributeDict:(NSMutableDictionary *)attributeDict{
     JDCode *code = [[JDCode alloc] init];
     [code addCodeLineWithFormat:@"<div %@>", [self attributeString:attributeDict]];
+    
     if(target == IUTargetOutput){
-        [code addCodeLine:@"    <div>"];
-        [code addCodeLine:@"    <ul>"];
-        [code addCodeLineWithFormat:@"        {%% for i in %@ %%}", pageLinkSet.pageCountVariable];
-        
         NSString *linkStr;
         if([pageLinkSet.link isKindOfClass:[IUBox class]]){
             linkStr = [((IUBox *)pageLinkSet.link).htmlID lowercaseString];
         }
+        
         if(linkStr){
-            [code addCodeLineWithFormat:@"        <a href=/%@/{{i}}>", linkStr];
-            [code addCodeLine:@"            <li> {{i}} </li>"];
-            [code addCodeLine:@"        </a>"];
+            [code addCodeLine:@"    <div>"];
+            [code addCodeLine:@"    <ul>"];
+            [code addCodeLineWithFormat:@"{%%if %@_prev%%}", pageLinkSet.pageCountVariable];
+            [code addCodeLineWithFormat:@"<a href=/%@/{{%@_prev}}><li>&#60;</li></a>",linkStr, pageLinkSet.pageCountVariable];
+            [code addCodeLine:@"{% endif %}"];
+            [code addCodeLineWithFormat:@"        {%% for i in %@ %%}", pageLinkSet.pageCountVariable];
+            
+            
+            if(linkStr){
+                [code addCodeLineWithFormat:@"        <a href=/%@/{{i}}>", linkStr];
+                [code addCodeLine:@"            <li> {{i}} </li>"];
+                [code addCodeLine:@"        </a>"];
+            }
+            [code addCodeLine:@"        {% endfor %}"];
+            [code addCodeLineWithFormat:@"{%%if %@_next%%}", pageLinkSet.pageCountVariable];
+            [code addCodeLineWithFormat:@"<a href=/%@/{{%@_next}}><li>&#62;</li></a>",linkStr, pageLinkSet.pageCountVariable];
+            [code addCodeLine:@"{% endif %}"];
+            [code addCodeLine:@"    </ul>"];
+            [code addCodeLine:@"    </div>"];
         }
-        [code addCodeLine:@"        {% endfor %}"];
-        [code addCodeLine:@"    </ul>"];
-        [code addCodeLine:@"    </div>"];
     }
     else if(target == IUTargetEditor){
         
         [code addCodeLine:@"    <div class='IUPageLinkSetClip'>"];
         [code addCodeLine:@"       <ul>"];
-        [code addCodeLine:@"           <a><li>1</li></a><a><li>2</li></a><a><li>3</li></a>"];
+        [code addCodeLine:@"           <a><li>&#60;</li></a><a><li>1</li></a><a><li>2</li></a><a><li>3</li></a><a><li>&#62;</li></a>"];
+        [code addCodeLine:@"       </ul>"];
         [code addCodeLine:@"    </div>"];
-
     }
     
     [code addCodeLine:@"</div>"];
