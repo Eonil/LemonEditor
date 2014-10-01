@@ -691,13 +691,43 @@
 
 - (JDCode *)htmlCodeAsIUTweetButton:(IUTweetButton *)tweet target:(IUTarget)target attributeDict:(NSMutableDictionary *)attributeDict{
     JDCode *code = [[JDCode alloc] init];
+    
+    [code addCodeLineWithFormat:@"<div %@ >", [self attributeString:attributeDict]];
+
     if(target == IUTargetOutput){
-        code = [self htmlCodeAsIUHTML:tweet target:target attributeDict:attributeDict];
+        
+        [code addString:@"<a href=\"https://twitter.com/share\" class=\"twitter-share-button\""];
+        if(tweet.tweetText){
+            [code addCodeWithFormat:@" data-text=\"%@\"", tweet.tweetText];
+        }
+        if(tweet.urlToTweet){
+            [code addCodeWithFormat:@" data-url=\"%@\"", tweet.urlToTweet];
+        }
+        
+        NSString *type;
+        switch (tweet.countType) {
+            case IUTweetButtonCountTypeVertical:
+                type = @"vertical";
+                break;
+            case IUTweetButtonCountTypeHorizontal:
+                type = @"horizontal";
+                break;
+            case IUTweetButtonCountTypeNone:
+                type = @"none";
+            default:
+                break;
+        }
+        
+        [code addCodeWithFormat:@" data-count=\"%@\"", type];
+        if(tweet.sizeType == IUTweetButtonSizeTypeLarge){
+            [code addCodeWithFormat:@" data-size=\"large\""];
+        }
+        
+        [code addCodeLine:@">Tweet</a>"];
         
     }
     else if( target == IUTargetEditor ){
         
-        [code addCodeLineWithFormat:@"<div %@ >", [self attributeString:attributeDict]];
         
         NSString *imageName;
         switch (tweet.countType) {
@@ -725,8 +755,10 @@
         NSString *innerHTML = [NSString stringWithFormat:@"<img src=\"%@\" style=\"width:100%%; height:100%%\"></imbc>", imagePath];
         
         [code addCodeLine:innerHTML];
-        [code addCodeLine:@"</div>"];
     }
+    
+    [code addCodeLine:@"</div>"];
+
     return code;
 }
 

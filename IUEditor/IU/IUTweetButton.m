@@ -20,8 +20,6 @@
     self = [super initWithProject:project options:options];
     if(self){
         [[self undoManager] disableUndoRegistration];
-        
-        self.innerHTML = @"";
         self.sizeType = IUTweetButtonSizeTypeMeidum;
         self.countType = IUTweetButtonCountTypeNone;
         
@@ -108,8 +106,8 @@
     }
     [[self.undoManager prepareWithInvocationTarget:self] setCountType:_countType];
     _countType = countType;
-    [self updateHTML];
     [self updateSize];
+    [self updateHTML];
 }
 
 
@@ -170,45 +168,6 @@
     [self updateCSS];
     
 }
-
-/** output에서만 사용(js 사용 문제)
- */
-- (NSString *)innerHTML{
-    NSMutableString *code = [NSMutableString string];
-    
-    [code appendString:@"<a href=\"https://twitter.com/share\" class=\"twitter-share-button\""];
-    if(_tweetText){
-        [code appendFormat:@" data-text=\"%@\"", _tweetText];
-    }
-    if(_urlToTweet){
-        [code appendFormat:@" data-url=\"%@\"", _urlToTweet];
-    }
-    
-    NSString *type;
-    switch (_countType) {
-        case IUTweetButtonCountTypeVertical:
-            type = @"vertical";
-            break;
-        case IUTweetButtonCountTypeHorizontal:
-            type = @"horizontal";
-            break;
-        case IUTweetButtonCountTypeNone:
-            type = @"none";
-        default:
-            break;
-    }
-    
-    [code appendFormat:@" data-count=\"%@\"", type];
-    if(_sizeType == IUTweetButtonSizeTypeLarge){
-        [code appendFormat:@" data-size=\"large\""];
-    }
-    
-    [code appendString:@">Tweet</a>"];
-    
- 
-    return code;
-}
-
 
 - (BOOL)canChangeWidthByUserInput{
     return NO;

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014년 JDLab. All rights reserved.
 //
 
-#import "IUHTML.h"
+#import "IUBox.h"
 
 typedef enum{
     IUTweetButtonCountTypeNone,
@@ -20,7 +20,7 @@ typedef enum{
     
 }IUTweetButtonSizeType;
 
-@interface IUTweetButton : IUHTML
+@interface IUTweetButton : IUBox
 
 @property (nonatomic) NSString *urlToTweet, *tweetText;
 @property (nonatomic) IUTweetButtonCountType countType;
