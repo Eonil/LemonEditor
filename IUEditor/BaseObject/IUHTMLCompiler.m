@@ -837,7 +837,6 @@
         [code addCodeLine:@"    <div class='IUPageLinkSetClip'>"];
         [code addCodeLine:@"       <ul>"];
         [code addCodeLine:@"           <a><li>1</li></a><a><li>2</li></a><a><li>3</li></a>"];
-        [code addCodeLine:@"       </div>"];
         [code addCodeLine:@"    </div>"];
 
     }
