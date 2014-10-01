@@ -671,21 +671,24 @@
 - (JDCode *)htmlCodeAsIUFBLike:(IUFBLike *)fblike target:(IUTarget)target attributeDict:(NSMutableDictionary *)attributeDict{
     JDCode *code = [[JDCode alloc] init];
     
+    
+    [code addCodeLineWithFormat:@"<div %@ >", [self attributeString:attributeDict]];
+
     if(target == IUTargetOutput){
+        
         
         code = [self htmlCodeAsIUHTML:fblike target:target attributeDict:attributeDict];
     }
     else if( target == IUTargetEditor ){
-        [code addCodeLineWithFormat:@"<div %@ >", [self attributeString:attributeDict]];
         
         NSString *fbPath = [[NSBundle mainBundle] pathForResource:@"FBSampleImage" ofType:@"png"];
         NSString *editorHTML = [NSString stringWithFormat:@"<img src=\"%@\" align=\"middle\" style=\"float:left;margin:0 5px 0 0; \" ><p style=\"font-size:11px ; font-family:'Helvetica Neue', Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif\">263,929 people like this. Be the first of your friends.</p>", fbPath];
         
         [code addCodeLine:editorHTML];
-        [code addCodeLine:@"</div>"];
 
     }
     
+    [code addCodeLine:@"</div>"];
     return code;
 }
 
