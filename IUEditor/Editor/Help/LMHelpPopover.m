@@ -34,7 +34,8 @@ static LMHelpPopover *gHelpPopover = nil;
 - (id)init{
     self = [super init];
     if(self){
-        self.appearance = NSPopoverAppearanceHUD;
+        /*FIXME: NSPopoverAppearanceHUD is deprecated */
+        //self.appearance = NSPopoverAppearanceHUD;
         self.animates = YES;
         self.behavior = NSPopoverBehaviorTransient;
         
