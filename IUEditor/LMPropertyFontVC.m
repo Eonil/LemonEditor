@@ -68,12 +68,14 @@
     
     //observing for undo
     observingList = @[
+                      /*
                       [self pathForCSSTag:IUCSSTagFontName],
                       [self pathForCSSTag:IUCSSTagFontWeight],
                       [self pathForCSSTag:IUCSSTagFontItalic],
                       [self pathForCSSTag:IUCSSTagFontDecoration],
                       [self pathForCSSTag:IUCSSTagFontSize],
                       [self pathForCSSTag:IUCSSTagLineHeight],
+                       */
                       [self pathForProperty:@"shouldCompileFontInfo"],
                       @"controller.selectedObjects",
                       ];
@@ -113,19 +115,6 @@
     [self removeObserver:self forKeyPaths:observingList];
 }
 
-/*
-- (BOOL)isSelectedObjectText{
-    BOOL isText = YES;
-    
-    for(IUBox *box in self.controller.selectedObjects){
-        if([box isMemberOfClass:[IUBox class]] == NO){
-            isText = NO;
-            break;
-        }
-    }
-    return isText;
-}
-*/
 /**
  Check Font should be enabled for current IUController selection
  */
@@ -186,26 +175,19 @@
         
         //set font name
         NSString *iuFontName = [self valueForCSSTag:IUCSSTagFontName];
-        if ([iuFontName isKindOfClass:[NSString class]]) {
-            [_fontCB setStringValue:iuFontName];
-        }
-        else {
-            [_fontCB setStringValue:@""];
-        }
-/*
         if(iuFontName == NSMultipleValuesMarker){
             NSString *placeholder = [NSString stringWithValueMarker:NSMultipleValuesMarker];
-            [[_fontB cell] setPlaceholderString:placeholder];
-            [_fontB setStringValue:@""];
+            [[_fontCB cell] setPlaceholderString:placeholder];
+            [_fontCB setStringValue:@""];
         }
         else if(iuFontName != nil){
-            [[_fontB cell] setPlaceholderString:@""];
-            [_fontB setStringValue:iuFontName];
+            [[_fontCB cell] setPlaceholderString:@""];
+            [_fontCB setStringValue:iuFontName];
         }
         else{
-            [_fontB setStringValue:@""];
+            [_fontCB setStringValue:@""];
         }
-        */
+        
         
         //set Font size
         if([self valueForCSSTag:IUCSSTagFontSize] == NSMultipleValuesMarker){
