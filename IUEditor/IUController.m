@@ -306,7 +306,9 @@
         NSMutableArray *retArray = [NSMutableArray array];
         for(IUBox *iu in self.selectedObjects){
             NSString *currentID = [import htmlIDInImport:iu];
-            [retArray addObject:currentID];
+            if(currentID){
+                [retArray addObject:currentID];
+            }
 
         }
         return retArray;
