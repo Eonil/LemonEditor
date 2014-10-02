@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMAppearanceFrameVC">
             <connections>
                 <outlet property="centerBtn" destination="rla-hR-v6O" id="Ig6-pi-4cy"/>
+                <outlet property="hNilBtn" destination="gJL-39-G80" id="Wql-OC-5zg"/>
                 <outlet property="hStepper" destination="Mtu-cf-B1n" id="38F-c7-Nms"/>
                 <outlet property="hTF" destination="KEg-GU-M43" id="og4-MR-soJ"/>
                 <outlet property="hUnitBtn" destination="2id-bU-xHh" id="mhn-5R-Dh6"/>
                 <outlet property="helpMenu" destination="iLy-bj-p0C" id="ikA-xJ-fdH"/>
+                <outlet property="minHNilBtn" destination="wrG-Yo-AoH" id="CLu-Iw-Nfe"/>
                 <outlet property="minHStepper" destination="zak-0j-lDY" id="hf1-fo-B2E"/>
                 <outlet property="minHTF" destination="fe7-vz-Q2Z" id="I4P-xN-vnM"/>
+                <outlet property="minWNilBtn" destination="ug8-az-m9y" id="bdU-1n-5ZL"/>
                 <outlet property="minWStepper" destination="Z5m-J8-vkF" id="LZm-ON-hyi"/>
                 <outlet property="minWTF" destination="IH8-1c-3f7" id="tmQ-Kk-T1L"/>
                 <outlet property="phStepper" destination="1qd-QH-DUM" id="mqH-O4-E5m"/>
@@ -26,19 +29,22 @@
                 <outlet property="pyTF" destination="AJN-a2-BIm" id="s8V-FG-462"/>
                 <outlet property="verticalCenterBtn" destination="PV4-h3-2d7" id="gEN-mp-ZwO"/>
                 <outlet property="view" destination="W2Z-Yo-bpM" id="zqF-ET-qCV"/>
+                <outlet property="wNilBtn" destination="FBR-6t-h4m" id="fBr-8e-azz"/>
                 <outlet property="wStepper" destination="1AX-8F-rIh" id="zEl-79-MWX"/>
                 <outlet property="wTF" destination="dde-if-4FG" id="f9d-yf-Xcp"/>
                 <outlet property="wUnitBtn" destination="bza-57-yAn" id="V3J-Ki-H3E"/>
+                <outlet property="xNilBtn" destination="D5K-nC-v4o" id="F74-mN-0u7"/>
                 <outlet property="xStepper" destination="Uhs-VT-XpO" id="eHn-1O-Gda"/>
                 <outlet property="xTF" destination="7ez-uH-X3R" id="fBE-RN-ePy"/>
                 <outlet property="xUnitBtn" destination="2Ur-uO-dSJ" id="dx5-gQ-85G"/>
+                <outlet property="yNilBtn" destination="y6m-de-Ucg" id="LDA-QK-zbg"/>
                 <outlet property="yStepper" destination="dRI-fw-Uqs" id="Yyo-eq-5ve"/>
                 <outlet property="yTF" destination="yqm-TH-YmF" id="gba-QO-fXT"/>
                 <outlet property="yUnitBtn" destination="NbJ-WM-MfU" id="a0L-XU-xR3"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <userDefaultsController representsSharedInstance="YES" id="FBy-kt-7By"/>
         <customView identifier="bgframe" id="W2Z-Yo-bpM" userLabel="Frame" customClass="JDOutlineCellView">
             <rect key="frame" x="0.0" y="0.0" width="283" height="150"/>
@@ -59,7 +65,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z07-rg-vmx">
-                                <rect key="frame" x="61" y="125" width="11" height="14"/>
+                                <rect key="frame" x="44" y="125" width="11" height="14"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="X" id="9fl-JO-IOE">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -67,7 +73,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ez-uH-X3R" userLabel="xTF">
-                                <rect key="frame" x="76" y="123" width="46" height="18"/>
+                                <rect key="frame" x="59" y="123" width="46" height="18"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="fGL-LL-81m">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -79,7 +85,7 @@
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ze4-DS-FcM" userLabel="pxTF">
-                                <rect key="frame" x="76" y="123" width="46" height="18"/>
+                                <rect key="frame" x="59" y="123" width="46" height="18"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="kbD-YD-TjZ">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -91,25 +97,19 @@
                                 </connections>
                             </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Ur-uO-dSJ">
-                                <rect key="frame" x="121" y="123" width="22" height="18"/>
+                                <rect key="frame" x="104" y="123" width="22" height="18"/>
                                 <buttonCell key="cell" type="square" title="px" alternateTitle="%" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Tl4-qk-CVj">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
                                 </buttonCell>
                             </button>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uhs-VT-XpO" userLabel="StepperX">
-                                <rect key="frame" x="143" y="124" width="13" height="15"/>
+                                <rect key="frame" x="126" y="124" width="13" height="15"/>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" minValue="-10000" maxValue="10000" id="yiT-2P-4tK"/>
-                                <connections>
-                                    <action selector="clickStepper:" target="-2" id="YPR-Y7-ENC"/>
-                                </connections>
                             </stepper>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hsx-wZ-7Py" userLabel="StepperPX">
-                                <rect key="frame" x="143" y="124" width="13" height="15"/>
+                                <rect key="frame" x="126" y="124" width="13" height="15"/>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="10000" id="zaz-gk-5Ep"/>
-                                <connections>
-                                    <action selector="clickStepper:" target="-2" id="PHL-zv-juO"/>
-                                </connections>
                             </stepper>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gRV-9E-wax">
                                 <rect key="frame" x="167" y="122" width="12" height="17"/>
@@ -153,30 +153,21 @@
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRI-fw-Uqs" userLabel="StepperY">
                                 <rect key="frame" x="248" y="124" width="13" height="15"/>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" minValue="-10000" maxValue="10000" id="Tf5-8w-1d3"/>
-                                <connections>
-                                    <action selector="clickStepper:" target="-2" id="LPR-wI-KU3"/>
-                                </connections>
                             </stepper>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tHP-Sn-QbS" userLabel="StepperPY">
                                 <rect key="frame" x="248" y="124" width="13" height="15"/>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="10000" id="Oyh-Ui-MAG"/>
-                                <connections>
-                                    <action selector="clickStepper:" target="-2" id="BwJ-bq-Jjf"/>
-                                </connections>
                             </stepper>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hol-Zn-Id9">
-                                <rect key="frame" x="54" y="97" width="20" height="16"/>
+                                <rect key="frame" x="37" y="97" width="20" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="W" id="XGA-gI-6Qg">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <action selector="clickStepper:" target="-2" id="JVT-c3-Pje"/>
-                                </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dde-if-4FG" userLabel="wTF">
-                                <rect key="frame" x="76" y="96" width="46" height="18"/>
+                                <rect key="frame" x="59" y="96" width="46" height="18"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="zGi-aO-0kU">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -188,7 +179,7 @@
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUx-4a-5bn" userLabel="pwTF">
-                                <rect key="frame" x="76" y="96" width="46" height="18"/>
+                                <rect key="frame" x="59" y="96" width="46" height="18"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="d4g-2h-A7Q">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -200,25 +191,19 @@
                                 </connections>
                             </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bza-57-yAn">
-                                <rect key="frame" x="121" y="96" width="22" height="18"/>
+                                <rect key="frame" x="104" y="96" width="22" height="18"/>
                                 <buttonCell key="cell" type="square" title="px" alternateTitle="%" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="v3g-l9-1f0">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
                                 </buttonCell>
                             </button>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1AX-8F-rIh" userLabel="StepperW">
-                                <rect key="frame" x="143" y="97" width="13" height="15"/>
+                                <rect key="frame" x="126" y="97" width="13" height="15"/>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="10000" id="kHq-0m-weB"/>
-                                <connections>
-                                    <action selector="clickStepper:" target="-2" id="5Nr-Ab-ejq"/>
-                                </connections>
                             </stepper>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y64-pA-dLY" userLabel="StepperPW">
-                                <rect key="frame" x="143" y="97" width="13" height="15"/>
+                                <rect key="frame" x="126" y="97" width="13" height="15"/>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="10000" id="kUu-1o-ivF"/>
-                                <connections>
-                                    <action selector="clickStepper:" target="-2" id="wI8-8w-vEy"/>
-                                </connections>
                             </stepper>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wit-4t-70U">
                                 <rect key="frame" x="166" y="96" width="13" height="17"/>
@@ -262,23 +247,10 @@
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mtu-cf-B1n" userLabel="StepperH">
                                 <rect key="frame" x="248" y="97" width="13" height="15"/>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="10000" id="Xpq-Gy-MhN"/>
-                                <connections>
-                                    <action selector="clickStepper:" target="-2" id="fnl-5K-SoW"/>
-                                </connections>
                             </stepper>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1qd-QH-DUM" userLabel="StepperpH">
                                 <rect key="frame" x="248" y="97" width="13" height="15"/>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="10000" id="fGF-dE-arv"/>
-                                <connections>
-                                    <action selector="clickStepper:" target="-2" id="Vf3-Sv-Wce"/>
-                                </connections>
-                            </stepper>
-                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zak-0j-lDY" userLabel="StepperMinH">
-                                <rect key="frame" x="240" y="73" width="13" height="15"/>
-                                <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="10000" id="Vqg-qw-EJZ"/>
-                                <connections>
-                                    <action selector="clickStepper:" target="-2" id="fIn-Wx-F7g"/>
-                                </connections>
                             </stepper>
                             <box autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="gsi-Ac-4ex">
                                 <rect key="frame" x="6" y="40" width="254" height="5"/>
@@ -340,19 +312,60 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5K-nC-v4o" userLabel="xNilBtn">
+                                <rect key="frame" x="134" y="117" width="33" height="32"/>
+                                <buttonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mle-Y1-AsC">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="clickNilBtn:" target="-2" id="u4q-NH-KZI"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FBR-6t-h4m" userLabel="WNilBtn">
+                                <rect key="frame" x="134" y="88" width="33" height="32"/>
+                                <buttonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qyq-zQ-Qxb">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="clickNilBtn:" target="-2" id="68f-ok-pO6"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y6m-de-Ucg" userLabel="YNilBtn">
+                                <rect key="frame" x="256" y="115" width="33" height="32"/>
+                                <buttonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XTZ-1T-cQw">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="clickNilBtn:" target="-2" id="8ZU-fu-AeA"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJL-39-G80" userLabel="HNilBtn">
+                                <rect key="frame" x="257" y="88" width="33" height="32"/>
+                                <buttonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KWe-iG-5mF">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="clickNilBtn:" target="-2" id="yfu-kp-F5R"/>
+                                </connections>
+                            </button>
+                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zak-0j-lDY" userLabel="StepperMinH">
+                                <rect key="frame" x="179" y="49" width="13" height="15"/>
+                                <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="10000" id="Vqg-qw-EJZ"/>
+                            </stepper>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hf-P9-wKq">
-                                <rect key="frame" x="27" y="73" width="40" height="16"/>
+                                <rect key="frame" x="86" y="71" width="40" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Min-W" id="VCr-2U-Rwt">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <action selector="clickStepper:" target="-2" id="txZ-kC-xod"/>
-                                </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IH8-1c-3f7" userLabel="minWTF">
-                                <rect key="frame" x="73" y="70" width="46" height="18"/>
+                                <rect key="frame" x="132" y="68" width="46" height="18"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="mC0-tA-jNn">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -364,7 +377,7 @@
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fe7-vz-Q2Z" userLabel="minHTF">
-                                <rect key="frame" x="193" y="70" width="46" height="18"/>
+                                <rect key="frame" x="132" y="46" width="46" height="18"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="yue-mv-f9K">
                                     <font key="font" metaFont="system" size="10"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -376,7 +389,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zFz-sC-pe2">
-                                <rect key="frame" x="149" y="70" width="38" height="17"/>
+                                <rect key="frame" x="88" y="46" width="38" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Min-H" id="dkl-dh-AFJ">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -384,7 +397,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IBj-aO-2c6">
-                                <rect key="frame" x="251" y="73" width="18" height="14"/>
+                                <rect key="frame" x="190" y="49" width="18" height="14"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="px" id="3Dr-En-BKr">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -392,7 +405,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oz7-yr-vuW">
-                                <rect key="frame" x="131" y="75" width="18" height="14"/>
+                                <rect key="frame" x="190" y="73" width="18" height="14"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="px" id="r5S-k3-2YY">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -400,12 +413,29 @@
                                 </textFieldCell>
                             </textField>
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z5m-J8-vkF" userLabel="StepperMinW">
-                                <rect key="frame" x="119" y="72" width="13" height="15"/>
+                                <rect key="frame" x="178" y="70" width="13" height="15"/>
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="10000" id="myf-dd-sm8"/>
-                                <connections>
-                                    <action selector="clickStepper:" target="-2" id="lil-n8-RKt"/>
-                                </connections>
                             </stepper>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ug8-az-m9y" userLabel="min-WNilBtn">
+                                <rect key="frame" x="201" y="63" width="33" height="32"/>
+                                <buttonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8S0-Vy-Sio">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="clickNilBtn:" target="-2" id="soK-SC-bAV"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wrG-Yo-AoH" userLabel="min-HNilBtn">
+                                <rect key="frame" x="203" y="37" width="33" height="32"/>
+                                <buttonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1L4-E0-gQI">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="clickNilBtn:" target="-2" id="ibv-15-QK8"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
