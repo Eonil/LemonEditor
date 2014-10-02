@@ -143,6 +143,8 @@
 }
 
 - (void)setCount:(NSInteger)count{
+    
+    
     if (count < 0 || count > 20 || count == self.children.count ) {
         return;
     }
@@ -153,10 +155,10 @@
         }
     }
     else if(count > self.children.count) {
+        
         if (self.isConnectedWithEditor) {
             [self.project.identifierManager resetUnconfirmedIUs];
         }
-        
         
         for(NSInteger i=self.children.count; i <count; i++){
             IUMenuItem *subMenu = [[IUMenuItem alloc] initWithProject:self.project options:nil];
@@ -171,6 +173,7 @@
     
     
     [self updateHTML];
+    
     
 }
 

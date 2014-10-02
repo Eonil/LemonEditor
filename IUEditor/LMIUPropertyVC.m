@@ -114,6 +114,7 @@
     NSViewController <IUPropertyDoubleClickReceiver> *doubleClickFocusVC;
     NSView *_noInspectorV;
     __weak NSTableView *_tableV;
+    NSString *currentSelectedClass;
 }
 
 @property     NSArray *propertyVArray;
@@ -294,10 +295,19 @@
         return;
     }
     
+    
     doubleClickFocusVC = nil;
 
     
     NSString *classString = [[self.controller selectedPedigree] firstObject];
+    
+    
+    if([currentSelectedClass isEqualToString:classString]){
+        //same class일때 table view 변하지 않음.
+        return;
+    }
+    
+    
     if ([classString isEqualToString:@"IUCarousel"]) {
         self.propertyVArray = nil;
         [_tableV setHidden:YES];
@@ -422,6 +432,7 @@
         self.propertyVArray = [NSMutableArray arrayWithArray:@[self.noInspectorV]];
         doubleClickFocusVC = nil;
     }
+    currentSelectedClass = classString;
     
     [_tableV reloadData];
 }
