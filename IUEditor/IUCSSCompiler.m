@@ -11,6 +11,8 @@
 #import "IUCSS.h"
 #import "IUProject.h"
 #import "IUSection.h"
+#import "IUHeader.h"
+#import "IUFooter.h"
 
 #import "PGPageLinkSet.h"
 #import "IUMenuBar.h"
@@ -962,6 +964,54 @@
     }
 }
 
+- (void)updateCSSCode:(IUCSSCode*)code asIUHeader:(IUHeader*)header{
+    if(header.prototypeClass){
+        NSArray *editWidths = [header.css allViewports];
+        [code setInsertingIdentifier:header.cssIdentifier];
+        
+        
+        for (NSNumber *viewportNumber in editWidths) {
+            int viewport = [viewportNumber intValue];
+            [code setInsertingViewPort:viewport];
+
+            //IUHeader의 높이는 prototypeclass의 높이와 일치시킨다.
+            NSDictionary *cssTagDict = [header.prototypeClass.css tagDictionaryForViewport:viewport];
+            
+            IUUnit hUnit = [[header.prototypeClass.css valueByStepForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+            NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
+            [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
+            
+            if(hUnit == IUUnitPercent && cssTagDict[IUCSSTagMinPixelHeight]){
+                [code insertTag:@"min-height" intFromNumber:cssTagDict[IUCSSTagMinPixelHeight] unit:IUUnitPixel];
+            }
+        }
+    }
+}
+
+- (void)updateCSSCode:(IUCSSCode*)code asIUFooter:(IUFooter*)footer{
+    if(footer.prototypeClass){
+        NSArray *editWidths = [footer.css allViewports];
+        [code setInsertingIdentifier:footer.cssIdentifier];
+        
+        
+        for (NSNumber *viewportNumber in editWidths) {
+            int viewport = [viewportNumber intValue];
+            [code setInsertingViewPort:viewport];
+            
+            //IUHeader의 높이는 prototypeclass의 높이와 일치시킨다.
+            NSDictionary *cssTagDict = [footer.prototypeClass.css tagDictionaryForViewport:viewport];
+            
+            IUUnit hUnit = [[footer.prototypeClass.css valueByStepForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+            NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
+            [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
+            
+            if(hUnit == IUUnitPercent && cssTagDict[IUCSSTagMinPixelHeight]){
+                [code insertTag:@"min-height" intFromNumber:cssTagDict[IUCSSTagMinPixelHeight] unit:IUUnitPixel];
+            }
+        }
+    }
+    
+}
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUPageContent:(IUPageContent*)pageContent{
     NSArray *editWidths = [pageContent.css allViewports];

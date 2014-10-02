@@ -105,7 +105,7 @@
         return importHTMLID;
     }
     else if(_prototypeClass == iu){
-        NSString *importHTMLID = [NSString stringWithFormat:@"%@%@_class",kIUImportEditorPrefix, self.htmlID];
+        NSString *importHTMLID = [NSString stringWithFormat:@"%@%@_%@",kIUImportEditorPrefix, self.htmlID, _prototypeClass.htmlID];
         return importHTMLID;
     }
     return nil;

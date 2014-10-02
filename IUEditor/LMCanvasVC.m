@@ -348,7 +348,7 @@
     
     NSString *selectedID = identifier;
     
-    IUBox *iu = [self.controller IUBoxByIdentifier:identifier];
+    IUBox *iu = [self.controller tryIUBoxByIdentifier:identifier];
     if([iu isKindOfClass:[IUItem class]]){
         if( [((IUItem *)iu) shouldSelectParentFirst]){
             IUBox *parentIU = iu.parent;
