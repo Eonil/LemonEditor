@@ -72,7 +72,6 @@
 
 @end
 
-
 @implementation LMAppearanceFrameVC{
     LMHelpWC *helpWC;
     BOOL enableObservation;
@@ -88,11 +87,6 @@
     return self;
 }
 
-
-/*
- Bind Enable/Hidden for main field (NSTextField)
- If user enter '-' mark, eleminate css tag. So, value can not be boud with text field
- */
 
 - (void)setController:(IUController *)controller{
     [super setController:controller];
@@ -173,7 +167,6 @@
 
 
     
-
     [self outlet:_positionPopupBtn bind:NSEnabledBinding property:@"canChangePositionType"];
     [self outlet:_centerBtn bind:NSEnabledBinding property:@"canChangeHCenter"];
     [self outlet:_verticalCenterBtn bind:NSEnabledBinding property:@"canChangeVCenter"];
@@ -212,6 +205,8 @@
 
     
     [self outlet:_centerBtn bind:NSEnabledBinding property:@"xPosMove" options:IUBindingNegationAndNotRaise];
+    [self outlet:_wUnitBtn bind:@"enabled2" property:@"canChangeWidthUnitByUserInput" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+
 
     //enabled option 3
     /* commented on 9.29. 2014
@@ -223,7 +218,6 @@
     [self outlet:_xUnitBtn bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
     [self outlet:_xStepper bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
     [self outlet:_pxStepper bind:@"enabled3" property:@"center" options:IUBindingNegationAndNotRaise];
-    [self outlet:_wUnitBtn bind:@"enabled3" property:@"canChangeWidthUnitByUserInput" options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
      */
     
 }
@@ -246,6 +240,12 @@
         [self setValue:nil forCSSTag:IUCSSTagMinPixelHeight];
     }
 }
+
+
+- (void)dealloc{
+    [JDLogUtil log:IULogDealloc string:@"LMAppearanceFrameVC"];
+}
+
 
 - (IBAction)helpMenu:(id)sender {
     JDTraceLog(@"this is help menu");
