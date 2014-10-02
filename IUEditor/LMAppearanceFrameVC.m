@@ -53,8 +53,6 @@
 @property (weak) IBOutlet NSButton *hUnitBtn;
 
 //nil button
-@property (weak) IBOutlet NSButton *xNilBtn;
-@property (weak) IBOutlet NSButton *yNilBtn;
 @property (weak) IBOutlet NSButton *wNilBtn;
 @property (weak) IBOutlet NSButton *hNilBtn;
 @property (weak) IBOutlet NSButton *minWNilBtn;
@@ -257,15 +255,7 @@
 }
 
 - (IBAction)clickNilBtn:(id)sender {
-    if([sender isEqualTo:_xNilBtn]){
-        [self setValue:nil forCSSTag:IUCSSTagPixelX];
-        [self setValue:nil forCSSTag:IUCSSTagPercentX];
-    }
-    else if([sender isEqualTo:_yNilBtn]){
-        [self setValue:nil forCSSTag:IUCSSTagPixelY];
-        [self setValue:nil forCSSTag:IUCSSTagPercentY];
-    }
-    else if([sender isEqualTo:_wNilBtn]){
+    if([sender isEqualTo:_wNilBtn]){
         [self setValue:nil forCSSTag:IUCSSTagPixelWidth];
         [self setValue:nil forCSSTag:IUCSSTagPercentWidth];
     }

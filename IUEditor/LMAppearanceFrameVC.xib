@@ -33,11 +33,9 @@
                 <outlet property="wStepper" destination="1AX-8F-rIh" id="zEl-79-MWX"/>
                 <outlet property="wTF" destination="dde-if-4FG" id="f9d-yf-Xcp"/>
                 <outlet property="wUnitBtn" destination="bza-57-yAn" id="V3J-Ki-H3E"/>
-                <outlet property="xNilBtn" destination="D5K-nC-v4o" id="F74-mN-0u7"/>
                 <outlet property="xStepper" destination="Uhs-VT-XpO" id="eHn-1O-Gda"/>
                 <outlet property="xTF" destination="7ez-uH-X3R" id="fBE-RN-ePy"/>
                 <outlet property="xUnitBtn" destination="2Ur-uO-dSJ" id="dx5-gQ-85G"/>
-                <outlet property="yNilBtn" destination="y6m-de-Ucg" id="LDA-QK-zbg"/>
                 <outlet property="yStepper" destination="dRI-fw-Uqs" id="Yyo-eq-5ve"/>
                 <outlet property="yTF" destination="yqm-TH-YmF" id="gba-QO-fXT"/>
                 <outlet property="yUnitBtn" destination="NbJ-WM-MfU" id="a0L-XU-xR3"/>
@@ -312,18 +310,8 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5K-nC-v4o" userLabel="xNilBtn">
-                                <rect key="frame" x="134" y="117" width="33" height="32"/>
-                                <buttonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mle-Y1-AsC">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="smallSystem"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="clickNilBtn:" target="-2" id="u4q-NH-KZI"/>
-                                </connections>
-                            </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FBR-6t-h4m" userLabel="WNilBtn">
-                                <rect key="frame" x="134" y="88" width="33" height="32"/>
+                                <rect key="frame" x="134" y="88" width="33" height="28"/>
                                 <buttonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qyq-zQ-Qxb">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -332,18 +320,8 @@
                                     <action selector="clickNilBtn:" target="-2" id="68f-ok-pO6"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y6m-de-Ucg" userLabel="YNilBtn">
-                                <rect key="frame" x="256" y="115" width="33" height="32"/>
-                                <buttonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XTZ-1T-cQw">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="smallSystem"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="clickNilBtn:" target="-2" id="8ZU-fu-AeA"/>
-                                </connections>
-                            </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gJL-39-G80" userLabel="HNilBtn">
-                                <rect key="frame" x="257" y="88" width="33" height="32"/>
+                                <rect key="frame" x="257" y="88" width="33" height="28"/>
                                 <buttonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KWe-iG-5mF">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -417,7 +395,7 @@
                                 <stepperCell key="cell" controlSize="mini" continuous="YES" alignment="left" maxValue="10000" id="myf-dd-sm8"/>
                             </stepper>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ug8-az-m9y" userLabel="min-WNilBtn">
-                                <rect key="frame" x="201" y="63" width="33" height="32"/>
+                                <rect key="frame" x="201" y="63" width="33" height="28"/>
                                 <buttonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8S0-Vy-Sio">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
@@ -427,7 +405,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wrG-Yo-AoH" userLabel="min-HNilBtn">
-                                <rect key="frame" x="203" y="37" width="33" height="32"/>
+                                <rect key="frame" x="203" y="37" width="33" height="28"/>
                                 <buttonCell key="cell" type="push" title="A" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1L4-E0-gQI">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="smallSystem"/>
