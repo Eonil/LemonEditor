@@ -5903,6 +5903,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "IUEditor/IUEditor-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -5921,6 +5922,7 @@
 					"NS_BLOCK_ASSERTIONS=1",
 				);
 				INFOPLIST_FILE = "IUEditor/IUEditor-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
