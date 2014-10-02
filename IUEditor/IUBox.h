@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JDCoder.h"
 #import "IUCSS.h"
 #import "IUEvent.h"
 #import "IUIdentifierManager.h"
-
 
 @protocol IUSourceDelegate <NSObject>
 @required
@@ -85,7 +85,7 @@ typedef enum _IUOverflowType{
 @class IUSheet;
 @class IUProject;
 
-@interface IUBox : NSObject <NSCoding, IUCSSDelegate, NSCopying>{
+@interface IUBox : NSObject <NSCoding, JDCoding, IUCSSDelegate, NSCopying>{
     NSMutableArray *_m_children;
     
 }
