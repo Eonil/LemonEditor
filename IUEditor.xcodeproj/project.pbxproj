@@ -414,8 +414,6 @@
 		3DB3ACE018EBEF5F0046DFB7 /* GuideLineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACDC18EBEF5F0046DFB7 /* GuideLineLayer.m */; };
 		3DB3ACE718EBEF9D0046DFB7 /* CursorRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACE418EBEF9D0046DFB7 /* CursorRect.m */; };
 		3DB3ACE818EBEF9D0046DFB7 /* IUFrameDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACE618EBEF9D0046DFB7 /* IUFrameDictionary.m */; };
-		3DB3ACF118EBFC4C0046DFB7 /* TestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACEF18EBFC4C0046DFB7 /* TestController.m */; };
-		3DB3ACF218EBFC4C0046DFB7 /* TestController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DB3ACF018EBFC4C0046DFB7 /* TestController.xib */; };
 		3DB3ACF318EBFDE20046DFB7 /* iuframe.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DB3ACEC18EBF7200046DFB7 /* iuframe.js */; };
 		3DB3ACF618EC1E120046DFB7 /* LMCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACF518EC1E120046DFB7 /* LMCanvasView.m */; };
 		3DB3ACFD18EC1F700046DFB7 /* LMCanvasVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3ACFB18EC1F700046DFB7 /* LMCanvasVC.m */; };
@@ -837,6 +835,7 @@
 		691F91A91973C2EA00A4CFFF /* IUWordpressProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91A81973C2EA00A4CFFF /* IUWordpressProject.m */; };
 		691F91AD1973C5EF00A4CFFF /* WPSiteTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91AC1973C5EF00A4CFFF /* WPSiteTitle.m */; };
 		691F91B31973CD6800A4CFFF /* WPSiteDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 691F91B21973CD6800A4CFFF /* WPSiteDescription.m */; };
+		69205E9219DCB11500ED6B77 /* JDCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 69205E9119DCB11500ED6B77 /* JDCoder.m */; };
 		6923AB4619A2A9B20084FFAC /* WPWidgetTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6923AB4519A2A9B20084FFAC /* WPWidgetTitle.m */; };
 		6923AB4919A2A9BC0084FFAC /* WPWidgetBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 6923AB4819A2A9BC0084FFAC /* WPWidgetBody.m */; };
 		692CBE15199871FD00CAF1D1 /* IUPage+WP.m in Sources */ = {isa = PBXBuildFile; fileRef = 692CBE14199871FD00CAF1D1 /* IUPage+WP.m */; };
@@ -947,6 +946,7 @@
 		69B45C3D1986BBC90087FDFD /* LMServerWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B45C3B1986BBC90087FDFD /* LMServerWC.m */; };
 		69B45C3E1986BBC90087FDFD /* LMServerWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B45C3C1986BBC90087FDFD /* LMServerWC.xib */; };
 		69B4D7FA192B5155008429B3 /* LMCommandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B4D7F9192B5155008429B3 /* LMCommandVC.m */; };
+		69B96F5319DDEE72008CE446 /* JDCoderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B96F5219DDEE72008CE446 /* JDCoderTest.m */; };
 		69B9A39618E5A2A30007D6E2 /* IUResourceFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 69B9A39518E5A2A30007D6E2 /* IUResourceFile.m */; };
 		69B9A39818E697F70007D6E2 /* iu.css in Resources */ = {isa = PBXBuildFile; fileRef = 69B9A39718E697F70007D6E2 /* iu.css */; };
 		69B9A39918E697F70007D6E2 /* iu.css in Resources */ = {isa = PBXBuildFile; fileRef = 69B9A39718E697F70007D6E2 /* iu.css */; };
@@ -972,7 +972,6 @@
 		69C575CA18D6F61E0016F050 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C575C918D6F61E0016F050 /* XCTest.framework */; };
 		69C575CB18D6F61E0016F050 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69C575AA18D6F61E0016F050 /* Cocoa.framework */; };
 		69C575D318D6F61E0016F050 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 69C575D118D6F61E0016F050 /* InfoPlist.strings */; };
-		69C575D518D6F61E0016F050 /* IUEditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C575D418D6F61E0016F050 /* IUEditorTests.m */; };
 		69C5760B18D6FE020016F050 /* IUClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C575FF18D6FE020016F050 /* IUClass.m */; };
 		69C5760C18D6FE020016F050 /* IUCSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C5760118D6FE020016F050 /* IUCSS.m */; };
 		69C5760D18D6FE020016F050 /* IUSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C5760318D6FE020016F050 /* IUSheet.m */; };
@@ -1557,9 +1556,6 @@
 		3DB3ACE618EBEF9D0046DFB7 /* IUFrameDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUFrameDictionary.m; sourceTree = "<group>"; };
 		3DB3ACEB18EBEFD80046DFB7 /* IUDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUDefinition.h; sourceTree = "<group>"; };
 		3DB3ACEC18EBF7200046DFB7 /* iuframe.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = iuframe.js; sourceTree = "<group>"; };
-		3DB3ACEE18EBFC4C0046DFB7 /* TestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestController.h; sourceTree = "<group>"; };
-		3DB3ACEF18EBFC4C0046DFB7 /* TestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestController.m; sourceTree = "<group>"; };
-		3DB3ACF018EBFC4C0046DFB7 /* TestController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestController.xib; sourceTree = "<group>"; };
 		3DB3ACF418EC1E120046DFB7 /* LMCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMCanvasView.h; sourceTree = "<group>"; };
 		3DB3ACF518EC1E120046DFB7 /* LMCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMCanvasView.m; sourceTree = "<group>"; };
 		3DB3ACFA18EC1F700046DFB7 /* LMCanvasVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMCanvasVC.h; sourceTree = "<group>"; };
@@ -2041,6 +2037,8 @@
 		691F91AC1973C5EF00A4CFFF /* WPSiteTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPSiteTitle.m; sourceTree = "<group>"; };
 		691F91B11973CD6800A4CFFF /* WPSiteDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPSiteDescription.h; sourceTree = "<group>"; };
 		691F91B21973CD6800A4CFFF /* WPSiteDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPSiteDescription.m; sourceTree = "<group>"; };
+		69205E9019DCB11500ED6B77 /* JDCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDCoder.h; sourceTree = "<group>"; };
+		69205E9119DCB11500ED6B77 /* JDCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDCoder.m; sourceTree = "<group>"; };
 		6923AB4419A2A9B20084FFAC /* WPWidgetTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPWidgetTitle.h; sourceTree = "<group>"; };
 		6923AB4519A2A9B20084FFAC /* WPWidgetTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPWidgetTitle.m; sourceTree = "<group>"; };
 		6923AB4719A2A9BC0084FFAC /* WPWidgetBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPWidgetBody.h; sourceTree = "<group>"; };
@@ -2228,6 +2226,7 @@
 		69B45C3C1986BBC90087FDFD /* LMServerWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMServerWC.xib; path = ../LMServerWC.xib; sourceTree = "<group>"; };
 		69B4D7F8192B5155008429B3 /* LMCommandVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMCommandVC.h; sourceTree = "<group>"; };
 		69B4D7F9192B5155008429B3 /* LMCommandVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMCommandVC.m; sourceTree = "<group>"; };
+		69B96F5219DDEE72008CE446 /* JDCoderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDCoderTest.m; sourceTree = "<group>"; };
 		69B9A39418E5A2A30007D6E2 /* IUResourceFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUResourceFile.h; sourceTree = "<group>"; };
 		69B9A39518E5A2A30007D6E2 /* IUResourceFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUResourceFile.m; sourceTree = "<group>"; };
 		69B9A39718E697F70007D6E2 /* iu.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = iu.css; sourceTree = "<group>"; };
@@ -2270,7 +2269,6 @@
 		69C575C918D6F61E0016F050 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		69C575D018D6F61E0016F050 /* IUEditorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IUEditorTests-Info.plist"; sourceTree = "<group>"; };
 		69C575D218D6F61E0016F050 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		69C575D418D6F61E0016F050 /* IUEditorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IUEditorTests.m; sourceTree = "<group>"; };
 		69C575FE18D6FE020016F050 /* IUClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUClass.h; path = BaseObject/IUClass.h; sourceTree = "<group>"; };
 		69C575FF18D6FE020016F050 /* IUClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUClass.m; path = BaseObject/IUClass.m; sourceTree = "<group>"; };
 		69C5760018D6FE020016F050 /* IUCSS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUCSS.h; sourceTree = "<group>"; };
@@ -4258,6 +4256,8 @@
 				3D9F5C3C19C6F3CD00D63B84 /* JDReponderCollectionView.m */,
 				3D9F5C5819D406E600D63B84 /* JDComboBoxCell.h */,
 				3D9F5C5919D406E600D63B84 /* JDComboBoxCell.m */,
+				69205E9019DCB11500ED6B77 /* JDCoder.h */,
+				69205E9119DCB11500ED6B77 /* JDCoder.m */,
 			);
 			name = JD;
 			sourceTree = "<group>";
@@ -4355,11 +4355,8 @@
 		69C575CE18D6F61E0016F050 /* IUEditorTests */ = {
 			isa = PBXGroup;
 			children = (
-				3DB3ACEE18EBFC4C0046DFB7 /* TestController.h */,
-				3DB3ACEF18EBFC4C0046DFB7 /* TestController.m */,
-				3DB3ACF018EBFC4C0046DFB7 /* TestController.xib */,
-				69C575D418D6F61E0016F050 /* IUEditorTests.m */,
 				69C575CF18D6F61E0016F050 /* Supporting Files */,
+				69B96F5219DDEE72008CE446 /* JDCoderTest.m */,
 			);
 			path = IUEditorTests;
 			sourceTree = "<group>";
@@ -5481,7 +5478,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DB3ACF218EBFC4C0046DFB7 /* TestController.xib in Resources */,
 				69B9A39918E697F70007D6E2 /* iu.css in Resources */,
 				696D1C9F18E5778400B4AB16 /* reset.css in Resources */,
 				69CFCAC418EAA21E00E3048A /* sample.jpg in Resources */,
@@ -5616,6 +5612,7 @@
 				069A0FE8195179D900476CFA /* LMPropertyDisplayVC.m in Sources */,
 				CBA877EA1963D0F400075294 /* LMTutorialWC.m in Sources */,
 				69CFCAB218E95A0C00E3048A /* LMResourceVC.m in Sources */,
+				69205E9219DCB11500ED6B77 /* JDCoder.m in Sources */,
 				69757B1518D95BBC0095CBAC /* NSTextField+DragAndDrop.m in Sources */,
 				3DED273A1904F271001A1D67 /* IUImageUtil.m in Sources */,
 				3D095C801990B5FB00E3E142 /* LMPropertyIUTweetButtonVC.m in Sources */,
@@ -5764,8 +5761,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69C575D518D6F61E0016F050 /* IUEditorTests.m in Sources */,
-				3DB3ACF118EBFC4C0046DFB7 /* TestController.m in Sources */,
+				69B96F5319DDEE72008CE446 /* JDCoderTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
