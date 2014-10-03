@@ -41,6 +41,10 @@
     [aCoder encodeObject:_cssDictWithViewPort forKey:@"cssDictWithViewPort"];
 }
 
+- (void)encodeWithJDCoder:(JDCoder *)aCoder{
+    [self encodeWithCoder:(NSCoder*)aCoder];
+}
+
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     [[self.delegate undoManager] disableUndoRegistration];
@@ -66,6 +70,18 @@
     return self;
 }
 
+- (id)initWithJDCoder:(JDCoder *)aDecoder{
+    self = [super init];
+    [[self.delegate undoManager] disableUndoRegistration];
+    
+    _cssDictWithViewPort = [aDecoder decodeObjectForKey:@"cssDictWithViewPort"];
+    self.editViewPort = IUCSSDefaultViewPort;
+    _effectiveTagDictionaryForEditWidth = [NSMutableDictionary dictionary];
+    [self updateEffectiveTagDictionary];
+    
+    [[self.delegate undoManager] enableUndoRegistration];
+    return self;
+}
 
 
 - (id)copyWithZone:(NSZone *)zone{

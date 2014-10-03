@@ -11,31 +11,29 @@
 
 @class JDCoder;
 
-
-
 @protocol JDCoding
-
 - (void)encodeWithJDCoder:(JDCoder *)aCoder;
 - (id)initWithJDCoder:(JDCoder *)aDecoder;
-
 @end
 
-
+/*
+ Followings are classes which support JDCoding
+ */
 @interface NSArray(JDCoding) <JDCoding>
-- (void)encodeWithJDCoder:(JDCoder *)aCoder;
-- (id)initWithJDCoder:(JDCoder *)aDecoder;
 @end
 
 @interface NSDictionary(JDCoding) <JDCoding>
-- (void)encodeWithJDCoder:(JDCoder *)aCoder;
-- (id)initWithJDCoder:(JDCoder *)aDecoder;
 @end
 
 @interface NSString(JDCoding) <JDCoding>
-- (void)encodeWithJDCoder:(JDCoder *)aCoder;
-- (id)initWithJDCoder:(JDCoder *)aDecoder;
 @end
 
+@interface NSColor(JDCoding) <JDCoding>
+@end
+
+@interface NSNumber(JDCoding) <JDCoding>
+
+@end
 
 /* JDCoder resemble NSCoder, but
  1) it save/load with JSON

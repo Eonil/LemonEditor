@@ -82,12 +82,14 @@
 -(id)initWithJDCoder:(JDCoder *)aDecoder{
     [[self undoManager] disableUndoRegistration];
     _htmlID = [aDecoder decodeObjectForKey:@"htmlID"];
+    _css = [aDecoder decodeObjectForKey:@"css"];
     [[self undoManager] enableUndoRegistration];
     return self;
 }
 
 - (void)encodeWithJDCoder:(JDCoder *)aCoder{
     [aCoder encodeObject:self.htmlID forKey:@"htmlID"];
+    [aCoder encodeObject:self.css forKey:@"css"];
 }
 /**
  Review: _m_children의 decode는 순서가 꼬이기 때문에 initWithCoder가 아닌 awkaAfterUsingCoder로 하도록한다.

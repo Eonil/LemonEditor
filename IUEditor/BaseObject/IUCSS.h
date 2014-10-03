@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JDCoder.h"
 
 @class IUProject;
 
@@ -19,7 +20,7 @@
 
 
 
-@interface IUCSS : NSObject <NSCoding, NSCopying>
+@interface IUCSS : NSObject <NSCoding, JDCoding, NSCopying>
 
 @property (nonatomic)  NSInteger editViewPort;
 @property (nonatomic)  NSInteger maxViewPort;
