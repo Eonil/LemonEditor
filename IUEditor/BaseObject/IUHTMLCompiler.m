@@ -671,66 +671,33 @@
 - (JDCode *)htmlCodeAsIUFBLike:(IUFBLike *)fblike target:(IUTarget)target attributeDict:(NSMutableDictionary *)attributeDict{
     JDCode *code = [[JDCode alloc] init];
     
-    
-    [code addCodeLineWithFormat:@"<div %@ >", [self attributeString:attributeDict]];
-
     if(target == IUTargetOutput){
-        
         
         code = [self htmlCodeAsIUHTML:fblike target:target attributeDict:attributeDict];
     }
     else if( target == IUTargetEditor ){
+        [code addCodeLineWithFormat:@"<div %@ >", [self attributeString:attributeDict]];
         
         NSString *fbPath = [[NSBundle mainBundle] pathForResource:@"FBSampleImage" ofType:@"png"];
         NSString *editorHTML = [NSString stringWithFormat:@"<img src=\"%@\" align=\"middle\" style=\"float:left;margin:0 5px 0 0; \" ><p style=\"font-size:11px ; font-family:'Helvetica Neue', Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif\">263,929 people like this. Be the first of your friends.</p>", fbPath];
         
         [code addCodeLine:editorHTML];
+        [code addCodeLine:@"</div>"];
 
     }
     
-    [code addCodeLine:@"</div>"];
     return code;
 }
 
 - (JDCode *)htmlCodeAsIUTweetButton:(IUTweetButton *)tweet target:(IUTarget)target attributeDict:(NSMutableDictionary *)attributeDict{
     JDCode *code = [[JDCode alloc] init];
-    
-    [code addCodeLineWithFormat:@"<div %@ >", [self attributeString:attributeDict]];
-
     if(target == IUTargetOutput){
-        
-        [code addString:@"<a href=\"https://twitter.com/share\" class=\"twitter-share-button\""];
-        if(tweet.tweetText){
-            [code addCodeWithFormat:@" data-text=\"%@\"", tweet.tweetText];
-        }
-        if(tweet.urlToTweet){
-            [code addCodeWithFormat:@" data-url=\"%@\"", tweet.urlToTweet];
-        }
-        
-        NSString *type;
-        switch (tweet.countType) {
-            case IUTweetButtonCountTypeVertical:
-                type = @"vertical";
-                break;
-            case IUTweetButtonCountTypeHorizontal:
-                type = @"horizontal";
-                break;
-            case IUTweetButtonCountTypeNone:
-                type = @"none";
-            default:
-                break;
-        }
-        
-        [code addCodeWithFormat:@" data-count=\"%@\"", type];
-        if(tweet.sizeType == IUTweetButtonSizeTypeLarge){
-            [code addCodeWithFormat:@" data-size=\"large\""];
-        }
-        
-        [code addCodeLine:@">Tweet</a>"];
+        code = [self htmlCodeAsIUHTML:tweet target:target attributeDict:attributeDict];
         
     }
     else if( target == IUTargetEditor ){
         
+        [code addCodeLineWithFormat:@"<div %@ >", [self attributeString:attributeDict]];
         
         NSString *imageName;
         switch (tweet.countType) {
@@ -758,10 +725,8 @@
         NSString *innerHTML = [NSString stringWithFormat:@"<img src=\"%@\" style=\"width:100%%; height:100%%\"></imbc>", imagePath];
         
         [code addCodeLine:innerHTML];
+        [code addCodeLine:@"</div>"];
     }
-    
-    [code addCodeLine:@"</div>"];
-
     return code;
 }
 
