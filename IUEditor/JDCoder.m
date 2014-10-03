@@ -18,7 +18,7 @@
 @implementation NSArray(JDCoding)
 
 - (void)encodeWithJDCoder:(JDCoder *)aCoder{
-    [aCoder encodeString:self.className forKey:@"_JD_ClassName"];
+    [aCoder encodeString:self.className forKey:@"JDClassName_"];
     for (NSUInteger i=0; i<self.count; i++) {
         NSObject <JDCoding> *obj = [self objectAtIndex:i];
         [aCoder encodeObject:obj forKey:@(i)];
@@ -42,7 +42,7 @@
 
 @implementation NSDictionary(JDCoding)
 - (void)encodeWithJDCoder:(JDCoder *)aCoder{
-    [aCoder encodeString:self.className forKey:@"_JD_ClassName"];
+    [aCoder encodeString:self.className forKey:@"JDClassName_"];
     [self enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         [aCoder encodeObject:obj forKey:key];
     }];
@@ -52,7 +52,9 @@
     self = [super init];
     NSMutableDictionary *temp = [NSMutableDictionary dictionary];
     for (id key in [aDecoder keysOfCurrentDecodingObject]) {
-        temp[key] = [aDecoder decodeObjectForKey:key];
+        if ([key isEqualTo:@"JDClassName_"] == NO ) {
+            temp[key] = [aDecoder decodeObjectForKey:key];
+        }
     }
     return [self initWithDictionary:temp];
 }
@@ -68,6 +70,39 @@
     self = [self initWithString:str];
     return self;
 }
+@end
+
+@implementation NSNumber (JDCoding)
+- (void)encodeWithJDCoder:(JDCoder *)aCoder{
+    [aCoder encodeDouble:[self doubleValue] forKey:@"value"];
+}
+
+- (id)initWithJDCoder:(JDCoder *)aDecoder{
+    self = [self initWithDouble:[aDecoder decodeDoubleForKey:@"value"]];
+    return self;
+}
+@end
+
+
+
+@implementation NSColor (JDCoding)
+
+- (void)encodeWithJDCoder:(JDCoder *)aCoder{
+    NSColor *convertedColor=[self colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+    [aCoder encodeDouble:[convertedColor redComponent] forKey:@"R"];
+    [aCoder encodeDouble:[convertedColor greenComponent] forKey:@"G"];
+    [aCoder encodeDouble:[convertedColor blueComponent] forKey:@"B"];
+    [aCoder encodeDouble:[convertedColor alphaComponent] forKey:@"A"];
+}
+
+- (id)initWithJDCoder:(JDCoder *)aDecoder{
+    NSColor *color = [NSColor colorWithDeviceRed:[aDecoder decodeDoubleForKey:@"R"]
+                                           green:[aDecoder decodeDoubleForKey:@"G"]
+                                            blue:[aDecoder decodeDoubleForKey:@"B"]
+                                           alpha:[aDecoder decodeDoubleForKey:@"A"]];
+    return color;
+}
+
 @end
 
 
@@ -100,12 +135,12 @@
  */
 
 - (void)encodeRootObject:(NSObject <JDCoding> *)object{
-    dataDict[@"_JD_ClassName"] = object.className;
+    dataDict[@"JDClassName_"] = object.className;
     [object encodeWithJDCoder:self];
 }
 
 - (id)decodedAndInitializeObject{
-    NSString *className = dataDict[@"_JD_ClassName"];
+    NSString *className = dataDict[@"JDClassName_"];
     NSObject <JDCoding> *newObj = [(NSObject <JDCoding>  *)[NSClassFromString(className) alloc] initWithJDCoder:self];
     for (NSString *selectorString in initSelectors) {
         SEL sel = NSSelectorFromString(selectorString);
@@ -142,12 +177,22 @@
 
 
 - (void)encodeObject:(NSObject <JDCoding> *)obj forKey:(id)key{
-    NSMutableDictionary* current = dataDict;
-    dataDict = [NSMutableDictionary dictionary];
-    current[key] = dataDict;
-    current[key][@"_JD_ClassName"] = NSStringFromClass([obj classForKeyedArchiver]);
-    [obj encodeWithJDCoder:self];
-    dataDict = current;
+    if ([[obj className] isEqualToString:@"__NSCFNumber"]) {
+        [self encodeDouble:[(NSNumber*)obj doubleValue] forKey:key];
+    }
+    else if ([[obj className] isEqualToString:@"__NSCFConstantString"]){
+        [self encodeString:(NSString*)obj forKey:key];
+    }
+    else {
+        NSMutableDictionary* current = dataDict;
+        dataDict = [NSMutableDictionary dictionary];
+        current[key] = dataDict;
+        current[key][@"JDClassName_"] = NSStringFromClass([obj classForKeyedArchiver]);
+        if (obj != nil) {
+            [obj encodeWithJDCoder:self];
+        }
+        dataDict = current;
+    }
 }
 
 - (void)encodeFromObject:(NSObject *)obj withProperties:(NSArray*)properties{
@@ -192,14 +237,23 @@
 }
 
 - (id)decodeObjectForKey:(id)key{
-    NSMutableDictionary* current = dataDict;
-    dataDict = current[key];
-    NSString *className = dataDict[@"_JD_ClassName"];
-    NSObject <JDCoding> *newObj = [(NSObject <JDCoding>  *)[NSClassFromString(className) alloc] initWithJDCoder:self];
-    dataDict = current;
-    
-    [decodedObjects addObject:newObj];
-    return newObj;
+    id value = dataDict[key];
+    if ([value isMemberOfClass:[NSNumber class]] || [value isMemberOfClass:[NSString class]]) {
+        return value;
+    }
+    else if ([[value className] isEqualToString:@"__NSCFConstantString"] || [[value className] isEqualToString:@"__NSCFNumber"]){
+        return value;
+    }
+    else {
+        NSMutableDictionary* current = dataDict;
+        dataDict = current[key];
+        NSString *className = dataDict[@"JDClassName_"];
+        NSObject <JDCoding> *newObj = [(NSObject <JDCoding>  *)[NSClassFromString(className) alloc] initWithJDCoder:self];
+        dataDict = current;
+        
+        [decodedObjects addObject:newObj];
+        return newObj;
+    }
 }
 
 - (float)decodeFloatForKey:(id)key{

@@ -27,7 +27,7 @@
     [super tearDown];
 }
 
-- (void)testIUBoxEncoding {
+- (void)testIUBoxEncoding1{
     // This is an example of a functional test case.
     IUBox *testBox = [[IUBox alloc] initWithProject:nil options:nil];
     testBox.htmlID = @"HTML_ID";
@@ -39,11 +39,26 @@
     XCTAssert([resultBox.htmlID isEqualToString:@"HTML_ID"], @"Pass");
 }
 
+- (void)testIUBoxEncoding2{
+    // This is an example of a functional test case.
+    IUBox *testBox = [[IUBox alloc] initWithProject:nil options:nil];
+    testBox.htmlID = @"THIS_IS_HTMLID";
+    [testBox.css setValue:@"VALUETEST" forTag:@"IUCSSTagForTest"];
+    
+    JDCoder *coder = [[JDCoder alloc] init];
+    [coder encodeRootObject:testBox];
+    IUBox *resultBox = [coder decodedAndInitializeObject];
+    
+    XCTAssert([[resultBox.css effectiveValueForTag:@"IUCSSTagForTest" forViewport:IUCSSDefaultViewPort] isEqualToString:@"VALUETEST"], @"Pass");
+}
+
+/*
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
     }];
 }
+ */
 
 @end
