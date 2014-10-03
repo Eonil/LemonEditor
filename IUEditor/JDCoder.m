@@ -11,8 +11,8 @@
 
 @interface JDCoder()
 - (NSArray*)keysOfCurrentDecodingObject;
-- (void)encodeString:(NSString*)string forKey:(id)key;
-- (NSString*)decodeStringForKey:(id)key;
+- (void)encodeString:(NSString*)string forKey:(NSString*)key;
+- (NSString*)decodeStringForKey:(NSString*)key;
 @end
 
 @implementation NSArray(JDCoding)
@@ -21,7 +21,7 @@
     [aCoder encodeString:self.className forKey:@"JDClassName_"];
     for (NSUInteger i=0; i<self.count; i++) {
         NSObject <JDCoding> *obj = [self objectAtIndex:i];
-        [aCoder encodeObject:obj forKey:@(i)];
+        [aCoder encodeObject:obj forKey:[NSString stringWithFormat:@"%ld", i]];
     }
     [aCoder encodeInteger:self.count forKey:@"count"];
 }
@@ -31,7 +31,7 @@
     NSMutableArray *tempArr = [NSMutableArray array];
     NSUInteger count = [aDecoder decodeIntegerForKey:@"count"];
     for (NSUInteger i=0; i<count; i++) {
-        NSObject <JDCoding> *obj = [aDecoder decodeObjectForKey:@(i)];
+        NSObject <JDCoding> *obj = [aDecoder decodeObjectForKey:[NSString stringWithFormat:@"%ld", i]];
         [tempArr addObject:obj];
     }
     self = [self initWithArray:tempArr];
@@ -135,6 +135,9 @@
  */
 
 - (void)encodeRootObject:(NSObject <JDCoding> *)object{
+    if (object == nil) {
+        NSAssert(0, @"object should not be nil");
+    }
     dataDict[@"JDClassName_"] = object.className;
     [object encodeWithJDCoder:self];
 }
@@ -155,28 +158,28 @@
     return newObj;
 }
 
-- (void)encodeInteger:(NSInteger)value forKey:(id)key{
+- (void)encodeInteger:(NSInteger)value forKey:(NSString*)key{
     [dataDict setValue:@(value) forKey:key];
 }
 
-- (void)encodeBool:(BOOL)value forKey:(id)key{
+- (void)encodeBool:(BOOL)value forKey:(NSString*)key{
     [dataDict setValue:@(value) forKey:key];
 }
 
-- (void)encodeFloat:(float)value forKey:(id)key{
+- (void)encodeFloat:(float)value forKey:(NSString*)key{
     [dataDict setValue:@(value) forKey:key];
 }
 
-- (void)encodeDouble:(double)value forKey:(id)key{
+- (void)encodeDouble:(double)value forKey:(NSString*)key{
     [dataDict setValue:@(value) forKey:key];
 }
 
-- (void)encodeString:(NSString*)value forKey:(id)key{
+- (void)encodeString:(NSString*)value forKey:(NSString*)key{
     [dataDict setValue:value forKey:key];
 }
 
 
-- (void)encodeObject:(NSObject <JDCoding> *)obj forKey:(id)key{
+- (void)encodeObject:(NSObject <JDCoding> *)obj forKey:(NSString*)key{
     if ([[obj className] isEqualToString:@"__NSCFNumber"]) {
         [self encodeDouble:[(NSNumber*)obj doubleValue] forKey:key];
     }
@@ -232,23 +235,29 @@
 
 
 
-- (NSInteger)decodeIntegerForKey:(id)key{
+- (NSInteger)decodeIntegerForKey:(NSString*)key{
     return [dataDict[key] integerValue];
 }
 
-- (id)decodeObjectForKey:(id)key{
+- (id)decodeObjectForKey:(NSString*)key{
     id value = dataDict[key];
     if ([value isMemberOfClass:[NSNumber class]] || [value isMemberOfClass:[NSString class]]) {
         return value;
     }
-    else if ([[value className] isEqualToString:@"__NSCFConstantString"] || [[value className] isEqualToString:@"__NSCFNumber"]){
+    else if ([[value className] isEqualToString:@"__NSCFConstantString"] || [value isKindOfClass:[NSString class]] || [[value className] isEqualToString:@"__NSCFNumber"] || [value isKindOfClass:[NSNumber class]]){
         return value;
     }
     else {
         NSMutableDictionary* current = dataDict;
         dataDict = current[key];
         NSString *className = dataDict[@"JDClassName_"];
-        NSObject <JDCoding> *newObj = [(NSObject <JDCoding>  *)[NSClassFromString(className) alloc] initWithJDCoder:self];
+        NSObject <JDCoding> *newObj;
+        if ([className isEqualToString:@"__NSDictionaryM"]) {
+            newObj = [[NSMutableDictionary alloc] initWithJDCoder:self];
+        }
+        else {
+            newObj= [(NSObject <JDCoding>  *)[NSClassFromString(className) alloc] initWithJDCoder:self];
+        }
         dataDict = current;
         
         [decodedObjects addObject:newObj];
@@ -256,15 +265,15 @@
     }
 }
 
-- (float)decodeFloatForKey:(id)key{
+- (float)decodeFloatForKey:(NSString*)key{
     return [dataDict[key] floatValue];
 }
 
-- (double)decodeDoubleForKey:(id)key{
+- (double)decodeDoubleForKey:(NSString*)key{
     return [dataDict[key] doubleValue];
 }
 
-- (NSString*)decodeStringForKey:(id)key{
+- (NSString*)decodeStringForKey:(NSString*)key{
     return dataDict[key];
 }
 
@@ -306,9 +315,10 @@
     }
 }
 
-- (void)saveToURL:(NSURL *)url error:(NSError **)error{
-    NSData *data = [NSJSONSerialization dataWithJSONObject:dataDict options:0 error:error];
-    [data writeToURL:url atomically:YES];
+- (BOOL)saveToURL:(NSURL *)url error:(NSError **)error{
+    NSError *err;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dataDict options:0 error:&err];
+    return [data writeToURL:url atomically:YES];
 }
 
 - (void)loadFromURL:(NSURL *)url error:(NSError **)error{

@@ -14,12 +14,17 @@
 
 @end
 
-@implementation JDCoderTest
+@implementation JDCoderTest {
+    IUBox *testBox;
+}
 
 - (void)setUp {
     [super setUp];
     NSLog(@"test");
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    testBox = [[IUBox alloc] initWithProject:nil options:nil];
+    testBox.htmlID = @"THIS_IS_HTMLID";
+    [testBox.css setValue:@"VALUETEST" forTag:@"IUCSSTagForTest"];
+    [testBox.css setValue:@(10) forTag:@"IUCSSTagForTestNum"];
 }
 
 - (void)tearDown {
@@ -27,29 +32,41 @@
     [super tearDown];
 }
 
-- (void)testIUBoxEncoding1{
+- (void)test1_IUBoxEncoding1{
     // This is an example of a functional test case.
-    IUBox *testBox = [[IUBox alloc] initWithProject:nil options:nil];
-    testBox.htmlID = @"HTML_ID";
-
     JDCoder *coder = [[JDCoder alloc] init];
     [coder encodeRootObject:testBox];
     IUBox *resultBox = [coder decodedAndInitializeObject];
 
-    XCTAssert([resultBox.htmlID isEqualToString:@"HTML_ID"], @"Pass");
+    XCTAssert([resultBox.htmlID isEqualToString:@"THIS_IS_HTMLID"], @"Pass");
 }
 
-- (void)testIUBoxEncoding2{
+- (void)test2_IUBoxCSS{
     // This is an example of a functional test case.
-    IUBox *testBox = [[IUBox alloc] initWithProject:nil options:nil];
-    testBox.htmlID = @"THIS_IS_HTMLID";
-    [testBox.css setValue:@"VALUETEST" forTag:@"IUCSSTagForTest"];
-    
     JDCoder *coder = [[JDCoder alloc] init];
     [coder encodeRootObject:testBox];
     IUBox *resultBox = [coder decodedAndInitializeObject];
     
     XCTAssert([[resultBox.css effectiveValueForTag:@"IUCSSTagForTest" forViewport:IUCSSDefaultViewPort] isEqualToString:@"VALUETEST"], @"Pass");
+    NSInteger result = [[resultBox.css effectiveValueForTag:@"IUCSSTagForTestNum" forViewport:IUCSSDefaultViewPort] integerValue];
+    XCTAssert(result == 10, @"Pass");
+}
+
+- (void)test3_CoderSaveLoad{
+    JDCoder *coder = [[JDCoder alloc] init];
+    [coder encodeRootObject:testBox];
+    NSString *tempDir = NSTemporaryDirectory();
+    NSURL *fileURL = [NSURL fileURLWithPath:[tempDir stringByAppendingPathComponent:@"testBox.iuml"]];
+    NSError *err;
+    BOOL saveResult = [coder saveToURL:fileURL error:&err];
+    XCTAssert(saveResult, @"Pass");
+    JDCoder *loadCoder = [[JDCoder alloc] init];
+    [loadCoder loadFromURL:fileURL error:&err];
+    IUBox *resultBox = [loadCoder decodedAndInitializeObject];
+    
+    XCTAssert([[resultBox.css effectiveValueForTag:@"IUCSSTagForTest" forViewport:IUCSSDefaultViewPort] isEqualToString:@"VALUETEST"], @"Pass");
+    NSInteger result = [[resultBox.css effectiveValueForTag:@"IUCSSTagForTestNum" forViewport:IUCSSDefaultViewPort] integerValue];
+    XCTAssert(result == 10, @"Pass");
 }
 
 /*

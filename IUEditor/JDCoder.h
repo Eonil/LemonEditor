@@ -57,22 +57,22 @@
 /*
  Following are encode/decode functions. Messages are same with NSCoder functions
  */
-- (void)encodeInteger:(NSInteger)value forKey:(id)key;
-- (void)encodeBool:(BOOL)value forKey:(id)key;
-- (void)encodeFloat:(float)value forKey:(id)key;
-- (void)encodeDouble:(double)value forKey:(id)key;
-- (void)encodeObject:(id <JDCoding>)obj forKey:(id)key;
+- (void)encodeInteger:(NSInteger)value forKey:(NSString*)key;
+- (void)encodeBool:(BOOL)value forKey:(NSString*)key;
+- (void)encodeFloat:(float)value forKey:(NSString*)key;
+- (void)encodeDouble:(double)value forKey:(NSString*)key;
+- (void)encodeObject:(id <JDCoding>)obj forKey:(NSString*)key;
 - (void)encodeFromObject:(NSObject *)obj withProperties:(NSArray*)properties;
 
-- (NSInteger)decodeIntegerForKey:(id)key;
-- (id)decodeObjectForKey:(id)key;
-- (float)decodeFloatForKey:(id)key;
-- (double)decodeDoubleForKey:(id)key;
+- (NSInteger)decodeIntegerForKey:(NSString*)key;
+- (id)decodeObjectForKey:(NSString*)key;
+- (float)decodeFloatForKey:(NSString*)key;
+- (double)decodeDoubleForKey:(NSString*)key;
 - (void)decodeToObject:(NSObject *)obj withProperties:(NSArray *)properties;
 
 /*
  Followings are save/load functions
  */
-- (void)saveToURL:(NSURL *)url error:(NSError **)error;
+- (BOOL)saveToURL:(NSURL *)url error:(NSError **)error;
 - (void)loadFromURL:(NSURL *)url error:(NSError **)error;
 @end
