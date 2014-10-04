@@ -116,6 +116,10 @@
 
 @implementation NSObject (JDExtension)
 
+- (NSString*)memoryAddress{
+    return [NSString stringWithFormat:@"%p", self];
+}
+
 -(void)addObserver:(NSObject *)observer forKeyPaths:(NSArray *)keyPaths options:(NSKeyValueObservingOptions)options context:(void *)context{
     for (NSString *keyPath in keyPaths) {
         [self addObserver:observer forKeyPath:keyPath options:options context:context];

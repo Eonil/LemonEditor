@@ -83,14 +83,23 @@
     [[self undoManager] disableUndoRegistration];
     _htmlID = [aDecoder decodeObjectForKey:@"htmlID"];
     _css = [aDecoder decodeObjectForKey:@"css"];
+    _m_children = [aDecoder decodeObjectForKey:@"children"];
     [[self undoManager] enableUndoRegistration];
     return self;
+}
+
+- (void)awakeAfterUsingJDCoder:(JDCoder *)aDecoder{
+    _link = [aDecoder decodeByRefObjectForKey:@"link"];
 }
 
 - (void)encodeWithJDCoder:(JDCoder *)aCoder{
     [aCoder encodeObject:self.htmlID forKey:@"htmlID"];
     [aCoder encodeObject:self.css forKey:@"css"];
+    [aCoder encodeObject:self.children forKey:@"children"];
+    [aCoder encodeByRefObject:self.link forKey:@"link"];
 }
+
+
 /**
  Review: _m_children의 decode는 순서가 꼬이기 때문에 initWithCoder가 아닌 awkaAfterUsingCoder로 하도록한다.
  (self가 다 할당되기전에 children이 먼저 할당 되면서 발생하는 문제 제거)

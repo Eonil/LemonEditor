@@ -31,7 +31,7 @@ static NSString * kJDContext = @"JDContext";
 
 
 @interface NSObject (JDExtension)
-
+- (NSString*)memoryAddress;
 
 -(void)addObserver:(NSObject *)observer forKeyPaths:(NSArray *)keyPaths options:(NSKeyValueObservingOptions)options context:(void *)context;
 
