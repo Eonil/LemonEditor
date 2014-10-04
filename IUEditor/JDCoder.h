@@ -12,8 +12,13 @@
 @class JDCoder;
 
 @protocol JDCoding
+
 - (void)encodeWithJDCoder:(JDCoder *)aCoder;
 - (id)initWithJDCoder:(JDCoder *)aDecoder;
+
+@optional
+- (void)awakeAfterUsingJDCoder:(JDCoder *)aDecoder;
+
 @end
 
 /*
@@ -32,7 +37,6 @@
 @end
 
 @interface NSNumber(JDCoding) <JDCoding>
-
 @end
 
 /* JDCoder resemble NSCoder, but
@@ -45,6 +49,7 @@
 
 /**
  Register Notifications of initialize process
+  awakeAfterUsingJDCoder: are called default.
  */
 - (void)appendSelectorInInitProcess:(SEL)selector;
 
@@ -69,6 +74,13 @@
 - (float)decodeFloatForKey:(NSString*)key;
 - (double)decodeDoubleForKey:(NSString*)key;
 - (void)decodeToObject:(NSObject *)obj withProperties:(NSArray *)properties;
+
+/*
+ This encoding/decoding by ref functions maintain weak reference of object.
+ Obj should decoded before decodeByObjectForKey: is called. Otherwise, it raises exception
+ */
+- (void)encodeByRefObject:(NSObject <NSCoding> *)obj forKey:(NSString*)key;
+- (id)decodeByRefObjectForKey:(NSString *)key;
 
 /*
  Followings are save/load functions

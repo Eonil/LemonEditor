@@ -16,6 +16,8 @@
 
 @implementation JDCoderTest {
     IUBox *testBox;
+    IUBox *childBox1;
+    IUBox *childBox2;
 }
 
 - (void)setUp {
@@ -25,6 +27,19 @@
     testBox.htmlID = @"THIS_IS_HTMLID";
     [testBox.css setValue:@"VALUETEST" forTag:@"IUCSSTagForTest"];
     [testBox.css setValue:@(10) forTag:@"IUCSSTagForTestNum"];
+    
+    childBox1 = [[IUBox alloc] initWithProject:nil options:nil];
+    childBox1.htmlID = @"ChildBox1";
+
+    childBox2 = [[IUBox alloc] initWithProject:nil options:nil];
+    childBox2.htmlID = @"ChildBox2";
+    
+    [testBox addIU:childBox1 error:nil];
+    [testBox addIU:childBox2 error:nil];
+
+    childBox1.link = childBox2;
+    childBox2.link = childBox1;
+    
 }
 
 - (void)tearDown {
@@ -67,6 +82,29 @@
     XCTAssert([[resultBox.css effectiveValueForTag:@"IUCSSTagForTest" forViewport:IUCSSDefaultViewPort] isEqualToString:@"VALUETEST"], @"Pass");
     NSInteger result = [[resultBox.css effectiveValueForTag:@"IUCSSTagForTestNum" forViewport:IUCSSDefaultViewPort] integerValue];
     XCTAssert(result == 10, @"Pass");
+}
+
+- (void)test4_children{
+    JDCoder *coder = [[JDCoder alloc] init];
+    [coder encodeRootObject:testBox];
+    
+    IUBox *resultBox = [coder decodedAndInitializeObject];
+    IUBox *resultChildBox1 = [[resultBox children] objectAtIndex:0];
+    
+    XCTAssert([resultChildBox1.htmlID isEqualToString:@"ChildBox1"], @"Pass");
+}
+
+- (void)test5_selector{
+    JDCoder *coder = [[JDCoder alloc] init];
+    [coder encodeRootObject:testBox];
+    
+    IUBox *resultBox = [coder decodedAndInitializeObject];
+    IUBox *resultChildBox1 = [[resultBox children] objectAtIndex:0];
+    IUBox *resultChildBox2 = [[resultBox children] objectAtIndex:1];
+
+    XCTAssert(resultChildBox1, @"Pass");
+    XCTAssert(resultChildBox1.link == resultChildBox2, @"Pass");
+    XCTAssert(resultChildBox2.link == resultChildBox1, @"Pass");
 }
 
 /*

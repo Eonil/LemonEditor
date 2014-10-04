@@ -18,7 +18,6 @@
 @implementation NSArray(JDCoding)
 
 - (void)encodeWithJDCoder:(JDCoder *)aCoder{
-    [aCoder encodeString:self.className forKey:@"JDClassName_"];
     for (NSUInteger i=0; i<self.count; i++) {
         NSObject <JDCoding> *obj = [self objectAtIndex:i];
         [aCoder encodeObject:obj forKey:[NSString stringWithFormat:@"%ld", i]];
@@ -42,7 +41,6 @@
 
 @implementation NSDictionary(JDCoding)
 - (void)encodeWithJDCoder:(JDCoder *)aCoder{
-    [aCoder encodeString:self.className forKey:@"JDClassName_"];
     [self enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         [aCoder encodeObject:obj forKey:key];
     }];
@@ -109,7 +107,7 @@
 @implementation JDCoder {
     NSMutableArray *initSelectors;
     NSMutableDictionary *dataDict;
-    NSMutableArray *decodedObjects;
+    NSMutableDictionary *decodedObjects;
 }
 
 /**
@@ -118,9 +116,9 @@
 
 - (instancetype)init{
     self = [super init];
-    initSelectors = [NSMutableArray array];
+    initSelectors = [NSMutableArray arrayWithObjects:@"awakeAfterUsingJDCoder:", nil];
     dataDict = [NSMutableDictionary dictionary];
-    decodedObjects = [NSMutableArray array];
+    decodedObjects = [NSMutableDictionary dictionary];
     return self;
 }
 
@@ -139,21 +137,27 @@
         NSAssert(0, @"object should not be nil");
     }
     dataDict[@"JDClassName_"] = object.className;
+    dataDict[@"JDMemory_"] = object.memoryAddress;
     [object encodeWithJDCoder:self];
 }
 
 - (id)decodedAndInitializeObject{
     NSString *className = dataDict[@"JDClassName_"];
     NSObject <JDCoding> *newObj = [(NSObject <JDCoding>  *)[NSClassFromString(className) alloc] initWithJDCoder:self];
+
     for (NSString *selectorString in initSelectors) {
         SEL sel = NSSelectorFromString(selectorString);
-        for (NSObject *obj in decodedObjects) {
+        [decodedObjects enumerateKeysAndObjectsUsingBlock:^(id key, NSDictionary* dict, BOOL *stop) {
+            id obj = dict[@"Object"];
+            
             if ([obj respondsToSelector:sel]) {
-                IMP imp = [obj methodForSelector:sel];
-                void (*func)(id, SEL) = (void *)imp;
-                func(obj, sel);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                dataDict = dict[@"Dict"];
+                [obj performSelector:sel withObject:self];
+#pragma clang diagnostic pop
             }
-        }
+        }];
     }
     return newObj;
 }
@@ -178,8 +182,28 @@
     [dataDict setValue:value forKey:key];
 }
 
+- (void)encodeByRefObject:(NSObject <NSCoding> *)obj forKey:(NSString*)key{
+    if (obj == nil){
+        return;
+    }
+    dataDict[key] = [NSMutableDictionary dictionary];
+    dataDict[key][@"JDClassName_"] = NSStringFromClass([obj classForKeyedArchiver]);
+    dataDict[key][@"JDMemory_"] = [NSString stringWithFormat:@"%p", obj];
+}
+
+- (id)decodeByRefObjectForKey:(NSString *)key{
+    NSString *memoryAddress = dataDict[key][@"JDMemory_"];
+    if (decodedObjects[memoryAddress] == nil) {
+        [NSException raise:@"JDDecodeError" format:@"Object Not decoded before decodeByRefObjectForKey:%@ is called", key];
+    }
+    return decodedObjects[memoryAddress][@"Object"];
+}
+
 
 - (void)encodeObject:(NSObject <JDCoding> *)obj forKey:(NSString*)key{
+    if (obj == nil) {
+        return;
+    }
     if ([[obj className] isEqualToString:@"__NSCFNumber"]) {
         [self encodeDouble:[(NSNumber*)obj doubleValue] forKey:key];
     }
@@ -191,6 +215,7 @@
         dataDict = [NSMutableDictionary dictionary];
         current[key] = dataDict;
         current[key][@"JDClassName_"] = NSStringFromClass([obj classForKeyedArchiver]);
+        current[key][@"JDMemory_"] = obj.memoryAddress;
         if (obj != nil) {
             [obj encodeWithJDCoder:self];
         }
@@ -258,9 +283,9 @@
         else {
             newObj= [(NSObject <JDCoding>  *)[NSClassFromString(className) alloc] initWithJDCoder:self];
         }
+        [decodedObjects setObject:@{@"Object":newObj, @"Dict":dataDict} forKey:dataDict[@"JDMemory_"]];
         dataDict = current;
         
-        [decodedObjects addObject:newObj];
         return newObj;
     }
 }
