@@ -14,7 +14,8 @@ input {
 
 a{
     text-decoration:none;
-/*    display:block; remove this : wp comment*/
+    /*requirement for width, height */
+    display:block;
 }
 
 .IUPage{
