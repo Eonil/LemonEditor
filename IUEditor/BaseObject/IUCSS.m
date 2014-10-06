@@ -59,7 +59,7 @@
     /*
         if key is NSNumber, change it to NSString
      */
-    for (id key in _cssDictWithViewPort) {
+    for (id key in [_cssDictWithViewPort allKeys]) {
         if ([key isKindOfClass:[NSNumber class]]) {
             _cssDictWithViewPort[Integer2Str([key integerValue])] = _cssDictWithViewPort[key];
             [_cssDictWithViewPort removeObjectForKey:key];
