@@ -90,6 +90,7 @@
 
 - (void)awakeAfterUsingJDCoder:(JDCoder *)aDecoder{
     _link = [aDecoder decodeByRefObjectForKey:@"link"];
+    _parent = [aDecoder decodeByRefObjectForKey:@"parent"];
 }
 
 - (void)encodeWithJDCoder:(JDCoder *)aCoder{
@@ -97,6 +98,7 @@
     [aCoder encodeObject:self.css forKey:@"css"];
     [aCoder encodeObject:self.children forKey:@"children"];
     [aCoder encodeByRefObject:self.link forKey:@"link"];
+    [aCoder encodeByRefObject:self.parent forKey:@"parent"];
 }
 
 

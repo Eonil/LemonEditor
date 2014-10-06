@@ -15,7 +15,7 @@
 @end
 
 @implementation JDCoderTest {
-    IUBox *testBox;
+    IUBox *parentBox;
     IUBox *childBox1;
     IUBox *childBox2;
 }
@@ -23,10 +23,10 @@
 - (void)setUp {
     [super setUp];
     NSLog(@"test");
-    testBox = [[IUBox alloc] initWithProject:nil options:nil];
-    testBox.htmlID = @"THIS_IS_HTMLID";
-    [testBox.css setValue:@"VALUETEST" forTag:@"IUCSSTagForTest"];
-    [testBox.css setValue:@(10) forTag:@"IUCSSTagForTestNum"];
+    parentBox = [[IUBox alloc] initWithProject:nil options:nil];
+    parentBox.htmlID = @"parentBox";
+    [parentBox.css setValue:@"VALUETEST" forTag:@"IUCSSTagForTest"];
+    [parentBox.css setValue:@(10) forTag:@"IUCSSTagForTestNum"];
     
     childBox1 = [[IUBox alloc] initWithProject:nil options:nil];
     childBox1.htmlID = @"ChildBox1";
@@ -34,8 +34,8 @@
     childBox2 = [[IUBox alloc] initWithProject:nil options:nil];
     childBox2.htmlID = @"ChildBox2";
     
-    [testBox addIU:childBox1 error:nil];
-    [testBox addIU:childBox2 error:nil];
+    [parentBox addIU:childBox1 error:nil];
+    [parentBox addIU:childBox2 error:nil];
 
     childBox1.link = childBox2;
     childBox2.link = childBox1;
@@ -49,17 +49,20 @@
 
 - (void)test1_IUBoxEncoding1{
     // This is an example of a functional test case.
+    IUBox *oneBox = [[IUBox alloc] initWithProject:nil options:nil];
+    oneBox.htmlID = @"OneBox";
+    
     JDCoder *coder = [[JDCoder alloc] init];
-    [coder encodeRootObject:testBox];
+    [coder encodeRootObject:oneBox];
     IUBox *resultBox = [coder decodedAndInitializeObject];
 
-    XCTAssert([resultBox.htmlID isEqualToString:@"THIS_IS_HTMLID"], @"Pass");
+    XCTAssert([resultBox.htmlID isEqualToString:@"OneBox"], @"Pass");
 }
 
 - (void)test2_IUBoxCSS{
     // This is an example of a functional test case.
     JDCoder *coder = [[JDCoder alloc] init];
-    [coder encodeRootObject:testBox];
+    [coder encodeRootObject:parentBox];
     IUBox *resultBox = [coder decodedAndInitializeObject];
     
     XCTAssert([[resultBox.css effectiveValueForTag:@"IUCSSTagForTest" forViewport:IUCSSDefaultViewPort] isEqualToString:@"VALUETEST"], @"Pass");
@@ -69,9 +72,9 @@
 
 - (void)test3_CoderSaveLoad{
     JDCoder *coder = [[JDCoder alloc] init];
-    [coder encodeRootObject:testBox];
+    [coder encodeRootObject:parentBox];
     NSString *tempDir = NSTemporaryDirectory();
-    NSURL *fileURL = [NSURL fileURLWithPath:[tempDir stringByAppendingPathComponent:@"testBox.iuml"]];
+    NSURL *fileURL = [NSURL fileURLWithPath:[tempDir stringByAppendingPathComponent:@"parentBox.iuml"]];
     NSError *err;
     BOOL saveResult = [coder saveToURL:fileURL error:&err];
     XCTAssert(saveResult, @"Pass");
@@ -86,17 +89,18 @@
 
 - (void)test4_children{
     JDCoder *coder = [[JDCoder alloc] init];
-    [coder encodeRootObject:testBox];
+    [coder encodeRootObject:parentBox];
     
     IUBox *resultBox = [coder decodedAndInitializeObject];
     IUBox *resultChildBox1 = [[resultBox children] objectAtIndex:0];
     
     XCTAssert([resultChildBox1.htmlID isEqualToString:@"ChildBox1"], @"Pass");
+    XCTAssert([resultChildBox1.parent.htmlID isEqualToString:@"parentBox"], @"Pass");
 }
 
 - (void)test5_selector{
     JDCoder *coder = [[JDCoder alloc] init];
-    [coder encodeRootObject:testBox];
+    [coder encodeRootObject:parentBox];
     
     IUBox *resultBox = [coder decodedAndInitializeObject];
     IUBox *resultChildBox1 = [[resultBox children] objectAtIndex:0];
