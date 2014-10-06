@@ -46,6 +46,7 @@ static NSString *kIUPageLayout = @"layout";
 
 
 //layout children
+@property IUPageLayout layout;
 @property IUHeader *header;
 @property IUFooter *footer;
 @property IUSidebar *sidebar;
