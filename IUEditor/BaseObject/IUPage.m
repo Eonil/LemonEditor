@@ -54,8 +54,8 @@
         [self.css eradicateTag:IUCSSTagPercentWidth];
         [self.css eradicateTag:IUCSSTagPercentHeight];
 
-        IUPageLayout layout = [[options objectForKey:kIUPageLayout] intValue];
-        [self makePageLayout:layout project:project];
+        _layout = [[options objectForKey:kIUPageLayout] intValue];
+        [self makePageLayout:_layout project:project];
         
         [self.undoManager enableUndoRegistration];
 
