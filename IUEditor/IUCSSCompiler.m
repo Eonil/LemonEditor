@@ -548,6 +548,14 @@
         
         [code setInsertingTarget:IUTargetEditor];
         [code insertTag:@"background-color" string:editorColor];
+        
+        [code setInsertingTarget:IUTargetBoth];
+        if(cssTagDict[IUCSSTagHoverBGColorDuration]){
+            NSString *durationStr = [NSString stringWithFormat:@"%lds", [cssTagDict[IUCSSTagHoverBGColorDuration] integerValue]];
+            [code insertTag:@"-webkit-transition-duration" string:durationStr];
+            [code insertTag:@"transition-duration" string:durationStr];
+        }
+
     }
     
     

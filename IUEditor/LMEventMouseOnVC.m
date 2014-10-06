@@ -23,6 +23,7 @@
 //bgColor
 @property (weak) IBOutlet NSButton *changeBGColorBtn;
 @property (weak) IBOutlet NSColorWell *bgColorWell;
+@property (weak) IBOutlet NSTextField *bgColorDurationTF;
 
 //textColor
 @property (weak) IBOutlet NSButton *changeTextColorBtn;
@@ -70,7 +71,8 @@
 #pragma mark bgColor
     [self outlet:_changeBGColorBtn bind:NSValueBinding cssTag:IUCSSTagHoverBGColorEnable];
     [self outlet:_bgColorWell bind:NSValueBinding cssTag:IUCSSTagHoverBGColor];
-    
+    [self outlet:_bgColorDurationTF bind:NSValueBinding cssTag:IUCSSTagHoverBGColorDuration options:IUBindingDictNumberAndNotRaisesApplicable];
+
     
 #pragma mark textColor
     [self outlet:_changeTextColorBtn bind:NSValueBinding cssTag:IUCSSTagHoverTextColorEnable];
