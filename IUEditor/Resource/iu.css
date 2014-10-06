@@ -103,7 +103,7 @@ a{
     width:initial;
     height:initial;
     overflow:visible;
-    display:inline-block;
+    display:block;
     z-index:10;
 }
 

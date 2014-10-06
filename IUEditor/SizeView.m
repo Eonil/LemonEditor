@@ -307,23 +307,25 @@
     
     [self addFrame:newWidth];
     [self.addFramePopover close];
+    NSMutableDictionary *userDict = [NSMutableDictionary dictionary];
+
+    userDict[IUNotificationMQSize] = @(newWidth);
     
     NSInteger currentIndex = [[self sortedArray] indexOfObject:widthNumber];
     
     NSNumber *max = [self.sortedArray firstObject];
+    userDict[IUNotificationMQMaxSize] = max;
     NSNumber *oldMax = [self.sortedArray objectAfterObject:max];
-    NSNumber *largerSize;
+    userDict[IUNotificationMQOldMaxSize] = oldMax;
     
     if(currentIndex != 0){
-        largerSize = [self.sortedArray objectAtIndex:currentIndex-1];
+        NSNumber *largerSize = [self.sortedArray objectAtIndex:currentIndex-1];
+        userDict[IUNotificationMQLargerSize] = largerSize;
     }
     
 //notification
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQAdded object:self
-                                                      userInfo:@{IUNotificationMQSize:@(newWidth),
-                                                                 IUNotificationMQOldMaxSize:oldMax,
-                                                                 IUNotificationMQMaxSize:max,
-                                                                 IUNotificationMQLargerSize:largerSize}];
+                                                      userInfo:userDict];
     
 }
 

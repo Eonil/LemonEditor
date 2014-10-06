@@ -1179,7 +1179,6 @@
         if(value){
             [code insertTag:@"color" color:value];
         }
-        [code insertTag:@"line-height" integer:height unit:IUUnitPixel];
         
         [code setInsertingIdentifier:[menuItem cssIdentifier]];
         [code setInsertingTarget:IUTargetBoth];
@@ -1190,6 +1189,8 @@
         else{
             [code insertTag:@"height" integer:height unit:IUUnitPixel];
         }
+        [code insertTag:@"line-height" integer:height unit:IUUnitPixel];
+
 
         
         //clousre
