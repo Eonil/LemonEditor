@@ -144,6 +144,7 @@
 - (id)decodedAndInitializeObject{
     NSString *className = dataDict[@"JDClassName_"];
     NSObject <JDCoding> *newObj = [(NSObject <JDCoding>  *)[NSClassFromString(className) alloc] initWithJDCoder:self];
+    [decodedObjects setObject:@{@"Object":newObj, @"Dict":dataDict} forKey:dataDict[@"JDMemory_"]];
 
     for (NSString *selectorString in initSelectors) {
         SEL sel = NSSelectorFromString(selectorString);
@@ -192,11 +193,16 @@
 }
 
 - (id)decodeByRefObjectForKey:(NSString *)key{
-    NSString *memoryAddress = dataDict[key][@"JDMemory_"];
-    if (decodedObjects[memoryAddress] == nil) {
-        [NSException raise:@"JDDecodeError" format:@"Object Not decoded before decodeByRefObjectForKey:%@ is called", key];
+    if (dataDict[key]) {
+        NSString *memoryAddress = dataDict[key][@"JDMemory_"];
+        if (decodedObjects[memoryAddress] == nil) {
+            [NSException raise:@"JDDecodeError" format:@"Object Not decoded before decodeByRefObjectForKey:%@ is called", key];
+        }
+        return decodedObjects[memoryAddress][@"Object"];
     }
-    return decodedObjects[memoryAddress][@"Object"];
+    else {
+        return nil;
+    }
 }
 
 
