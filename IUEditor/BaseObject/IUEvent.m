@@ -67,7 +67,7 @@
 + (NSArray *)visibleTypeArray{
     NSArray *array = [NSArray arrayWithObjects:
                       @"Blind",
-                      @"Slide"
+                      @"Slide",
                       @"Fold",
                       @"Bounce",
                       @"Clip",

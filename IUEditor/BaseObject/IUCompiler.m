@@ -384,7 +384,7 @@
         [code addCodeLine:jqueryPathCode];
         
         
-        NSString *jqueryUIPath = [[NSBundle mainBundle] pathForResource:@"jquery-ui-1.9.2" ofType:@"js"];
+        NSString *jqueryUIPath = [[NSBundle mainBundle] pathForResource:@"jquery-ui-1.11.1.min" ofType:@"js"];
         NSString *jqueryUIPathCode = [NSString stringWithFormat:@"<script src='%@'></script>", jqueryUIPath];
         [code addCodeLine:jqueryUIPathCode];
 
@@ -397,7 +397,7 @@
     }
     else{
         [code addCodeLine:@"<script src='http://code.jquery.com/jquery-1.10.2.js'></script>"];
-        [code addCodeLine:@"<script src='http://code.jquery.com/ui/1.9.2/jquery-ui.js'></script>"];
+        [code addCodeLine:@"<script src='http://code.jquery.com/ui/1.11.1/jquery-ui.js'></script>"];
         
         for(NSString *filename in sheet.project.defaultOutputJSArray){
             [code addCodeLineWithFormat:@"<script type=\"text/javascript\" src=\"resource/js/%@\"></script>", filename];
