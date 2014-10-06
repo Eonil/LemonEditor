@@ -822,7 +822,7 @@
         if([((DOMHTMLElement *)node) hasAttribute:@"hasChildren"]){
             return (DOMHTMLElement *)node;
         }
-        return [self IUNodeAtCurrentNode:node.parentNode];
+        return [self parentIUNodeAtCurrentNode:node.parentNode];
     }
     else if ([node isKindOfClass:[DOMHTMLIFrameElement class]]){
         JDTraceLog(@"");
@@ -837,7 +837,7 @@
         return nil;
     }
     else {
-        return [self IUNodeAtCurrentNode:node.parentNode];
+        return [self parentIUNodeAtCurrentNode:node.parentNode];
     }
 }
 
