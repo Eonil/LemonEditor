@@ -1061,7 +1061,7 @@
     }
     if(htmlText){
         if(IUTargetEditor == target ||
-           (IUTargetOutput == target && iu.pgContentVariable == nil && _compiler.rule == IUCompileRuleDjango)){
+           (IUTargetOutput == target && iu.pgContentVariable == nil)){
             [code increaseIndentLevelForEdit];
             [code addCodeLineWithFormat:@"<p>%@</p>",htmlText];
             [code decreaseIndentLevelForEdit];
