@@ -185,14 +185,14 @@
         return 0;
     }
 }
-- (void)setMaxWidth:(BOOL)max{
+- (void)setMaxWidthWithChange:(BOOL)isChange{
     InnerSizeBox *maxBox = (InnerSizeBox *)boxManageView.subviews[0];
     if(maxBox){
         if(maxBox.frameWidth > boxManageView.frame.size.width){
             [boxManageView setWidth:maxBox.frameWidth];
         }
     }
-    if(max){
+    if(isChange){
         [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQMaxChanged object:self userInfo:@{IUNotificationMQSize:@(selectedWidth), IUNotificationMQMaxSize:@(maxBox.frameWidth)}];
     }
 }
@@ -233,7 +233,7 @@
         [boxManageView addSubviewLeftInFrameWithFrame:newBox positioned:NSWindowBelow relativeTo:frontView];
     }
     
-    [self setMaxWidth:isMaxChanged];
+    [self setMaxWidthWithChange:isMaxChanged];
     if(isMaxChanged){
         [self selectBox:newBox];
     }
@@ -272,7 +272,7 @@
     [_sizeArray removeObject:widthNumber];
     
     //set maxWidth in case of removing maxWidth 
-    [self setMaxWidth:isMaxChanged];
+    [self setMaxWidthWithChange:isMaxChanged];
     
 
     //notification
