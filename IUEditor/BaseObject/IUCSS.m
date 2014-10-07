@@ -156,19 +156,10 @@
 }
 - (void)copySizeFrom:(NSInteger)fromWidth to:(NSInteger)toWidth{
     if(_cssFrameDict[@(toWidth)] == nil){
-        NSMutableDictionary *cssDict = [_cssFrameDict[@(fromWidth)] mutableCopy];
-        [_cssFrameDict setObject:cssDict forKey:@(toWidth)];
-    }
-}
-/**
- @brief
- media query를 조금더 부드럽게 하기위해서 새로운 size를 만들때 하나위의  css 를 카피함.
- 없을 경우에는 frame dict만 만들어 놓음.
- */
-- (void)checkSizeDict:(NSInteger)width{
-    if(_cssFrameDict[@(width)] == nil){
-        NSMutableDictionary *cssDict = [NSMutableDictionary dictionary];
-        [_cssFrameDict setObject:cssDict forKey:@(width)];
+        if(_cssFrameDict[@(fromWidth)]){
+            NSMutableDictionary *cssDict = [_cssFrameDict[@(fromWidth)] mutableCopy];
+            [_cssFrameDict setObject:cssDict forKey:@(toWidth)];
+        }
     }
 }
 

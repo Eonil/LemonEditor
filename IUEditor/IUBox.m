@@ -541,7 +541,6 @@
         [_css copyMaxSizeToSize:oldMaxSize];
     }
     
-    [_css checkSizeDict:size];
     [_css setMaxWidth:maxSize];
     
 }

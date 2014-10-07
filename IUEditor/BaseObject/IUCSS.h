@@ -52,7 +52,6 @@
  */
 - (void)copyMaxSizeToSize:(NSInteger)width;
 - (void)copySizeFrom:(NSInteger)fromWidth to:(NSInteger)toWidth;
-- (void)checkSizeDict:(NSInteger)width;
 
 //observable.
 @property (readonly) NSMutableDictionary *assembledTagDictionary;
