@@ -385,7 +385,8 @@
     }
     
     if(menuItem.children.count > 0){
-        [code addCodeLine:@"<div class='closure'></div>"];
+        //TODO: closure position property랑 connect 되면 소스 추가
+        //        [code addCodeLine:@"<div class='closure'></div>"];
         [code addCodeLine:@"<ul>"];
         for(IUBox *child in menuItem.children){
             [self htmlCode:child target:target code:code];

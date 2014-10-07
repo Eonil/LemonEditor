@@ -1157,24 +1157,23 @@
             value = [menuItem.parent.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport];
         }
         else if(menuItem.depth == 2){
-            value = [menuItem.parent.parent.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport];
+            value = [menuItem.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport];
+
+            if(value == nil){
+                value = [menuItem.parent.parent.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport];
+            }
         }
         else{
-            value = [menuItem.parent.parent.parent.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport];
+            value = [menuItem.parent.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport];
+
+            if(value== nil){
+                value = [menuItem.parent.parent.parent.css valueByStepForTag:IUCSSTagPixelHeight forViewport:viewport];
+            }
         }
         
-        if(value){
-            maxHeight = [value intValue];
-        }
+
+        int height = [value intValue];
         
-        int height;
-        if(menuItem.depth > 1){
-            height = maxHeight - 10;
-        }
-        else{
-            height = maxHeight;
-        }
-                
         //item identifier
         [code setInsertingIdentifier:menuItem.itemIdentifier];
         [code setInsertingTarget:IUTargetBoth];

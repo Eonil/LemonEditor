@@ -293,6 +293,9 @@
     return NO;
 }
 - (BOOL)hasHeight{
+    if(self.depth == 2){
+        return YES;
+    }
     return NO;
 }
 - (BOOL)hasWidth{
@@ -304,6 +307,9 @@
     }
 }
 - (BOOL)canChangeHeightByUserInput{
+    if(self.depth == 2){
+        return YES;
+    }
     return NO;
 }
 - (BOOL)canChangePositionType{
