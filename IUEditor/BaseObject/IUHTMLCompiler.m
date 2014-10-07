@@ -1054,7 +1054,9 @@
         }
     }
     
-    if(iu.text && iu.text.length > 0 && [iu conformsToProtocol:@protocol(IUPHPCodeProtocol)] == NO){
+    if(iu.text && iu.text.length > 0
+       && iu.pgContentVariable == nil && _compiler.rule != IUCompileRuleDjango
+       && [iu conformsToProtocol:@protocol(IUPHPCodeProtocol)] == NO){
         [code addNewLine];
         NSString *htmlText = [iu.text stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
         htmlText = [htmlText stringByReplacingOccurrencesOfString:@"  " withString:@" &nbsp;"];
