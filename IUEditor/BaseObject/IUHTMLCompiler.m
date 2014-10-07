@@ -1032,7 +1032,6 @@
             [code decreaseIndentLevelForEdit];
             
         }
-        
         //TODO: WP
         else if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol)] && _compiler.rule == IUCompileRuleDefault){
             /* for example, WORDPRESS can be compiled as HTML */
@@ -1054,15 +1053,20 @@
         }
     }
     
+    NSString *htmlText;
     if(iu.text && iu.text.length > 0
-       && iu.pgContentVariable == nil && _compiler.rule != IUCompileRuleDjango
        && [iu conformsToProtocol:@protocol(IUPHPCodeProtocol)] == NO){
-        [code addNewLine];
-        NSString *htmlText = [iu.text stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
+        htmlText = [iu.text stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
         htmlText = [htmlText stringByReplacingOccurrencesOfString:@"  " withString:@" &nbsp;"];
-        [code increaseIndentLevelForEdit];
-        [code addCodeLineWithFormat:@"<p>%@</p>",htmlText];
-        [code decreaseIndentLevelForEdit];
+    }
+    if(htmlText){
+        if(IUTargetEditor == target ||
+           (IUTargetOutput == target && iu.pgContentVariable == nil && _compiler.rule == IUCompileRuleDjango)){
+            [code increaseIndentLevelForEdit];
+            [code addCodeLineWithFormat:@"<p>%@</p>",htmlText];
+            [code decreaseIndentLevelForEdit];
+
+        }
     }
     
     if (target == IUTargetEditor || ( target == IUTargetOutput && [iu shouldCompileChildrenForOutput] )) {
