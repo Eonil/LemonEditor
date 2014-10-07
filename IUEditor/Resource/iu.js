@@ -288,6 +288,7 @@ $(window).resize(function(){
 	resizePageLinkSet();
 	resizeSideBar();
 	makefullSizeSection();
+	resizePageContentHeight();
 });
 
 

@@ -10,6 +10,7 @@ function isIUinWindow(iu){
 	
 	return true;
 }
+
 function makefullSizeSection(){
     var respc = $('[enableFullSize="1"]').toArray();
 	var windowHeight =  $(window).height();
@@ -27,6 +28,22 @@ function makefullSizeSection(){
 	
 	$.each(respc, function(){
 		$(this).css('height', sectionHeight+'px');
+	});
+}
+
+function resizePageContentHeight(){
+	$('.IUPageContent').each(function(){
+		var minHeight = 0;
+		$(this).children().each(function(){
+			var position = $(this).css('position');
+			if(position == 'relative'){
+				var iulocation = $(this).position().top + $(this).height();
+				if(iulocation > minHeight){
+					minHeight = iulocation;
+				}
+			}
+		})
+		$(this).css('min-height', minHeight);
 	});
 }
 
