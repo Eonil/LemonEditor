@@ -382,18 +382,19 @@
     [code addCodeLineWithFormat:@"<li %@>", [self attributeString:attributeDict]];
     [code increaseIndentLevelForEdit];
     
-    if(target == IUTargetEditor){
-        [code addCodeLineWithFormat:@"<a>%@</a>", menuItem.text];
-    }
-    else if(target == IUTargetOutput){
-        if(menuItem.link){
-            [code addCodeLineWithFormat:@"%@%@</a>", [self linkHeaderString:menuItem], menuItem.text];
+    if(menuItem.text && menuItem.text.length > 0){
+        if(target == IUTargetEditor){
+            [code addCodeLineWithFormat:@"<a>%@</a>", menuItem.text];
         }
-        else{
-            [code addCodeLineWithFormat:@"<a href=''>%@</a>", menuItem.text];
+        else if(target == IUTargetOutput){
+            if(menuItem.link){
+                [code addCodeLineWithFormat:@"%@%@</a>", [self linkHeaderString:menuItem], menuItem.text];
+            }
+            else{
+                [code addCodeLineWithFormat:@"<a href=''>%@</a>", menuItem.text];
+            }
         }
     }
-    
     if(menuItem.children.count > 0){
         //TODO: closure position property랑 connect 되면 소스 추가
         //        [code addCodeLine:@"<div class='closure'></div>"];
