@@ -68,6 +68,7 @@
 - (void)updateLinkPopupButtonItems{
     [_pageLinkPopupButton removeAllItems];
     [_pageLinkPopupButton addItemWithTitle:@"None"];
+    [_pageLinkPopupButton addItemWithTitle:@"Self"];
     for (IUPage *page in [_project pageSheets]) {
         NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:page.name action:nil keyEquivalent:@""];
         item.representedObject = page;
@@ -108,7 +109,13 @@
                 [_pageLinkPopupButton selectItemWithTitle:((IUBox *)value).name];
                 [_urlCheckButton setState:0];
                 [_urlTF setStringValue:@""];
-                [self updateDivLink:value];
+                [self updateDivLink:value isClassLink:NO];
+            }
+            else if ([value isKindOfClass:[NSString class]] && [value isEqualToString:@"Self"]){
+                [_pageLinkPopupButton selectItemWithTitle:@"Self"];
+                [_urlTF setStringValue:@""];
+                [_targetCheckButton setEnabled:NO];
+                [self updateDivLink:[self.controller.content firstObject] isClassLink:YES];
             }
             else{
                 [_urlCheckButton setState:1];
@@ -155,11 +162,16 @@
         [self setValue:nil forIUProperty:@"link"];
         return;
     }
+    else if([link isEqualToString:@"Self"]){
+        [self setValue:@"Self" forIUProperty:@"link"];
+        [self updateDivLink:[self.controller.content firstObject] isClassLink:YES];
+        return;
+    }
     if(_project){
         IUBox *box = [_project.identifierManager IUWithIdentifier:link];
         if(box){
             [self setValue:box forIUProperty:@"link"];
-            [self updateDivLink:(IUPage *)box];
+            [self updateDivLink:(IUPage *)box isClassLink:NO];
         }
         
     }
@@ -182,15 +194,30 @@
 
 #pragma mark - div link
 
-- (void)updateDivLink:(IUPage *)page{
+- (void)updateDivLink:(IUPage *)page isClassLink:(BOOL)isClassLink{
     NSAssert([page isKindOfClass:[IUPage class]], @"");
     [_divLinkPB setEnabled:YES];
     [_divLinkPB removeAllItems];
     [_divLinkPB addItemWithTitle:@"None"];
-    for(IUBox *box in page.allChildren){
-        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:box.name action:nil keyEquivalent:@""];
-        item.representedObject = box;
-        [[_divLinkPB menu] addItem:item];
+    if(isClassLink){
+        for(IUBox *box in page.allChildren){
+            if([box isKindOfClass:[IUImport class]]){
+                for(IUBox *classBox in box.allChildren){
+                    NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:classBox.name action:nil keyEquivalent:@""];
+                    item.representedObject = classBox;
+                    [[_divLinkPB menu] addItem:item];
+ 
+                }
+            }
+
+        }
+    }
+    else{
+        for(IUBox *box in page.allChildren){
+            NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:box.name action:nil keyEquivalent:@""];
+            item.representedObject = box;
+            [[_divLinkPB menu] addItem:item];
+        }
     }
     
 }

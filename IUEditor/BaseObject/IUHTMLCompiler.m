@@ -61,7 +61,12 @@
     if ([linkStr isHTTPURL] == NO) {
         if (_compiler.rule == IUCompileRuleDjango) {
             if(iu.divLink){
-                linkURL = [NSString stringWithFormat:@"/%@#%@", linkStr , ((IUBox *)iu.divLink).htmlID];
+                if([linkStr isEqualToString:@"Self"]){
+                    linkURL = [NSString stringWithFormat:@"#%@", ((IUBox *)iu.divLink).htmlID];
+                }
+                else{
+                    linkURL = [NSString stringWithFormat:@"/%@#%@", linkStr , ((IUBox *)iu.divLink).htmlID];
+                }
             }
             else{
                 linkURL = [NSString stringWithFormat:@"/%@", linkStr];
@@ -69,7 +74,12 @@
         }
         else {
             if(iu.divLink){
-                linkURL = [NSString stringWithFormat:@"./%@.html#%@", linkStr, ((IUBox *)iu.divLink).htmlID];
+                if([linkStr isEqualToString:@"Self"]){
+                    linkURL = [NSString stringWithFormat:@"#%@", ((IUBox *)iu.divLink).htmlID];
+                }
+                else{
+                    linkURL = [NSString stringWithFormat:@"./%@.html#%@", linkStr, ((IUBox *)iu.divLink).htmlID];
+                }
             }
             else{
                 linkURL = [NSString stringWithFormat:@"./%@.html", linkStr];
