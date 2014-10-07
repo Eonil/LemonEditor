@@ -1,15 +1,20 @@
-function isIUinWindow(iu){
-	var screenH = $(window).height();
-	
-	if($(iu).position().top + $(iu).height < 0){
-		return false;
-	}
-	if($(iu).position().top > screenH){
-		return false;
-	}
-	
-	return true;
+function isElementInViewport (el) {
+
+    //special bonus for those using jQuery
+    if (typeof jQuery === "function" && el instanceof jQuery) {
+        el = el[0];
+    }
+
+    var rect = el.getBoundingClientRect();
+
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+    );
 }
+
 
 function makefullSizeSection(){
     var respc = $('[enableFullSize="1"]').toArray();
