@@ -112,8 +112,8 @@
     //width value
     [self outlet:_wTF bind:NSValueBinding cssTag:IUCSSTagPixelWidth];
     [self outlet:_wStepper bind:NSValueBinding cssTag:IUCSSTagPixelWidth];
-    [self outlet:_pwTF bind:NSValueBinding cssTag:IUCSSTagPixelWidth];
-    [self outlet:_pwStepper bind:NSValueBinding cssTag:IUCSSTagPixelWidth];
+    [self outlet:_pwTF bind:NSValueBinding cssTag:IUCSSTagPercentWidth];
+    [self outlet:_pwStepper bind:NSValueBinding cssTag:IUCSSTagPercentWidth];
     
     //height value
     [self outlet:_hTF bind:NSValueBinding cssTag:IUCSSTagPixelHeight];
