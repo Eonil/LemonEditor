@@ -523,14 +523,12 @@
 - (void)updateCSSHoverCode:(IUCSSCode*)code asIUBox:(IUBox*)_iu viewport:(int)viewport{
     NSDictionary *cssTagDict = [_iu.css tagDictionaryForViewport:viewport];
 
-    NSArray *codeIdentifiers;
     if([_iu.link isKindOfClass:[IUBox class]]){
-        codeIdentifiers = @[_iu.cssHoverClass, _iu.cssActiveClass];
+        [code setInsertingIdentifiers:@[_iu.cssHoverClass, _iu.cssActiveClass]];
     }
     else{
-        codeIdentifiers = @[_iu.cssHoverClass];
+        [code setInsertingIdentifiers:@[_iu.cssHoverClass]];
     }
-    [code setInsertingIdentifiers:codeIdentifiers];
     
     if ([cssTagDict[IUCSSTagHoverBGImagePositionEnable] boolValue]) {
         [code insertTag:@"background-position-x" floatFromNumber:cssTagDict[IUCSSTagHoverBGImageX] unit:IUUnitPixel];
@@ -551,12 +549,12 @@
         [code setInsertingTarget:IUTargetEditor];
         [code insertTag:@"background-color" string:editorColor];
         
-        [code setInsertingTarget:IUTargetBoth];
+        [code setInsertingTarget:IUTargetOutput];
         if(cssTagDict[IUCSSTagHoverBGColorDuration]){
-            [code setInsertingIdentifiers:[codeIdentifiers arrayByAddingObject:_iu.cssIdentifier]];
-            NSString *durationStr = [NSString stringWithFormat:@"%lds", [cssTagDict[IUCSSTagHoverBGColorDuration] integerValue]];
-            [code insertTag:@"-webkit-transition-duration" string:durationStr];
-            [code insertTag:@"transition-duration" string:durationStr];
+            [code setInsertingIdentifier:_iu.cssIdentifier];
+            NSString *durationStr = [NSString stringWithFormat:@"background-color %lds", [cssTagDict[IUCSSTagHoverBGColorDuration] integerValue]];
+            [code insertTag:@"-webkit-transition" string:durationStr];
+            [code insertTag:@"transition" string:durationStr];
         }
 
     }
