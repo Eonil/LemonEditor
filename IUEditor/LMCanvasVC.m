@@ -297,8 +297,32 @@
         return NO;
     }
 }
-- (BOOL)isEditable{
-    return NO;
+
+- (void)disableTextEditor{
+    [self IUClassIdentifier:@"addible" removeClass:@"addible"];
+    [self IUClassIdentifier:@"editable" removeClass:@"editable"];
+}
+
+- (void)enableTextEditorForSelectedIU{
+    if(self.controller.selectedObjects.count != 1){
+        return;
+    }
+    
+    IUBox *iu = [self.controller.selectedObjects firstObject];
+    if([iu isMemberOfClass:[IUBox class]]){
+        NSString *className;
+        if(iu.pgContentVariable && iu.pgContentVariable.length > 0){
+            className = @"addible";
+        }
+        else{
+            className = @"editable";
+        }
+        NSString *identifer = [self.controller.selectedIdentifiersWithImportIdentifier firstObject];
+
+        [self IUClassIdentifier:identifer addClass:className];
+    }
+    
+    [self evaluateWebScript:@"tinyMCE.execCommand(\"mceRepaint\");"];
 }
 
 -(void)selectedObjectsDidChange:(NSDictionary*)change{
@@ -428,7 +452,9 @@
     for (int i=0; i<list.length; i++) {
         DOMHTMLElement *node = (DOMHTMLElement*)[list item:i];
         NSString *currentClass = [node getAttribute:@"class"];
-        [node setAttribute:@"class" value:[currentClass stringByAppendingFormat:@" %@", className]];
+        if([currentClass containsString:className] == NO){
+            [node setAttribute:@"class" value:[currentClass stringByAppendingFormat:@" %@", className]];
+        }
     }
 }
 

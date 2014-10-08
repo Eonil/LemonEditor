@@ -29,10 +29,8 @@
         //connect delegate
         [self setUIDelegate:self];
         [self setResourceLoadDelegate:self];
-        [self setEditingDelegate:self];
         [self setFrameLoadDelegate:self];
         [self setPolicyDelegate:self];
-        [self setEditable:NO];
         [[[self mainFrame] frameView] setAllowsScrolling:NO];
         
         [self registerForDraggedTypes:@[(id)kUTTypeIUType, (id)kUTTypeIUImageResource]];
@@ -186,10 +184,6 @@
 
 #pragma mark -
 #pragma mark mouse operation
-
-- (NSUInteger)webView:(WebView *)webView dragSourceActionMaskForPoint:(NSPoint)point{
-    return WebDragSourceActionNone;
-}
 
 - (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender{
     return NSDragOperationEvery;
@@ -403,79 +397,6 @@
 
 
 #pragma mark -
-#pragma mark text
-
-- (void)setEditable:(BOOL)flag{
-    [super setEditable:flag];
-    
-    if(flag == YES && [[NSUserDefaults standardUserDefaults] boolForKey:@"textEditMode"]==NO){
-        [JDUIUtil hudAlert:@"Text Mode" second:2];
-    }
-    
-    [[NSUserDefaults standardUserDefaults] setBool:flag forKey:@"textEditMode"];
-
-}
-
-
-- (BOOL)webView:(WebView *)webView shouldInsertText:(NSString *)text replacingDOMRange:(DOMRange *)range givenAction:(WebViewInsertAction)action{
-    return NO;
-}
-
-
-- (void)changeDOMRange:(NSPoint)point{
-    DOMRange *range = [self editableDOMRangeForPoint:point];
-    [self setSelectedDOMRange:range affinity:NSSelectionAffinityDownstream];
-}
-
-- (DOMHTMLParagraphElement *)pElementOfNode:(DOMNode *)node{
-    if([node isKindOfClass:[DOMHTMLParagraphElement class]]){
-        return (DOMHTMLParagraphElement *)node;
-    }
-    else if([node isKindOfClass:[DOMHTMLBodyElement class]]){
-        return nil;
-    }
-    else{
-        return [self pElementOfNode:node.parentNode];
-    }
-}
-
-- (DOMHTMLElement *)textElementOfNode:(DOMNode *)node{
-    if([node isKindOfClass:[DOMHTMLParagraphElement class]]){
-        return (DOMHTMLElement *)node;
-    }
-    else if([node isKindOfClass:[DOMHTMLBodyElement class]]){
-        return nil;
-    }
-    else if([node isKindOfClass:[DOMHTMLElement class]]){
-        DOMHTMLElement *element = (DOMHTMLElement *)node;
-        NSString *tagName = element.tagName;
-        if([tagName isEqualToString:@"SPAN"]){
-            return element;
-        }else{
-            return [self textElementOfNode:node.parentNode];
-        }
-    }
-    else{
-        return [self textElementOfNode:node.parentNode];
-    }
-}
-
-- (BOOL)isTextElement:(DOMHTMLElement *)element{
-    if([element isKindOfClass:[DOMText class]]
-       || [element isKindOfClass:[DOMHTMLParagraphElement class]]
-       || [element isKindOfClass:[DOMHTMLBRElement class]]){
-        return YES;
-    }
-    if([element isKindOfClass:[DOMHTMLElement class]]){
-        NSString *tagName = element.tagName;
-        if([tagName isEqualToString:@"SPAN"]){
-            return YES;
-        }
-    }
-    return NO;
-}
-
-#pragma mark -
 #pragma mark manage IU
 
 
@@ -505,15 +426,6 @@
     
     return nil;
 }
-
-- (BOOL)isDOMTextAtPoint:(NSPoint)point{
-    DOMElement *element = [self DOMElementAtPoint:point];
-    if([element isKindOfClass:[DOMText class]]){
-        return YES;
-    }
-    return NO;
-}
-
 
 - (DOMHTMLElement *)parentIUNodeAtCurrentNode:(DOMNode *)node{
     NSString *iuClass = ((DOMElement *)node).className;

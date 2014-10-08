@@ -40,13 +40,15 @@
 
 //select IUs
 - (BOOL)containsIU:(NSString *)IUID;
-- (BOOL)isEditable;
 - (NSUInteger)countOfSelectedIUs;
 - (void)deselectedAllIUs;
 - (void)addSelectedIU:(NSString *)IU;
 - (void)removeSelectedIU:(NSString *)IU;
 - (void)setSelectedIU:(NSString *)IU;
 - (void)selectIUInRect:(NSRect)frame;
+
+- (void)disableTextEditor;
+- (void)enableTextEditorForSelectedIU;
 
 #pragma mark -
 #pragma mark be set by IU

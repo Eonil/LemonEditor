@@ -331,6 +331,7 @@
 		3D8D4B2B19179F910002C871 /* LMPropertyIUTextViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D8D4B2919179F910002C871 /* LMPropertyIUTextViewVC.xib */; };
 		3D973F091946F45100FB893F /* IUProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D973F081946F45100FB893F /* IUProjectController.m */; };
 		3D97D45D1950339500826280 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D97D45C1950339500826280 /* Defaults.plist */; };
+		3D99BFA519E52EF100B86CCA /* tinymce in Resources */ = {isa = PBXBuildFile; fileRef = 3D99BFA419E52EF100B86CCA /* tinymce */; };
 		3D9B38D319B6CE27004364B0 /* LMPropertyIUSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B38D119B6CE27004364B0 /* LMPropertyIUSection.m */; };
 		3D9B38D419B6CE27004364B0 /* LMPropertyIUSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B38D219B6CE27004364B0 /* LMPropertyIUSection.xib */; };
 		3D9B38D719B8510E004364B0 /* IUCenterBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B38D619B8510E004364B0 /* IUCenterBox.m */; };
@@ -1436,6 +1437,7 @@
 		3D973F071946F45100FB893F /* IUProjectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUProjectController.h; sourceTree = "<group>"; };
 		3D973F081946F45100FB893F /* IUProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUProjectController.m; sourceTree = "<group>"; };
 		3D97D45C1950339500826280 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
+		3D99BFA419E52EF100B86CCA /* tinymce */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tinymce; path = js/tinymce; sourceTree = "<group>"; };
 		3D9B38D019B6CE27004364B0 /* LMPropertyIUSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUSection.h; path = File/LMPropertyIUSection.h; sourceTree = "<group>"; };
 		3D9B38D119B6CE27004364B0 /* LMPropertyIUSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPropertyIUSection.m; path = File/LMPropertyIUSection.m; sourceTree = "<group>"; };
 		3D9B38D219B6CE27004364B0 /* LMPropertyIUSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyIUSection.xib; path = File/LMPropertyIUSection.xib; sourceTree = "<group>"; };
@@ -3594,12 +3596,14 @@
 		3DED275D190E388F001A1D67 /* JS */ = {
 			isa = PBXGroup;
 			children = (
+				3D99BFA419E52EF100B86CCA /* tinymce */,
 				3D9F5C5519D2B37900D63B84 /* test */,
 				698503E8199953A500576DBF /* jquery-1.10.2.js */,
 				3D6DD37919E28591004C2E9D /* jquery-ui-1.11.1.min.js */,
 				698503E9199953A500576DBF /* jquery-ui-1.9.2.js */,
 				3D19E42119874A7400A50D35 /* ie8 */,
 				3DED2768190E3956001A1D67 /* plugins */,
+				3DF437CD19AF69940049A87E /* iuresource */,
 				3DA6C652197536C6004D6587 /* iucarousel.js */,
 				3DB3ACEC18EBF7200046DFB7 /* iuframe.js */,
 				3DD9E97019122EAB0076BF4E /* iueditor.js */,
@@ -3978,7 +3982,6 @@
 		690A409E18E170AC00095263 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				3DF437CD19AF69940049A87E /* iuresource */,
 				3DB0AB4F19ACA63C0066FAB7 /* wpResource */,
 				3DA6C65419763480004D6587 /* clipArt */,
 				CBA877EC1963D1A300075294 /* helpResource */,
@@ -5206,6 +5209,7 @@
 				3DF803E018FE62C900913505 /* align_center.png in Resources */,
 				CBA878031963D3CF00075294 /* Tutorial04_en.png in Resources */,
 				266C411919AB8032008A77CD /* setting@2x.png in Resources */,
+				3D99BFA519E52EF100B86CCA /* tinymce in Resources */,
 				CBC65119197E8CA80012E4EF /* LMPropertyAnalyticsVC.xib in Resources */,
 				3DF803E318FE62C900913505 /* stack_carousel.png in Resources */,
 				3DF803E418FE62C900913505 /* stack_movie.png in Resources */,

@@ -213,12 +213,10 @@
                     }
                     else{
                         //다른 iu를 선택하는 순간 editing mode out
-                        /*
                         if([self isDifferentIU:currentIUID]){
-                            [[self webView] setEditable:NO];
+                            [self.delegate disableTextEditor];
                             
                         }
-                         */
                         
                         if([((LMCanvasVC *)self.delegate) containsIU:currentIUID] == NO || [(LMCanvasVC *)self.delegate countOfSelectedIUs] == 1){
                             [((LMCanvasVC *)self.delegate) setSelectedIU:currentIUID];
@@ -235,15 +233,7 @@
                 //change editable mode
                 if(theEvent.clickCount ==2){
                     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationDoubleClickCanvas object:self.window];
-#if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
-                    if([((LMCanvasVC *)self.delegate) isEditable]){
-                        [[self webView] setEditable:YES];
-                    }
-                    else {
-                        NSString *alertText= [currentIUID stringByAppendingString:@" is not text-editable\nPlease use IUText box"];
-                        [JDUIUtil hudAlert:alertText second:5];
-                    }
-#endif
+                    [self.delegate enableTextEditorForSelectedIU];
                 }
             }
             else if (theEvent.type == NSRightMouseDown){
