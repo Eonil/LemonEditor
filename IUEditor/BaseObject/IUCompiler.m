@@ -305,7 +305,7 @@
         
         if(imageNames.count >0){
             for(NSString *imageName in imageNames){
-                if([[imageName pathComponents][0] isEqualToString:@"clipArt"]){
+                if(imageName && imageName.length > 0 && [[imageName pathComponents][0] isEqualToString:@"clipArt"]){
                     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"clipArtList" ofType:@"plist"];
                     NSDictionary *clipArtDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
                     
