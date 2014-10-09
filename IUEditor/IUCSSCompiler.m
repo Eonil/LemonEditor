@@ -67,10 +67,6 @@
     _currentIdentifiers = [[NSArray alloc] initWithArray:identifiers copyItems:YES];
 }
 
-- (int)insertingViewPort{
-    return _currentViewPort;
-}
-
 - (NSArray*)allIdentifiers{
     NSMutableArray *returnIdentifiers = [NSMutableArray array];
     NSArray *viewPortDatas = [_editorCSSDictWithViewPort allValues];

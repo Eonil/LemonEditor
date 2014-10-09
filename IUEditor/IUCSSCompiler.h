@@ -42,7 +42,6 @@ typedef enum _IUUnit{
 
 - (void)setInsertingTarget:(IUTarget)target;
 - (void)setInsertingViewPort:(int)viewport;
-- (int)insertingViewPort;
 - (void)setInsertingIdentifier:(NSString *)identifier;
 - (void)setInsertingIdentifiers:(NSArray *)identifiers;
 - (void)renameIdentifier:(NSString*)fromIdentifier to:(NSString*)toIdentifier;

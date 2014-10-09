@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "IUBox.h"
-#import "IUCarousel.h"
-#import "IUCompilerResourceSource.h"
 #import "JDCode.h"
 #import "IUResourceManager.h"
 

@@ -29,6 +29,7 @@
 
 #import "IUFBLike.h"
 #import "IUTweetButton.h"
+#import "IUCarousel.h"
 
 //django
 

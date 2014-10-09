@@ -45,8 +45,6 @@
 #import "IUWordpressProject.h"
 #import "IUCollectionView.h"
 
-
-#import "WPPageLink.h"
 #import "WPPageLinks.h"
 
 #if CURRENT_TEXT_VERSION >= TEXT_SELECTION_VERSION
