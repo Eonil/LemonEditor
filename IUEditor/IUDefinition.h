@@ -24,9 +24,8 @@ static NSString * kUTTypeIUImageResource = @"kUTTypeIUImageResource";
 
 
 
-#define definedPrefixIdentifiers @[@"IU"]
-#define definedIdentifers  @[@"id",@"ifdef",@"default",@"Self",@"self"]
-
+#define definedPrefixIdentifiers @[@"IU",@"mce",@"mceu"]
+#define definedIdentifers  @[@"id",@"ifdef",@"default"]
 
 
 #endif

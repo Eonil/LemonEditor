@@ -96,7 +96,7 @@
             }
             else{
 
-                if([self isEditable]){
+                if([self.VC isEnableTextEditor]){
                     //ESC key
                     if(keyCode == IUKeyCodeESC){
                         [self setEditable:NO];
@@ -404,6 +404,31 @@
     NSDictionary *dict  =[self elementAtPoint:point];
     DOMElement *element = [dict objectForKey:WebElementDOMNodeKey];
     return element;
+}
+
+- (DOMHTMLElement *)domHTMLElementWithId:(DOMElement *)element{
+    if([element isKindOfClass:[DOMHTMLElement class]]
+       && ((DOMHTMLElement *)element).idName
+       && ((DOMHTMLElement *)element).idName.length > 0){
+        return (DOMHTMLElement *)element;
+    }
+    else{
+        return [self domHTMLElementWithId:element.parentElement];
+    }
+}
+
+- (BOOL)isTextEditorAtPoint:(NSPoint)point{
+    DOMElement *domNode =[self DOMElementAtPoint:point];
+    DOMHTMLElement *htmlElement = [self domHTMLElementWithId:domNode];
+    if([htmlElement.idName rangeOfString:@"mceu"].location == 0){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+    
+    
+    return NO;
 }
 
 - (NSString *)IUAtPoint:(NSPoint)point{

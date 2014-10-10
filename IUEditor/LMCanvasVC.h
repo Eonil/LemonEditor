@@ -49,6 +49,7 @@
 
 - (void)disableTextEditor;
 - (void)enableTextEditorForSelectedIU;
+- (BOOL)isEnableTextEditor;
 
 #pragma mark -
 #pragma mark be set by IU

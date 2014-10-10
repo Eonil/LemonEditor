@@ -391,7 +391,6 @@
 		3DA6F30E1963B810004DF0AA /* LMHelpVideoPopoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA6F30C1963B810004DF0AA /* LMHelpVideoPopoverVC.m */; };
 		3DA6F30F1963B810004DF0AA /* LMHelpVideoPopoverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DA6F30D1963B810004DF0AA /* LMHelpVideoPopoverVC.xib */; };
 		3DA6F3121963BC6E004DF0AA /* LMCollectionItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA6F3111963BC6E004DF0AA /* LMCollectionItemView.m */; };
-		3DA72903192B5ABC00203764 /* IUTextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA72902192B5ABC00203764 /* IUTextController.m */; };
 		3DA77130199C8986001743B9 /* LMDefaultPropertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7712F199C8986001743B9 /* LMDefaultPropertyVC.m */; };
 		3DAEEDFD1938537700196A81 /* image_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DAEEDFC1938537700196A81 /* image_default.png */; };
 		3DAEEE00193C3D2500196A81 /* iuinit.js in Resources */ = {isa = PBXBuildFile; fileRef = 3DAEEDFE193C36E600196A81 /* iuinit.js */; };
@@ -1517,8 +1516,6 @@
 		3DA6F30D1963B810004DF0AA /* LMHelpVideoPopoverVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMHelpVideoPopoverVC.xib; path = IUEditor/Editor/Help/LMHelpVideoPopoverVC.xib; sourceTree = "<group>"; };
 		3DA6F3101963BC6E004DF0AA /* LMCollectionItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMCollectionItemView.h; path = Editor/Widget/LMCollectionItemView.h; sourceTree = "<group>"; };
 		3DA6F3111963BC6E004DF0AA /* LMCollectionItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMCollectionItemView.m; path = Editor/Widget/LMCollectionItemView.m; sourceTree = "<group>"; };
-		3DA72901192B5ABC00203764 /* IUTextController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUTextController.h; sourceTree = "<group>"; };
-		3DA72902192B5ABC00203764 /* IUTextController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUTextController.m; sourceTree = "<group>"; };
 		3DA7712E199C8986001743B9 /* LMDefaultPropertyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMDefaultPropertyVC.h; path = Editor/LMDefaultPropertyVC.h; sourceTree = "<group>"; };
 		3DA7712F199C8986001743B9 /* LMDefaultPropertyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMDefaultPropertyVC.m; path = Editor/LMDefaultPropertyVC.m; sourceTree = "<group>"; };
 		3DAEEDFC1938537700196A81 /* image_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_default.png; sourceTree = "<group>"; };
@@ -4397,8 +4394,6 @@
 				3DED2758190A1DA6001A1D67 /* IUEvent.m */,
 				3DED275A190A2630001A1D67 /* IUEventVariable.h */,
 				3DED275B190A2630001A1D67 /* IUEventVariable.m */,
-				3DA72901192B5ABC00203764 /* IUTextController.h */,
-				3DA72902192B5ABC00203764 /* IUTextController.m */,
 			);
 			path = BaseObject;
 			sourceTree = "<group>";
@@ -5533,7 +5528,6 @@
 				3DED26E719010B82001A1D67 /* LMPropertyIUMovieVC.m in Sources */,
 				69761BC318F04ECD00C4EDC6 /* LMPropertyBGImageVC.m in Sources */,
 				694A985F196D13E000C1D630 /* JDNetworkUtil.m in Sources */,
-				3DA72903192B5ABC00203764 /* IUTextController.m in Sources */,
 				693FDA6619B6905000A0F47F /* WPCommentAvator.m in Sources */,
 				3DF8029D18FE3D6000913505 /* IUWebMovie.m in Sources */,
 				3DB3ACDE18EBEF5F0046DFB7 /* BorderLayer.m in Sources */,

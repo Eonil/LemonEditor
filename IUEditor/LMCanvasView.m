@@ -166,7 +166,7 @@
             unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
             
             
-            if([[self webView] isEditable]== NO){
+            if([self.delegate isEnableTextEditor]== NO){
                 //delete key
                 if(key == NSDeleteCharacter){
                     [((LMCanvasVC *)self.delegate) removeSelectedIUs];
@@ -187,8 +187,10 @@
     
     if([hitView isKindOfClass:[GridView class]] == NO){
         if( [self pointInScrollView:convertedScrollPoint]){
-            if ( theEvent.type == NSLeftMouseDown){
+            if ( theEvent.type == NSLeftMouseDown
+                && ([self.webView isTextEditorAtPoint:convertedPoint] == NO)){
                 JDTraceLog( @"mouse down");
+                
                 isMouseDown = YES;
                 NSString *currentIUID = [self.webView IUAtPoint:convertedPoint];
                 

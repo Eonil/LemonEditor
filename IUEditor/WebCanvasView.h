@@ -30,5 +30,6 @@
 
 - (NSSize)parentBlockElementSize:(NSString *)identifier;
 - (NSString *)IUAtPoint:(NSPoint)point;
+- (BOOL)isTextEditorAtPoint:(NSPoint)point;
 
 @end

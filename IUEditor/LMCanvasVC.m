@@ -48,7 +48,7 @@
     int levelForUpdateCSS;
     int levelForUpdateJS;
     int levelForUpdateHTML;
-
+    BOOL isEnableText;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,6 +60,7 @@
         levelForUpdateCSS = 0;
         levelForUpdateJS =0;
         levelForUpdateHTML= 0;
+        isEnableText = NO;
     }
     return self;
 }
@@ -322,7 +323,12 @@
         [self evaluateWebScript:removeMCE];
         
     }
+    
+    isEnableText = NO;
 
+}
+- (BOOL)isEnableTextEditor{
+    return isEnableText;
 }
 
 - (void)enableTextEditorForSelectedIU{
@@ -345,6 +351,7 @@
         
         NSString *reloadMCE =[NSString stringWithFormat:@"tinyMCE.execCommand('mceAddEditor', true, '%@');", identifer];
         [self evaluateWebScript:reloadMCE];
+        isEnableText = YES;
     }
     
 }
