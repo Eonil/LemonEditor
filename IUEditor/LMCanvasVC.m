@@ -299,8 +299,30 @@
 }
 
 - (void)disableTextEditor{
-    [self IUClassIdentifier:@"addible" removeClass:@"addible"];
-    [self IUClassIdentifier:@"editable" removeClass:@"editable"];
+    
+    
+    DOMNodeList *list = [self.DOMDoc.documentElement getElementsByClassName:@"addible"];
+    for (int i=0; i<list.length; i++) {
+        DOMHTMLElement *node = (DOMHTMLElement*)[list item:i];
+        NSString *currentClass = [node getAttribute:@"class"];
+        [node setAttribute:@"class" value:[currentClass stringByReplacingOccurrencesOfString:@"addible" withString:@""]];
+        NSString *identifier = node.idName;
+        NSString *removeMCE = [NSString stringWithFormat:@"tinyMCE.execCommand('mceRemoveEditor', true, '%@');", identifier];
+        [self evaluateWebScript:removeMCE];
+
+    }
+    
+    list = [self.DOMDoc.documentElement getElementsByClassName:@"editable"];
+    for (int i=0; i<list.length; i++) {
+        DOMHTMLElement *node = (DOMHTMLElement*)[list item:i];
+        NSString *currentClass = [node getAttribute:@"class"];
+        [node setAttribute:@"class" value:[currentClass stringByReplacingOccurrencesOfString:@"addible" withString:@""]];
+        NSString *identifier = node.idName;
+        NSString *removeMCE = [NSString stringWithFormat:@"tinyMCE.execCommand('mceRemoveEditor', true, '%@');", identifier];
+        [self evaluateWebScript:removeMCE];
+        
+    }
+
 }
 
 - (void)enableTextEditorForSelectedIU{
@@ -320,9 +342,11 @@
         NSString *identifer = [self.controller.selectedIdentifiersWithImportIdentifier firstObject];
 
         [self IUClassIdentifier:identifer addClass:className];
+        
+        NSString *reloadMCE =[NSString stringWithFormat:@"tinyMCE.execCommand('mceAddEditor', true, '%@');", identifer];
+        [self evaluateWebScript:reloadMCE];
     }
     
-    [self evaluateWebScript:@"tinyMCE.execCommand(\"mceRepaint\");"];
 }
 
 -(void)selectedObjectsDidChange:(NSDictionary*)change{
