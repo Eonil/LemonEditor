@@ -11,7 +11,7 @@
 
 @implementation LMCanvasView{
     /* current state of mouse + current state of iu (extend or move)*/
-    BOOL isSelected, isDragged, isSelectDragged, isMouseDown;
+    BOOL isSelected, isDragged, isSelectDragged, isMouseDownForMoveIU;
     NSPoint startDragPoint, middleDragPoint, endDragPoint;
     NSUInteger keyModifierFlags;
 }
@@ -191,7 +191,7 @@
                 && ([self.webView isTextEditorAtPoint:convertedPoint] == NO)){
                 JDTraceLog( @"mouse down");
                 
-                isMouseDown = YES;
+                isMouseDownForMoveIU = YES;
                 NSString *currentIUID = [self.webView IUAtPoint:convertedPoint];
                 
                 //webview에서 발견 못하면 gridView에서 한번더 체크
@@ -229,6 +229,13 @@
                         isSelected = YES;
                     }
                     [((LMCanvasVC *)(self.delegate)) startFrameMoveWithUndoManager:self];
+                    
+                    //if mouse down on text, it assumes for text selection
+                    DOMElement *element = [self.webView DOMElementAtPoint:convertedPoint];
+                    if([element isKindOfClass:[DOMText class]]){
+                        isMouseDownForMoveIU = NO;
+                    }
+                    
                     startDragPoint = convertedPoint;
                     middleDragPoint = startDragPoint;
                 }
@@ -249,7 +256,7 @@
             }
         }
         /* mouse dragged */
-        if (theEvent.type == NSLeftMouseDragged && isMouseDown){
+        if (theEvent.type == NSLeftMouseDragged && isMouseDownForMoveIU){
             JDTraceLog( @"mouse dragged");
             endDragPoint = convertedPoint;
             
@@ -265,7 +272,7 @@
         /* mouse up */
         else if ( theEvent.type == NSLeftMouseUp ){
             JDTraceLog( @"NSLeftMouseUp");
-            isMouseDown = NO;
+            isMouseDownForMoveIU = NO;
             [self clearMouseMovement];
             
         }
@@ -282,7 +289,7 @@
 
 - (void)startDraggingFromGridView{
     //turn off canvas view dragging.
-    isMouseDown = NO;
+    isMouseDownForMoveIU = NO;
     isSelected = NO;
 }
 
