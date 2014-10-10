@@ -31172,7 +31172,32 @@ define("tinymce/EditorManager", [
 					}
 
 					return true;
+				//add Editor from IUEditor
+				case "iuAddEditorEditable":
+					var settings = {  
+				             selector: ".IUBox.editable",  
+				             inline: true,  
+				             plugins: ["link searchreplace paste textcolor"],  
+				             toolbar: "forecolor backcolor | fontselect fontsizeselect | bold italic underline | link unlink",  
+				             menubar: false  
+				             };  
+					if (!self.get(value)) {
+						new Editor(value, settings, self).render();
+					}
 
+					return true;
+				case "iuAddEditorAddible":
+					var settings = {  
+				             selector: ".IUBox.addible",  
+				             inline: true,  
+				             plugins: ["searchreplace paste"],  
+				             toolbar: false,  
+				             menubar: false  
+				             };  
+					if (!self.get(value)) {
+						new Editor(value, settings, self).render();
+					}
+					return true;
 				case "mceRemoveEditor":
 					if (editor) {
 						editor.remove();

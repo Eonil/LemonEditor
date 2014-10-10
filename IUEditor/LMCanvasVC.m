@@ -338,18 +338,22 @@
     
     IUBox *iu = [self.controller.selectedObjects firstObject];
     if([iu isMemberOfClass:[IUBox class]]){
-        NSString *className;
+        NSString *className, *fnName;
         if(iu.pgContentVariable && iu.pgContentVariable.length > 0){
             className = @"addible";
+            fnName = @"iuAddEditorAddible";
+            [JDUIUtil hudAlert:@"Sample Text Typing Mode" second:2];
         }
         else{
             className = @"editable";
+            fnName = @"iuAddEditorEditable";
+            [JDUIUtil hudAlert:@"Text Editor Mode" second:2];
         }
         NSString *identifer = [self.controller.selectedIdentifiersWithImportIdentifier firstObject];
 
         [self IUClassIdentifier:identifer addClass:className];
         
-        NSString *reloadMCE =[NSString stringWithFormat:@"tinyMCE.execCommand('mceAddEditor', true, '%@');", identifer];
+        NSString *reloadMCE =[NSString stringWithFormat:@"tinyMCE.execCommand('%@', true, '%@');",fnName, identifer];
         [self evaluateWebScript:reloadMCE];
         isEnableText = YES;
     }

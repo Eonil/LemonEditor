@@ -397,18 +397,6 @@
         //text editor - tinymce
         NSString *mcePath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponents:@[@"tinymce",@"tinymce"]] stringByAppendingPathExtension:@"js"];
         [code addCodeLineWithFormat:@"<script src='%@'></script>", mcePath];
-        [code addCodeLine:@"<script type=\"text/javascript\">"];
-        [code increaseIndentLevelForEdit];
-        [code addCodeLine:@"tinymce.init({"];
-        [code addCodeLine:@"selector: \".IUBox.editable\","];
-        [code addCodeLine:@"inline: true,"];
-        [code addCodeLine:@"plugins: [\"link searchreplace paste textcolor\"],"];
-        [code addCodeLine:@"toolbar: \"forecolor backcolor | fontselect fontsizeselect | bold italic underline | link unlink\","];
-        [code addCodeLine:@"menubar: false"];
-        [code addCodeLine:@"});"];
-        [code decreaseIndentLevelForEdit];
-        [code addCodeLine:@"</script>"];
-
      
     }
     else{
