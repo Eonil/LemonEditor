@@ -39,11 +39,9 @@
     [self outlet:_contentTF bind:NSValueBinding property:@"pgContentVariable"];
 
     NSDictionary *enableBinding = @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
-    [self outlet:_ellipsisTF bind:NSEnabledBinding property:@"pgContentVariable" options:enableBinding];
-    [self outlet:_ellipsisTF bind:@"enabled2" property:@"pgContentVariable" options:enableBinding];
+//    [self outlet:_ellipsisTF bind:NSEnabledBinding property:@"pgContentVariable"];
 
-    [self outlet:_ellipsisStepper bind:NSEnabledBinding property:@"pgContentVariable" options:enableBinding];
-    [self outlet:_ellipsisStepper bind:@"enabled2" property:@"pgContentVariable" options:enableBinding];
+//    [self outlet:_ellipsisStepper bind:NSEnabledBinding property:@"pgContentVariable"];
     
     [self outlet:_ellipsisTF bind:NSValueBinding cssTag:IUCSSTagEllipsis];
     [self outlet:_ellipsisStepper bind:NSValueBinding cssTag:IUCSSTagEllipsis];

@@ -176,6 +176,9 @@
 #pragma mark set By LMCanvasVC
 
 - (BOOL)setSelectionIndexPaths:(NSArray *)indexPaths{
+    //paste repeat count zero
+    _pasteRepeatCount = 0;
+
     [self willChangeValueForKey:@"selectedTextRange"];
     _selectedTextRange = NSMakeRange(0, 0);
     BOOL result = [super setSelectionIndexPaths:indexPaths];
@@ -184,6 +187,9 @@
 }
 
 - (BOOL)setSelectionIndexPath:(NSIndexPath *)indexPath{
+    //paste repeat count zero
+    _pasteRepeatCount = 0;
+    
     [self willChangeValueForKey:@"selectedTextRange"];
     _selectedTextRange = NSMakeRange(0, 0);
     BOOL result = [super setSelectionIndexPath:indexPath];
@@ -192,11 +198,7 @@
 }
 
 
-
 -(void)trySetSelectedObjectsByIdentifiers:(NSArray *)identifiers{
-    //paste repeat count zero
-    _pasteRepeatCount = 0;
-
     [JDLogUtil log:IULogAction key:@"canvas selected objects" string:[identifiers description]];
     
     [[self.undoManager prepareWithInvocationTarget:self] trySetSelectedObjectsByIdentifiers:[self selectedIdentifiers]];
