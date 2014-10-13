@@ -30,10 +30,10 @@ function transitionAnimationOn(eventObject){
     var duration = $(transition).attr('transitionduration');
 
     if(duration <= 0){
-        $(secondObj).show(effect, 1, function(){reframeCenterIU('#'+transition.id)});
+        $(secondObj).show(effect, 1, function(){reframeCenterIU('.'+transition.id)});
     }
     else{
-        $(secondObj).show(effect, duration, function(){reframeCenterIU('#'+transition.id)});
+        $(secondObj).show(effect, duration, function(){reframeCenterIU('.'+transition.id)});
     }
 	
    	$(transition).data('isSelected', 'false');
