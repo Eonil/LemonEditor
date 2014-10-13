@@ -25,6 +25,10 @@
 
 @property (nonatomic) IUBox *pastedNewIU;
 
+
+/** current sheet for notification 
+ */
+- (IUSheet *)currentSheet;
 - (void)prepareDealloc;
 
 - (void)selectFirstDocument;
