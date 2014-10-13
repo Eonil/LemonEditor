@@ -31178,7 +31178,7 @@ define("tinymce/EditorManager", [
 				             selector: ".IUBox.editable",  
 				             inline: true,  
 				             plugins: ["link searchreplace paste textcolor"],  
-							 /*iu_font_format*/
+							 font_formats:iuFontList,
 				             toolbar: "forecolor backcolor | fontselect fontsizeselect | bold italic underline | link unlink",  
 				             menubar: false  
 				             };  
@@ -31192,7 +31192,7 @@ define("tinymce/EditorManager", [
 				             selector: ".IUBox.addible",  
 				             inline: true,  
 				             plugins: ["searchreplace paste"],  
-							 /*iu_font_format*/
+							 font_formats:iuFontList,
 				             toolbar: false, 
 				             menubar: false  
 				             };  

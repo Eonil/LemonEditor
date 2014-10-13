@@ -393,6 +393,12 @@
             NSString *jsPath = [[NSBundle mainBundle] pathForResource:[filename stringByDeletingPathExtension] ofType:[filename pathExtension]];
             [code addCodeLineWithFormat:@"<script type=\"text/javascript\" src=\"%@\"></script>", jsPath];
         }
+        [code addCodeLine:@"<script type=\"text/javascript\">"];
+        NSString *currentFontList = [[LMFontController sharedFontController] mceFontList];
+        [code addCodeLineWithFormat:@"var iuFontList = %@;", currentFontList];
+
+        [code addCodeLine:@"</script>"];
+
         
         //text editor - tinymce
         NSString *mcePath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponents:@[@"tinymce",@"tinymce"]] stringByAppendingPathExtension:@"js"];

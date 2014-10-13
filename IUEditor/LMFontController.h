@@ -35,6 +35,7 @@ typedef enum{
 - (NSString *)cssForFontName:(NSString *)fontName;
 - (BOOL)hasLight:(NSString *)fontName;
 
+- (NSString *)mceFontList;
 
 - (JDCode *)headerCodeForAllFont;
 - (JDCode *)headerCodeForFont:(NSArray *)fontArray;

@@ -174,5 +174,17 @@ static LMFontController *gFontController = nil;
 }
 
 
+- (NSString *)mceFontList{
+    NSMutableString *fontList = [NSMutableString string];
+    [fontList appendString:@"\""];
+    
+    for(NSString *fontName in _fontDict){
+        NSString *cssString = [self cssForFontName:fontName];
+        [fontList appendFormat:@"%@=%@;", fontName, cssString];
+    }
+    
+    [fontList appendString:@"\""];
+    return fontList;
+}
 
 @end
