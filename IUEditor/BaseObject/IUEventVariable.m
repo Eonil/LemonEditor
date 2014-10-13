@@ -193,8 +193,8 @@
                         [fnCode addCodeLineWithFormat:@"if( %@ ){", value];
                         
                         JDCode *innerJS = [JDCode code];
-                        [innerJS addCodeWithFormat:@"$(\"#%@\").show(", visibleID];
-                        NSString *reframe = [NSString stringWithFormat:@"function(){reframeCenterIU('#%@')}", visibleID];
+                        [innerJS addCodeWithFormat:@"$(\".%@\").show(", visibleID];
+                        NSString *reframe = [NSString stringWithFormat:@"function(){reframeCenterIU('.%@')}", visibleID];
 
                         if(duration > 0){
                             [innerJS addCodeLineWithFormat:@"\"%@\", %ld, %@);", typeStr, duration*100, reframe];
@@ -202,7 +202,7 @@
                         else{
                             [innerJS addCodeLineWithFormat:@"\"%@\", 1, %@);", typeStr, reframe];
                         }
-                        [innerJS addCodeLineWithFormat:@"$(\"#%@\").data(\"run%@\", 1);", visibleID, fnName];
+                        [innerJS addCodeLineWithFormat:@"$(\".%@\").data(\"run%@\", 1);", visibleID, fnName];
                         [innerJS addCode:[self checkForIUGoogleMap:[receiverDict objectForKey:IUEventTagVisibleIU]]];
                         
                         [fnCode addCodeWithIndent:innerJS];
@@ -210,16 +210,16 @@
                         
                         [fnCode addCodeLine:@"else{"];
                         innerJS = [JDCode code];
-                        [innerJS addCodeLineWithFormat:@"var clicked =$(\"#%@\").data(\"run%@\");", visibleID,fnName];
+                        [innerJS addCodeLineWithFormat:@"var clicked =$(\".%@\").data(\"run%@\");", visibleID,fnName];
                         [innerJS addCodeLineWithFormat:@"if(clicked == undefined){"];
-                        [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").hide();", visibleID];
+                        [innerJS addCodeLineWithFormat:@"\t$(\".%@\").hide();", visibleID];
                         [innerJS addCodeLine:@"}"];
                         [innerJS addCodeLine:@"else{"];
                         if(duration > 0){
-                            [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").hide(\"%@\",%ld);", visibleID, typeStr, duration*100];
+                            [innerJS addCodeLineWithFormat:@"\t$(\".%@\").hide(\"%@\",%ld);", visibleID, typeStr, duration*100];
                         }
                         else{
-                            [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").hide(\"%@\", 1);", visibleID, typeStr];
+                            [innerJS addCodeLineWithFormat:@"\t$(\".%@\").hide(\"%@\", 1);", visibleID, typeStr];
                         }
                         [innerJS addString:@"}"];
                         [fnCode addCodeWithIndent:innerJS];
@@ -254,17 +254,17 @@
                         
                         JDCode *innerJS = [JDCode code];
                         
-                        [innerJS addCodeLineWithFormat:@"$(\"#%@\").data(\"run%@\", 1);", frameID, fnName];
-                        [innerJS addCodeLineWithFormat:@"$(\"#%@\").data(\"width\", $(\"#%@\").css('width'));", frameID, frameID];
-                        [innerJS addCodeLineWithFormat:@"$(\"#%@\").data(\"height\", $(\"#%@\").css('height'));", frameID, frameID];
-                        [innerJS addCodeWithFormat:@"$(\"#%@\").animate({", frameID];
+                        [innerJS addCodeLineWithFormat:@"$(\".%@\").data(\"run%@\", 1);", frameID, fnName];
+                        [innerJS addCodeLineWithFormat:@"$(\".%@\").data(\"width\", $(\".%@\").css('width'));", frameID, frameID];
+                        [innerJS addCodeLineWithFormat:@"$(\".%@\").data(\"height\", $(\".%@\").css('height'));", frameID, frameID];
+                        [innerJS addCodeWithFormat:@"$(\".%@\").animate({", frameID];
                         
                         CGFloat width = [[receiverDict objectForKey:IUEventTagFrameWidth] floatValue];
                         CGFloat height = [[receiverDict objectForKey:IUEventTagFrameHeight] floatValue];
                         [innerJS addCodeWithFormat:@"width:\"%.2fpx\", height:\"%.2fpx\"}", width, height];
                         
                         NSInteger duration = [[receiverDict objectForKey:IUEventTagFrameDuration] integerValue];
-                        NSString *reframe = [NSString stringWithFormat:@"function(){reframeCenterIU('#%@')}", frameID];
+                        NSString *reframe = [NSString stringWithFormat:@"function(){reframeCenterIU('.%@')}", frameID];
                         if(duration > 0){
                             [innerJS addCodeWithFormat:@", %ld, %@);", duration*100, reframe];
                         }
@@ -280,23 +280,23 @@
                         [fnCode addCodeLine:@"else{"];
                         
                         innerJS = [JDCode code];
-                        [innerJS addCodeLineWithFormat:@"var clicked =$(\"#%@\").data(\"run%@\");", frameID, fnName];
-                        [innerJS addCodeLineWithFormat:@"var d_width =$(\"#%@\").data(\"width\");", frameID];
-                        [innerJS addCodeLineWithFormat:@"var d_height =$(\"#%@\").data(\"height\");", frameID];
+                        [innerJS addCodeLineWithFormat:@"var clicked =$(\".%@\").data(\"run%@\");", frameID, fnName];
+                        [innerJS addCodeLineWithFormat:@"var d_width =$(\".%@\").data(\"width\");", frameID];
+                        [innerJS addCodeLineWithFormat:@"var d_height =$(\".%@\").data(\"height\");", frameID];
                         [innerJS addCodeWithFormat:@"if(clicked == undefined){"];
                         if(duration > 0){
-                            [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, %ld);", frameID, duration*100];
+                            [innerJS addCodeLineWithFormat:@"\t$(\".%@\").animate({width:d_width, height:d_height}, %ld);", frameID, duration*100];
                         }
                         else{
-                            [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, 1 );", frameID];
+                            [innerJS addCodeLineWithFormat:@"\t$(\".%@\").animate({width:d_width, height:d_height}, 1 );", frameID];
                         }
                         [innerJS addCodeLine:@"}"];
                         [innerJS addCodeLine:@"else{"];
                         if(duration > 0){
-                            [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height}, %ld);", frameID, duration*100];
+                            [innerJS addCodeLineWithFormat:@"\t$(\".%@\").animate({width:d_width, height:d_height}, %ld);", frameID, duration*100];
                         }
                         else{
-                            [innerJS addCodeLineWithFormat:@"\t$(\"#%@\").animate({width:d_width, height:d_height} ,1);", frameID];
+                            [innerJS addCodeLineWithFormat:@"\t$(\".%@\").animate({width:d_width, height:d_height} ,1);", frameID];
                         }
                         [innerJS addString:@"}"];
                         
@@ -320,9 +320,9 @@
                     
                     [eventCode addCodeLineWithFormat:@"/* [IU:%@] Event Declaration */", bindingIUID];
                     if(type == IUEventActionTypeClick){
-                        [eventCode addCodeLineWithFormat:@"$(\"#%@\").css('cursor', 'pointer');", bindingIUID];
+                        [eventCode addCodeLineWithFormat:@"$(\".%@\").css('cursor', 'pointer');", bindingIUID];
                     }
-                    [eventCode addCodeWithFormat:@"$(\"#%@\").", bindingIUID];
+                    [eventCode addCodeWithFormat:@"$(\".%@\").", bindingIUID];
                     
                     if(type == IUEventActionTypeClick){
                         [eventCode addString:@"click(function(){"];

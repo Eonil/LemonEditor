@@ -458,7 +458,7 @@
 - (JDCode *)htmlCodeAsIUImage:(IUImage *)image target:(IUTarget)target attributeDict:(NSMutableDictionary *)attributeDict{
     JDCode *code = [[JDCode alloc] init];
     
-    if (image.pgContentVariable && _compiler.rule == IUCompileRuleDjango) {
+    if (image.pgContentVariable && image.pgContentVariable.length > 0 && _compiler.rule == IUCompileRuleDjango) {
         if ([image.sheet isKindOfClass:[IUClass class]]) {
             attributeDict[@"src"] = [NSString stringWithFormat:@"{{ object.%@ }}", image.pgContentVariable];
         }
@@ -469,7 +469,9 @@
         //image tag attributes
         if(image.imageName && image.imageName.length > 0){
             NSString *imgSrc = [_compiler imagePathWithImageName:image.imageName target:target];
-            attributeDict[@"src"] = imgSrc;
+            if(imgSrc && imgSrc.length > 0){
+                attributeDict[@"src"] = imgSrc;
+            }
 
         }
         else if (target == IUTargetEditor){
