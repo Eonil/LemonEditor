@@ -21,7 +21,12 @@
 
 -(NSArray*)allViewports{
     NSSortDescriptor* sortOrder = [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: NO];
-    return [[self.cssFrameDict allKeys] sortedArrayUsingDescriptors:@[sortOrder]];
+    //FIXME: max가 바뀔때 frame이 제대로 동작안하는것 같음
+    //상태 1280이 맥시멈인데 9999, 1280두개 다 존재함.
+    NSMutableArray *array = [[[self.cssFrameDict allKeys] sortedArrayUsingDescriptors:@[sortOrder]] mutableCopy];
+    
+    
+    return array;
 }
 
 -(id)init{
