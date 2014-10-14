@@ -168,6 +168,14 @@ static NSString * IUCSSTagHoverTextColor  = @"hoverTextColor";
 static NSString *IUCSSTagCarouselArrowDisable = @"carouselDisable";
 
 
+
+
+///////MQData Tag
+#define IUMQDataTag NSString*
+static NSString * IUMQDataTagInnerHTML = @"innerHTML";
+static NSString * IUMQDataTagCollectionCount = @"collectionCount";
+
+
 #define isEqualToTag isEqualToString
 
 @interface NSString (IUTag)

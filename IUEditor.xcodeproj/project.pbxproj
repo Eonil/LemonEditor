@@ -332,6 +332,7 @@
 		3D973F091946F45100FB893F /* IUProjectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D973F081946F45100FB893F /* IUProjectController.m */; };
 		3D97D45D1950339500826280 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D97D45C1950339500826280 /* Defaults.plist */; };
 		3D99BFA519E52EF100B86CCA /* tinymce in Resources */ = {isa = PBXBuildFile; fileRef = 3D99BFA419E52EF100B86CCA /* tinymce */; };
+		3D99BFA819ECC18300B86CCA /* IUMQData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D99BFA719ECC18300B86CCA /* IUMQData.m */; };
 		3D9B38D319B6CE27004364B0 /* LMPropertyIUSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B38D119B6CE27004364B0 /* LMPropertyIUSection.m */; };
 		3D9B38D419B6CE27004364B0 /* LMPropertyIUSection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B38D219B6CE27004364B0 /* LMPropertyIUSection.xib */; };
 		3D9B38D719B8510E004364B0 /* IUCenterBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B38D619B8510E004364B0 /* IUCenterBox.m */; };
@@ -1437,6 +1438,8 @@
 		3D973F081946F45100FB893F /* IUProjectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUProjectController.m; sourceTree = "<group>"; };
 		3D97D45C1950339500826280 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		3D99BFA419E52EF100B86CCA /* tinymce */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tinymce; path = js/tinymce; sourceTree = "<group>"; };
+		3D99BFA619ECC18300B86CCA /* IUMQData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUMQData.h; sourceTree = "<group>"; };
+		3D99BFA719ECC18300B86CCA /* IUMQData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUMQData.m; sourceTree = "<group>"; };
 		3D9B38D019B6CE27004364B0 /* LMPropertyIUSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUSection.h; path = File/LMPropertyIUSection.h; sourceTree = "<group>"; };
 		3D9B38D119B6CE27004364B0 /* LMPropertyIUSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMPropertyIUSection.m; path = File/LMPropertyIUSection.m; sourceTree = "<group>"; };
 		3D9B38D219B6CE27004364B0 /* LMPropertyIUSection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMPropertyIUSection.xib; path = File/LMPropertyIUSection.xib; sourceTree = "<group>"; };
@@ -4394,6 +4397,8 @@
 				3DED2758190A1DA6001A1D67 /* IUEvent.m */,
 				3DED275A190A2630001A1D67 /* IUEventVariable.h */,
 				3DED275B190A2630001A1D67 /* IUEventVariable.m */,
+				3D99BFA619ECC18300B86CCA /* IUMQData.h */,
+				3D99BFA719ECC18300B86CCA /* IUMQData.m */,
 			);
 			path = BaseObject;
 			sourceTree = "<group>";
@@ -5669,6 +5674,7 @@
 				69B45C3D1986BBC90087FDFD /* LMServerWC.m in Sources */,
 				6954812818D7640A00CA02F1 /* IUPage.m in Sources */,
 				693F24791977929C00451500 /* LMPropertyWPMenuVC.m in Sources */,
+				3D99BFA819ECC18300B86CCA /* IUMQData.m in Sources */,
 				69C5764018D729830016F050 /* IUSheetController.m in Sources */,
 				06EA0FFC197F8C880068C683 /* ClipArt.m in Sources */,
 				3DB0AB3F19AAE93B0066FAB7 /* LMAppWarningWC.m in Sources */,

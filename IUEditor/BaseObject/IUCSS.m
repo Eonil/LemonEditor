@@ -144,35 +144,35 @@
 }
 
 -(void)setValueWithoutUpdateCSS:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width{
-        NSMutableDictionary *cssDict = _cssDictWithViewPort[Integer2Str(width)];
+    NSMutableDictionary *cssDict = _cssDictWithViewPort[Integer2Str(width)];
+    
+    id currentValue = [cssDict objectForKey:tag];
+    if(currentValue == nil ||  [currentValue isNotEqualTo:value]){
         
-        id currentValue = [cssDict objectForKey:tag];
-        if(currentValue == nil ||  [currentValue isNotEqualTo:value]){
-            
-            if([self isUndoTag:tag]){
-                [[[self.delegate undoManager] prepareWithInvocationTarget:self] setValue:currentValue forTag:tag forViewport:width];
-            }
-            
-            if (cssDict == nil) {
-                cssDict = [NSMutableDictionary dictionary];
-                /* save as string : to change json object, key should be nsstring format */
-                [_cssDictWithViewPort setObject:cssDict forKey:Integer2Str(width)];
-            }
-            
-            if (value == nil) {
-                [cssDict removeObjectForKey:tag];
-                if(width == _editViewPort){
-                    [_effectiveTagDictionaryForEditWidth removeObjectForKey:tag];
-                }
-            }
-            else {
-                cssDict[tag] = value;
-                if(width == _editViewPort){
-                    [_effectiveTagDictionaryForEditWidth setObject:value forKey:tag];
-                }
-            }
-            
+        if([self isUndoTag:tag]){
+            [[[self.delegate undoManager] prepareWithInvocationTarget:self] setValue:currentValue forTag:tag forViewport:width];
         }
+        
+        if (cssDict == nil) {
+            cssDict = [NSMutableDictionary dictionary];
+            /* save as string : to change json object, key should be nsstring format */
+            [_cssDictWithViewPort setObject:cssDict forKey:Integer2Str(width)];
+        }
+        
+        if (value == nil) {
+            [cssDict removeObjectForKey:tag];
+            if(width == _editViewPort){
+                [_effectiveTagDictionaryForEditWidth removeObjectForKey:tag];
+            }
+        }
+        else {
+            cssDict[tag] = value;
+            if(width == _editViewPort){
+                [_effectiveTagDictionaryForEditWidth setObject:value forKey:tag];
+            }
+        }
+        
+    }
 }
 
 -(id)effectiveValueForTag:(IUCSSTag)tag forViewport:(NSInteger)width{
