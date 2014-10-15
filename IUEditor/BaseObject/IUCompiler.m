@@ -701,6 +701,12 @@
     [jsCode addNewLine];
     
     [jsCode addCodeLine:@"});"];
+    
+    //text media query
+    [jsCode addCodeLine:@"function reloadTextMediaQuery(){"];
+    [jsCode addCodeWithIndent:[self textMQJavascriptCode:sheet]];
+    [jsCode addCodeLine:@"}"];
+    
     return jsCode;
 }
 
@@ -839,13 +845,50 @@
         
         
     }
-    
     else if ([iu isKindOfClass:[IUBox class]]) {
         for (IUBox *child in iu.children) {
             [code addCodeWithIndent:[self readyJSCode:child isEdit:isEdit]];
         }
 
     }
+    return code;
+}
+- (JDCode *)mqCodeForTag:(IUMQDataTag)tag inIU:(IUBox *)iu{
+    JDCode *code = [[JDCode alloc] init];
+    NSDictionary *mqDict = [iu.mqData dictionaryForTag:tag];
+    if(mqDict.count > 0){
+        [code addCodeLine:@"{"];
+        [code increaseIndentLevelForEdit];
+        for(NSString *widthStr in [mqDict allKeys]){
+            [code addCodeLineWithFormat:@"%@:\"%@\",", widthStr, [mqDict[widthStr] JSEscape]];
+            
+        }
+        [code decreaseIndentLevelForEdit];
+        [code addCodeLine:@"}"];
+    }
+    return code;
+}
+
+- (JDCode *)textMQJavascriptCode:(IUBox *)iu{
+    JDCode *code = [[JDCode alloc] init];
+    if ([iu isKindOfClass:[IUBox class]]) {
+        NSDictionary *mqDict = [iu.mqData dictionaryForTag:IUMQDataTagInnerHTML];
+        if(mqDict.count){
+            [code addCodeLineWithFormat:@"var %@_textMQDict = ", iu.htmlID];
+            [code addCode:[self mqCodeForTag:IUMQDataTagInnerHTML inIU:iu]];
+            [code addCodeLineWithFormat:@"var %@_currentText = getCurrentData(%@_textMQDict)", iu.htmlID, iu.htmlID];
+            [code addCodeLineWithFormat:@"$('.%@').html(%@_currentText)", iu.htmlID, iu.htmlID];
+            
+        }
+        else{
+            for (IUBox *child in iu.children) {
+                [code addCode:[self textMQJavascriptCode:child]];
+            }
+        }
+        
+    }
+
+    
     return code;
 }
 

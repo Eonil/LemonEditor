@@ -304,10 +304,18 @@
     
     DOMNodeList *list = [self.DOMDoc.documentElement getElementsByClassName:@"addible"];
     for (int i=0; i<list.length; i++) {
+        //find editor
         DOMHTMLElement *node = (DOMHTMLElement*)[list item:i];
         NSString *currentClass = [node getAttribute:@"class"];
         [node setAttribute:@"class" value:[currentClass stringByReplacingOccurrencesOfString:@"addible" withString:@""]];
         NSString *identifier = node.idName;
+        
+        //save current text
+        for(IUBox *iu in self.controller.selectedObjects){
+            iu.text = node.innerText;
+        }
+        
+        //remove current editor
         NSString *removeMCE = [NSString stringWithFormat:@"tinyMCE.execCommand('mceRemoveEditor', true, '%@');", identifier];
         [self evaluateWebScript:removeMCE];
 
@@ -315,10 +323,17 @@
     
     list = [self.DOMDoc.documentElement getElementsByClassName:@"editable"];
     for (int i=0; i<list.length; i++) {
+        //find editor
         DOMHTMLElement *node = (DOMHTMLElement*)[list item:i];
         NSString *currentClass = [node getAttribute:@"class"];
         [node setAttribute:@"class" value:[currentClass stringByReplacingOccurrencesOfString:@"addible" withString:@""]];
         NSString *identifier = node.idName;
+        //save text
+        for(IUBox *iu in self.controller.selectedObjects){
+            [iu.mqData setValue:node.innerHTML forTag:IUMQDataTagInnerHTML];
+        }
+        
+        //remove editor
         NSString *removeMCE = [NSString stringWithFormat:@"tinyMCE.execCommand('mceRemoveEditor', true, '%@');", identifier];
         [self evaluateWebScript:removeMCE];
         
@@ -347,6 +362,7 @@
         else{
             className = @"editable";
             fnName = @"iuAddEditorEditable";
+            iu.text = nil;
             [JDUIUtil hudAlert:@"Text Editor Mode" second:2];
         }
         NSString *identifer = [self.controller.selectedIdentifiersWithImportIdentifier firstObject];

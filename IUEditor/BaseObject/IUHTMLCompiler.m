@@ -1118,6 +1118,17 @@
 
         }
     }
+    else if(target == IUTargetEditor){
+        
+        NSString *innerHTML = [iu.mqData effectiveValueForTag:IUMQDataTagInnerHTML forViewport:iu.mqData.editViewPort];
+        
+        if(innerHTML && innerHTML.length > 0){
+            [code increaseIndentLevelForEdit];
+            [code addCodeLine:innerHTML];
+            [code decreaseIndentLevelForEdit];
+        }
+
+    }
     
     if (target == IUTargetEditor || ( target == IUTargetOutput && [iu shouldCompileChildrenForOutput] )) {
         for (IUBox *child in iu.children) {

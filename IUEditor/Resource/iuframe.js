@@ -233,3 +233,19 @@ function resizePageLinkSet(){
         console.log('setting width'+$(this).id+' width : '+width);
 	});
 }
+
+function getCurrentData(mqDict){
+	var viewportWidth = $(window).width();
+	var minWidth = 10000;
+	var currentData;
+	for (var key in mqDict){
+		var width = parseInt(key);
+	
+		if (viewportWidth<width && minWidth > width){
+			currentData = mqDict[key];
+			minWidth = width;
+		}
+	}
+	return currentData;
+}
+

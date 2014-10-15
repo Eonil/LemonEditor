@@ -65,6 +65,10 @@
         
         _css = [aDecoder decodeObjectForKey:@"css"];
         _css.delegate = self;
+        
+        _mqData = [aDecoder decodeObjectForKey:@"mqData"];
+        _mqData.delegate = self;
+        
         _event = [aDecoder decodeObjectForKey:@"event"];
         changedCSSWidths = [NSMutableSet set];
         if ([self.htmlID length] == 0) {
@@ -81,9 +85,12 @@
 
 -(id)initWithJDCoder:(JDCoder *)aDecoder{
     [[self undoManager] disableUndoRegistration];
+    
     _htmlID = [aDecoder decodeObjectForKey:@"htmlID"];
     _css = [aDecoder decodeObjectForKey:@"css"];
+    _mqData = [aDecoder decodeObjectForKey:@"mqData"];
     _m_children = [aDecoder decodeObjectForKey:@"children"];
+    
     [[self undoManager] enableUndoRegistration];
     return self;
 }
@@ -96,6 +103,7 @@
 - (void)encodeWithJDCoder:(JDCoder *)aCoder{
     [aCoder encodeObject:self.htmlID forKey:@"htmlID"];
     [aCoder encodeObject:self.css forKey:@"css"];
+    [aCoder encodeObject:self.mqData forKey:@"mqData"];
     [aCoder encodeObject:self.children forKey:@"children"];
     [aCoder encodeByRefObject:self.link forKey:@"link"];
     [aCoder encodeByRefObject:self.parent forKey:@"parent"];
@@ -157,6 +165,7 @@
     }
     [aCoder encodeFromObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"identifierManager", @"textController", @"linkCaller"]]];
     [aCoder encodeObject:_css forKey:@"css"];
+    [aCoder encodeObject:_mqData forKey:@"mqData"];
     [aCoder encodeObject:_event forKey:@"event"];
     [aCoder encodeObject:_m_children forKey:@"children"];
     
@@ -168,6 +177,10 @@
     if (self) {
         _css = [[IUCSS alloc] init];
         _css.delegate = self;
+        
+        _mqData = [[IUMQData alloc] init];
+        _mqData.delegate = self;
+        
         _event = [[IUEvent alloc] init];
         _m_children = [NSMutableArray array];
         
@@ -187,6 +200,10 @@
         _tempProject = project;
         _css = [[IUCSS alloc] init];
         _css.delegate = self;
+        
+        _mqData = [[IUMQData alloc] init];
+        _mqData.delegate = self;
+        
         _event = [[IUEvent alloc] init];
         _m_children = [NSMutableArray array];
         _lineHeightAuto = YES;
@@ -315,6 +332,7 @@
     if(box){
         
         IUCSS *newCSS = [_css copy];
+        IUMQData *newMQData = [_mqData copy];
         IUEvent *newEvent = [_event copy];
         NSArray *children = [self.children deepCopy];
 #if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
@@ -328,6 +346,10 @@
         
         box.css = newCSS;
         newCSS.delegate  = box;
+        
+        box.mqData = newMQData;
+        newMQData.delegate = box;
+        
         box.event = newEvent;
         
         box.delegate = self.delegate;
@@ -412,6 +434,12 @@
 - (void)setCss:(IUCSS *)css{
     _css = css;
 }
+
+#pragma mark - MQData
+- (void)setMqData:(IUMQData *)mqData{
+    _mqData = mqData;
+}
+
 
 #pragma mark - Event
 
@@ -562,6 +590,7 @@
     }
     
     [_css setMaxViewPort:maxSize];
+    [_mqData setMaxViewPort:maxSize];
     
 }
 
@@ -570,6 +599,7 @@
     NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
     [_css removeTagDictionaryForViewport:size];
     [_css setMaxViewPort:maxSize];
+    [_mqData setMaxViewPort:maxSize];
 
 }
 
@@ -583,11 +613,14 @@
 
     if (selectedSize == maxSize) {
         [_css setEditViewPort:IUCSSDefaultViewPort];
+        [_mqData setEditViewPort:IUCSSDefaultViewPort];
     }
     else {
         [_css setEditViewPort:selectedSize];
+        [_mqData setEditViewPort:selectedSize];
     }
     [_css setMaxViewPort:maxSize];
+    [_mqData setMaxViewPort:maxSize];
     
     [self didChangeValueForKey:@"canChangeHCenter"];
         

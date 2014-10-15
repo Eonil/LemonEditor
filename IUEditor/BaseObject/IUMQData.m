@@ -7,6 +7,7 @@
 //
 
 #import "IUMQData.h"
+
 @interface IUMQData ()
 @property NSMutableDictionary *mqDictWithViewPort;
 @property (readwrite) NSMutableDictionary *effectiveTagDictionaryForEditWidth;
@@ -78,6 +79,19 @@
     return [[self.mqDictWithViewPort allKeys] sortedArrayUsingDescriptors:@[sortOrder]];
 }
 
+-(NSDictionary *)dictionaryForTag:(IUMQDataTag)tag{
+    NSMutableDictionary *tagDict = [NSMutableDictionary dictionary];
+    for(NSString *widthKey in _mqDictWithViewPort){
+        NSDictionary *dictForWidth = _mqDictWithViewPort[widthKey];
+        id value = dictForWidth[tag];
+        if(value){
+            tagDict[widthKey] = value;
+        }
+    }
+    
+    return tagDict;
+}
+
 #pragma mark -value
 -(void)updateEffectiveTagDictionary{
     
@@ -138,10 +152,23 @@
                 [_effectiveTagDictionaryForEditWidth setObject:value forKey:tag];
             }
         }
-        
     }
     
+    [self.delegate updateHTML];
+    
 }
+
+
+-(id)valueForKeyPath:(NSString *)keyPath{
+    if ([keyPath containsString:@"effectiveTagDictionary."]) {
+        NSString *tag = [keyPath substringFromIndex:23];
+        return [_effectiveTagDictionaryForEditWidth objectForKey:tag];
+    }
+    else {
+        return [super valueForKey:keyPath];
+    }
+}
+
 
 -(id)effectiveValueForTag:(IUMQDataTag)tag forViewport:(NSInteger)width{
     if( _mqDictWithViewPort[Integer2Str(width)]){
@@ -156,15 +183,38 @@
 
 }
 
--(void)eradicateTag:(IUMQDataTag)type{
+-(id)valueForTag:(IUMQDataTag)tag forViewport:(NSInteger)width{
+    if( _mqDictWithViewPort[Integer2Str(width)]){
+        id value = [_mqDictWithViewPort[Integer2Str(width)] objectForKey:tag];
+        if(value){
+            return value;
+        }
+    }
+    
+    return nil;
+}
+
+
+-(void)eradicateTag:(IUMQDataTag)tag{
+    for (id key in _mqDictWithViewPort) {
+        NSMutableDictionary *cssDict = _mqDictWithViewPort[key];
+        [cssDict removeObjectForKey:tag];
+    }
+    
+    [self updateEffectiveTagDictionary];
+    [self.delegate updateHTML];
     
 }
 
 -(void)removeTagDictionaryForViewport:(NSInteger)width{
-    
+    if([_mqDictWithViewPort objectForKey:Integer2Str(width)]){
+        [_mqDictWithViewPort removeObjectForKey:Integer2Str(width)];
+    }
 }
 -(NSDictionary*)tagDictionaryForViewport:(NSInteger)width{
     return _mqDictWithViewPort[Integer2Str(width)];
 }
+
+
 
 @end

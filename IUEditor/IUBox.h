@@ -10,6 +10,7 @@
 #import "JDCoder.h"
 #import "IUCSS.h"
 #import "IUEvent.h"
+#import "IUMQData.h"
 #import "IUIdentifierManager.h"
 
 @protocol IUSourceDelegate <NSObject>
@@ -85,7 +86,7 @@ typedef enum _IUOverflowType{
 @class IUSheet;
 @class IUProject;
 
-@interface IUBox : NSObject <NSCoding, JDCoding, IUCSSDelegate, NSCopying>{
+@interface IUBox : NSObject <NSCoding, NSCopying, JDCoding, IUCSSDelegate, IUMQDataDelegate>{
     NSMutableArray *_m_children;
     
 }
@@ -139,6 +140,8 @@ typedef enum _IUOverflowType{
 
 
 //mediaquery
+@property (readonly) IUMQData *mqData;
+
 - (void)addMQSize:(NSNotification *)notification;
 - (void)removeMQSize:(NSNotification *)notification;
 - (void)changeMQSelect:(NSNotification *)notification;

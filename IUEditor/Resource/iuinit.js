@@ -93,6 +93,9 @@ $(document).ready(function(){
 	
 	/* Initialize iu.js*/
 	relocateScrollAnimation();
+	
+	/*init text media query*/
+	reloadTextMediaQuery();
     /*INIT_Default_REPLACEMENT_END*/
                   
     console.log("ready : iuinit.js");

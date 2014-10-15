@@ -297,6 +297,9 @@ $(window).resize(function(){
 	resizeSideBar();
 	makefullSizeSection();
 	resizePageContentHeight();
+	
+	//iuinit.js
+	reloadTextMediaQuery();
 });
 
 

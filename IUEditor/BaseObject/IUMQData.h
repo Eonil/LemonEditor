@@ -12,7 +12,7 @@
 @protocol IUMQDataDelegate
 
 @required
-- (void)updateMQData;
+- (void)updateHTML;
 - (NSUndoManager *)undoManager;
 @end
 
@@ -35,15 +35,20 @@
  @brief find viewport tag, if there not, return default value for tag
  */
 -(id)effectiveValueForTag:(IUMQDataTag)tag forViewport:(NSInteger)width;
+-(id)valueForTag:(IUMQDataTag)tag forViewport:(NSInteger)width;
 
 
 //remove tag of all tag dictionay in width
--(void)eradicateTag:(IUMQDataTag)type;
-
-//get css tag dictionary for specific width
+-(void)eradicateTag:(IUMQDataTag)tag;
 -(void)removeTagDictionaryForViewport:(NSInteger)width;
+
+//get mqdata tag dictionary for specific width
 -(NSDictionary*)tagDictionaryForViewport:(NSInteger)width;
 -(NSArray*)allViewports;
+/**
+ get mqdata tag dictionary for width
+ */
+-(NSDictionary *)dictionaryForTag:(IUMQDataTag)tag;
 
 //observable.
 @property (readonly) NSDictionary *effectiveTagDictionary;
