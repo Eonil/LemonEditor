@@ -11,6 +11,8 @@
 #import "IUCSS.h"
 #import "IUProject.h"
 #import "IUSection.h"
+#import "IUHeader.h"
+#import "IUFooter.h"
 
 #import "PGPageLinkSet.h"
 #import "IUMenuBar.h"
@@ -521,9 +523,9 @@
         [code setInsertingIdentifiers:@[_iu.cssHoverClass, _iu.cssActiveClass]];
     }
     else{
-        [code setInsertingIdentifier:_iu.cssHoverClass];
+        [code setInsertingIdentifiers:@[_iu.cssHoverClass]];
     }
-
+    
     if ([cssTagDict[IUCSSTagHoverBGImagePositionEnable] boolValue]) {
         [code insertTag:@"background-position-x" floatFromNumber:cssTagDict[IUCSSTagHoverBGImageX] unit:IUUnitPixel];
         [code insertTag:@"background-position-y" floatFromNumber:cssTagDict[IUCSSTagHoverBGImageY] unit:IUUnitPixel];
@@ -542,6 +544,15 @@
         
         [code setInsertingTarget:IUTargetEditor];
         [code insertTag:@"background-color" string:editorColor];
+        
+        [code setInsertingTarget:IUTargetOutput];
+        if(cssTagDict[IUCSSTagHoverBGColorDuration]){
+            [code setInsertingIdentifier:_iu.cssIdentifier];
+            NSString *durationStr = [NSString stringWithFormat:@"background-color %lds", [cssTagDict[IUCSSTagHoverBGColorDuration] integerValue]];
+            [code insertTag:@"-webkit-transition" string:durationStr];
+            [code insertTag:@"transition" string:durationStr];
+        }
+
     }
     
     
@@ -958,6 +969,54 @@
     }
 }
 
+- (void)updateCSSCode:(IUCSSCode*)code asIUHeader:(IUHeader*)header{
+    if(header.prototypeClass){
+        NSArray *editWidths = [header.css allViewports];
+        [code setInsertingIdentifier:header.cssIdentifier];
+        
+        
+        for (NSNumber *viewportNumber in editWidths) {
+            int viewport = [viewportNumber intValue];
+            [code setInsertingViewPort:viewport];
+
+            //IUHeader의 높이는 prototypeclass의 높이와 일치시킨다.
+            NSDictionary *cssTagDict = [header.prototypeClass.css tagDictionaryForViewport:viewport];
+            
+            IUUnit hUnit = [[header.prototypeClass.css effectiveValueForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+            NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
+            [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
+            
+            if(hUnit == IUUnitPercent && cssTagDict[IUCSSTagMinPixelHeight]){
+                [code insertTag:@"min-height" intFromNumber:cssTagDict[IUCSSTagMinPixelHeight] unit:IUUnitPixel];
+            }
+        }
+    }
+}
+
+- (void)updateCSSCode:(IUCSSCode*)code asIUFooter:(IUFooter*)footer{
+    if(footer.prototypeClass){
+        NSArray *editWidths = [footer.css allViewports];
+        [code setInsertingIdentifier:footer.cssIdentifier];
+        
+        
+        for (NSNumber *viewportNumber in editWidths) {
+            int viewport = [viewportNumber intValue];
+            [code setInsertingViewPort:viewport];
+            
+            //IUHeader의 높이는 prototypeclass의 높이와 일치시킨다.
+            NSDictionary *cssTagDict = [footer.prototypeClass.css tagDictionaryForViewport:viewport];
+            
+            IUUnit hUnit = [[footer.prototypeClass.css effectiveValueForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+            NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
+            [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
+            
+            if(hUnit == IUUnitPercent && cssTagDict[IUCSSTagMinPixelHeight]){
+                [code insertTag:@"min-height" intFromNumber:cssTagDict[IUCSSTagMinPixelHeight] unit:IUUnitPixel];
+            }
+        }
+    }
+    
+}
 
 - (void)updateCSSCode:(IUCSSCode*)code asIUPageContent:(IUPageContent*)pageContent{
     NSArray *editWidths = [pageContent.css allViewports];
@@ -1095,24 +1154,23 @@
             value = [menuItem.parent.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport];
         }
         else if(menuItem.depth == 2){
-            value = [menuItem.parent.parent.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport];
+            value = [menuItem.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport];
+
+            if(value == nil){
+                value = [menuItem.parent.parent.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport];
+            }
         }
         else{
-            value = [menuItem.parent.parent.parent.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport];
+            value = [menuItem.parent.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport];
+
+            if(value== nil){
+                value = [menuItem.parent.parent.parent.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport];
+            }
         }
         
-        if(value){
-            maxHeight = [value intValue];
-        }
+
+        int height = [value intValue];
         
-        int height;
-        if(menuItem.depth > 1){
-            height = maxHeight - 10;
-        }
-        else{
-            height = maxHeight;
-        }
-                
         //item identifier
         [code setInsertingIdentifier:menuItem.itemIdentifier];
         [code setInsertingTarget:IUTargetBoth];
@@ -1125,7 +1183,6 @@
         if(value){
             [code insertTag:@"color" color:value];
         }
-        [code insertTag:@"line-height" integer:height unit:IUUnitPixel];
         
         [code setInsertingIdentifier:[menuItem cssIdentifier]];
         [code setInsertingTarget:IUTargetBoth];
@@ -1136,6 +1193,8 @@
         else{
             [code insertTag:@"height" integer:height unit:IUUnitPixel];
         }
+        [code insertTag:@"line-height" integer:height unit:IUUnitPixel];
+
 
         
         //clousre

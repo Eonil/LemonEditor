@@ -292,7 +292,11 @@
 - (BOOL)shouldCompileY{
     return NO;
 }
+
 - (BOOL)shouldCompileHeight{
+    if(self.depth == 2){
+        return YES;
+    }
     return NO;
 }
 - (BOOL)shouldCompileWidth{
@@ -304,6 +308,9 @@
     }
 }
 - (BOOL)canChangeHeightByUserInput{
+    if(self.depth == 2){
+        return YES;
+    }
     return NO;
 }
 - (BOOL)canChangePositionType{

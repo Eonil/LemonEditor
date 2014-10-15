@@ -49,11 +49,13 @@
 
 
 - (IBAction)performPrototypeChange:(NSPopUpButton *)sender {
-    IUClass *class = [[_project classSheets] objectWithKey:@"name" value:sender.selectedItem.title];
-    NSArray *selectedIUs = self.controller.selectedObjects;
-    for (IUImport *iu in selectedIUs) {
-        NSAssert([iu isKindOfClass:[IUImport class]], @"");
-        iu.prototypeClass = class;
+    
+    if([[sender title] isEqualToString:@"None"]){
+        [self setValue:nil forIUProperty:@"prototypeClass"];
+    }
+    else{
+        IUClass *class = [[_project classSheets] objectWithKey:@"name" value:sender.selectedItem.title];
+        [self setValue:class forIUProperty:@"prototypeClass"];
     }
 }
 

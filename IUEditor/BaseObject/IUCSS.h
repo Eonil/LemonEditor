@@ -50,9 +50,8 @@
 /**
  @brief copy max-size cssDictionary to specific width dictionary;
  */
-- (void)copyCSSMaxViewPortDictTo:(NSInteger)width;
-- (void)copyCSSDictFrom:(NSInteger)fromWidth to:(NSInteger)toWidth;
-- (void)checkCSSDictForViewport:(NSInteger)width;
+- (void)copyMaxSizeToSize:(NSInteger)width;
+- (void)copySizeFrom:(NSInteger)fromWidth to:(NSInteger)toWidth;
 
 //observable.
 @property (readonly) NSDictionary *effectiveTagDictionary;

@@ -62,7 +62,12 @@
     if ([linkStr isHTTPURL] == NO) {
         if (_compiler.rule == IUCompileRuleDjango) {
             if(iu.divLink){
-                linkURL = [NSString stringWithFormat:@"/%@#%@", linkStr , ((IUBox *)iu.divLink).htmlID];
+                if([linkStr isEqualToString:@"Self"]){
+                    linkURL = [NSString stringWithFormat:@"#%@", ((IUBox *)iu.divLink).htmlID];
+                }
+                else{
+                    linkURL = [NSString stringWithFormat:@"/%@#%@", linkStr , ((IUBox *)iu.divLink).htmlID];
+                }
             }
             else{
                 linkURL = [NSString stringWithFormat:@"/%@", linkStr];
@@ -70,7 +75,12 @@
         }
         else {
             if(iu.divLink){
-                linkURL = [NSString stringWithFormat:@"./%@.html#%@", linkStr, ((IUBox *)iu.divLink).htmlID];
+                if([linkStr isEqualToString:@"Self"]){
+                    linkURL = [NSString stringWithFormat:@"#%@", ((IUBox *)iu.divLink).htmlID];
+                }
+                else{
+                    linkURL = [NSString stringWithFormat:@"./%@.html#%@", linkStr, ((IUBox *)iu.divLink).htmlID];
+                }
             }
             else{
                 linkURL = [NSString stringWithFormat:@"./%@.html", linkStr];
@@ -373,20 +383,22 @@
     [code addCodeLineWithFormat:@"<li %@>", [self attributeString:attributeDict]];
     [code increaseIndentLevelForEdit];
     
-    if(target == IUTargetEditor){
-        [code addCodeLineWithFormat:@"<a>%@</a>", menuItem.text];
-    }
-    else if(target == IUTargetOutput){
-        if(menuItem.link){
-            [code addCodeLineWithFormat:@"%@%@</a>", [self linkHeaderString:menuItem], menuItem.text];
+    if(menuItem.text && menuItem.text.length > 0){
+        if(target == IUTargetEditor){
+            [code addCodeLineWithFormat:@"<a>%@</a>", menuItem.text];
         }
-        else{
-            [code addCodeLineWithFormat:@"<a href=''>%@</a>", menuItem.text];
+        else if(target == IUTargetOutput){
+            if(menuItem.link){
+                [code addCodeLineWithFormat:@"%@%@</a>", [self linkHeaderString:menuItem], menuItem.text];
+            }
+            else{
+                [code addCodeLineWithFormat:@"<a href=''>%@</a>", menuItem.text];
+            }
         }
     }
-    
     if(menuItem.children.count > 0){
-        [code addCodeLine:@"<div class='closure'></div>"];
+        //TODO: closure position property랑 connect 되면 소스 추가
+        //        [code addCodeLine:@"<div class='closure'></div>"];
         [code addCodeLine:@"<ul>"];
         for(IUBox *child in menuItem.children){
             [self htmlCode:child target:target code:code];
@@ -447,7 +459,7 @@
 - (JDCode *)htmlCodeAsIUImage:(IUImage *)image target:(IUTarget)target attributeDict:(NSMutableDictionary *)attributeDict{
     JDCode *code = [[JDCode alloc] init];
     
-    if (image.pgContentVariable && _compiler.rule == IUCompileRuleDjango) {
+    if (image.pgContentVariable && image.pgContentVariable.length > 0 && _compiler.rule == IUCompileRuleDjango) {
         if ([image.sheet isKindOfClass:[IUClass class]]) {
             attributeDict[@"src"] = [NSString stringWithFormat:@"{{ object.%@ }}", image.pgContentVariable];
         }
@@ -458,7 +470,9 @@
         //image tag attributes
         if(image.imageName && image.imageName.length > 0){
             NSString *imgSrc = [_compiler imagePathWithImageName:image.imageName target:target];
-            attributeDict[@"src"] = imgSrc;
+            if(imgSrc && imgSrc.length > 0){
+                attributeDict[@"src"] = imgSrc;
+            }
 
         }
         else if (target == IUTargetEditor){
@@ -1107,7 +1121,6 @@
             [code decreaseIndentLevelForEdit];
             
         }
-        
         //TODO: WP
         else if ([iu conformsToProtocol:@protocol(IUSampleHTMLProtocol)] && _compiler.rule == IUCompileRuleDefault){
             /* for example, WORDPRESS can be compiled as HTML */
@@ -1129,13 +1142,20 @@
         }
     }
     
-    if(iu.text && iu.text.length > 0 && [iu conformsToProtocol:@protocol(IUPHPCodeProtocol)] == NO){
-        [code addNewLine];
-        NSString *htmlText = [iu.text stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
+    NSString *htmlText;
+    if(iu.text && iu.text.length > 0
+       && [iu conformsToProtocol:@protocol(IUPHPCodeProtocol)] == NO){
+        htmlText = [iu.text stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
         htmlText = [htmlText stringByReplacingOccurrencesOfString:@"  " withString:@" &nbsp;"];
-        [code increaseIndentLevelForEdit];
-        [code addCodeLineWithFormat:@"<p>%@</p>",htmlText];
-        [code decreaseIndentLevelForEdit];
+    }
+    if(htmlText){
+        if(IUTargetEditor == target ||
+           (IUTargetOutput == target && iu.pgContentVariable == nil)){
+            [code increaseIndentLevelForEdit];
+            [code addCodeLineWithFormat:@"<p>%@</p>",htmlText];
+            [code decreaseIndentLevelForEdit];
+
+        }
     }
     
     if (target == IUTargetEditor || ( target == IUTargetOutput && [iu shouldCompileChildrenForOutput] )) {

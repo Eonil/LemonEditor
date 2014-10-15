@@ -8,6 +8,7 @@
 
 #import "IUClass.h"
 #import "IUProject.h"
+#import "IUImport.h"
 
 @implementation IUClass{
     NSMutableArray *_referenceImports;
@@ -130,6 +131,12 @@
     return [_referenceImports copy];
 }
 
+- (void)updateCSS{
+    [super updateCSS];
+    for(IUImport *import in _referenceImports){
+        [import updateCSS];
+    }
+}
 
 
 @end

@@ -318,6 +318,7 @@
 		3D5B5AFD1991C8B100EF6F12 /* ttwidgetLargeNone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D5B5AFB1991C8B100EF6F12 /* ttwidgetLargeNone.png */; };
 		3D5B5AFF1991C9D700EF6F12 /* ttwidgetHorizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D5B5AFE1991C9D700EF6F12 /* ttwidgetHorizontal.png */; };
 		3D5B5B011991C9DC00EF6F12 /* ttwidgetLargeHorizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D5B5B001991C9DC00EF6F12 /* ttwidgetLargeHorizontal.png */; };
+		3D6DD37A19E28591004C2E9D /* jquery-ui-1.11.1.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 3D6DD37919E28591004C2E9D /* jquery-ui-1.11.1.min.js */; };
 		3D748C7C19207B7A005665A3 /* iueditor.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 3D748C7A19207B7A005665A3 /* iueditor.iconset */; };
 		3D748C81192095A1005665A3 /* LMPropertyIUPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D748C7F192095A1005665A3 /* LMPropertyIUPageVC.m */; };
 		3D748C82192095A1005665A3 /* LMPropertyIUPageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D748C80192095A1005665A3 /* LMPropertyIUPageVC.xib */; };
@@ -1417,6 +1418,7 @@
 		3D5B5AFB1991C8B100EF6F12 /* ttwidgetLargeNone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ttwidgetLargeNone.png; sourceTree = "<group>"; };
 		3D5B5AFE1991C9D700EF6F12 /* ttwidgetHorizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ttwidgetHorizontal.png; sourceTree = "<group>"; };
 		3D5B5B001991C9DC00EF6F12 /* ttwidgetLargeHorizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ttwidgetLargeHorizontal.png; sourceTree = "<group>"; };
+		3D6DD37919E28591004C2E9D /* jquery-ui-1.11.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-ui-1.11.1.min.js"; sourceTree = "<group>"; };
 		3D748C7919207B7A005665A3 /* iueditor.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iueditor.icns; sourceTree = "<group>"; };
 		3D748C7A19207B7A005665A3 /* iueditor.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = iueditor.iconset; sourceTree = "<group>"; };
 		3D748C7E192095A1005665A3 /* LMPropertyIUPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMPropertyIUPageVC.h; path = IU/LMPropertyIUPageVC.h; sourceTree = "<group>"; };
@@ -3594,6 +3596,7 @@
 			children = (
 				3D9F5C5519D2B37900D63B84 /* test */,
 				698503E8199953A500576DBF /* jquery-1.10.2.js */,
+				3D6DD37919E28591004C2E9D /* jquery-ui-1.11.1.min.js */,
 				698503E9199953A500576DBF /* jquery-ui-1.9.2.js */,
 				3D19E42119874A7400A50D35 /* ie8 */,
 				3DED2768190E3956001A1D67 /* plugins */,
@@ -5343,6 +5346,7 @@
 				26382F45199CBB47009DC5C4 /* ws_thumbnail.png in Resources */,
 				2627FEB5199B74850085BDEF /* autoheight_on.png in Resources */,
 				CBA878021963D3CF00075294 /* Tutorial03_kr.png in Resources */,
+				3D6DD37A19E28591004C2E9D /* jquery-ui-1.11.1.min.js in Resources */,
 				690A8275190A2CC200DDBA86 /* new_django.png in Resources */,
 				26CA36D7198760B70004D888 /* cs_thumbnail@2x.png in Resources */,
 				266C411419AB6CC9008A77CD /* wp-logo.png in Resources */,

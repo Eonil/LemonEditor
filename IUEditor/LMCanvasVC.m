@@ -187,11 +187,29 @@
 }
 
 - (void)removeSelectedIUs{
-    for(IUBox *obj in self.controller.selectedObjects){
-        if([obj canRemoveIUByUserInput]){
-            [obj.parent removeIU:obj];
+    NSMutableArray *alternatedSelection = [NSMutableArray array];
+    
+    for(IUBox *box in [self.controller selectedObjects]){
+        //selected objects can contain removed object
+        if([alternatedSelection containsObject:box.htmlID]){
+            [alternatedSelection removeObject:box.htmlID];
+        }
+        
+        //add parent or not to be removed objects add to alternated selection
+        if([box canRemoveIUByUserInput]){
+            [box.parent removeIU:box];
+            [alternatedSelection addObject:box.parent.htmlID];
+        }
+        else{
+            [alternatedSelection addObject:box.htmlID];
         }
     }
+    
+    
+    
+    [self.controller setSelectedObjectsByIdentifiers:alternatedSelection];
+    [self.controller rearrangeObjects];
+    
 }
 
 -(void)insertImage:(NSString *)name atIU:(NSString *)identifier{
@@ -332,7 +350,7 @@
     
     NSString *selectedID = identifier;
     
-    IUBox *iu = [self.controller IUBoxByIdentifier:identifier];
+    IUBox *iu = [self.controller tryIUBoxByIdentifier:identifier];
     if([iu isKindOfClass:[IUItem class]]){
         if( [((IUItem *)iu) shouldSelectParentFirst]){
             IUBox *parentIU = iu.parent;

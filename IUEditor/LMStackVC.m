@@ -126,12 +126,24 @@
 
 -(void)keyDown:(NSEvent *)theEvent{
     unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+    NSMutableArray *alternatedSelection = [NSMutableArray array];
     if (key == NSDeleteCharacter) {
         for(IUBox *box in [self.IUController selectedObjects]){
+            //selected objects can contain removed object
+            if([alternatedSelection containsObject:box.htmlID]){
+                [alternatedSelection removeObject:box.htmlID];
+            }
+            
+            //add parent or not to be removed objects add to alternated selection
             if([box canRemoveIUByUserInput]){
                 [box.parent removeIU:box];
+                [alternatedSelection addObject:box.parent.htmlID];
+            }
+            else{
+                [alternatedSelection addObject:box.htmlID];
             }
         }
+        [self.IUController setSelectedObjectsByIdentifiers:alternatedSelection];
         [self.IUController rearrangeObjects];
     }
 }

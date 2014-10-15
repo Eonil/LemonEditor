@@ -206,13 +206,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addMQSize:) name:IUNotificationMQAdded object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeMQSize:) name:IUNotificationMQRemoved object:nil];
     
-    [_pageContent connectWithEditor];
+    for(IUBox *iu in self.children){
+        [iu connectWithEditor];
+    }
     [[self undoManager] enableUndoRegistration];
 }
 
 - (void)disconnectWithEditor{
     if([self isConnectedWithEditor]){
-        [_pageContent disconnectWithEditor];
+        for(IUBox *iu in self.children){
+            [iu disconnectWithEditor];
+        }
     }
     [super disconnectWithEditor];
 }

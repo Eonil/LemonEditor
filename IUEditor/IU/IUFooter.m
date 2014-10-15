@@ -64,6 +64,9 @@
     return NO;
 }
 
+- (BOOL)canChangeHeightByUserInput{
+    return NO;
+}
 - (BOOL)canCopy{
     return NO;
 }

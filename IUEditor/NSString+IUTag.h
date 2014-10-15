@@ -159,6 +159,7 @@ static NSString * IUCSSTagHoverBGImageX = @"hoverBGImageX";
 static NSString * IUCSSTagHoverBGImageY = @"hoverBGImageY";
 static NSString * IUCSSTagHoverBGColorEnable  = @"hoverBGColorEnable";
 static NSString * IUCSSTagHoverBGColor  = @"hoverBGColor";
+static NSString * IUCSSTagHoverBGColorDuration  = @"hoverBGColorDuration";
 static NSString * IUCSSTagHoverTextColorEnable  = @"hoverTextColorEnable";
 static NSString * IUCSSTagHoverTextColor  = @"hoverTextColor";
 

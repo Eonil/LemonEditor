@@ -65,7 +65,7 @@
 
 - (void)setPrototypeClass:(IUClass *)prototypeClass{
     
-    if([prototypeClass isEqualTo:_prototypeClass]){
+    if(prototypeClass && [prototypeClass isEqualTo:_prototypeClass]){
         return;
     }
     
@@ -75,7 +75,7 @@
     
     [_prototypeClass removeReference:self];
     
-    if(prototypeClass == nil){
+    if(prototypeClass == nil && _prototypeClass != nil){
         //remove layers
         for(IUBox *box in _prototypeClass.allChildren){
             NSString *currentID = [self modifieldHtmlIDOfChild:box];
@@ -87,14 +87,19 @@
     }
     
     _prototypeClass = prototypeClass;
-    _prototypeClass.delegate = self.delegate;
- 
-    [_prototypeClass addReference:self];
+    
+    if(_prototypeClass){
+        _prototypeClass.delegate = self.delegate;
+        [_prototypeClass addReference:self];
+    }
+    
     [self updateHTML];
-    if (self.delegate) {
+    
+    if (self.delegate && _prototypeClass) {
         for (IUBox *iu in [prototypeClass.allChildren arrayByAddingObject:prototypeClass]) {
             [iu updateCSS];
         }
+        
     }
     [self didChangeValueForKey:@"children"];
 }
@@ -105,7 +110,7 @@
         return importHTMLID;
     }
     else if(_prototypeClass == iu){
-        NSString *importHTMLID = [NSString stringWithFormat:@"%@%@_class",kIUImportEditorPrefix, self.htmlID];
+        NSString *importHTMLID = [NSString stringWithFormat:@"%@%@_%@",kIUImportEditorPrefix, self.htmlID, _prototypeClass.htmlID];
         return importHTMLID;
     }
     return nil;
@@ -130,8 +135,10 @@
 
 - (NSMutableArray *)allIdentifierChildren{
     NSMutableArray *array =  [self allChildren];
-    [array removeObject:_prototypeClass];
-    [array removeObjectsInArray:[_prototypeClass allChildren]];
+    if(_prototypeClass){
+        [array removeObject:_prototypeClass];
+        [array removeObjectsInArray:[_prototypeClass allChildren]];
+    }
     return array;
 }
 

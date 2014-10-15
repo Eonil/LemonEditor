@@ -21,7 +21,12 @@
 
 -(NSArray*)allViewports{
     NSSortDescriptor* sortOrder = [NSSortDescriptor sortDescriptorWithKey: @"self" ascending: NO];
-    return [[self.cssDictWithViewPort allKeys] sortedArrayUsingDescriptors:@[sortOrder]];
+    //FIXME: max가 바뀔때 frame이 제대로 동작안하는것 같음
+    //상태 1280이 맥시멈인데 9999, 1280두개 다 존재함.
+    NSMutableArray *array = [[[self.cssDictWithViewPort allKeys] sortedArrayUsingDescriptors:@[sortOrder]] mutableCopy];
+    
+    
+    return array;
 }
 
 -(id)init{
@@ -185,24 +190,15 @@
 }
 
 
-/**
- @brief
- media query를 조금더 부드럽게 하기위해서 새로운 size를 만들때 하나위의  css 를 카피함.
- 없을 경우에는 frame dict만 만들어 놓음.
- */
-- (void)copyCSSMaxViewPortDictTo:(NSInteger)width{
-    [self copyCSSDictFrom:IUCSSDefaultViewPort to:width];
+- (void)copyMaxSizeToSize:(NSInteger)width{
+    [self copySizeFrom:IUCSSDefaultViewPort to:width];
 }
-- (void)copyCSSDictFrom:(NSInteger)fromWidth to:(NSInteger)toWidth{
+- (void)copySizeFrom:(NSInteger)fromWidth to:(NSInteger)toWidth{
     if(_cssDictWithViewPort[Integer2Str(toWidth)] == nil){
-        NSMutableDictionary *cssDict = [_cssDictWithViewPort[@(fromWidth)] mutableCopy];
-        [_cssDictWithViewPort setObject:cssDict forKey:@(toWidth)];
-    }
-}
-- (void)checkCSSDictForViewport:(NSInteger)width{
-    if(_cssDictWithViewPort[Integer2Str(width)] == nil){
-        NSMutableDictionary *cssDict = [NSMutableDictionary dictionary];
-        [_cssDictWithViewPort setObject:cssDict forKey:Integer2Str(width)];
+        if(_cssDictWithViewPort[Integer2Str(fromWidth)]){
+            NSMutableDictionary *cssDict = [_cssDictWithViewPort[Integer2Str(fromWidth)] mutableCopy];
+            [_cssDictWithViewPort setObject:cssDict forKey:Integer2Str(toWidth)];
+        }
     }
 }
 

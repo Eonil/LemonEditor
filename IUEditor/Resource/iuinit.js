@@ -78,7 +78,7 @@ $(document).ready(function(){
 		    evn.preventDefault();
 			var div =  this.href.split('#')[1];
 			var linkIU = $('#'+div);
-	        $('html,body').scrollTo(linkIU.position().left, linkIU.position().top); 			
+	        $('html,body').scrollTo(linkIU.offset().left, linkIU.offset().top); 			
 		}
     });
     
@@ -89,6 +89,7 @@ $(document).ready(function(){
 	resizeSideBar();
 	makeBottomLocation();
 	reframeCenter();
+	resizePageContentHeight();
 	
 	/* Initialize iu.js*/
 	relocateScrollAnimation();

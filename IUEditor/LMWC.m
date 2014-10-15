@@ -471,6 +471,13 @@
     [_selectionToolbarTF setStringValue:status];
     [_selectionToolbarTF sizeToFit];
 }
+- (IUSheet *)currentSheet{
+    if ([_selectedNode isKindOfClass:[IUSheet class]]) {
+        return _selectedNode;
+    }
+    
+    return nil;
+}
 
 
 #pragma mark - select TabView

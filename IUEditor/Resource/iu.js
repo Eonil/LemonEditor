@@ -30,10 +30,10 @@ function transitionAnimationOn(eventObject){
     var duration = $(transition).attr('transitionduration');
 
     if(duration <= 0){
-        $(secondObj).show(effect, 1, function(){reframeCenterIU('#'+transition.id)});
+        $(secondObj).show(effect, 1, function(){reframeCenterIU('.'+transition.id)});
     }
     else{
-        $(secondObj).show(effect, duration, function(){reframeCenterIU('#'+transition.id)});
+        $(secondObj).show(effect, duration, function(){reframeCenterIU('.'+transition.id)});
     }
 	
    	$(transition).data('isSelected', 'false');
@@ -150,7 +150,7 @@ function onWebMovieAutoPlay(){
 	$('[eventAutoplay]').each(function(){
 		var type = $(this).attr('videotype');
         var display = $(this).css('display');
-		if(isIUinWindow(this) && display != 'none'){
+		if(isElementInViewport(this) && display != 'none'){
 			//play
 			if(type=='vimeo'){
 				var vimeo = $f($(this).children()[0]);
@@ -197,7 +197,7 @@ function moveScrollAnimation(){
 		
 	//move horizontally
 	$('[opacitymove]').each(function(){
-		if(isIUinWindow(this)){
+		if(isElementInViewport(this)){
 			var opacityMove = $(this).attr('opacitymove'); 
 			var yPos = $(this).offset().top+$(this).outerHeight()/2;
 			var percent = (yPos - scrollY)/(screenH/2);
@@ -219,7 +219,7 @@ function moveScrollAnimation(){
 	
 	
 	$('[xPosMove]').each(function(){
-		if(isIUinWindow(this)){
+		if(isElementInViewport(this)){
 		
 			var start = parseFloat($(this).attr('start'));
 			var xMove = parseFloat($(this).attr('xPosMove'));
@@ -288,6 +288,7 @@ $(window).resize(function(){
 	resizePageLinkSet();
 	resizeSideBar();
 	makefullSizeSection();
+	resizePageContentHeight();
 });
 
 

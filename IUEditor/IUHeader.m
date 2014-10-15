@@ -29,6 +29,35 @@
     return self;
 }
 
+- (void)connectWithEditor{
+    [super connectWithEditor];
+}
+
+
+#pragma mark - property
+
+- (void)setPrototypeClass:(IUClass *)prototypeClass{
+    [super setPrototypeClass:prototypeClass];
+    
+    //for version converting for document befor IU_VERSION_LAYOUT
+    if(prototypeClass == nil){
+        [_m_children removeAllObjects];
+    }
+}
+
+- (NSArray*)children{
+    if (self.prototypeClass == nil) {
+        //for version converting for document befor IU_VERSION_LAYOUT
+        if(_m_children.count > 0){
+            return _m_children;
+        }
+        
+        return [NSArray array];
+    }
+    return @[self.prototypeClass];
+}
+
+#pragma mark - should
 
 -(BOOL)canRemoveIUByUserInput{
     return NO;
@@ -64,20 +93,12 @@
 - (BOOL)canChangeWidthByUserInput{
     return NO;
 }
-
+- (BOOL)canChangeHeightByUserInput{
+    return NO;
+}
 - (BOOL)canCopy{
     return NO;
 }
 
-- (NSArray*)children{
-    if (self.prototypeClass == nil) {
-        //for version converting for document befor IU_VERSION_LAYOUT
-        if(_m_children.count > 0){
-            return _m_children;
-        }
-        
-        return [NSArray array];
-    }
-    return @[self.prototypeClass];
-}
+
 @end
