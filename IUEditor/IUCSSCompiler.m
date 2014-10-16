@@ -804,6 +804,7 @@
         
         /* bg size & position */
         if(cssTagDict[IUCSSTagBGSize]){
+            
             IUBGSizeType bgSizeType = [cssTagDict[IUCSSTagBGSize] intValue];
             switch (bgSizeType) {
                 case IUBGSizeTypeStretch:
@@ -821,6 +822,10 @@
                     default:
                     break;
             }
+            if(viewport != IUCSSDefaultViewPort && bgSizeType != IUBGSizeTypeFull){
+                [code insertTag:@"background-attachment" string:@"initial"];
+            }
+
         }
         
         if ([cssTagDict[IUCSSTagEnableBGCustomPosition] boolValue]) {
