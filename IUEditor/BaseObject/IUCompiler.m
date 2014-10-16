@@ -248,13 +248,32 @@
     return code;
 }
 
+-(NSArray *)fontNameFromInnerHTMLDictionary:(NSDictionary *)dictionary{
+    NSMutableArray *array = [NSMutableArray array];
+    for(NSString *innerHTML in [dictionary allValues]){
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"font-family:[a-z,\\s-]*;" options:NSRegularExpressionCaseInsensitive error:nil];
+        NSArray *findStringArray = [regex matchesInString:innerHTML options:0 range:NSMakeRange(0, innerHTML.length)];
+        
+        for(NSTextCheckingResult *result in findStringArray){
+        
+            NSString *fontfamily = [innerHTML substringWithRange:[result range]];
+            //** css font name만 남김
+            fontfamily = [fontfamily substringWithRange:NSMakeRange(13, fontfamily.length-14)];
+            NSString *fontName = [[LMFontController sharedFontController] fontNameForFontCSS:fontfamily];
+            if(fontName && fontName.length > 0){
+                [array addObject:@{IUCSSTagFontName:fontName}];
+            }
+        }
+    }
+    
+    return array;
+}
+
 
 -(JDCode *)webfontImportSourceForOutput:(IUPage *)page{
     NSMutableArray *fontArray = [NSMutableArray array];
 
-    for (IUBox *box in page.allChildren){
-        
-#if CURRENT_TEXT_VERSION < TEXT_SELECTION_VERSION
+    for (IUBox *box in page.allChildren){        
         NSString *fontName = box.css.effectiveTagDictionary[IUCSSTagFontName];
         if(fontName && fontName.length >0 ){
             if(box.css.effectiveTagDictionary[IUCSSTagFontWeight]){
@@ -264,21 +283,12 @@
                 [fontArray addObject:@{IUCSSTagFontName:fontName}];
             }
         }
-#else
-        if([box isKindOfClass:[IUText class]]){
-            for(NSString *fontName in [(IUText *)box fontNameArray]){
-                if([fontNameArray containsString:fontName] == NO){
-                    [fontNameArray addObject:fontName];
-                }
-            }
+        NSDictionary *mqDict = [box.mqData dictionaryForTag:IUMQDataTagInnerHTML];
+        NSArray *innerFontArray = [self fontNameFromInnerHTMLDictionary:mqDict];
+        if(innerFontArray.count > 0){
+            [fontArray addObjectsFromArray:innerFontArray];
         }
-        else{
-            NSString *fontName = [box.css valueForKeyPath:[@"effectiveTagDictionary" stringByAppendingPathExtension:IUCSSTagFontName]];
-            if([fontNameArray containsString:fontName] == NO){
-                [fontNameArray addObject:fontName];
-            }
-        }
-#endif
+
     }
 
     LMFontController *fontController = [LMFontController sharedFontController];

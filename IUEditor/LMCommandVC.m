@@ -227,6 +227,11 @@
         [debugServerShell stop];
         debugServerShell = nil;
     }
+    
+    if ([debugServerShell.task isRunning] == NO) {
+        return;
+    }
+    
     IUDjangoProject *project = (IUDjangoProject *)_docController.project;
     NSInteger pid = [JDNetworkUtil pidOfPort:project.port];
     if (pid != NSNotFound) {

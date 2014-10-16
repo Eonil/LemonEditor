@@ -33,6 +33,7 @@ typedef enum{
 - (void)saveFontList;
 
 - (NSString *)cssForFontName:(NSString *)fontName;
+- (NSString *)fontNameForFontCSS:(NSString *)css;
 - (BOOL)hasLight:(NSString *)fontName;
 
 - (NSString *)mceFontList;

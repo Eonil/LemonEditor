@@ -52,7 +52,16 @@ static LMFontController *gFontController = nil;
 - (NSString *)cssForFontName:(NSString *)fontName{
     return [_fontDict objectForKey:fontName][LMFontFamilyName];
 }
-
+- (NSString *)fontNameForFontCSS:(NSString *)css{
+    for(NSString *key in _fontDict){
+        NSString *keyCSS = [[_fontDict objectForKey:key][LMFontFamilyName] stringByReplacingOccurrencesOfString:@"'" withString:@""];
+        keyCSS = [keyCSS stringByTrim];
+        if([keyCSS isEqualToString:[css stringByTrim]]){
+            return key;
+        }
+    }
+    return nil;
+}
 - (NSString *)linkForFontName:(NSString *)fontName{
     return [_fontDict objectForKey:fontName][LMFontHeaderLink];
 }
@@ -172,7 +181,6 @@ static LMFontController *gFontController = nil;
     
     return code;
 }
-
 
 - (NSString *)mceFontList{
     NSMutableString *fontList = [NSMutableString string];
