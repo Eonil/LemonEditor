@@ -35381,7 +35381,7 @@ define("tinymce/ui/FormatControls", [
 		});
 
 		editor.addButton('fontsizeselect', function() {
-			var items = [], defaultFontsizeFormats = '8pt 10pt 12pt 14pt 18pt 24pt 36pt';
+			var items = [], defaultFontsizeFormats = '6pt 8pt 9pt 10pt 12pt 14pt 18pt 21pt 24pt 30pt 36pt 48pt 60pt 72pt';
 			var fontsize_formats = editor.settings.fontsize_formats || defaultFontsizeFormats;
 
 			each(fontsize_formats.split(' '), function(item) {
