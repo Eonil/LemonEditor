@@ -150,6 +150,17 @@
                 }
             }
         }
+        if(IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_TEXTMCE, self.project.IUProjectVersion)){
+            _mqData = [[IUMQData alloc] init];
+            _mqData.delegate = self;
+            
+            //sampletext가 아니고 innerHTML로 동작해야 하는경우에는 mqdata로 옮겨준다.
+            if(_text && _text.length > 0 && (_pgContentVariable == nil || (_pgContentVariable && _pgContentVariable.length==0))){
+                NSString *innerHTML = [NSString stringWithFormat:@"<p>%@</p>", _text];
+                [_mqData setValue:innerHTML forTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];
+                _text = nil;
+            }
+        }
         
     }
     [self.undoManager enableUndoRegistration];
@@ -932,7 +943,7 @@ e.g. 만약 css로 옮긴다면)
 
 #pragma mark has frame
 - (BOOL)shouldCompileFontInfo{
-    if (self.text || self.pgContentVariable) {
+    if (self.text || self.pgContentVariable || [self.mqData dictionaryForTag:IUMQDataTagInnerHTML].count > 0) {
         return YES;
     }
     return NO;

@@ -365,10 +365,10 @@
             iu.text = nil;
             [JDUIUtil hudAlert:@"Text Editor Mode" second:2];
         }
-        NSString *identifer = [self.controller.selectedIdentifiersWithImportIdentifier firstObject];
-
-        [self IUClassIdentifier:identifer addClass:className];
+        NSString *classidentifer = [self.controller.selectedIdentifiers firstObject];
+        [self IUClassIdentifier:classidentifer addClass:className];
         
+        NSString *identifer = [self.controller.selectedIdentifiersWithImportIdentifier firstObject];
         NSString *reloadMCE =[NSString stringWithFormat:@"tinyMCE.execCommand('%@', true, '%@');",fnName, identifer];
         [self evaluateWebScript:reloadMCE];
         isEnableText = YES;
