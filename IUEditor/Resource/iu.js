@@ -199,20 +199,26 @@ function moveScrollAnimation(){
 		
 	//move horizontally
 	$('[opacitymove]').each(function(){
-		if(isElementInViewport(this)){
+		if(isElementIntersectViewport(this)){
 			var opacityMove = $(this).attr('opacitymove'); 
 			var yPos = $(this).offset().top+$(this).outerHeight()/2;
 			var percent = (yPos - scrollY)/(screenH/2);
 			if(percent > 0){
+				//top position in window
 				if(percent<=0.35){
 					percent = percent*2.0;	
 				}
+				//center position
 				else if(percent>0.35 && percent <1.0){
 					percent = 1.0;
 				}
-				else if(percent > 1.0){
-					percent = percent - 1.0;
-					percent = 1.0 - percent;
+				//bottom position in window(current div being risen)
+				else if(percent > 1.0 && percent < 2.0){
+					percent = 1.0 - (percent - Math.floor(percent));
+				}
+				//bottom position in window(visible part is really small)
+				else{
+					percent = 0.1;
 				}
 				$(this).css('opacity', percent);
 			}
@@ -221,7 +227,7 @@ function moveScrollAnimation(){
 	
 	
 	$('[xPosMove]').each(function(){
-		if(isElementInViewport(this)){
+		if(isElementIntersectViewport(this)){
 		
 			var start = parseFloat($(this).attr('start'));
 			var xMove = parseFloat($(this).attr('xPosMove'));
