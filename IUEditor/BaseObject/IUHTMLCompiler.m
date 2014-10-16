@@ -1118,6 +1118,12 @@
 
         }
     }
+    else if ([iu.mqData dictionaryForTag:IUMQDataTagInnerHTML].count == 1 ){
+        [code increaseIndentLevelForEdit];
+        [code addCodeLine:[iu.mqData valueForTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort]];
+        [code decreaseIndentLevelForEdit];
+
+    }
     else if(target == IUTargetEditor){
         
         NSString *innerHTML = [iu.mqData effectiveValueForTag:IUMQDataTagInnerHTML forViewport:iu.mqData.editViewPort];

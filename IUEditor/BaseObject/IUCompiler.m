@@ -883,7 +883,7 @@
     JDCode *code = [[JDCode alloc] init];
     if ([iu isKindOfClass:[IUBox class]]) {
         NSDictionary *mqDict = [iu.mqData dictionaryForTag:IUMQDataTagInnerHTML];
-        if(mqDict.count){
+        if(mqDict.count > 1){
             [code addCodeLineWithFormat:@"var %@_textMQDict = ", iu.htmlID];
             [code addCode:[self mqCodeForTag:IUMQDataTagInnerHTML inIU:iu]];
             [code addCodeLineWithFormat:@"var %@_currentText = getCurrentData(%@_textMQDict)", iu.htmlID, iu.htmlID];
