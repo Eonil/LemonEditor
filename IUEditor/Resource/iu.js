@@ -29,7 +29,7 @@ function transitionAnimationOn(eventObject){
 	var effect = $(transition).attr('transitionanimation');
     var duration = $(transition).attr('transitionduration');
 	
-    $(secondObj).css('visibility', 'initial');
+    $(secondObj).css({'visibility':'initial','display':'none'});
 
     if(duration <= 0){
         $(secondObj).show(effect, 1, function(){reframeCenterIU('.'+transition.id)});

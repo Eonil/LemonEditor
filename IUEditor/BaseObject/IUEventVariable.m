@@ -193,7 +193,7 @@
                         [fnCode addCodeLineWithFormat:@"if( %@ ){", value];
                         
                         JDCode *innerJS = [JDCode code];
-                        [innerJS addCodeLineWithFormat:@"$('.%@').css('visibility', 'initial');", visibleID];
+                        [innerJS addCodeLineWithFormat:@"$('.%@').css({'visibility':'initial','display':'none'});", visibleID];
                         [innerJS addCodeWithFormat:@"$(\".%@\").show(", visibleID];
                         NSString *reframe = [NSString stringWithFormat:@"function(){reframeCenterIU('.%@')}", visibleID];
 
