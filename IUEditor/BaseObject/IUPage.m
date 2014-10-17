@@ -54,9 +54,6 @@
         [self.css eradicateTag:IUCSSTagPercentWidth];
         [self.css eradicateTag:IUCSSTagPercentHeight];
 
-        
-        self.positionType = IUPositionTypeRelative;
-        
         IUPageLayout layout = [[options objectForKey:kIUPageLayout] intValue];
         [self makePageLayout:layout project:project];
         
@@ -71,6 +68,10 @@
     [super awakeAfterUsingCoder:aDecoder];
     if(self.project && IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, self.project.IUProjectVersion) ){
         [self addIU:_pageContent error:nil];
+    }
+    //default == absolute로
+    if(self.positionType == IUPositionTypeRelative){
+        self.positionType = IUPositionTypeAbsolute;
     }
     return self;
 }

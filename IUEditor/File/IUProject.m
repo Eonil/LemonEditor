@@ -123,6 +123,10 @@
     [self.undoManager disableUndoRegistration];
     [super awakeAfterUsingCoder:aDecoder];
 
+    
+    [_identifierManager registerIUs:self.allDocuments];
+
+    
     if( IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, _IUProjectVersion) ){
         [self makeDefaultClasses];
         
@@ -136,6 +140,7 @@
         for(IUBox *child in oldHeader.children){
             IUBox *copychild = [child copy];
             [headerClass addIU:copychild error:nil];
+            [_identifierManager registerIUs:@[copychild]];
         }
         [headerClass copyCSSFromIU:oldHeader];
         [headerClass.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
@@ -168,12 +173,15 @@
             
             [page addIU:footer error:nil];
             page.footer = footer;
+            
+            //register identifier
+            [_identifierManager registerIUs:@[header, footer]];
+
 
         }
 
     }
     
-    [_identifierManager registerIUs:self.allDocuments];
     
     [self.undoManager enableUndoRegistration];
     return self;
@@ -706,7 +714,7 @@
     
    
     
-    [JDUIUtil hudAlert:@"Build Success" second:2];
+    [JDUIUtil hudAlert:@"Successfully Exported" second:2];
     return YES;
 }
 
