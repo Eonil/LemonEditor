@@ -329,6 +329,7 @@
         header.name = @"header";
         header.htmlID = @"header";
         [self addSheet:header toSheetGroup:_classGroup];
+        [_identifierManager registerIUs:@[header]];
     }
     
     IUClass *footer = [self classWithName:@"footer"];
@@ -338,6 +339,7 @@
         footer.name = @"footer";
         footer.htmlID = @"footer";
         [self addSheet:footer toSheetGroup:_classGroup];
+        [_identifierManager registerIUs:@[footer]];
     }
     
     IUClass *sidebar = [self classWithName:@"sidebar"];
@@ -347,6 +349,8 @@
         sidebar.name = @"sidebar";
         sidebar.htmlID = @"sidebar";
         [self addSheet:sidebar toSheetGroup:_classGroup];
+        [_identifierManager registerIUs:@[sidebar]];
+
     }
 }
 
