@@ -104,6 +104,44 @@
 			<key>boldType</key>
 			<integer>1</integer>
 		</dict>
+        <key>Josefin Sans</key>
+        <dict>
+            <key>name</key>
+            <string>Josefin Sans</string>
+            <key>font-family</key>
+            <string>&apos;Josefin Sans&apos;, sans-serif</string>
+            <key>editable</key>
+            <false/>
+            <key>isLoadable</key>
+            <true/>
+            <key>hasLight</key>
+            <true/>
+            <key>isGoogleFonts</key>
+            <true/>
+            <key>googleApiFamily</key>
+            <string>Josefin+Sans</string>
+            <key>boldType</key>
+            <integer>1</integer>
+        </dict>
+        <key>Lato</key>
+        <dict>
+            <key>name</key>
+            <string>Lato</string>
+            <key>font-family</key>
+            <string>&apos;Lato&apos;, sans-serif</string>
+            <key>editable</key>
+            <false/>
+            <key>isLoadable</key>
+            <true/>
+            <key>hasLight</key>
+            <true/>
+            <key>isGoogleFonts</key>
+            <true/>
+            <key>googleApiFamily</key>
+            <string>Lato</string>
+            <key>boldType</key>
+            <integer>1</integer>
+        </dict>
 		<key>Montserrat</key>
 		<dict>
 			<key>name</key>
