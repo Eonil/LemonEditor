@@ -78,8 +78,10 @@
     [[self.undoManager prepareWithInvocationTarget:self] setEnableFullSize:_enableFullSize];
     _enableFullSize = enableFullSize;
     
-    [self.css eradicateTag:IUCSSTagPixelHeight];
-    [self.css eradicateTag:IUCSSTagPercentHeight];
+    if(_enableFullSize){
+        [self.css eradicateTag:IUCSSTagPixelHeight];
+        [self.css eradicateTag:IUCSSTagPercentHeight];
+    }
     
     [self didChangeValueForKey:@"canChangeHeightByUserInput"];
 }
