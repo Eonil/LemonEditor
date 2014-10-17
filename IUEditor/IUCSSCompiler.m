@@ -966,6 +966,7 @@
     }
     
     if (_iu.hasHeight) {
+    
         
         IUUnit hUnit = [[_iu.css valueByStepForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
         NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
@@ -975,6 +976,13 @@
             [code insertTag:@"min-height" intFromNumber:cssTagDict[IUCSSTagMinPixelHeight] unit:IUUnitPixel];
         }
 
+    }
+}
+- (void)updateCSSCode:(IUCSSCode*)code asIUSection:(IUSection*)section{
+    if(section.enableFullSize){
+        [code setInsertingTarget:IUTargetEditor];
+        [code setInsertingIdentifier:section.cssIdentifier];
+        [code insertTag:@"height" integer:720 unit:IUUnitPixel];
     }
 }
 
