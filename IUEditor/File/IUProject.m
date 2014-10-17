@@ -512,7 +512,7 @@
 - (NSString*)absoluteBuildPath{
     NSMutableString *str = [self.buildPath mutableCopy];
     [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[[self path] stringByDeletingLastPathComponent] options:0 range:NSMakeRange(0, [str length])];
-    [str replaceOccurrencesOfString:@"$AppName" withString:[self name] options:0 range:NSMakeRange(0, [str length])];
+    [str replaceOccurrencesOfString:@"$AppName" withString:[self name] options:0 range:NSMakeRange(0, [str length])];    
     
     NSString *returnPath = [str stringByExpandingTildeInPath];
     return returnPath;

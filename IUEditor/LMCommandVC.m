@@ -209,7 +209,8 @@
         return NO;
     }
     
-    NSString *command = [NSString stringWithFormat:@"%@ runserver %ld",filePath , project.port];
+    NSString *shellFilePath = [filePath stringByReplacingOccurrencesOfString:@" " withString:@"\\ "];
+    NSString *command = [NSString stringWithFormat:@"%@ runserver %ld",shellFilePath , project.port];
     if ([debugServerShell.task isRunning] == NO) {
         debugServerShell = [[JDShellUtil alloc] init];
         [debugServerShell execute:command delegate:self];
