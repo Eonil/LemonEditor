@@ -412,6 +412,9 @@
        && ((DOMHTMLElement *)element).idName.length > 0){
         return (DOMHTMLElement *)element;
     }
+    else if(element == nil){
+        return nil;
+    }
     else{
         return [self domHTMLElementWithId:element.parentElement];
     }
@@ -420,7 +423,10 @@
 - (BOOL)isTextEditorAtPoint:(NSPoint)point{
     DOMElement *domNode =[self DOMElementAtPoint:point];
     DOMHTMLElement *htmlElement = [self domHTMLElementWithId:domNode];
-    if([htmlElement.idName rangeOfString:@"mceu"].location == 0){
+    if(htmlElement == nil){
+        return NO;
+    }
+    else if([htmlElement.idName rangeOfString:@"mceu"].location == 0){
         return YES;
     }
     else{

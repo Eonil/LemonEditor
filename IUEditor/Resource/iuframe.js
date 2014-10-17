@@ -241,7 +241,7 @@ function getCurrentData(mqDict){
 	for (var key in mqDict){
 		var width = parseInt(key);
 	
-		if (viewportWidth<width && minWidth > width){
+		if (viewportWidth <= width && minWidth > width){
 			currentData = mqDict[key];
 			minWidth = width;
 		}
