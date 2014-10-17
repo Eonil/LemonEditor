@@ -7,6 +7,7 @@
 //
 
 #import "IUHeader.h"
+#import "IUProject.h"
 
 @implementation IUHeader
 
@@ -29,18 +30,13 @@
     return self;
 }
 
-- (void)connectWithEditor{
-    [super connectWithEditor];
-}
-
-
 #pragma mark - property
 
 - (void)setPrototypeClass:(IUClass *)prototypeClass{
     [super setPrototypeClass:prototypeClass];
     
     //for version converting for document befor IU_VERSION_LAYOUT
-    if(prototypeClass == nil){
+    if(self.isConnectedWithEditor && prototypeClass == nil){
         [_m_children removeAllObjects];
     }
 }
