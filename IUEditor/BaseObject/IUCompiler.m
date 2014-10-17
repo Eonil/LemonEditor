@@ -895,7 +895,6 @@
                 [code addCode:[self textMQJavascriptCode:child]];
             }
         }
-        
     }
 
     
