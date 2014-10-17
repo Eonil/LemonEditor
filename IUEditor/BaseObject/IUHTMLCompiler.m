@@ -575,7 +575,7 @@
     }
 
     if(target == IUTargetOutput){
-        [self htmlCodeAsIUHTML:webmovie target:target attributeDict:attributeDict];
+        [code addCodeWithIndent:[self htmlCodeAsIUHTML:webmovie target:target attributeDict:attributeDict]];
     }
     else if(target == IUTargetEditor){
         

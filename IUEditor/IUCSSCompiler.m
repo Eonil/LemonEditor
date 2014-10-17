@@ -1021,14 +1021,16 @@
             [code setInsertingViewPort:viewport];
             
             //IUHeader의 높이는 prototypeclass의 높이와 일치시킨다.
-            NSDictionary *cssTagDict = [footer.prototypeClass.css tagDictionaryForViewport:viewport];
-            
-            IUUnit hUnit = [[footer.prototypeClass.css valueByStepForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
-            NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
-            [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
-            
-            if(hUnit == IUUnitPercent && cssTagDict[IUCSSTagMinPixelHeight]){
-                [code insertTag:@"min-height" intFromNumber:cssTagDict[IUCSSTagMinPixelHeight] unit:IUUnitPixel];
+            if(footer.prototypeClass){
+                NSDictionary *cssTagDict = [footer.prototypeClass.css tagDictionaryForViewport:viewport];
+                
+                IUUnit hUnit = [[footer.prototypeClass.css valueByStepForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+                NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
+                [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
+                
+                if(hUnit == IUUnitPercent && cssTagDict[IUCSSTagMinPixelHeight]){
+                    [code insertTag:@"min-height" intFromNumber:cssTagDict[IUCSSTagMinPixelHeight] unit:IUUnitPixel];
+                }
             }
         }
     }

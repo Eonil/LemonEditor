@@ -168,8 +168,10 @@
             
             IUFooter *footer = [[IUFooter alloc] initWithProject:self options:nil];
             footer.name = @"footer";
-            footer.prototypeClass = [self classWithName:@"footer"];
+            IUClass *footerClass = [self classWithName:@"footer"];
+            footer.prototypeClass = footerClass;
             [footer.css setValue:@(0) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
+            [footerClass.css setValue:@(0) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
             
             [page addIU:footer error:nil];
             page.footer = footer;
