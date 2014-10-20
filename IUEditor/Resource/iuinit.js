@@ -23,7 +23,7 @@ $(document).ready(function(){
         var firstObj = $(this).children().filter('.IUItem')[0];
         $(firstObj).css('display', 'block');
         var secondObj = $(this).children().filter('.IUItem')[1];
-        $(secondObj).css('display', 'none');
+        $(secondObj).css('visibility', 'hidden');
 	});
     /*INIT_IUTransition_REPLACEMENT_END*/
     /*INIT_IUMenuBar_REPLACEMENT_START*/

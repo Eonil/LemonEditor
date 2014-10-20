@@ -193,6 +193,7 @@
                         [fnCode addCodeLineWithFormat:@"if( %@ ){", value];
                         
                         JDCode *innerJS = [JDCode code];
+                        [innerJS addCodeLineWithFormat:@"$('.%@').css({'visibility':'initial','display':'none'});", visibleID];
                         [innerJS addCodeWithFormat:@"$(\".%@\").show(", visibleID];
                         NSString *reframe = [NSString stringWithFormat:@"function(){reframeCenterIU('.%@')}", visibleID];
 
@@ -209,17 +210,21 @@
                         [fnCode addCodeLine:@"}"];
                         
                         [fnCode addCodeLine:@"else{"];
+
+                        NSString *visibleString = [NSString stringWithFormat:@"function(){ $('.%@').css({\"visibility\":\"hidden\",\"display\":\"block\"}) }", visibleID];
+                        
                         innerJS = [JDCode code];
                         [innerJS addCodeLineWithFormat:@"var clicked =$(\".%@\").data(\"run%@\");", visibleID,fnName];
                         [innerJS addCodeLineWithFormat:@"if(clicked == undefined){"];
-                        [innerJS addCodeLineWithFormat:@"\t$(\".%@\").hide();", visibleID];
+                        [innerJS addCodeLineWithFormat:@"\t$(\".%@\").hide(0, %@);", visibleID, visibleString];
                         [innerJS addCodeLine:@"}"];
                         [innerJS addCodeLine:@"else{"];
+                        
                         if(duration > 0){
-                            [innerJS addCodeLineWithFormat:@"\t$(\".%@\").hide(\"%@\",%ld);", visibleID, typeStr, duration*100];
+                            [innerJS addCodeLineWithFormat:@"\t$(\".%@\").hide(\"%@\",%ld, %@);", visibleID, typeStr, duration*100, visibleString];
                         }
                         else{
-                            [innerJS addCodeLineWithFormat:@"\t$(\".%@\").hide(\"%@\", 1);", visibleID, typeStr];
+                            [innerJS addCodeLineWithFormat:@"\t$(\".%@\").hide(\"%@\", 1, %@);", visibleID, typeStr, visibleString];
                         }
                         [innerJS addString:@"}"];
                         [fnCode addCodeWithIndent:innerJS];
@@ -358,17 +363,20 @@
     
     [eventJSCode addCodeLine:@" /* Decleare Visible Fn */ "];
     [eventJSCode addCodeWithIndent:visibleFnCode];
+    [eventJSCode addNewLine];
 
     [eventJSCode addCodeLine:@" /* Decleare Frame Fn */ "];
     [eventJSCode addCodeWithIndent:frameFnCode];
     
     [eventJSCode addCodeLine:@"$(document).ready(function(){"];
-    [eventJSCode addCodeLine:@"console.log('ready : iuevent.js');"];
     [eventJSCode increaseIndentLevelForEdit];
+    
+    [eventJSCode addCodeLine:@"console.log('ready : iuevent.js');"];
     [eventJSCode addCodeWithIndent:bodyHeader];
     [eventJSCode addCodeWithIndent:body];
     [eventJSCode addCodeLine:@" /* initialize fn */ "];
     [eventJSCode addCodeWithIndent:initializeFn];
+    
     [eventJSCode decreaseIndentLevelForEdit];
 
     [eventJSCode addCodeLine:@"});"];

@@ -800,6 +800,7 @@
         
         /* bg size & position */
         if(cssTagDict[IUCSSTagBGSize]){
+            
             IUBGSizeType bgSizeType = [cssTagDict[IUCSSTagBGSize] intValue];
             switch (bgSizeType) {
                 case IUBGSizeTypeStretch:
@@ -817,6 +818,10 @@
                     default:
                     break;
             }
+            if(viewport != IUCSSDefaultViewPort && bgSizeType != IUBGSizeTypeFull){
+                [code insertTag:@"background-attachment" string:@"initial"];
+            }
+
         }
         
         if ([cssTagDict[IUCSSTagEnableBGCustomPosition] boolValue]) {
@@ -957,7 +962,6 @@
     }
     
     if (_iu.shouldCompileHeight) {
-        
         IUUnit hUnit = [[_iu.css effectiveValueForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
         NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
         [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
@@ -966,6 +970,13 @@
             [code insertTag:@"min-height" intFromNumber:cssTagDict[IUCSSTagMinPixelHeight] unit:IUUnitPixel];
         }
 
+    }
+}
+- (void)updateCSSCode:(IUCSSCode*)code asIUSection:(IUSection*)section{
+    if(section.enableFullSize){
+        [code setInsertingTarget:IUTargetEditor];
+        [code setInsertingIdentifier:section.cssIdentifier];
+        [code insertTag:@"height" integer:720 unit:IUUnitPixel];
     }
 }
 
@@ -1004,14 +1015,16 @@
             [code setInsertingViewPort:viewport];
             
             //IUHeader의 높이는 prototypeclass의 높이와 일치시킨다.
-            NSDictionary *cssTagDict = [footer.prototypeClass.css tagDictionaryForViewport:viewport];
-            
-            IUUnit hUnit = [[footer.prototypeClass.css effectiveValueForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
-            NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
-            [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
-            
-            if(hUnit == IUUnitPercent && cssTagDict[IUCSSTagMinPixelHeight]){
-                [code insertTag:@"min-height" intFromNumber:cssTagDict[IUCSSTagMinPixelHeight] unit:IUUnitPixel];
+            if(footer.prototypeClass){
+                NSDictionary *cssTagDict = [footer.prototypeClass.css tagDictionaryForViewport:viewport];
+                
+                IUUnit hUnit = [[footer.prototypeClass.css effectiveValueForTag:IUCSSTagHeightUnitIsPercent forViewport:viewport] boolValue] ? IUUnitPercent : IUUnitPixel;
+                NSNumber *hValue = (hUnit == IUUnitPercent) ? cssTagDict[IUCSSTagPercentHeight] : cssTagDict[IUCSSTagPixelHeight];
+                [code insertTag:@"height" floatFromNumber:hValue unit:hUnit];
+                
+                if(hUnit == IUUnitPercent && cssTagDict[IUCSSTagMinPixelHeight]){
+                    [code insertTag:@"min-height" intFromNumber:cssTagDict[IUCSSTagMinPixelHeight] unit:IUUnitPixel];
+                }
             }
         }
     }

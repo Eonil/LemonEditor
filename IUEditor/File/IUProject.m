@@ -123,6 +123,10 @@
     [self.undoManager disableUndoRegistration];
     [super awakeAfterUsingCoder:aDecoder];
 
+    
+    [_identifierManager registerIUs:self.allDocuments];
+
+    
     if( IU_VERSION_V1_GREATER_THAN_V2(IU_VERSION_LAYOUT, _IUProjectVersion) ){
         [self makeDefaultClasses];
         
@@ -136,6 +140,7 @@
         for(IUBox *child in oldHeader.children){
             IUBox *copychild = [child copy];
             [headerClass addIU:copychild error:nil];
+            [_identifierManager registerIUs:@[copychild]];
         }
         [headerClass copyCSSFromIU:oldHeader];
         [headerClass.css setValue:@(YES) forTag:IUCSSTagWidthUnitIsPercent forViewport:IUCSSDefaultViewPort];
@@ -163,17 +168,22 @@
             
             IUFooter *footer = [[IUFooter alloc] initWithProject:self options:nil];
             footer.name = @"footer";
-            footer.prototypeClass = [self classWithName:@"footer"];
+            IUClass *footerClass = [self classWithName:@"footer"];
+            footer.prototypeClass = footerClass;
             [footer.css setValue:@(0) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
+            [footerClass.css setValue:@(0) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
             
             [page addIU:footer error:nil];
             page.footer = footer;
+            
+            //register identifier
+            [_identifierManager registerIUs:@[header, footer]];
+
 
         }
 
     }
     
-    [_identifierManager registerIUs:self.allDocuments];
     
     [self.undoManager enableUndoRegistration];
     return self;
@@ -321,6 +331,7 @@
         header.name = @"header";
         header.htmlID = @"header";
         [self addSheet:header toSheetGroup:_classGroup];
+        [_identifierManager registerIUs:@[header]];
     }
     
     IUClass *footer = [self classWithName:@"footer"];
@@ -330,6 +341,7 @@
         footer.name = @"footer";
         footer.htmlID = @"footer";
         [self addSheet:footer toSheetGroup:_classGroup];
+        [_identifierManager registerIUs:@[footer]];
     }
     
     IUClass *sidebar = [self classWithName:@"sidebar"];
@@ -339,6 +351,8 @@
         sidebar.name = @"sidebar";
         sidebar.htmlID = @"sidebar";
         [self addSheet:sidebar toSheetGroup:_classGroup];
+        [_identifierManager registerIUs:@[sidebar]];
+
     }
 }
 
@@ -498,7 +512,7 @@
 - (NSString*)absoluteBuildPath{
     NSMutableString *str = [self.buildPath mutableCopy];
     [str replaceOccurrencesOfString:@"$IUFileDirectory" withString:[[self path] stringByDeletingLastPathComponent] options:0 range:NSMakeRange(0, [str length])];
-    [str replaceOccurrencesOfString:@"$AppName" withString:[self name] options:0 range:NSMakeRange(0, [str length])];
+    [str replaceOccurrencesOfString:@"$AppName" withString:[self name] options:0 range:NSMakeRange(0, [str length])];    
     
     NSString *returnPath = [str stringByExpandingTildeInPath];
     return returnPath;
@@ -706,7 +720,7 @@
     
    
     
-    [JDUIUtil hudAlert:@"Build Success" second:2];
+    [JDUIUtil hudAlert:@"Successfully Exported" second:2];
     return YES;
 }
 

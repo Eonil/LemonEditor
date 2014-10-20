@@ -22,7 +22,7 @@
         [self.css setValue:@(120) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
         
         self.positionType = IUPositionTypeRelative;
-        self.overflowType = IUOverflowTypeVisible;
+        self.overflowType = IUOverflowTypeHidden;
         
         [self.undoManager enableUndoRegistration];
     }

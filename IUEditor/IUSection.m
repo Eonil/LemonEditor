@@ -65,4 +65,25 @@
     return NO;
 }
 
+- (BOOL)canChangeHeightByUserInput{
+    if(_enableFullSize){
+        return NO;
+    }
+    return [super canChangeHeightByUserInput];
+}
+
+- (void)setEnableFullSize:(BOOL)enableFullSize{
+    [self willChangeValueForKey:@"canChangeHeightByUserInput"];
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setEnableFullSize:_enableFullSize];
+    _enableFullSize = enableFullSize;
+    
+    if(_enableFullSize){
+        [self.css eradicateTag:IUCSSTagPixelHeight];
+        [self.css eradicateTag:IUCSSTagPercentHeight];
+    }
+    
+    [self didChangeValueForKey:@"canChangeHeightByUserInput"];
+}
+
 @end
