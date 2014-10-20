@@ -87,7 +87,7 @@ $(document).ready(function(){
 	resizePageLinkSet();
 	makefullSizeSection();
 	resizeSideBar();
-	makeBottomLocation();
+	//makeBottomLocation();
 	reframeCenter();
 	resizePageContentHeight();
 	

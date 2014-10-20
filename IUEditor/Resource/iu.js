@@ -288,7 +288,7 @@ function makeBottomLocation(){
 }
 $(window).resize(function(){
 	//iu.js
-	makeBottomLocation();
+	//makeBottomLocation();
 	
 	//iuframe.js
 	resizeCollection();
