@@ -153,8 +153,22 @@
             }
         }
     }
+    
+    if([self isNeededToUpdateForTag:tag]){
+        [self.delegate updateHTML];
+    }
         
 }
+
+- (BOOL)isNeededToUpdateForTag:(IUMQDataTag)tag{
+    if([tag isEqualToString:IUMQDataTagInnerHTML]){
+        return NO;
+    }
+    else{
+        return YES;
+    }
+}
+
 
 
 -(id)valueForKeyPath:(NSString *)keyPath{
