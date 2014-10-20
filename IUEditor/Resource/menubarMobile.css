@@ -12,20 +12,20 @@
 	content: '';
 	position: absolute;
 	height: 3px;
-	width: 22px;
+	width: 20px;
 	margin:0;
 	border-top: 2px solid #d3eced;
 	border-bottom: 2px solid #d3eced;
-	right: 25px;
+	right: 20px;
 }
 .IUMenuBar .menu-bottom{
 	display: block;
 	content: '';
 	position: absolute;
 	height: 3px;
-	width: 22px;
+	width: 20px;
 	border-top: 2px solid #d3eced;
-	right: 25px;
+	right: 20px;
 }
 /* menuItem : depth - 1*/
 .IUMenuBar > ul{
