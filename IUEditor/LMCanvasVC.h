@@ -47,6 +47,7 @@
 - (void)setSelectedIU:(NSString *)IU;
 - (void)selectIUInRect:(NSRect)frame;
 
+- (void)saveCurrentTextEditorForWidth:(NSInteger)width;
 - (void)disableTextEditor;
 - (void)enableTextEditorForSelectedIU;
 - (BOOL)isEnableTextEditor;

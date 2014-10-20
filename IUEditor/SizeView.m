@@ -149,6 +149,7 @@
         selectIndex = newSelectIndex;
     }
     
+    NSInteger oldSelectedWidth = selectedWidth;
     selectedWidth = selectBox.frameWidth;
     
     for(InnerSizeBox *sizeBox in boxManageView.subviews){
@@ -165,7 +166,7 @@
         largeSize = [[self sortedArray][selectIndex -1] integerValue];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQSelected object:self userInfo:@{IUNotificationMQSize:@(selectedWidth), IUNotificationMQMaxSize:@(maxSize)}];
-    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQSelectedWithInfo object:self userInfo:@{IUNotificationMQSize:@(selectedWidth), IUNotificationMQMaxSize:@(maxSize), IUNotificationMQLargerSize:@(largeSize)} ];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IUNotificationMQSelectedWithInfo object:self userInfo:@{IUNotificationMQSize:@(selectedWidth), IUNotificationMQMaxSize:@(maxSize), IUNotificationMQLargerSize:@(largeSize), IUNotificationMQOldSize:@(oldSelectedWidth)} ];
     
     [self.delegate enableUpdateCSS:self];
         

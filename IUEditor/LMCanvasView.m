@@ -40,7 +40,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boundsDidChange:) name:NSViewBoundsDidChangeNotification object:[self.mainScrollView contentView]];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelected object:[self sizeView]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQSelect:) name:IUNotificationMQSelectedWithInfo object:[self sizeView]];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMQMaxSize:) name:IUNotificationMQMaxChanged object:[self sizeView]];
 
@@ -78,12 +78,22 @@
     
     NSInteger selectedSize = [[notification.userInfo valueForKey:IUNotificationMQSize] integerValue];
     NSInteger maxSize = [[notification.userInfo valueForKey:IUNotificationMQMaxSize] integerValue];
+    
+    NSInteger oldSelectedSize = [[notification.userInfo valueForKey:IUNotificationMQOldSize] integerValue];
+    if(oldSelectedSize == maxSize){
+        [self.delegate saveCurrentTextEditorForWidth:IUCSSDefaultViewPort];
+    }
+    else{
+        [self.delegate saveCurrentTextEditorForWidth:oldSelectedSize];
+    }
 
     if([[self.mainView subviews] containsObject:self.webView]){
         [self.mainView subview:self.webView changeConstraintTrailing:(maxSize -selectedSize)];
     }
-    
+
+    [self.delegate setSelectedFrameWidth:selectedSize];
     [self.delegate reloadSheet];
+    
     
     [[self webView] updateFrameDict];
 }
@@ -96,6 +106,10 @@
     if([[self.mainView subviews] containsObject:self.webView]){
         [self.mainView subview:self.webView changeConstraintTrailing:(maxSize -selectedSize)];
     }
+    
+    [self.delegate setMaxFrameWidth:maxSize];
+    [self.delegate setSelectedFrameWidth:selectedSize];
+    
     
     [[self webView] updateFrameDict];
     
