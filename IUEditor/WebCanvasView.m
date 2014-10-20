@@ -31,6 +31,7 @@
         [self setResourceLoadDelegate:self];
         [self setFrameLoadDelegate:self];
         [self setPolicyDelegate:self];
+        
         [[[self mainFrame] frameView] setAllowsScrolling:NO];
         
         [self registerForDraggedTypes:@[(id)kUTTypeIUType, (id)kUTTypeIUImageResource]];
@@ -542,6 +543,7 @@
 
 #pragma mark -
 #pragma mark web policy
+
 
 - (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element
     defaultMenuItems:(NSArray *)defaultMenuItems

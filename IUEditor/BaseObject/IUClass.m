@@ -51,10 +51,9 @@
         [self.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
         [self.css setValue:@(120) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
         [self.css setValue:[NSColor rgbColorRed:50 green:50 blue:50 alpha:1] forTag:IUCSSTagBGColor forViewport:IUCSSDefaultViewPort];
-        
        
         titleBox.textType = IUTextTypeH1;
-        titleBox.text = @"Header Area";
+        [titleBox.mqData setValue:@"Header Area" forTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];
         
         [self addIU:titleBox error:nil];
         
@@ -65,7 +64,7 @@
         [self.css setValue:@(100) forTag:IUCSSTagPercentWidth forViewport:IUCSSDefaultViewPort];
         [self.css setValue:@(120) forTag:IUCSSTagPixelHeight forViewport:IUCSSDefaultViewPort];
         
-        titleBox.text = @"Footer Area";
+        [titleBox.mqData setValue:@"Footer Area" forTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];
         [self addIU:titleBox error:nil];
 
         
@@ -78,8 +77,7 @@
         [self.css setValue:@(100) forTag:IUCSSTagPercentHeight forViewport:IUCSSDefaultViewPort];
         [titleBox.css setValue:@(12) forTag:IUCSSTagFontSize forViewport:IUCSSDefaultViewPort];
 
-        titleBox.text = @"Sidebar Area";
-        
+        [titleBox.mqData setValue:@"Sidebar Area" forTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];        
         [self addIU:titleBox error:nil];
 
     }

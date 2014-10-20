@@ -153,9 +153,7 @@
             }
         }
     }
-    
-    [self.delegate updateHTML];
-    
+        
 }
 
 

@@ -100,7 +100,8 @@
     IUBox *text404 = [[IUBox alloc] initWithProject:self.project options:nil];
     text404.htmlID = @"text404";
     text404.name = @"text404";
-    text404.text = @"Sorry, but the page you are looking for has not been found.\nTry checking the URL for errors, then hit the refresh button.";
+    [text404.mqData setValue:@"Sorry, but the page you are looking for has not been found.\nTry checking the URL for errors, then hit the refresh button." forTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];
+
     //frame
     text404.enableHCenter = YES;
     [text404 setPositionType:IUPositionTypeAbsolute];

@@ -57,8 +57,8 @@
 
         titleBox.positionType = IUPositionTypeAbsolute;
         titleBox.enableHCenter = YES;
-        titleBox.text = @"Content Area";
-        
+        [titleBox.mqData setValue:@"Content Area" forTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];
+
         [section addIU:titleBox error:nil];
         
         IUBox *contentBox = [[IUBox alloc] initWithProject:project options:options];
@@ -73,7 +73,7 @@
         
         contentBox.positionType = IUPositionTypeAbsolute;
         contentBox.enableHCenter = YES;
-        contentBox.text = @"Double-click to edit text\n\nThis box has absolute-center position.\nFor free movement, see the position at the right.";
+        [contentBox.mqData setValue:@"Double-click to edit text\n\nThis box has absolute-center position.\nFor free movement, see the position at the right." forTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];
         
         [section addIU:contentBox error:nil];
         

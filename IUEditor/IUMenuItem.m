@@ -17,7 +17,8 @@
     if(self){
         [self.undoManager disableUndoRegistration];
         
-        self.text = @"MENU";
+        [self.mqData setValue:@"MENU" forTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];
+
         self.positionType = IUPositionTypeRelative;
         self.overflowType = IUOverflowTypeVisible;
         

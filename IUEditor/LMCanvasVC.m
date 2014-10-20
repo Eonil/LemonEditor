@@ -362,7 +362,7 @@
         //find editor
         DOMHTMLElement *node = (DOMHTMLElement*)[list item:i];
         NSString *currentClass = [node getAttribute:@"class"];
-        [node setAttribute:@"class" value:[currentClass stringByReplacingOccurrencesOfString:@"addible" withString:@""]];
+        [node setAttribute:@"class" value:[currentClass stringByReplacingOccurrencesOfString:@"editable" withString:@""]];
         NSString *identifier = node.idName;
         
         //remove editor
@@ -379,7 +379,7 @@
 }
 
 - (void)enableTextEditorForSelectedIU{
-    if(self.controller.selectedObjects.count != 1){
+    if(self.controller.selectedObjects.count != 1 || isEnableText){
         return;
     }
     
@@ -394,7 +394,6 @@
         else{
             className = @"editable";
             fnName = @"iuAddEditorEditable";
-            iu.text = nil;
             [JDUIUtil hudAlert:@"Text Editor Mode" second:2];
         }
         NSString *classidentifer = [self.controller.selectedIdentifiers firstObject];

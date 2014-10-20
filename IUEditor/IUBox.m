@@ -313,7 +313,8 @@
     [copyright.undoManager disableUndoRegistration];
     
     copyright.name = @"Copyright";
-    copyright.text = @"Copyright (C) IUEditor all rights reserved";
+    [copyright.mqData setValue:@"Copyright (C) IUEditor all rights reserved" forTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];
+
     copyright.enableHCenter = YES;
     [copyright.css setValue:@(40) forTag:IUCSSTagPixelY forViewport:IUCSSDefaultViewPort];
     [copyright.css eradicateTag:IUCSSTagPixelWidth];
@@ -666,7 +667,6 @@
     }
     
 }
-
 
 #pragma mark - css
 
