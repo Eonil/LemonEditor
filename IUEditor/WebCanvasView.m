@@ -232,6 +232,13 @@
     return NO;
 }
 
+- (NSUInteger)webView:(WebView *)webView dragSourceActionMaskForPoint:(NSPoint)point{
+    return WebDragDestinationActionNone;
+}
+- (NSUInteger)webView:(WebView *)webView dragDestinationActionMaskForDraggingInfo:(id<NSDraggingInfo>)draggingInfo{
+    return WebDragDestinationActionNone;
+}
+
 
 
 

@@ -706,25 +706,31 @@
     JDCode *objectJSSource = [self readyJSCode:sheet isEdit:NO];
     [jsCode addCodeWithIndent:objectJSSource];
     
-    JDCode *classJSSource = [self jsOnceCodeForSheet:sheet];
+    JDCode *classJSSource = [self readyJSCodeFromInitForSheet:sheet];
     [jsCode addCodeWithIndent:classJSSource];
     [jsCode addNewLine];
     
     [jsCode addCodeLine:@"});"];
     
     //text media query
-    [jsCode addCodeLine:@"function reloadTextMediaQuery(){"];
-    [jsCode addCodeWithIndent:[self textMQJavascriptCode:sheet]];
-    [jsCode addCodeLine:@"}"];
+    
+    JDCode *textMQCode = [self textMQJavascriptCode:sheet];
+    if([textMQCode.string stringByTrim].length > 0){
+        [jsCode addCodeLine:@"function reloadTextMediaQuery(){"];
+        [jsCode addCodeWithIndent:textMQCode];
+        [jsCode addCodeLine:@"}"];
+    }
+    
+    //window load code
+    [jsCode addCode:[self windowLoadJSCodeFromInitForSheet:sheet]];
     
     return jsCode;
 }
 
--(JDCode *)jsOnceCodeForSheet:(IUSheet *)sheet{
+-(JDCode *)readyJSCodeFromInitForSheet:(IUSheet *)sheet{
     JDCode *jsCode = [[JDCode alloc] init];
 
     NSString *iuinitFilePath = [[NSBundle mainBundle] pathForResource:@"iuinit" ofType:@"js"];
-    
     NSString *initJSStr = [NSString stringWithContentsOfFile:iuinitFilePath encoding:NSUTF8StringEncoding error:nil];
     
     if([sheet containClass:[IUTransition class]]){
@@ -735,6 +741,15 @@
     }
     
     [jsCode addJSBlockFromString:initJSStr WithIdentifier:@"Default"];
+    return jsCode;
+}
+
+-(JDCode *)windowLoadJSCodeFromInitForSheet:(IUSheet *)sheet{
+    JDCode *jsCode = [[JDCode alloc] init];
+    
+    NSString *iuinitFilePath = [[NSBundle mainBundle] pathForResource:@"iuinit" ofType:@"js"];
+    NSString *initJSStr = [NSString stringWithContentsOfFile:iuinitFilePath encoding:NSUTF8StringEncoding error:nil];
+    [jsCode addJSBlockFromString:initJSStr WithIdentifier:@"WINDOW_LOAD"];
     return jsCode;
 }
 

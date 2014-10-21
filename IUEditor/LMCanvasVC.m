@@ -396,12 +396,14 @@
     else if(inputType == IUTextInputTypeAddible){
         className = @"addible";
         fnName = @"iuAddEditorAddible";
-        [JDUIUtil hudAlert:@"Text Typing Mode" second:2];
+        NSString *alertString = [NSString stringWithFormat:@"Text Typing Mode : %@", iu.name];
+        [JDUIUtil hudAlert:alertString second:2];
     }
     else if(inputType == IUTextInputTypeEditable){
         className = @"editable";
         fnName = @"iuAddEditorEditable";
-        [JDUIUtil hudAlert:@"Text Editor Mode" second:2];
+        NSString *alertString = [NSString stringWithFormat:@"Text Editor Mode : %@", iu.name];
+        [JDUIUtil hudAlert:alertString second:2];
     }
     NSString *classidentifer = [self.controller.selectedIdentifiers firstObject];
     [self IUClassIdentifier:classidentifer addClass:className];

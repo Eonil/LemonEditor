@@ -62,7 +62,8 @@
     IUBox *pasteTarget;
     BOOL pasteTargetIsParent;
     
-    if(pasteboard == nil || pasteboard.count ==0){
+    if(pasteboard == nil || pasteboard.count ==0 || self.selectedObjects.count < 1){
+        //FIXME: current selection이 선택이 없으면 리턴 (IUClass를 새로 만들었을 때 종종 발생함)
         return;
     }
     //copy할 때 현재 select가 된 object 를 저장했다가 paste에서도 똑같으면 parent에 copy
