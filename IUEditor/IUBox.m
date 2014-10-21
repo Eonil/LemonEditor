@@ -174,7 +174,7 @@
 #endif 
         self.htmlID = [NSString randomStringWithLength:8];
     }
-    [aCoder encodeFromObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"identifierManager", @"textController", @"linkCaller"]]];
+    [aCoder encodeFromObject:self withProperties:[[IUBox class] propertiesWithOutProperties:@[@"identifierManager", @"textController", @"linkCaller", @"cssManager"]]];
     [aCoder encodeObject:_css forKey:@"css"];
     [aCoder encodeObject:_mqData forKey:@"mqData"];
     [aCoder encodeObject:_event forKey:@"event"];
