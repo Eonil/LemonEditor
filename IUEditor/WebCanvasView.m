@@ -76,23 +76,17 @@
             unsigned short keyCode = theEvent.keyCode;//keyCode is hardware-independent
             
             if([theEvent modifierFlags] & NSCommandKeyMask){
-                //select all
-                /*
-                if(key == 'A' || key == 'a'){
-                    [self selectWholeRangeOfCurrentCursor];
-                    return YES;
-                }
-                 */
-                
-                // 'C'
-                if (keyCode == IUKeyCodeC) {
-                    [self.VC copy:self];
-                    return YES;
-                }
-                // 'V'
-                if (keyCode == IUKeyCodeV) {
-                    [self.VC paste:self];
-                    return YES;
+                if([self.VC isEnableTextEditor] == NO){
+                    // 'C'
+                    if (keyCode == IUKeyCodeC) {
+                        [self.VC copy:self];
+                        return YES;
+                    }
+                    // 'V'
+                    if (keyCode == IUKeyCodeV) {
+                        [self.VC paste:self];
+                        return YES;
+                    }
                 }
             }
             else{

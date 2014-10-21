@@ -244,6 +244,8 @@
 - (NSString *)activeItemIdentifier{
     return [self.cssActiveClass stringByAppendingString:@" > a"];
 }
+
+/* removed. 2014.10.10 smchoi
 - (NSString *)closureIdentifier{
     if(self.children.count > 0){
         return [self.cssIdentifier stringByAppendingString:@" > div.closure"];
@@ -263,10 +265,11 @@
     }
     return nil;
 }
+ */
 
 - (NSArray *)cssIdentifierArray{
     if(self.children.count > 0){
-        return @[[self cssIdentifier], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier], [self closureIdentifier], [self closureHoverIdentifier], [self closureActiveIdentifier], [self editorDisplayIdentifier]];
+        return @[[self cssIdentifier], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier], [self editorDisplayIdentifier]];
     }
     else{
         return @[[self cssIdentifier], [self itemIdentifier], [self hoverItemIdentifier], [self activeItemIdentifier]];
@@ -275,13 +278,7 @@
 
 
 - (void)updateCSSForItemColor{
-    if(self.children.count > 0){
-        [self updateCSSWithIdentifiers:@[[self hoverItemIdentifier], [self activeItemIdentifier],[self closureIdentifier], [self closureHoverIdentifier], [self closureActiveIdentifier]]];
-    }
-    else{
-        [self updateCSSWithIdentifiers:@[[self hoverItemIdentifier], [self activeItemIdentifier]]];
-        
-    }
+    [self updateCSSWithIdentifiers:@[[self hoverItemIdentifier], [self activeItemIdentifier]]];
 }
 
 

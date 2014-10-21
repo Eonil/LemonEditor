@@ -38,7 +38,7 @@
     [self outlet:_visibleTF bind:NSValueBinding property:@"pgVisibleConditionVariable"];
     [self outlet:_contentTF bind:NSValueBinding property:@"pgContentVariable"];
 
-    NSDictionary *enableBinding = @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
+//    NSDictionary *enableBinding @{NSRaisesForNotApplicableKeysBindingOption:@(NO),NSValueTransformerNameBindingOption:@"JDNilToZeroTransformer"};
 //    [self outlet:_ellipsisTF bind:NSEnabledBinding property:@"pgContentVariable"];
 
 //    [self outlet:_ellipsisStepper bind:NSEnabledBinding property:@"pgContentVariable"];

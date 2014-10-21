@@ -1155,7 +1155,6 @@
 
     NSMutableArray *editWidths = [menuItem.project.mqSizes mutableCopy];
     [editWidths replaceObjectAtIndex:0 withObject:@(IUCSSDefaultViewPort)];
-    int maxHeight;
     
     for (NSNumber *viewportNumber in editWidths) {
         int viewport = [viewportNumber intValue];
@@ -1216,6 +1215,8 @@
 
         
         //clousre
+        //closure removed 2014.10.20 @smchoi
+        /*
         if(menuItem.closureIdentifier){
             [code setInsertingIdentifier:menuItem.closureIdentifier];
             value = [menuItem.css effectiveValueForTag:IUCSSTagFontColor forViewport:viewport];
@@ -1251,6 +1252,7 @@
                 
             
         }
+         
         
         //clousre active, hover
         if(menuItem.closureHoverIdentifier){
@@ -1283,6 +1285,7 @@
             [code insertTag:@"top" integer:top unit:IUUnitPixel];
             
         }
+         */
         
         
         //editor mode
