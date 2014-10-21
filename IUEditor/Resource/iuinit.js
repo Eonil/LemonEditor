@@ -81,6 +81,19 @@ $(document).ready(function(){
 	        $('html,body').scrollTo(linkIU.offset().left, linkIU.offset().top); 			
 		}
     });
+                 
+    /* Initialize IUFrame.js */
+    resizeCollection();
+    resizePageLinkSet();
+    makefullSizeSection();
+    resizeSideBar();
+    //makeBottomLocation();
+    resizePageContentHeight();
+    reframeCenter();
+                  
+    /* Initialize iu.js*/
+    relocateScrollAnimation();
+
     
 	/*init text media query*/
 	reloadTextMediaQuery();
@@ -91,19 +104,10 @@ $(document).ready(function(){
 
 //css - initialize
 //document.ready fires when all HTML has been loaded
+
 /*INIT_WINDOW_LOAD_REPLACEMENT_START*/
 $(window).load(function(){
-	/* Initialize IUFrame.js */
-	resizeCollection();
-	resizePageLinkSet();
-	makefullSizeSection();
-	resizeSideBar();
-	//makeBottomLocation();
-	resizePageContentHeight();
-	reframeCenter();
-	
-	/* Initialize iu.js*/
-	relocateScrollAnimation();
+    reframeCenter();
 })
 /*INIT_WINDOW_LOAD_REPLACEMENT_END*/
 

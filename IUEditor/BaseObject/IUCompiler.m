@@ -713,13 +713,10 @@
     [jsCode addCodeLine:@"});"];
     
     //text media query
+    [jsCode addCodeLine:@"function reloadTextMediaQuery(){"];
+    [jsCode addCodeWithIndent:[self textMQJavascriptCode:sheet]];
+    [jsCode addCodeLine:@"}"];
     
-    JDCode *textMQCode = [self textMQJavascriptCode:sheet];
-    if([textMQCode.string stringByTrim].length > 0){
-        [jsCode addCodeLine:@"function reloadTextMediaQuery(){"];
-        [jsCode addCodeWithIndent:textMQCode];
-        [jsCode addCodeLine:@"}"];
-    }
     
     //window load code
     [jsCode addCode:[self windowLoadJSCodeFromInitForSheet:sheet]];
