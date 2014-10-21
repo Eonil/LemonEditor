@@ -1507,7 +1507,6 @@ e.g. 만약 css로 옮긴다면)
     if(_text.length > 300){
         [self setLineHeightAuto:NO];
     }
-    [self updateHTML];
     
     if(isNeedUpdated){
         [self didChangeValueForKey:@"shouldCompileFontInfo"];

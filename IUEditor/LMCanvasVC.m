@@ -586,6 +586,10 @@
 
 -(void)IUHTMLIdentifier:(NSString*)identifier HTML:(NSString *)html withParentID:(NSString *)parentID{
     
+    //element를 바꾸기 전에 현재 text editor를 disable시켜야지 text editor가 제대로 동작함.
+    //editor remove가 제대로 돌아가야 함.
+    [self disableTextEditor];
+    
     DOMHTMLElement *currentElement = [self getHTMLElementbyID:identifier];
     if(currentElement){
         //change html text

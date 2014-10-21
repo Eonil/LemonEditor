@@ -45,4 +45,9 @@
 
 }
 
+- (void)performFocus:(NSNotification *)noti{
+    [self.view.window makeFirstResponder:_titleTF];
+}
+
+
 @end

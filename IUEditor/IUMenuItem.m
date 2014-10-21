@@ -17,8 +17,8 @@
     if(self){
         [self.undoManager disableUndoRegistration];
         
-        [self.mqData setValue:@"MENU" forTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];
-
+        self.text = @"MENU";
+        
         self.positionType = IUPositionTypeRelative;
         self.overflowType = IUOverflowTypeVisible;
         
@@ -223,6 +223,11 @@
     _fontActive = fontActive;
     
     [self updateCSSForItemColor];
+}
+
+- (void)setText:(NSString *)text{
+    [super setText:text];
+    [self updateHTML];
 }
 
 #pragma mark - css
