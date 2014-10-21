@@ -102,11 +102,13 @@
     self = [super init];
 
     _allViewPorts = [NSArray arrayWithObject:@(IUDefaultViewPort)];
-    _currentViewPort = IUDefaultViewPort;
-    _defaultStorage = [self newStorage];
+    storages = [NSMutableDictionary dictionary];
+    storages[@(IUDefaultViewPort)] = [self newStorage];
+    _defaultStorage = storages[@(IUDefaultViewPort)];
     _defaultStorage.manager = self;
     
-    [self observeValueForKeyPath:@"currentViewPort" ofObject:self change:0 context:nil];
+    [self addObserver:self forKeyPath:@"currentViewPort" options:0 context:nil];
+    self.currentViewPort = IUCSSDefaultViewPort;
     return self;
 }
 

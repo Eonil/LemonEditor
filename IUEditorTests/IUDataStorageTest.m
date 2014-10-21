@@ -17,12 +17,16 @@
 @implementation IUDataStorageTest {
     IUCSSStorage *storage;
     NSMutableArray *arr;
+    
+    IUCSSStorageManager *storageManager;
 }
 
 - (void)setUp {
     [super setUp];
     storage = [[IUCSSStorage alloc] init];
     [storage setValue:@"value" forKey:@"key"];
+    
+    storageManager = [[IUCSSStorageManager alloc] init];
     
     arr = [NSMutableArray array];
 }
@@ -66,9 +70,26 @@
 }
 
 
-
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     [arr addObject:keyPath];
+}
+
+- (void)test5_IUStorageManager{
+    XCTAssert(storageManager.currentViewPort == IUDefaultViewPort , @"Pass");
+    XCTAssertNotNil(storageManager.currentStorage);
+    XCTAssertNotNil(storageManager.defaultStorage);
+
+    [storageManager.currentStorage setValue:@"testValue" forKey:@"Key"];
+    XCTAssertEqual([storageManager.liveStorage valueForKey:@"Key"], @"testValue");
+    XCTAssertEqual([storageManager.defaultStorage valueForKey:@"Key"], @"testValue");
+    
+    [storageManager.liveStorage setValue:@"testValue2" forKey:@"Key2"];
+    XCTAssertEqual([storageManager.currentStorage valueForKey:@"Key"], @"testValue");
+    
+    storageManager.currentViewPort = 1000;
+    XCTAssertEqual([storageManager.liveStorage valueForKey:@"Key"], @"testValue");
+    XCTAssertNil([storageManager.currentStorage valueForKey:@"Key"]);
+    XCTAssertEqual([storageManager.defaultStorage valueForKey:@"Key"], @"testValue");
 }
 
 - (void)testPerformanceExample {
