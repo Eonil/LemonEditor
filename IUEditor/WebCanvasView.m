@@ -233,12 +233,9 @@
 }
 
 - (NSUInteger)webView:(WebView *)webView dragSourceActionMaskForPoint:(NSPoint)point{
+    //prevent drag image (already inserted)
     return WebDragDestinationActionNone;
 }
-- (NSUInteger)webView:(WebView *)webView dragDestinationActionMaskForDraggingInfo:(id<NSDraggingInfo>)draggingInfo{
-    return WebDragDestinationActionNone;
-}
-
 
 
 

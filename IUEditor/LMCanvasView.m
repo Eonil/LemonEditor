@@ -245,8 +245,7 @@
                     [((LMCanvasVC *)(self.delegate)) startFrameMoveWithUndoManager:self];
                     
                     //if mouse down on text, it assumes for text selection
-                    DOMElement *element = [self.webView DOMElementAtPoint:convertedPoint];
-                    if([element isKindOfClass:[DOMText class]]){
+                    if([self.delegate isEnableTextEditor]){
                         isMouseDownForMoveIU = NO;
                     }
                     
