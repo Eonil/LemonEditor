@@ -261,6 +261,8 @@
         self.name = self.htmlID;
         [[self undoManager] enableUndoRegistration];
         
+        _cssManager = [[IUCSSStorageManager alloc] init];
+        
     }
     
     return self;
@@ -1505,9 +1507,8 @@ e.g. 만약 css로 옮긴다면)
     return className;
 }
 
-
-
 - (BOOL)canMoveToOtherParent{
     return YES;
 }
+
 @end

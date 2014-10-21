@@ -92,6 +92,20 @@
     XCTAssertEqual([storageManager.defaultStorage valueForKey:@"Key"], @"testValue");
 }
 
+- (void)test6_IUStorageHover{
+    storageManager.selector = IUCSSSelectorHover;
+    XCTAssertNotNil(storageManager.currentStorage);
+    XCTAssertNotNil(storageManager.defaultStorage);
+    [storageManager.currentStorage setValue:@"testValue" forKey:@"Key"];
+
+    storageManager.selector = IUCSSSelectorDefault;
+    XCTAssertNil([storageManager.liveStorage valueForKey:@"Key"]);
+    
+    storageManager.selector = IUCSSSelectorHover;
+    XCTAssertEqual([storageManager.currentStorage valueForKey:@"Key"], @"testValue");
+    
+}
+
 - (void)testPerformanceExample {
     /* This is an example of a performance test case.
     [self measureBlock:^{

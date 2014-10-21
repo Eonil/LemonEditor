@@ -12,6 +12,7 @@
 #import "IUEvent.h"
 #import "IUMQData.h"
 #import "IUIdentifierManager.h"
+#import "IUDataStorage.h"
 
 @protocol IUSourceDelegate <NSObject>
 @required
@@ -273,5 +274,7 @@ typedef enum _IUOverflowType{
 //can move to other parent?
 - (BOOL)canMoveToOtherParent;
 
+
+@property IUCSSStorageManager *cssManager;
 
 @end

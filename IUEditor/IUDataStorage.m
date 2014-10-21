@@ -17,6 +17,8 @@
 @end
 
 @interface IUDataStorageManager()
+
+@property NSMutableDictionary *storages; //key == viewPort(NSNumber) value=IUDataStorage.
 @property NSArray * allViewPorts;
 @property IUDataStorage *currentStorage;
 @property IUDataStorage *defaultStorage;
@@ -58,14 +60,14 @@
     [aCoder encodeObject:_storage forKey:@"storage"];
 }
 
-- (void)setValue:(id)value forKey:(NSString *)key{
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key{
     [self willChangeValueForKey:key];
     [_storage setValue:value forKey:key];
     [manager storage:self updated:key];
     [self didChangeValueForKey:key];
 }
 
-- (id)valueForKey:(NSString *)key{
+- (id)valueForUndefinedKey:(NSString *)key{
     return [_storage valueForKey:key];
 }
 
@@ -90,7 +92,6 @@
 
 
 @implementation IUDataStorageManager{
-    NSMutableDictionary *storages; //key == viewPort(NSNumber) value=IUDataStorage.
 }
 
 - (IUDataStorage *)newStorage{
@@ -102,9 +103,9 @@
     self = [super init];
 
     _allViewPorts = [NSArray arrayWithObject:@(IUDefaultViewPort)];
-    storages = [NSMutableDictionary dictionary];
-    storages[@(IUDefaultViewPort)] = [self newStorage];
-    _defaultStorage = storages[@(IUDefaultViewPort)];
+    _storages = [NSMutableDictionary dictionary];
+    _storages[@(IUDefaultViewPort)] = [self newStorage];
+    _defaultStorage = _storages[@(IUDefaultViewPort)];
     _defaultStorage.manager = self;
     
     [self addObserver:self forKeyPath:@"currentViewPort" options:0 context:nil];
@@ -116,40 +117,44 @@
     self = [super init];
 
     //storages
-    storages = [NSMutableDictionary dictionary];
+    _storages = [NSMutableDictionary dictionary];
     NSDictionary *savedStorage = [aDecoder decodeObjectForKey:@"storages"];
     [savedStorage enumerateKeysAndObjectsUsingBlock:^(NSString* key, id obj, BOOL *stop) {
-        storages[@([key integerValue])] = obj;
+        _storages[@([key integerValue])] = obj;
     }];
     return self;
 }
 
 - (void)encodeWithJDCoder:(JDCoder *)aCoder{
     NSMutableDictionary *saveStorage = [NSMutableDictionary dictionary];
-    [storages enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, id obj, BOOL *stop) {
+    [_storages enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, id obj, BOOL *stop) {
         saveStorage[[key stringValue]] = obj;
     }];
     [aCoder encodeObject:saveStorage forKey:@"storages"];
 }
 
 - (void)currentViewPortDidChange:(NSDictionary*)change{
+    [self updateStorages];
+}
+
+- (void)updateStorages{
     //update
-    if (storages[@(_currentViewPort)] == nil) {
+    if (_storages[@(_currentViewPort)] == nil) {
         IUDataStorage *newStorage = [self newStorage];
         newStorage.manager = self;
-        storages[@(_currentViewPort)] = newStorage;
+        _storages[@(_currentViewPort)] = newStorage;
     }
     
-    self.currentStorage = storages[@(_currentViewPort)];
+    self.currentStorage = _storages[@(_currentViewPort)];
     self.liveStorage = [self.defaultStorage storageByOverwritingDataStorage:self.currentStorage];
 }
 
 - (IUDataStorage*)storageForViewPort:(NSInteger)viewPort{
-    return storages[@(viewPort)];
+    return _storages[@(viewPort)];
 }
 
-- (void)removeViewPort:(NSInteger)viewPort{
-    [storages removeObjectForKey:@(viewPort)];
+- (void)removeStorageForViewPort:(NSInteger)viewPort{
+    [_storages removeObjectForKey:@(viewPort)];
 }
 
 
@@ -233,10 +238,47 @@
 
 @end
 
-@implementation IUCSSStorageManager
+@implementation IUCSSStorageManager {
+    NSMutableDictionary *defaultSelectorStorages;
+    NSMutableDictionary *activeSelectorStorages;
+    NSMutableDictionary *hoverSelectorStorages;
+    
+}
 
 - (IUDataStorage *)newStorage{
     return [[IUCSSStorage alloc] init];
+}
+
+- (id)init{
+    self = [super init];
+    defaultSelectorStorages = self.storages;
+    activeSelectorStorages = [NSMutableDictionary dictionary];
+    hoverSelectorStorages = [NSMutableDictionary dictionary];
+    return self;
+}
+
+- (void)setSelector:(IUCSSSelector)selector{
+    _selector = selector;
+    switch (selector) {
+        case IUCSSSelectorDefault:
+            self.storages = defaultSelectorStorages;
+            break;
+        case IUCSSSelectorActive:
+            self.storages = activeSelectorStorages;
+        case IUCSSSelectorHover:
+        default:
+            self.storages = hoverSelectorStorages;
+            break;
+    }
+    [self updateStorages];
+}
+
+- (void)updateStorages{
+    if ([self.storages objectForKey:@(IUDefaultViewPort)] == nil) {
+        self.storages[@(IUDefaultViewPort)] = [self newStorage];
+    }
+    self.defaultStorage = [self.storages objectForKey:@(IUDefaultViewPort)];
+    [super updateStorages];
 }
 
 - (IUCSSStorage*)storageForViewPort:(NSInteger)viewPort{
