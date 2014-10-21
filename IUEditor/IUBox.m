@@ -532,28 +532,6 @@
 }
 
 
-
-- (void)setPgContentVariable:(NSString *)pgContentVariable{
-    if([pgContentVariable isEqualToString:_pgContentVariable]){
-        return;
-    }
-    [[[self undoManager] prepareWithInvocationTarget:self] setPgContentVariable:_pgContentVariable];
-
-    _pgContentVariable = pgContentVariable;
-}
-
-- (void)setPgVisibleConditionVariable:(NSString *)pgVisibleConditionVariable{
-    if([pgVisibleConditionVariable isEqualToString:_pgVisibleConditionVariable]){
-        return;
-    }
-    
-    [[self.undoManager prepareWithInvocationTarget:self] setPgVisibleConditionVariable:_pgVisibleConditionVariable];
-    
-    _pgVisibleConditionVariable = pgVisibleConditionVariable;
-}
-
-
-
 //iucontroller & inspectorVC sync가 안맞는듯.
 - (id)valueForUndefinedKey:(NSString *)key{
     return nil;
@@ -939,6 +917,44 @@ e.g. 만약 css로 옮긴다면)
 }
 
 #pragma mark - text
+- (void)setPgContentVariable:(NSString *)pgContentVariable{
+    if([pgContentVariable isEqualToString:_pgContentVariable]){
+        return;
+    }
+    
+    [self willChangeValueForKey:@"shouldCompileFontInfo"];
+    
+    [[[self undoManager] prepareWithInvocationTarget:self] setPgContentVariable:_pgContentVariable];
+    
+    BOOL needUpdate = NO;
+    
+    if(_pgContentVariable == nil && pgContentVariable && pgContentVariable.length > 0){
+        _text = [self.mqData valueForTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];
+        [self.mqData eradicateTag:IUMQDataTagInnerHTML];
+    }
+    else if((pgContentVariable == nil || pgContentVariable.length==0) && _pgContentVariable && _pgContentVariable.length > 0){
+        [self.mqData setValue:_text forTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];
+        _text = nil;
+    }
+    
+    _pgContentVariable = pgContentVariable;
+    
+    if(needUpdate){
+        [self updateHTML];
+    }
+    
+    [self didChangeValueForKey:@"shouldCompileFontInfo"];
+}
+
+- (void)setPgVisibleConditionVariable:(NSString *)pgVisibleConditionVariable{
+    if([pgVisibleConditionVariable isEqualToString:_pgVisibleConditionVariable]){
+        return;
+    }
+    
+    [[self.undoManager prepareWithInvocationTarget:self] setPgVisibleConditionVariable:_pgVisibleConditionVariable];
+    
+    _pgVisibleConditionVariable = pgVisibleConditionVariable;
+}
 
 - (BOOL)shouldCompileFontInfo{
     IUTextInputType inputType = [self textInputType];
@@ -963,6 +979,7 @@ e.g. 만약 css로 옮긴다면)
 }
 
 - (IUTextInputType)textInputType{
+    
     if([self isMemberOfClass:[IUBox class]]){
         if(self.pgContentVariable && self.pgContentVariable.length > 0){
             return IUTextInputTypeAddible;

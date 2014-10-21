@@ -214,8 +214,9 @@
     }
     
     [self updateEffectiveTagDictionary];
-    [self.delegate updateHTML];
-    
+    if([self isNeededToUpdateForTag:tag]){
+        [self.delegate updateHTML];
+    }
 }
 
 -(void)removeTagDictionaryForViewport:(NSInteger)width{
