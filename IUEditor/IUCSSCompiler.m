@@ -1109,7 +1109,8 @@
         int viewport = [viewportNumber intValue];
         [code setInsertingViewPort:viewport];
         int height = [[menuBar.css effectiveValueForTag:IUCSSTagPixelHeight forViewport:viewport] intValue];
-        
+
+        [code setInsertingTarget:IUTargetBoth];
         if(viewport < IUMobileSize){
             
             
