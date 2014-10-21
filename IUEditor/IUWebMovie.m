@@ -121,16 +121,29 @@
         //http://vimeo.com/channels/staffpicks/79426902
         //<iframe src="//player.vimeo.com/video/VIDEO_ID" width="WIDTH" height="HEIGHT" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-        _movieID = [[_movieLink lastPathComponent] substringWithRange:NSMakeRange(0, 9)];
-
-        _movieType = IUWebMovieTypeVimeo;
+        _movieID = [_movieLink lastPathComponent];
+        if(_movieID.length !=8){
+            //not found
+            _movieID = nil;
+            _movieType = IUWebMovieTypeUnknown;
+        }
+        else{
+            _movieType = IUWebMovieTypeVimeo;
+        }
     }
     else if([_movieLink containsString:@"youtu.be"]){
         //http://youtu.be/Z0uknBJc8NI
         //http://youtu.be/EM06XSULpgc?list=RDEM06XSULpgc
         //<iframe width="560" height="315" src="//www.youtube.com/embed/Sl-BDzmORX0?list=RDHCzBybJtuKWjA" frameborder="0" allowfullscreen></iframe>
-        _movieID = [[_movieLink lastPathComponent] substringWithRange:NSMakeRange(0, 11)];
-        _movieType = IUWebMovieTypeYoutube;
+        if([_movieLink lastPathComponent].length > 10){
+            _movieID = [[_movieLink lastPathComponent] substringWithRange:NSMakeRange(0, 11)];
+            _movieType = IUWebMovieTypeYoutube;
+        }
+        else{
+            //not found
+            _movieID = nil;
+            _movieType = IUWebMovieTypeUnknown;
+        }
 
     }
     else{
@@ -138,7 +151,9 @@
         return;
     }
     
-    [self updateThumbnailOfWebMovie];
+    if(_movieType != IUWebMovieTypeUnknown && _movieID && _movieID.length > 0){
+        [self updateThumbnailOfWebMovie];
+    }
 }
 
 
