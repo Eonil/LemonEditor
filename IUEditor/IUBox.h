@@ -81,6 +81,12 @@ typedef enum _IUOverflowType{
     IUOverflowTypeScroll,
 }IUOverflowType;
 
+typedef enum{
+    IUTextInputTypeNone,
+    IUTextInputTypeEditable,
+    IUTextInputTypeAddible,
+    IUTextInputTypeTextField,
+}IUTextInputType;
 
 @class IUBox;
 @class IUSheet;
@@ -134,6 +140,7 @@ typedef enum _IUOverflowType{
 @property (nonatomic) NSString *text;
 
 #endif
+- (IUTextInputType)textInputType;
 
 //undoManager
 - (NSUndoManager *)undoManager;

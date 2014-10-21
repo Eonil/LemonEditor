@@ -31,6 +31,8 @@
         [self setResourceLoadDelegate:self];
         [self setFrameLoadDelegate:self];
         [self setPolicyDelegate:self];
+        [self setEditingDelegate:self];
+
         
         [[[self mainFrame] frameView] setAllowsScrolling:NO];
         
@@ -537,6 +539,22 @@
 
 #pragma mark -
 #pragma mark web policy
+
+
+- (BOOL)webView:(WebView *)webView shouldChangeSelectedDOMRange:(DOMRange *)currentRange
+     toDOMRange:(DOMRange *)proposedRange
+       affinity:(NSSelectionAffinity)selectionAffinity
+ stillSelecting:(BOOL)flag
+{
+    if([self.VC isEnableTextEditor]){
+        return YES;
+    }
+    else{
+        // disable text selection
+        return NO;
+    }
+}
+
 
 
 - (NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element

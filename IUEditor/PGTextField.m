@@ -68,6 +68,10 @@
 
 #pragma mark -
 #pragma mark setting
+
+- (IUTextInputType)textInputType{
+    return IUTextInputTypeTextField;
+}
 - (BOOL)shouldCompileFontInfo{
     return YES;
 }

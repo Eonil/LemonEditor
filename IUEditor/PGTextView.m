@@ -110,5 +110,8 @@
 - (BOOL)shouldCompileFontInfo{
     return YES;
 }
+- (IUTextInputType)textInputType{
+    return IUTextInputTypeTextField;
+}
 
 @end

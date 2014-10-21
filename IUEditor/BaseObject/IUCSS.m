@@ -59,17 +59,6 @@
         _cssDictWithViewPort = [aDecoder decodeObjectForKey:@"cssFrameDict"];
     }
     
-    /*
-        if key is NSNumber, change it to NSString
-     */
-    for (id key in [_cssDictWithViewPort allKeys]) {
-        if ([key isKindOfClass:[NSNumber class]]) {
-            _cssDictWithViewPort[Integer2Str([key integerValue])] = _cssDictWithViewPort[key];
-            [_cssDictWithViewPort removeObjectForKey:key];
-        }
-    }
-
-    
     //////////////////////////////////////////////////////////////////////////////////////
 
     self.editViewPort = IUCSSDefaultViewPort;
@@ -144,7 +133,7 @@
 }
 
 -(void)setValueWithoutUpdateCSS:(id)value forTag:(IUCSSTag)tag forViewport:(NSInteger)width{
-    NSMutableDictionary *cssDict = _cssDictWithViewPort[Integer2Str(width)];
+    NSMutableDictionary *cssDict = _cssDictWithViewPort[@(width)];
     
     id currentValue = [cssDict objectForKey:tag];
     if(currentValue == nil ||  [currentValue isNotEqualTo:value]){
@@ -156,7 +145,7 @@
         if (cssDict == nil) {
             cssDict = [NSMutableDictionary dictionary];
             /* save as string : to change json object, key should be nsstring format */
-            [_cssDictWithViewPort setObject:cssDict forKey:Integer2Str(width)];
+            [_cssDictWithViewPort setObject:cssDict forKey:@(width)];
         }
         
         if (value == nil) {
@@ -176,14 +165,14 @@
 }
 
 -(id)effectiveValueForTag:(IUCSSTag)tag forViewport:(NSInteger)width{
-    if( _cssDictWithViewPort[Integer2Str(width)]){
-        id value = [_cssDictWithViewPort[Integer2Str(width)] objectForKey:tag];
+    if( _cssDictWithViewPort[@(width)]){
+        id value = [_cssDictWithViewPort[@(width)] objectForKey:tag];
         if(value){
             return value;
         }
     }
     
-    id value = [_cssDictWithViewPort[Integer2Str(IUCSSDefaultViewPort)] objectForKey:tag];
+    id value = [_cssDictWithViewPort[@(IUCSSDefaultViewPort)] objectForKey:tag];
     return value;
 }
 
@@ -220,7 +209,7 @@
 
 
 -(NSDictionary*)tagDictionaryForViewport:(NSInteger)width{
-    return _cssDictWithViewPort[Integer2Str(width)];
+    return _cssDictWithViewPort[@(width)];
 }
 
 -(void)updateEffectiveTagDictionary{
@@ -245,8 +234,8 @@
 }
 
 -(void)removeTagDictionaryForViewport:(NSInteger)width{
-    if([_cssDictWithViewPort objectForKey:Integer2Str(width)]){
-        [_cssDictWithViewPort removeObjectForKey:Integer2Str(width)];
+    if([_cssDictWithViewPort objectForKey:@(width)]){
+        [_cssDictWithViewPort removeObjectForKey:@(width)];
     }
 }
 

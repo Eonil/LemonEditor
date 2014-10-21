@@ -19,6 +19,7 @@
 #import "InnerSizeBox.h"
 #import "IUSection.h"
 #import "IUImport.h"
+#import "IUMenuItem.h"
 
 #import "LMHelpWC.h"
 
@@ -329,6 +330,7 @@
         if(iu){
             [iu.mqData setValue:node.innerHTML forTag:IUMQDataTagInnerHTML forViewport:width];
         }
+        [iu updateCSS];
         
     }
 }
@@ -384,26 +386,31 @@
     }
     
     IUBox *iu = [self.controller.selectedObjects firstObject];
-    if([iu isMemberOfClass:[IUBox class]]){
-        NSString *className, *fnName;
-        if(iu.pgContentVariable && iu.pgContentVariable.length > 0){
-            className = @"addible";
-            fnName = @"iuAddEditorAddible";
-            [JDUIUtil hudAlert:@"Sample Text Typing Mode" second:2];
-        }
-        else{
-            className = @"editable";
-            fnName = @"iuAddEditorEditable";
-            [JDUIUtil hudAlert:@"Text Editor Mode" second:2];
-        }
-        NSString *classidentifer = [self.controller.selectedIdentifiers firstObject];
-        [self IUClassIdentifier:classidentifer addClass:className];
-        
-        NSString *identifer = [self.controller.selectedIdentifiersWithImportIdentifier firstObject];
-        NSString *reloadMCE =[NSString stringWithFormat:@"tinyMCE.execCommand('%@', true, '%@');",fnName, identifer];
-        [self evaluateWebScript:reloadMCE];
-        isEnableText = YES;
+ 
+    
+    IUTextInputType inputType = [iu textInputType];
+    NSString *className, *fnName;
+    if (inputType == IUTextInputTypeNone || inputType == IUTextInputTypeTextField) {
+        return;
     }
+    else if(inputType == IUTextInputTypeAddible){
+        className = @"addible";
+        fnName = @"iuAddEditorAddible";
+        [JDUIUtil hudAlert:@"Text Typing Mode" second:2];
+    }
+    else if(inputType == IUTextInputTypeEditable){
+        className = @"editable";
+        fnName = @"iuAddEditorEditable";
+        [JDUIUtil hudAlert:@"Text Editor Mode" second:2];
+    }
+    NSString *classidentifer = [self.controller.selectedIdentifiers firstObject];
+    [self IUClassIdentifier:classidentifer addClass:className];
+    
+    NSString *identifer = [self.controller.selectedIdentifiersWithImportIdentifier firstObject];
+    NSString *reloadMCE =[NSString stringWithFormat:@"tinyMCE.execCommand('%@', true, '%@');",fnName, identifer];
+    [self evaluateWebScript:reloadMCE];
+    isEnableText = YES;
+
     
 }
 

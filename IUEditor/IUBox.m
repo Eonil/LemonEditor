@@ -155,8 +155,9 @@
             _mqData.delegate = self;
             
             //sampletext가 아니고 innerHTML로 동작해야 하는경우에는 mqdata로 옮겨준다.
-            if(_text && _text.length > 0 && (_pgContentVariable == nil || (_pgContentVariable && _pgContentVariable.length==0))){
+            if(_text && _text.length > 0 && [self textInputType] == IUTextInputTypeEditable ){
                 NSString *innerHTML = [NSString stringWithFormat:@"<p>%@</p>", _text];
+                innerHTML = [innerHTML stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
                 [_mqData setValue:innerHTML forTag:IUMQDataTagInnerHTML forViewport:IUCSSDefaultViewPort];
                 _text = nil;
             }
@@ -937,18 +938,44 @@ e.g. 만약 css로 옮긴다면)
     return [self removeIU:box];
 }
 
+#pragma mark - text
 
-#pragma mark - Frame
-
-
-#pragma mark has frame
 - (BOOL)shouldCompileFontInfo{
-    if (self.text || self.pgContentVariable || [self.mqData dictionaryForTag:IUMQDataTagInnerHTML].count > 0) {
-        return YES;
+    IUTextInputType inputType = [self textInputType];
+    
+    switch (inputType) {
+        case IUTextInputTypeNone:
+            return NO;
+        case IUTextInputTypeAddible:
+        case IUTextInputTypeTextField:
+            return YES;
+        case IUTextInputTypeEditable:
+            if( [self.mqData dictionaryForTag:IUMQDataTagInnerHTML].count > 0){
+                return YES;
+            }
+            else{
+                return NO;
+            }
     }
+    
     return NO;
+
 }
 
+- (IUTextInputType)textInputType{
+    if([self isMemberOfClass:[IUBox class]]){
+        if(self.pgContentVariable && self.pgContentVariable.length > 0){
+            return IUTextInputTypeAddible;
+        }
+        else{
+            return IUTextInputTypeEditable;
+        }
+    }
+    
+    return IUTextInputTypeNone;
+}
+
+#pragma mark - Frame
 - (BOOL)shouldCompileImagePositionInfo{
     return YES;
 }

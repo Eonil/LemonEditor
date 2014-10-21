@@ -283,6 +283,9 @@
 
 
 #pragma mark - shouldXXX
+- (IUTextInputType)textInputType{
+    return IUTextInputTypeTextField;
+}
 
 - (BOOL)shouldCompileX{
     return NO;
