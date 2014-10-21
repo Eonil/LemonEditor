@@ -122,7 +122,8 @@
         //<iframe src="//player.vimeo.com/video/VIDEO_ID" width="WIDTH" height="HEIGHT" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
         _movieID = [_movieLink lastPathComponent];
-        if(_movieID.length !=8){
+        
+        if([_movieID rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].length > 0){
             //not found
             _movieID = nil;
             _movieType = IUWebMovieTypeUnknown;
