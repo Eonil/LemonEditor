@@ -53,6 +53,10 @@
     [outlet bind:binding toObject:self withKeyPath:[self pathForEventTag:tag] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
 }
 
+- (void)outlet:(id)outlet bind:(NSString *)binding mqDataTag:(IUMQDataTag)tag{
+    [outlet bind:binding toObject:self withKeyPath:[self pathForMqDataTag:tag] options:IUBindingDictNotRaisesApplicableAndContinuousUpdate];
+}
+
 - (void)outlet:(id)outlet bind:(NSString *)binding cssTag:(IUCSSTag)tag options:(NSDictionary *)options{
     [outlet bind:binding toObject:self withKeyPath:[self pathForCSSTag:tag] options:options];
 }
@@ -63,6 +67,10 @@
 
 - (void)outlet:(id)outlet bind:(NSString *)binding eventTag:(IUEventTag)tag options:(NSDictionary *)options{
     [outlet bind:binding toObject:self withKeyPath:[self pathForEventTag:tag] options:options];
+}
+
+- (void)outlet:(id)outlet bind:(NSString *)binding mqDataTag:(IUMQDataTag)tag options:(NSDictionary *)options{
+    [outlet bind:binding toObject:self withKeyPath:[self pathForMqDataTag:tag] options:options];
 }
 
 
@@ -111,6 +119,9 @@
 }
 - (NSString *)pathForEventTag:(IUEventTag)tag{
     return [@"self.controller.selection.event." stringByAppendingString:tag];
+}
+- (NSString *)pathForMqDataTag:(IUMQDataTag)tag{
+    return [@"self.controller.selection.mqData." stringByAppendingString:tag];
 }
 
 @end

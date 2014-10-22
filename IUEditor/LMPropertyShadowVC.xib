@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMPropertyShadowVC">
@@ -15,12 +16,11 @@
                 <outlet property="shadowSpreadText" destination="nDw-yV-JEA" id="qTU-ms-63d"/>
                 <outlet property="shadowV" destination="wmj-qP-Vvw" id="XsC-Ra-cn8"/>
                 <outlet property="shadowVText" destination="w0y-HD-dSp" id="eKi-sE-OSK"/>
-                <outlet property="verticalText" destination="mSQ-Wk-JoE" id="Aca-mh-uEW"/>
                 <outlet property="view" destination="33F-UJ-27v" id="JSq-1b-bEv"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView identifier="shadowvc" id="33F-UJ-27v" userLabel="Shadow" customClass="JDOutlineCellView">
             <rect key="frame" x="0.0" y="0.0" width="276" height="130"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -39,7 +39,7 @@
                                 </constraints>
                                 <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                             </colorWell>
-                            <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="z2G-4F-eKG">
+                            <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="z2G-4F-eKG">
                                 <rect key="frame" x="6" y="25" width="254" height="9"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="254" id="RPE-xe-xwR"/>
@@ -275,6 +275,6 @@
         <userDefaultsController representsSharedInstance="YES" id="vuW-ma-3L4"/>
     </objects>
     <resources>
-        <image name="info" width="13" height="12"/>
+        <image name="info" width="20.803611755371094" height="20.803611755371094"/>
     </resources>
 </document>

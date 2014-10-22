@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LMWidgetLibraryVC">
             <connections>
-                <outlet property="PGCollectionV" destination="SvR-gg-FJ0" id="br5-If-PNJ"/>
                 <outlet property="PGTabView" destination="UKc-w3-qOR" id="8ud-lg-Yos"/>
-                <outlet property="WPCollectionV" destination="cD2-51-vK2" id="eR3-sP-kG4"/>
                 <outlet property="WPTabView" destination="Lt0-do-8tU" id="5rA-PZ-low"/>
                 <outlet property="collectionTabV" destination="pPJ-ce-Fha" id="Ub6-PL-2JT"/>
                 <outlet property="iconB" destination="09H-fm-KUt" id="0DJ-z8-0KP"/>
                 <outlet property="listB" destination="Rfa-DJ-weo" id="1Gv-MM-frV"/>
-                <outlet property="primaryCollectionV" destination="aib-bx-OKK" id="5TF-v0-dSC"/>
                 <outlet property="primaryTabView" destination="uLh-jb-tV9" id="Gs5-C5-gTD"/>
-                <outlet property="secondaryCollectionV" destination="tDY-cT-l9N" id="cHO-nt-BOW"/>
                 <outlet property="secondaryTabView" destination="bhA-QV-KRV" id="AUS-gK-0xp"/>
                 <outlet property="view" destination="vMJ-qe-EFg" id="htO-To-TcY"/>
                 <outlet property="widgetTabMatrix" destination="2Qj-z8-WNI" id="Iqh-9S-mSz"/>
@@ -23,7 +20,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <collectionViewItem id="Y4D-g3-cxE" userLabel="Collection View Item-list">
             <connections>
                 <outlet property="view" destination="D8H-iL-h9h" id="nLh-Qk-0zI"/>
@@ -89,7 +86,7 @@
                         <binding destination="Y4D-g3-cxE" name="value" keyPath="representedObject.shortDesc" id="IKm-xO-DsP"/>
                     </connections>
                 </textField>
-                <box autoresizesSubviews="NO" verticalHuggingPriority="750" alphaValue="0.29999999999999999" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="v3c-Wx-kU0">
+                <box verticalHuggingPriority="750" alphaValue="0.29999999999999999" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="v3c-Wx-kU0">
                     <rect key="frame" x="6" y="-2" width="250" height="5"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="8fi-SF-ox6"/>
@@ -226,7 +223,7 @@
                     <color key="borderColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="fillColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                 </box>
-                <box autoresizesSubviews="NO" verticalHuggingPriority="750" alphaValue="0.40000000000000002" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="sGn-bl-Kcs">
+                <box verticalHuggingPriority="750" alphaValue="0.40000000000000002" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="sGn-bl-Kcs">
                     <rect key="frame" x="0.0" y="28" width="300" height="5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="ld6-lF-0r3"/>

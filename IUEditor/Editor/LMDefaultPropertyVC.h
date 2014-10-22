@@ -20,10 +20,12 @@
 - (void)outlet:(id)outlet bind:(NSString *)binding cssTag:(IUCSSTag)tag;
 - (void)outlet:(id)outlet bind:(NSString *)binding property:(IUPropertyTag)property;
 - (void)outlet:(id)outlet bind:(NSString *)binding eventTag:(IUEventTag)tag;
+- (void)outlet:(id)outlet bind:(NSString *)binding mqDataTag:(IUMQDataTag)tag;
 
 - (void)outlet:(id)outlet bind:(NSString *)binding cssTag:(IUCSSTag)tag options:(NSDictionary *)options;
 - (void)outlet:(id)outlet bind:(NSString *)binding property:(IUPropertyTag)property options:(NSDictionary *)options;
 - (void)outlet:(id)outlet bind:(NSString *)binding eventTag:(IUEventTag)tag options:(NSDictionary *)options;
+- (void)outlet:(id)outlet bind:(NSString *)binding mqDataTag:(IUMQDataTag)tag options:(NSDictionary *)options;
 
 //value
 - (id)valueForCSSTag:(IUCSSTag)tag;
