@@ -34,4 +34,29 @@
     return NO;
 }
 
+- (BOOL)isBorderWidthComponentTag{
+    if ([self isEqualToTag:IUCSSTagBorderTopWidth] || [self isEqualToTag:IUCSSTagBorderLeftWidth] || [self isEqualToTag:IUCSSTagBorderBottomWidth]
+        || [self isEqualToTag:IUCSSTagBorderRightWidth]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)isBorderColorComponentTag{
+    if ([self isEqualToTag:IUCSSTagBorderTopColor] || [self isEqualToTag:IUCSSTagBorderLeftColor] || [self isEqualToTag:IUCSSTagBorderBottomColor]
+        || [self isEqualToTag:IUCSSTagBorderRightColor]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)isBorderRadiusComponentTag{
+    if ([self isEqualToTag:IUCSSTagBorderRadiusTopLeft] || [self isEqualToTag:IUCSSTagBorderRadiusTopRight] || [self isEqualToTag:IUCSSTagBorderRadiusBottomLeft]
+        || [self isEqualToTag:IUCSSTagBorderRadiusBottomRight]) {
+        return YES;
+    }
+    return NO;
+}
+
+
 @end

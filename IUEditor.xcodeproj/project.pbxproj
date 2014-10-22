@@ -962,6 +962,7 @@
 		69BE6A511989527000F84850 /* git in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A501989527000F84850 /* git */; };
 		69BE6A551989847300F84850 /* config.ru in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A541989847300F84850 /* config.ru */; };
 		69BE6A571989848300F84850 /* config.ruunit in Resources */ = {isa = PBXBuildFile; fileRef = 69BE6A561989848300F84850 /* config.ruunit */; };
+		69C2036819F51B5800CE9BAF /* IUDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C2036719F51B5800CE9BAF /* IUDataStorage.m */; };
 		69C4AA1A1908E82900CF75E7 /* IUSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C4AA191908E82900CF75E7 /* IUSection.m */; };
 		69C4AA1D1908E96F00CF75E7 /* IUImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C4AA1C1908E96F00CF75E7 /* IUImport.m */; };
 		69C4AA231909905500CF75E7 /* IUCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 69C4AA221909905500CF75E7 /* IUCollection.m */; };
@@ -1028,7 +1029,7 @@
 		69F59BA5196D97EA00D6EAF5 /* JDShellUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F59BA4196D97EA00D6EAF5 /* JDShellUtil.m */; };
 		69F59BA9196ED5D100D6EAF5 /* LMConsoleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F59BA7196ED5D100D6EAF5 /* LMConsoleVC.m */; };
 		69F59BAA196ED5D100D6EAF5 /* LMConsoleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69F59BA8196ED5D100D6EAF5 /* LMConsoleVC.xib */; };
-		69F6C52F19DFC0C8008F5931 /* IUCSSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F6C52E19DFC0C8008F5931 /* IUCSSTest.m */; };
+		69F6C52F19DFC0C8008F5931 /* IUDataStorageTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 69F6C52E19DFC0C8008F5931 /* IUDataStorageTest.m */; };
 		69F97C9219B550F000BDEFBE /* wpWebTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = 69F97C9119B550F000BDEFBE /* wpWebTemplate.html */; };
 		69FEC48A19483D6D00483C11 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FEC48919483D6D00483C11 /* Quartz.framework */; };
 		69FEF94A1996D3B200AEB283 /* LMWordpressCreateFileWC.m in Sources */ = {isa = PBXBuildFile; fileRef = 69FEF9481996D3B200AEB283 /* LMWordpressCreateFileWC.m */; };
@@ -2250,6 +2251,8 @@
 		69BE6A501989527000F84850 /* git */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = git; path = ../git; sourceTree = "<group>"; };
 		69BE6A541989847300F84850 /* config.ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config.ru; path = ../config.ru; sourceTree = "<group>"; };
 		69BE6A561989848300F84850 /* config.ruunit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config.ruunit; path = ../config.ruunit; sourceTree = "<group>"; };
+		69C2036619F51B5800CE9BAF /* IUDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IUDataStorage.h; path = ../IUDataStorage.h; sourceTree = "<group>"; };
+		69C2036719F51B5800CE9BAF /* IUDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IUDataStorage.m; path = ../IUDataStorage.m; sourceTree = "<group>"; };
 		69C4AA181908E82900CF75E7 /* IUSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUSection.h; sourceTree = "<group>"; };
 		69C4AA191908E82900CF75E7 /* IUSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUSection.m; sourceTree = "<group>"; };
 		69C4AA1B1908E96F00CF75E7 /* IUImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUImport.h; sourceTree = "<group>"; };
@@ -2361,7 +2364,7 @@
 		69F59BA6196ED5D000D6EAF5 /* LMConsoleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LMConsoleVC.h; path = ../LMConsoleVC.h; sourceTree = "<group>"; };
 		69F59BA7196ED5D100D6EAF5 /* LMConsoleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LMConsoleVC.m; path = ../LMConsoleVC.m; sourceTree = "<group>"; };
 		69F59BA8196ED5D100D6EAF5 /* LMConsoleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LMConsoleVC.xib; path = ../LMConsoleVC.xib; sourceTree = "<group>"; };
-		69F6C52E19DFC0C8008F5931 /* IUCSSTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUCSSTest.m; sourceTree = "<group>"; };
+		69F6C52E19DFC0C8008F5931 /* IUDataStorageTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IUDataStorageTest.m; sourceTree = "<group>"; };
 		69F97C9119B550F000BDEFBE /* wpWebTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = wpWebTemplate.html; sourceTree = "<group>"; };
 		69FEC48919483D6D00483C11 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		69FEF9471996D3B200AEB283 /* LMWordpressCreateFileWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWordpressCreateFileWC.h; sourceTree = SOURCE_ROOT; };
@@ -4365,7 +4368,7 @@
 			children = (
 				69C575CF18D6F61E0016F050 /* Supporting Files */,
 				69B96F5219DDEE72008CE446 /* JDCoderTest.m */,
-				69F6C52E19DFC0C8008F5931 /* IUCSSTest.m */,
+				69F6C52E19DFC0C8008F5931 /* IUDataStorageTest.m */,
 			);
 			path = IUEditorTests;
 			sourceTree = "<group>";
@@ -4384,6 +4387,8 @@
 			children = (
 				69C5760018D6FE020016F050 /* IUCSS.h */,
 				69C5760118D6FE020016F050 /* IUCSS.m */,
+				69C2036619F51B5800CE9BAF /* IUDataStorage.h */,
+				69C2036719F51B5800CE9BAF /* IUDataStorage.m */,
 				69604767198FE56400605FA2 /* IUCSSCompiler.h */,
 				69604768198FE56400605FA2 /* IUCSSCompiler.m */,
 				691EE6DC1992DB320080E23A /* IUCSSWPCompiler.h */,
@@ -5649,6 +5654,7 @@
 				6967425318F7D077008B7111 /* IUIdentifierManager.m in Sources */,
 				69761BCA18F168D700C4EDC6 /* IUResourceManager.m in Sources */,
 				69860E5C19766B24001C3F7F /* WPMenuItem.m in Sources */,
+				69C2036819F51B5800CE9BAF /* IUDataStorage.m in Sources */,
 				69FFB27E1950305600DA2783 /* LMIUPropertyVC.m in Sources */,
 				69CB92B4191B5F6800BEFBED /* PGPageLinkSet.m in Sources */,
 				3D9F5C4C19C92C9E00D63B84 /* IUFooter.m in Sources */,
@@ -5773,7 +5779,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69B96F5319DDEE72008CE446 /* JDCoderTest.m in Sources */,
-				69F6C52F19DFC0C8008F5931 /* IUCSSTest.m in Sources */,
+				69F6C52F19DFC0C8008F5931 /* IUDataStorageTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

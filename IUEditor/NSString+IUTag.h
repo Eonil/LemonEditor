@@ -184,5 +184,8 @@ static NSString * IUMQDataTagCollectionCount = @"collectionCount";
 - (BOOL)isFrameTag;
 - (BOOL)isHoverTag;
 
+- (BOOL)isBorderWidthComponentTag;
+- (BOOL)isBorderColorComponentTag;
+- (BOOL)isBorderRadiusComponentTag;
 
 @end
